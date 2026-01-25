@@ -5,86 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self';">
-    
-    <title>Basiliso Rosario - Profile</title>
-    
+    <meta name="description" content="Basiliso Rosario's portfolio featuring AI prompt engineering guides, security-first web development, and enterprise-grade implementation examples.">
+
+    <title>Basiliso Rosario - AI Prompt Engineering & Secure Web Development</title>
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <nav class="sidebar">
-        <div class="brand-area">
+    <!-- Skip Navigation for Keyboard Users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <nav class="sidebar" role="navigation" aria-label="Main navigation">
+        <div class="brand-area" role="banner">
             &lt; /BASILISO<span class="text-red">ROSARIO &gt;</span>
         </div>
-        <button class="nav-toggle" aria-label="Toggle navigation">
-            <span></span>
-            <span></span>
-            <span></span>
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
         </button>
-        <div class="nav-scroller">
-            <div class="nav-header">Site Navigation</div>
+        <div class="nav-scroller" id="nav-menu">
+            <div class="nav-header" role="heading" aria-level="2">Site Navigation</div>
 
-            <a href="#" class="nav-item active">Home / Profile</a>
-
-            <div class="nav-accordion">
-                <div class="nav-accordion-header">
-                    Security
-                    <img src="Icons/SVG/chevron-right.svg" alt="" class="accordion-icon icon-grey">
-                </div>
-                <div class="nav-accordion-content">
-                    <a href="Security/security.html" class="nav-item">Security Posture & Test Results</a>
-                    <a href="Security/site-use-policy.html" class="nav-item">Site Use Policy</a>
-                </div>
-            </div>
-
+            <a href="#" class="nav-item active" aria-current="page">Home / Profile</a>
+            <a href="Security/security.html" class="nav-item">Security</a>
             <a href="library.html" class="nav-item">Prompt Library</a>
 
-            <div class="nav-header">Connect</div>
-            <a href="https://www.linkedin.com/in/basiliso-rosario/" target="_blank" rel="noopener noreferrer" class="nav-item">
-                <img src="Icons/SVG/linkedin.svg" alt="" class="local-icon icon-grey"> LinkedIn
+            <div class="nav-header" role="heading" aria-level="2">Connect</div>
+            <a href="https://www.linkedin.com/in/basiliso-rosario/" target="_blank" rel="noopener noreferrer" class="nav-item" aria-label="LinkedIn profile (opens in new tab)">
+                <img src="Icons/SVG/linkedin.svg" alt="LinkedIn icon" class="local-icon icon-grey" aria-hidden="true"> LinkedIn
             </a>
-            <a href="mailto:bas.rosario@gmail.com" class="nav-item">
-                <img src="Icons/SVG/email.svg" alt="" class="local-icon icon-grey"> Contact
+            <a href="mailto:bas.rosario@gmail.com" class="nav-item" aria-label="Email contact">
+                <img src="Icons/SVG/email.svg" alt="Email icon" class="local-icon icon-grey" aria-hidden="true"> Contact
             </a>
         </div>
     </nav>
 
-    <div class="main-wrapper profile-mode">
-        
+    <main class="main-wrapper profile-mode" id="main-content" role="main">
+
         <div class="hero-container">
-            
-            <div class="hero-visual">
-                <div class="visual-accent-corner"></div>
+
+            <div class="hero-visual" aria-label="Profile photo section">
+                <div class="visual-accent-corner" aria-hidden="true"></div>
                 <div class="profile-frame">
-                    <img src="me2.png" alt="Basiliso Rosario Portrait">
+                    <img src="me2.png" alt="Professional portrait of Basiliso Rosario">
                 </div>
             </div>
 
             <div class="hero-content">
-                <div class="dash-separator"></div>
+                <div class="dash-separator" aria-hidden="true"></div>
                 <h1 class="hero-title">HI I'M <span class="text-red">BASILISO ROSARIO</span></h1>
-                
-                <div class="hero-bio">
-                    <span class="quote-highlight">
-                        <span class="text-red">Favorite Quote</span> : 
+
+                <section class="hero-bio" aria-labelledby="bio-heading">
+                    <h2 id="bio-heading" class="visually-hidden">About Me</h2>
+                    <blockquote class="quote-highlight">
+                        <span class="text-red">Favorite Quote</span>:
                         <strong>"The best way to predict the future is to create it."</strong>
-                    </span>
-                    
+                    </blockquote>
+
                     <p>I created this prompting guide because I believe that true innovation in AI isn't just about companies adopting AI as a new technology, it's about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.</p>
-                    <br>
-                    <p><strong>My mission is to demystify AI use and to drive personal adoption, with the goal of creating collabrative environments where technology and human creativity combine to solve complex problems and build a better tomorrow. :)</strong></p>
-                </div>
-                
-                <a href="library.html" class="btn-primary">
+
+                    <p><strong>My mission is to demystify AI use and to drive personal adoption, with the goal of creating collaborative environments where technology and human creativity combine to solve complex problems and build a better tomorrow.</strong></p>
+                </section>
+
+                <a href="library.html" class="btn-primary" aria-label="View Prompt Library">
                     Prompt Library
-                    <span class="btn-icon-circle">
-                        <img src="Icons/SVG/arrow-right.svg" alt="Go" class="local-icon icon-white">
+                    <span class="btn-icon-circle" aria-hidden="true">
+                        <img src="Icons/SVG/arrow-right.svg" alt="" class="local-icon icon-white">
                     </span>
                 </a>
             </div>
 
         </div>
-    </div>
+    </main>
 
     <script src="app.js" defer></script>
 </body>

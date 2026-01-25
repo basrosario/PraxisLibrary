@@ -15,15 +15,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function closeMenu() {
-        if (navToggle) navToggle.classList.remove('active');
+        if (navToggle) {
+            navToggle.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+        }
         if (navScroller) navScroller.classList.remove('active');
         if (navBackdrop) navBackdrop.classList.remove('active');
     }
 
     function openMenu() {
-        if (navToggle) navToggle.classList.add('active');
+        if (navToggle) {
+            navToggle.classList.add('active');
+            navToggle.setAttribute('aria-expanded', 'true');
+        }
         if (navScroller) navScroller.classList.add('active');
         if (navBackdrop) navBackdrop.classList.add('active');
+
+        // Focus first nav item for keyboard users
+        const firstNavItem = navScroller.querySelector('.nav-item');
+        if (firstNavItem) {
+            setTimeout(() => firstNavItem.focus(), 100);
+        }
     }
 
     if (navToggle && navScroller) {
@@ -54,9 +66,17 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('click', (e) => {
             const isClickInsideNav = navScroller.contains(e.target);
             const isClickOnToggle = navToggle.contains(e.target);
-            
+
             if (!isClickInsideNav && !isClickOnToggle && navToggle.classList.contains('active')) {
                 closeMenu();
+            }
+        });
+
+        // Keyboard Navigation - Close menu with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navToggle.classList.contains('active')) {
+                closeMenu();
+                navToggle.focus(); // Return focus to toggle button
             }
         });
     }
@@ -106,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Only runs if tabs exist (Library Page)
     // ==========================================
     const tabNavItems = document.querySelectorAll('.nav-item[data-tab]');
-    
+
     if (tabNavItems.length > 0) {
         tabNavItems.forEach(item => {
             item.addEventListener('click', () => {
@@ -115,24 +135,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (!targetTab) return;
 
-                // 1. Hide all tabs
+                // 1. Hide all tabs and update ARIA
                 document.querySelectorAll('.tab-content').forEach(tab => {
                     tab.classList.remove('active');
+                    tab.setAttribute('hidden', '');
                 });
 
-                // 2. Show the target tab
+                // 2. Show the target tab and update ARIA
                 targetTab.classList.add('active');
+                targetTab.removeAttribute('hidden');
 
-                // 3. Update active state on sidebar
+                // 3. Update active state and ARIA on sidebar
                 document.querySelectorAll('.nav-item[data-tab]').forEach(nav => {
                     nav.classList.remove('active');
+                    nav.setAttribute('aria-selected', 'false');
                 });
                 item.classList.add('active');
+                item.setAttribute('aria-selected', 'true');
 
                 // 4. Scroll to top (if container exists)
                 const scrollContainer = document.querySelector('.content-scroll');
                 if (scrollContainer) {
                     scrollContainer.scrollTop = 0;
+                }
+
+                // 5. Announce tab change for screen readers
+                const announcement = document.createElement('div');
+                announcement.setAttribute('role', 'status');
+                announcement.setAttribute('aria-live', 'polite');
+                announcement.className = 'visually-hidden';
+                announcement.textContent = `${item.textContent} section loaded`;
+                document.body.appendChild(announcement);
+                setTimeout(() => announcement.remove(), 1000);
+            });
+        });
+
+        // Keyboard Navigation for Tabs - Arrow keys
+        tabNavItems.forEach((item, index) => {
+            item.addEventListener('keydown', (e) => {
+                let newIndex;
+
+                if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    newIndex = (index + 1) % tabNavItems.length;
+                    tabNavItems[newIndex].focus();
+                    tabNavItems[newIndex].click();
+                } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    newIndex = (index - 1 + tabNavItems.length) % tabNavItems.length;
+                    tabNavItems[newIndex].focus();
+                    tabNavItems[newIndex].click();
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    tabNavItems[0].focus();
+                    tabNavItems[0].click();
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    tabNavItems[tabNavItems.length - 1].focus();
+                    tabNavItems[tabNavItems.length - 1].click();
                 }
             });
         });
