@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
 
     <title>GitHub Insights - Basiliso Rosario</title>
     <link rel="stylesheet" href="../styles.css">
@@ -671,6 +671,62 @@
                                         <tr>
                                             <td class="label">Why Universal Design?</td>
                                             <td class="value">The site was created with Universal Design (UD) principles in mind—designing for the widest possible audience from the start. This means considering users with different abilities, devices, connection speeds, and contexts. Accessibility isn't a checkbox; it's a design philosophy.</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Browser DevTools Section -->
+                    <div class="chart-section">
+                        <h4 class="chart-title chart-title-spaced">Browser DevTools: Essential for Security-First Development</h4>
+                        <div class="sec-card sec-card-spaced">
+                            <div class="sec-card-header">
+                                <img src="../Icons/SVG/code.svg" class="local-icon icon-red" alt=""> <b>Why DevTools Matter</b>
+                            </div>
+                            <p class="card-paragraph">Browser Developer Tools aren't just for debugging—they're a critical security validation tool. Every deployment should be verified using DevTools to ensure resources load correctly, no CSP violations occur, and no unexpected network requests are made. This is a crucial step in security and structure-first web development.</p>
+                        </div>
+
+                        <div class="rationale-grid">
+                            <div class="rationale-item">
+                                <strong>Network Tab: Resource Verification</strong>
+                                <p>The Network tab reveals every resource your page loads. Verify that images serve the correct format (WebP vs PNG), scripts load from expected origins, and no third-party requests leak data. Watch for unexpected 404s, slow resources, or resources blocked by CSP. A clean Network tab with all 200 status codes and expected file types confirms your deployment is correct.</p>
+                            </div>
+                            <div class="rationale-item">
+                                <strong>Console Tab: Error Detection</strong>
+                                <p>The Console is your first line of defense against security issues. CSP violations appear here immediately—if you see "Refused to execute inline script" or "Refused to load stylesheet," your CSP is working but something needs fixing. A production site should show zero errors. Warnings about deprecated features or ignored directives (like frame-ancestors in meta tags) guide architectural decisions.</p>
+                            </div>
+                            <div class="rationale-item">
+                                <strong>Application Tab: Storage Audit</strong>
+                                <p>Check what your site stores locally. Review cookies (should be minimal or none for static sites), localStorage entries, and sessionStorage. Unexpected storage often indicates tracking scripts or security risks. This site stores only theme preference—nothing else. If you see data you didn't intentionally store, investigate immediately.</p>
+                            </div>
+                            <div class="rationale-item">
+                                <strong>Security Tab: Certificate Validation</strong>
+                                <p>The Security tab confirms HTTPS is properly configured, certificates are valid, and mixed content warnings are absent. Green indicators across the board mean your transport security is solid. Any warnings here—expired certificates, mixed content, or insecure origins—must be resolved before deployment.</p>
+                            </div>
+                        </div>
+
+                        <h4 class="chart-title chart-title-spaced">DevTools Validation Checklist</h4>
+                        <div class="test-results-section mt-20">
+                            <div class="test-row flex-col">
+                                <div class="test-info w-full">
+                                    <table class="test-table">
+                                        <tr>
+                                            <td class="label label-w-200">Network Tab Check</td>
+                                            <td class="value">All resources return 200 status. No unexpected third-party requests. Images load in optimized format (WebP where supported). Total transfer size is minimal.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label">Console Check</td>
+                                            <td class="value">Zero errors. CSP violations indicate security working as intended—fix the code, not the policy. Warnings should be understood and addressed or documented as intentional.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label">Application Check</td>
+                                            <td class="value">Only expected localStorage keys present (theme preference). No tracking cookies. Service workers registered only if intentionally implemented.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label">Security Check</td>
+                                            <td class="value">Valid certificate chain. No mixed content warnings. Connection uses TLS 1.2 or higher. HSTS header present in server response.</td>
                                         </tr>
                                     </table>
                                 </div>
