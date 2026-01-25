@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
     
     <title>Security - Basiliso Rosario</title>
     <link rel="stylesheet" href="../styles.css">
@@ -423,7 +423,7 @@
                                 <div class="circular-progress">
                                     <svg viewBox="0 0 100 100">
                                         <circle class="bg" cx="50" cy="50" r="45"></circle>
-                                        <circle class="progress green" cx="50" cy="50" r="45" style="--progress-offset: 0;"></circle>
+                                        <circle class="progress green" cx="50" cy="50" r="45" data-progress="0"></circle>
                                     </svg>
                                     <div class="circular-value">A+</div>
                                 </div>
@@ -433,7 +433,7 @@
                                 <div class="circular-progress">
                                     <svg viewBox="0 0 100 100">
                                         <circle class="bg" cx="50" cy="50" r="45"></circle>
-                                        <circle class="progress blue" cx="50" cy="50" r="45" style="--progress-offset: 0;"></circle>
+                                        <circle class="progress blue" cx="50" cy="50" r="45" data-progress="0"></circle>
                                     </svg>
                                     <div class="circular-value">A+</div>
                                 </div>
@@ -443,7 +443,7 @@
                                 <div class="circular-progress">
                                     <svg viewBox="0 0 100 100">
                                         <circle class="bg" cx="50" cy="50" r="45"></circle>
-                                        <circle class="progress purple" cx="50" cy="50" r="45" style="--progress-offset: 0;"></circle>
+                                        <circle class="progress purple" cx="50" cy="50" r="45" data-progress="0"></circle>
                                     </svg>
                                     <div class="circular-value">A+</div>
                                 </div>
@@ -453,7 +453,7 @@
                                 <div class="circular-progress">
                                     <svg viewBox="0 0 100 100">
                                         <circle class="bg" cx="50" cy="50" r="45"></circle>
-                                        <circle class="progress red" cx="50" cy="50" r="45" style="--progress-offset: 0;"></circle>
+                                        <circle class="progress red" cx="50" cy="50" r="45" data-progress="0"></circle>
                                     </svg>
                                     <div class="circular-value">100</div>
                                 </div>
@@ -469,35 +469,35 @@
                             <div class="bar-item">
                                 <span class="bar-label">External Scripts</span>
                                 <div class="bar-container">
-                                    <div class="bar-fill config" style="--bar-width: 0%;" data-value="0"></div>
+                                    <div class="bar-fill config" data-width="0" data-value="0"></div>
                                 </div>
                             </div>
                             <div class="bar-item">
                                 <span class="bar-label">Third-Party CDNs</span>
                                 <div class="bar-container">
-                                    <div class="bar-fill config" style="--bar-width: 0%;" data-value="0"></div>
+                                    <div class="bar-fill config" data-width="0" data-value="0"></div>
                                 </div>
                             </div>
                             <div class="bar-item">
                                 <span class="bar-label">Tracking Scripts</span>
                                 <div class="bar-container">
-                                    <div class="bar-fill config" style="--bar-width: 0%;" data-value="0"></div>
+                                    <div class="bar-fill config" data-width="0" data-value="0"></div>
                                 </div>
                             </div>
                             <div class="bar-item">
                                 <span class="bar-label">Form Endpoints</span>
                                 <div class="bar-container">
-                                    <div class="bar-fill config" style="--bar-width: 0%;" data-value="0"></div>
+                                    <div class="bar-fill config" data-width="0" data-value="0"></div>
                                 </div>
                             </div>
                             <div class="bar-item">
                                 <span class="bar-label">Cookies Set</span>
                                 <div class="bar-container">
-                                    <div class="bar-fill config" style="--bar-width: 0%;" data-value="0"></div>
+                                    <div class="bar-fill config" data-width="0" data-value="0"></div>
                                 </div>
                             </div>
                         </div>
-                        <p style="margin-top: 20px; color: var(--text-secondary); font-size: 0.9rem; text-align: center;"><strong>Zero attack vectors</strong> — The site maintains the smallest possible attack surface by eliminating all unnecessary external connections and data collection.</p>
+                        <p class="zero-attack-note"><strong>Zero attack vectors</strong> — The site maintains the smallest possible attack surface by eliminating all unnecessary external connections and data collection.</p>
                     </div>
 
                     <!-- Security Headers Breakdown -->
@@ -505,10 +505,10 @@
                         <h4 class="chart-title">Security Headers Implementation</h4>
                         <div class="stacked-bar-container">
                             <div class="stacked-bar">
-                                <div class="stacked-segment html" style="--segment-flex: 25;">CSP</div>
-                                <div class="stacked-segment css" style="--segment-flex: 20;">HSTS</div>
-                                <div class="stacked-segment js" style="--segment-flex: 15;">X-Frame</div>
-                                <div class="stacked-segment other" style="--segment-flex: 40;">+5 More</div>
+                                <div class="stacked-segment html" data-flex="25">CSP</div>
+                                <div class="stacked-segment css" data-flex="20">HSTS</div>
+                                <div class="stacked-segment js" data-flex="15">X-Frame</div>
+                                <div class="stacked-segment other" data-flex="40">+5 More</div>
                             </div>
                             <div class="stacked-legend">
                                 <div class="legend-item"><span class="legend-dot html"></span> Content-Security-Policy</div>
@@ -557,23 +557,23 @@
                     <!-- About the Developer -->
                     <div class="chart-section">
                         <h4 class="chart-title">About the Developer</h4>
-                        <div class="sec-card" style="margin-bottom: 25px;">
+                        <div class="sec-card sec-card-spaced">
                             <div class="sec-card-header">
                                 <img src="../Icons/SVG/user-tie.svg" class="local-icon icon-red" alt=""> <b>Basiliso Rosario</b> - Creator & Developer
                             </div>
-                            <p style="margin-top: 15px; line-height: 1.8;">The security architecture of this site was designed and implemented by <strong>Basiliso Rosario</strong>, a technology professional who believes that security is not a feature—it's a foundation. Every technical decision was evaluated through the lens of "what could go wrong?" before implementation.</p>
+                            <p class="card-paragraph">The security architecture of this site was designed and implemented by <strong>Basiliso Rosario</strong>, a technology professional who believes that security is not a feature—it's a foundation. Every technical decision was evaluated through the lens of "what could go wrong?" before implementation.</p>
                         </div>
 
-                        <h4 class="chart-title" style="margin-top: 30px;">Mission & Vision</h4>
-                        <div class="sec-card" style="margin-bottom: 25px;">
+                        <h4 class="chart-title chart-title-spaced">Mission & Vision</h4>
+                        <div class="sec-card sec-card-spaced">
                             <div class="sec-card-header">
                                 <img src="../Icons/SVG/bullseye.svg" class="local-icon icon-red" alt=""> <b>Why This Project Exists</b>
                             </div>
-                            <p style="margin-top: 15px; line-height: 1.8;">This prompting guide was created because <strong>Basiliso Rosario</strong> believes that true innovation in AI isn't just about companies adopting AI as a new technology—it's about <em>people</em> learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.</p>
-                            <p style="margin-top: 15px; line-height: 1.8;">The mission is to <strong>demystify AI use</strong> and to <strong>drive personal adoption</strong>, with the goal of creating collaborative environments where technology and human creativity combine to solve complex problems and build a better tomorrow.</p>
+                            <p class="card-paragraph">This prompting guide was created because <strong>Basiliso Rosario</strong> believes that true innovation in AI isn't just about companies adopting AI as a new technology—it's about <em>people</em> learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.</p>
+                            <p class="card-paragraph">The mission is to <strong>demystify AI use</strong> and to <strong>drive personal adoption</strong>, with the goal of creating collaborative environments where technology and human creativity combine to solve complex problems and build a better tomorrow.</p>
                         </div>
 
-                        <h4 class="chart-title" style="margin-top: 30px;">Universal Design Philosophy</h4>
+                        <h4 class="chart-title chart-title-spaced">Universal Design Philosophy</h4>
                         <div class="rationale-grid">
                             <div class="rationale-item">
                                 <strong>Designing for Everyone, Not Just Some</strong>
@@ -593,12 +593,12 @@
                             </div>
                         </div>
 
-                        <h4 class="chart-title" style="margin-top: 30px;">Security Philosophy & Design Decisions</h4>
-                        <div class="sec-card" style="margin-bottom: 25px;">
+                        <h4 class="chart-title chart-title-spaced">Security Philosophy & Design Decisions</h4>
+                        <div class="sec-card sec-card-spaced">
                             <div class="sec-card-header">
                                 <img src="../Icons/SVG/shield.svg" class="local-icon icon-red" alt=""> <b>Defense-in-Depth Approach</b>
                             </div>
-                            <p style="margin-top: 15px; line-height: 1.8;">Security was implemented from day one—not retrofitted as an afterthought. Every feature was built with Content Security Policy, HSTS, and strict header configurations baked in. This proactive approach resulted in A+ ratings across all major security testing platforms without requiring remediation.</p>
+                            <p class="card-paragraph">Security was implemented from day one—not retrofitted as an afterthought. Every feature was built with Content Security Policy, HSTS, and strict header configurations baked in. This proactive approach resulted in A+ ratings across all major security testing platforms without requiring remediation.</p>
                         </div>
 
                         <div class="rationale-grid">
@@ -632,12 +632,12 @@
                     <!-- Key Security Decisions -->
                     <div class="chart-section">
                         <h4 class="chart-title">Key Security Decisions Explained</h4>
-                        <div class="test-results-section" style="margin-top: 20px;">
-                            <div class="test-row" style="flex-direction: column;">
-                                <div class="test-info" style="width: 100%;">
+                        <div class="test-results-section mt-20">
+                            <div class="test-row flex-col">
+                                <div class="test-info w-full">
                                     <table class="test-table">
                                         <tr>
-                                            <td class="label" style="width: 220px;">Why default-src 'none'?</td>
+                                            <td class="label label-w-220">Why default-src 'none'?</td>
                                             <td class="value">Starting from zero trust forces explicit declaration of every allowed resource type. This catches oversights and makes the policy self-documenting. If something breaks, you know exactly which directive needs adjustment.</td>
                                         </tr>
                                         <tr>

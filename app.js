@@ -493,4 +493,28 @@ document.addEventListener('DOMContentLoaded', () => {
             promptText.parentNode.insertBefore(readMoreBtn, promptText.nextSibling);
         }
     });
+
+    // ==========================================
+    // CHART DATA INITIALIZATION (CSP-Safe)
+    // Reads data attributes and sets CSS custom properties
+    // This replaces inline styles for security compliance
+    // ==========================================
+
+    // Initialize circular progress charts
+    document.querySelectorAll('circle[data-progress]').forEach(circle => {
+        const progress = circle.dataset.progress;
+        circle.style.setProperty('--progress-offset', progress);
+    });
+
+    // Initialize bar chart fills
+    document.querySelectorAll('.bar-fill[data-width]').forEach(bar => {
+        const width = bar.dataset.width;
+        bar.style.setProperty('--bar-width', width + '%');
+    });
+
+    // Initialize stacked bar segments
+    document.querySelectorAll('.stacked-segment[data-flex]').forEach(segment => {
+        const flex = segment.dataset.flex;
+        segment.style.setProperty('--segment-flex', flex);
+    });
 });

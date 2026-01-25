@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
 
     <title>GitHub Insights - Basiliso Rosario</title>
     <link rel="stylesheet" href="../styles.css">
@@ -373,7 +373,7 @@
                                 <div class="circular-progress">
                                     <svg viewBox="0 0 100 100">
                                         <circle class="bg" cx="50" cy="50" r="45"></circle>
-                                        <circle class="progress green" cx="50" cy="50" r="45" style="--progress-offset: 0;"></circle>
+                                        <circle class="progress green" cx="50" cy="50" r="45" data-progress="0"></circle>
                                     </svg>
                                     <div class="circular-value">100</div>
                                 </div>
@@ -383,7 +383,7 @@
                                 <div class="circular-progress">
                                     <svg viewBox="0 0 100 100">
                                         <circle class="bg" cx="50" cy="50" r="45"></circle>
-                                        <circle class="progress blue" cx="50" cy="50" r="45" style="--progress-offset: 0;"></circle>
+                                        <circle class="progress blue" cx="50" cy="50" r="45" data-progress="0"></circle>
                                     </svg>
                                     <div class="circular-value">100</div>
                                 </div>
@@ -393,7 +393,7 @@
                                 <div class="circular-progress">
                                     <svg viewBox="0 0 100 100">
                                         <circle class="bg" cx="50" cy="50" r="45"></circle>
-                                        <circle class="progress purple" cx="50" cy="50" r="45" style="--progress-offset: 0;"></circle>
+                                        <circle class="progress purple" cx="50" cy="50" r="45" data-progress="0"></circle>
                                     </svg>
                                     <div class="circular-value">100</div>
                                 </div>
@@ -403,7 +403,7 @@
                                 <div class="circular-progress">
                                     <svg viewBox="0 0 100 100">
                                         <circle class="bg" cx="50" cy="50" r="45"></circle>
-                                        <circle class="progress red" cx="50" cy="50" r="45" style="--progress-offset: 31;"></circle>
+                                        <circle class="progress red" cx="50" cy="50" r="45" data-progress="31"></circle>
                                     </svg>
                                     <div class="circular-value">90</div>
                                 </div>
@@ -417,10 +417,10 @@
                         <h4 class="chart-title">Codebase Composition by Language</h4>
                         <div class="stacked-bar-container">
                             <div class="stacked-bar">
-                                <div class="stacked-segment html" style="--segment-flex: 25;">HTML</div>
-                                <div class="stacked-segment css" style="--segment-flex: 45;">CSS</div>
-                                <div class="stacked-segment js" style="--segment-flex: 20;">JS</div>
-                                <div class="stacked-segment other" style="--segment-flex: 10;">Other</div>
+                                <div class="stacked-segment html" data-flex="25">HTML</div>
+                                <div class="stacked-segment css" data-flex="45">CSS</div>
+                                <div class="stacked-segment js" data-flex="20">JS</div>
+                                <div class="stacked-segment other" data-flex="10">Other</div>
                             </div>
                             <div class="stacked-legend">
                                 <div class="legend-item"><span class="legend-dot html"></span> HTML (25%)</div>
@@ -438,31 +438,31 @@
                             <div class="bar-item">
                                 <span class="bar-label">styles.css</span>
                                 <div class="bar-container">
-                                    <div class="bar-fill css" style="--bar-width: 85%;" data-value="~65 KB"></div>
+                                    <div class="bar-fill css" data-width="85" data-value="~65 KB"></div>
                                 </div>
                             </div>
                             <div class="bar-item">
                                 <span class="bar-label">app.js</span>
                                 <div class="bar-container">
-                                    <div class="bar-fill js" style="--bar-width: 25%;" data-value="~18 KB"></div>
+                                    <div class="bar-fill js" data-width="25" data-value="~18 KB"></div>
                                 </div>
                             </div>
                             <div class="bar-item">
                                 <span class="bar-label">library.html</span>
                                 <div class="bar-container">
-                                    <div class="bar-fill html" style="--bar-width: 45%;" data-value="~32 KB"></div>
+                                    <div class="bar-fill html" data-width="45" data-value="~32 KB"></div>
                                 </div>
                             </div>
                             <div class="bar-item">
                                 <span class="bar-label">Profile Image</span>
                                 <div class="bar-container">
-                                    <div class="bar-fill svg" style="--bar-width: 10%;" data-value="7.1 KB"></div>
+                                    <div class="bar-fill svg" data-width="10" data-value="7.1 KB"></div>
                                 </div>
                             </div>
                             <div class="bar-item">
                                 <span class="bar-label">SVG Icons</span>
                                 <div class="bar-container">
-                                    <div class="bar-fill config" style="--bar-width: 8%;" data-value="~5 KB"></div>
+                                    <div class="bar-fill config" data-width="8" data-value="~5 KB"></div>
                                 </div>
                             </div>
                         </div>
@@ -577,23 +577,23 @@
                     <!-- Developer Philosophy Section -->
                     <div class="chart-section">
                         <h4 class="chart-title">About the Developer</h4>
-                        <div class="sec-card" style="margin-bottom: 25px;">
+                        <div class="sec-card sec-card-spaced">
                             <div class="sec-card-header">
                                 <img src="../Icons/SVG/user-tie.svg" class="local-icon icon-red" alt=""> <b>Basiliso Rosario</b> - Creator & Developer
                             </div>
-                            <p style="margin-top: 15px; line-height: 1.8;">This project was conceived, designed, and implemented by <strong>Basiliso Rosario</strong>, a technology professional with a passion for building secure, performant, and accessible web experiences. Every line of code reflects deliberate architectural decisions rooted in industry best practices and a commitment to excellence.</p>
+                            <p class="card-paragraph">This project was conceived, designed, and implemented by <strong>Basiliso Rosario</strong>, a technology professional with a passion for building secure, performant, and accessible web experiences. Every line of code reflects deliberate architectural decisions rooted in industry best practices and a commitment to excellence.</p>
                         </div>
 
-                        <h4 class="chart-title" style="margin-top: 30px;">Mission & Vision</h4>
-                        <div class="sec-card" style="margin-bottom: 25px;">
+                        <h4 class="chart-title chart-title-spaced">Mission & Vision</h4>
+                        <div class="sec-card sec-card-spaced">
                             <div class="sec-card-header">
                                 <img src="../Icons/SVG/bullseye.svg" class="local-icon icon-red" alt=""> <b>Why This Project Exists</b>
                             </div>
-                            <p style="margin-top: 15px; line-height: 1.8;">This prompting guide was created because <strong>Basiliso Rosario</strong> believes that true innovation in AI isn't just about companies adopting AI as a new technology—it's about <em>people</em> learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.</p>
-                            <p style="margin-top: 15px; line-height: 1.8;">The mission is to <strong>demystify AI use</strong> and to <strong>drive personal adoption</strong>, with the goal of creating collaborative environments where technology and human creativity combine to solve complex problems and build a better tomorrow.</p>
+                            <p class="card-paragraph">This prompting guide was created because <strong>Basiliso Rosario</strong> believes that true innovation in AI isn't just about companies adopting AI as a new technology—it's about <em>people</em> learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.</p>
+                            <p class="card-paragraph">The mission is to <strong>demystify AI use</strong> and to <strong>drive personal adoption</strong>, with the goal of creating collaborative environments where technology and human creativity combine to solve complex problems and build a better tomorrow.</p>
                         </div>
 
-                        <h4 class="chart-title" style="margin-top: 30px;">Universal Design Philosophy</h4>
+                        <h4 class="chart-title chart-title-spaced">Universal Design Philosophy</h4>
                         <div class="rationale-grid">
                             <div class="rationale-item">
                                 <strong>Designing for Everyone, Not Just Some</strong>
@@ -613,7 +613,7 @@
                             </div>
                         </div>
 
-                        <h4 class="chart-title" style="margin-top: 30px;">Development Philosophy & Design Choices</h4>
+                        <h4 class="chart-title chart-title-spaced">Development Philosophy & Design Choices</h4>
 
                         <div class="rationale-grid">
                             <div class="rationale-item">
@@ -642,14 +642,14 @@
                             </div>
                         </div>
 
-                        <h4 class="chart-title" style="margin-top: 30px;">Key Technical Decisions Explained</h4>
+                        <h4 class="chart-title chart-title-spaced">Key Technical Decisions Explained</h4>
 
-                        <div class="test-results-section" style="margin-top: 20px;">
-                            <div class="test-row" style="flex-direction: column;">
-                                <div class="test-info" style="width: 100%;">
+                        <div class="test-results-section mt-20">
+                            <div class="test-row flex-col">
+                                <div class="test-info w-full">
                                     <table class="test-table">
                                         <tr>
-                                            <td class="label" style="width: 200px;">Why Self-Host Everything?</td>
+                                            <td class="label label-w-200">Why Self-Host Everything?</td>
                                             <td class="value">External CDNs introduce single points of failure and tracking vectors. By self-hosting fonts, icons, and scripts, the site maintains availability even if third-party services go down, and eliminates cross-origin requests that could leak user data.</td>
                                         </tr>
                                         <tr>
