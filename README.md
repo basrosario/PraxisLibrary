@@ -1,4 +1,4 @@
-# PROMPTLIBRARY - Enterprise Prompt Engineering Website
+# PROMPTLIBRARY - Prompt Engineering Library - </OpenBas>
 
 <div align="center">
 
