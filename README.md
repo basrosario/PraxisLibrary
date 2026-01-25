@@ -1,339 +1,567 @@
-# 🚀 PROMPTLIBRARY - Enterprise Prompt Engineering Website
+# PROMPTLIBRARY - Enterprise Prompt Engineering Website
 
 <div align="center">
 
 ![Security Grade](https://img.shields.io/badge/Security-A+-success?style=for-the-badge)
-![Performance](https://img.shields.io/badge/Performance-100%25-success?style=for-the-badge)
+![Performance](https://img.shields.io/badge/Performance-98%25-success?style=for-the-badge)
 ![Mobile Optimized](https://img.shields.io/badge/Mobile-Optimized-blue?style=for-the-badge)
 
 **A professional portfolio and prompt engineering library showcasing security-first design and enterprise-grade implementation**
 
-[Live Demo](https://basiliso-rosario.com) · [Security Report](#security-posture) · [Documentation](#documentation)
+[Live Demo](https://basiliso-rosario.com) | [Security Report](https://basiliso-rosario.com/Security/security.html) | [Documentation](#documentation)
 
 </div>
 
 ---
 
-## 📖 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
-- [Features](#features)
-- [Security Posture](#security-posture)
+- [Project Roadmap](#project-roadmap)
+  - [Phase 1: Prerequisites & Setup](#phase-1-prerequisites--setup)
+  - [Phase 2: Development Environment](#phase-2-development-environment)
+  - [Phase 3: Website Development](#phase-3-website-development)
+  - [Phase 4: Security Implementation](#phase-4-security-implementation)
+  - [Phase 5: Version Control & GitHub](#phase-5-version-control--github)
+  - [Phase 6: Hosting & Deployment](#phase-6-hosting--deployment)
+  - [Phase 7: CI/CD & Auto-Deployment](#phase-7-cicd--auto-deployment)
+  - [Phase 8: Performance Optimization](#phase-8-performance-optimization)
 - [Technology Stack](#technology-stack)
+- [Security Posture](#security-posture)
 - [Project Structure](#project-structure)
-- [UX Optimizations](#ux-optimizations)
-- [Development Notes](#development-notes)
-- [Deployment](#deployment)
-- [Testing](#testing)
 - [License](#license)
+- [Contact](#contact)
 
 ---
 
-## 🎯 Overview
+## Overview
 
-This project is a **security-hardened personal portfolio and prompt engineering library** designed to demonstrate:
+This project is a **security-hardened personal portfolio and prompt engineering library** that demonstrates:
 
-- ✨ Enterprise-grade security implementation (A+ ratings across all platforms)
-- 📱 Mobile-first responsive design with desktop-like UX
-- 🎨 Professional UI/UX with minimal dependencies
-- 📚 Comprehensive prompt engineering library with real-world examples
-- 🔒 Privacy-conscious architecture (no tracking, no analytics, no cookies)
+- Enterprise-grade security implementation (A+ ratings across all testing platforms)
+- Mobile-first responsive design with desktop-like UX
+- Professional UI/UX with zero external dependencies
+- Comprehensive prompt engineering library with real-world examples
+- Privacy-conscious architecture (no tracking, no analytics, no cookies)
 
-The website showcases professional work, provides educational resources related to prompt engineering, and demonstrates security best practices for modern web applications.
-
----
-
-## ✨ Features
-
-### Core Functionality
-
-- **Personal Portfolio** - Professional profile with bio, quote, and call-to-action
-- **Prompt Engineering Library** - Comprehensive collection of enterprise prompts organized by:
-  - Methodology frameworks (CRISP, CRISPE, COSTAR, ReAct)
-  - Role-based best practices (Executive Assistant, IT Engineer, IT Manager, IT Site Support)
-  - Skill levels (Entry, Intermediate, Advanced)
-- **Security Showcase** - Live security test results and implementation details
-- **Site Use Policy** - Comprehensive legal framework and security disclosures
-
-### Design & UX
-
-- **Accordion Navigation** - Organized desktop navigation with expandable Security section
-- **Mobile-Optimized** - 40% reduction in scrolling on mobile devices
-- **Tablet Support** - Dedicated breakpoint with 2-column layouts (769px - 1024px)
-- **Copy-to-Clipboard** - One-click copy functionality for all prompt templates
-- **Dark Theme Sidebar** - Professional gradient sidebar with red accent theme
-- **Responsive Grid Layouts** - Adapts from 6-column desktop to single-column mobile
-
-### Security Features
-
-- **Content Security Policy (CSP)** - Strict policy with explicit resource allowlists
-- **HTTP Strict Transport Security (HSTS)** - 1-year enforcement with subdomains
-- **Security Headers** - X-Frame-Options, X-Content-Type-Options, Permissions-Policy
-- **TLS 1.3 Encryption** - Modern cipher suites with automated certificate renewal
-- **No Third-Party Scripts** - Zero external dependencies, all resources self-hosted
-- **No Data Collection** - No cookies, no analytics, no user tracking
+This README serves as a **complete roadmap** documenting every tool, technology, and step used to build, secure, and deploy this website from scratch.
 
 ---
 
-## 🔒 Security Posture
+## Project Roadmap
+
+This section documents the chronological journey of building this project. Each phase builds on the previous one - you must complete earlier phases before moving to later ones.
+
+---
+
+### Phase 1: Prerequisites & Setup
+
+**You need these BEFORE you can begin development.**
+
+#### 1.1 Domain Name
+
+| Item | Details |
+|------|---------|
+| **What** | Register a domain name |
+| **Provider Used** | Hostinger |
+| **Domain** | basiliso-rosario.com |
+| **Why First** | You need a domain before you can configure hosting, SSL, or DNS |
+
+#### 1.2 Web Hosting Account
+
+| Item | Details |
+|------|---------|
+| **What** | Web hosting with file storage and server access |
+| **Provider Used** | Hostinger (Premium Web Hosting) |
+| **Features Needed** | PHP support (optional), SSL certificates, .htaccess support, File Manager |
+| **Why First** | You need hosting before you can upload files or configure security headers |
+
+#### 1.3 SSL Certificate
+
+| Item | Details |
+|------|---------|
+| **What** | SSL/TLS certificate for HTTPS |
+| **Provider Used** | Hostinger (Free SSL with hosting) |
+| **Type** | Let's Encrypt (auto-renewal) |
+| **Why First** | Security headers like HSTS require HTTPS to function |
+
+---
+
+### Phase 2: Development Environment
+
+**Set up your local development tools.**
+
+#### 2.1 Visual Studio Code (VS Code)
+
+| Item | Details |
+|------|---------|
+| **What** | Code editor for writing HTML, CSS, JavaScript |
+| **Download** | [code.visualstudio.com](https://code.visualstudio.com/) |
+| **Why** | Industry-standard editor with excellent extensions and Git integration |
+
+**Recommended VS Code Extensions:**
+- Live Server - Local development server with auto-reload
+- Prettier - Code formatting
+- GitLens - Enhanced Git integration
+- HTML CSS Support - Autocomplete for HTML/CSS
+
+#### 2.2 Git
+
+| Item | Details |
+|------|---------|
+| **What** | Version control system |
+| **Download** | [git-scm.com](https://git-scm.com/) |
+| **Why** | Track changes, collaborate, and deploy via GitHub |
+
+**Basic Git Configuration:**
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+```
+
+#### 2.3 Claude Code (AI Development Assistant)
+
+| Item | Details |
+|------|---------|
+| **What** | AI-powered coding assistant CLI tool by Anthropic |
+| **Install** | `npm install -g @anthropic-ai/claude-code` |
+| **Requires** | Node.js 18+, Anthropic API key |
+| **Why** | Accelerates development with AI assistance for coding, debugging, and refactoring |
+
+**How Claude Code Was Used in This Project:**
+- Writing and refactoring HTML/CSS/JavaScript
+- Implementing security headers in .htaccess
+- Debugging responsive design issues
+- Creating documentation
+- Git commit management
+- Performance optimization recommendations
+
+#### 2.4 Web Browser with DevTools
+
+| Item | Details |
+|------|---------|
+| **What** | Modern browser for testing |
+| **Recommended** | Chrome, Firefox, or Edge |
+| **Why** | DevTools for debugging, network inspection, responsive testing |
+
+---
+
+### Phase 3: Website Development
+
+**Build the actual website files.**
+
+#### 3.1 Project Initialization
+
+```bash
+# Create project directory
+mkdir PROMPTLIBRARY
+cd PROMPTLIBRARY
+
+# Initialize Git repository
+git init
+
+# Create initial file structure
+mkdir Security Icons Fonts
+mkdir Icons/SVG
+```
+
+#### 3.2 Core Files Created
+
+| File | Purpose |
+|------|---------|
+| `index.html` | Home/Profile page with personal bio and CTA |
+| `library.html` | Prompt engineering library with categorized prompts |
+| `styles.css` | Master stylesheet with responsive breakpoints |
+| `app.js` | JavaScript for navigation, copy functionality, accordions |
+| `Security/security.html` | Security posture and test results showcase |
+| `Security/site-use-policy.html` | Legal framework and privacy policy |
+
+#### 3.3 Design Principles Applied
+
+- **Mobile-First**: Design for mobile, then enhance for larger screens
+- **No External Dependencies**: All fonts, icons, and scripts self-hosted
+- **Semantic HTML**: Proper heading hierarchy and ARIA labels
+- **CSS Grid/Flexbox**: Modern layout techniques
+- **Progressive Enhancement**: Core functionality works without JavaScript
+
+#### 3.4 Responsive Breakpoints
+
+| Breakpoint | Target | Grid Columns |
+|------------|--------|--------------|
+| 1025px+ | Desktop | 5-6 columns |
+| 769px - 1024px | Tablet | 2 columns |
+| 481px - 768px | Mobile | 1 column |
+| ≤480px | Small Mobile | 1 column (compressed) |
+
+---
+
+### Phase 4: Security Implementation
+
+**Implement enterprise-grade security headers.**
+
+#### 4.1 Understanding .htaccess
+
+The `.htaccess` file configures Apache server behavior. This is where security headers are implemented.
+
+#### 4.2 Security Headers Implemented
+
+```apache
+# Content Security Policy - Strict allowlists
+Header set Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';"
+
+# HTTP Strict Transport Security - Force HTTPS for 1 year
+Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+# Prevent clickjacking
+Header set X-Frame-Options "DENY"
+
+# Prevent MIME type sniffing
+Header set X-Content-Type-Options "nosniff"
+
+# Referrer Policy - Privacy protection
+Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+# Permissions Policy - Restrict browser APIs
+Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+```
+
+#### 4.3 Browser Caching for Performance
+
+```apache
+# Cache static assets for 1 year
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+```
+
+#### 4.4 Security Testing
+
+| Platform | URL | What It Tests |
+|----------|-----|---------------|
+| Mozilla Observatory | [observatory.mozilla.org](https://observatory.mozilla.org) | Security headers, CSP |
+| SecurityHeaders.com | [securityheaders.com](https://securityheaders.com) | Header implementation |
+| SSL Labs | [ssllabs.com/ssltest](https://www.ssllabs.com/ssltest/) | TLS/SSL configuration |
+| GTmetrix | [gtmetrix.com](https://gtmetrix.com) | Performance, caching |
+
+---
+
+### Phase 5: Version Control & GitHub
+
+**Set up GitHub for code hosting and collaboration.**
+
+#### 5.1 Create GitHub Account
+
+| Item | Details |
+|------|---------|
+| **URL** | [github.com](https://github.com) |
+| **Account Type** | Free (sufficient for this project) |
+
+#### 5.2 Create Repository
+
+1. Go to GitHub → Click "New repository"
+2. Repository name: `PROMPTLIBRARY`
+3. Set to Public or Private
+4. Do NOT initialize with README (we have local files)
+
+#### 5.3 Connect Local Repository to GitHub
+
+```bash
+# Add remote origin
+git remote add origin https://github.com/YOUR_USERNAME/PROMPTLIBRARY.git
+
+# Stage all files
+git add -A
+
+# Initial commit
+git commit -m "Initial commit: Portfolio and prompt library"
+
+# Push to GitHub
+git push -u origin main
+```
+
+#### 5.4 Git Workflow Used
+
+```bash
+# Check status before changes
+git status
+
+# Stage specific files
+git add filename.html
+
+# Or stage all changes
+git add -A
+
+# Commit with descriptive message
+git commit -m "fix: Update security headers for A+ rating"
+
+# Push to remote
+git push origin main
+```
+
+---
+
+### Phase 6: Hosting & Deployment
+
+**Upload files to Hostinger and configure the live site.**
+
+#### 6.1 Manual Deployment (Initial)
+
+1. Log into **Hostinger hPanel**
+2. Go to **Files** → **File Manager**
+3. Navigate to `public_html`
+4. Upload all project files maintaining directory structure
+
+#### 6.2 Verify Deployment
+
+- Visit your domain (e.g., https://basiliso-rosario.com)
+- Hard refresh: `Ctrl + Shift + R`
+- Check browser console for errors (F12 → Console)
+
+#### 6.3 DNS Configuration (if needed)
+
+| Record Type | Name | Value |
+|-------------|------|-------|
+| A | @ | Hostinger IP address |
+| CNAME | www | yourdomain.com |
+
+---
+
+### Phase 7: CI/CD & Auto-Deployment
+
+**Set up automatic deployment from GitHub to Hostinger.**
+
+#### 7.1 Why Auto-Deployment?
+
+- Push to GitHub → Automatically updates live site
+- No manual file uploads needed
+- Version history maintained
+- Rollback capability
+
+#### 7.2 Generate SSH Key in Hostinger
+
+1. Log into **Hostinger hPanel**
+2. Go to **Advanced** → **Git**
+3. Click **Create** or **Manage**
+4. Hostinger generates an SSH public key
+5. Copy the SSH key (starts with `ssh-rsa`)
+
+#### 7.3 Add Deploy Key to GitHub
+
+1. Go to your GitHub repository
+2. Click **Settings** → **Deploy keys**
+3. Click **Add deploy key**
+4. Title: `Hostinger Auto Deploy`
+5. Paste the SSH key from Hostinger
+6. Check "Allow write access" (optional)
+7. Click **Add key**
+
+#### 7.4 Configure Git Repository in Hostinger
+
+1. In Hostinger hPanel → **Git**
+2. Repository URL: `git@github.com:YOUR_USERNAME/PROMPTLIBRARY.git`
+3. Branch: `main`
+4. Directory: `public_html`
+5. Click **Create**
+6. Enable **Auto deployment**
+
+#### 7.5 Deployment Workflow (After Setup)
+
+```bash
+# Local: Make changes and commit
+git add -A
+git commit -m "Update: New feature added"
+git push origin main
+
+# Hostinger automatically pulls changes
+# Live site updates within seconds
+```
+
+---
+
+### Phase 8: Performance Optimization
+
+**Achieve high performance scores.**
+
+#### 8.1 Image Optimization
+
+| Image | Original Size | Optimized Size | Savings |
+|-------|---------------|----------------|---------|
+| me2.png | 4.4 MB | ~40 KB | 99% |
+| Screenshots | 200-500 KB | 70-350 KB | 30-50% |
+
+**Tools for Image Optimization:**
+- [TinyPNG](https://tinypng.com) - PNG/JPEG compression
+- [Squoosh](https://squoosh.app) - Advanced compression with preview
+- ImageMagick (CLI) - Batch processing
+
+#### 8.2 Browser Caching
+
+Added 1-year cache headers for static assets (see Phase 4).
+
+#### 8.3 Performance Results (GTmetrix)
+
+| Metric | Score |
+|--------|-------|
+| Performance | 98% |
+| Structure | 98% |
+| Largest Contentful Paint | 1.1s |
+| Total Blocking Time | 0ms |
+| Cumulative Layout Shift | 0 |
+
+---
+
+## Technology Stack
+
+### Frontend
+| Technology | Purpose |
+|------------|---------|
+| HTML5 | Semantic markup |
+| CSS3 | Responsive design, Grid/Flexbox |
+| Vanilla JavaScript | DOM manipulation, no frameworks |
+| SVG Icons | Scalable, self-hosted graphics |
+
+### Development Tools
+| Tool | Purpose |
+|------|---------|
+| VS Code | Code editor |
+| Claude Code | AI development assistant |
+| Git | Version control |
+| Chrome DevTools | Debugging and testing |
+
+### Hosting & Infrastructure
+| Service | Purpose |
+|---------|---------|
+| Hostinger | Web hosting |
+| GitHub | Code repository |
+| Let's Encrypt | SSL certificates |
+| Apache | Web server (.htaccess) |
+
+---
+
+## Security Posture
 
 ### Test Results
 
 | Platform | Grade | Focus Area |
 |----------|-------|------------|
-| **Mozilla Observatory** | A+ | Security Headers |
-| **SecurityHeaders.com** | A+ | Header Implementation |
-| **SSL Labs** | A+ | TLS Configuration |
-| **GTmetrix** | A | Performance & Structure |
+| Mozilla Observatory | A+ | Security Headers |
+| SecurityHeaders.com | A+ | Header Implementation |
+| SSL Labs | A+ | TLS Configuration |
+| GTmetrix | A | Performance & Structure |
 
 ### Security Philosophy
 
 1. **Least Privilege** - Only minimum required browser capabilities permitted
 2. **Defense in Depth** - Multiple overlapping security controls
-3. **Predictability** - Explicit configuration over defaults
-
-### Implementation Highlights
-
-- **CSP Default-src: 'none'** - Explicit allowlists for each resource type
-- **HSTS Max-Age: 31536000** - 1 year enforcement
-- **X-Frame-Options: DENY** - Clickjacking protection
-- **Permissions-Policy** - Restrictive browser API controls
-- **Referrer-Policy: strict-origin-when-cross-origin** - Privacy protection
-
-> See [Security Posture & Test Results](Security/security.html) for full details and live test screenshots.
+3. **No Third-Party Scripts** - Zero external dependencies
+4. **No Data Collection** - No cookies, analytics, or tracking
 
 ---
 
-## 🛠️ Technology Stack
-
-### Frontend
-
-- **HTML5** - Semantic markup with accessibility considerations
-- **CSS3** - Modern responsive design with flexbox/grid layouts
-- **Vanilla JavaScript** - No frameworks, pure DOM manipulation
-- **SVG Icons** - Scalable, self-hosted vector graphics
-- **SVG Fonts** - Scalable, self-hosted vector fonts
-
-### Hosting & Infrastructure
-
-- **Static HTML** - No server-side processing required
-- **Self-Hosted Assets** - All fonts, icons, and resources served from origin
-- **HTTPS Only** - TLS 1.3 with automated certificate renewal
-
-### Development Tools
-
-- Modern text editor (VS Code recommended)
-- Git for version control
-- Browser DevTools for testing
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 PROMPTLIBRARY/
 ├── index.html                  # Home/Profile page
 ├── library.html                # Prompt engineering library
-├── styles.css                  # Master stylesheet (1449 lines)
+├── styles.css                  # Master stylesheet
 ├── app.js                      # JavaScript functionality
-├── .htaccess                   # Security headers configuration
-├── me2.png                     # Profile image
+├── .htaccess                   # Security headers & caching
+├── me2.png                     # Profile image (optimized)
+├── README.md                   # This documentation
+├── LICENSE                     # Project license
 │
 ├── Security/
-│   ├── security.html           # Combined security posture & test results
-│   ├── site-use-policy.html    # Legal framework and disclosures
+│   ├── security.html           # Security posture & test results
+│   ├── site-use-policy.html    # Legal framework
 │   ├── mozilla-observatory.png # Test screenshot
 │   ├── securityheaders.png     # Test screenshot
 │   ├── ssl-labs.png            # Test screenshot
-│   └── gtmetrix.png            # Test screenshot
+│   └── gtmetrixscan.png        # Test screenshot
 │
-├── Icons/SVG/
+├── Icons/SVG/                  # Self-hosted SVG icons
 │   ├── arrow-left.svg
-│   ├── arrow-right.svg
-│   ├── chevron-right.svg       # Accordion indicator
+│   ├── chevron-right.svg
 │   ├── linkedin.svg
 │   ├── email.svg
-│   ├── home.svg
-│   ├── bullseye.svg
-│   └── [other role/feature icons]
+│   └── [additional icons]
 │
-├── Fonts/                      # Self-hosted fonts (if any)
-│
-└── docs/                       # Project documentation
-    ├── DEPLOYMENT-CHECKLIST.md
-    ├── UX-IMPROVEMENTS.md
-    ├── FIXES-SUMMARY.md
-    └── PROJECT-NOTES.md
+└── .github/
+    └── copilot-instructions.md # AI assistant context
 ```
 
 ---
 
-## 🎨 UX Optimizations
+## Quick Start Guide
 
-### Mobile Experience (40% Less Scrolling)
+### For New Developers
 
-| Element | Desktop | Tablet | Mobile |
-|---------|---------|--------|--------|
-| **Prompt Text Size** | 0.9rem | 0.9rem | 0.85rem |
-| **Line Height** | 1.7 | 1.7 | 1.6 |
-| **Content Padding** | 40px | 30px | 15px |
-| **Framework Grid Columns** | 5-6 | 2 | 1 |
-| **Section Spacing** | 30px | - | 25px |
+1. **Prerequisites**: Get hosting account, domain, and SSL certificate
+2. **Development**: Install VS Code and Git
+3. **Clone**: `git clone https://github.com/basrosario/PROMPTLIBRARY.git`
+4. **Local Development**: Open with Live Server extension in VS Code
+5. **Deploy**: Push to GitHub → Auto-deploys to Hostinger
 
-### Responsive Breakpoints
+### For Existing Developers
 
-- **Desktop**: 1025px+ (Full layout, 5-6 column grids)
-- **Tablet**: 769px - 1024px (2-column grids, moderate compression)
-- **Mobile**: ≤768px (Single column, aggressive spacing optimization)
-- **Small Mobile**: ≤480px (Same as mobile with additional considerations)
+```bash
+# Clone the repository
+git clone https://github.com/basrosario/PROMPTLIBRARY.git
+cd PROMPTLIBRARY
 
-### Key Improvements
+# Make changes
+# ...
 
-- ✅ 40% reduction in vertical scrolling on mobile
-- ✅ Desktop-like flow across all devices
-- ✅ Tablet-specific optimizations (often overlooked)
-- ✅ Maintained readability and accessibility
-- ✅ Professional polish with tighter content density
-
-> See [UX-IMPROVEMENTS.md](UX-IMPROVEMENTS.md) for detailed metrics and implementation.
+# Commit and push
+git add -A
+git commit -m "Your commit message"
+git push origin main
+```
 
 ---
 
-## 📝 Development Notes
+## License
 
-### Recent Updates
+This project is provided for reference and learning purposes.
 
-1. **Accordion Navigation** - Added expandable Security section in sidebar
-2. **Security Page Consolidation** - Merged Test Results into Posture page
-3. **Site Use Policy** - Created comprehensive 12-section legal framework
-4. **Mobile UX Overhaul** - 40% scrolling reduction with responsive optimizations
-5. **Tablet Breakpoint** - Added dedicated 769px-1024px breakpoint
+**Permitted:**
+- View and learn from code structure
+- Reference security implementations
+- Adapt prompt engineering examples
 
-### Known Issues
-
-- None currently tracked
-
-### Planned Enhancements
-
-- [ ] Collapsible/expandable example blocks
-- [ ] "Read More" functionality for long prompts
-- [ ] Sticky headers on scroll
-- [ ] Print-friendly stylesheet
-- [ ] Smooth scroll behavior
+**Not Permitted:**
+- Reproduce the entire site
+- Use profile content or personal information
 
 ---
 
-## 🚀 Deployment
-
-### Prerequisites
-
-- Web server with HTTPS support
-- Apache with mod_headers enabled (for .htaccess)
-- Git for version control
-
-### Deployment Steps
-
-1. **Clone Repository**
-   ```bash
-   git clone https://github.com/Leafmebe/PROMPTLIBRARY.git
-   cd PROMPTLIBRARY
-   ```
-
-2. **Upload to Server**
-   - Upload all files maintaining directory structure
-   - Ensure .htaccess is processed
-   - Verify Icons/SVG/ directory uploads completely
-
-3. **Verify Security Headers**
-   - Test at [SecurityHeaders.com](https://securityheaders.com)
-   - Test at [Mozilla Observatory](https://observatory.mozilla.org)
-
-4. **Clear Cache**
-   - Browser: Ctrl + Shift + Delete
-   - Hard refresh: Ctrl + Shift + R
-
-> See [DEPLOYMENT-CHECKLIST.md](DEPLOYMENT-CHECKLIST.md) for detailed instructions.
-
----
-
-## 🧪 Testing
-
-### Desktop Tests
-
-- [ ] Sidebar has dark gradient background
-- [ ] Framework grids display in 5-6 columns
-- [ ] Navigation items hover correctly
-- [ ] All SVG icons load without errors
-- [ ] Copy buttons work for prompt examples
-
-### Mobile Tests (< 768px)
-
-- [ ] Hamburger menu appears and functions
-- [ ] Navigation menu slides down with backdrop
-- [ ] Framework grids collapse to single column
-- [ ] Scrolling is reduced vs previous version
-- [ ] All tap targets are >44px (accessibility)
-
-### Security Tests
-
-- [ ] CSP violations: 0
-- [ ] Mixed content warnings: 0
-- [ ] HTTP requests: 0 (all HTTPS)
-- [ ] Third-party scripts: 0
-
-### Browser Compatibility
-
-- ✅ Chrome/Edge (Chromium)
-- ✅ Firefox
-- ✅ Safari
-- ✅ Mobile Safari (iOS)
-- ✅ Chrome Mobile (Android)
-
----
-
-## 📚 Documentation
-
-- [DEPLOYMENT-CHECKLIST.md](DEPLOYMENT-CHECKLIST.md) - Server upload and testing
-- [UX-IMPROVEMENTS.md](UX-IMPROVEMENTS.md) - Mobile optimization details
-- [FIXES-SUMMARY.md](FIXES-SUMMARY.md) - Bug fixes and solutions
-
----
-
-## 📄 License
-
-This project is a personal portfolio and educational resource. The code is provided for reference and learning purposes.
-
-**Content Usage:**
-- ✅ View and learn from code structure
-- ✅ Reference security implementations
-- ✅ Adapt prompt engineering examples
-- ❌ Do not reproduce the entire site
-- ❌ Do not use profile content or personal information
-
----
-
-## 🤝 Contact
+## Contact
 
 **Basiliso Rosario**
+- Website: [basiliso-rosario.com](https://basiliso-rosario.com)
 - LinkedIn: [linkedin.com/in/basiliso-rosario](https://www.linkedin.com/in/basiliso-rosario/)
 - Email: bas.rosario@gmail.com
-- Website: [basiliso-rosario.com](https://basiliso-rosario.com)
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-- Icons: Self-designed SVG icons
-- Fonts: System fonts for performance
-- Security Testing: Mozilla Observatory, SecurityHeaders.com, SSL Labs, GTmetrix
-- Prompt Engineering: Real-world enterprise examples from professional experience
+- **Claude Code** by Anthropic - AI development assistance
+- **Hostinger** - Web hosting and deployment
+- **GitHub** - Version control and repository hosting
+- **Security Testing Platforms** - Mozilla Observatory, SecurityHeaders.com, SSL Labs, GTmetrix
 
 ---
 
 <div align="center">
 
-**Built with security, performance, and user experience in mind** 🚀
+**Built with security, performance, and documentation in mind**
 
-[⬆ Back to Top](#-promptlibrary---enterprise-prompt-engineering-website)
+[Back to Top](#promptlibrary---enterprise-prompt-engineering-website)
 
 </div>
