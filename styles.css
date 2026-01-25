@@ -2202,11 +2202,59 @@ p { margin-bottom: 15px; }
 .fade-in-stagger > .fade-in:nth-child(5) { transition-delay: 0.4s; }
 .fade-in-stagger > .fade-in:nth-child(6) { transition-delay: 0.5s; }
 
-/* Reduce motion for accessibility */
+/* =========================================
+   ACCESSIBILITY: Reduced Motion Support
+   Respects user's system preference for reduced motion
+   ========================================= */
 @media (prefers-reduced-motion: reduce) {
+    /* Disable all animations globally */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* Fade-in elements appear immediately */
     .fade-in {
         opacity: 1;
         transform: none;
+    }
+
+    /* Chart animations show final state */
+    .bar-fill {
+        animation: none;
+        width: var(--bar-width, 100%);
+    }
+
+    .circle-progress {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
+
+    .stacked-segment {
+        animation: none;
+    }
+
+    /* Toast notifications appear instantly */
+    .toast {
+        animation: none;
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* Pulse effects disabled */
+    .pulse-ring {
+        animation: none;
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Accordion/collapsible transitions instant */
+    .nav-accordion-content,
+    .prompt-text.collapsible {
         transition: none;
     }
 }
