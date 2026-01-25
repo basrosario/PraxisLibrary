@@ -356,4 +356,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
         localStorage.setItem('theme', newTheme);
     });
+
+    // ==========================================
+    // FADE-IN ANIMATIONS ON SCROLL
+    // ==========================================
+    // Add fade-in class to animatable elements
+    const animatableSelectors = [
+        '.sec-section',
+        '.sec-card',
+        '.test-row',
+        '.example-block',
+        '.rationale-item'
+    ];
+
+    animatableSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => {
+            el.classList.add('fade-in');
+        });
+    });
+
+    // Add stagger class to grid containers
+    document.querySelectorAll('.sec-grid, .rationale-grid').forEach(grid => {
+        grid.classList.add('fade-in-stagger');
+    });
+
+    // Create Intersection Observer
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                fadeObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe all fade-in elements
+    document.querySelectorAll('.fade-in').forEach(el => {
+        fadeObserver.observe(el);
+    });
 });

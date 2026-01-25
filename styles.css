@@ -1912,3 +1912,34 @@ p { margin-bottom: 15px; }
         height: 20px;
     }
 }
+
+/* =========================================
+   20. FADE-IN ANIMATIONS ON SCROLL
+   ========================================= */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered animation delays for grid items */
+.fade-in-stagger > .fade-in:nth-child(1) { transition-delay: 0s; }
+.fade-in-stagger > .fade-in:nth-child(2) { transition-delay: 0.1s; }
+.fade-in-stagger > .fade-in:nth-child(3) { transition-delay: 0.2s; }
+.fade-in-stagger > .fade-in:nth-child(4) { transition-delay: 0.3s; }
+.fade-in-stagger > .fade-in:nth-child(5) { transition-delay: 0.4s; }
+.fade-in-stagger > .fade-in:nth-child(6) { transition-delay: 0.5s; }
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .fade-in {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
