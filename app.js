@@ -466,33 +466,10 @@ document.addEventListener('DOMContentLoaded', () => {
     updateProgress();
 
     // ==========================================
-    // COLLAPSIBLE PROMPT SECTIONS
+    // COLLAPSIBLE PROMPT SECTIONS (DISABLED)
+    // Feature disabled for consistent UX across all sections
+    // All prompt content now flows naturally without height constraints
     // ==========================================
-    const promptTexts = document.querySelectorAll('.prompt-text');
-    const collapseThreshold = 200; // Height in pixels before collapsing
-
-    promptTexts.forEach(promptText => {
-        // Check if content is tall enough to need collapsing
-        if (promptText.scrollHeight > collapseThreshold) {
-            promptText.classList.add('collapsible');
-
-            // Create read more button
-            const readMoreBtn = document.createElement('button');
-            readMoreBtn.className = 'read-more-btn';
-            readMoreBtn.innerHTML = 'Read more <span class="arrow">&#9660;</span>';
-
-            readMoreBtn.addEventListener('click', () => {
-                const isExpanded = promptText.classList.toggle('expanded');
-                readMoreBtn.classList.toggle('expanded', isExpanded);
-                readMoreBtn.innerHTML = isExpanded
-                    ? 'Read less <span class="arrow">&#9660;</span>'
-                    : 'Read more <span class="arrow">&#9660;</span>';
-            });
-
-            // Insert button after prompt text
-            promptText.parentNode.insertBefore(readMoreBtn, promptText.nextSibling);
-        }
-    });
 
     // ==========================================
     // CHART DATA INITIALIZATION (CSP-Safe)
