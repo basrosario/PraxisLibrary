@@ -146,60 +146,6 @@
                     </div>
                     <div class="method-explanation"><strong>Overview:</strong> ReAct prevents "hallucination" by forcing the AI to request real data before drawing conclusions. Unlike standard chat that guesses solutions based on training data, ReAct creates an interactive loop where the AI stops and waits for your input before continuing.</div>
 
-                    <div class="level-header"><span class="level-badge">When to Use</span><span class="level-title">Best Applications</span><span class="level-desc">Guidance</span></div>
-                    <div class="method-explanation"><strong>A. Complex Troubleshooting:</strong> When the problem requires multiple diagnostic steps and the root cause isn't obvious. Examples: network outages, application crashes, performance degradation.</div>
-                    <div class="method-explanation"><strong>B. Environment-Specific Issues:</strong> When the AI cannot know your specific configuration, versions, or setup. The loop forces it to gather real system data rather than assume generic configurations.</div>
-
-                    <div class="level-header"><span class="level-badge cell-accent text-white">Template</span><span class="level-title">ReAct System Prompt</span><span class="level-desc">Copyable</span></div>
-                    <div class="example-block">
-                        <div class="example-header">
-                            <span>Universal ReAct Setup</span>
-                            <span class="method-badge">ReAct</span>
-                            <button class="btn-copy">Copy</button>
-                        </div>
-                        <div class="example-content">
-                            <div class="prompt-text"><span class="key">[Role]</span> You are a [ROLE] using the ReAct framework.<br>
-<span class="key">[Goal]</span> Your goal is to solve the user's [PROBLEM TYPE] by simulating a troubleshooting loop.<br>
-<span class="key">[Tools]</span> You have access to the following "Virtual Tools":<br>
-1. [Tool1]: [Description]<br>
-2. [Tool2]: [Description]<br>
-3. [Tool3]: [Description]<br><br>
-<span class="key">[Format]</span> Strictly follow this format:<br>
-<strong>Thought:</strong> Analyze the current situation. What is the hypothesis?<br>
-<strong>Action:</strong> The specific tool/command you want me to run.<br>
-<strong>[STOP and wait for my input as the "Observation"]</strong><br><br>
-Continue the loop until you identify the root cause and solution.</div>
-                        </div>
-                    </div>
-
-                    <div class="level-header"><span class="level-badge cell-accent text-white">Example</span><span class="level-title">Real-World Application</span><span class="level-desc">IT Site Support</span></div>
-                    <div class="example-block">
-                        <div class="example-header">
-                            <span>Application Crash Troubleshooting</span>
-                            <span class="method-badge">ReAct</span>
-                            <button class="btn-copy">Copy</button>
-                        </div>
-                        <div class="example-content">
-                            <div class="prompt-text"><span class="key">[Role]</span> You are a Tier 3 Application Support Engineer using the ReAct framework.<br>
-<span class="key">[Goal]</span> Solve the user's application crash by simulating a troubleshooting loop.<br>
-<span class="key">[Tools]</span> [EventViewer], [ProcessMonitor], [AppLogs]<br>
-<span class="key">[Format]</span> Thought → Action → [STOP for Observation] → Repeat<br>
-<span class="key">[Scenario]</span> A critical business application crashes every time a user tries to export a report to PDF. It worked fine last week.<br><br>
-
-<strong>AI (ReAct Mode):</strong><br>
-<span class="key">Thought:</span> A recent change likely caused this. The crash on PDF export suggests a rendering or dependency issue. I need to check the application event logs first.<br>
-<span class="key">Action:</span> [EventViewer] Filter Application log for errors from the app in the last 7 days.<br><br>
-
-<strong>You:</strong><br>
-<span class="key">Observation:</span> Event ID 1026: ".NET Runtime Error - System.IO.FileNotFoundException: Could not load file 'PDFSharp.dll'"<br><br>
-
-<strong>AI (ReAct Mode):</strong><br>
-<span class="key">Thought:</span> The missing DLL indicates a broken dependency. This could be from an update or accidental deletion. I should verify when this file went missing.<br>
-<span class="key">Action:</span> [ProcessMonitor] Check if PDFSharp.dll exists in the application directory and when it was last modified.</div>
-                        </div>
-                    </div>
-                    <div class="method-explanation"><strong>Why this works:</strong> Instead of guessing "reinstall the application" (common AI advice), the ReAct loop identified the exact missing DLL in one diagnostic step. This saves hours of troubleshooting and targets the precise fix: restore or reinstall only the PDF rendering component.</div>
-
                 </div>
 
                 <div id="ea" class="tab-content">
