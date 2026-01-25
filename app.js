@@ -187,4 +187,50 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // ==========================================
+    // BACK TO TOP BUTTON
+    // ==========================================
+    // Create button element
+    const backToTopBtn = document.createElement('button');
+    backToTopBtn.className = 'back-to-top';
+    backToTopBtn.setAttribute('aria-label', 'Back to top');
+    backToTopBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4l-8 8h5v8h6v-8h5z"/>
+        </svg>
+    `;
+    document.body.appendChild(backToTopBtn);
+
+    // Get scroll container (content-scroll or window)
+    const scrollContainer = document.querySelector('.content-scroll') || window;
+    const scrollElement = scrollContainer === window ? document.documentElement : scrollContainer;
+
+    // Show/hide button based on scroll position
+    function toggleBackToTop() {
+        const scrollTop = scrollContainer === window
+            ? window.pageYOffset || document.documentElement.scrollTop
+            : scrollContainer.scrollTop;
+
+        if (scrollTop > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    }
+
+    // Scroll to top on click
+    backToTopBtn.addEventListener('click', () => {
+        if (scrollContainer === window) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    });
+
+    // Listen for scroll events
+    scrollContainer.addEventListener('scroll', toggleBackToTop);
+
+    // Initial check
+    toggleBackToTop();
 });
