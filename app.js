@@ -263,4 +263,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial check
     toggleBackToTop();
+
+    // ==========================================
+    // IMAGE LIGHTBOX
+    // ==========================================
+    // Create lightbox overlay
+    const lightboxOverlay = document.createElement('div');
+    lightboxOverlay.className = 'lightbox-overlay';
+    lightboxOverlay.innerHTML = `
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close">&times;</button>
+            <img class="lightbox-image" src="" alt="">
+            <div class="lightbox-caption"></div>
+        </div>
+    `;
+    document.body.appendChild(lightboxOverlay);
+
+    const lightboxImage = lightboxOverlay.querySelector('.lightbox-image');
+    const lightboxCaption = lightboxOverlay.querySelector('.lightbox-caption');
+    const lightboxClose = lightboxOverlay.querySelector('.lightbox-close');
+
+    // Add lightbox trigger to security test images
+    const testImages = document.querySelectorAll('.test-image img');
+    testImages.forEach(img => {
+        img.classList.add('lightbox-trigger');
+        img.addEventListener('click', () => {
+            lightboxImage.src = img.src;
+            lightboxImage.alt = img.alt;
+            lightboxCaption.textContent = img.alt || '';
+            lightboxOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // Close lightbox functions
+    function closeLightbox() {
+        lightboxOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    lightboxClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeLightbox();
+    });
+
+    lightboxOverlay.addEventListener('click', (e) => {
+        if (e.target === lightboxOverlay) {
+            closeLightbox();
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightboxOverlay.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
 });
