@@ -541,18 +541,21 @@ This project is provided for reference and learning purposes.
 
 ---
 
-## Contact
+## Author
 
-**Basiliso Rosario**
+**Basiliso Rosario** - Creator & Developer
+
 - Website: [basiliso-rosario.com](https://basiliso-rosario.com)
 - LinkedIn: [linkedin.com/in/basiliso-rosario](https://www.linkedin.com/in/basiliso-rosario/)
 - Email: bas.rosario@gmail.com
+
+This project was designed, developed, and implemented by Basiliso Rosario. All HTML, CSS, JavaScript, security configurations, and architectural decisions were authored by the creator.
 
 ---
 
 ## Acknowledgments
 
-- **Claude Code** by Anthropic - AI development assistance
+- **Claude Code** by Anthropic - AI assistance for code refinement and documentation
 - **Hostinger** - Web hosting and deployment
 - **GitHub** - Version control and repository hosting
 - **Security Testing Platforms** - Mozilla Observatory, SecurityHeaders.com, SSL Labs, GTmetrix
