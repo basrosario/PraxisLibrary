@@ -520,16 +520,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // This replaces inline styles for security compliance
     // ==========================================
 
-    // Initialize circular progress charts
+    // Initialize circular progress charts with animation
+    // data-progress can be either a percentage (0-100) or an offset value (0-314)
     document.querySelectorAll('circle[data-progress]').forEach(circle => {
-        const progress = circle.dataset.progress;
-        circle.style.setProperty('--progress-offset', progress);
+        const value = parseFloat(circle.dataset.progress);
+        // If value is <= 100, treat it as a percentage and calculate offset
+        // If value > 100, it's already an offset value
+        const offset = value <= 100 ? 314 - (314 * value / 100) : value;
+        circle.style.setProperty('--progress-offset', offset);
+        // Trigger animation after a brief delay to ensure CSS is applied
+        requestAnimationFrame(() => {
+            circle.classList.add('animate');
+        });
     });
 
-    // Initialize bar chart fills
+    // Initialize bar chart fills with animation
     document.querySelectorAll('.bar-fill[data-width]').forEach(bar => {
         const width = bar.dataset.width;
         bar.style.setProperty('--bar-width', width + '%');
+        // Trigger animation after a brief delay to ensure CSS is applied
+        requestAnimationFrame(() => {
+            bar.classList.add('animate');
+        });
     });
 
     // Initialize stacked bar segments

@@ -2578,10 +2578,14 @@ p { margin-bottom: 15px; }
     height: 100%;
     border-radius: 15px;
     position: relative;
-    width: var(--bar-width, 0%);
+    width: 0%;
     transform-origin: left center;
-    animation: barScale 2.5s ease-out forwards;
+    transition: width 1.5s ease-out;
     background: linear-gradient(90deg, #c0392b, #e74c3c); /* Default red gradient */
+}
+
+.bar-fill.animate {
+    width: var(--bar-width, 0%);
 }
 
 /* Type-specific bar colors - All RED */
@@ -2652,8 +2656,12 @@ p { margin-bottom: 15px; }
     stroke-width: 10;
     stroke-linecap: round;
     stroke-dasharray: 314;
+    stroke-dashoffset: 314;
+    transition: stroke-dashoffset 1.5s ease-out;
+}
+
+.circular-progress .progress.animate {
     stroke-dashoffset: var(--progress-offset, 314);
-    animation: circleProgress 3s ease-out forwards;
 }
 
 /* Circular progress - Red, Black, Grey palette */
@@ -2662,9 +2670,7 @@ p { margin-bottom: 15px; }
 .circular-progress .progress.blue { stroke: #666666; }         /* Medium Grey */
 .circular-progress .progress.purple { stroke: #999999; }       /* Light Grey */
 
-@keyframes circleProgress {
-    from { stroke-dashoffset: 314; }
-}
+/* Animation handled via transition + .animate class */
 
 .circular-value {
     position: absolute;
