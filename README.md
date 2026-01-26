@@ -1,4 +1,4 @@
-<div align="center"><h1>< / OpenBas > PROMPTLIBRARY  <br> AI Engineering Prompting Library</h1></div>
+<div align="center"><h1>< / OpenBas > PROMPTLIBRARY  <br> AI Education & Adoption Resource Library</h1></div>
 
 <div align="center">
 
@@ -9,25 +9,37 @@
 ![Structure](https://img.shields.io/badge/Structure-100%25-success?style=for-the-badge&labelColor=2196F3)
 ![Mobile Optimized](https://img.shields.io/badge/Mobile-Optimized-success?style=for-the-badge&labelColor=2196F3)
 
-**An AI engineering prompting library showcasing security-first design and enterprise-grade implementation**
+**A comprehensive AI education and adoption library empowering educators, businesses, and service professionals to embrace AI effectively**
 
 </div>
 
 ---
 
+## 🎯 Mission: Adoption Over Prevention
+
+This library is built on a fundamental belief: **AI literacy through education is more effective than AI restriction through detection.**
+
+Instead of teaching people to fear AI or catch AI use, we focus on:
+- **Teaching responsible AI usage** across all audiences
+- **Providing practical prompts** that demonstrate ethical AI applications
+- **Empowering professionals** to integrate AI into their workflows
+- **Supporting educators** in teaching AI literacy, not AI avoidance
+
+> **EDUCATE**: *Empower Don't Undermine — Collaborate And Teach Ethically*
+
+---
+
 ## Table of Contents
 
-- [Overview](#overview)
+- [Mission: Adoption Over Prevention](#-mission-adoption-over-prevention)
+- [Prompt Libraries](#-prompt-libraries)
+  - [IT Professional Library](#it-professional-library)
+  - [Education Hub](#education-hub)
+  - [Business Sectors](#business-sectors)
+  - [Service Industries](#service-industries)
+- [Core Features](#-core-features)
 - [Quick Start](#quick-start)
 - [Implementation Roadmap](#implementation-roadmap)
-  - [Phase 1: Prerequisites & Setup](#phase-1-prerequisites--setup)
-  - [Phase 2: Development Environment](#phase-2-development-environment)
-  - [Phase 3: Website Development](#phase-3-website-development)
-  - [Phase 4: Security Implementation](#phase-4-security-implementation)
-  - [Phase 5: Version Control & GitHub](#phase-5-version-control--github)
-  - [Phase 6: Hosting & Deployment](#phase-6-hosting--deployment)
-  - [Phase 7: CI/CD & Auto-Deployment](#phase-7-cicd--auto-deployment)
-  - [Phase 8: Performance Optimization](#phase-8-performance-optimization)
 - [Technology Stack](#technology-stack)
 - [Security Posture](#security-posture)
 - [Project Structure](#project-structure)
@@ -36,18 +48,72 @@
 
 ---
 
-## Overview
+## 📚 Prompt Libraries
 
-This project is a **security-hardened portfolio and prompt engineering library** that demonstrates:
+### IT Professional Library
 
-- Enterprise-grade security implementation (A+ ratings across all testing platforms)
-- Mobile-first responsive design with desktop-like UX
-- Professional UI/UX with zero external dependencies
-- Comprehensive prompt engineering library with real-world examples across 15+ professional roles
-- Privacy-conscious architecture (no tracking, no analytics, no cookies)
-- CRISP, CRISPE, COSTAR, and ReAct prompt methodologies
+The original library featuring enterprise-grade prompts for IT professionals:
 
-This README serves as a **complete implementation guide** documenting every tool, technology, and step needed to build, secure, and deploy this website from scratch.
+| Role | Focus Areas |
+|------|-------------|
+| **Executive Assistant** | Meeting prep, communication drafting, document synthesis |
+| **IT Engineer** | Code review, architecture decisions, debugging |
+| **IT Manager** | Team leadership, budget justification, strategic planning |
+| **IT Site Support** | Troubleshooting, user training, documentation |
+
+**Methodologies covered:** CRISP, CRISPE, COSTAR, ReAct
+
+---
+
+### Education Hub
+
+A complete AI literacy curriculum for the education sector, built on the **"Adoption Over Prevention"** philosophy.
+
+| Audience | Content |
+|----------|---------|
+| **Teachers** | Lesson planning, differentiated instruction, AI literacy lessons, feedback generation |
+| **Students** | Ethical AI use, research assistance, study tools, citation practices |
+| **Administrators** | Policy development, faculty training, strategic implementation |
+
+**Key Philosophy:** We teach students HOW to use AI ethically, not HOW to avoid detection.
+
+---
+
+### Business Sectors
+
+Tailored prompts for organizations of every size:
+
+| Sector | Employee Range | Focus |
+|--------|----------------|-------|
+| **Enterprise** | 1,000+ | Governance, compliance, change management |
+| **Mid-Size** | 100-999 | Scaling operations, process optimization |
+| **Small Business** | 10-99 | Marketing, customer service, efficiency |
+| **Startups** | 1-9 | Idea validation, lean operations, bootstrapping |
+
+---
+
+### Service Industries
+
+Practical AI prompts for service professionals:
+
+| Industry | Professionals |
+|----------|---------------|
+| **Beauty & Wellness** | Salons, barbershops, spas, wellness centers |
+| **Professional Services** | Consultants, coaches, freelancers |
+| **Creative Services** | Photographers, designers, videographers |
+| **Trades** | Electricians, plumbers, contractors |
+| **Hospitality** | Restaurants, caterers, event planners |
+
+---
+
+## ✨ Core Features
+
+- **50+ Role-Specific Prompt Templates** across IT, education, business, and services
+- **Enterprise-Grade Security** (A+ ratings across all testing platforms)
+- **Mobile-First Responsive Design** with desktop-like UX
+- **Zero External Dependencies** - all fonts, icons, and scripts self-hosted
+- **Privacy-Conscious Architecture** - no tracking, no analytics, no cookies
+- **Universal Design Principles** - accessible to all users
 
 ---
 
@@ -73,9 +139,11 @@ Before deploying, update these files with your information:
 
 1. **index.html** - Replace profile name, bio, and contact links
 2. **library.html** - Customize or expand prompt examples for your use case
-3. **Security/site-use-policy.html** - Update legal information
-4. **styles.css** - Modify brand colors if desired (#D71920 is the accent color)
-5. **.htaccess** - Update domain-specific settings
+3. **education/** - Modify prompts for your educational context
+4. **business/** - Adapt prompts to your industry focus
+5. **services/** - Customize for your service industry needs
+6. **styles.css** - Modify brand colors if desired (#D71920 is the accent color)
+7. **.htaccess** - Update domain-specific settings
 
 ---
 
@@ -191,8 +259,8 @@ cd PROMPTLIBRARY
 git init
 
 # Create initial file structure
-mkdir Security Icons GitHub Fonts
-mkdir Icons/SVG
+mkdir -p assets/fonts assets/icons/SVG assets/images
+mkdir -p pages education business services
 ```
 
 #### 3.2 Core Files
@@ -200,14 +268,22 @@ mkdir Icons/SVG
 | File | Purpose |
 |------|---------|
 | `index.html` | Home/Profile page with personal bio and CTA |
-| `library.html` | Prompt engineering library with categorized prompts |
+| `library.html` | IT Professional prompt library with categorized prompts |
 | `styles.css` | Master stylesheet with responsive breakpoints |
 | `app.js` | JavaScript for navigation, copy functionality, accordions |
-| `Security/security.html` | Security posture and test results showcase |
-| `Security/site-use-policy.html` | Legal framework and privacy policy |
-| `GitHub/github-insights.html` | GitHub project insights and metrics |
+| `pages/security.html` | Security posture and test results showcase |
+| `pages/site-use-policy.html` | Legal framework and privacy policy |
+| `pages/github-insights.html` | GitHub project insights and metrics |
 
-#### 3.3 Design Principles
+#### 3.3 Prompt Hub Files
+
+| Directory | Purpose |
+|-----------|---------|
+| `education/` | Education Hub - Teachers, Students, Administrators |
+| `business/` | Business Sectors - Enterprise, Mid-Size, Small, Startups |
+| `services/` | Service Industries - Beauty, Professional, Creative, Trades, Hospitality |
+
+#### 3.4 Design Principles
 
 - **Mobile-First**: Design for mobile, then enhance for larger screens
 - **No External Dependencies**: All fonts, icons, and scripts self-hosted
@@ -215,7 +291,7 @@ mkdir Icons/SVG
 - **CSS Grid/Flexbox**: Modern layout techniques
 - **Progressive Enhancement**: Core functionality works without JavaScript
 
-#### 3.4 Responsive Breakpoints
+#### 3.5 Responsive Breakpoints
 
 | Breakpoint | Target | Grid Columns |
 |------------|--------|--------------|
@@ -487,7 +563,7 @@ Add 1-year cache headers for static assets (see Phase 4).
 ```
 PROMPTLIBRARY/
 ├── index.html                  # Home/Profile page
-├── library.html                # Prompt engineering library
+├── library.html                # IT Professional prompt library
 ├── styles.css                  # Master stylesheet
 ├── app.js                      # JavaScript functionality
 ├── .htaccess                   # Security headers & caching
@@ -505,9 +581,31 @@ PROMPTLIBRARY/
 │           └── security/       # Security test screenshots
 │
 ├── pages/
+│   ├── about.html              # About/Bio page
 │   ├── github-insights.html    # GitHub project insights
 │   ├── security.html           # Security posture & test results
 │   └── site-use-policy.html    # Terms of use policy
+│
+├── education/                  # Education Hub
+│   ├── index.html              # Education landing page
+│   ├── teachers.html           # Prompts for educators
+│   ├── students.html           # Prompts for students
+│   └── administrators.html     # Prompts for school leaders
+│
+├── business/                   # Business Sectors
+│   ├── index.html              # Business landing page
+│   ├── enterprise.html         # 1,000+ employees
+│   ├── midsize.html            # 100-999 employees
+│   ├── small.html              # 10-99 employees
+│   └── startup.html            # Solopreneurs & startups
+│
+├── services/                   # Service Industries
+│   ├── index.html              # Services landing page
+│   ├── beauty-wellness.html    # Salons, spas, barbershops
+│   ├── professional-services.html  # Consultants, coaches
+│   ├── creative-services.html  # Photographers, designers
+│   ├── trades.html             # Electricians, plumbers
+│   └── hospitality.html        # Restaurants, caterers
 │
 └── .github/
     └── copilot-instructions.md # AI assistant context
@@ -525,18 +623,36 @@ The primary accent color is `#D71920` (red). To change it:
 2. Search for `#D71920` and replace with your color
 3. Update the `.text-red` utility class
 
-### Adding New Roles to the Library
+### Adding New Roles to the IT Library
 
 1. Add a new navigation item in `library.html` sidebar
 2. Create a new `tab-content` section with matching `data-tab` ID
 3. Follow the existing structure for CRISP/CRISPE/COSTAR/ReAct examples
 
+### Customizing Education Prompts
+
+1. Navigate to `education/` directory
+2. Modify prompts in `teachers.html`, `students.html`, or `administrators.html`
+3. Maintain the existing card and example-block structure
+
+### Adding New Business Sectors
+
+1. Create a new HTML file in `business/` directory
+2. Copy structure from `enterprise.html` as a template
+3. Update navigation in `business/index.html`
+
+### Adding New Service Industries
+
+1. Create a new HTML file in `services/` directory
+2. Copy structure from `beauty-wellness.html` as a template
+3. Update navigation in `services/index.html`
+
 ### Updating Security Information
 
 1. Run security tests on your deployed site
 2. Take screenshots of results
-3. Place in `Security/` directory
-4. Update `Security/security.html` with your results
+3. Place in `assets/images/screenshots/security/` directory
+4. Update `pages/security.html` with your results
 
 ---
 
@@ -562,8 +678,10 @@ See [LICENSE](LICENSE) for full details.
 
 <div align="center">
 
-**Built with security, performance, and accessibility in mind**
+**Built with security, performance, accessibility, and education in mind**
 
-[Back to Top](#promptlibrary---ai-engineering-prompting-library)
+*Empowering AI adoption through education, not restriction*
+
+[Back to Top](#promptlibrary---ai-education--adoption-resource-library)
 
 </div>
