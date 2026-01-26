@@ -17,7 +17,7 @@
 
 ## 👋 Hi, I'm Basiliso Rosario
 
-> *"The best way to predict the future is to create it."*
+Favorite Quote> *"The best way to predict the future is to create it."*
 
 I believe that true innovation in AI isn't just about companies adopting AI as a new technology—it's about **people** learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.
 
