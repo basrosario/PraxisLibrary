@@ -1,15 +1,15 @@
-# PROMPTLIBRARY - AI Prompt Engineering Portfolio
+# PROMPTLIBRARY - AI Engineering Prompting Library
 
 <div align="center">
 
-![This Website Was](https://img.shields.io/badge/This_Website_Was-D71920?style=for-the-badge)![Created](https://img.shields.io/badge/CREATED-FF6600?style=for-the-badge)![With](https://img.shields.io/badge/WITH-FFD700?style=for-the-badge)![UD](https://img.shields.io/badge/UD-4CAF50?style=for-the-badge)![In](https://img.shields.io/badge/IN-2196F3?style=for-the-badge)![Mind](https://img.shields.io/badge/MIND-9C27B0?style=for-the-badge)
+![</OpenBas>](https://img.shields.io/badge/%3C%2FOpenBas%3E-FFFFFF?style=for-the-badge&logoColor=black)![This Website Was](https://img.shields.io/badge/This_Website_Was-D71920?style=for-the-badge)![Created](https://img.shields.io/badge/CREATED-FF6600?style=for-the-badge)![With](https://img.shields.io/badge/WITH-FFD700?style=for-the-badge)![UD](https://img.shields.io/badge/UD-4CAF50?style=for-the-badge)![In](https://img.shields.io/badge/IN-2196F3?style=for-the-badge)![Mind](https://img.shields.io/badge/MIND-9C27B0?style=for-the-badge)
 
 ![Security Grade](https://img.shields.io/badge/Security-A+_100%25-success?style=for-the-badge&labelColor=2196F3)
 ![Performance](https://img.shields.io/badge/Performance-100%25-success?style=for-the-badge&labelColor=2196F3)
 ![Structure](https://img.shields.io/badge/Structure-100%25-success?style=for-the-badge&labelColor=2196F3)
 ![Mobile Optimized](https://img.shields.io/badge/Mobile-Optimized-success?style=for-the-badge&labelColor=2196F3)
 
-**A professional portfolio and prompt engineering library showcasing security-first design and enterprise-grade implementation**
+**An AI engineering prompting library showcasing security-first design and enterprise-grade implementation**
 
 </div>
 
@@ -566,6 +566,6 @@ See [LICENSE](LICENSE) for full details.
 
 **Built with security, performance, and accessibility in mind**
 
-[Back to Top](#promptlibrary---ai-prompt-engineering-portfolio)
+[Back to Top](#promptlibrary---ai-engineering-prompting-library)
 
 </div>
