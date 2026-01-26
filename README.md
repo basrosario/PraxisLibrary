@@ -57,7 +57,7 @@ This README serves as a **complete implementation guide** documenting every tool
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/PROMPTLIBRARY.git
+git clone https://github.com/basrosario/PROMPTLIBRARY.git
 cd PROMPTLIBRARY
 
 # Open in VS Code
@@ -303,7 +303,7 @@ Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment
 
 ```bash
 # Add remote origin
-git remote add origin https://github.com/YOUR_USERNAME/PROMPTLIBRARY.git
+git remote add origin https://github.com/basrosario/PROMPTLIBRARY.git
 
 # Stage all files
 git add -A
@@ -387,7 +387,7 @@ git push origin main
    - Click **Add key**
 
 3. **Configure Git Repository in Hosting**
-   - Repository URL: `git@github.com:YOUR_USERNAME/PROMPTLIBRARY.git`
+   - Repository URL: `git@github.com:basrosario/PROMPTLIBRARY.git`
    - Branch: `main`
    - Directory: `public_html`
    - Enable **Auto deployment**
