@@ -3208,6 +3208,32 @@ p { margin-bottom: 15px; }
     letter-spacing: 4px;
 }
 
+.praxis-brand-massive {
+    font-size: 6rem;
+    margin-bottom: 40px;
+    letter-spacing: 8px;
+    text-shadow:
+        0 0 30px rgba(230, 57, 70, 0.5),
+        0 0 60px rgba(230, 57, 70, 0.3),
+        0 0 90px rgba(230, 57, 70, 0.2);
+    animation: brandPulse 3s ease-in-out infinite, staticFlicker 0.1s infinite;
+}
+
+.praxis-brand-massive .praxis-bracket {
+    font-size: 5rem;
+}
+
+.praxis-brand-massive .praxis-text,
+.praxis-brand-massive .praxis-ai {
+    font-size: 6rem;
+}
+
+@keyframes staticFlicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.98; }
+    25%, 75% { opacity: 0.99; }
+}
+
 .praxis-bracket {
     color: #666666;
     transition: color 0.3s ease;
@@ -3269,11 +3295,16 @@ p { margin-bottom: 15px; }
 }
 
 @keyframes glitchEffect {
-    0%, 100% { transform: translate(0); filter: none; }
-    20% { transform: translate(-3px, 2px); filter: hue-rotate(90deg); }
-    40% { transform: translate(3px, -2px); filter: hue-rotate(180deg); }
-    60% { transform: translate(-2px, -1px); filter: hue-rotate(270deg); }
-    80% { transform: translate(2px, 1px); filter: hue-rotate(360deg); }
+    0%, 100% { transform: translate(0); text-shadow: none; }
+    10% { transform: translate(-3px, 2px); text-shadow: 3px 0 0 #E63946, -3px 0 0 #FFFFFF; }
+    20% { transform: translate(3px, -2px); text-shadow: -3px 0 0 #E63946, 3px 0 0 #666666; }
+    30% { transform: translate(-2px, -1px); text-shadow: 2px 0 0 #FFFFFF, -2px 0 0 #E63946; }
+    40% { transform: translate(2px, 1px); text-shadow: -2px 0 0 #666666, 2px 0 0 #E63946; }
+    50% { transform: translate(-1px, 2px); text-shadow: 1px 0 0 #E63946, -1px 0 0 #FFFFFF; }
+    60% { transform: translate(1px, -1px); text-shadow: -1px 0 0 #E63946, 1px 0 0 #666666; }
+    70% { transform: translate(-2px, 1px); text-shadow: 2px 0 0 #FFFFFF, -2px 0 0 #E63946; }
+    80% { transform: translate(2px, -2px); text-shadow: -2px 0 0 #E63946, 2px 0 0 #FFFFFF; }
+    90% { transform: translate(-1px, -1px); text-shadow: 1px 0 0 #666666, -1px 0 0 #E63946; }
 }
 
 @keyframes floatEffect {
@@ -3298,8 +3329,69 @@ p { margin-bottom: 15px; }
 }
 
 @keyframes colorShiftEffect {
-    0%, 100% { filter: hue-rotate(0deg); }
-    50% { filter: hue-rotate(180deg); }
+    0%, 100% { color: #FFFFFF; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+    25% { color: #E63946; text-shadow: 0 0 20px rgba(230,57,70,0.8); }
+    50% { color: #666666; text-shadow: 0 0 10px rgba(102,102,102,0.5); }
+    75% { color: #E63946; text-shadow: 0 0 20px rgba(230,57,70,0.8); }
+}
+
+/* Additional Glitch/Static/Zap Effects */
+.anim-char.static {
+    animation: staticEffect 0.15s steps(2) infinite;
+}
+
+.anim-char.zap {
+    animation: zapEffect 0.3s ease-out;
+}
+
+.anim-char.scan {
+    animation: scanlineEffect 0.8s linear;
+}
+
+.anim-char.corrupt {
+    animation: corruptEffect 0.4s steps(4);
+}
+
+.anim-char.flicker {
+    animation: flickerEffect 0.2s steps(3);
+}
+
+@keyframes staticEffect {
+    0% { transform: translate(1px, 1px); opacity: 0.9; }
+    50% { transform: translate(-1px, -1px); opacity: 1; }
+    100% { transform: translate(1px, -1px); opacity: 0.95; }
+}
+
+@keyframes zapEffect {
+    0% { transform: scale(1) skewX(0deg); color: #FFFFFF; text-shadow: 0 0 30px #E63946; }
+    20% { transform: scale(1.2) skewX(-10deg); color: #E63946; text-shadow: 0 0 50px #FFFFFF, 0 0 80px #E63946; }
+    40% { transform: scale(0.9) skewX(5deg); color: #FFFFFF; text-shadow: 0 0 20px #E63946; }
+    60% { transform: scale(1.1) skewX(-3deg); color: #E63946; text-shadow: 0 0 40px #FFFFFF; }
+    100% { transform: scale(1) skewX(0deg); text-shadow: none; }
+}
+
+@keyframes scanlineEffect {
+    0% { clip-path: inset(0 0 100% 0); opacity: 0; }
+    20% { clip-path: inset(0 0 80% 0); opacity: 1; text-shadow: 0 0 10px #E63946; }
+    40% { clip-path: inset(0 0 60% 0); text-shadow: 0 0 20px #E63946; }
+    60% { clip-path: inset(0 0 40% 0); text-shadow: 0 0 30px #E63946; }
+    80% { clip-path: inset(0 0 20% 0); text-shadow: 0 0 20px #E63946; }
+    100% { clip-path: inset(0 0 0% 0); opacity: 1; text-shadow: none; }
+}
+
+@keyframes corruptEffect {
+    0% { transform: translate(0); filter: none; }
+    25% { transform: translate(3px, 0) scaleX(1.1); filter: contrast(1.5) brightness(1.2); }
+    50% { transform: translate(-2px, 1px) scaleX(0.95); filter: contrast(2) brightness(0.8); }
+    75% { transform: translate(1px, -1px) scaleX(1.05); filter: contrast(1.2) brightness(1.3); }
+    100% { transform: translate(0); filter: none; }
+}
+
+@keyframes flickerEffect {
+    0% { opacity: 1; }
+    33% { opacity: 0.4; color: #E63946; }
+    66% { opacity: 0.9; color: #FFFFFF; }
+    100% { opacity: 1; }
 }
 
 /* Main Title */
@@ -3493,6 +3585,20 @@ p { margin-bottom: 15px; }
         font-size: 1.2rem;
     }
 
+    .praxis-brand-massive {
+        font-size: 3.5rem;
+        letter-spacing: 4px;
+    }
+
+    .praxis-brand-massive .praxis-bracket {
+        font-size: 3rem;
+    }
+
+    .praxis-brand-massive .praxis-text,
+    .praxis-brand-massive .praxis-ai {
+        font-size: 3.5rem;
+    }
+
     .praxis-stats {
         gap: 25px;
     }
@@ -3525,6 +3631,20 @@ p { margin-bottom: 15px; }
 @media (max-width: 480px) {
     .praxis-title {
         font-size: 2rem;
+    }
+
+    .praxis-brand-massive {
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+    }
+
+    .praxis-brand-massive .praxis-bracket {
+        font-size: 2.2rem;
+    }
+
+    .praxis-brand-massive .praxis-text,
+    .praxis-brand-massive .praxis-ai {
+        font-size: 2.5rem;
     }
 
     .praxis-tagline {

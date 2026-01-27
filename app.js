@@ -822,20 +822,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const animatedBrand = document.getElementById('animated-brand');
     if (animatedBrand) {
         const animChars = animatedBrand.querySelectorAll('.anim-char');
-        const effects = ['glitch', 'float', 'pulse', 'shake', 'flip', 'color-shift'];
+        // Extended effects with new glitchy/static/zappy animations
+        const effects = ['glitch', 'float', 'pulse', 'shake', 'flip', 'color-shift', 'static', 'zap', 'scan', 'corrupt', 'flicker'];
+        const glitchyEffects = ['glitch', 'static', 'zap', 'corrupt', 'flicker']; // High intensity
+
+        // Clear all effects from a character
+        function clearEffects(char) {
+            effects.forEach(e => char.classList.remove(e));
+        }
 
         // Random effect on individual characters
         function triggerRandomEffect() {
             const randomChar = animChars[Math.floor(Math.random() * animChars.length)];
             const randomEffect = effects[Math.floor(Math.random() * effects.length)];
 
-            // Remove any existing effect
-            effects.forEach(e => randomChar.classList.remove(e));
-
-            // Add new effect
+            clearEffects(randomChar);
             randomChar.classList.add(randomEffect);
 
-            // Remove effect after animation completes
             setTimeout(() => {
                 randomChar.classList.remove(randomEffect);
             }, 1000);
@@ -846,7 +849,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const randomEffect = effects[Math.floor(Math.random() * effects.length)];
             animChars.forEach((char, index) => {
                 setTimeout(() => {
-                    effects.forEach(e => char.classList.remove(e));
+                    clearEffects(char);
                     char.classList.add(randomEffect);
                     setTimeout(() => char.classList.remove(randomEffect), 600);
                 }, index * 100);
@@ -868,27 +871,92 @@ document.addEventListener('DOMContentLoaded', () => {
             let iterations = 0;
             const storm = setInterval(() => {
                 const randomChar = animChars[Math.floor(Math.random() * animChars.length)];
-                randomChar.classList.add('glitch');
-                setTimeout(() => randomChar.classList.remove('glitch'), 300);
+                const randomGlitch = glitchyEffects[Math.floor(Math.random() * glitchyEffects.length)];
+                randomChar.classList.add(randomGlitch);
+                setTimeout(() => randomChar.classList.remove(randomGlitch), 300);
                 iterations++;
-                if (iterations > 10) clearInterval(storm);
-            }, 100);
+                if (iterations > 15) clearInterval(storm);
+            }, 80);
         }
 
-        // Random interval for effects (between 2-5 seconds)
+        // ZAP BURST - intense lightning effect across brand
+        function zapBurst() {
+            animChars.forEach((char, index) => {
+                setTimeout(() => {
+                    char.classList.add('zap');
+                    setTimeout(() => char.classList.remove('zap'), 300);
+                }, index * 50);
+            });
+        }
+
+        // STATIC WAVE - TV static effect rippling through
+        function staticWave() {
+            animChars.forEach((char, index) => {
+                setTimeout(() => {
+                    char.classList.add('static');
+                    setTimeout(() => {
+                        char.classList.remove('static');
+                        char.classList.add('flicker');
+                        setTimeout(() => char.classList.remove('flicker'), 200);
+                    }, 300);
+                }, index * 60);
+            });
+        }
+
+        // CORRUPT SEQUENCE - data corruption effect
+        function corruptSequence() {
+            const shuffled = [...animChars].sort(() => Math.random() - 0.5);
+            shuffled.forEach((char, index) => {
+                setTimeout(() => {
+                    char.classList.add('corrupt');
+                    setTimeout(() => char.classList.remove('corrupt'), 400);
+                }, index * 80);
+            });
+        }
+
+        // SCAN REVEAL - scanning line effect
+        function scanReveal() {
+            animChars.forEach((char, index) => {
+                setTimeout(() => {
+                    char.classList.add('scan');
+                    setTimeout(() => char.classList.remove('scan'), 800);
+                }, index * 120);
+            });
+        }
+
+        // CHAOS MODE - multiple random effects simultaneously
+        function chaosMode() {
+            animChars.forEach(char => {
+                const randomEffect = glitchyEffects[Math.floor(Math.random() * glitchyEffects.length)];
+                char.classList.add(randomEffect);
+                setTimeout(() => char.classList.remove(randomEffect), 500);
+            });
+        }
+
+        // Random interval for effects (between 1.5-4 seconds)
         function scheduleRandomEffect() {
-            const delay = Math.random() * 3000 + 2000;
+            const delay = Math.random() * 2500 + 1500;
             setTimeout(() => {
-                // Choose between different effect types
+                // Choose between different effect types with weighted probability
                 const effectType = Math.random();
-                if (effectType < 0.4) {
+                if (effectType < 0.25) {
                     triggerRandomEffect();
-                } else if (effectType < 0.6) {
+                } else if (effectType < 0.35) {
                     cascadeEffect();
-                } else if (effectType < 0.8) {
+                } else if (effectType < 0.45) {
                     waveEffect();
-                } else {
+                } else if (effectType < 0.55) {
                     glitchStorm();
+                } else if (effectType < 0.65) {
+                    zapBurst();
+                } else if (effectType < 0.75) {
+                    staticWave();
+                } else if (effectType < 0.85) {
+                    corruptSequence();
+                } else if (effectType < 0.93) {
+                    scanReveal();
+                } else {
+                    chaosMode();
                 }
                 scheduleRandomEffect();
             }, delay);
@@ -897,13 +965,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // Start random animations after page load
         setTimeout(scheduleRandomEffect, 1000);
 
-        // Hover effects - glitch on hover
+        // Initial dramatic entrance
+        setTimeout(() => {
+            scanReveal();
+        }, 500);
+
+        // Hover effects - zap on hover for intensity
         animChars.forEach(char => {
             char.addEventListener('mouseenter', () => {
-                char.classList.add('glitch');
+                char.classList.add('zap');
             });
             char.addEventListener('mouseleave', () => {
-                setTimeout(() => char.classList.remove('glitch'), 300);
+                setTimeout(() => char.classList.remove('zap'), 300);
             });
         });
     }
