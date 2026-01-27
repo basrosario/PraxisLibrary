@@ -1,752 +1,299 @@
-<div align="center"><h1>< / OpenBas > PROMPTLIBRARY  <br> AI Education & Adoption Resource Library</h1></div>
+# Praxis AI Prompt Library
 
 <div align="center">
 
-![</OpenBas>](https://img.shields.io/badge/%3C%2FOpenBas%3E-FFFFFF?style=for-the-badge&logoColor=black)![This Website Was](https://img.shields.io/badge/This_Website_Was-D71920?style=for-the-badge)![Created](https://img.shields.io/badge/CREATED-FF6600?style=for-the-badge)![With](https://img.shields.io/badge/WITH-FFD700?style=for-the-badge)![UD](https://img.shields.io/badge/UD-4CAF50?style=for-the-badge)![In](https://img.shields.io/badge/IN-2196F3?style=for-the-badge)![Mind](https://img.shields.io/badge/MIND-9C27B0?style=for-the-badge)
+**A Human-AI Collaboration Example Project**
+
+*How we built a complete web application together—humans and AI working side by side*
 
 ![Security Grade](https://img.shields.io/badge/Security-A+_100%25-success?style=for-the-badge&labelColor=2196F3)
 ![Performance](https://img.shields.io/badge/Performance-100%25-success?style=for-the-badge&labelColor=2196F3)
-![Structure](https://img.shields.io/badge/Structure-100%25-success?style=for-the-badge&labelColor=2196F3)
-![Mobile Optimized](https://img.shields.io/badge/Mobile-Optimized-success?style=for-the-badge&labelColor=2196F3)
-
-**A comprehensive AI education and adoption library empowering educators, businesses, and service professionals to embrace AI effectively**
+![Built With](https://img.shields.io/badge/Built_With-Claude_Code-7C3AED?style=for-the-badge)
 
 </div>
 
 ---
 
-## 👋 Hi, I'm Basiliso Rosario
+## What This Project Demonstrates
 
-Favorite Quote | *"The best way to predict the future is to create it."*
+This repository serves as a **working example** of what happens when humans and AI collaborate on a real project. It's not about the content itself—it's about the process, the tools, and the possibilities.
 
-I believe that true innovation in AI isn't just about companies adopting AI as a new technology—it's about **people** learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.
-
-This project exists because I'm passionate about **demystifying AI** and **driving personal adoption**. My goal is to create collaborative environments where technology and human creativity combine to solve complex problems and build a better tomorrow.
-
-### Why This Library Exists
-
-- **AI is here.** The question isn't whether to use it—it's how to use it effectively and ethically.
-- **Learning unlocks potential.** When people understand AI, they can harness it to amplify their unique human capabilities.
-- **Everyone deserves access.** AI literacy shouldn't be a privilege reserved for technologists.
-- **Personal growth matters.** True AI transformation happens when individuals embrace these tools in their daily lives.
+**What you'll find here:**
+- A complete, production-ready web application
+- Zero external dependencies (no CDNs, no tracking, no frameworks)
+- Enterprise-grade security (A+ ratings across all testing platforms)
+- Responsive, accessible design
+- And most importantly: **documentation of how we built it together**
 
 ---
 
-## 🎯 Mission: Unlocking Human Potential
+## The Human-AI Partnership
 
-This library is built on a fundamental belief: **AI is a tool for human empowerment—helping people learn, adapt, and grow.**
+This entire project was built through conversation. A human with ideas and goals. An AI assistant (Claude Code) with technical capabilities. Together, we:
 
-Our focus is on guiding people through their AI journey:
-- **Nurturing AI literacy** through hands-on learning and practical examples
-- **Providing practical prompts** that demonstrate ethical AI applications
-- **Empowering individuals** to integrate AI into their personal and professional lives
-- **Supporting continuous growth** as AI capabilities evolve
+- Designed the architecture
+- Wrote every line of HTML, CSS, and JavaScript
+- Implemented security headers
+- Debugged responsive layouts
+- Managed Git commits
+- Created this documentation
 
-> **E.D.U.C.A.T.E.**: *Empower Don't Underestimate — Collaborate And Teach Ethically*
->
-> This philosophy underpins everything in this library. We believe in empowering people with knowledge, never underestimating anyone's ability to learn and grow, collaborating across disciplines and experience levels, and maintaining ethical standards in all AI applications.
-
----
-
-## Table of Contents
-
-- [Mission: Unlocking Human Potential](#-mission-unlocking-human-potential)
-- [Prompt Libraries](#-prompt-libraries)
-  - [IT Professional Library](#it-professional-library)
-  - [Education Hub](#education-hub)
-  - [Business Sectors](#business-sectors)
-  - [Service Industries](#service-industries)
-  - [Enterprise Programs](#enterprise-programs)
-- [Core Features](#-core-features)
-- [Quick Start](#quick-start)
-- [Implementation Roadmap](#implementation-roadmap)
-- [Technology Stack](#technology-stack)
-- [Security Posture](#security-posture)
-- [Project Structure](#project-structure)
-- [Customization Guide](#customization-guide)
-- [License](#license)
+**The goal isn't to replace human creativity—it's to amplify it.**
 
 ---
 
-## 📚 Prompt Libraries
+## What You Can Learn From This
 
-### IT Professional Library
+### 1. Setting Up Your Environment
 
-The original library featuring enterprise-grade prompts for IT professionals:
+Before we wrote any code, we set up the right tools:
 
-| Role | Focus Areas |
-|------|-------------|
-| **Executive Assistant** | Meeting prep, communication drafting, document synthesis |
-| **IT Engineer** | Code review, architecture decisions, debugging |
-| **IT Manager** | Team leadership, budget justification, strategic planning |
-| **IT Site Support** | Troubleshooting, user training, documentation |
-
-**Methodologies covered:** CRISP, CRISPE, COSTAR, ReAct
-
----
-
-### Education Hub
-
-A complete AI literacy curriculum for the education sector, built on the **E.D.U.C.A.T.E.** philosophy.
-
-| Audience | Content |
-|----------|---------|
-| **Teachers** | Lesson planning, differentiated instruction, AI literacy lessons, feedback generation |
-| **Students** | Ethical AI use, research assistance, study tools, citation practices |
-| **Administrators** | Policy development, faculty training, strategic implementation |
-
-**Key Philosophy:** We guide students to understand, embrace, and use AI as a tool for learning and growth.
-
----
-
-### Business Sectors
-
-Tailored prompts for organizations of every size:
-
-| Sector | Employee Range | Focus |
-|--------|----------------|-------|
-| **Enterprise** | 1,000+ | Governance, compliance, change management |
-| **Mid-Size** | 100-999 | Scaling operations, process optimization |
-| **Small Business** | 10-99 | Marketing, customer service, efficiency |
-| **Startups** | 1-9 | Idea validation, lean operations, bootstrapping |
-
----
-
-### Service Industries
-
-Practical AI prompts for service professionals:
-
-| Industry | Professionals |
-|----------|---------------|
-| **Beauty & Wellness** | Salons, barbershops, spas, wellness centers |
-| **Professional Services** | Consultants, coaches, freelancers |
-| **Creative Services** | Photographers, designers, videographers |
-| **Trades** | Electricians, plumbers, contractors |
-| **Hospitality** | Restaurants, caterers, event planners |
-
----
-
-### Enterprise Programs
-
-Comprehensive AI adoption programs for organizations:
-
-| Program | Focus |
-|---------|-------|
-| **Program Overview** | Structured approach to enterprise AI deployment |
-| **Workshops & Training** | Hands-on sessions for teams at all levels |
-| **Implementation Guide** | Step-by-step rollout methodology |
-| **AI Governance** | Policies, ethics, and responsible AI frameworks |
-
----
-
-## ✨ Core Features
-
-- **50+ Role-Specific Prompt Templates** across IT, education, business, and services
-- **Industry Research Statistics** with data visualizations on every hub and sector page
-- **Interactive Data Visualizations** - animated bar charts, circular progress indicators, metrics grids
-- **Cited Research Sources** - McKinsey, Gartner, Deloitte, MIT/Stanford, and more
-- **Enterprise-Grade Security** (A+ ratings across all testing platforms)
-- **Mobile-First Responsive Design** with desktop-like UX
-- **Zero External Dependencies** - all fonts, icons, and scripts self-hosted
-- **Privacy-Conscious Architecture** - no tracking, no analytics, no cookies
-- **Universal Design Principles** - accessible to all users
-
-### Data Visualization Features (Phase 7)
-
-Each hub landing page and sector page now includes industry-specific AI adoption statistics:
-
-| Page Category | Statistics Included | Research Sources |
-|---------------|---------------------|------------------|
-| **Education Hub** | Teacher adoption rates, time savings, student perspectives | Walton Family Foundation, EdWeek, Forbes/McGraw Hill |
-| **Business Hub** | ROI metrics, adoption by company size, productivity gains | McKinsey, MIT/Stanford, BCG Research |
-| **Services Hub** | Customer satisfaction, admin time savings, lead conversion | Salesforce, QuickBooks, Adobe |
-| **IT Sector** | Developer productivity, code completion, AI tool adoption | GitHub Copilot, Stack Overflow, Gartner |
-| **Enterprise** | Deployment rates, investment by function, cost reduction | McKinsey, Deloitte, Gartner |
-| **Mid-Size** | Implementation speed, ROI timeline, use cases | McKinsey SMB, HubSpot, Salesforce |
-| **Small Business** | Adoption rates, time savings, competitive edge | US Chamber, Constant Contact, QuickBooks |
-| **Startups** | Solopreneur adoption, founder productivity, use cases | Fiverr, Notion, Y Combinator |
-| **Service Industries** | Industry-specific stats for Beauty, Professional, Creative, Trades, Hospitality | Vagaro, Thomson Reuters, Adobe, ServiceTitan, Toast |
-| **Role Categories** | Quality/Regulatory, Clinical/Medical, Corporate, Compliance, Innovation, R&D | Deloitte, HIMSS, BCG, Nature Biotechnology |
-
----
-
-## Quick Start
-
-### Clone and Customize
-
-```bash
-# Clone the repository
-git clone https://github.com/basrosario/PROMPTLIBRARY.git
-cd PROMPTLIBRARY
-
-# Open in VS Code
-code .
-
-# Start local development server (using Live Server extension)
-# Right-click index.html → "Open with Live Server"
-```
-
-### Customization Checklist
-
-Before deploying, update these files with your information:
-
-1. **index.html** - Replace profile name, bio, and contact links
-2. **library.html** - Customize or expand prompt examples for your use case
-3. **education/** - Modify prompts for your educational context
-4. **business/** - Adapt prompts to your industry focus
-5. **services/** - Customize for your service industry needs
-6. **styles.css** - Modify brand colors if desired (#D71920 is the accent color)
-7. **.htaccess** - Update domain-specific settings
-
----
-
-## Implementation Roadmap
-
-This section documents the chronological journey of building this project. Each phase builds on the previous one.
-
----
-
-### Phase 1: Prerequisites & Setup
-
-**Complete these BEFORE you begin development.**
-
-#### 1.1 Domain Name
-
-| Item | Details |
-|------|---------|
-| **What** | Register a domain name |
-| **Example Providers** | Hostinger, Namecheap, GoDaddy, Cloudflare |
-| **Your Domain** | `yourdomain.com` |
-| **Why First** | You need a domain before you can configure hosting, SSL, or DNS |
-
-#### 1.2 Web Hosting Account
-
-| Item | Details |
-|------|---------|
-| **What** | Web hosting with file storage and server access |
-| **Example Providers** | Hostinger, DigitalOcean, AWS, Netlify |
-| **Features Needed** | SSL certificates, .htaccess support (Apache), File Manager |
-| **Why First** | You need hosting before you can upload files or configure security headers |
-
-#### 1.3 SSL Certificate
-
-| Item | Details |
-|------|---------|
-| **What** | SSL/TLS certificate for HTTPS |
-| **Options** | Let's Encrypt (free), Provider-included SSL |
-| **Type** | Let's Encrypt (auto-renewal recommended) |
-| **Why First** | Security headers like HSTS require HTTPS to function |
-
----
-
-### Phase 2: Development Environment
-
-**Set up your local development tools.**
-
-#### 2.1 Visual Studio Code (VS Code)
-
-| Item | Details |
-|------|---------|
-| **What** | Code editor for writing HTML, CSS, JavaScript |
-| **Download** | [code.visualstudio.com](https://code.visualstudio.com/) |
-| **Why** | Industry-standard editor with excellent extensions and Git integration |
-
-**Recommended VS Code Extensions:**
-- Live Server - Local development server with auto-reload
-- Prettier - Code formatting
-- GitLens - Enhanced Git integration
-- HTML CSS Support - Autocomplete for HTML/CSS
-
-#### 2.2 Git
-
-| Item | Details |
-|------|---------|
-| **What** | Version control system |
-| **Download** | [git-scm.com](https://git-scm.com/) |
-| **Why** | Track changes, collaborate, and deploy via GitHub |
-
-**Basic Git Configuration:**
-```bash
-git config --global user.name "Your Name"
-git config --global user.email "your.email@example.com"
-```
-
-#### 2.3 Claude Code (AI Development Assistant)
-
-| Item | Details |
-|------|---------|
-| **What** | AI-powered coding assistant CLI tool by Anthropic |
-| **Install** | `npm install -g @anthropic-ai/claude-code` |
-| **Requires** | Node.js 18+, Anthropic API key |
-| **Why** | Accelerates development with AI assistance for coding, debugging, and refactoring |
-
-**How Claude Code Was Used in This Project:**
-- Writing and refactoring HTML/CSS/JavaScript
-- Implementing security headers in .htaccess
-- Debugging responsive design issues
-- Creating documentation
-- Git commit management
-
-#### 2.4 Web Browser with DevTools
-
-| Item | Details |
-|------|---------|
-| **What** | Modern browser for testing |
-| **Recommended** | Chrome, Firefox, or Edge |
-| **Why** | DevTools for debugging, network inspection, responsive testing |
-
----
-
-### Phase 3: Website Development
-
-**Build the actual website files.**
-
-#### 3.1 Project Initialization
-
-```bash
-# Create project directory
-mkdir PROMPTLIBRARY
-cd PROMPTLIBRARY
-
-# Initialize Git repository
-git init
-
-# Create initial file structure
-mkdir -p assets/fonts assets/icons/SVG assets/images
-mkdir -p pages education business services
-```
-
-#### 3.2 Core Files
-
-| File | Purpose |
-|------|---------|
-| `index.html` | Home/Profile page with personal bio and CTA |
-| `library.html` | IT Professional prompt library with categorized prompts |
-| `styles.css` | Master stylesheet with responsive breakpoints |
-| `app.js` | JavaScript for navigation, copy functionality, accordions |
-| `pages/security.html` | Security posture and test results showcase |
-| `pages/site-use-policy.html` | Legal framework and privacy policy |
-| `pages/github-insights.html` | GitHub project insights and metrics |
-
-#### 3.3 Prompt Hub Files
-
-| Directory | Purpose |
-|-----------|---------|
-| `education/` | Education Hub - Teachers, Students, Administrators |
-| `business/` | Business Sectors - Enterprise, Mid-Size, Small, Startups |
-| `services/` | Service Industries - Beauty, Professional, Creative, Trades, Hospitality |
-
-#### 3.4 Design Principles
-
-- **Mobile-First**: Design for mobile, then enhance for larger screens
-- **No External Dependencies**: All fonts, icons, and scripts self-hosted
-- **Semantic HTML**: Proper heading hierarchy and ARIA labels
-- **CSS Grid/Flexbox**: Modern layout techniques
-- **Progressive Enhancement**: Core functionality works without JavaScript
-
-#### 3.5 Responsive Breakpoints
-
-| Breakpoint | Target | Grid Columns |
-|------------|--------|--------------|
-| 1025px+ | Desktop | 5-6 columns |
-| 769px - 1024px | Tablet | 2 columns |
-| 481px - 768px | Mobile | 1 column |
-| ≤480px | Small Mobile | 1 column (compressed) |
-
----
-
-### Phase 4: Security Implementation
-
-**Implement enterprise-grade security headers.**
-
-#### 4.1 Understanding .htaccess
-
-The `.htaccess` file configures Apache server behavior. This is where security headers are implemented.
-
-#### 4.2 Security Headers
-
-```apache
-# Content Security Policy - Strict allowlists
-Header set Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';"
-
-# HTTP Strict Transport Security - Force HTTPS for 1 year
-Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-
-# Prevent clickjacking
-Header set X-Frame-Options "DENY"
-
-# Prevent MIME type sniffing
-Header set X-Content-Type-Options "nosniff"
-
-# Referrer Policy - Privacy protection
-Header set Referrer-Policy "strict-origin-when-cross-origin"
-
-# Permissions Policy - Restrict browser APIs
-Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
-```
-
-#### 4.3 Browser Caching
-
-```apache
-# Cache static assets for 1 year
-<IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresByType image/jpeg "access plus 1 year"
-    ExpiresByType image/png "access plus 1 year"
-    ExpiresByType text/css "access plus 1 year"
-    ExpiresByType application/javascript "access plus 1 year"
-    ExpiresByType text/html "access plus 1 hour"
-</IfModule>
-```
-
-#### 4.4 Security Testing
-
-| Platform | URL | What It Tests |
-|----------|-----|---------------|
-| Mozilla Observatory | [observatory.mozilla.org](https://observatory.mozilla.org) | Security headers, CSP |
-| SecurityHeaders.com | [securityheaders.com](https://securityheaders.com) | Header implementation |
-| SSL Labs | [ssllabs.com/ssltest](https://www.ssllabs.com/ssltest/) | TLS/SSL configuration |
-| GTmetrix | [gtmetrix.com](https://gtmetrix.com) | Performance, caching |
-
----
-
-### Phase 5: Version Control & GitHub
-
-**Set up GitHub for code hosting and collaboration.**
-
-#### 5.1 Create GitHub Account
-
-| Item | Details |
-|------|---------|
-| **URL** | [github.com](https://github.com) |
-| **Account Type** | Free (sufficient for this project) |
-
-#### 5.2 Create Repository
-
-1. Go to GitHub → Click "New repository"
-2. Repository name: `PROMPTLIBRARY`
-3. Set to Public or Private
-4. Do NOT initialize with README (we have local files)
-
-#### 5.3 Connect Local Repository to GitHub
-
-```bash
-# Add remote origin
-git remote add origin https://github.com/basrosario/PROMPTLIBRARY.git
-
-# Stage all files
-git add -A
-
-# Initial commit
-git commit -m "Initial commit: Portfolio and prompt library"
-
-# Push to GitHub
-git push -u origin main
-```
-
-#### 5.4 Git Workflow
-
-```bash
-# Check status before changes
-git status
-
-# Stage specific files
-git add filename.html
-
-# Or stage all changes
-git add -A
-
-# Commit with descriptive message
-git commit -m "feat: Add new feature description"
-
-# Push to remote
-git push origin main
-```
-
----
-
-### Phase 6: Hosting & Deployment
-
-**Upload files to your hosting provider.**
-
-#### 6.1 Manual Deployment (Initial)
-
-1. Log into your hosting control panel
-2. Go to **Files** → **File Manager**
-3. Navigate to `public_html` (or your web root)
-4. Upload all project files maintaining directory structure
-
-#### 6.2 Verify Deployment
-
-- Visit your domain (e.g., `https://yourdomain.com`)
-- Hard refresh: `Ctrl + Shift + R`
-- Check browser console for errors (F12 → Console)
-
-#### 6.3 DNS Configuration (if needed)
-
-| Record Type | Name | Value |
-|-------------|------|-------|
-| A | @ | Your hosting IP address |
-| CNAME | www | yourdomain.com |
-
----
-
-### Phase 7: CI/CD & Auto-Deployment
-
-**Set up automatic deployment from GitHub to your hosting.**
-
-#### 7.1 Why Auto-Deployment?
-
-- Push to GitHub → Automatically updates live site
-- No manual file uploads needed
-- Version history maintained
-- Rollback capability
-
-#### 7.2 Setup Steps (Hostinger Example)
-
-1. **Generate SSH Key in Hosting Panel**
-   - Go to **Advanced** → **Git**
-   - Click **Create** or **Manage**
-   - Copy the generated SSH public key
-
-2. **Add Deploy Key to GitHub**
-   - Go to your GitHub repository → **Settings** → **Deploy keys**
-   - Click **Add deploy key**
-   - Paste the SSH key from your hosting
-   - Click **Add key**
-
-3. **Configure Git Repository in Hosting**
-   - Repository URL: `git@github.com:basrosario/PROMPTLIBRARY.git`
-   - Branch: `main`
-   - Directory: `public_html`
-   - Enable **Auto deployment**
-
-#### 7.3 Deployment Workflow (After Setup)
-
-```bash
-# Local: Make changes and commit
-git add -A
-git commit -m "Update: New feature added"
-git push origin main
-
-# Hosting automatically pulls changes
-# Live site updates within seconds
-```
-
----
-
-### Phase 8: Performance Optimization
-
-**Achieve high performance scores.**
-
-#### 8.1 Image Optimization
-
-**Tools for Image Optimization:**
-- [TinyPNG](https://tinypng.com) - PNG/JPEG compression
-- [Squoosh](https://squoosh.app) - Advanced compression with preview
-- ImageMagick (CLI) - Batch processing
-
-**Target:** Reduce images by 50-99% without visible quality loss
-
-#### 8.2 Browser Caching
-
-Add 1-year cache headers for static assets (see Phase 4).
-
-#### 8.3 Performance Targets
-
-| Metric | Target |
-|--------|--------|
-| Performance | 90%+ |
-| Structure | 90%+ |
-| Largest Contentful Paint | < 2.5s |
-| Total Blocking Time | < 200ms |
-| Cumulative Layout Shift | < 0.1 |
-
----
-
-## Technology Stack
-
-### Frontend
-| Technology | Purpose |
-|------------|---------|
-| HTML5 | Semantic markup |
-| CSS3 | Responsive design, Grid/Flexbox |
-| Vanilla JavaScript | DOM manipulation, no frameworks |
-| SVG Icons | Scalable, self-hosted graphics |
-
-### Development Tools
 | Tool | Purpose |
 |------|---------|
-| VS Code | Code editor |
-| Claude Code | AI development assistant |
+| VS Code | Code editor with great extensions |
 | Git | Version control |
-| Chrome DevTools | Debugging and testing |
+| Claude Code | AI development assistant (`npm install -g @anthropic-ai/claude-code`) |
+| Live Server | Local development with auto-reload |
 
-### Hosting & Infrastructure
-| Service | Purpose |
-|---------|---------|
-| Web Hosting (Apache) | Server with .htaccess support |
-| GitHub | Code repository |
-| Let's Encrypt | SSL certificates |
+### 2. Project Structure
 
----
-
-## Security Posture
-
-### Test Results (Achievable)
-
-| Platform | Target Grade | Focus Area |
-|----------|--------------|------------|
-| Mozilla Observatory | A+ | Security Headers |
-| SecurityHeaders.com | A+ | Header Implementation |
-| SSL Labs | A+ | TLS Configuration |
-| GTmetrix | A | Performance & Structure |
-
-### Security Philosophy
-
-1. **Least Privilege** - Only minimum required browser capabilities permitted
-2. **Defense in Depth** - Multiple overlapping security controls
-3. **Predictability** - Explicit configuration and deterministic behavior
-4. **Visibility** - Security posture openly documented and verifiable
-
----
-
-## Project Structure
+We organized files logically from the start:
 
 ```
-PROMPTLIBRARY/
-├── index.html                  # Home/Profile page
-├── library.html                # IT Professional prompt library
-├── styles.css                  # Master stylesheet
-├── app.js                      # JavaScript functionality
-├── .htaccess                   # Security headers & caching
-├── README.md                   # This documentation
-├── LICENSE                     # Project license
-│
+project/
+├── index.html              # Entry point
+├── styles.css              # All styles in one file
+├── app.js                  # All JavaScript in one file
+├── .htaccess               # Security headers (Apache)
 ├── assets/
-│   ├── fonts/                  # Self-hosted web fonts
-│   ├── icons/                  # SVG icons
-│   │   └── SVG/
-│   └── images/
-│       ├── profile/            # Profile pictures
-│       └── screenshots/
-│           ├── github/         # GitHub insights screenshots
-│           └── security/       # Security test screenshots
-│
-├── pages/
-│   ├── about.html              # About/Bio page
-│   ├── github-insights.html    # GitHub project insights
-│   ├── security.html           # Security posture & test results
-│   └── site-use-policy.html    # Terms of use policy
-│
-├── education/                  # Education Hub
-│   ├── index.html              # Education landing page
-│   ├── teachers.html           # Prompts for educators
-│   ├── students.html           # Prompts for students
-│   ├── administrators.html     # Prompts for school leaders
-│   └── ai-safety.html          # AI Safety & Ethics guide
-│
-├── business/                   # Business Sectors
-│   ├── index.html              # Business landing page
-│   ├── enterprise.html         # 1,000+ employees
-│   ├── midsize.html            # 100-999 employees
-│   ├── small.html              # 10-99 employees
-│   └── startup.html            # Solopreneurs & startups
-│
-├── services/                   # Service Industries
-│   ├── index.html              # Services landing page
-│   ├── beauty-wellness.html    # Salons, spas, barbershops
-│   ├── professional-services.html  # Consultants, coaches
-│   ├── creative-services.html  # Photographers, designers
-│   ├── trades.html             # Electricians, plumbers
-│   └── hospitality.html        # Restaurants, caterers
-│
-├── enterprise/                 # Enterprise AI Programs
-│   └── index.html              # Program overview, workshops, implementation, governance
-│
-└── .github/
-    └── copilot-instructions.md # AI assistant context
+│   ├── fonts/              # Self-hosted fonts
+│   ├── icons/SVG/          # Self-hosted icons
+│   └── images/             # Optimized images
+└── pages/                  # Additional pages
+```
+
+### 3. Security-First Approach
+
+We implemented security headers before writing content:
+
+```apache
+# Content Security Policy - Be strict
+Header set Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self';"
+
+# Force HTTPS
+Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+# Prevent common attacks
+Header set X-Frame-Options "DENY"
+Header set X-Content-Type-Options "nosniff"
+```
+
+### 4. No External Dependencies
+
+We made a deliberate choice: **no CDNs, no external scripts, no tracking.**
+
+Why?
+- Faster load times (no DNS lookups)
+- Better privacy (no third-party requests)
+- Works offline
+- Full control over our codebase
+
+### 5. Mobile-First Responsive Design
+
+We designed for mobile first, then enhanced for larger screens:
+
+```css
+/* Mobile base styles */
+.container { padding: 15px; }
+
+/* Tablet and up */
+@media (min-width: 768px) {
+    .container { padding: 30px; }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .container { padding: 40px; }
+}
 ```
 
 ---
 
-## Customization Guide
+## How to Build Something Similar
 
-### Changing Brand Colors
+### Step 1: Start with Conversation
 
-The primary accent color is `#D71920` (red). To change it:
+Don't start by writing code. Start by describing what you want to build:
 
-1. Open `styles.css`
-2. Search for `#D71920` and replace with your color
-3. Update the `.text-red` utility class
+> "I want to create a website that helps people learn about AI prompts. It should be fast, secure, and work on mobile devices."
 
-### Adding New Roles to the IT Library
+### Step 2: Plan Together
 
-1. Add a new navigation item in `library.html` sidebar
-2. Create a new `tab-content` section with matching `data-tab` ID
-3. Follow the existing structure for CRISP/CRISPE/COSTAR/ReAct examples
+Work with your AI assistant to create a roadmap:
 
-### Customizing Education Prompts
+1. Set up development environment
+2. Create basic file structure
+3. Build core HTML templates
+4. Add styling
+5. Implement interactivity
+6. Add security headers
+7. Test and refine
+8. Deploy
 
-1. Navigate to `education/` directory
-2. Modify prompts in `teachers.html`, `students.html`, or `administrators.html`
-3. Maintain the existing card and example-block structure
+### Step 3: Iterate
 
-### Adding New Business Sectors
+The best results come from back-and-forth:
 
-1. Create a new HTML file in `business/` directory
-2. Copy structure from `enterprise.html` as a template
-3. Update navigation in `business/index.html`
+> Human: "The sidebar doesn't look right on mobile."
+> AI: *Proposes CSS changes*
+> Human: "Better, but the animation is too slow."
+> AI: *Adjusts timing*
+> Human: "Perfect."
 
-### Adding New Service Industries
+### Step 4: Learn Along the Way
 
-1. Create a new HTML file in `services/` directory
-2. Copy structure from `beauty-wellness.html` as a template
-3. Update navigation in `services/index.html`
+Every interaction is an opportunity to understand:
 
-### Updating Security Information
+- Ask "why" when the AI suggests something
+- Request explanations of complex code
+- Build mental models of how things work
 
-1. Run security tests on your deployed site
-2. Take screenshots of results
-3. Place in `assets/images/screenshots/security/` directory
-4. Update `pages/security.html` with your results
+---
+
+## Technical Specifications
+
+### What We Built
+
+| Feature | Implementation |
+|---------|----------------|
+| Responsive sidebar | CSS transitions + JavaScript toggle |
+| Copy-to-clipboard | Vanilla JS Clipboard API |
+| Animated charts | CSS transitions triggered by JS |
+| Particle animation | Canvas API |
+| Dark mode | CSS custom properties |
+
+### Performance Targets (Achieved)
+
+| Metric | Target | Actual |
+|--------|--------|--------|
+| Performance | 90%+ | 100% |
+| Security | A+ | A+ |
+| Accessibility | High | WCAG compliant |
+| Mobile | Optimized | Responsive |
+
+### Browser Support
+
+- Chrome 80+
+- Firefox 75+
+- Safari 13+
+- Edge 80+
+
+---
+
+## Getting Started
+
+### Clone This Repository
+
+```bash
+git clone https://github.com/basrosario/PROMPTLIBRARY.git
+cd PROMPTLIBRARY
+```
+
+### Run Locally
+
+1. Open the folder in VS Code
+2. Install the "Live Server" extension
+3. Right-click `index.html` → "Open with Live Server"
+
+### Deploy Your Own
+
+1. Get a domain and hosting (Hostinger, Netlify, etc.)
+2. Upload all files to your web root
+3. Ensure SSL is enabled
+4. Verify `.htaccess` is working (check security headers)
+
+---
+
+## Lessons We Learned
+
+### What Worked Well
+
+- **Starting simple** - We built core features first, then enhanced
+- **Testing early** - We caught issues before they compounded
+- **Clear communication** - Specific requests got better results
+- **Iterating quickly** - Small changes, frequent commits
+
+### What We'd Do Differently
+
+- **Plan mobile navigation earlier** - We refactored this twice
+- **Establish naming conventions first** - Consistency matters
+- **Set up CI/CD sooner** - Manual uploads are tedious
+
+---
+
+## Contributing
+
+This project is open for learning. If you build something inspired by this:
+
+1. **Share what you learned** - Write about your process
+2. **Credit the collaboration** - Mention human-AI partnership
+3. **Pass it forward** - Help others learn too
+
+---
+
+## A Note on Attribution
+
+This project represents collaborative work. When referencing it:
+
+> "Built through human-AI collaboration using Claude Code"
+
+No single person "owns" what emerges from genuine collaboration. We're all learning together.
+
+---
+
+## Resources
+
+### Tools We Used
+
+- [VS Code](https://code.visualstudio.com/) - Code editor
+- [Claude Code](https://claude.ai/claude-code) - AI development assistant
+- [Git](https://git-scm.com/) - Version control
+
+### Testing Platforms
+
+- [Mozilla Observatory](https://observatory.mozilla.org) - Security headers
+- [SecurityHeaders.com](https://securityheaders.com) - Header verification
+- [GTmetrix](https://gtmetrix.com) - Performance testing
+
+### Learning Resources
+
+- [MDN Web Docs](https://developer.mozilla.org) - Web standards reference
+- [CSS-Tricks](https://css-tricks.com) - CSS techniques
+- [web.dev](https://web.dev) - Modern web best practices
 
 ---
 
 ## License
 
-This project is released under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** license.
+**Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**
 
-**You MAY (for personal, non-commercial use):**
-- Use this code as a template for your own portfolio
-- Modify and customize the design and functionality
-- Learn from the security implementation
-- Reference the prompt engineering structure
-- Share with others (with attribution)
+You're free to:
+- Use this as a learning resource
+- Build your own version
+- Share with attribution
 
-**You MUST:**
-- **Provide attribution** to Basiliso Rosario with a link to the source
-- Replace all personal information (name, photo, bio, contact info)
-- Replace or customize prompt engineering examples
-- Indicate if changes were made to the original content
+You must:
+- Give appropriate credit
+- Not use commercially without permission
 
-**You MAY NOT (without written permission):**
-- Use for commercial purposes
-- Use in paid training materials or courses
-- Remove or obscure attribution notices
-
-For commercial licensing inquiries, contact: bas.rosario@gmail.com
-
-See [LICENSE](LICENSE) for full details.
+See [LICENSE](LICENSE) for details.
 
 ---
 
 <div align="center">
 
-**Built with security, performance, accessibility, and education in mind**
+**Built by humans, with AI, for everyone**
 
-*Empowering people to learn, adapt, and unlock their potential through AI*
-
-[Back to Top](#promptlibrary---ai-education--adoption-resource-library)
+*The future isn't human vs. AI—it's human + AI*
 
 </div>
