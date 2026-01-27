@@ -1,4 +1,4 @@
-<div align="center"><b># Praxis Interactive AI Library</b></div>
+<div align="center"><h1># Praxis Interactive AI Library</h1></div>
 
 <div align="center">
 
