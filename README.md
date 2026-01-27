@@ -17,50 +17,49 @@
 
 ---
 
-## The Story: Perfection Through AI Adoption
+## The Mission
 
-This project didn't start as a blank canvas. The foundation—the knowledge, the vision, the domain expertise—already existed. What AI brought was the ability to **perfect** that foundation into something far superior than either human or machine could have created alone.
+I created this prompting guide because I believe that true innovation in AI isn't just about companies adopting AI as a new technology—it's about **people** learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.
 
-**The key insight:** AI adoption isn't about replacement. It's about combining your existing knowledge with AI's capabilities to create products that exceed what either could achieve independently.
+> **"The best way to predict the future is to create it."**
 
-### What This Repository Demonstrates
+My mission is to demystify AI use and drive personal adoption, with the goal of creating collaborative environments where technology and human creativity combine to solve complex problems and build a better tomorrow.
 
-- How AI can elevate existing work to production-quality standards
-- The workflow of iterative refinement through human-AI collaboration
-- Enterprise-grade security achieved through AI-assisted implementation
-- A complete, vendor-agnostic approach to working with AI
+### What This Project Represents
+
+This isn't just a prompt library—it's a demonstration of what happens when human expertise meets AI capability:
+
+- **50+ carefully crafted prompts** across education, business, and service industries
+- **Enterprise-grade security** achieved through human-AI collaboration
+- **Accessible design** built with Universal Design principles
+- **A reproducible workflow** that anyone can follow
 
 ---
 
-## Setting Up Your AI Development Environment
+## Getting Started: Your AI Development Environment
 
-This guide walks you through setting up the tools and resources needed to work with AI the same way this project was created—**without vendor lock-in**.
+This guide walks you through setting up the same tools and workflow used to create this project. No vendor lock-in—choose what works for you.
 
-### Phase 1: Core Development Tools
+### Step 1: Choose Your Code Editor
 
-These are the foundational tools you need regardless of which AI you choose.
-
-#### Code Editor
-Choose any modern code editor with extension support:
-
-| Editor | Platform | Notes |
-|--------|----------|-------|
+| Editor | Platform | Why Choose It |
+|--------|----------|---------------|
 | [VS Code](https://code.visualstudio.com/) | All | Most popular, extensive extensions |
-| [Cursor](https://cursor.sh/) | All | AI-native editor with built-in assistance |
+| [Cursor](https://cursor.sh/) | All | AI-native with built-in assistance |
 | [Zed](https://zed.dev/) | Mac/Linux | Fast, collaborative, AI-ready |
 | [Sublime Text](https://www.sublimetext.com/) | All | Lightweight, fast |
-| [Neovim](https://neovim.io/) | All | Terminal-based, highly customizable |
+| [Neovim](https://neovim.io/) | All | Terminal-based, customizable |
 
-**Recommended Extensions (VS Code):**
-- Live Server (local development)
-- GitLens (version control visualization)
-- Prettier (code formatting)
+**Recommended VS Code Extensions:**
+- Live Server (local preview)
+- GitLens (version control)
+- Prettier (formatting)
 - HTML CSS Support
 
-#### Version Control
+### Step 2: Set Up Version Control
 
 ```bash
-# Install Git (if not already installed)
+# Install Git
 # Windows: Download from https://git-scm.com/
 # Mac: xcode-select --install
 # Linux: sudo apt install git
@@ -69,17 +68,17 @@ Choose any modern code editor with extension support:
 git config --global user.name "Your Name"
 git config --global user.email "your@email.com"
 
-# Create a new repository
+# Initialize a new project
 git init
 git add .
 git commit -m "Initial commit"
 ```
 
-### Phase 2: AI Assistant Options
+### Step 3: Choose Your AI Assistant
 
-Choose the AI assistant that fits your workflow. This project uses Claude Code, but the principles apply to any AI.
+Pick the AI that fits your workflow. This project uses Claude Code, but the principles apply universally.
 
-#### Option A: Claude Code (Used in This Project)
+#### Option A: Claude Code (Used Here)
 
 ```bash
 # Install via npm
@@ -93,7 +92,7 @@ cd your-project
 claude
 ```
 
-**Strengths:** Deep code understanding, security-aware, excellent at iteration
+**Best for:** Deep code understanding, security-aware refactoring, iterative improvement
 
 #### Option B: GitHub Copilot
 
@@ -103,19 +102,18 @@ claude
 # Requires GitHub account and subscription
 ```
 
-**Strengths:** Inline completions, IDE integration, code suggestions
+**Best for:** Inline completions, quick suggestions, IDE integration
 
 #### Option C: Cursor AI
 
 ```bash
-# Download Cursor editor from https://cursor.sh/
+# Download from https://cursor.sh/
 # AI features built directly into the editor
-# Uses multiple AI models (GPT-4, Claude)
 ```
 
-**Strengths:** All-in-one solution, natural language commands
+**Best for:** All-in-one solution, natural language commands
 
-#### Option D: Open Source / Self-Hosted
+#### Option D: Self-Hosted / Open Source
 
 ```bash
 # Ollama - Run local models
@@ -127,11 +125,9 @@ ollama pull mistral
 # Install from VS Code marketplace
 ```
 
-**Strengths:** Privacy, no API costs, offline capability
+**Best for:** Privacy, no API costs, offline capability
 
-### Phase 3: Project Structure
-
-Organize your project for AI collaboration:
+### Step 4: Organize Your Project
 
 ```
 project/
@@ -139,25 +135,24 @@ project/
 ├── styles.css              # Centralized styles
 ├── app.js                  # Application logic
 ├── .htaccess               # Server configuration
-├── README.md               # Project documentation
+├── README.md               # Documentation
 ├── LICENSE                 # Usage terms
 ├── assets/
 │   ├── fonts/              # Self-hosted typography
 │   ├── icons/SVG/          # Vector icons
 │   └── images/             # Optimized media
 ├── pages/                  # Additional views
-└── .claude/                # AI configuration (if using Claude Code)
-    └── settings.json       # Project-specific settings
+└── .claude/                # AI configuration (optional)
+    └── settings.json
 ```
 
-### Phase 4: Security Configuration
+### Step 5: Implement Security From the Start
 
-Implement security from the start—AI can help you get this right:
+Add this to your `.htaccess` file:
 
 ```apache
-# .htaccess - Security Headers
 <IfModule mod_headers.c>
-    # Content Security Policy
+    # Content Security Policy - Block unsafe resources
     Header set Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; form-action 'none'; base-uri 'none';"
 
     # Force HTTPS
@@ -177,192 +172,164 @@ Implement security from the start—AI can help you get this right:
 </IfModule>
 ```
 
-### Phase 5: Hosting Options (Vendor Agnostic)
+### Step 6: Deploy Your Project
 
-Deploy anywhere—this project has no vendor dependencies:
+#### Static Hosting (Free Options)
 
-#### Static Hosting (Simplest)
-| Provider | Free Tier | Custom Domain | SSL |
-|----------|-----------|---------------|-----|
-| GitHub Pages | Yes | Yes | Yes |
-| Netlify | Yes | Yes | Yes |
-| Vercel | Yes | Yes | Yes |
-| Cloudflare Pages | Yes | Yes | Yes |
-| Render | Yes | Yes | Yes |
+| Provider | Custom Domain | SSL | Deploy Method |
+|----------|---------------|-----|---------------|
+| GitHub Pages | Yes | Yes | `git push` |
+| Netlify | Yes | Yes | `netlify deploy` |
+| Vercel | Yes | Yes | `vercel --prod` |
+| Cloudflare Pages | Yes | Yes | Git integration |
+| Render | Yes | Yes | Git integration |
 
-#### Traditional Hosting
-| Type | Examples | Best For |
-|------|----------|----------|
-| Shared | Any web host | Simple sites |
-| VPS | DigitalOcean, Linode, Vultr | Full control |
-| Cloud | AWS S3, Google Cloud, Azure | Scale |
-
-#### Deployment Commands
+#### Quick Deploy Commands
 
 ```bash
 # GitHub Pages
 git push origin main
-# Configure in repo Settings > Pages
+# Then enable in repo Settings > Pages
 
-# Netlify (CLI)
+# Netlify
 npm install -g netlify-cli
 netlify deploy --prod
 
-# Vercel (CLI)
+# Vercel
 npm install -g vercel
 vercel --prod
-
-# Manual FTP/SFTP
-# Use FileZilla or any FTP client
-# Upload all files to public_html or www
 ```
 
 ---
 
-## The Praxis Workflow
+## The Human-AI Workflow
 
-How we perfected this project through AI adoption:
+This is how the collaboration actually works:
 
-### 1. Start With What You Know
+### 1. You Bring the Vision
 
-You don't need AI to have ideas. You need AI to execute them at a higher level than you could alone.
-
-```
-Human: "I have a website with prompt examples. It works, but it's not
-        polished. Security could be better. Design is inconsistent."
-
-AI: "Let me analyze what you have and suggest improvements..."
-```
-
-### 2. Iterate Toward Perfection
-
-The magic happens in the back-and-forth:
+AI doesn't have your ideas. You set the direction.
 
 ```
-Human: "The charts don't animate smoothly."
-AI: [Proposes CSS transition changes]
-Human: "Better, but they violate our Content Security Policy."
-AI: [Refactors to use data attributes instead of inline styles]
-Human: "Now they work. Apply this pattern everywhere."
-AI: [Updates all chart implementations site-wide]
+Human: "I want to create a prompt library that helps people
+        across different industries adopt AI in their work."
+
+AI: "I can help structure that. What industries are you
+     thinking about?"
 ```
 
-### 3. Maintain Your Standards
+### 2. Iterate Together
 
-AI learns your project's standards and enforces them:
-
-```
-Human: "Every page needs the same CSP header, same branding, same
-        security posture."
-AI: [Audits all files, identifies inconsistencies, applies fixes]
-```
-
-### 4. Document As You Go
-
-AI can explain what it's doing and why:
+The magic is in the back-and-forth:
 
 ```
-Human: "Generate a security report for what we've implemented."
-AI: [Creates comprehensive SECURITY-REPORT.md with all findings]
+Human: "The education section needs prompts for teachers."
+AI: [Creates initial prompts]
+Human: "Good, but they need to address grading and feedback too."
+AI: [Expands and refines]
+Human: "Now make sure they follow our design system."
+AI: [Applies consistent styling]
+```
+
+### 3. Let AI Handle the Details
+
+You focus on what matters; AI handles the tedious parts:
+
+```
+Human: "Apply this same security header to all 26 pages."
+AI: [Updates every file, maintains consistency]
+```
+
+### 4. Review and Refine
+
+AI proposes, you decide:
+
+```
+Human: "Generate a security audit report."
+AI: [Creates comprehensive SECURITY-REPORT.md]
+Human: "Fix these three issues you found."
+AI: [Implements fixes across all affected files]
 ```
 
 ---
 
-## Technical Architecture
+## What We Built Together
 
-### What We Achieved
+| Aspect | Human Contribution | AI Contribution |
+|--------|-------------------|-----------------|
+| **Vision** | Industry selection, user needs | Structure and organization |
+| **Content** | Prompt concepts, domain knowledge | Writing, formatting, consistency |
+| **Design** | Color choices, branding direction | CSS implementation, responsiveness |
+| **Security** | Requirements and standards | Implementation, auditing, fixes |
+| **Accessibility** | UD/UDL principles | ARIA labels, semantic HTML |
 
-| Aspect | Implementation | Result |
-|--------|----------------|--------|
-| Security | Strict CSP, no inline scripts/styles | A+ rating |
-| Performance | Zero external dependencies | 100% score |
-| Accessibility | Semantic HTML, skip links, ARIA | WCAG compliant |
-| Maintainability | CSS utility classes, organized structure | Easy updates |
+### Technical Achievements
 
-### Design Principles
-
-1. **No External Dependencies** - Everything self-hosted
-2. **Security First** - CSP before features
-3. **Mobile First** - Responsive from the start
-4. **Accessibility Always** - Semantic, navigable, readable
-
-### Browser Support
-
-- Chrome/Edge 80+
-- Firefox 75+
-- Safari 13+
-- Mobile browsers (iOS Safari, Chrome Android)
+| Metric | Result |
+|--------|--------|
+| Security Grade | A+ (100%) |
+| Performance | 100% |
+| Inline Scripts | 0 |
+| Inline Styles | 0 |
+| External Dependencies | 0 |
+| Pages | 26+ |
+| Prompts | 50+ |
 
 ---
 
-## Getting Started With This Repository
-
-### Clone and Explore
+## Clone and Explore
 
 ```bash
 git clone https://github.com/basrosario/PROMPTLIBRARY.git
 cd PROMPTLIBRARY
-```
 
-### Run Locally
-
-```bash
-# Option 1: VS Code Live Server
-# Right-click index.html > "Open with Live Server"
-
-# Option 2: Python simple server
+# Run locally
+# Option 1: VS Code Live Server extension
+# Option 2: Python
 python -m http.server 8000
-
-# Option 3: Node http-server
+# Option 3: Node
 npx http-server
 ```
-
-### Make It Your Own
-
-1. Fork this repository
-2. Replace content with your own
-3. Update branding (colors in `styles.css` CSS variables)
-4. Deploy to your preferred host
 
 ---
 
 ## Key Takeaways
 
 ### For Individuals
-- AI doesn't replace your expertise—it amplifies it
-- Start with what you know, let AI help you perfect it
+- AI amplifies your expertise—it doesn't replace it
+- Start with what you know; let AI help you execute better
 - The iteration loop is where quality emerges
 
 ### For Teams
-- Establish standards early, let AI enforce them
+- Establish standards early; let AI enforce them
 - Document decisions as you make them
-- Use AI to maintain consistency across large codebases
+- Use AI to maintain consistency at scale
 
-### For Organizations
-- AI adoption is about augmentation, not replacement
-- The human brings vision and judgment; AI brings execution speed
-- Superior results require both human insight and AI capability
+### For Everyone
+- AI adoption is about empowerment, not replacement
+- The human brings judgment and creativity; AI brings speed and consistency
+- Together, we build things neither could build alone
 
 ---
 
 ## Resources
 
-### AI Development Tools
-- [Claude Code](https://claude.ai/claude-code) - AI coding assistant
-- [GitHub Copilot](https://github.com/features/copilot) - AI pair programmer
-- [Cursor](https://cursor.sh/) - AI-native code editor
-- [Continue.dev](https://continue.dev/) - Open source AI assistant
+### AI Development
+- [Claude Code](https://claude.ai/claude-code)
+- [GitHub Copilot](https://github.com/features/copilot)
+- [Cursor](https://cursor.sh/)
+- [Continue.dev](https://continue.dev/)
 
 ### Testing & Verification
-- [Mozilla Observatory](https://observatory.mozilla.org) - Security testing
-- [SecurityHeaders.com](https://securityheaders.com) - Header verification
-- [GTmetrix](https://gtmetrix.com) - Performance analysis
-- [WAVE](https://wave.webaim.org/) - Accessibility testing
+- [Mozilla Observatory](https://observatory.mozilla.org) - Security
+- [SecurityHeaders.com](https://securityheaders.com) - Headers
+- [GTmetrix](https://gtmetrix.com) - Performance
+- [WAVE](https://wave.webaim.org/) - Accessibility
 
 ### Learning
-- [MDN Web Docs](https://developer.mozilla.org) - Web standards
-- [web.dev](https://web.dev) - Modern best practices
-- [Anthropic Docs](https://docs.anthropic.com) - Claude documentation
+- [MDN Web Docs](https://developer.mozilla.org)
+- [web.dev](https://web.dev)
+- [Anthropic Docs](https://docs.anthropic.com)
 
 ---
 
@@ -370,14 +337,7 @@ npx http-server
 
 **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**
 
-You may:
-- Use this as a learning resource
-- Build your own version
-- Share with attribution
-
-You must:
-- Give appropriate credit
-- Not use commercially without permission
+You may use this as a learning resource, build your own version, and share with attribution. Commercial use requires permission.
 
 See [LICENSE](LICENSE) for full terms.
 
@@ -387,8 +347,8 @@ See [LICENSE](LICENSE) for full terms.
 
 **Praxis AI - Prompt Engineering Example Library**
 
-*We didn't build this from nothing. We perfected what we knew with what AI could do.*
+*Human creativity. AI capability. Better outcomes.*
 
-*The future belongs to those who combine human insight with AI capability.*
+*The future belongs to those who learn to work alongside AI.*
 
 </div>
