@@ -549,4 +549,166 @@ document.addEventListener('DOMContentLoaded', () => {
         const flex = segment.dataset.flex;
         segment.style.setProperty('--segment-flex', flex);
     });
+
+    // ==========================================
+    // PRAXIS AI HERO ANIMATIONS
+    // ==========================================
+
+    // Particle Network Animation
+    const canvas = document.getElementById('praxis-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationId;
+
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+
+        function createParticles() {
+            particles = [];
+            const numberOfParticles = Math.floor((canvas.width * canvas.height) / 15000);
+
+            for (let i = 0; i < numberOfParticles; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    radius: Math.random() * 2 + 1,
+                    opacity: Math.random() * 0.5 + 0.2
+                });
+            }
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw connections
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        const opacity = (1 - distance / 150) * 0.3;
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(192, 57, 43, ${opacity})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Draw particles
+            particles.forEach(particle => {
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+                ctx.fill();
+
+                // Update position
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+
+                // Bounce off edges
+                if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+            });
+
+            animationId = requestAnimationFrame(drawParticles);
+        }
+
+        resizeCanvas();
+        createParticles();
+        drawParticles();
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            createParticles();
+        });
+    }
+
+    // Typing Effect for Tagline
+    const taglineElement = document.getElementById('typed-tagline');
+    if (taglineElement) {
+        const taglines = [
+            'Empowering humans through AI literacy',
+            'Learn. Adapt. Unlock your potential.',
+            '50+ prompts across 4 sectors',
+            'From education to enterprise'
+        ];
+        let currentTagline = 0;
+        let currentChar = 0;
+        let isDeleting = false;
+        let typingSpeed = 80;
+
+        function typeTagline() {
+            const current = taglines[currentTagline];
+
+            if (isDeleting) {
+                taglineElement.textContent = current.substring(0, currentChar - 1);
+                currentChar--;
+                typingSpeed = 40;
+            } else {
+                taglineElement.textContent = current.substring(0, currentChar + 1);
+                currentChar++;
+                typingSpeed = 80;
+            }
+
+            if (!isDeleting && currentChar === current.length) {
+                typingSpeed = 2000; // Pause at end
+                isDeleting = true;
+            } else if (isDeleting && currentChar === 0) {
+                isDeleting = false;
+                currentTagline = (currentTagline + 1) % taglines.length;
+                typingSpeed = 500; // Pause before next
+            }
+
+            setTimeout(typeTagline, typingSpeed);
+        }
+
+        setTimeout(typeTagline, 1000);
+    }
+
+    // Counter Animation for Stats
+    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+    if (statNumbers.length > 0) {
+        const animateCounter = (element) => {
+            const target = parseInt(element.dataset.target);
+            const duration = 2000;
+            const start = 0;
+            const startTime = performance.now();
+
+            function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Easing function for smooth animation
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                const current = Math.floor(easeOutQuart * target);
+
+                element.textContent = current;
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            }
+
+            requestAnimationFrame(updateCounter);
+        };
+
+        // Start counters with slight delay
+        setTimeout(() => {
+            statNumbers.forEach((stat, index) => {
+                setTimeout(() => animateCounter(stat), index * 200);
+            });
+        }, 500);
+    }
 });
