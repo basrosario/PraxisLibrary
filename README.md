@@ -1,4 +1,4 @@
-# Praxis Interactive AI Library
+<div align="center"># Praxis Interactive AI Library</div>
 
 <div align="center">
 
