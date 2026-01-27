@@ -814,6 +814,100 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ==========================================
+    // ANIMATED BRAND EFFECTS
+    // Randomized cool animations for </Praxis Library>
+    // ==========================================
+
+    const animatedBrand = document.getElementById('animated-brand');
+    if (animatedBrand) {
+        const animChars = animatedBrand.querySelectorAll('.anim-char');
+        const effects = ['glitch', 'float', 'pulse', 'shake', 'flip', 'color-shift'];
+
+        // Random effect on individual characters
+        function triggerRandomEffect() {
+            const randomChar = animChars[Math.floor(Math.random() * animChars.length)];
+            const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+
+            // Remove any existing effect
+            effects.forEach(e => randomChar.classList.remove(e));
+
+            // Add new effect
+            randomChar.classList.add(randomEffect);
+
+            // Remove effect after animation completes
+            setTimeout(() => {
+                randomChar.classList.remove(randomEffect);
+            }, 1000);
+        }
+
+        // Cascade effect - animate all characters in sequence
+        function cascadeEffect() {
+            const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+            animChars.forEach((char, index) => {
+                setTimeout(() => {
+                    effects.forEach(e => char.classList.remove(e));
+                    char.classList.add(randomEffect);
+                    setTimeout(() => char.classList.remove(randomEffect), 600);
+                }, index * 100);
+            });
+        }
+
+        // Wave effect - characters float in sequence
+        function waveEffect() {
+            animChars.forEach((char, index) => {
+                setTimeout(() => {
+                    char.classList.add('float');
+                    setTimeout(() => char.classList.remove('float'), 2000);
+                }, index * 150);
+            });
+        }
+
+        // Glitch storm - rapid glitches across all characters
+        function glitchStorm() {
+            let iterations = 0;
+            const storm = setInterval(() => {
+                const randomChar = animChars[Math.floor(Math.random() * animChars.length)];
+                randomChar.classList.add('glitch');
+                setTimeout(() => randomChar.classList.remove('glitch'), 300);
+                iterations++;
+                if (iterations > 10) clearInterval(storm);
+            }, 100);
+        }
+
+        // Random interval for effects (between 2-5 seconds)
+        function scheduleRandomEffect() {
+            const delay = Math.random() * 3000 + 2000;
+            setTimeout(() => {
+                // Choose between different effect types
+                const effectType = Math.random();
+                if (effectType < 0.4) {
+                    triggerRandomEffect();
+                } else if (effectType < 0.6) {
+                    cascadeEffect();
+                } else if (effectType < 0.8) {
+                    waveEffect();
+                } else {
+                    glitchStorm();
+                }
+                scheduleRandomEffect();
+            }, delay);
+        }
+
+        // Start random animations after page load
+        setTimeout(scheduleRandomEffect, 1000);
+
+        // Hover effects - glitch on hover
+        animChars.forEach(char => {
+            char.addEventListener('mouseenter', () => {
+                char.classList.add('glitch');
+            });
+            char.addEventListener('mouseleave', () => {
+                setTimeout(() => char.classList.remove('glitch'), 300);
+            });
+        });
+    }
+
     // Typing Effect for Tagline
     const taglineElement = document.getElementById('typed-tagline');
     if (taglineElement) {
