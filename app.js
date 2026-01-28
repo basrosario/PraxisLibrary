@@ -64,35 +64,307 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // FLOATING PARTICLES ANIMATION
+    // INTERACTIVE NEURAL NETWORK ANIMATION
     // ==========================================
-    const particlesContainer = document.getElementById('particles');
+    const neuralCanvas = document.getElementById('neural-network');
 
-    if (particlesContainer) {
-        const particleCount = 20;
+    if (neuralCanvas) {
+        const ctx = neuralCanvas.getContext('2d');
+        let width, height;
+        let nodes = [];
+        let aiTerms = [];
+        let mouse = { x: null, y: null, radius: 150 };
+        let animationId;
 
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
+        // AI terms that float through the network
+        const AI_TERMS = [
+            'CRISP', 'COSTAR', 'ReAct', 'Prompt', 'Context', 'Token',
+            'LLM', 'GPT', 'Claude', 'Neural', 'Inference', 'Embedding',
+            'Transform', 'Attention', 'Query', 'Model', 'Train', 'Fine-tune',
+            'Chain', 'Agent', 'Memory', 'Vector', 'Semantic', 'Generate',
+            'Parameters', 'Weights', 'Layers', 'Output', 'Input', 'Reasoning'
+        ];
 
-            // Random position
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
+        // Node class for neural network points
+        class Node {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.baseX = x;
+                this.baseY = y;
+                this.size = Math.random() * 3 + 1;
+                this.baseSize = this.size;
+                this.density = Math.random() * 30 + 1;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.brightness = Math.random() * 0.5 + 0.3;
+                this.pulseSpeed = Math.random() * 0.02 + 0.01;
+                this.pulseOffset = Math.random() * Math.PI * 2;
+            }
 
-            // Random size
-            const size = Math.random() * 4 + 2;
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
+            update(time) {
+                // Pulse effect
+                this.brightness = 0.3 + Math.sin(time * this.pulseSpeed + this.pulseOffset) * 0.2;
+                this.size = this.baseSize + Math.sin(time * this.pulseSpeed * 0.5 + this.pulseOffset) * 0.5;
 
-            // Random animation delay and duration
-            particle.style.animationDelay = Math.random() * 15 + 's';
-            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                // Mouse repulsion - water-like effect
+                if (mouse.x !== null && mouse.y !== null) {
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
 
-            // Random opacity
-            particle.style.opacity = Math.random() * 0.4 + 0.1;
+                    if (distance < mouse.radius) {
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        const angle = Math.atan2(dy, dx);
+                        const pushX = Math.cos(angle) * force * 3;
+                        const pushY = Math.sin(angle) * force * 3;
+                        this.x -= pushX;
+                        this.y -= pushY;
+                    }
+                }
 
-            particlesContainer.appendChild(particle);
+                // Return to base position (spring effect)
+                const dx = this.baseX - this.x;
+                const dy = this.baseY - this.y;
+                this.x += dx * 0.03;
+                this.y += dy * 0.03;
+
+                // Gentle drift
+                this.baseX += this.vx;
+                this.baseY += this.vy;
+
+                // Boundary check for base position
+                if (this.baseX < 0 || this.baseX > width) this.vx *= -1;
+                if (this.baseY < 0 || this.baseY > height) this.vy *= -1;
+            }
+
+            draw() {
+                const alpha = this.brightness;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(230, 57, 70, ${alpha})`;
+                ctx.fill();
+
+                // Glow effect for larger nodes
+                if (this.baseSize > 2.5) {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(230, 57, 70, ${alpha * 0.15})`;
+                    ctx.fill();
+                }
+            }
         }
+
+        // Floating AI term class
+        class AITerm {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.text = AI_TERMS[Math.floor(Math.random() * AI_TERMS.length)];
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.fontSize = Math.random() * 10 + 10;
+                this.brightness = 0;
+                this.targetBrightness = Math.random() * 0.6 + 0.2;
+                this.fadeSpeed = Math.random() * 0.01 + 0.005;
+                this.phase = 'fadeIn';
+                this.lifetime = Math.random() * 5000 + 3000;
+                this.born = performance.now();
+                this.flickerIntensity = Math.random() * 0.3;
+                this.flickerSpeed = Math.random() * 0.1 + 0.05;
+            }
+
+            update(time) {
+                // Movement
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Mouse interaction - terms scatter from mouse
+                if (mouse.x !== null && mouse.y !== null) {
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouse.radius * 0.8) {
+                        const force = (mouse.radius * 0.8 - distance) / (mouse.radius * 0.8);
+                        const angle = Math.atan2(dy, dx);
+                        this.x -= Math.cos(angle) * force * 2;
+                        this.y -= Math.sin(angle) * force * 2;
+                    }
+                }
+
+                // Boundary wrapping
+                if (this.x < -100) this.x = width + 100;
+                if (this.x > width + 100) this.x = -100;
+                if (this.y < -50) this.y = height + 50;
+                if (this.y > height + 50) this.y = -50;
+
+                // Lifecycle management
+                const age = performance.now() - this.born;
+
+                if (this.phase === 'fadeIn') {
+                    this.brightness += this.fadeSpeed;
+                    if (this.brightness >= this.targetBrightness) {
+                        this.brightness = this.targetBrightness;
+                        this.phase = 'visible';
+                    }
+                } else if (this.phase === 'visible') {
+                    if (age > this.lifetime) {
+                        this.phase = 'fadeOut';
+                    }
+                } else if (this.phase === 'fadeOut') {
+                    this.brightness -= this.fadeSpeed;
+                    if (this.brightness <= 0) {
+                        this.reset();
+                    }
+                }
+
+                // Flicker effect
+                const flicker = Math.sin(time * this.flickerSpeed) * this.flickerIntensity;
+                this.currentBrightness = Math.max(0, this.brightness + flicker);
+            }
+
+            draw() {
+                if (this.currentBrightness <= 0) return;
+
+                ctx.save();
+                ctx.font = `${this.fontSize}px monospace`;
+                ctx.fillStyle = `rgba(230, 57, 70, ${this.currentBrightness})`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                // Glow effect
+                ctx.shadowColor = `rgba(230, 57, 70, ${this.currentBrightness})`;
+                ctx.shadowBlur = 10 + this.currentBrightness * 20;
+                ctx.fillText(this.text, this.x, this.y);
+
+                ctx.restore();
+            }
+        }
+
+        function resize() {
+            width = neuralCanvas.width = neuralCanvas.offsetWidth;
+            height = neuralCanvas.height = neuralCanvas.offsetHeight;
+            initNodes();
+            initTerms();
+        }
+
+        function initNodes() {
+            nodes = [];
+            // Calculate node count based on screen size (more for larger screens)
+            const density = 0.00015;
+            const nodeCount = Math.floor(width * height * density);
+            const clampedCount = Math.min(Math.max(nodeCount, 80), 300);
+
+            for (let i = 0; i < clampedCount; i++) {
+                nodes.push(new Node(
+                    Math.random() * width,
+                    Math.random() * height
+                ));
+            }
+        }
+
+        function initTerms() {
+            aiTerms = [];
+            // Fewer terms on mobile
+            const termCount = width < 768 ? 8 : 15;
+
+            for (let i = 0; i < termCount; i++) {
+                const term = new AITerm();
+                // Stagger initial appearance
+                term.born = performance.now() - Math.random() * 5000;
+                aiTerms.push(term);
+            }
+        }
+
+        function drawConnections() {
+            const maxDistance = 120;
+
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < maxDistance) {
+                        const alpha = (1 - distance / maxDistance) * 0.15;
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.strokeStyle = `rgba(230, 57, 70, ${alpha})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate(time) {
+            ctx.clearRect(0, 0, width, height);
+
+            // Draw connections first (behind nodes)
+            drawConnections();
+
+            // Update and draw nodes
+            nodes.forEach(node => {
+                node.update(time);
+                node.draw();
+            });
+
+            // Update and draw AI terms
+            aiTerms.forEach(term => {
+                term.update(time);
+                term.draw();
+            });
+
+            animationId = requestAnimationFrame(animate);
+        }
+
+        // Mouse tracking
+        function handleMouseMove(e) {
+            const rect = neuralCanvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        }
+
+        function handleMouseLeave() {
+            mouse.x = null;
+            mouse.y = null;
+        }
+
+        // Touch support
+        function handleTouchMove(e) {
+            if (e.touches.length > 0) {
+                const rect = neuralCanvas.getBoundingClientRect();
+                mouse.x = e.touches[0].clientX - rect.left;
+                mouse.y = e.touches[0].clientY - rect.top;
+            }
+        }
+
+        function handleTouchEnd() {
+            mouse.x = null;
+            mouse.y = null;
+        }
+
+        // Initialize
+        resize();
+        animate(0);
+
+        // Event listeners
+        window.addEventListener('resize', resize);
+        neuralCanvas.addEventListener('mousemove', handleMouseMove);
+        neuralCanvas.addEventListener('mouseleave', handleMouseLeave);
+        neuralCanvas.addEventListener('touchmove', handleTouchMove, { passive: true });
+        neuralCanvas.addEventListener('touchend', handleTouchEnd);
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            cancelAnimationFrame(animationId);
+        });
     }
 
     // ==========================================
