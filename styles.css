@@ -2632,11 +2632,63 @@ p {
     display: none;
 }
 
+/* Mobile Menu Active State */
+.nav.active {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(13, 17, 23, 0.98);
+    padding: var(--space-xl);
+    gap: var(--space-md);
+    z-index: 999;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nav.active .nav-link {
+    font-size: 1.25rem;
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Prevent body scroll when menu is open */
+body.menu-open {
+    overflow: hidden;
+}
+
 @media (min-width: 768px) {
     .nav {
         display: flex;
         align-items: center;
         gap: var(--space-lg);
+    }
+
+    .nav.active {
+        position: static;
+        flex-direction: row;
+        background: transparent;
+        padding: 0;
+        animation: none;
+    }
+
+    .nav.active .nav-link {
+        font-size: 0.9375rem;
+        padding: 0;
+        border-bottom: none;
     }
 }
 
