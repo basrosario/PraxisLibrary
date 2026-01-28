@@ -300,8 +300,44 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        function drawConnections() {
-            const maxDistance = 120;
+        // Dynamic connection state - connections can release and reconnect
+        let connectionStates = new Map();
+        let lastConnectionUpdate = 0;
+        const connectionUpdateInterval = 2000; // Check for reconnections every 2 seconds
+
+        function getConnectionKey(i, j) {
+            return i < j ? `${i}-${j}` : `${j}-${i}`;
+        }
+
+        function updateConnectionStates(time) {
+            // Periodically release some connections and form new ones
+            if (time - lastConnectionUpdate > connectionUpdateInterval) {
+                lastConnectionUpdate = time;
+
+                // Randomly release 5-10% of existing connections
+                connectionStates.forEach((state, key) => {
+                    if (Math.random() < 0.08) {
+                        connectionStates.set(key, {
+                            active: false,
+                            releaseTime: time,
+                            reconnectDelay: Math.random() * 3000 + 1000 // 1-4 seconds to reconnect
+                        });
+                    }
+                });
+            }
+
+            // Check for connections ready to reconnect
+            connectionStates.forEach((state, key) => {
+                if (!state.active && time - state.releaseTime > state.reconnectDelay) {
+                    connectionStates.set(key, { active: true });
+                }
+            });
+        }
+
+        function drawConnections(time) {
+            const maxDistance = 150; // Increased range for more connections
+
+            updateConnectionStates(time);
 
             for (let i = 0; i < nodes.length; i++) {
                 for (let j = i + 1; j < nodes.length; j++) {
@@ -310,69 +346,53 @@ document.addEventListener('DOMContentLoaded', () => {
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < maxDistance) {
-                        const alpha = (1 - distance / maxDistance) * 0.15;
+                        const key = getConnectionKey(i, j);
+
+                        // Initialize connection state if not exists
+                        if (!connectionStates.has(key)) {
+                            connectionStates.set(key, { active: true });
+                        }
+
+                        const state = connectionStates.get(key);
+
+                        // Skip if connection is released
+                        if (!state.active) {
+                            // Draw fading connection during release
+                            const fadeProgress = Math.min(1, (performance.now() - state.releaseTime) / 500);
+                            if (fadeProgress < 1) {
+                                const fadeAlpha = (1 - distance / maxDistance) * 0.5 * (1 - fadeProgress);
+                                ctx.beginPath();
+                                ctx.moveTo(nodes[i].x, nodes[i].y);
+                                ctx.lineTo(nodes[j].x, nodes[j].y);
+                                ctx.strokeStyle = `rgba(230, 57, 70, ${fadeAlpha})`;
+                                ctx.lineWidth = 1;
+                                ctx.stroke();
+                            }
+                            continue;
+                        }
+
+                        // Brighter lines - increased from 0.15 to 0.5
+                        const baseAlpha = (1 - distance / maxDistance) * 0.5;
+                        // Add subtle pulse to connections
+                        const pulse = Math.sin(time * 0.002 + i * 0.1) * 0.1;
+                        const alpha = Math.max(0.1, baseAlpha + pulse);
+
                         ctx.beginPath();
                         ctx.moveTo(nodes[i].x, nodes[i].y);
                         ctx.lineTo(nodes[j].x, nodes[j].y);
                         ctx.strokeStyle = `rgba(230, 57, 70, ${alpha})`;
-                        ctx.lineWidth = 0.5;
+                        ctx.lineWidth = 1; // Thicker lines
                         ctx.stroke();
                     }
                 }
             }
         }
 
-        // Mouse/touch glow effect - lights up the area around cursor
-        function drawMouseGlow(time) {
-            if (mouse.x === null || mouse.y === null) return;
-
-            // Pulsing glow intensity
-            const pulseIntensity = 0.15 + Math.sin(time * 0.003) * 0.05;
-            const glowRadius = mouse.radius * 1.5;
-
-            // Create radial gradient for the glow
-            const gradient = ctx.createRadialGradient(
-                mouse.x, mouse.y, 0,
-                mouse.x, mouse.y, glowRadius
-            );
-
-            // Inner bright core
-            gradient.addColorStop(0, `rgba(230, 57, 70, ${pulseIntensity * 1.5})`);
-            // Mid glow
-            gradient.addColorStop(0.3, `rgba(230, 57, 70, ${pulseIntensity * 0.8})`);
-            // Outer fade
-            gradient.addColorStop(0.6, `rgba(230, 57, 70, ${pulseIntensity * 0.3})`);
-            // Edge fade out
-            gradient.addColorStop(1, 'rgba(230, 57, 70, 0)');
-
-            ctx.beginPath();
-            ctx.arc(mouse.x, mouse.y, glowRadius, 0, Math.PI * 2);
-            ctx.fillStyle = gradient;
-            ctx.fill();
-
-            // Add a brighter inner ring
-            const innerGradient = ctx.createRadialGradient(
-                mouse.x, mouse.y, 0,
-                mouse.x, mouse.y, 30
-            );
-            innerGradient.addColorStop(0, `rgba(255, 255, 255, ${pulseIntensity * 0.3})`);
-            innerGradient.addColorStop(0.5, `rgba(230, 57, 70, ${pulseIntensity * 0.5})`);
-            innerGradient.addColorStop(1, 'rgba(230, 57, 70, 0)');
-
-            ctx.beginPath();
-            ctx.arc(mouse.x, mouse.y, 30, 0, Math.PI * 2);
-            ctx.fillStyle = innerGradient;
-            ctx.fill();
-        }
-
         function animate(time) {
             ctx.clearRect(0, 0, width, height);
 
-            // Draw mouse glow first (behind everything)
-            drawMouseGlow(time);
-
             // Draw connections (behind nodes)
-            drawConnections();
+            drawConnections(time);
 
             // Update and draw nodes
             nodes.forEach(node => {
