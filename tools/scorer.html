@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
+    <title>Prompt Scorer - Praxis</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/<span>Praxis</span>&gt;</a>
+            <nav class="nav" id="nav">
+                <a href="../learn/index.html" class="nav-link">Learn</a>
+                <a href="scorer.html" class="nav-link active">Tools</a>
+                <a href="../patterns/index.html" class="nav-link">Patterns</a>
+                <a href="../quiz/index.html" class="nav-link">Quiz</a>
+                <a href="../pages/ai-safety.html" class="nav-link">Safety</a>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <div class="container">
+                <nav class="breadcrumb fade-in">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="scorer.html">Tools</a>
+                    <span class="separator">/</span>
+                    <span class="current">Prompt Scorer</span>
+                </nav>
+                <h1 class="page-title fade-in">Prompt Scorer</h1>
+                <p class="page-subtitle fade-in">Get instant feedback on your prompts. Analyze clarity, specificity, structure, and context to improve your AI communication.</p>
+            </div>
+        </section>
+
+        <!-- Scorer Tool -->
+        <section class="section">
+            <div class="container">
+                <div class="tool-container fade-in-up">
+                    <form id="scorer-form" class="scorer-form">
+                        <label for="prompt-input" class="input-label">Enter your prompt:</label>
+                        <textarea
+                            id="prompt-input"
+                            class="prompt-textarea"
+                            placeholder="Paste or type your prompt here..."
+                            rows="6"
+                            required
+                        ></textarea>
+                        <button type="submit" class="btn btn-primary btn-full">Analyze Prompt</button>
+                    </form>
+
+                    <div id="score-display" class="score-display">
+                        <!-- Scores will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">How Scoring Works</h2>
+                <p class="section-subtitle fade-in-up">Your prompt is analyzed across four dimensions</p>
+
+                <div class="score-info-grid stagger-children">
+                    <div class="score-info-card">
+                        <h3>Clarity</h3>
+                        <p>How clear and understandable is your prompt? Measures sentence structure, word choice, and readability.</p>
+                        <div class="score-tip">
+                            <strong>Improve it:</strong> Use shorter sentences, avoid jargon, be direct.
+                        </div>
+                    </div>
+
+                    <div class="score-info-card">
+                        <h3>Specificity</h3>
+                        <p>How detailed and precise is your request? Looks for specific requirements, formats, and constraints.</p>
+                        <div class="score-tip">
+                            <strong>Improve it:</strong> Add details about format, length, style, or examples.
+                        </div>
+                    </div>
+
+                    <div class="score-info-card">
+                        <h3>Structure</h3>
+                        <p>How well organized is your prompt? Checks for logical flow, sections, and clear instructions.</p>
+                        <div class="score-tip">
+                            <strong>Improve it:</strong> Use numbered steps, headers, or clear sections.
+                        </div>
+                    </div>
+
+                    <div class="score-info-card">
+                        <h3>Context</h3>
+                        <p>How much background information do you provide? Evaluates whether the AI has enough context to respond well.</p>
+                        <div class="score-tip">
+                            <strong>Improve it:</strong> Explain your situation, goals, and constraints.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example Prompts -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Example Prompts</h2>
+                <p class="section-subtitle fade-in-up">See how different prompts score</p>
+
+                <div class="example-prompts stagger-children">
+                    <div class="example-prompt-card">
+                        <div class="example-score score-poor">35</div>
+                        <h4>Weak Prompt</h4>
+                        <p class="example-text">"Write about marketing"</p>
+                        <ul class="example-issues">
+                            <li>No context about the audience or purpose</li>
+                            <li>No format or length specified</li>
+                            <li>Vague topic with no focus</li>
+                        </ul>
+                    </div>
+
+                    <div class="example-prompt-card">
+                        <div class="example-score score-good">68</div>
+                        <h4>Better Prompt</h4>
+                        <p class="example-text">"Write a 500-word blog post about email marketing best practices for small businesses"</p>
+                        <ul class="example-issues">
+                            <li>Specifies format and length</li>
+                            <li>Has a clear topic focus</li>
+                            <li>Still missing tone and context</li>
+                        </ul>
+                    </div>
+
+                    <div class="example-prompt-card">
+                        <div class="example-score score-excellent">92</div>
+                        <h4>Strong Prompt</h4>
+                        <p class="example-text">"Context: I run a small e-commerce store selling handmade jewelry. Task: Write a 500-word blog post about email marketing best practices. Include 5 actionable tips with examples. Tone: Friendly and practical. Audience: Small business owners with limited marketing experience."</p>
+                        <ul class="example-issues">
+                            <li>Clear context and background</li>
+                            <li>Specific format and structure</li>
+                            <li>Defined audience and tone</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Other Tools -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">More Tools</h2>
+
+                <div class="card-grid stagger-children">
+                    <a href="checklist.html" class="card card-glow">
+                        <h3 class="card-title">Preflight Checklist</h3>
+                        <p class="card-text">Quick quality check before you hit enter. Catch common issues and improve your prompts.</p>
+                        <span class="card-link">Use Checklist</span>
+                    </a>
+
+                    <a href="hallucination.html" class="card card-glow">
+                        <h3 class="card-title">Hallucination Spotter</h3>
+                        <p class="card-text">Learn to identify when AI makes things up. Build intuition for catching errors.</p>
+                        <span class="card-link">Practice Spotting</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">&lt;/<span>Praxis</span>&gt;</a>
+                    <p>Master the art of AI communication through proven methodologies.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Learn</h4>
+                    <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                    <a href="../learn/crisp.html">CRISP Method</a>
+                    <a href="../learn/costar.html">COSTAR Method</a>
+                    <a href="../learn/advanced.html">Advanced</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Tools</h4>
+                    <a href="scorer.html">Prompt Scorer</a>
+                    <a href="checklist.html">Preflight Checklist</a>
+                    <a href="hallucination.html">Hallucination Spotter</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="../patterns/index.html">Patterns Library</a>
+                    <a href="../quiz/index.html">Readiness Quiz</a>
+                    <a href="../pages/ai-safety.html">AI Safety</a>
+                    <a href="../pages/about.html">About</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>AI for Everybody</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../app.js"></script>
+</body>
+</html>

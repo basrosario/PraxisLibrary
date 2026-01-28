@@ -1,573 +1,117 @@
+/**
+ * Praxis - Mobile-First JavaScript
+ * Clean, performant animations and interactions
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
-    
+    'use strict';
+
     // ==========================================
-    // MOBILE NAVIGATION TOGGLE
+    // MOBILE MENU TOGGLE
     // ==========================================
-    const navToggle = document.querySelector('.nav-toggle');
-    const navScroller = document.querySelector('.nav-scroller');
-    let navBackdrop = document.querySelector('.nav-backdrop');
+    const menuToggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('nav');
+    const header = document.getElementById('header');
 
-    // Create backdrop if it doesn't exist
-    if (!navBackdrop && navScroller) {
-        navBackdrop = document.createElement('div');
-        navBackdrop.className = 'nav-backdrop';
-        navScroller.parentNode.insertBefore(navBackdrop, navScroller);
-    }
-
-    function closeMenu() {
-        if (navToggle) navToggle.classList.remove('active');
-        if (navScroller) navScroller.classList.remove('active');
-        if (navBackdrop) navBackdrop.classList.remove('active');
-    }
-
-    function openMenu() {
-        if (navToggle) navToggle.classList.add('active');
-        if (navScroller) navScroller.classList.add('active');
-        if (navBackdrop) navBackdrop.classList.add('active');
-    }
-
-    if (navToggle && navScroller) {
-        // Toggle menu on hamburger click
-        navToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (navToggle.classList.contains('active')) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
+    if (menuToggle && nav) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            nav.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
         });
 
-        // Close menu when clicking on a nav item
-        const navItems = navScroller.querySelectorAll('.nav-item');
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                closeMenu();
+        // Close menu when clicking a link
+        nav.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+                document.body.classList.remove('menu-open');
             });
         });
 
-        // Close menu when clicking backdrop
-        if (navBackdrop) {
-            navBackdrop.addEventListener('click', closeMenu);
-        }
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            const isClickInsideNav = navScroller.contains(e.target);
-            const isClickOnToggle = navToggle.contains(e.target);
-            
-            if (!isClickInsideNav && !isClickOnToggle && navToggle.classList.contains('active')) {
-                closeMenu();
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && nav.classList.contains('active')) {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+                document.body.classList.remove('menu-open');
             }
         });
     }
 
     // ==========================================
-    // ACCORDION NAVIGATION
+    // HEADER SCROLL EFFECT
     // ==========================================
-    const accordionHeaders = document.querySelectorAll('.nav-accordion-header');
+    let headerTicking = false;
 
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-            const content = header.nextElementSibling;
-            const isActive = header.classList.contains('active');
-            const tabId = header.dataset.tab;
-
-            // Close all other accordions
-            accordionHeaders.forEach(otherHeader => {
-                if (otherHeader !== header) {
-                    otherHeader.classList.remove('active');
-                    otherHeader.nextElementSibling.classList.remove('active');
-                }
-            });
-
-            // Toggle current accordion
-            if (isActive) {
-                header.classList.remove('active');
-                content.classList.remove('active');
-            } else {
-                header.classList.add('active');
-                content.classList.add('active');
-            }
-
-            // If header has data-tab, show that tab content
-            if (tabId) {
-                const targetTab = document.getElementById(tabId);
-                if (targetTab) {
-                    // Hide all tabs
-                    document.querySelectorAll('.tab-content').forEach(tab => {
-                        tab.classList.remove('active');
-                    });
-                    // Show target tab
-                    targetTab.classList.add('active');
-                    // Update nav-item active states
-                    document.querySelectorAll('.nav-item[data-tab]').forEach(nav => {
-                        nav.classList.remove('active');
-                    });
-                    // Scroll to top
-                    const scrollContainer = document.querySelector('.content-scroll');
-                    if (scrollContainer) {
-                        scrollContainer.scrollTop = 0;
-                    }
-                }
-            }
-        });
-    });
-
-    // Auto-expand accordion if child is active
-    const activeNavItem = document.querySelector('.nav-accordion-content .nav-item.active');
-    if (activeNavItem) {
-        const accordionContent = activeNavItem.closest('.nav-accordion-content');
-        const accordionHeader = accordionContent?.previousElementSibling;
-        if (accordionHeader && accordionContent) {
-            accordionHeader.classList.add('active');
-            accordionContent.classList.add('active');
-        }
-    }
-
-    // ==========================================
-    // LIBRARY TAB NAVIGATION
-    // Only runs if tabs exist (Library Page)
-    // ==========================================
-    const tabNavItems = document.querySelectorAll('.nav-item[data-tab]');
-    
-    if (tabNavItems.length > 0) {
-        tabNavItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const tabId = item.dataset.tab;
-                const targetTab = document.getElementById(tabId);
-
-                if (!targetTab) return;
-
-                // 1. Hide all tabs
-                document.querySelectorAll('.tab-content').forEach(tab => {
-                    tab.classList.remove('active');
-                });
-
-                // 2. Show the target tab
-                targetTab.classList.add('active');
-
-                // 3. Update active state on sidebar
-                document.querySelectorAll('.nav-item[data-tab]').forEach(nav => {
-                    nav.classList.remove('active');
-                });
-                item.classList.add('active');
-
-                // 4. Scroll to top (if container exists)
-                const scrollContainer = document.querySelector('.content-scroll');
-                if (scrollContainer) {
-                    scrollContainer.scrollTop = 0;
-                }
-            });
-        });
-    }
-
-    // ==========================================
-    // PROMPT ACCORDION (Collapsible Example Blocks)
-    // ==========================================
-    const collapsibleBlocks = document.querySelectorAll('.example-block.collapsible');
-
-    if (collapsibleBlocks.length > 0) {
-        collapsibleBlocks.forEach(block => {
-            const header = block.querySelector('.example-header');
-
-            if (header) {
-                header.addEventListener('click', (e) => {
-                    // Don't toggle if clicking on the copy button
-                    if (e.target.closest('.btn-copy')) return;
-
-                    block.classList.toggle('expanded');
-                });
-            }
-        });
-    }
-
-    // ==========================================
-    // COLLAPSE ALL / EXPAND ALL BUTTONS
-    // ==========================================
-    const promptControlsContainer = document.querySelector('.prompt-controls');
-
-    if (promptControlsContainer && collapsibleBlocks.length > 0) {
-        const collapseBtn = promptControlsContainer.querySelector('.btn-collapse-all');
-        const expandBtn = promptControlsContainer.querySelector('.btn-expand-all');
-
-        if (collapseBtn) {
-            collapseBtn.addEventListener('click', () => {
-                collapsibleBlocks.forEach(block => {
-                    block.classList.remove('expanded');
-                });
-                showToast('All prompts collapsed', 'success');
-            });
-        }
-
-        if (expandBtn) {
-            expandBtn.addEventListener('click', () => {
-                collapsibleBlocks.forEach(block => {
-                    block.classList.add('expanded');
-                });
-                showToast('All prompts expanded', 'success');
-            });
-        }
-    }
-
-    // Auto-create prompt controls if collapsible blocks exist and no controls present
-    if (collapsibleBlocks.length > 3 && !promptControlsContainer) {
-        // Find a suitable insertion point (first level-header or first example-block)
-        const firstLevelHeader = document.querySelector('.level-header');
-        const tabContent = document.querySelector('.tab-content.active') || document.querySelector('.tab-content');
-
-        if (firstLevelHeader || tabContent) {
-            const controls = document.createElement('div');
-            controls.className = 'prompt-controls';
-            controls.innerHTML = `
-                <button class="btn-secondary btn-collapse-all" aria-label="Collapse all prompts">
-                    <svg viewBox="0 0 24 24" class="btn-icon"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
-                    Collapse All
-                </button>
-                <button class="btn-secondary btn-expand-all" aria-label="Expand all prompts">
-                    <svg viewBox="0 0 24 24" class="btn-icon"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
-                    Expand All
-                </button>
-            `;
-
-            // Insert at top of content area
-            const insertTarget = tabContent || firstLevelHeader.parentNode;
-            if (insertTarget) {
-                insertTarget.insertBefore(controls, insertTarget.firstChild);
-
-                // Bind events to dynamically created buttons
-                controls.querySelector('.btn-collapse-all').addEventListener('click', () => {
-                    document.querySelectorAll('.example-block.collapsible').forEach(block => {
-                        block.classList.remove('expanded');
-                    });
-                    showToast('All prompts collapsed', 'success');
-                });
-
-                controls.querySelector('.btn-expand-all').addEventListener('click', () => {
-                    document.querySelectorAll('.example-block.collapsible').forEach(block => {
-                        block.classList.add('expanded');
-                    });
-                    showToast('All prompts expanded', 'success');
-                });
-            }
-        }
-    }
-
-    // ==========================================
-    // TOAST NOTIFICATION SYSTEM
-    // ==========================================
-    // Create toast container
-    let toastContainer = document.querySelector('.toast-container');
-    if (!toastContainer) {
-        toastContainer = document.createElement('div');
-        toastContainer.className = 'toast-container';
-        document.body.appendChild(toastContainer);
-    }
-
-    function showToast(message, type = 'success') {
-        const toast = document.createElement('div');
-        toast.className = `toast ${type}`;
-
-        const iconSvg = type === 'success'
-            ? '<svg class="toast-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>'
-            : '<svg class="toast-icon" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>';
-
-        toast.innerHTML = `${iconSvg}<span>${message}</span>`;
-        toastContainer.appendChild(toast);
-
-        // Auto-remove after 3 seconds
-        setTimeout(() => {
-            toast.classList.add('hiding');
-            setTimeout(() => toast.remove(), 300);
-        }, 3000);
-    }
-
-    // ==========================================
-    // COPY TO CLIPBOARD LOGIC (Library)
-    // ==========================================
-    const copyButtons = document.querySelectorAll('.btn-copy');
-
-    if (copyButtons.length > 0) {
-        copyButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const block = e.target.closest('.example-block');
-                if (block) {
-                    const promptElement = block.querySelector('.prompt-text');
-                    if (promptElement) {
-                        navigator.clipboard.writeText(promptElement.innerText)
-                            .then(() => {
-                                showToast('Copied to clipboard!', 'success');
-                            })
-                            .catch(err => {
-                                showToast('Failed to copy', 'error');
-                            });
-                    }
-                }
-            });
-        });
-    }
-
-    // ==========================================
-    // SMOOTH SCROLL FOR ANCHOR LINKS
-    // ==========================================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-
-            // Skip if it's just "#" or empty
-            if (targetId === '#' || targetId === '') return;
-
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                e.preventDefault();
-
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-
-                // Update URL without jumping
-                history.pushState(null, null, targetId);
-            }
-        });
-    });
-
-    // ==========================================
-    // BACK TO TOP BUTTON
-    // ==========================================
-    // Create button element
-    const backToTopBtn = document.createElement('button');
-    backToTopBtn.className = 'back-to-top';
-    backToTopBtn.setAttribute('aria-label', 'Back to top');
-    backToTopBtn.innerHTML = `
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 4l-8 8h5v8h6v-8h5z"/>
-        </svg>
-    `;
-    document.body.appendChild(backToTopBtn);
-
-    // Get scroll container (content-scroll or window)
-    const scrollContainer = document.querySelector('.content-scroll') || window;
-    const scrollElement = scrollContainer === window ? document.documentElement : scrollContainer;
-
-    // Show/hide button based on scroll position
-    function toggleBackToTop() {
-        const scrollTop = scrollContainer === window
-            ? window.pageYOffset || document.documentElement.scrollTop
-            : scrollContainer.scrollTop;
-
-        if (scrollTop > 300) {
-            backToTopBtn.classList.add('visible');
+    function updateHeader() {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
         } else {
-            backToTopBtn.classList.remove('visible');
+            header.classList.remove('scrolled');
+        }
+        headerTicking = false;
+    }
+
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (!headerTicking) {
+                requestAnimationFrame(updateHeader);
+                headerTicking = true;
+            }
+        }, { passive: true });
+        updateHeader();
+    }
+
+    // ==========================================
+    // FLOATING PARTICLES ANIMATION
+    // ==========================================
+    const particlesContainer = document.getElementById('particles');
+
+    if (particlesContainer) {
+        const particleCount = 20;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+
+            // Random position
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+
+            // Random size
+            const size = Math.random() * 4 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+
+            // Random animation delay and duration
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+
+            // Random opacity
+            particle.style.opacity = Math.random() * 0.4 + 0.1;
+
+            particlesContainer.appendChild(particle);
         }
     }
 
-    // Scroll to top on click
-    backToTopBtn.addEventListener('click', () => {
-        if (scrollContainer === window) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-            scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    });
-
-    // Listen for scroll events
-    scrollContainer.addEventListener('scroll', toggleBackToTop);
-
-    // Initial check
-    toggleBackToTop();
-
     // ==========================================
-    // IMAGE LIGHTBOX
+    // SCROLL REVEAL ANIMATIONS
     // ==========================================
-    // Create lightbox overlay
-    const lightboxOverlay = document.createElement('div');
-    lightboxOverlay.className = 'lightbox-overlay';
-    lightboxOverlay.innerHTML = `
-        <div class="lightbox-content">
-            <button class="lightbox-close" aria-label="Close">&times;</button>
-            <img class="lightbox-image" src="" alt="">
-            <div class="lightbox-caption"></div>
-        </div>
-    `;
-    document.body.appendChild(lightboxOverlay);
-
-    const lightboxImage = lightboxOverlay.querySelector('.lightbox-image');
-    const lightboxCaption = lightboxOverlay.querySelector('.lightbox-caption');
-    const lightboxClose = lightboxOverlay.querySelector('.lightbox-close');
-
-    // Add lightbox trigger to security test images
-    const testImages = document.querySelectorAll('.test-image img');
-    testImages.forEach(img => {
-        img.classList.add('lightbox-trigger');
-        img.addEventListener('click', () => {
-            lightboxImage.src = img.src;
-            lightboxImage.alt = img.alt;
-            lightboxCaption.textContent = img.alt || '';
-            lightboxOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-    });
-
-    // Close lightbox functions
-    function closeLightbox() {
-        lightboxOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    lightboxClose.addEventListener('click', (e) => {
-        e.stopPropagation();
-        closeLightbox();
-    });
-
-    lightboxOverlay.addEventListener('click', (e) => {
-        if (e.target === lightboxOverlay) {
-            closeLightbox();
-        }
-    });
-
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightboxOverlay.classList.contains('active')) {
-            closeLightbox();
-        }
-    });
-
-    // ==========================================
-    // THEME CONTROLS (Dark/Light Mode + Color Slider)
-    // ==========================================
-
-    // Create container for theme controls
-    const themeControls = document.createElement('div');
-    themeControls.className = 'theme-controls';
-
-    // Create theme toggle button
-    const themeToggle = document.createElement('button');
-    themeToggle.className = 'theme-toggle';
-    themeToggle.setAttribute('aria-label', 'Toggle dark mode');
-    themeToggle.innerHTML = `
-        <svg class="icon-moon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>
-        </svg>
-        <svg class="icon-sun" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
-        </svg>
-    `;
-
-    // Create color slider container
-    const colorSliderContainer = document.createElement('div');
-    colorSliderContainer.className = 'color-slider-container';
-    colorSliderContainer.innerHTML = `
-        <div class="color-slider-icon" aria-hidden="true"></div>
-        <input type="range" class="color-slider" min="0" max="360" value="355" aria-label="Adjust accent color hue">
-        <button class="color-reset-btn" aria-label="Reset to default color">Reset</button>
-    `;
-
-    // Add controls to container
-    themeControls.appendChild(themeToggle);
-    themeControls.appendChild(colorSliderContainer);
-    document.body.appendChild(themeControls);
-
-    // Default hue value (red)
-    const DEFAULT_HUE = 355;
-
-    // Function to update accent hue
-    function updateAccentHue(hue) {
-        document.documentElement.style.setProperty('--accent-hue', hue);
-        const colorIcon = colorSliderContainer.querySelector('.color-slider-icon');
-        if (colorIcon) {
-            colorIcon.style.background = `hsl(${hue}, 78%, 56%)`;
-        }
-    }
-
-    // Check for saved color preference
-    const savedHue = localStorage.getItem('accentHue');
-    const colorSlider = colorSliderContainer.querySelector('.color-slider');
-    if (savedHue !== null) {
-        updateAccentHue(savedHue);
-        colorSlider.value = savedHue;
-    }
-
-    // Color slider event listener
-    colorSlider.addEventListener('input', (e) => {
-        const hue = e.target.value;
-        updateAccentHue(hue);
-        localStorage.setItem('accentHue', hue);
-    });
-
-    // Reset button event listener
-    const resetBtn = colorSliderContainer.querySelector('.color-reset-btn');
-    resetBtn.addEventListener('click', () => {
-        updateAccentHue(DEFAULT_HUE);
-        colorSlider.value = DEFAULT_HUE;
-        localStorage.removeItem('accentHue');
-        showToast('Color reset to default', 'success');
-    });
-
-    // Check for saved theme preference or default to light
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    if (savedTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-    }
-
-    // Toggle theme on click
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-        if (newTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        } else {
-            document.documentElement.removeAttribute('data-theme');
-        }
-
-        localStorage.setItem('theme', newTheme);
-    });
-
-    // ==========================================
-    // FADE-IN ANIMATIONS ON SCROLL
-    // ==========================================
-    // Add fade-in class to animatable elements
-    const animatableSelectors = [
-        '.sec-section',
-        '.sec-card',
-        '.test-row',
-        '.example-block',
-        '.rationale-item',
-        '.score-card',
-        '.metric-card',
-        '.achievement-banner',
-        '.hub-card',
-        '.def-cell',
-        '.chart-section'
-    ];
-
-    animatableSelectors.forEach(selector => {
-        document.querySelectorAll(selector).forEach(el => {
-            el.classList.add('fade-in');
-        });
-    });
-
-    // Add stagger class to grid containers
-    document.querySelectorAll('.sec-grid, .rationale-grid, .score-grid, .metrics-grid, .framework-grid').forEach(grid => {
-        grid.classList.add('fade-in-stagger');
-    });
-
-    // Add stagger delays to grid children for cascading effect
-    document.querySelectorAll('.fade-in-stagger').forEach(grid => {
-        const children = grid.querySelectorAll('.fade-in');
-        children.forEach((child, index) => {
-            child.classList.add(`stagger-${Math.min(index + 1, 8)}`);
-        });
-    });
-
-    // Create Intersection Observer
-    const fadeObserver = new IntersectionObserver((entries) => {
+    const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                fadeObserver.unobserve(entry.target);
+
+                // If it's a stagger container, animate children
+                if (entry.target.classList.contains('stagger-children')) {
+                    const children = entry.target.children;
+                    Array.from(children).forEach((child, index) => {
+                        setTimeout(() => {
+                            child.classList.add('visible');
+                        }, index * 100);
+                    });
+                }
             }
         });
     }, {
@@ -576,1383 +120,638 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Observe all fade-in elements
-    document.querySelectorAll('.fade-in').forEach(el => {
-        fadeObserver.observe(el);
+    document.querySelectorAll('.fade-in, .fade-in-up, .stagger-children, .card, .feature-item, .pattern-chip, .cta-card').forEach(el => {
+        revealObserver.observe(el);
     });
 
     // ==========================================
-    // ANIMATED COUNTERS
+    // COUNTER ANIMATIONS
     // ==========================================
-    function animateCounter(element) {
-        const target = parseInt(element.dataset.target, 10);
-        const duration = 1500; // 1.5 seconds
-        const startTime = performance.now();
-
-        function updateCounter(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-
-            // Ease out cubic
-            const easeOut = 1 - Math.pow(1 - progress, 3);
-            const current = Math.round(easeOut * target);
-
-            element.textContent = current;
-
-            if (progress < 1) {
-                requestAnimationFrame(updateCounter);
-            }
-        }
-
-        requestAnimationFrame(updateCounter);
-    }
-
-    // Intersection Observer for counters
-    const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCounter(entry.target);
-                counterObserver.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.5
-    });
-
-    // Observe all counter elements
-    document.querySelectorAll('.counter').forEach(counter => {
-        counterObserver.observe(counter);
-    });
-
-    // ==========================================
-    // READING PROGRESS BAR
-    // ==========================================
-    // Create progress bar element
-    const progressBar = document.createElement('div');
-    progressBar.className = 'reading-progress';
-    document.body.appendChild(progressBar);
-
-    // Update progress on scroll
-    function updateProgress() {
-        const scrollEl = document.querySelector('.content-scroll') || document.documentElement;
-        const scrollTop = scrollEl.scrollTop || window.pageYOffset;
-        const scrollHeight = scrollEl.scrollHeight - scrollEl.clientHeight;
-        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-        progressBar.style.width = progress + '%';
-    }
-
-    // Listen for scroll on the correct container
-    const progressScrollContainer = document.querySelector('.content-scroll') || window;
-    progressScrollContainer.addEventListener('scroll', updateProgress);
-
-    // Initial update
-    updateProgress();
-
-    // ==========================================
-    // COLLAPSIBLE PROMPT SECTIONS (DISABLED)
-    // Feature disabled for consistent UX across all sections
-    // All prompt content now flows naturally without height constraints
-    // ==========================================
-
-    // ==========================================
-    // CHART DATA INITIALIZATION (CSP-Safe)
-    // Reads data attributes and sets CSS custom properties
-    // This replaces inline styles for security compliance
-    // ==========================================
-
-    // Initialize circular progress charts with animation
-    // data-progress can be either a percentage (0-100) or an offset value (0-314)
-    document.querySelectorAll('circle[data-progress]').forEach(circle => {
-        const value = parseFloat(circle.dataset.progress);
-        // If value is <= 100, treat it as a percentage and calculate offset
-        // If value > 100, it's already an offset value
-        const offset = value <= 100 ? 314 - (314 * value / 100) : value;
-        circle.style.setProperty('--progress-offset', offset);
-        // Trigger animation after a brief delay to ensure CSS is applied
-        requestAnimationFrame(() => {
-            circle.classList.add('animate');
-        });
-    });
-
-    // Initialize bar chart fills with animation
-    document.querySelectorAll('.bar-fill[data-width]').forEach(bar => {
-        const width = bar.dataset.width;
-        bar.style.setProperty('--bar-width', width + '%');
-        // Trigger animation after a brief delay to ensure CSS is applied
-        requestAnimationFrame(() => {
-            bar.classList.add('animate');
-        });
-    });
-
-    // Initialize stacked bar segments
-    document.querySelectorAll('.stacked-segment[data-flex]').forEach(segment => {
-        const flex = segment.dataset.flex;
-        segment.style.setProperty('--segment-flex', flex);
-    });
-
-    // ==========================================
-    // PRAXIS AI HERO ANIMATIONS
-    // Neural Network / Code / Formula Visualization
-    // ==========================================
-
-    const canvas = document.getElementById('praxis-canvas');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        let nodes = [];
-        let codeElements = [];
-        let animationId;
-        let time = 0;
-
-        // Neural Network Color Palette - Red Theme
-        const colors = {
-            red: { r: 230, g: 57, b: 70 },
-            crimson: { r: 193, g: 18, b: 31 },
-            coral: { r: 255, g: 77, b: 90 },
-            rose: { r: 255, g: 99, b: 99 }
-        };
-
-        // Code/Formula snippets for floating text
-        const codeSnippets = [
-            'AI', 'ML', 'NLP', 'GPT', 'LLM',
-            'f(x)', 'Σ', '∇', 'λ', 'θ',
-            '{ }', '[ ]', '< >', '//',
-            '01', '10', '11', '00',
-            '→', '⟨ ⟩', '∂', '∞'
-        ];
-
-        function resizeCanvas() {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-        }
-
-        function createNodes() {
-            nodes = [];
-            codeElements = [];
-            const numberOfNodes = Math.floor((canvas.width * canvas.height) / 12000);
-
-            // Create neural network nodes
-            for (let i = 0; i < numberOfNodes; i++) {
-                const colorKeys = Object.keys(colors);
-                const colorKey = colorKeys[Math.floor(Math.random() * colorKeys.length)];
-                nodes.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.4,
-                    vy: (Math.random() - 0.5) * 0.4,
-                    radius: Math.random() * 3 + 1.5,
-                    color: colors[colorKey],
-                    pulsePhase: Math.random() * Math.PI * 2,
-                    isHub: Math.random() < 0.15
-                });
-            }
-
-            // Create floating code elements
-            const numCodeElements = Math.floor(numberOfNodes / 4);
-            for (let i = 0; i < numCodeElements; i++) {
-                codeElements.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.2,
-                    vy: (Math.random() - 0.5) * 0.2,
-                    text: codeSnippets[Math.floor(Math.random() * codeSnippets.length)],
-                    opacity: Math.random() * 0.3 + 0.1,
-                    size: Math.random() * 8 + 10
-                });
-            }
-        }
-
-        function drawNetwork() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            time += 0.02;
-
-            // Draw floating code/formula elements
-            ctx.font = '12px "Courier New", monospace';
-            codeElements.forEach(el => {
-                const pulse = Math.sin(time + el.opacity * 10) * 0.1 + 0.9;
-                ctx.fillStyle = `rgba(230, 57, 70, ${el.opacity * pulse})`;
-                ctx.font = `${el.size}px "Courier New", monospace`;
-                ctx.fillText(el.text, el.x, el.y);
-
-                el.x += el.vx;
-                el.y += el.vy;
-
-                if (el.x < -20 || el.x > canvas.width + 20) el.vx *= -1;
-                if (el.y < -20 || el.y > canvas.height + 20) el.vy *= -1;
-            });
-
-            // Draw neural network connections
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const dx = nodes[i].x - nodes[j].x;
-                    const dy = nodes[i].y - nodes[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    const maxDist = nodes[i].isHub || nodes[j].isHub ? 200 : 120;
-
-                    if (distance < maxDist) {
-                        const opacity = (1 - distance / maxDist) * 0.4;
-                        const pulse = Math.sin(time * 2 + i * 0.1) * 0.2 + 0.8;
-
-                        // Gradient line effect
-                        const gradient = ctx.createLinearGradient(
-                            nodes[i].x, nodes[i].y,
-                            nodes[j].x, nodes[j].y
-                        );
-                        gradient.addColorStop(0, `rgba(${nodes[i].color.r}, ${nodes[i].color.g}, ${nodes[i].color.b}, ${opacity * pulse})`);
-                        gradient.addColorStop(1, `rgba(${nodes[j].color.r}, ${nodes[j].color.g}, ${nodes[j].color.b}, ${opacity * pulse})`);
-
-                        ctx.beginPath();
-                        ctx.strokeStyle = gradient;
-                        ctx.lineWidth = nodes[i].isHub || nodes[j].isHub ? 1.5 : 0.8;
-                        ctx.moveTo(nodes[i].x, nodes[i].y);
-                        ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            // Draw nodes
-            nodes.forEach(node => {
-                const pulse = Math.sin(time * 3 + node.pulsePhase) * 0.3 + 0.7;
-                const glowSize = node.isHub ? 15 : 8;
-
-                // Glow effect
-                const glow = ctx.createRadialGradient(
-                    node.x, node.y, 0,
-                    node.x, node.y, glowSize
-                );
-                glow.addColorStop(0, `rgba(${node.color.r}, ${node.color.g}, ${node.color.b}, ${0.6 * pulse})`);
-                glow.addColorStop(1, `rgba(${node.color.r}, ${node.color.g}, ${node.color.b}, 0)`);
-
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, glowSize, 0, Math.PI * 2);
-                ctx.fillStyle = glow;
-                ctx.fill();
-
-                // Core node
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, node.radius * (node.isHub ? 1.5 : 1), 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${node.color.r}, ${node.color.g}, ${node.color.b}, ${0.9 * pulse})`;
-                ctx.fill();
-
-                // Update position
-                node.x += node.vx;
-                node.y += node.vy;
-
-                // Bounce off edges
-                if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
-                if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
-            });
-
-            animationId = requestAnimationFrame(drawNetwork);
-        }
-
-        resizeCanvas();
-        createNodes();
-        drawNetwork();
-
-        window.addEventListener('resize', () => {
-            resizeCanvas();
-            createNodes();
-        });
-    }
-
-    // ==========================================
-    // GLOBAL NEURAL NETWORK BACKGROUND
-    // Subtle ambient animation for all pages
-    // ==========================================
-
-    // Only create global neural bg if not on hero page (no praxis-canvas)
-    if (!document.getElementById('praxis-canvas') && !document.querySelector('.neural-bg')) {
-        const neuralCanvas = document.createElement('canvas');
-        neuralCanvas.id = 'neural-network-bg';
-        neuralCanvas.className = 'neural-bg';
-        document.body.insertBefore(neuralCanvas, document.body.firstChild);
-
-        const nCtx = neuralCanvas.getContext('2d');
-        let nNodes = [];
-        let nTime = 0;
-
-        const nColors = {
-            red: { r: 230, g: 57, b: 70 },
-            crimson: { r: 193, g: 18, b: 31 },
-            coral: { r: 255, g: 77, b: 90 }
-        };
-
-        function resizeNeuralCanvas() {
-            neuralCanvas.width = window.innerWidth;
-            neuralCanvas.height = window.innerHeight;
-        }
-
-        function createNeuralNodes() {
-            nNodes = [];
-            const numNodes = Math.floor((neuralCanvas.width * neuralCanvas.height) / 25000);
-
-            for (let i = 0; i < numNodes; i++) {
-                const colorKeys = Object.keys(nColors);
-                const colorKey = colorKeys[Math.floor(Math.random() * colorKeys.length)];
-                nNodes.push({
-                    x: Math.random() * neuralCanvas.width,
-                    y: Math.random() * neuralCanvas.height,
-                    vx: (Math.random() - 0.5) * 0.3,
-                    vy: (Math.random() - 0.5) * 0.3,
-                    radius: Math.random() * 2 + 1,
-                    color: nColors[colorKey]
-                });
-            }
-        }
-
-        function drawNeuralNetwork() {
-            nCtx.clearRect(0, 0, neuralCanvas.width, neuralCanvas.height);
-            nTime += 0.01;
-
-            // Draw connections
-            for (let i = 0; i < nNodes.length; i++) {
-                for (let j = i + 1; j < nNodes.length; j++) {
-                    const dx = nNodes[i].x - nNodes[j].x;
-                    const dy = nNodes[i].y - nNodes[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 150) {
-                        const opacity = (1 - dist / 150) * 0.3;
-                        nCtx.strokeStyle = `rgba(230, 57, 70, ${opacity})`;
-                        nCtx.lineWidth = 0.5;
-                        nCtx.beginPath();
-                        nCtx.moveTo(nNodes[i].x, nNodes[i].y);
-                        nCtx.lineTo(nNodes[j].x, nNodes[j].y);
-                        nCtx.stroke();
-                    }
-                }
-            }
-
-            // Draw nodes
-            nNodes.forEach(node => {
-                const pulse = Math.sin(nTime * 2 + node.x * 0.01) * 0.3 + 0.7;
-                nCtx.beginPath();
-                nCtx.arc(node.x, node.y, node.radius * pulse, 0, Math.PI * 2);
-                nCtx.fillStyle = `rgba(${node.color.r}, ${node.color.g}, ${node.color.b}, 0.6)`;
-                nCtx.fill();
-
-                // Update position
-                node.x += node.vx;
-                node.y += node.vy;
-
-                if (node.x < 0 || node.x > neuralCanvas.width) node.vx *= -1;
-                if (node.y < 0 || node.y > neuralCanvas.height) node.vy *= -1;
-            });
-
-            requestAnimationFrame(drawNeuralNetwork);
-        }
-
-        resizeNeuralCanvas();
-        createNeuralNodes();
-        drawNeuralNetwork();
-
-        window.addEventListener('resize', () => {
-            resizeNeuralCanvas();
-            createNeuralNodes();
-        });
-    }
-
-    // ==========================================
-    // ANIMATED BRAND EFFECTS
-    // Randomized cool animations for </Praxis Library>
-    // ==========================================
-
-    const animatedBrand = document.getElementById('animated-brand');
-    if (animatedBrand) {
-        const animChars = animatedBrand.querySelectorAll('.anim-char');
-        // Extended effects with new glitchy/static/zappy animations
-        const effects = ['glitch', 'float', 'pulse', 'shake', 'flip', 'color-shift', 'static', 'zap', 'scan', 'corrupt', 'flicker'];
-        const glitchyEffects = ['glitch', 'static', 'zap', 'corrupt', 'flicker']; // High intensity
-
-        // Clear all effects from a character
-        function clearEffects(char) {
-            effects.forEach(e => char.classList.remove(e));
-        }
-
-        // Random effect on individual characters
-        function triggerRandomEffect() {
-            const randomChar = animChars[Math.floor(Math.random() * animChars.length)];
-            const randomEffect = effects[Math.floor(Math.random() * effects.length)];
-
-            clearEffects(randomChar);
-            randomChar.classList.add(randomEffect);
-
-            setTimeout(() => {
-                randomChar.classList.remove(randomEffect);
-            }, 1000);
-        }
-
-        // Cascade effect - animate all characters in sequence
-        function cascadeEffect() {
-            const randomEffect = effects[Math.floor(Math.random() * effects.length)];
-            animChars.forEach((char, index) => {
-                setTimeout(() => {
-                    clearEffects(char);
-                    char.classList.add(randomEffect);
-                    setTimeout(() => char.classList.remove(randomEffect), 600);
-                }, index * 100);
-            });
-        }
-
-        // Wave effect - characters float in sequence
-        function waveEffect() {
-            animChars.forEach((char, index) => {
-                setTimeout(() => {
-                    char.classList.add('float');
-                    setTimeout(() => char.classList.remove('float'), 2000);
-                }, index * 150);
-            });
-        }
-
-        // Glitch storm - rapid glitches across all characters
-        function glitchStorm() {
-            let iterations = 0;
-            const storm = setInterval(() => {
-                const randomChar = animChars[Math.floor(Math.random() * animChars.length)];
-                const randomGlitch = glitchyEffects[Math.floor(Math.random() * glitchyEffects.length)];
-                randomChar.classList.add(randomGlitch);
-                setTimeout(() => randomChar.classList.remove(randomGlitch), 300);
-                iterations++;
-                if (iterations > 15) clearInterval(storm);
-            }, 80);
-        }
-
-        // ZAP BURST - intense lightning effect across brand
-        function zapBurst() {
-            animChars.forEach((char, index) => {
-                setTimeout(() => {
-                    char.classList.add('zap');
-                    setTimeout(() => char.classList.remove('zap'), 300);
-                }, index * 50);
-            });
-        }
-
-        // STATIC WAVE - TV static effect rippling through
-        function staticWave() {
-            animChars.forEach((char, index) => {
-                setTimeout(() => {
-                    char.classList.add('static');
-                    setTimeout(() => {
-                        char.classList.remove('static');
-                        char.classList.add('flicker');
-                        setTimeout(() => char.classList.remove('flicker'), 200);
-                    }, 300);
-                }, index * 60);
-            });
-        }
-
-        // CORRUPT SEQUENCE - data corruption effect
-        function corruptSequence() {
-            const shuffled = [...animChars].sort(() => Math.random() - 0.5);
-            shuffled.forEach((char, index) => {
-                setTimeout(() => {
-                    char.classList.add('corrupt');
-                    setTimeout(() => char.classList.remove('corrupt'), 400);
-                }, index * 80);
-            });
-        }
-
-        // SCAN REVEAL - scanning line effect
-        function scanReveal() {
-            animChars.forEach((char, index) => {
-                setTimeout(() => {
-                    char.classList.add('scan');
-                    setTimeout(() => char.classList.remove('scan'), 800);
-                }, index * 120);
-            });
-        }
-
-        // CHAOS MODE - multiple random effects simultaneously
-        function chaosMode() {
-            animChars.forEach(char => {
-                const randomEffect = glitchyEffects[Math.floor(Math.random() * glitchyEffects.length)];
-                char.classList.add(randomEffect);
-                setTimeout(() => char.classList.remove(randomEffect), 500);
-            });
-        }
-
-        // Random interval for effects (between 1.5-4 seconds)
-        function scheduleRandomEffect() {
-            const delay = Math.random() * 2500 + 1500;
-            setTimeout(() => {
-                // Choose between different effect types with weighted probability
-                const effectType = Math.random();
-                if (effectType < 0.25) {
-                    triggerRandomEffect();
-                } else if (effectType < 0.35) {
-                    cascadeEffect();
-                } else if (effectType < 0.45) {
-                    waveEffect();
-                } else if (effectType < 0.55) {
-                    glitchStorm();
-                } else if (effectType < 0.65) {
-                    zapBurst();
-                } else if (effectType < 0.75) {
-                    staticWave();
-                } else if (effectType < 0.85) {
-                    corruptSequence();
-                } else if (effectType < 0.93) {
-                    scanReveal();
-                } else {
-                    chaosMode();
-                }
-                scheduleRandomEffect();
-            }, delay);
-        }
-
-        // Start random animations after page load
-        setTimeout(scheduleRandomEffect, 1000);
-
-        // Initial dramatic entrance
-        setTimeout(() => {
-            scanReveal();
-        }, 500);
-
-        // Hover effects - zap on hover for intensity
-        animChars.forEach(char => {
-            char.addEventListener('mouseenter', () => {
-                char.classList.add('zap');
-            });
-            char.addEventListener('mouseleave', () => {
-                setTimeout(() => char.classList.remove('zap'), 300);
-            });
-        });
-    }
-
-    // Static Tagline Display
-    const taglineElement = document.getElementById('typed-tagline');
-    if (taglineElement) {
-        const tagline = 'Interactive AI Educational Library';
-        let currentChar = 0;
-
-        function typeTagline() {
-            if (currentChar < tagline.length) {
-                taglineElement.textContent = tagline.substring(0, currentChar + 1);
-                currentChar++;
-                setTimeout(typeTagline, 60);
-            }
-        }
-
-        setTimeout(typeTagline, 800);
-    }
-
-    // Counter Animation for Stats
-    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
-    if (statNumbers.length > 0) {
-        const animateCounter = (element) => {
-            const target = parseInt(element.dataset.target);
-            const duration = 2000;
-            const start = 0;
-            const startTime = performance.now();
-
-            function updateCounter(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-
-                // Easing function for smooth animation
-                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-                const current = Math.floor(easeOutQuart * target);
-
-                element.textContent = current;
-
-                if (progress < 1) {
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    element.textContent = target;
-                }
-            }
-
-            requestAnimationFrame(updateCounter);
-        };
-
-        // Start counters with slight delay
-        setTimeout(() => {
-            statNumbers.forEach((stat, index) => {
-                setTimeout(() => animateCounter(stat), index * 200);
-            });
-        }, 500);
-    }
-
-    // ==========================================
-    // SITE-WIDE SEARCH SYSTEM
-    // ==========================================
-
-    class SiteSearch {
-        constructor() {
-            this.index = null;
-            this.modal = null;
-            this.input = null;
-            this.results = null;
-            this.selectedIndex = -1;
-            this.currentResults = [];
-        }
-
-        async init() {
-            // Create search UI
-            this.createSearchUI();
-
-            // Load search index
-            await this.loadIndex();
-
-            // Bind events
-            this.bindEvents();
-        }
-
-        createSearchUI() {
-            // Find nav-scroller to add search toggle
-            const navScroller = document.querySelector('.nav-scroller');
-            if (navScroller) {
-                // Create search toggle button
-                const searchToggle = document.createElement('button');
-                searchToggle.className = 'search-toggle';
-                searchToggle.setAttribute('aria-label', 'Search site');
-                searchToggle.innerHTML = `
-                    <img src="${this.getBasePath()}assets/icons/SVG/search.svg" alt="" class="local-icon icon-white">
-                    <span>Search...</span>
-                    <span class="search-shortcut">Ctrl+K</span>
-                `;
-
-                // Insert at top of nav-scroller
-                navScroller.insertBefore(searchToggle, navScroller.firstChild);
-                this.searchToggle = searchToggle;
-            }
-
-            // Create modal
-            this.modal = document.createElement('div');
-            this.modal.className = 'search-modal';
-            this.modal.setAttribute('role', 'dialog');
-            this.modal.setAttribute('aria-modal', 'true');
-            this.modal.setAttribute('aria-label', 'Site search');
-            this.modal.innerHTML = `
-                <div class="search-modal-content">
-                    <div class="search-input-container">
-                        <img src="${this.getBasePath()}assets/icons/SVG/search.svg" alt="" class="local-icon">
-                        <input type="search" id="site-search" placeholder="Search prompts, guides, topics..." autocomplete="off" aria-label="Search">
-                        <button class="search-close" aria-label="Close search">&times;</button>
-                    </div>
-                    <div class="search-results" role="listbox" aria-label="Search results"></div>
-                    <div class="search-footer">
-                        <span><kbd>↑</kbd> <kbd>↓</kbd> Navigate</span>
-                        <span><kbd>Enter</kbd> Open</span>
-                        <span><kbd>Esc</kbd> Close</span>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(this.modal);
-
-            this.input = this.modal.querySelector('#site-search');
-            this.results = this.modal.querySelector('.search-results');
-            this.closeBtn = this.modal.querySelector('.search-close');
-        }
-
-        getBasePath() {
-            // Determine base path based on current page location
-            // Works for both web servers and local file:// access
-            const path = window.location.pathname.toLowerCase();
-
-            // Check for known subdirectories and their depth
-            // Level 2 deep (e.g., /education/games/)
-            if (path.includes('/education/games/') ||
-                path.includes('/education/data/')) {
-                return '../../';
-            }
-
-            // Level 1 deep (e.g., /education/, /business/, /services/, /pages/, /enterprise/)
-            if (path.includes('/education/') ||
-                path.includes('/business/') ||
-                path.includes('/services/') ||
-                path.includes('/pages/') ||
-                path.includes('/enterprise/')) {
-                return '../';
-            }
-
-            // Root level
-            return '';
-        }
-
-        async loadIndex() {
-            try {
-                const basePath = this.getBasePath();
-                const indexUrl = `${basePath}search-index.json`;
-                console.log('[Search] Loading index from:', indexUrl);
-                console.log('[Search] Current path:', window.location.pathname);
-                console.log('[Search] Base path calculated:', basePath);
-
-                const response = await fetch(indexUrl);
-                if (response.ok) {
-                    const data = await response.json();
-                    this.index = data.entries;
-                    console.log('[Search] Index loaded successfully:', this.index.length, 'entries');
-                } else {
-                    console.error('[Search] Index fetch failed:', response.status, response.statusText);
-                    console.error('[Search] Attempted URL:', indexUrl);
-                    this.index = [];
-                }
-            } catch (error) {
-                console.error('[Search] Failed to load search index:', error);
-                console.error('[Search] Attempted URL:', `${this.getBasePath()}search-index.json`);
-                this.index = [];
-            }
-        }
-
-        bindEvents() {
-            // Toggle button click
-            if (this.searchToggle) {
-                this.searchToggle.addEventListener('click', () => this.open());
-            }
-
-            // Close button
-            this.closeBtn.addEventListener('click', () => this.close());
-
-            // Click outside to close
-            this.modal.addEventListener('click', (e) => {
-                if (e.target === this.modal) this.close();
-            });
-
-            // Input events
-            this.input.addEventListener('input', () => this.onSearch());
-
-            // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                // Ctrl/Cmd + K to open
-                if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-                    e.preventDefault();
-                    this.open();
-                }
-
-                // Escape to close
-                if (e.key === 'Escape' && this.modal.classList.contains('active')) {
-                    this.close();
-                }
-
-                // Arrow navigation in results
-                if (this.modal.classList.contains('active')) {
-                    if (e.key === 'ArrowDown') {
-                        e.preventDefault();
-                        this.navigateResults(1);
-                    } else if (e.key === 'ArrowUp') {
-                        e.preventDefault();
-                        this.navigateResults(-1);
-                    } else if (e.key === 'Enter' && this.selectedIndex >= 0) {
-                        e.preventDefault();
-                        this.selectResult(this.currentResults[this.selectedIndex]);
-                    }
-                }
-            });
-        }
-
-        open() {
-            this.modal.classList.add('active');
-            this.input.focus();
-            document.body.style.overflow = 'hidden';
-        }
-
-        close() {
-            this.modal.classList.remove('active');
-            this.input.value = '';
-            this.results.innerHTML = '';
-            this.selectedIndex = -1;
-            this.currentResults = [];
-            document.body.style.overflow = '';
-        }
-
-        onSearch() {
-            const query = this.input.value.trim();
-
-            if (query.length < 2) {
-                this.results.innerHTML = '';
-                this.currentResults = [];
-                this.selectedIndex = -1;
-                return;
-            }
-
-            const matches = this.search(query);
-            this.currentResults = matches;
-            this.selectedIndex = -1;
-            this.renderResults(matches);
-        }
-
-        search(query) {
-            if (!this.index || !query) return [];
-
-            const terms = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
-
-            return this.index.filter(entry => {
-                const searchText = [
-                    entry.title,
-                    entry.category,
-                    entry.subcategory,
-                    entry.excerpt,
-                    ...(entry.keywords || [])
-                ].join(' ').toLowerCase();
-
-                return terms.every(term => searchText.includes(term));
-            }).slice(0, 10);
-        }
-
-        renderResults(matches) {
-            if (matches.length === 0) {
-                this.results.innerHTML = `
-                    <div class="search-no-results">
-                        <p>No results found. Try different keywords.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            const basePath = this.getBasePath();
-
-            this.results.innerHTML = matches.map((entry, index) => `
-                <a href="${basePath}${entry.page}${entry.anchor ? '#' + entry.anchor : ''}"
-                   class="search-result-item"
-                   data-index="${index}"
-                   role="option">
-                    <div class="result-header">
-                        <span class="result-title">${this.escapeHtml(entry.title)}</span>
-                        <span class="result-category">${this.escapeHtml(entry.category)}${entry.subcategory ? ' / ' + this.escapeHtml(entry.subcategory) : ''}</span>
-                        ${entry.method ? `<span class="result-method">${this.escapeHtml(entry.method)}</span>` : ''}
-                    </div>
-                    <div class="result-excerpt">${this.escapeHtml(entry.excerpt)}</div>
-                </a>
-            `).join('');
-
-            // Add click handlers
-            this.results.querySelectorAll('.search-result-item').forEach((item, index) => {
-                item.addEventListener('click', (e) => {
-                    // Let the link work naturally
-                    this.close();
-                });
-            });
-        }
-
-        navigateResults(direction) {
-            if (this.currentResults.length === 0) return;
-
-            const items = this.results.querySelectorAll('.search-result-item');
-
-            // Remove current selection
-            if (this.selectedIndex >= 0 && items[this.selectedIndex]) {
-                items[this.selectedIndex].classList.remove('selected');
-            }
-
-            // Update index
-            this.selectedIndex += direction;
-            if (this.selectedIndex < 0) this.selectedIndex = this.currentResults.length - 1;
-            if (this.selectedIndex >= this.currentResults.length) this.selectedIndex = 0;
-
-            // Add selection
-            if (items[this.selectedIndex]) {
-                items[this.selectedIndex].classList.add('selected');
-                items[this.selectedIndex].scrollIntoView({ block: 'nearest' });
-            }
-        }
-
-        selectResult(entry) {
-            if (!entry) return;
-            const basePath = this.getBasePath();
-            const url = entry.anchor
-                ? `${basePath}${entry.page}#${entry.anchor}`
-                : `${basePath}${entry.page}`;
-            window.location.href = url;
-        }
-
-        escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text || '';
-            return div.innerHTML;
-        }
-    }
-
-    // Initialize search
-    const siteSearch = new SiteSearch();
-    siteSearch.init();
-
-    // ==========================================
-    // AI TOOL FINDER WIZARD
-    // ==========================================
-    const wizard = document.querySelector('.tool-finder-wizard');
-    if (wizard) {
-        const answers = {};
-        const progressBar = wizard.querySelector('.wizard-progress-bar');
-        const steps = wizard.querySelectorAll('.wizard-step');
-
-        // AI tool recommendations database
-        const recommendations = {
-            text: {
-                beginner: {
-                    free: {
-                        primary: { name: 'ChatGPT Free', desc: 'Easy to use, great for beginners. Start conversations naturally and learn as you go.', icon: 'chat', link: 'https://chat.openai.com' },
-                        secondary: { name: 'Google Gemini', desc: 'Integrated with Google services, good for research with web search.', icon: 'search', link: 'https://gemini.google.com' }
-                    },
-                    paid: {
-                        primary: { name: 'ChatGPT Plus', desc: 'Access to GPT-4, faster responses, and additional features like DALL-E.', icon: 'chat', link: 'https://chat.openai.com' },
-                        secondary: { name: 'Claude Pro', desc: 'Excellent for longer documents and nuanced writing tasks.', icon: 'chat', link: 'https://claude.ai' }
-                    }
-                },
-                intermediate: {
-                    free: {
-                        primary: { name: 'Claude Free', desc: 'Excellent for detailed analysis, longer context windows, and nuanced writing.', icon: 'chat', link: 'https://claude.ai' },
-                        secondary: { name: 'Perplexity Free', desc: 'Great for research with cited sources and current information.', icon: 'search', link: 'https://perplexity.ai' }
-                    },
-                    paid: {
-                        primary: { name: 'Claude Pro', desc: 'Extended limits, priority access, ideal for professional writing and analysis.', icon: 'chat', link: 'https://claude.ai' },
-                        secondary: { name: 'ChatGPT Plus', desc: 'GPT-4 access with plugins and advanced features.', icon: 'chat', link: 'https://chat.openai.com' }
-                    }
-                },
-                advanced: {
-                    free: {
-                        primary: { name: 'Claude Free', desc: 'Best reasoning capabilities for complex tasks and longer documents.', icon: 'chat', link: 'https://claude.ai' },
-                        secondary: { name: 'ChatGPT Free', desc: 'Good for varied tasks and creative writing.', icon: 'chat', link: 'https://chat.openai.com' }
-                    },
-                    paid: {
-                        primary: { name: 'Claude Pro', desc: 'Maximum context length, best for complex professional work.', icon: 'chat', link: 'https://claude.ai' },
-                        secondary: { name: 'ChatGPT Plus with GPT-4', desc: 'Advanced reasoning with plugin ecosystem.', icon: 'chat', link: 'https://chat.openai.com' }
-                    }
-                }
-            },
-            images: {
-                beginner: {
-                    free: {
-                        primary: { name: 'Microsoft Designer', desc: 'Free, easy-to-use image generation with templates and editing tools.', icon: 'image', link: 'https://designer.microsoft.com' },
-                        secondary: { name: 'Canva AI', desc: 'Design platform with AI image generation built in.', icon: 'image', link: 'https://canva.com' }
-                    },
-                    paid: {
-                        primary: { name: 'Midjourney', desc: 'Highest quality artistic images, excellent for creative projects.', icon: 'image', link: 'https://midjourney.com' },
-                        secondary: { name: 'DALL-E 3 (ChatGPT Plus)', desc: 'Included with ChatGPT Plus, great for quick image generation.', icon: 'image', link: 'https://chat.openai.com' }
-                    }
-                },
-                intermediate: {
-                    free: {
-                        primary: { name: 'Leonardo AI', desc: 'Generous free tier with professional-quality outputs.', icon: 'image', link: 'https://leonardo.ai' },
-                        secondary: { name: 'Ideogram', desc: 'Excellent at text in images, good for logos and graphics.', icon: 'image', link: 'https://ideogram.ai' }
-                    },
-                    paid: {
-                        primary: { name: 'Midjourney', desc: 'Industry-leading quality for artistic and photorealistic images.', icon: 'image', link: 'https://midjourney.com' },
-                        secondary: { name: 'Adobe Firefly', desc: 'Integrates with Creative Cloud, commercially safe.', icon: 'image', link: 'https://firefly.adobe.com' }
-                    }
-                },
-                advanced: {
-                    free: {
-                        primary: { name: 'Stable Diffusion (local)', desc: 'Full control, run locally, unlimited generations.', icon: 'image', link: 'https://stability.ai' },
-                        secondary: { name: 'ComfyUI', desc: 'Node-based workflow for advanced image generation.', icon: 'image', link: 'https://github.com/comfyanonymous/ComfyUI' }
-                    },
-                    paid: {
-                        primary: { name: 'Midjourney', desc: 'Best overall quality, especially for artistic work.', icon: 'image', link: 'https://midjourney.com' },
-                        secondary: { name: 'Runway ML', desc: 'Advanced video and image generation tools.', icon: 'video', link: 'https://runway.ml' }
-                    }
-                }
-            },
-            code: {
-                beginner: {
-                    free: {
-                        primary: { name: 'Claude Free', desc: 'Excellent at explaining code and helping beginners learn.', icon: 'code', link: 'https://claude.ai' },
-                        secondary: { name: 'ChatGPT Free', desc: 'Good for learning programming concepts with examples.', icon: 'chat', link: 'https://chat.openai.com' }
-                    },
-                    paid: {
-                        primary: { name: 'GitHub Copilot', desc: 'Real-time code suggestions directly in your editor.', icon: 'code', link: 'https://github.com/features/copilot' },
-                        secondary: { name: 'Claude Pro', desc: 'Extended context for larger codebases and projects.', icon: 'code', link: 'https://claude.ai' }
-                    }
-                },
-                intermediate: {
-                    free: {
-                        primary: { name: 'Codeium', desc: 'Free code completion with IDE integration.', icon: 'code', link: 'https://codeium.com' },
-                        secondary: { name: 'Claude Free', desc: 'Great for code review and debugging help.', icon: 'code', link: 'https://claude.ai' }
-                    },
-                    paid: {
-                        primary: { name: 'GitHub Copilot', desc: 'Industry standard for code assistance in IDEs.', icon: 'code', link: 'https://github.com/features/copilot' },
-                        secondary: { name: 'Cursor', desc: 'AI-first code editor with advanced features.', icon: 'code', link: 'https://cursor.sh' }
-                    }
-                },
-                advanced: {
-                    free: {
-                        primary: { name: 'Claude Free', desc: 'Best for complex architectural decisions and code review.', icon: 'code', link: 'https://claude.ai' },
-                        secondary: { name: 'Codeium', desc: 'Solid free alternative to Copilot.', icon: 'code', link: 'https://codeium.com' }
-                    },
-                    paid: {
-                        primary: { name: 'Claude Code (CLI)', desc: 'Command-line AI coding assistant for professional developers.', icon: 'code', link: 'https://claude.ai/code' },
-                        secondary: { name: 'Cursor', desc: 'Full IDE with integrated AI for complex projects.', icon: 'code', link: 'https://cursor.sh' }
-                    }
-                }
-            },
-            research: {
-                beginner: {
-                    free: {
-                        primary: { name: 'Perplexity Free', desc: 'AI search with cited sources, perfect for research.', icon: 'search', link: 'https://perplexity.ai' },
-                        secondary: { name: 'Google Gemini', desc: 'Web search integrated with AI summaries.', icon: 'search', link: 'https://gemini.google.com' }
-                    },
-                    paid: {
-                        primary: { name: 'Perplexity Pro', desc: 'Deeper research capabilities with GPT-4 and Claude.', icon: 'search', link: 'https://perplexity.ai' },
-                        secondary: { name: 'ChatGPT Plus with Browse', desc: 'Web browsing for current information.', icon: 'search', link: 'https://chat.openai.com' }
-                    }
-                },
-                intermediate: {
-                    free: {
-                        primary: { name: 'Perplexity Free', desc: 'Best free option for sourced research and fact-checking.', icon: 'search', link: 'https://perplexity.ai' },
-                        secondary: { name: 'Consensus', desc: 'AI search specifically for academic papers.', icon: 'search', link: 'https://consensus.app' }
-                    },
-                    paid: {
-                        primary: { name: 'Perplexity Pro', desc: 'Unlimited Pro searches with advanced AI models.', icon: 'search', link: 'https://perplexity.ai' },
-                        secondary: { name: 'Elicit', desc: 'Research assistant for academic literature review.', icon: 'search', link: 'https://elicit.org' }
-                    }
-                },
-                advanced: {
-                    free: {
-                        primary: { name: 'Semantic Scholar', desc: 'AI-powered academic paper search and analysis.', icon: 'search', link: 'https://semanticscholar.org' },
-                        secondary: { name: 'Perplexity Free', desc: 'General research with source citations.', icon: 'search', link: 'https://perplexity.ai' }
-                    },
-                    paid: {
-                        primary: { name: 'Perplexity Pro', desc: 'Most comprehensive AI research tool available.', icon: 'search', link: 'https://perplexity.ai' },
-                        secondary: { name: 'Elicit', desc: 'Systematic literature review automation.', icon: 'search', link: 'https://elicit.org' }
-                    }
-                }
-            }
-        };
-
-        function showStep(stepNum) {
-            steps.forEach(step => step.classList.remove('active'));
-            const targetStep = wizard.querySelector(`.wizard-step[data-step="${stepNum}"]`);
-            if (targetStep) {
-                targetStep.classList.add('active');
-                if (progressBar) progressBar.dataset.step = stepNum;
-            }
-        }
-
-        function showResults() {
-            const contentType = answers.content || 'text';
-            const experience = answers.experience || 'beginner';
-            const budget = answers.budget || 'free';
-
-            const result = recommendations[contentType]?.[experience]?.[budget];
-            const resultContainer = document.getElementById('wizard-recommendation');
-
-            if (result && resultContainer) {
-                resultContainer.innerHTML = `
-                    <div class="recommendation-card primary">
-                        <div class="recommendation-icon">
-                            <img src="../assets/icons/SVG/${result.primary.icon}.svg" alt="" class="local-icon icon-white">
-                        </div>
-                        <div class="recommendation-content">
-                            <h5>${result.primary.name}</h5>
-                            <p>${result.primary.desc}</p>
-                            <a href="${result.primary.link}" target="_blank" rel="noopener noreferrer" class="recommendation-link">
-                                Visit ${result.primary.name} →
-                            </a>
-                        </div>
-                    </div>
-                    <div class="recommendation-card secondary">
-                        <div class="recommendation-icon" style="background: var(--accent-green);">
-                            <img src="../assets/icons/SVG/${result.secondary.icon}.svg" alt="" class="local-icon icon-white">
-                        </div>
-                        <div class="recommendation-content">
-                            <h5>Also Consider: ${result.secondary.name}</h5>
-                            <p>${result.secondary.desc}</p>
-                            <a href="${result.secondary.link}" target="_blank" rel="noopener noreferrer" class="recommendation-link">
-                                Visit ${result.secondary.name} →
-                            </a>
-                        </div>
-                    </div>
-                `;
-            }
-            showStep('result');
-        }
-
-        // Handle option clicks
-        wizard.querySelectorAll('.wizard-option').forEach(option => {
-            option.addEventListener('click', () => {
-                const step = option.closest('.wizard-step');
-                const stepNum = step?.dataset.step;
-                const nextStep = option.dataset.next;
-                const answer = option.dataset.answer;
-
-                // Store answer based on step
-                if (stepNum === '1') answers.content = answer;
-                if (stepNum === '2') answers.experience = answer;
-                if (stepNum === '3') answers.budget = answer;
-
-                // Navigate
-                if (nextStep === 'result') {
-                    showResults();
-                } else {
-                    showStep(nextStep);
-                }
-            });
-        });
-
-        // Handle back buttons
-        wizard.querySelectorAll('.wizard-back').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const prevStep = btn.dataset.prev;
-                showStep(prevStep);
-            });
-        });
-
-        // Handle restart
-        const restartBtn = wizard.querySelector('.wizard-restart');
-        if (restartBtn) {
-            restartBtn.addEventListener('click', () => {
-                answers.content = null;
-                answers.experience = null;
-                answers.budget = null;
-                showStep('1');
-            });
-        }
-    }
-
-    // ==========================================
-    // CORPORATE REDESIGN - ANIMATION CONTROLLERS
-    // ==========================================
-
-    // Scroll Reveal Animation using Intersection Observer
-    class ScrollAnimator {
-        constructor() {
-            this.observer = new IntersectionObserver(
-                (entries) => this.handleIntersect(entries),
-                {
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -50px 0px'
-                }
-            );
-        }
-
-        init() {
-            const elements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-stagger, .section-fade');
-            elements.forEach(el => this.observer.observe(el));
-        }
-
-        handleIntersect(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }
-    }
-
-    // Parallax Effect Controller (Performance Optimized)
-    class ParallaxController {
-        constructor() {
-            this.elements = [];
-            this.ticking = false;
-        }
-
-        init() {
-            this.elements = document.querySelectorAll('[data-parallax]');
-            if (this.elements.length > 0) {
-                window.addEventListener('scroll', () => this.requestTick(), { passive: true });
-                this.update(); // Initial position
-            }
-        }
-
-        requestTick() {
-            if (!this.ticking) {
-                requestAnimationFrame(() => this.update());
-                this.ticking = true;
-            }
-        }
-
-        update() {
-            const scrollY = window.scrollY;
-            this.elements.forEach(el => {
-                const speed = parseFloat(el.dataset.parallax) || 0.5;
-                const offset = scrollY * speed;
-                el.style.setProperty('--parallax-offset', `${offset}px`);
-            });
-            this.ticking = false;
-        }
-    }
-
-    // Counter Animation
     function animateCounter(element, target, duration = 2000) {
-        const start = 0;
         const startTime = performance.now();
 
         function update(currentTime) {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            // easeOutCubic for smooth deceleration
+
+            // Ease out cubic for smooth deceleration
             const eased = 1 - Math.pow(1 - progress, 3);
-            element.textContent = Math.floor(start + (target - start) * eased);
+            element.textContent = Math.floor(target * eased);
 
             if (progress < 1) {
                 requestAnimationFrame(update);
+            } else {
+                element.textContent = target;
             }
         }
 
         requestAnimationFrame(update);
     }
 
-    // Counter Observer - triggers counter when visible
-    class CounterAnimator {
-        constructor() {
-            this.observer = new IntersectionObserver(
-                (entries) => this.handleIntersect(entries),
-                { threshold: 0.5 }
-            );
-        }
-
-        init() {
-            const counters = document.querySelectorAll('[data-counter]');
-            counters.forEach(el => {
-                el.dataset.animated = 'false';
-                this.observer.observe(el);
-            });
-        }
-
-        handleIntersect(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && entry.target.dataset.animated === 'false') {
-                    const target = parseInt(entry.target.dataset.counter, 10);
-                    const duration = parseInt(entry.target.dataset.duration, 10) || 2000;
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.dataset.animated) {
+                const target = parseInt(entry.target.dataset.count, 10);
+                if (!isNaN(target)) {
                     entry.target.dataset.animated = 'true';
-                    animateCounter(entry.target, target, duration);
+                    animateCounter(entry.target, target);
                 }
-            });
-        }
-    }
-
-    // Header Scroll Effect
-    class HeaderScrollEffect {
-        constructor() {
-            this.header = document.querySelector('.top-header');
-            this.scrollThreshold = 50;
-            this.ticking = false;
-        }
-
-        init() {
-            if (!this.header) return;
-
-            window.addEventListener('scroll', () => this.requestTick(), { passive: true });
-            this.update(); // Initial state
-        }
-
-        requestTick() {
-            if (!this.ticking) {
-                requestAnimationFrame(() => this.update());
-                this.ticking = true;
             }
-        }
-
-        update() {
-            if (window.scrollY > this.scrollThreshold) {
-                this.header.classList.add('scrolled');
-            } else {
-                this.header.classList.remove('scrolled');
-            }
-            this.ticking = false;
-        }
-    }
-
-    // Tab Controller for Resources Section
-    class TabController {
-        constructor(containerSelector) {
-            this.container = document.querySelector(containerSelector);
-        }
-
-        init() {
-            if (!this.container) return;
-
-            const tabs = this.container.querySelectorAll('.tab-btn');
-            const panels = this.container.querySelectorAll('.tab-panel');
-
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const targetTab = tab.dataset.tab;
-
-                    // Update active tab
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-
-                    // Update active panel
-                    panels.forEach(panel => {
-                        if (panel.dataset.panel === targetTab) {
-                            panel.classList.add('active');
-                        } else {
-                            panel.classList.remove('active');
-                        }
-                    });
-                });
-            });
-        }
-    }
-
-    // Initialize all animation controllers
-    const scrollAnimator = new ScrollAnimator();
-    scrollAnimator.init();
-
-    const parallaxController = new ParallaxController();
-    parallaxController.init();
-
-    const counterAnimator = new CounterAnimator();
-    counterAnimator.init();
-
-    const headerScrollEffect = new HeaderScrollEffect();
-    headerScrollEffect.init();
-
-    const tabController = new TabController('.resources-section');
-    tabController.init();
-
-    // Hero Search Bar - triggers existing site search
-    const heroSearchInput = document.querySelector('.hero-search-input');
-    const heroSearchBtn = document.querySelector('.hero-search-btn');
-
-    if (heroSearchInput && typeof siteSearch !== 'undefined') {
-        heroSearchInput.addEventListener('focus', () => {
-            siteSearch.open();
-            heroSearchInput.blur();
         });
+    }, { threshold: 0.5 });
 
-        if (heroSearchBtn) {
-            heroSearchBtn.addEventListener('click', () => {
-                siteSearch.open();
-            });
-        }
-    }
+    document.querySelectorAll('[data-count]').forEach(el => {
+        counterObserver.observe(el);
+    });
 
-    // Popular tag clicks
-    const heroTags = document.querySelectorAll('.hero-tag');
-    heroTags.forEach(tag => {
-        tag.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (typeof siteSearch !== 'undefined') {
-                siteSearch.open();
-                // Pre-fill search with tag text
-                setTimeout(() => {
-                    const searchInput = document.querySelector('.search-input');
-                    if (searchInput) {
-                        searchInput.value = tag.textContent.trim();
-                        searchInput.dispatchEvent(new Event('input'));
-                    }
-                }, 100);
+    // ==========================================
+    // SMOOTH SCROLL FOR ANCHOR LINKS
+    // ==========================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#' || targetId === '') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                history.pushState(null, null, targetId);
             }
         });
     });
 
-    // Header Search Button - triggers existing site search
-    const headerSearchBtn = document.querySelector('.header-search-btn');
-    if (headerSearchBtn && typeof siteSearch !== 'undefined') {
-        headerSearchBtn.addEventListener('click', () => {
-            siteSearch.open();
+    // ==========================================
+    // BACK TO TOP BUTTON
+    // ==========================================
+    const backToTop = document.createElement('button');
+    backToTop.className = 'back-to-top';
+    backToTop.setAttribute('aria-label', 'Back to top');
+    backToTop.innerHTML = `
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    `;
+    document.body.appendChild(backToTop);
+
+    let backToTopTicking = false;
+
+    function updateBackToTop() {
+        if (window.scrollY > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+        backToTopTicking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!backToTopTicking) {
+            requestAnimationFrame(updateBackToTop);
+            backToTopTicking = true;
+        }
+    }, { passive: true });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ==========================================
+    // TOAST NOTIFICATIONS
+    // ==========================================
+    let toastContainer = document.querySelector('.toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.className = 'toast-container';
+        document.body.appendChild(toastContainer);
+    }
+
+    window.showToast = function(message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
+        toastContainer.appendChild(toast);
+
+        setTimeout(() => {
+            toast.classList.add('hiding');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    };
+
+    // ==========================================
+    // THEME TOGGLE (Dark/Light Mode)
+    // ==========================================
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+
+    // Theme toggle button (if exists)
+    const themeToggle = document.querySelector('.theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            if (newTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+            }
+
+            localStorage.setItem('theme', newTheme);
         });
     }
 
-    // Mobile Menu Toggle for top header
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const headerNav = document.querySelector('.header-nav');
+    // ==========================================
+    // TOOL PAGE: PROMPT SCORER
+    // ==========================================
+    const scorerForm = document.getElementById('scorer-form');
+    const promptInput = document.getElementById('prompt-input');
+    const scoreDisplay = document.getElementById('score-display');
 
-    if (mobileMenuToggle && headerNav) {
-        mobileMenuToggle.addEventListener('click', () => {
-            mobileMenuToggle.classList.toggle('active');
-            headerNav.classList.toggle('mobile-active');
+    if (scorerForm && promptInput && scoreDisplay) {
+        scorerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const prompt = promptInput.value.trim();
+
+            if (prompt.length < 10) {
+                showToast('Please enter a longer prompt to analyze', 'error');
+                return;
+            }
+
+            const scores = analyzePrompt(prompt);
+            displayScores(scores);
+        });
+    }
+
+    function analyzePrompt(prompt) {
+        const words = prompt.split(/\s+/).filter(w => w.length > 0);
+        const sentences = prompt.split(/[.!?]+/).filter(s => s.trim().length > 0);
+
+        // Clarity score (based on sentence structure and word length)
+        const avgWordLength = words.reduce((sum, w) => sum + w.length, 0) / words.length;
+        const clarityBase = avgWordLength < 8 ? 70 : 50;
+        const clarity = Math.min(100, clarityBase + (sentences.length > 1 ? 20 : 0) + (words.length > 10 ? 10 : 0));
+
+        // Specificity score (based on detail indicators)
+        const specificWords = ['specific', 'exactly', 'precisely', 'include', 'must', 'should', 'format', 'example', 'such as', 'like'];
+        const specificCount = specificWords.filter(w => prompt.toLowerCase().includes(w)).length;
+        const specificity = Math.min(100, 40 + specificCount * 15 + (words.length > 20 ? 20 : 0));
+
+        // Structure score (based on organization indicators)
+        const structureWords = ['first', 'second', 'then', 'finally', 'step', '1.', '2.', '-', ':', 'context', 'task', 'output'];
+        const structureCount = structureWords.filter(w => prompt.toLowerCase().includes(w)).length;
+        const structure = Math.min(100, 30 + structureCount * 20);
+
+        // Context score (based on background information)
+        const contextWords = ['background', 'context', 'situation', 'currently', 'working on', 'project', 'goal', 'purpose', 'need'];
+        const contextCount = contextWords.filter(w => prompt.toLowerCase().includes(w)).length;
+        const context = Math.min(100, 25 + contextCount * 20 + (words.length > 30 ? 25 : 0));
+
+        // Overall score (weighted average)
+        const overall = Math.round((clarity * 0.3 + specificity * 0.3 + structure * 0.2 + context * 0.2));
+
+        return {
+            overall,
+            clarity: Math.round(clarity),
+            specificity: Math.round(specificity),
+            structure: Math.round(structure),
+            context: Math.round(context),
+            feedback: generateFeedback(clarity, specificity, structure, context)
+        };
+    }
+
+    function generateFeedback(clarity, specificity, structure, context) {
+        const feedback = [];
+
+        if (clarity < 60) feedback.push('Use shorter, clearer sentences for better understanding.');
+        if (specificity < 60) feedback.push('Add more specific details about what you want.');
+        if (structure < 60) feedback.push('Organize your prompt with clear sections or steps.');
+        if (context < 60) feedback.push('Provide more background context for better results.');
+
+        if (feedback.length === 0) {
+            feedback.push('Great prompt! Consider adding examples for even better results.');
+        }
+
+        return feedback;
+    }
+
+    function displayScores(scores) {
+        scoreDisplay.innerHTML = `
+            <div class="score-main">
+                <div class="score-circle ${getScoreClass(scores.overall)}">
+                    <span class="score-value">${scores.overall}</span>
+                    <span class="score-label">Overall</span>
+                </div>
+            </div>
+            <div class="sub-scores">
+                <div class="sub-score">
+                    <div class="sub-score-bar">
+                        <div class="sub-score-fill ${getScoreClass(scores.clarity)}" style="width: ${scores.clarity}%"></div>
+                    </div>
+                    <span class="sub-score-label">Clarity</span>
+                    <span class="sub-score-value">${scores.clarity}</span>
+                </div>
+                <div class="sub-score">
+                    <div class="sub-score-bar">
+                        <div class="sub-score-fill ${getScoreClass(scores.specificity)}" style="width: ${scores.specificity}%"></div>
+                    </div>
+                    <span class="sub-score-label">Specificity</span>
+                    <span class="sub-score-value">${scores.specificity}</span>
+                </div>
+                <div class="sub-score">
+                    <div class="sub-score-bar">
+                        <div class="sub-score-fill ${getScoreClass(scores.structure)}" style="width: ${scores.structure}%"></div>
+                    </div>
+                    <span class="sub-score-label">Structure</span>
+                    <span class="sub-score-value">${scores.structure}</span>
+                </div>
+                <div class="sub-score">
+                    <div class="sub-score-bar">
+                        <div class="sub-score-fill ${getScoreClass(scores.context)}" style="width: ${scores.context}%"></div>
+                    </div>
+                    <span class="sub-score-label">Context</span>
+                    <span class="sub-score-value">${scores.context}</span>
+                </div>
+            </div>
+            <div class="feedback-section">
+                <h4>Suggestions</h4>
+                <ul class="feedback-list">
+                    ${scores.feedback.map(f => `<li>${f}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+        scoreDisplay.classList.add('visible');
+    }
+
+    function getScoreClass(score) {
+        if (score >= 80) return 'score-excellent';
+        if (score >= 60) return 'score-good';
+        if (score >= 40) return 'score-fair';
+        return 'score-poor';
+    }
+
+    // ==========================================
+    // TOOL PAGE: PREFLIGHT CHECKLIST
+    // ==========================================
+    const checklistForm = document.getElementById('checklist-form');
+
+    if (checklistForm) {
+        const checkboxes = checklistForm.querySelectorAll('input[type="checkbox"]');
+        const progressBar = document.querySelector('.checklist-progress-fill');
+        const progressText = document.querySelector('.checklist-progress-text');
+
+        function updateProgress() {
+            const total = checkboxes.length;
+            const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const percent = Math.round((checked / total) * 100);
+
+            if (progressBar) progressBar.style.width = percent + '%';
+            if (progressText) progressText.textContent = `${checked}/${total} Complete`;
+        }
+
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', updateProgress);
         });
 
-        // Close mobile menu when clicking a link
-        const headerLinks = headerNav.querySelectorAll('.header-nav-link');
-        headerLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenuToggle.classList.remove('active');
-                headerNav.classList.remove('mobile-active');
+        updateProgress();
+    }
+
+    // ==========================================
+    // TOOL PAGE: HALLUCINATION SPOTTER
+    // ==========================================
+    const hallucinationGame = document.getElementById('hallucination-game');
+
+    if (hallucinationGame) {
+        const statements = [
+            { text: "The Great Wall of China is visible from space with the naked eye.", isTrue: false, explanation: "This is a common misconception. The Great Wall is not visible from space without aid." },
+            { text: "Honey never spoils and edible honey has been found in ancient Egyptian tombs.", isTrue: true, explanation: "True! Honey's low moisture content and acidic pH make it resistant to bacteria." },
+            { text: "Goldfish have a memory span of only 3 seconds.", isTrue: false, explanation: "False! Studies show goldfish can remember things for months." },
+            { text: "Lightning never strikes the same place twice.", isTrue: false, explanation: "False! Tall buildings like the Empire State Building get struck multiple times per year." },
+            { text: "The Eiffel Tower can grow up to 6 inches taller in summer due to thermal expansion.", isTrue: true, explanation: "True! Metal expands in heat, making the tower grow slightly in warm weather." },
+            { text: "Humans only use 10% of their brains.", isTrue: false, explanation: "False! Brain imaging shows we use virtually all parts of our brain." },
+            { text: "Octopuses have three hearts.", isTrue: true, explanation: "True! Two pump blood to the gills, one pumps it to the rest of the body." },
+            { text: "The Amazon River is the longest river in the world.", isTrue: false, explanation: "False! The Nile River is generally considered the longest, though this is debated." }
+        ];
+
+        let currentIndex = 0;
+        let score = 0;
+        let shuffledStatements = [...statements].sort(() => Math.random() - 0.5);
+
+        const statementText = hallucinationGame.querySelector('.statement-text');
+        const trueBtn = hallucinationGame.querySelector('.btn-true');
+        const falseBtn = hallucinationGame.querySelector('.btn-false');
+        const resultDisplay = hallucinationGame.querySelector('.result-display');
+        const scoreDisplay = hallucinationGame.querySelector('.game-score');
+        const progressDisplay = hallucinationGame.querySelector('.game-progress');
+
+        function showStatement() {
+            if (currentIndex >= shuffledStatements.length) {
+                showFinalScore();
+                return;
+            }
+
+            const current = shuffledStatements[currentIndex];
+            statementText.textContent = current.text;
+            resultDisplay.classList.remove('visible', 'correct', 'incorrect');
+            trueBtn.disabled = false;
+            falseBtn.disabled = false;
+            progressDisplay.textContent = `${currentIndex + 1}/${shuffledStatements.length}`;
+        }
+
+        function checkAnswer(userAnswer) {
+            const current = shuffledStatements[currentIndex];
+            const isCorrect = userAnswer === current.isTrue;
+
+            if (isCorrect) {
+                score++;
+                resultDisplay.classList.add('correct');
+                resultDisplay.innerHTML = `<strong>Correct!</strong> ${current.explanation}`;
+            } else {
+                resultDisplay.classList.add('incorrect');
+                resultDisplay.innerHTML = `<strong>Incorrect.</strong> ${current.explanation}`;
+            }
+
+            resultDisplay.classList.add('visible');
+            trueBtn.disabled = true;
+            falseBtn.disabled = true;
+            scoreDisplay.textContent = `Score: ${score}`;
+
+            setTimeout(() => {
+                currentIndex++;
+                showStatement();
+            }, 3000);
+        }
+
+        function showFinalScore() {
+            const percent = Math.round((score / shuffledStatements.length) * 100);
+            statementText.innerHTML = `
+                <div class="final-score">
+                    <h3>Game Complete!</h3>
+                    <p class="score-big">${score}/${shuffledStatements.length}</p>
+                    <p>${percent}% accuracy</p>
+                    <button class="btn btn-primary" onclick="location.reload()">Play Again</button>
+                </div>
+            `;
+            trueBtn.style.display = 'none';
+            falseBtn.style.display = 'none';
+        }
+
+        if (trueBtn && falseBtn) {
+            trueBtn.addEventListener('click', () => checkAnswer(true));
+            falseBtn.addEventListener('click', () => checkAnswer(false));
+            showStatement();
+        }
+    }
+
+    // ==========================================
+    // QUIZ: OPERATIONAL READINESS
+    // ==========================================
+    const quizContainer = document.getElementById('readiness-quiz');
+
+    if (quizContainer) {
+        const questions = [
+            {
+                question: "Before using AI for a task, you should first:",
+                options: [
+                    "Just start typing and see what happens",
+                    "Think about what you want to achieve and what information the AI needs",
+                    "Copy a prompt from the internet",
+                    "Ask the AI what to ask it"
+                ],
+                correct: 1
+            },
+            {
+                question: "When reviewing AI-generated content, you should:",
+                options: [
+                    "Trust it completely since AI doesn't make mistakes",
+                    "Only check for spelling errors",
+                    "Verify facts, check for consistency, and evaluate if it meets your needs",
+                    "Publish it immediately to save time"
+                ],
+                correct: 2
+            },
+            {
+                question: "If an AI gives you incorrect information, the best response is to:",
+                options: [
+                    "Assume your prompt was perfect and the AI is broken",
+                    "Rephrase your prompt with more context and specific requirements",
+                    "Give up on using AI",
+                    "Accept the incorrect information anyway"
+                ],
+                correct: 1
+            },
+            {
+                question: "The CRISP framework stands for:",
+                options: [
+                    "Context, Request, Instructions, Style, Parameters",
+                    "Clear, Refined, Intelligent, Smart, Perfect",
+                    "Create, Review, Iterate, Submit, Publish",
+                    "Complex, Random, Interesting, Simple, Plain"
+                ],
+                correct: 0
+            },
+            {
+                question: "When should you include examples in your prompt?",
+                options: [
+                    "Never - AI should figure it out",
+                    "Only when writing code",
+                    "When you want the AI to follow a specific format or style",
+                    "Only for creative writing tasks"
+                ],
+                correct: 2
+            }
+        ];
+
+        let currentQuestion = 0;
+        let quizScore = 0;
+
+        function renderQuestion() {
+            if (currentQuestion >= questions.length) {
+                showQuizResults();
+                return;
+            }
+
+            const q = questions[currentQuestion];
+            quizContainer.innerHTML = `
+                <div class="quiz-progress">
+                    <div class="quiz-progress-fill" style="width: ${(currentQuestion / questions.length) * 100}%"></div>
+                </div>
+                <div class="quiz-question">
+                    <span class="question-number">Question ${currentQuestion + 1} of ${questions.length}</span>
+                    <h3>${q.question}</h3>
+                </div>
+                <div class="quiz-options">
+                    ${q.options.map((opt, i) => `
+                        <button class="quiz-option" data-index="${i}">${opt}</button>
+                    `).join('')}
+                </div>
+            `;
+
+            quizContainer.querySelectorAll('.quiz-option').forEach(btn => {
+                btn.addEventListener('click', () => selectAnswer(parseInt(btn.dataset.index)));
+            });
+        }
+
+        function selectAnswer(index) {
+            const q = questions[currentQuestion];
+            const buttons = quizContainer.querySelectorAll('.quiz-option');
+
+            buttons.forEach((btn, i) => {
+                btn.disabled = true;
+                if (i === q.correct) {
+                    btn.classList.add('correct');
+                } else if (i === index && i !== q.correct) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            if (index === q.correct) {
+                quizScore++;
+            }
+
+            setTimeout(() => {
+                currentQuestion++;
+                renderQuestion();
+            }, 1500);
+        }
+
+        function showQuizResults() {
+            const percent = Math.round((quizScore / questions.length) * 100);
+            let level, message;
+
+            if (percent >= 80) {
+                level = 'Expert';
+                message = 'Excellent! You have a strong understanding of AI prompting best practices.';
+            } else if (percent >= 60) {
+                level = 'Intermediate';
+                message = 'Good foundation! Review our methodology guides to strengthen your skills.';
+            } else {
+                level = 'Beginner';
+                message = 'Great start! Check out our Learn section to build your prompting skills.';
+            }
+
+            quizContainer.innerHTML = `
+                <div class="quiz-results">
+                    <div class="result-score">${quizScore}/${questions.length}</div>
+                    <div class="result-percent">${percent}%</div>
+                    <div class="result-level">${level} Level</div>
+                    <p class="result-message">${message}</p>
+                    <div class="result-actions">
+                        <button class="btn btn-primary" onclick="location.reload()">Retake Quiz</button>
+                        <a href="../learn/index.html" class="btn btn-secondary">Start Learning</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        renderQuestion();
+    }
+
+    // ==========================================
+    // PATTERN LIBRARY FILTERING
+    // ==========================================
+    const patternFilter = document.querySelector('.pattern-filter');
+    const patternCards = document.querySelectorAll('.pattern-card');
+
+    if (patternFilter && patternCards.length > 0) {
+        const filterButtons = patternFilter.querySelectorAll('.filter-btn');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const category = btn.dataset.filter;
+
+                // Update active button
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Filter cards
+                patternCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = '';
+                        card.classList.add('visible');
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
             });
         });
     }
+
+    // ==========================================
+    // COPY TO CLIPBOARD
+    // ==========================================
+    document.querySelectorAll('.btn-copy').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = btn.dataset.target;
+            const text = document.querySelector(target)?.textContent;
+
+            if (text) {
+                navigator.clipboard.writeText(text)
+                    .then(() => showToast('Copied to clipboard!', 'success'))
+                    .catch(() => showToast('Failed to copy', 'error'));
+            }
+        });
+    });
+
+    // ==========================================
+    // ACCORDION
+    // ==========================================
+    document.querySelectorAll('.accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const item = header.parentElement;
+            const isActive = item.classList.contains('active');
+
+            // Close all other accordions in the same container
+            const container = item.parentElement;
+            container.querySelectorAll('.accordion-item').forEach(acc => {
+                acc.classList.remove('active');
+            });
+
+            // Toggle current
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+
+    // ==========================================
+    // TABS
+    // ==========================================
+    document.querySelectorAll('.tabs').forEach(tabContainer => {
+        const tabButtons = tabContainer.querySelectorAll('.tab-btn');
+        const tabPanels = tabContainer.querySelectorAll('.tab-panel');
+
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetId = btn.dataset.tab;
+
+                // Update buttons
+                tabButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Update panels
+                tabPanels.forEach(panel => {
+                    panel.classList.toggle('active', panel.id === targetId);
+                });
+            });
+        });
+    });
+
+    // ==========================================
+    // KEYBOARD SHORTCUTS
+    // ==========================================
+    document.addEventListener('keydown', (e) => {
+        // Ctrl/Cmd + K for search (if search exists)
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            // Future: open search modal
+        }
+    });
+
+    console.log('Praxis initialized');
 });
