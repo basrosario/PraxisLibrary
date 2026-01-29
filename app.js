@@ -359,9 +359,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     startNode: reverse ? conn.j : conn.i,
                     endNode: reverse ? conn.i : conn.j,
                     progress: 0,
-                    speed: 0.008 + Math.random() * 0.012, // Vary speed
-                    size: 3 + Math.random() * 2,
-                    trailLength: 0.15 + Math.random() * 0.1
+                    speed: 0.015, // Uniform speed - streamlined
+                    size: 1.5, // Skinnier pulse
+                    trailLength: 0.12 // Shorter trail
                 });
 
                 this.lastPulseSpawn = time;
@@ -401,9 +401,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                 startNode: endNode,
                                 endNode: nextNode,
                                 progress: 0,
-                                speed: pulse.speed,
-                                size: pulse.size * 0.9,
-                                trailLength: pulse.trailLength
+                                speed: 0.015, // Same uniform speed
+                                size: 1.5, // Same size
+                                trailLength: 0.12
                             });
                         }
                     }
@@ -422,39 +422,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 const x = startNode.x + (endNode.x - startNode.x) * pulse.progress;
                 const y = startNode.y + (endNode.y - startNode.y) * pulse.progress;
 
-                // Trail effect - draw fading trail behind the pulse
-                const trailSteps = 5;
+                // Streamlined trail - thin line effect
+                const trailSteps = 4;
                 for (let t = trailSteps; t >= 0; t--) {
                     const trailProgress = pulse.progress - (pulse.trailLength * t / trailSteps);
                     if (trailProgress < 0) continue;
 
                     const tx = startNode.x + (endNode.x - startNode.x) * trailProgress;
                     const ty = startNode.y + (endNode.y - startNode.y) * trailProgress;
-                    const trailAlpha = (1 - t / trailSteps) * 0.3;
-                    const trailSize = pulse.size * (1 - t / trailSteps * 0.5);
+                    const trailAlpha = (1 - t / trailSteps) * 0.5;
 
                     this.ctx.beginPath();
-                    this.ctx.arc(tx, ty, trailSize, 0, Math.PI * 2);
+                    this.ctx.arc(tx, ty, pulse.size * 0.8, 0, Math.PI * 2);
                     this.ctx.fillStyle = `rgba(255, 255, 255, ${trailAlpha})`;
                     this.ctx.fill();
                 }
 
-                // Main pulse - bright white core
+                // Main pulse - small bright core
                 this.ctx.beginPath();
                 this.ctx.arc(x, y, pulse.size, 0, Math.PI * 2);
-                this.ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                this.ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
                 this.ctx.fill();
 
-                // Outer glow
+                // Subtle glow
                 this.ctx.beginPath();
-                this.ctx.arc(x, y, pulse.size * 2.5, 0, Math.PI * 2);
-                this.ctx.fillStyle = 'rgba(230, 57, 70, 0.4)';
-                this.ctx.fill();
-
-                // Bright glow halo
-                this.ctx.beginPath();
-                this.ctx.arc(x, y, pulse.size * 4, 0, Math.PI * 2);
-                this.ctx.fillStyle = 'rgba(230, 57, 70, 0.15)';
+                this.ctx.arc(x, y, pulse.size * 2, 0, Math.PI * 2);
+                this.ctx.fillStyle = 'rgba(230, 57, 70, 0.25)';
                 this.ctx.fill();
             });
         }
