@@ -174,13 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 x, y,
                 baseX: x,
                 baseY: y,
-                size: Math.random() * 3 + 1,
-                baseSize: Math.random() * 3 + 1,
-                vx: (Math.random() - 0.5) * 0.3,
-                vy: (Math.random() - 0.5) * 0.3,
-                brightness: Math.random() * 0.5 + 0.3,
-                pulseSpeed: Math.random() * 0.02 + 0.01,
-                pulseOffset: Math.random() * Math.PI * 2
+                size: Math.random() * 1.5 + 0.5, // Smaller, subtle points
+                vx: (Math.random() - 0.5) * 0.2,
+                vy: (Math.random() - 0.5) * 0.2,
+                brightness: Math.random() * 0.3 + 0.2 // Subtle, consistent brightness
             };
         }
 
@@ -196,30 +193,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 text: AI_TERMS[Math.floor(Math.random() * AI_TERMS.length)],
                 x: Math.random() * this.width,
                 y: Math.random() * this.height,
-                vx: (Math.random() - 0.5) * 0.3,
-                vy: (Math.random() - 0.5) * 0.3,
-                fontSize: Math.random() * 10 + 10,
-                baseFontSize: 0, // Set after fontSize
+                vx: (Math.random() - 0.5) * 0.2,
+                vy: (Math.random() - 0.5) * 0.2,
+                fontSize: Math.random() * 8 + 10, // Slightly smaller text
                 brightness: 0,
-                targetBrightness: Math.random() * 0.5 + 0.25,
-                fadeSpeed: Math.random() * 0.008 + 0.004,
+                targetBrightness: Math.random() * 0.35 + 0.15, // More subtle
+                fadeSpeed: Math.random() * 0.006 + 0.003, // Slower, smoother fade
                 phase: 'fadeIn',
-                lifetime: Math.random() * 6000 + 4000,
-                born: performance.now() - Math.random() * 5000,
-                // Dissolve effect properties
-                dissolveProgress: 0,
-                blur: 0,
-                scale: 1,
-                driftSpeed: 0
+                lifetime: Math.random() * 8000 + 5000, // Longer visible time
+                born: performance.now() - Math.random() * 5000
             };
         }
 
         updateNode(node, time) {
-            // Pulse effect
-            node.brightness = 0.3 + Math.sin(time * node.pulseSpeed + node.pulseOffset) * 0.2;
-            node.size = node.baseSize + Math.sin(time * node.pulseSpeed * 0.5 + node.pulseOffset) * 0.5;
-
-            // Mouse repulsion
+            // Mouse repulsion (subtle)
             if (this.mouse.x !== null && this.mouse.y !== null) {
                 const dx = this.mouse.x - node.x;
                 const dy = this.mouse.y - node.y;
@@ -228,8 +215,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (distance < this.mouse.radius) {
                     const force = (this.mouse.radius - distance) / this.mouse.radius;
                     const angle = Math.atan2(dy, dx);
-                    node.x -= Math.cos(angle) * force * 3;
-                    node.y -= Math.sin(angle) * force * 3;
+                    node.x -= Math.cos(angle) * force * 2;
+                    node.y -= Math.sin(angle) * force * 2;
                 }
             }
 
@@ -237,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
             node.x += (node.baseX - node.x) * 0.03;
             node.y += (node.baseY - node.y) * 0.03;
 
-            // Drift
+            // Slow drift
             node.baseX += node.vx;
             node.baseY += node.vy;
 
@@ -247,17 +234,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         drawNode(node) {
+            // Simple, small point - no glow or pulsing
             this.ctx.beginPath();
             this.ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
             this.ctx.fillStyle = `rgba(230, 57, 70, ${node.brightness})`;
             this.ctx.fill();
-
-            if (node.baseSize > 2.5) {
-                this.ctx.beginPath();
-                this.ctx.arc(node.x, node.y, node.size * 2, 0, Math.PI * 2);
-                this.ctx.fillStyle = `rgba(230, 57, 70, ${node.brightness * 0.15})`;
-                this.ctx.fill();
-            }
         }
 
         updateTerm(term, time) {
@@ -285,37 +266,22 @@ document.addEventListener('DOMContentLoaded', () => {
             if (term.y < -50) term.y = this.height + 50;
             if (term.y > this.height + 50) term.y = -50;
 
-            // Lifecycle with smooth dissolve
+            // Lifecycle with smooth fade
             const age = performance.now() - term.born;
             if (term.phase === 'fadeIn') {
-                // Smooth fade in
+                // Gentle fade in
                 term.brightness += term.fadeSpeed;
-                term.scale = 0.8 + (term.brightness / term.targetBrightness) * 0.2;
                 if (term.brightness >= term.targetBrightness) {
                     term.brightness = term.targetBrightness;
-                    term.scale = 1;
                     term.phase = 'visible';
                 }
             } else if (term.phase === 'visible' && age > term.lifetime) {
                 term.phase = 'fadeOut';
-                term.dissolveProgress = 0;
-                term.driftSpeed = 0.3 + Math.random() * 0.4; // Upward drift like steam
             } else if (term.phase === 'fadeOut') {
-                // Smooth dissolve like steam/smoke
-                term.dissolveProgress += 0.012;
-                term.brightness = term.targetBrightness * (1 - term.dissolveProgress);
+                // Smooth fade out - just opacity, no movement changes
+                term.brightness -= term.fadeSpeed * 0.8;
 
-                // Rise upward like steam
-                term.y -= term.driftSpeed;
-
-                // Expand and blur as it dissolves
-                term.scale = 1 + term.dissolveProgress * 0.5;
-                term.blur = term.dissolveProgress * 15;
-
-                // Slow down horizontal movement
-                term.vx *= 0.98;
-
-                if (term.dissolveProgress >= 1) {
+                if (term.brightness <= 0) {
                     Object.assign(term, this.createTerm());
                 }
             }
@@ -325,21 +291,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (term.brightness <= 0) return;
 
             this.ctx.save();
-
-            // Apply scale for dissolve effect
-            const scaledSize = term.fontSize * (term.scale || 1);
-            this.ctx.font = `${scaledSize}px monospace`;
-
-            // Smooth opacity
+            this.ctx.font = `${term.fontSize}px monospace`;
             this.ctx.fillStyle = `rgba(230, 57, 70, ${term.brightness})`;
             this.ctx.textAlign = 'center';
             this.ctx.textBaseline = 'middle';
 
-            // Glow increases as it dissolves (like glowing embers)
-            const baseBlur = 8 + term.brightness * 15;
-            const dissolveBlur = term.blur || 0;
-            this.ctx.shadowColor = `rgba(230, 57, 70, ${term.brightness * 0.8})`;
-            this.ctx.shadowBlur = baseBlur + dissolveBlur;
+            // Subtle glow
+            this.ctx.shadowColor = `rgba(230, 57, 70, ${term.brightness * 0.6})`;
+            this.ctx.shadowBlur = 8;
 
             this.ctx.fillText(term.text, term.x, term.y);
             this.ctx.restore();
@@ -582,12 +541,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize all neural network canvases
     const neuralNetworks = [];
 
-    // Main hero canvas (with AI terms)
+    // Main hero canvas with subtle floating terms that fade smoothly
     const mainCanvas = document.getElementById('neural-network');
     if (mainCanvas) {
         neuralNetworks.push(new NeuralNetwork(mainCanvas, {
             showTerms: true,
-            termCount: window.innerWidth < 768 ? 18 : 35
+            termCount: window.innerWidth < 768 ? 6 : 12 // Fewer terms for cleaner look
         }));
     }
 
