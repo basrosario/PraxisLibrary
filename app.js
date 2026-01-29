@@ -95,22 +95,32 @@ document.addEventListener('DOMContentLoaded', () => {
             this.connectionStates = new Map();
             this.lastConnectionUpdate = 0;
 
-            // Options for different canvas types
+            // Mobile detection
+            this.isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+
+            // Options for different canvas types - reduced for mobile
             this.showTerms = options.showTerms !== false;
-            this.nodeDensity = options.nodeDensity || 0.00015;
-            this.maxNodes = options.maxNodes || 300;
-            this.minNodes = options.minNodes || 40;
-            this.termCount = options.termCount || (window.innerWidth < 768 ? 12 : 25);
+            this.nodeDensity = this.isMobile ? 0.00008 : (options.nodeDensity || 0.00015);
+            this.maxNodes = this.isMobile ? 60 : (options.maxNodes || 300);
+            this.minNodes = this.isMobile ? 20 : (options.minNodes || 40);
+            this.termCount = this.isMobile ? 4 : (options.termCount || 12);
+            this.maxConnectionDistance = this.isMobile ? 100 : 150;
 
             // Data pulses traveling along connections (foreground - bright)
             this.dataPulses = [];
             this.lastPulseSpawn = 0;
-            this.pulseSpawnInterval = 800; // Spawn new pulse every 800ms
+            this.pulseSpawnInterval = this.isMobile ? 1500 : 800; // Slower on mobile
+            this.maxPulses = this.isMobile ? 5 : 15;
 
-            // Background pulses - dimmer, more frequent for 3D depth
+            // Background pulses - dimmer, more frequent for 3D depth (disabled on mobile)
             this.bgPulses = [];
             this.lastBgPulseSpawn = 0;
-            this.bgPulseSpawnInterval = 300; // More frequent background activity
+            this.bgPulseSpawnInterval = 300;
+            this.enableBgPulses = !this.isMobile; // Disable on mobile for performance
+
+            // Frame throttling for mobile
+            this.lastFrameTime = 0;
+            this.targetFrameInterval = this.isMobile ? 33 : 16; // ~30fps on mobile, 60fps on desktop
 
             this.init();
         }
@@ -302,9 +312,11 @@ document.addEventListener('DOMContentLoaded', () => {
             this.ctx.textAlign = 'center';
             this.ctx.textBaseline = 'middle';
 
-            // Subtle glow
-            this.ctx.shadowColor = `rgba(230, 57, 70, ${term.brightness * 0.6})`;
-            this.ctx.shadowBlur = 8;
+            // Subtle glow - skip on mobile (shadowBlur is expensive)
+            if (!this.isMobile) {
+                this.ctx.shadowColor = `rgba(230, 57, 70, ${term.brightness * 0.6})`;
+                this.ctx.shadowBlur = 8;
+            }
 
             this.ctx.fillText(term.text, term.x, term.y);
             this.ctx.restore();
@@ -334,11 +346,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Data pulse methods - information traveling along connections
         spawnDataPulse(time) {
             if (time - this.lastPulseSpawn < this.pulseSpawnInterval) return;
-            if (this.dataPulses.length > 15) return; // Limit active pulses
+            if (this.dataPulses.length >= this.maxPulses) return; // Limit active pulses
 
             // Find active connections to spawn pulses on
             const activeConnections = [];
-            const maxDistance = 150;
+            const maxDistance = this.maxConnectionDistance;
 
             for (let i = 0; i < this.nodes.length; i++) {
                 for (let j = i + 1; j < this.nodes.length; j++) {
@@ -380,10 +392,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // When pulse reaches end, chance to chain to next connection
                 if (pulse.progress >= 1) {
-                    if (Math.random() < 0.4) {
+                    // Lower chain probability on mobile
+                    const chainChance = this.isMobile ? 0.2 : 0.4;
+                    if (Math.random() < chainChance) {
                         // Find connected nodes to continue the chain
                         const endNode = pulse.endNode;
-                        const maxDistance = 150;
+                        const maxDistance = this.maxConnectionDistance;
                         const nextNodes = [];
 
                         for (let i = 0; i < this.nodes.length; i++) {
@@ -428,8 +442,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const x = startNode.x + (endNode.x - startNode.x) * pulse.progress;
                 const y = startNode.y + (endNode.y - startNode.y) * pulse.progress;
 
-                // Streamlined trail - thin line effect
-                const trailSteps = 4;
+                // Streamlined trail - reduced on mobile
+                const trailSteps = this.isMobile ? 2 : 4;
                 for (let t = trailSteps; t >= 0; t--) {
                     const trailProgress = pulse.progress - (pulse.trailLength * t / trailSteps);
                     if (trailProgress < 0) continue;
@@ -450,21 +464,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
                 this.ctx.fill();
 
-                // Subtle glow
-                this.ctx.beginPath();
-                this.ctx.arc(x, y, pulse.size * 2, 0, Math.PI * 2);
-                this.ctx.fillStyle = 'rgba(230, 57, 70, 0.25)';
-                this.ctx.fill();
+                // Subtle glow - skip on mobile
+                if (!this.isMobile) {
+                    this.ctx.beginPath();
+                    this.ctx.arc(x, y, pulse.size * 2, 0, Math.PI * 2);
+                    this.ctx.fillStyle = 'rgba(230, 57, 70, 0.25)';
+                    this.ctx.fill();
+                }
             });
         }
 
         // Background pulses - dimmer layer for 3D depth effect
         spawnBgPulse(time) {
+            if (!this.enableBgPulses) return; // Skip on mobile
             if (time - this.lastBgPulseSpawn < this.bgPulseSpawnInterval) return;
             if (this.bgPulses.length > 30) return; // More background activity
 
             const activeConnections = [];
-            const maxDistance = 150;
+            const maxDistance = this.maxConnectionDistance;
 
             for (let i = 0; i < this.nodes.length; i++) {
                 for (let j = i + 1; j < this.nodes.length; j++) {
@@ -508,7 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (pulse.progress >= 1) {
                     if (Math.random() < 0.25) {
                         const endNode = pulse.endNode;
-                        const maxDistance = 150;
+                        const maxDistance = this.maxConnectionDistance;
                         const nextNodes = [];
 
                         for (let i = 0; i < this.nodes.length; i++) {
@@ -578,7 +595,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         drawConnections(time) {
-            const maxDistance = 150;
+            const maxDistance = this.maxConnectionDistance;
             this.updateConnectionStates(time);
 
             for (let i = 0; i < this.nodes.length; i++) {
@@ -626,12 +643,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         animate(time) {
+            // Frame throttling for mobile performance
+            const elapsed = time - this.lastFrameTime;
+            if (elapsed < this.targetFrameInterval) {
+                this.animationId = requestAnimationFrame((t) => this.animate(t));
+                return;
+            }
+            this.lastFrameTime = time;
+
             this.ctx.clearRect(0, 0, this.width, this.height);
 
-            // Layer 1: Background pulses (deepest - dim, behind everything)
-            this.spawnBgPulse(time);
-            this.updateBgPulses();
-            this.drawBgPulses();
+            // Layer 1: Background pulses (deepest - dim, behind everything) - skip on mobile
+            if (this.enableBgPulses) {
+                this.spawnBgPulse(time);
+                this.updateBgPulses();
+                this.drawBgPulses();
+            }
 
             // Layer 2: Connection lines
             this.drawConnections(time);
@@ -677,14 +704,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Secondary canvases (CTA cards, footer - lighter version without terms)
-    document.querySelectorAll('.neural-canvas-secondary').forEach(canvas => {
-        neuralNetworks.push(new NeuralNetwork(canvas, {
-            showTerms: false,
-            nodeDensity: 0.0002,
-            maxNodes: 100,
-            minNodes: 30
-        }));
-    });
+    // Skip on mobile for better performance
+    const isMobileDevice = window.innerWidth < 768 || 'ontouchstart' in window;
+    if (!isMobileDevice) {
+        document.querySelectorAll('.neural-canvas-secondary').forEach(canvas => {
+            neuralNetworks.push(new NeuralNetwork(canvas, {
+                showTerms: false,
+                nodeDensity: 0.0001,
+                maxNodes: 60,
+                minNodes: 20
+            }));
+        });
+    }
 
     // Cleanup on page unload
     window.addEventListener('beforeunload', () => {
