@@ -67,18 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // INTERACTIVE NEURAL NETWORK ANIMATION
     // ==========================================
 
-    // AI terms that float through the network
+    // AI assistant names that float through the network
     const AI_TERMS = [
-        'CRISP', 'COSTAR', 'ReAct', 'CRISPE', 'Chain-of-Thought', 'Few-Shot',
-        'Zero-Shot', 'Role Play', 'System Prompt', 'Meta Prompt',
-        'Prompt', 'Context', 'Token', 'Completion', 'Temperature', 'Top-P',
-        'Hallucination', 'Grounding', 'Retrieval', 'RAG', 'Fine-tune',
-        'LLM', 'GPT', 'Claude', 'Gemini', 'Neural', 'Transformer',
-        'Attention', 'BERT', 'Diffusion', 'Multimodal', 'Vision',
-        'Embedding', 'Vector', 'Semantic', 'Inference', 'Latent',
-        'Generate', 'Train', 'Evaluate', 'Iterate', 'Optimize',
-        'Agent', 'Memory', 'Chain', 'Tool Use', 'Function Call',
-        'Alignment', 'Safety', 'Bias', 'Fairness', 'RLHF'
+        'ChatGPT', 'CLAUDE CODE', 'GEMINI', 'CURSOR.AI', 'COPILOT', 'PERPLEXITY'
     ];
 
     // Neural Network class - 3D mesh style with glowing nodes
@@ -104,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.nodeDensity = this.isMobile ? 0.00012 : (options.nodeDensity || 0.00025);
             this.maxNodes = this.isMobile ? 80 : (options.maxNodes || 200);
             this.minNodes = this.isMobile ? 40 : (options.minNodes || 80);
-            this.termCount = this.isMobile ? 8 : (options.termCount || 18);
+            this.termCount = this.isMobile ? 4 : (options.termCount || 6);
             this.maxConnectionDistance = this.isMobile ? 120 : 180;
 
             // Data pulses traveling along connections
@@ -290,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!this.isMobile || node.z > 0.5) {
                 const glowSize = node.size * (3 + node.z * 2);
 
-                // Outer glow layer (most diffuse)
+                // Outer glow layer (most diffuse) - deep red
                 this.ctx.beginPath();
                 this.ctx.arc(node.x, node.y, glowSize, 0, Math.PI * 2);
                 if (node.z > 0.6) {
@@ -300,34 +291,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 this.ctx.fill();
 
-                // Middle glow layer
+                // Middle glow layer - pure red
                 this.ctx.beginPath();
                 this.ctx.arc(node.x, node.y, glowSize * 0.5, 0, Math.PI * 2);
                 if (node.z > 0.6) {
-                    this.ctx.fillStyle = `rgba(255, 120, 60, ${intensity * 0.2})`;
+                    this.ctx.fillStyle = `rgba(255, 70, 70, ${intensity * 0.2})`;
                 } else if (node.z > 0.3) {
-                    this.ctx.fillStyle = `rgba(230, 70, 60, ${intensity * 0.15})`;
+                    this.ctx.fillStyle = `rgba(230, 57, 70, ${intensity * 0.15})`;
                 } else {
                     this.ctx.fillStyle = `rgba(180, 50, 50, ${intensity * 0.1})`;
                 }
                 this.ctx.fill();
 
-                // Inner glow layer (bright nodes only)
+                // Inner glow layer (bright nodes only) - bright red/pink
                 if (node.z > 0.5) {
                     this.ctx.beginPath();
                     this.ctx.arc(node.x, node.y, glowSize * 0.25, 0, Math.PI * 2);
-                    this.ctx.fillStyle = `rgba(255, 160, 80, ${intensity * 0.4})`;
+                    this.ctx.fillStyle = `rgba(255, 100, 100, ${intensity * 0.4})`;
                     this.ctx.fill();
                 }
             }
 
-            // Core of the node (bright center)
+            // Core of the node (bright center) - white/pink
             this.ctx.beginPath();
             this.ctx.arc(node.x, node.y, node.size * 0.5, 0, Math.PI * 2);
             if (node.z > 0.6) {
-                this.ctx.fillStyle = `rgba(255, 230, 200, ${intensity})`;
+                this.ctx.fillStyle = `rgba(255, 220, 220, ${intensity})`;
             } else {
-                this.ctx.fillStyle = `rgba(255, 150, 120, ${intensity * 0.8})`;
+                this.ctx.fillStyle = `rgba(255, 150, 150, ${intensity * 0.8})`;
             }
             this.ctx.fill();
         }
@@ -483,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const x = startNode.x + (endNode.x - startNode.x) * pulse.progress;
                 const y = startNode.y + (endNode.y - startNode.y) * pulse.progress;
 
-                // Trail
+                // Trail - red/pink
                 const trailSteps = this.isMobile ? 3 : 6;
                 for (let t = trailSteps; t >= 0; t--) {
                     const trailProg = pulse.progress - (0.15 * t / trailSteps);
@@ -495,22 +486,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     this.ctx.beginPath();
                     this.ctx.arc(tx, ty, pulse.size * 0.6, 0, Math.PI * 2);
-                    this.ctx.fillStyle = `rgba(255, 200, 150, ${trailAlpha})`;
+                    this.ctx.fillStyle = `rgba(255, 150, 150, ${trailAlpha})`;
                     this.ctx.fill();
                 }
 
-                // Glow
+                // Glow - red
                 if (!this.isMobile) {
                     this.ctx.beginPath();
                     this.ctx.arc(x, y, pulse.size * 2.5, 0, Math.PI * 2);
-                    this.ctx.fillStyle = `rgba(255, 150, 80, ${pulse.brightness * 0.3})`;
+                    this.ctx.fillStyle = `rgba(255, 80, 80, ${pulse.brightness * 0.3})`;
                     this.ctx.fill();
                 }
 
-                // Core
+                // Core - bright white/pink
                 this.ctx.beginPath();
                 this.ctx.arc(x, y, pulse.size, 0, Math.PI * 2);
-                this.ctx.fillStyle = `rgba(255, 255, 240, ${pulse.brightness})`;
+                this.ctx.fillStyle = `rgba(255, 240, 240, ${pulse.brightness})`;
                 this.ctx.fill();
             });
         }
@@ -564,7 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mainCanvas) {
         neuralNetworks.push(new NeuralNetwork(mainCanvas, {
             showTerms: true,
-            termCount: window.innerWidth < 768 ? 8 : 18
+            termCount: window.innerWidth < 768 ? 4 : 6
         }));
     }
 
