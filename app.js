@@ -67,9 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // INTERACTIVE NEURAL NETWORK ANIMATION
     // ==========================================
 
-    // AI assistant names that float through the network
-    const AI_TERMS = [
-        'ChatGPT', 'CLAUDE CODE', 'GEMINI', 'CURSOR.AI', 'COPILOT', 'PERPLEXITY'
+    // AI assistant names - permanently displayed in the network
+    const AI_NAMES = [
+        'ChatGPT',
+        'CLAUDE CODE',
+        'GEMINI',
+        'CURSOR.AI',
+        'COPILOT',
+        'PERPLEXITY'
     ];
 
     // Neural Network class - 3D mesh style with glowing nodes
@@ -95,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.nodeDensity = this.isMobile ? 0.00012 : (options.nodeDensity || 0.00025);
             this.maxNodes = this.isMobile ? 80 : (options.maxNodes || 200);
             this.minNodes = this.isMobile ? 40 : (options.minNodes || 80);
-            this.termCount = this.isMobile ? 4 : (options.termCount || 6);
+            // All 6 AI names are always shown
             this.maxConnectionDistance = this.isMobile ? 120 : 180;
 
             // Data pulses traveling along connections
@@ -225,27 +230,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
         initTerms() {
             this.aiTerms = [];
-            for (let i = 0; i < this.termCount; i++) {
-                this.aiTerms.push(this.createTerm());
-            }
-        }
+            // Create static labels for all AI names in a grid layout
+            const names = AI_NAMES;
+            const cols = this.isMobile ? 2 : 3;
+            const rows = Math.ceil(names.length / cols);
 
-        createTerm() {
-            return {
-                text: AI_TERMS[Math.floor(Math.random() * AI_TERMS.length)],
-                x: Math.random() * this.width,
-                y: Math.random() * this.height,
-                // Slow, gentle drift
-                vx: (Math.random() - 0.5) * 0.1,
-                vy: (Math.random() - 0.5) * 0.1,
-                fontSize: Math.random() * 6 + 10,
-                brightness: 0,
-                targetBrightness: Math.random() * 0.35 + 0.2,
-                fadeSpeed: Math.random() * 0.004 + 0.002,
-                phase: 'fadeIn',
-                lifetime: Math.random() * 12000 + 8000,
-                born: performance.now() - Math.random() * 5000
-            };
+            // Calculate spacing
+            const paddingX = this.width * 0.15;
+            const paddingY = this.height * 0.2;
+            const spacingX = (this.width - paddingX * 2) / (cols - 1 || 1);
+            const spacingY = (this.height - paddingY * 2) / (rows - 1 || 1);
+
+            names.forEach((name, i) => {
+                const col = i % cols;
+                const row = Math.floor(i / cols);
+                this.aiTerms.push({
+                    text: name,
+                    x: paddingX + col * spacingX,
+                    y: paddingY + row * spacingY,
+                    fontSize: this.isMobile ? 12 : 14,
+                    pulseOffset: i * 0.5 // Stagger the pulse animation
+                });
+            });
         }
 
         updateNode(node, time) {
@@ -323,49 +329,35 @@ document.addEventListener('DOMContentLoaded', () => {
             this.ctx.fill();
         }
 
-        updateTerm(term) {
-            // Slow drift - no mouse interaction
-            term.x += term.vx;
-            term.y += term.vy;
-
-            // Wrap around edges
-            if (term.x < -100) term.x = this.width + 100;
-            if (term.x > this.width + 100) term.x = -100;
-            if (term.y < -50) term.y = this.height + 50;
-            if (term.y > this.height + 50) term.y = -50;
-
-            const age = performance.now() - term.born;
-            if (term.phase === 'fadeIn') {
-                term.brightness += term.fadeSpeed;
-                if (term.brightness >= term.targetBrightness) {
-                    term.brightness = term.targetBrightness;
-                    term.phase = 'visible';
-                }
-            } else if (term.phase === 'visible' && age > term.lifetime) {
-                term.phase = 'fadeOut';
-            } else if (term.phase === 'fadeOut') {
-                term.brightness -= term.fadeSpeed * 0.8;
-                if (term.brightness <= 0) {
-                    Object.assign(term, this.createTerm());
-                }
-            }
+        updateTerm(term, time) {
+            // Static labels - no movement, just subtle pulse animation
         }
 
-        drawTerm(term) {
-            if (term.brightness <= 0) return;
+        drawTerm(term, time) {
+            // Subtle pulse effect for visual interest
+            const pulse = Math.sin(time * 0.002 + term.pulseOffset) * 0.1 + 0.9;
+            const brightness = 0.6 * pulse;
 
             this.ctx.save();
-            this.ctx.font = `${term.fontSize}px monospace`;
-            this.ctx.fillStyle = `rgba(230, 57, 70, ${term.brightness})`;
+            this.ctx.font = `bold ${term.fontSize}px monospace`;
             this.ctx.textAlign = 'center';
             this.ctx.textBaseline = 'middle';
 
+            // Draw glow/background for readability
             if (!this.isMobile) {
-                this.ctx.shadowColor = `rgba(230, 57, 70, ${term.brightness * 0.5})`;
-                this.ctx.shadowBlur = 6;
+                this.ctx.shadowColor = `rgba(230, 57, 70, ${brightness * 0.8})`;
+                this.ctx.shadowBlur = 12;
             }
 
+            // Main text - bright red
+            this.ctx.fillStyle = `rgba(230, 57, 70, ${brightness})`;
             this.ctx.fillText(term.text, term.x, term.y);
+
+            // Second pass for brighter center (no shadow)
+            this.ctx.shadowBlur = 0;
+            this.ctx.fillStyle = `rgba(255, 100, 100, ${brightness * 0.5})`;
+            this.ctx.fillText(term.text, term.x, term.y);
+
             this.ctx.restore();
         }
 
@@ -530,11 +522,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.drawNode(node, time);
             });
 
-            // Layer 4: Terms (topmost)
+            // Layer 4: AI Labels (topmost) - static permanent labels
             if (this.showTerms) {
                 this.aiTerms.forEach(term => {
-                    this.updateTerm(term);
-                    this.drawTerm(term);
+                    this.updateTerm(term, time);
+                    this.drawTerm(term, time);
                 });
             }
 
@@ -550,12 +542,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize all neural network canvases
     const neuralNetworks = [];
 
-    // Main hero canvas - self-animating neural network with clusters
+    // Main hero canvas - self-animating neural network with static AI labels
     const mainCanvas = document.getElementById('neural-network');
     if (mainCanvas) {
         neuralNetworks.push(new NeuralNetwork(mainCanvas, {
-            showTerms: true,
-            termCount: window.innerWidth < 768 ? 4 : 6
+            showTerms: true
         }));
     }
 
