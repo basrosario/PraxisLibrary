@@ -81,49 +81,43 @@ document.addEventListener('DOMContentLoaded', () => {
         'Alignment', 'Safety', 'Bias', 'Fairness', 'RLHF'
     ];
 
-    // Neural Network class - supports multiple instances
+    // Neural Network class - 3D mesh style with glowing nodes
     class NeuralNetwork {
         constructor(canvas, options = {}) {
             this.canvas = canvas;
             this.ctx = canvas.getContext('2d');
             this.width = 0;
             this.height = 0;
+            this.nodes = [];
+            this.aiTerms = [];
+            this.mouse = { x: null, y: null, radius: 150 };
             this.animationId = null;
-            this.mouse = { x: null, y: null, radius: 120 };
 
             // Mobile detection
             this.isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
 
-            // Options
+            // Options - denser mesh for 3D effect
             this.showTerms = options.showTerms !== false;
+            this.nodeDensity = this.isMobile ? 0.00012 : (options.nodeDensity || 0.00025);
+            this.maxNodes = this.isMobile ? 80 : (options.maxNodes || 200);
+            this.minNodes = this.isMobile ? 40 : (options.minNodes || 80);
             this.termCount = this.isMobile ? 4 : (options.termCount || 10);
+            this.maxConnectionDistance = this.isMobile ? 120 : 180;
 
-            // PCB Grid Configuration
-            this.gridSpacing = this.isMobile ? 50 : 40;
-            this.traceWidth = this.isMobile ? 1.5 : 2;
-            this.viaRadius = this.isMobile ? 3 : 4;
-            this.padRadius = this.isMobile ? 5 : 6;
-
-            // PCB Elements
-            this.gridNodes = [];
-            this.traces = [];
-            this.vias = [];
-            this.pads = [];
-            this.chips = [];
-            this.aiTerms = [];
-
-            // Data pulses traveling along PCB traces
+            // Data pulses traveling along connections
             this.dataPulses = [];
             this.lastPulseSpawn = 0;
-            this.pulseSpawnInterval = this.isMobile ? 400 : 200;
-            this.maxPulses = this.isMobile ? 15 : 40;
+            this.pulseSpawnInterval = this.isMobile ? 800 : 400;
+            this.maxPulses = this.isMobile ? 8 : 25;
 
-            // Frame throttling
+            // Frame throttling for mobile
             this.lastFrameTime = 0;
             this.targetFrameInterval = this.isMobile ? 33 : 16;
 
-            // Animation time
-            this.time = 0;
+            // Connection cache for performance (avoids O(n²) per frame)
+            this.cachedConnections = [];
+            this.lastConnectionUpdate = 0;
+            this.connectionUpdateInterval = 100; // Update connections every 100ms
 
             this.init();
         }
@@ -166,127 +160,70 @@ document.addEventListener('DOMContentLoaded', () => {
         resize() {
             this.width = this.canvas.width = this.canvas.offsetWidth;
             this.height = this.canvas.height = this.canvas.offsetHeight;
-            this.generatePCBLayout();
+            this.initNodes();
             this.dataPulses = [];
+            this.buildConnections(); // Build connection cache on resize
             if (this.showTerms) this.initTerms();
         }
 
-        generatePCBLayout() {
-            this.gridNodes = [];
-            this.traces = [];
-            this.vias = [];
-            this.pads = [];
-            this.chips = [];
+        // Build connections cache - O(n²) but only runs periodically, not every frame
+        buildConnections() {
+            this.cachedConnections = [];
+            const maxDist = this.maxConnectionDistance;
 
-            const cols = Math.ceil(this.width / this.gridSpacing) + 1;
-            const rows = Math.ceil(this.height / this.gridSpacing) + 1;
-            const offsetX = (this.width - (cols - 1) * this.gridSpacing) / 2;
-            const offsetY = (this.height - (rows - 1) * this.gridSpacing) / 2;
+            for (let i = 0; i < this.nodes.length; i++) {
+                for (let j = i + 1; j < this.nodes.length; j++) {
+                    const nodeA = this.nodes[i];
+                    const nodeB = this.nodes[j];
+                    const dx = nodeA.x - nodeB.x;
+                    const dy = nodeA.y - nodeB.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
 
-            // Create grid nodes
-            for (let row = 0; row < rows; row++) {
-                for (let col = 0; col < cols; col++) {
-                    const x = offsetX + col * this.gridSpacing;
-                    const y = offsetY + row * this.gridSpacing;
-                    this.gridNodes.push({
-                        x, y, row, col,
-                        id: row * cols + col,
-                        connections: []
-                    });
+                    if (dist < maxDist) {
+                        const avgZ = (nodeA.z + nodeB.z) / 2;
+                        this.cachedConnections.push({
+                            i, j, dist, avgZ,
+                            // Pre-calculate line properties
+                            lineWidth: 0.5 + avgZ * 1.5,
+                            baseAlpha: (1 - dist / maxDist) * (0.15 + avgZ * 0.35)
+                        });
+                    }
                 }
             }
+        }
 
-            // Generate traces with PCB-style right-angle routing
-            const traceChance = this.isMobile ? 0.35 : 0.45;
-            for (let i = 0; i < this.gridNodes.length; i++) {
-                const node = this.gridNodes[i];
+        initNodes() {
+            this.nodes = [];
+            const nodeCount = Math.floor(this.width * this.height * this.nodeDensity);
+            const clampedCount = Math.min(Math.max(nodeCount, this.minNodes), this.maxNodes);
 
-                // Horizontal trace (to right neighbor)
-                if (node.col < cols - 1 && Math.random() < traceChance) {
-                    const rightNode = this.gridNodes[i + 1];
-                    this.traces.push({
-                        start: node,
-                        end: rightNode,
-                        type: 'horizontal',
-                        active: true,
-                        pulsePhase: Math.random() * Math.PI * 2
-                    });
-                    node.connections.push(rightNode.id);
-                    rightNode.connections.push(node.id);
-                }
-
-                // Vertical trace (to bottom neighbor)
-                if (node.row < rows - 1 && Math.random() < traceChance) {
-                    const bottomNode = this.gridNodes[i + cols];
-                    this.traces.push({
-                        start: node,
-                        end: bottomNode,
-                        type: 'vertical',
-                        active: true,
-                        pulsePhase: Math.random() * Math.PI * 2
-                    });
-                    node.connections.push(bottomNode.id);
-                    bottomNode.connections.push(node.id);
-                }
-
-                // Diagonal-style L-shaped traces (adds complexity)
-                if (node.col < cols - 1 && node.row < rows - 1 && Math.random() < 0.15) {
-                    const cornerNode = this.gridNodes[i + cols + 1];
-                    const midX = node.x + this.gridSpacing;
-                    const midY = node.y;
-                    this.traces.push({
-                        start: node,
-                        end: cornerNode,
-                        type: 'L-shape',
-                        midPoint: { x: midX, y: midY },
-                        active: true,
-                        pulsePhase: Math.random() * Math.PI * 2
-                    });
-                }
+            for (let i = 0; i < clampedCount; i++) {
+                this.nodes.push(this.createNode(
+                    Math.random() * this.width,
+                    Math.random() * this.height
+                ));
             }
 
-            // Create vias at intersections
-            const viaChance = this.isMobile ? 0.15 : 0.2;
-            for (const node of this.gridNodes) {
-                if (node.connections.length >= 2 && Math.random() < viaChance) {
-                    this.vias.push({
-                        x: node.x,
-                        y: node.y,
-                        nodeId: node.id,
-                        pulsePhase: Math.random() * Math.PI * 2
-                    });
-                }
-            }
+            // Sort by z for depth layering
+            this.nodes.sort((a, b) => a.z - b.z);
+        }
 
-            // Create component pads
-            const padCount = this.isMobile ? 8 : 15;
-            for (let i = 0; i < padCount; i++) {
-                const node = this.gridNodes[Math.floor(Math.random() * this.gridNodes.length)];
-                if (node.connections.length > 0) {
-                    this.pads.push({
-                        x: node.x,
-                        y: node.y,
-                        size: this.padRadius + Math.random() * 3,
-                        type: Math.random() > 0.5 ? 'square' : 'round',
-                        pulsePhase: Math.random() * Math.PI * 2
-                    });
-                }
-            }
-
-            // Create IC chips (rectangular components)
-            const chipCount = this.isMobile ? 2 : 4;
-            for (let i = 0; i < chipCount; i++) {
-                const node = this.gridNodes[Math.floor(Math.random() * this.gridNodes.length)];
-                const chipWidth = this.gridSpacing * (1.5 + Math.random());
-                const chipHeight = this.gridSpacing * (0.8 + Math.random() * 0.5);
-                this.chips.push({
-                    x: node.x - chipWidth / 2,
-                    y: node.y - chipHeight / 2,
-                    width: chipWidth,
-                    height: chipHeight,
-                    pins: Math.floor(4 + Math.random() * 6)
-                });
-            }
+        createNode(x, y) {
+            // z represents depth (0 = far/dim, 1 = close/bright)
+            const z = Math.random();
+            return {
+                x, y, z,
+                baseX: x,
+                baseY: y,
+                // Size and brightness based on depth
+                size: 1.5 + z * 3, // 1.5-4.5 range
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                // Bright nodes glow orange-yellow, dim nodes are deep red
+                glowIntensity: 0.3 + z * 0.7, // 0.3-1.0
+                pulseOffset: Math.random() * Math.PI * 2,
+                connections: [] // Cache connections for performance
+            };
         }
 
         initTerms() {
@@ -303,14 +240,95 @@ document.addEventListener('DOMContentLoaded', () => {
                 y: Math.random() * this.height,
                 vx: (Math.random() - 0.5) * 0.15,
                 vy: (Math.random() - 0.5) * 0.15,
-                fontSize: Math.random() * 6 + 9,
+                fontSize: Math.random() * 6 + 10,
                 brightness: 0,
-                targetBrightness: Math.random() * 0.25 + 0.1,
-                fadeSpeed: Math.random() * 0.004 + 0.002,
+                targetBrightness: Math.random() * 0.3 + 0.15,
+                fadeSpeed: Math.random() * 0.005 + 0.002,
                 phase: 'fadeIn',
                 lifetime: Math.random() * 10000 + 6000,
                 born: performance.now() - Math.random() * 5000
             };
+        }
+
+        updateNode(node, time) {
+            // Mouse interaction - attract slightly, repel when too close
+            if (this.mouse.x !== null && this.mouse.y !== null) {
+                const dx = this.mouse.x - node.x;
+                const dy = this.mouse.y - node.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < this.mouse.radius) {
+                    const force = (this.mouse.radius - distance) / this.mouse.radius;
+                    const angle = Math.atan2(dy, dx);
+                    // Gentle repulsion
+                    node.x -= Math.cos(angle) * force * 1.5;
+                    node.y -= Math.sin(angle) * force * 1.5;
+                }
+            }
+
+            // Spring back to base position
+            node.x += (node.baseX - node.x) * 0.02;
+            node.y += (node.baseY - node.y) * 0.02;
+
+            // Slow organic drift
+            node.baseX += node.vx;
+            node.baseY += node.vy;
+
+            // Bounce off edges
+            if (node.baseX < 0 || node.baseX > this.width) node.vx *= -1;
+            if (node.baseY < 0 || node.baseY > this.height) node.vy *= -1;
+        }
+
+        drawNode(node, time) {
+            // Pulsing glow based on depth
+            const pulse = Math.sin(time * 0.003 + node.pulseOffset) * 0.15 + 0.85;
+            const intensity = node.glowIntensity * pulse;
+
+            // Simplified glow using concentric circles instead of expensive gradients
+            // Skip glow entirely on mobile for far nodes (performance)
+            if (!this.isMobile || node.z > 0.5) {
+                const glowSize = node.size * (3 + node.z * 2);
+
+                // Outer glow layer (most diffuse)
+                this.ctx.beginPath();
+                this.ctx.arc(node.x, node.y, glowSize, 0, Math.PI * 2);
+                if (node.z > 0.6) {
+                    this.ctx.fillStyle = `rgba(230, 57, 70, ${intensity * 0.08})`;
+                } else {
+                    this.ctx.fillStyle = `rgba(150, 40, 50, ${intensity * 0.05})`;
+                }
+                this.ctx.fill();
+
+                // Middle glow layer
+                this.ctx.beginPath();
+                this.ctx.arc(node.x, node.y, glowSize * 0.5, 0, Math.PI * 2);
+                if (node.z > 0.6) {
+                    this.ctx.fillStyle = `rgba(255, 120, 60, ${intensity * 0.2})`;
+                } else if (node.z > 0.3) {
+                    this.ctx.fillStyle = `rgba(230, 70, 60, ${intensity * 0.15})`;
+                } else {
+                    this.ctx.fillStyle = `rgba(180, 50, 50, ${intensity * 0.1})`;
+                }
+                this.ctx.fill();
+
+                // Inner glow layer (bright nodes only)
+                if (node.z > 0.5) {
+                    this.ctx.beginPath();
+                    this.ctx.arc(node.x, node.y, glowSize * 0.25, 0, Math.PI * 2);
+                    this.ctx.fillStyle = `rgba(255, 160, 80, ${intensity * 0.4})`;
+                    this.ctx.fill();
+                }
+            }
+
+            // Core of the node (bright center)
+            this.ctx.beginPath();
+            this.ctx.arc(node.x, node.y, node.size * 0.5, 0, Math.PI * 2);
+            if (node.z > 0.6) {
+                this.ctx.fillStyle = `rgba(255, 230, 200, ${intensity})`;
+            } else {
+                this.ctx.fillStyle = `rgba(255, 150, 120, ${intensity * 0.8})`;
+            }
+            this.ctx.fill();
         }
 
         updateTerm(term) {
@@ -321,8 +339,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const dx = this.mouse.x - term.x;
                 const dy = this.mouse.y - term.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < this.mouse.radius) {
-                    const force = (this.mouse.radius - distance) / this.mouse.radius;
+                if (distance < this.mouse.radius * 0.8) {
+                    const force = (this.mouse.radius * 0.8 - distance) / (this.mouse.radius * 0.8);
                     term.x -= (dx / distance) * force * 1.5;
                     term.y -= (dy / distance) * force * 1.5;
                 }
@@ -352,154 +370,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
         drawTerm(term) {
             if (term.brightness <= 0) return;
+
             this.ctx.save();
             this.ctx.font = `${term.fontSize}px monospace`;
             this.ctx.fillStyle = `rgba(230, 57, 70, ${term.brightness})`;
             this.ctx.textAlign = 'center';
             this.ctx.textBaseline = 'middle';
+
             if (!this.isMobile) {
                 this.ctx.shadowColor = `rgba(230, 57, 70, ${term.brightness * 0.5})`;
                 this.ctx.shadowBlur = 6;
             }
+
             this.ctx.fillText(term.text, term.x, term.y);
             this.ctx.restore();
         }
 
-        drawPCBBackground() {
-            // Subtle grid pattern
-            this.ctx.strokeStyle = 'rgba(230, 57, 70, 0.03)';
-            this.ctx.lineWidth = 0.5;
-
-            const smallGrid = this.gridSpacing / 4;
-            for (let x = 0; x < this.width; x += smallGrid) {
-                this.ctx.beginPath();
-                this.ctx.moveTo(x, 0);
-                this.ctx.lineTo(x, this.height);
-                this.ctx.stroke();
+        drawConnections(time) {
+            // Periodically rebuild connections to account for node movement
+            if (time - this.lastConnectionUpdate > this.connectionUpdateInterval) {
+                this.buildConnections();
+                this.lastConnectionUpdate = time;
             }
-            for (let y = 0; y < this.height; y += smallGrid) {
-                this.ctx.beginPath();
-                this.ctx.moveTo(0, y);
-                this.ctx.lineTo(this.width, y);
-                this.ctx.stroke();
-            }
-        }
 
-        drawTraces(time) {
-            for (const trace of this.traces) {
-                const pulse = Math.sin(time * 0.001 + trace.pulsePhase) * 0.15 + 0.85;
-                const alpha = 0.25 * pulse;
+            this.ctx.lineCap = 'round';
 
-                this.ctx.strokeStyle = `rgba(230, 57, 70, ${alpha})`;
-                this.ctx.lineWidth = this.traceWidth;
-                this.ctx.lineCap = 'round';
-                this.ctx.lineJoin = 'round';
+            // Use cached connections - much faster than O(n²) every frame
+            for (const conn of this.cachedConnections) {
+                const nodeA = this.nodes[conn.i];
+                const nodeB = this.nodes[conn.j];
+
+                // Subtle pulse animation
+                const pulse = Math.sin(time * 0.001 + conn.i * 0.05) * 0.1 + 0.9;
+                const alpha = conn.baseAlpha * pulse;
 
                 this.ctx.beginPath();
-                if (trace.type === 'L-shape' && trace.midPoint) {
-                    this.ctx.moveTo(trace.start.x, trace.start.y);
-                    this.ctx.lineTo(trace.midPoint.x, trace.midPoint.y);
-                    this.ctx.lineTo(trace.end.x, trace.end.y);
+                this.ctx.moveTo(nodeA.x, nodeA.y);
+                this.ctx.lineTo(nodeB.x, nodeB.y);
+
+                // Color based on depth (pre-calculated avgZ)
+                if (conn.avgZ > 0.6) {
+                    this.ctx.strokeStyle = `rgba(200, 80, 70, ${alpha})`;
+                } else if (conn.avgZ > 0.3) {
+                    this.ctx.strokeStyle = `rgba(180, 60, 60, ${alpha})`;
                 } else {
-                    this.ctx.moveTo(trace.start.x, trace.start.y);
-                    this.ctx.lineTo(trace.end.x, trace.end.y);
+                    this.ctx.strokeStyle = `rgba(140, 50, 55, ${alpha})`;
                 }
+
+                this.ctx.lineWidth = conn.lineWidth;
                 this.ctx.stroke();
             }
         }
 
-        drawVias(time) {
-            for (const via of this.vias) {
-                const pulse = Math.sin(time * 0.002 + via.pulsePhase) * 0.2 + 0.8;
-
-                // Outer ring
-                this.ctx.beginPath();
-                this.ctx.arc(via.x, via.y, this.viaRadius + 2, 0, Math.PI * 2);
-                this.ctx.fillStyle = `rgba(230, 57, 70, ${0.15 * pulse})`;
-                this.ctx.fill();
-
-                // Inner hole
-                this.ctx.beginPath();
-                this.ctx.arc(via.x, via.y, this.viaRadius, 0, Math.PI * 2);
-                this.ctx.strokeStyle = `rgba(230, 57, 70, ${0.4 * pulse})`;
-                this.ctx.lineWidth = 1.5;
-                this.ctx.stroke();
-
-                // Center dot
-                this.ctx.beginPath();
-                this.ctx.arc(via.x, via.y, 1.5, 0, Math.PI * 2);
-                this.ctx.fillStyle = `rgba(230, 57, 70, ${0.5 * pulse})`;
-                this.ctx.fill();
-            }
-        }
-
-        drawPads(time) {
-            for (const pad of this.pads) {
-                const pulse = Math.sin(time * 0.0015 + pad.pulsePhase) * 0.2 + 0.8;
-
-                this.ctx.fillStyle = `rgba(230, 57, 70, ${0.2 * pulse})`;
-                this.ctx.strokeStyle = `rgba(230, 57, 70, ${0.35 * pulse})`;
-                this.ctx.lineWidth = 1;
-
-                if (pad.type === 'square') {
-                    const size = pad.size * 2;
-                    this.ctx.fillRect(pad.x - size / 2, pad.y - size / 2, size, size);
-                    this.ctx.strokeRect(pad.x - size / 2, pad.y - size / 2, size, size);
-                } else {
-                    this.ctx.beginPath();
-                    this.ctx.arc(pad.x, pad.y, pad.size, 0, Math.PI * 2);
-                    this.ctx.fill();
-                    this.ctx.stroke();
-                }
-            }
-        }
-
-        drawChips(time) {
-            for (const chip of this.chips) {
-                // Chip body
-                this.ctx.fillStyle = 'rgba(20, 20, 25, 0.6)';
-                this.ctx.fillRect(chip.x, chip.y, chip.width, chip.height);
-
-                // Chip border
-                this.ctx.strokeStyle = 'rgba(230, 57, 70, 0.3)';
-                this.ctx.lineWidth = 1;
-                this.ctx.strokeRect(chip.x, chip.y, chip.width, chip.height);
-
-                // Chip pins
-                const pinSpacing = chip.width / (chip.pins + 1);
-                for (let i = 1; i <= chip.pins; i++) {
-                    const pinX = chip.x + i * pinSpacing;
-                    // Top pins
-                    this.ctx.fillStyle = 'rgba(230, 57, 70, 0.25)';
-                    this.ctx.fillRect(pinX - 2, chip.y - 4, 4, 4);
-                    // Bottom pins
-                    this.ctx.fillRect(pinX - 2, chip.y + chip.height, 4, 4);
-                }
-
-                // Chip marking (notch)
-                this.ctx.beginPath();
-                this.ctx.arc(chip.x + 8, chip.y + chip.height / 2, 3, 0, Math.PI * 2);
-                this.ctx.fillStyle = 'rgba(230, 57, 70, 0.15)';
-                this.ctx.fill();
-            }
-        }
-
+        // Data pulses traveling along connections - uses cached connections
         spawnDataPulse(time) {
             if (time - this.lastPulseSpawn < this.pulseSpawnInterval) return;
             if (this.dataPulses.length >= this.maxPulses) return;
-            if (this.traces.length === 0) return;
+            if (this.cachedConnections.length === 0) return;
 
-            const trace = this.traces[Math.floor(Math.random() * this.traces.length)];
+            // Use cached connections instead of recalculating O(n²)
+            const conn = this.cachedConnections[Math.floor(Math.random() * this.cachedConnections.length)];
             const reverse = Math.random() > 0.5;
 
             this.dataPulses.push({
-                trace: trace,
+                startIdx: reverse ? conn.j : conn.i,
+                endIdx: reverse ? conn.i : conn.j,
                 progress: 0,
-                speed: 0.012 + Math.random() * 0.008,
-                reverse: reverse,
-                size: 2 + Math.random(),
-                brightness: 0.8 + Math.random() * 0.2,
-                trailLength: 0.15 + Math.random() * 0.1
+                speed: 0.008 + Math.random() * 0.012,
+                size: 1.5 + conn.avgZ * 2,
+                brightness: 0.6 + conn.avgZ * 0.4,
+                z: conn.avgZ
             });
 
             this.lastPulseSpawn = time;
@@ -510,26 +450,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 pulse.progress += pulse.speed;
 
                 if (pulse.progress >= 1) {
-                    // Chain to connected trace
-                    if (Math.random() < 0.5) {
-                        const endNode = pulse.reverse ? pulse.trace.start : pulse.trace.end;
-                        const connectedTraces = this.traces.filter(t =>
-                            t !== pulse.trace &&
-                            (t.start === endNode || t.end === endNode)
+                    // Chain to next connection
+                    if (Math.random() < (this.isMobile ? 0.3 : 0.5)) {
+                        const endNode = this.nodes[pulse.endIdx];
+                        // Null safety check
+                        if (!endNode) return false;
+
+                        // Use cached connections for chaining instead of O(n) loop
+                        const nextConnections = this.cachedConnections.filter(conn =>
+                            (conn.i === pulse.endIdx || conn.j === pulse.endIdx) &&
+                            conn.i !== pulse.startIdx && conn.j !== pulse.startIdx
                         );
 
-                        if (connectedTraces.length > 0) {
-                            const nextTrace = connectedTraces[Math.floor(Math.random() * connectedTraces.length)];
-                            const newReverse = nextTrace.end === endNode;
+                        if (nextConnections.length > 0) {
+                            const nextConn = nextConnections[Math.floor(Math.random() * nextConnections.length)];
+                            const nextIdx = nextConn.i === pulse.endIdx ? nextConn.j : nextConn.i;
 
                             this.dataPulses.push({
-                                trace: nextTrace,
+                                startIdx: pulse.endIdx,
+                                endIdx: nextIdx,
                                 progress: 0,
                                 speed: pulse.speed,
-                                reverse: newReverse,
-                                size: pulse.size,
+                                size: pulse.size * 0.95,
                                 brightness: pulse.brightness * 0.9,
-                                trailLength: pulse.trailLength
+                                z: nextConn.avgZ
                             });
                         }
                     }
@@ -539,65 +483,44 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        getTracePosition(trace, progress, reverse) {
-            const p = reverse ? 1 - progress : progress;
-
-            if (trace.type === 'L-shape' && trace.midPoint) {
-                // Two-segment L-shape
-                if (p < 0.5) {
-                    const segProgress = p * 2;
-                    return {
-                        x: trace.start.x + (trace.midPoint.x - trace.start.x) * segProgress,
-                        y: trace.start.y + (trace.midPoint.y - trace.start.y) * segProgress
-                    };
-                } else {
-                    const segProgress = (p - 0.5) * 2;
-                    return {
-                        x: trace.midPoint.x + (trace.end.x - trace.midPoint.x) * segProgress,
-                        y: trace.midPoint.y + (trace.end.y - trace.midPoint.y) * segProgress
-                    };
-                }
-            } else {
-                return {
-                    x: trace.start.x + (trace.end.x - trace.start.x) * p,
-                    y: trace.start.y + (trace.end.y - trace.start.y) * p
-                };
-            }
-        }
-
         drawDataPulses() {
-            for (const pulse of this.dataPulses) {
-                const pos = this.getTracePosition(pulse.trace, pulse.progress, pulse.reverse);
+            this.dataPulses.forEach(pulse => {
+                const startNode = this.nodes[pulse.startIdx];
+                const endNode = this.nodes[pulse.endIdx];
+
+                const x = startNode.x + (endNode.x - startNode.x) * pulse.progress;
+                const y = startNode.y + (endNode.y - startNode.y) * pulse.progress;
 
                 // Trail
-                const trailSteps = this.isMobile ? 4 : 8;
+                const trailSteps = this.isMobile ? 3 : 6;
                 for (let t = trailSteps; t >= 0; t--) {
-                    const trailProgress = pulse.progress - (pulse.trailLength * t / trailSteps);
-                    if (trailProgress < 0) continue;
+                    const trailProg = pulse.progress - (0.15 * t / trailSteps);
+                    if (trailProg < 0) continue;
 
-                    const trailPos = this.getTracePosition(pulse.trace, trailProgress, pulse.reverse);
-                    const trailAlpha = (1 - t / trailSteps) * pulse.brightness * 0.4;
+                    const tx = startNode.x + (endNode.x - startNode.x) * trailProg;
+                    const ty = startNode.y + (endNode.y - startNode.y) * trailProg;
+                    const trailAlpha = (1 - t / trailSteps) * pulse.brightness * 0.5;
 
                     this.ctx.beginPath();
-                    this.ctx.arc(trailPos.x, trailPos.y, pulse.size * 0.6, 0, Math.PI * 2);
-                    this.ctx.fillStyle = `rgba(255, 200, 200, ${trailAlpha})`;
+                    this.ctx.arc(tx, ty, pulse.size * 0.6, 0, Math.PI * 2);
+                    this.ctx.fillStyle = `rgba(255, 200, 150, ${trailAlpha})`;
                     this.ctx.fill();
                 }
 
-                // Main pulse glow
+                // Glow
                 if (!this.isMobile) {
                     this.ctx.beginPath();
-                    this.ctx.arc(pos.x, pos.y, pulse.size * 3, 0, Math.PI * 2);
-                    this.ctx.fillStyle = `rgba(230, 57, 70, ${pulse.brightness * 0.15})`;
+                    this.ctx.arc(x, y, pulse.size * 2.5, 0, Math.PI * 2);
+                    this.ctx.fillStyle = `rgba(255, 150, 80, ${pulse.brightness * 0.3})`;
                     this.ctx.fill();
                 }
 
-                // Main pulse core
+                // Core
                 this.ctx.beginPath();
-                this.ctx.arc(pos.x, pos.y, pulse.size, 0, Math.PI * 2);
-                this.ctx.fillStyle = `rgba(255, 255, 255, ${pulse.brightness})`;
+                this.ctx.arc(x, y, pulse.size, 0, Math.PI * 2);
+                this.ctx.fillStyle = `rgba(255, 255, 240, ${pulse.brightness})`;
                 this.ctx.fill();
-            }
+            });
         }
 
         animate(time) {
@@ -607,29 +530,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             this.lastFrameTime = time;
-            this.time = time;
 
             this.ctx.clearRect(0, 0, this.width, this.height);
 
-            // Layer 1: PCB background grid
-            this.drawPCBBackground();
+            // Layer 1: Connections (behind everything)
+            this.drawConnections(time);
 
-            // Layer 2: IC Chips (behind traces)
-            this.drawChips(time);
-
-            // Layer 3: PCB Traces
-            this.drawTraces(time);
-
-            // Layer 4: Vias and Pads
-            this.drawVias(time);
-            this.drawPads(time);
-
-            // Layer 5: Data pulses
+            // Layer 2: Data pulses
             this.spawnDataPulse(time);
             this.updateDataPulses();
             this.drawDataPulses();
 
-            // Layer 6: Floating terms
+            // Layer 3: Nodes (sorted by z, far to near)
+            this.nodes.forEach(node => {
+                this.updateNode(node, time);
+                this.drawNode(node, time);
+            });
+
+            // Layer 4: Terms (topmost)
             if (this.showTerms) {
                 this.aiTerms.forEach(term => {
                     this.updateTerm(term);
@@ -649,25 +567,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize all neural network canvases
     const neuralNetworks = [];
 
-    // Main hero canvas with subtle floating terms that fade smoothly
+    // Main hero canvas - dense 3D mesh with glowing nodes
     const mainCanvas = document.getElementById('neural-network');
     if (mainCanvas) {
         neuralNetworks.push(new NeuralNetwork(mainCanvas, {
             showTerms: true,
-            termCount: window.innerWidth < 768 ? 6 : 12 // Fewer terms for cleaner look
+            termCount: window.innerWidth < 768 ? 5 : 10
         }));
     }
 
-    // Secondary canvases (CTA cards, footer - lighter version without terms)
+    // Secondary canvases (CTA cards, footer - lighter version)
     // Skip on mobile for better performance
     const isMobileDevice = window.innerWidth < 768 || 'ontouchstart' in window;
     if (!isMobileDevice) {
         document.querySelectorAll('.neural-canvas-secondary').forEach(canvas => {
             neuralNetworks.push(new NeuralNetwork(canvas, {
                 showTerms: false,
-                nodeDensity: 0.0001,
-                maxNodes: 60,
-                minNodes: 20
+                nodeDensity: 0.00015,
+                maxNodes: 80,
+                minNodes: 30
             }));
         });
     }
