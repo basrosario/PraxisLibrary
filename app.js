@@ -117,94 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
         'PERPLEXITY'
     ];
 
-    // Chat scripts for each AI - short, punchy, humorous prompts (max ~60 chars each)
-    const AI_CHAT_SCRIPTS = {
-        'ChatGPT': [
-            {
-                prompt: "Make this email less passive-aggressive",
-                response: "The art of 'per my last email' with grace. Done!"
-            },
-            {
-                prompt: "50-page report by EOD. Help?",
-                response: "Challenge accepted! Outline incoming..."
-            },
-            {
-                prompt: "Explain AI to my grandma",
-                response: "It's like a very fast student who never sleeps!"
-            }
-        ],
-        'CLAUDE CODE': [
-            {
-                prompt: "This worked yesterday. I changed nothing.",
-                response: "The classic mystery! Let's debug together..."
-            },
-            {
-                prompt: "Why did my 10 lines become 200?",
-                response: "Feature creep strikes again. Let's refactor!"
-            },
-            {
-                prompt: "Make this code future-proof",
-                response: "Future you will thank us. Adding comments..."
-            }
-        ],
-        'GEMINI': [
-            {
-                prompt: "Help me sound smart about AI tomorrow",
-                response: "Synergy with substance. I've got you covered!"
-            },
-            {
-                prompt: "Summarize this PDF in 2 minutes",
-                response: "Speed mode! Here's what matters..."
-            },
-            {
-                prompt: "Research this topic for my deck",
-                response: "On it! Finding the key insights now..."
-            }
-        ],
-        'CURSOR.AI': [
-            {
-                prompt: "Refactor this. No comments exist.",
-                response: "Legacy code adventure! Let's modernize it."
-            },
-            {
-                prompt: "Why is this so slow?",
-                response: "Found it! Sneaky bottleneck on line 47..."
-            },
-            {
-                prompt: "Clean up this spaghetti code",
-                response: "Time for clean architecture. Let's go!"
-            }
-        ],
-        'COPILOT': [
-            {
-                prompt: "Autocomplete this function for me",
-                response: "Already on it! Check this out..."
-            },
-            {
-                prompt: "Why does this PR have 47 comments?",
-                response: "Spirited review! Let's address them all."
-            },
-            {
-                prompt: "Write tests for this module",
-                response: "No judgment! Comprehensive tests coming..."
-            }
-        ],
-        'PERPLEXITY': [
-            {
-                prompt: "Tabs or spaces? Settle this.",
-                response: "The eternal debate! Your style guide wins."
-            },
-            {
-                prompt: "What did I miss this week in AI?",
-                response: "Catching you up! Here's the highlights..."
-            },
-            {
-                prompt: "Find research backing my idea",
-                response: "Good news! Found solid supporting data."
-            }
-        ]
-    };
-
     // AI-related terms for floating display - processing terms for each AI cluster
     const AI_TERMS = [
         // Core AI concepts
@@ -354,14 +266,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Orbiting terms
                 this.heroTerms = [];
                 this.heroTermCount = this.isMobile ? 20 : 50;
-                // Chat animation
-                this.chatContainer = null;
-                this.chatPromptText = null;
-                this.chatResponseText = null;
-                this.chatPromptCursor = null;
-                this.chatResponseCursor = null;
-                this.chatAnimationStarted = false;
-                this.initChatAnimation();
             } else {
                 // Cluster settings - one per AI (cluster mode)
                 this.nodesPerCluster = this.isMobile ? (isCombined ? 20 : 15) : (isCombined ? 35 : 25);
@@ -755,9 +659,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Rebuild the entire network on the new side
                 this.initHeroCluster();
-
-                // Restart chat animation for new AI
-                this.onAISwitch();
                 this.buildConnections();
             } else if (this.aiTransitionProgress < 1) {
                 // Fading IN phase
@@ -771,125 +672,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // All movement disabled - network is completely static
             // (heroRotation and term angles no longer update)
-
-            // Update chat animation
-            this.updateChatAnimation(timeSinceSwitch);
-        }
-
-        // Initialize chat animation elements
-        initChatAnimation() {
-            this.chatContainer = document.querySelector('.chat-container');
-            if (!this.chatContainer) return;
-
-            this.chatPromptText = this.chatContainer.querySelector('.chat-prompt .chat-text');
-            this.chatResponseText = this.chatContainer.querySelector('.chat-response .chat-text');
-            this.chatPromptCursor = this.chatContainer.querySelector('.chat-prompt .chat-cursor');
-            this.chatResponseCursor = this.chatContainer.querySelector('.chat-response .chat-cursor');
-            this.chatResponseBubble = this.chatContainer.querySelector('.chat-response');
-
-            // Start first chat animation
-            this.startChatAnimation();
-        }
-
-        // Start chat animation for current AI
-        startChatAnimation() {
-            if (!this.chatContainer) return;
-
-            const aiName = AI_NAMES[this.currentAIIndex];
-            const scripts = AI_CHAT_SCRIPTS[aiName];
-            if (!scripts || scripts.length === 0) return;
-
-            // Pick a random script from the array
-            const script = scripts[Math.floor(Math.random() * scripts.length)];
-
-            // Reset state
-            this.chatPromptText.textContent = '';
-            this.chatResponseText.textContent = '';
-            this.chatPromptCursor.classList.remove('hidden');
-            this.chatResponseCursor.classList.add('hidden');
-            this.chatResponseBubble.classList.remove('visible');
-            this.chatAnimationStarted = true;
-            this.chatPhase = 'prompt';
-            this.chatCharIndex = 0;
-            this.chatLastCharTime = 0;
-            this.currentScript = script;
-
-            // Position chat on same side as network
-            if (this.heroSide === 'right') {
-                this.chatContainer.classList.add('right-side');
-            } else {
-                this.chatContainer.classList.remove('right-side');
-            }
-
-            // Show container
-            this.chatContainer.classList.add('visible');
-        }
-
-        // Update chat animation based on time since AI switch
-        updateChatAnimation(timeSinceSwitch) {
-            if (!this.chatContainer || !this.chatAnimationStarted) return;
-
-            const now = performance.now();
-            const typingSpeed = 25; // ms per character (faster for 9s cycle)
-
-            // Phase timing (within 9 second cycle):
-            // 0-300ms: Wait, then show container
-            // 300-2200ms: Type prompt
-            // 2200-2500ms: Pause
-            // 2500-5000ms: Type response
-            // 5000-7500ms: Display both
-            // 7500-9000ms: Fade out during transition
-
-            if (timeSinceSwitch < 300) {
-                // Wait before showing
-                this.chatContainer.classList.remove('visible');
-            } else if (timeSinceSwitch < 2200 && this.chatPhase === 'prompt') {
-                // Type prompt
-                this.chatContainer.classList.add('visible');
-                if (now - this.chatLastCharTime > typingSpeed && this.chatCharIndex < this.currentScript.prompt.length) {
-                    this.chatCharIndex++;
-                    this.chatPromptText.textContent = this.currentScript.prompt.substring(0, this.chatCharIndex);
-                    this.chatLastCharTime = now;
-                }
-                if (this.chatCharIndex >= this.currentScript.prompt.length) {
-                    this.chatPromptCursor.classList.add('hidden');
-                }
-            } else if (timeSinceSwitch >= 2200 && timeSinceSwitch < 2500) {
-                // Pause between prompt and response
-                if (this.chatPhase === 'prompt') {
-                    this.chatPhase = 'pause';
-                    this.chatPromptCursor.classList.add('hidden');
-                }
-            } else if (timeSinceSwitch >= 2500 && timeSinceSwitch < 5000) {
-                // Type response
-                if (this.chatPhase === 'pause') {
-                    this.chatPhase = 'response';
-                    this.chatCharIndex = 0;
-                    this.chatResponseBubble.classList.add('visible');
-                    this.chatResponseCursor.classList.remove('hidden');
-                }
-                if (now - this.chatLastCharTime > typingSpeed && this.chatCharIndex < this.currentScript.response.length) {
-                    this.chatCharIndex++;
-                    this.chatResponseText.textContent = this.currentScript.response.substring(0, this.chatCharIndex);
-                    this.chatLastCharTime = now;
-                }
-                if (this.chatCharIndex >= this.currentScript.response.length) {
-                    this.chatResponseCursor.classList.add('hidden');
-                }
-            } else if (timeSinceSwitch >= 5000 && timeSinceSwitch < 7500) {
-                // Display both - ensure cursors are hidden
-                this.chatPromptCursor.classList.add('hidden');
-                this.chatResponseCursor.classList.add('hidden');
-            } else if (timeSinceSwitch >= 7500 && timeSinceSwitch < this.aiSwitchInterval) {
-                // Fade out before switch
-                this.chatContainer.classList.remove('visible');
-                this.chatAnimationStarted = false;
-            }
-        }
-
-        // Called when AI switches - restart chat animation
-        onAISwitch() {
-            this.startChatAnimation();
         }
 
         // Get static position for hero nodes (no movement)
