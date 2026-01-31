@@ -1038,10 +1038,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const posA = this.getNodePosition(nodeA);
                 const posB = this.getNodePosition(nodeB);
 
-                // Animated pulse - prominent lines pulse more
-                const pulseIntensity = conn.isProminent ? 0.2 : 0.1;
-                const pulse = Math.sin(time * 0.001 + conn.i * 0.05) * pulseIntensity + (1 - pulseIntensity);
-                const alpha = conn.baseAlpha * pulse * heroMult;
+                // Steady alpha - no pulsing, just organic wave movement
+                const alpha = conn.baseAlpha * heroMult;
 
                 this.ctx.beginPath();
 
@@ -1106,8 +1104,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 endIdx: reverse ? conn.i : conn.j,
                 progress: 0,
                 speed: isHero ? 0.006 + Math.random() * 0.008 : 0.008 + Math.random() * 0.012,
-                // Hero mode: smaller, more delicate pulses
-                size: isHero ? 0.8 + conn.avgZ * 1 : 1.5 + conn.avgZ * 2,
+                // Hero mode: skinnier, more delicate pulses (half size)
+                size: isHero ? 0.4 + conn.avgZ * 0.5 : 1.5 + conn.avgZ * 2,
                 brightness: isHero ? 0.4 + conn.avgZ * 0.3 : 0.6 + conn.avgZ * 0.4,
                 z: conn.avgZ
             });
