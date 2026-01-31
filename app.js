@@ -1355,56 +1355,92 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.ctx.fillStyle = `rgba(${coreColor}, ${brightness})`;
                 this.ctx.fill();
 
-                // Lightning forks - small white arcs emanating from the data ball
-                if (!this.isMobile && Math.random() > 0.4) {
-                    const forkCount = Math.floor(Math.random() * 3) + 1; // 1-3 forks
+                // Lightning forks - long white arcs between nodes/pillars
+                if (!this.isMobile && Math.random() > 0.5) {
+                    const forkCount = Math.floor(Math.random() * 2) + 1; // 1-2 main forks
+
                     for (let f = 0; f < forkCount; f++) {
-                        const startAngle = Math.random() * Math.PI * 2;
-                        const forkLength = pulse.size * (4 + Math.random() * 6);
-                        const segments = 3 + Math.floor(Math.random() * 2); // 3-4 segments
+                        // Find a nearby node to arc towards
+                        let targetX, targetY;
+                        const nearbyNodes = this.nodes.filter((n, idx) => {
+                            if (idx === pulse.startIdx || idx === pulse.endIdx) return false;
+                            const pos = this.getNodePosition(n);
+                            const dist = Math.sqrt((pos.x - x) ** 2 + (pos.y - y) ** 2);
+                            return dist > 30 && dist < 150; // Nodes within range
+                        });
+
+                        if (nearbyNodes.length > 0 && Math.random() > 0.3) {
+                            // Arc towards a nearby node
+                            const targetNode = nearbyNodes[Math.floor(Math.random() * nearbyNodes.length)];
+                            const targetPos = this.getNodePosition(targetNode);
+                            targetX = targetPos.x;
+                            targetY = targetPos.y;
+                        } else {
+                            // Random long arc
+                            const arcAngle = Math.random() * Math.PI * 2;
+                            const arcLength = 60 + Math.random() * 100;
+                            targetX = x + Math.cos(arcAngle) * arcLength;
+                            targetY = y + Math.sin(arcAngle) * arcLength;
+                        }
+
+                        const dx = targetX - x;
+                        const dy = targetY - y;
+                        const totalDist = Math.sqrt(dx * dx + dy * dy);
+                        const segments = 5 + Math.floor(Math.random() * 4); // 5-8 segments for jagged look
 
                         this.ctx.beginPath();
                         this.ctx.moveTo(x, y);
 
                         let fx = x;
                         let fy = y;
-                        let angle = startAngle;
 
-                        for (let s = 0; s < segments; s++) {
-                            const segLength = forkLength / segments;
-                            // Add jagged randomness to angle
-                            angle += (Math.random() - 0.5) * 1.2;
-                            fx += Math.cos(angle) * segLength;
-                            fy += Math.sin(angle) * segLength;
+                        for (let s = 1; s <= segments; s++) {
+                            const progress = s / segments;
+                            // Base position along the path
+                            const baseX = x + dx * progress;
+                            const baseY = y + dy * progress;
+                            // Add perpendicular jitter (more in middle, less at ends)
+                            const jitterAmount = Math.sin(progress * Math.PI) * (15 + Math.random() * 25);
+                            const perpAngle = Math.atan2(dy, dx) + Math.PI / 2;
+                            const jitterDir = (Math.random() - 0.5) * 2;
+                            fx = baseX + Math.cos(perpAngle) * jitterAmount * jitterDir;
+                            fy = baseY + Math.sin(perpAngle) * jitterAmount * jitterDir;
                             this.ctx.lineTo(fx, fy);
                         }
 
-                        const forkAlpha = brightness * (0.4 + Math.random() * 0.4);
+                        const forkAlpha = brightness * (0.5 + Math.random() * 0.4);
                         this.ctx.strokeStyle = `rgba(255, 255, 255, ${forkAlpha})`;
-                        this.ctx.lineWidth = 0.5 + Math.random() * 0.5;
+                        this.ctx.lineWidth = 0.8 + Math.random() * 0.7;
                         this.ctx.stroke();
 
-                        // Occasional secondary branch
-                        if (Math.random() > 0.6) {
-                            const branchPoint = Math.floor(segments / 2);
-                            let bx = x, by = y;
-                            let bAngle = startAngle;
-                            for (let b = 0; b < branchPoint; b++) {
-                                bAngle += (Math.random() - 0.5) * 1.2;
-                                bx += Math.cos(bAngle) * (forkLength / segments);
-                                by += Math.sin(bAngle) * (forkLength / segments);
-                            }
+                        // Add glow effect to lightning
+                        this.ctx.strokeStyle = `rgba(200, 220, 255, ${forkAlpha * 0.3})`;
+                        this.ctx.lineWidth = 3;
+                        this.ctx.stroke();
+
+                        // Secondary branches along the main fork
+                        const branchCount = Math.floor(Math.random() * 3) + 1;
+                        for (let b = 0; b < branchCount; b++) {
+                            const branchProgress = 0.2 + Math.random() * 0.6;
+                            const bx = x + dx * branchProgress + (Math.random() - 0.5) * 20;
+                            const by = y + dy * branchProgress + (Math.random() - 0.5) * 20;
+                            const branchAngle = Math.atan2(dy, dx) + (Math.random() - 0.5) * 2;
+                            const branchLen = 20 + Math.random() * 40;
+                            const branchSegs = 2 + Math.floor(Math.random() * 2);
 
                             this.ctx.beginPath();
                             this.ctx.moveTo(bx, by);
-                            const branchAngle = bAngle + (Math.random() - 0.5) * 2;
-                            const branchLen = forkLength * 0.4;
-                            this.ctx.lineTo(
-                                bx + Math.cos(branchAngle) * branchLen,
-                                by + Math.sin(branchAngle) * branchLen
-                            );
-                            this.ctx.strokeStyle = `rgba(255, 255, 255, ${forkAlpha * 0.6})`;
-                            this.ctx.lineWidth = 0.3;
+
+                            let bbx = bx, bby = by;
+                            for (let bs = 0; bs < branchSegs; bs++) {
+                                const segAngle = branchAngle + (Math.random() - 0.5) * 0.8;
+                                bbx += Math.cos(segAngle) * (branchLen / branchSegs);
+                                bby += Math.sin(segAngle) * (branchLen / branchSegs);
+                                this.ctx.lineTo(bbx, bby);
+                            }
+
+                            this.ctx.strokeStyle = `rgba(255, 255, 255, ${forkAlpha * 0.5})`;
+                            this.ctx.lineWidth = 0.4 + Math.random() * 0.3;
                             this.ctx.stroke();
                         }
                     }
