@@ -89,35 +89,17 @@ Homepage ReAct card now uses `badge-purple` for consistency.
 
 ## 5. Footer Canvas Element Inconsistency
 
-**Severity:** Low
-**Files Affected:** All pages except index.html
+**Severity:** ~~Low~~ **RESOLVED**
 
-`index.html` has a neural network canvas in the footer:
-```html
-<footer class="footer">
-    <canvas class="neural-canvas-secondary"></canvas>
-    ...
-</footer>
-```
-
-All other pages have footers without this canvas element.
+**FIXED:** Removed all neural network canvas elements from index.html per user decision. Site now uses gradient backgrounds only (no animations) for consistent, clean appearance across all pages.
 
 ---
 
 ## 6. CTA Card Canvas Element Inconsistency
 
-**Severity:** Low
-**Files Affected:** All pages except index.html
+**Severity:** ~~Low~~ **RESOLVED**
 
-`index.html` has a canvas inside the CTA card:
-```html
-<div class="cta-card fade-in-up">
-    <canvas class="neural-canvas-secondary"></canvas>
-    ...
-</div>
-```
-
-All other pages have CTA cards without the canvas element.
+**FIXED:** Removed canvas from CTA card and hero section on index.html. All pages now have consistent styling without canvas animations.
 
 ---
 
@@ -329,8 +311,8 @@ The duplicate with tighter spacing (4px padding, 13px font) was removed as it ap
 | Missing CSS preload | 19 pages | ✅ FIXED |
 | Badge label inconsistencies | 5 methods affected | ✅ FIXED |
 | Badge color inconsistencies | Multiple pages | ✅ FIXED |
-| Missing footer canvas | 19 pages | Pending |
-| Missing CTA canvas | 19 pages | Pending |
+| Missing footer canvas | 19 pages | ✅ RESOLVED (removed all) |
+| Missing CTA canvas | 19 pages | ✅ RESOLVED (removed all) |
 | Undefined CSS classes | 2 (btn-full, text-gradient) | ✅ FIXED |
 | CSS selector mismatches | 1 (callout classes in faq.html) | ✅ FIXED |
 | Hardcoded inline colors / CSP violations | 3+ files | ✅ FIXED |
@@ -642,11 +624,12 @@ Create CSS classes for legend badge colors:
 - [x] Remove duplicate (removed line 5794 duplicate)
 - [ ] Test: All pages with small buttons
 
-### Phase 5 (Visual Consistency)
+### Phase 5 (Visual Consistency) ✅ COMPLETED
 - [x] Create legend badge CSS classes (moved to CSP fix)
 - [x] Update HTML files to use classes (moved to CSP fix)
-- [ ] Decision on canvas elements
-- [ ] Test: Method example pages, footer appearance
+- [x] Decision on canvas elements (removed all - gradient backgrounds only)
+- [x] Removed canvas elements from index.html (hero, CTA, footer)
+- [x] Test: Method example pages, footer appearance
 
 ---
 
