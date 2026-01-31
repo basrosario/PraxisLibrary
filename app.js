@@ -837,24 +837,26 @@ document.addEventListener('DOMContentLoaded', () => {
             // Cluster mode: calculate from cluster center + angle/radius
             const cluster = this.aiClusters[node.clusterIndex];
 
-            // Hero mode: apply global rotation
-            let effectiveAngle = node.angle;
-            if (this.mode === 'hero') {
-                effectiveAngle += this.heroRotation;
-            }
-
-            const x = cluster.centerX + Math.cos(effectiveAngle) * node.radius;
-            const y = cluster.centerY + Math.sin(effectiveAngle) * node.radius;
+            // Static position - no rotation applied
+            const x = cluster.centerX + Math.cos(node.angle) * node.radius;
+            const y = cluster.centerY + Math.sin(node.angle) * node.radius;
             return { x, y };
         }
 
         updateClusterPositions(time) {
-            // Update each cluster's floating position
+            // Update each cluster's position
             this.aiClusters.forEach(cluster => {
-                cluster.centerX = cluster.baseCenterX +
-                    Math.sin(time * cluster.floatSpeedX + cluster.floatPhaseX) * cluster.floatAmplitudeX;
-                cluster.centerY = cluster.baseCenterY +
-                    Math.sin(time * cluster.floatSpeedY + cluster.floatPhaseY) * cluster.floatAmplitudeY;
+                // Hero mode: static position (no floating)
+                // Other modes: floating animation
+                if (this.mode === 'hero') {
+                    cluster.centerX = cluster.baseCenterX;
+                    cluster.centerY = cluster.baseCenterY;
+                } else {
+                    cluster.centerX = cluster.baseCenterX +
+                        Math.sin(time * cluster.floatSpeedX + cluster.floatPhaseX) * cluster.floatAmplitudeX;
+                    cluster.centerY = cluster.baseCenterY +
+                        Math.sin(time * cluster.floatSpeedY + cluster.floatPhaseY) * cluster.floatAmplitudeY;
+                }
             });
         }
 
@@ -993,8 +995,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         drawConnections(time) {
-            // Periodically rebuild connections to account for node movement
-            if (time - this.lastConnectionUpdate > this.connectionUpdateInterval) {
+            // Periodically rebuild connections (only in non-hero modes where nodes move)
+            if (this.mode !== 'hero' && time - this.lastConnectionUpdate > this.connectionUpdateInterval) {
                 this.buildConnections();
                 this.lastConnectionUpdate = time;
             }
