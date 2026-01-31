@@ -1825,6 +1825,18 @@ document.addEventListener('DOMContentLoaded', () => {
             { key: 'specifics', letter: 'S', label: 'Format, length, tone? (specifics)', placeholder: 'e.g., Friendly tone, include prep time, common grocery ingredients...' },
             { key: 'parameters', letter: 'P', label: 'Constraints and what to avoid?', placeholder: 'e.g., Under 45 minutes per meal. No seafood (allergies)...' },
             { key: 'example', letter: 'E', label: 'Example of desired output? (optional)', placeholder: 'e.g., Format like: "Monday: Veggie Tacos - Prep: 15 min - Hidden veggies: peppers"', optional: true }
+        ],
+        REACT: [
+            { key: 'problem', letter: 'P', label: 'What problem needs to be solved?', placeholder: 'e.g., I need to debug why my website login is failing for some users...', fullWidth: true },
+            { key: 'context', letter: 'C', label: 'What relevant information do you have?', placeholder: 'e.g., Error logs show timeout after 30 seconds, only affects users in Europe...' },
+            { key: 'approach', letter: 'A', label: 'How should AI approach reasoning?', placeholder: 'e.g., Think through each potential cause step by step, explain your reasoning...' },
+            { key: 'constraints', letter: 'X', label: 'Any constraints or requirements?', placeholder: 'e.g., Solution must not require server restart, explain in non-technical terms...' }
+        ],
+        FLIPPED: [
+            { key: 'topic', letter: 'T', label: 'What topic do you need help with?', placeholder: 'e.g., I\'m trying to decide on a career change into tech...', fullWidth: true },
+            { key: 'goal', letter: 'G', label: 'What\'s your ultimate goal?', placeholder: 'e.g., Find a fulfilling career that offers work-life balance and good income...' },
+            { key: 'expertise', letter: 'E', label: 'What expertise should AI have?', placeholder: 'e.g., Career counselor with tech industry knowledge...' },
+            { key: 'questions', letter: 'Q', label: 'How many questions should AI ask first?', placeholder: 'e.g., Ask me 5-7 clarifying questions before giving advice...' }
         ]
     };
 
@@ -2270,6 +2282,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (answers.specifics?.trim()) parts.push(answers.specifics.trim());
             if (answers.parameters?.trim()) parts.push(answers.parameters.trim());
             if (answers.example?.trim()) parts.push(`Example: ${answers.example.trim()}`);
+        } else if (methodology === 'REACT') {
+            if (answers.problem?.trim()) parts.push(answers.problem.trim());
+            if (answers.context?.trim()) parts.push(`Context: ${answers.context.trim()}`);
+            if (answers.approach?.trim()) parts.push(answers.approach.trim());
+            if (answers.constraints?.trim()) parts.push(answers.constraints.trim());
+        } else if (methodology === 'FLIPPED') {
+            if (answers.expertise?.trim()) parts.push(`Act as ${answers.expertise.trim()}.`);
+            if (answers.topic?.trim()) parts.push(answers.topic.trim());
+            if (answers.goal?.trim()) parts.push(`My goal is ${answers.goal.trim()}.`);
+            if (answers.questions?.trim()) parts.push(`Before giving me advice, ${answers.questions.trim()} to better understand my situation.`);
         }
 
         const combined = parts.join('\n\n');
@@ -3345,6 +3367,18 @@ document.addEventListener('DOMContentLoaded', () => {
             { key: 'specifics', letter: 'S', label: 'Format, length, tone? (specifics)', placeholder: 'e.g., Friendly tone, include prep time, common grocery ingredients...' },
             { key: 'parameters', letter: 'P', label: 'Constraints and what to avoid?', placeholder: 'e.g., Under 45 minutes per meal. No seafood (allergies)...' },
             { key: 'example', letter: 'E', label: 'Example of desired output? (optional)', placeholder: 'e.g., Format like: "Monday: Veggie Tacos - Prep: 15 min - Hidden veggies: peppers"', optional: true }
+        ],
+        REACT: [
+            { key: 'problem', letter: 'P', label: 'What problem needs to be solved?', placeholder: 'e.g., I need to debug why my website login is failing for some users...', fullWidth: true },
+            { key: 'context', letter: 'C', label: 'What relevant information do you have?', placeholder: 'e.g., Error logs show timeout after 30 seconds, only affects users in Europe...' },
+            { key: 'approach', letter: 'A', label: 'How should AI approach reasoning?', placeholder: 'e.g., Think through each potential cause step by step, explain your reasoning...' },
+            { key: 'constraints', letter: 'X', label: 'Any constraints or requirements?', placeholder: 'e.g., Solution must not require server restart, explain in non-technical terms...' }
+        ],
+        FLIPPED: [
+            { key: 'topic', letter: 'T', label: 'What topic do you need help with?', placeholder: 'e.g., I\'m trying to decide on a career change into tech...', fullWidth: true },
+            { key: 'goal', letter: 'G', label: 'What\'s your ultimate goal?', placeholder: 'e.g., Find a fulfilling career that offers work-life balance and good income...' },
+            { key: 'expertise', letter: 'E', label: 'What expertise should AI have?', placeholder: 'e.g., Career counselor with tech industry knowledge...' },
+            { key: 'questions', letter: 'Q', label: 'How many questions should AI ask first?', placeholder: 'e.g., Ask me 5-7 clarifying questions before giving advice...' }
         ]
     };
 
@@ -3421,6 +3455,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (answers.specifics?.trim()) parts.push(answers.specifics.trim());
             if (answers.parameters?.trim()) parts.push(answers.parameters.trim());
             if (answers.example?.trim()) parts.push(`Example: ${answers.example.trim()}`);
+        } else if (methodology === 'REACT') {
+            if (answers.problem?.trim()) parts.push(answers.problem.trim());
+            if (answers.context?.trim()) parts.push(`Context: ${answers.context.trim()}`);
+            if (answers.approach?.trim()) parts.push(answers.approach.trim());
+            if (answers.constraints?.trim()) parts.push(answers.constraints.trim());
+        } else if (methodology === 'FLIPPED') {
+            if (answers.expertise?.trim()) parts.push(`Act as ${answers.expertise.trim()}.`);
+            if (answers.topic?.trim()) parts.push(answers.topic.trim());
+            if (answers.goal?.trim()) parts.push(`My goal is ${answers.goal.trim()}.`);
+            if (answers.questions?.trim()) parts.push(`Before giving me advice, ${answers.questions.trim()} to better understand my situation.`);
         }
 
         const combined = parts.join('\n\n');
