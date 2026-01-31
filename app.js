@@ -117,90 +117,90 @@ document.addEventListener('DOMContentLoaded', () => {
         'PERPLEXITY'
     ];
 
-    // Chat scripts for each AI - creative, corporate-friendly, humorous prompts
+    // Chat scripts for each AI - short, punchy, humorous prompts (max ~60 chars each)
     const AI_CHAT_SCRIPTS = {
         'ChatGPT': [
             {
-                prompt: "ChatGPT, my boss wants a 'quick' 50-page report by EOD. Help?",
-                response: "Challenge accepted! Let's turn that mountain into a molehill... with excellent formatting."
+                prompt: "Make this email less passive-aggressive",
+                response: "The art of 'per my last email' with grace. Done!"
             },
             {
-                prompt: "Can you make this email sound professional but not passive-aggressive?",
-                response: "Ah yes, the corporate art of saying 'per my last email' with grace. I've got you covered."
+                prompt: "50-page report by EOD. Help?",
+                response: "Challenge accepted! Outline incoming..."
             },
             {
-                prompt: "Explain blockchain to my grandma. She thinks I mine actual coins.",
-                response: "Picture a magical ledger that everyone can see but no one can cheat... and no pickaxes required!"
+                prompt: "Explain AI to my grandma",
+                response: "It's like a very fast student who never sleeps!"
             }
         ],
         'CLAUDE CODE': [
             {
-                prompt: "Claude, this code worked yesterday. I changed nothing. It's broken now.",
-                response: "Ah, the classic 'it works on my machine' paradox. Let's debug this mystery together..."
+                prompt: "This worked yesterday. I changed nothing.",
+                response: "The classic mystery! Let's debug together..."
             },
             {
-                prompt: "Can you explain why my 10-line function became 200 lines?",
-                response: "Feature creep is a silent visitor. Let's refactor this back to elegance."
+                prompt: "Why did my 10 lines become 200?",
+                response: "Feature creep strikes again. Let's refactor!"
             },
             {
-                prompt: "Help me write code that future me won't hate.",
-                response: "Future you will thank present you. Let's add some comments and clean architecture!"
+                prompt: "Make this code future-proof",
+                response: "Future you will thank us. Adding comments..."
             }
         ],
         'GEMINI': [
             {
-                prompt: "Gemini, I need to sound smart in tomorrow's meeting about AI.",
-                response: "Let's get you fluent in 'synergy' and 'paradigm shifts' with actual substance behind them."
+                prompt: "Help me sound smart about AI tomorrow",
+                response: "Synergy with substance. I've got you covered!"
             },
             {
-                prompt: "Summarize this 100-page PDF. I have a meeting in 10 minutes.",
-                response: "Speed-reading mode activated! Here are the 5 things you actually need to know..."
+                prompt: "Summarize this PDF in 2 minutes",
+                response: "Speed mode! Here's what matters..."
             },
             {
-                prompt: "What's the difference between AI and my coffee machine?",
-                response: "One learns from data, the other just judges you for that third espresso. Let me elaborate..."
+                prompt: "Research this topic for my deck",
+                response: "On it! Finding the key insights now..."
             }
         ],
         'CURSOR.AI': [
             {
-                prompt: "Cursor, help me refactor this. The original dev left no comments.",
-                response: "Brave explorer of legacy code! Let's document and modernize this archaeological find."
+                prompt: "Refactor this. No comments exist.",
+                response: "Legacy code adventure! Let's modernize it."
             },
             {
-                prompt: "Why is my code running slower than my Monday morning?",
-                response: "Let's profile this and find those sneaky performance bottlenecks hiding in plain sight."
+                prompt: "Why is this so slow?",
+                response: "Found it! Sneaky bottleneck on line 47..."
             },
             {
-                prompt: "Convert this spaghetti code into something... less Italian?",
-                response: "Time for some clean architecture! We'll transform this into elegant, maintainable code."
+                prompt: "Clean up this spaghetti code",
+                response: "Time for clean architecture. Let's go!"
             }
         ],
         'COPILOT': [
             {
-                prompt: "Copilot, autocomplete my hopes and dreams... I mean, this function.",
-                response: "Dreams loading... In the meantime, here's that perfectly typed function you needed!"
+                prompt: "Autocomplete this function for me",
+                response: "Already on it! Check this out..."
             },
             {
-                prompt: "Can you see why this PR has 47 comments?",
-                response: "Ah, a spirited code review! Let's address these concerns one diplomatic commit at a time."
+                prompt: "Why does this PR have 47 comments?",
+                response: "Spirited review! Let's address them all."
             },
             {
-                prompt: "Help me write tests. Yes, I know I should've written them first.",
-                response: "No judgment here! Let's add comprehensive tests and pretend we planned this all along."
+                prompt: "Write tests for this module",
+                response: "No judgment! Comprehensive tests coming..."
             }
         ],
         'PERPLEXITY': [
             {
-                prompt: "Perplexity, settle an office debate: tabs or spaces?",
-                response: "The eternal war! Research shows... it depends on your team's style guide. Diplomacy wins!"
+                prompt: "Tabs or spaces? Settle this.",
+                response: "The eternal debate! Your style guide wins."
             },
             {
-                prompt: "What did my competitors announce while I was on vacation?",
-                response: "Let me catch you up on the industry news you missed. Spoiler: you didn't miss the AI revolution."
+                prompt: "What did I miss this week in AI?",
+                response: "Catching you up! Here's the highlights..."
             },
             {
-                prompt: "Find me research that proves my idea isn't crazy.",
-                response: "Validating your hypothesis... Good news! There's actually solid research supporting this approach."
+                prompt: "Find research backing my idea",
+                response: "Good news! Found solid supporting data."
             }
         ]
     };
