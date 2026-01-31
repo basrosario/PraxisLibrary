@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Hero mode settings - single large network, alternating sides
             if (isHero) {
                 this.nodesPerCluster = this.isMobile ? 80 : 180; // More nodes for detail
-                this.clusterSpread = this.isMobile ? 160 : 280; // Network radius
+                this.clusterSpread = this.isMobile ? 180 : 350; // Network radius - larger
                 this.heroOpacity = 0.5; // Slightly more visible
                 this.currentAIIndex = 0;
                 this.lastAISwitch = 0;
@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.heroRotationSpeed = 0.0001; // Very slow rotation
                 // Orbiting terms
                 this.heroTerms = [];
-                this.heroTermCount = this.isMobile ? 12 : 25;
+                this.heroTermCount = this.isMobile ? 20 : 50;
             } else {
                 // Cluster settings - one per AI (cluster mode)
                 this.nodesPerCluster = this.isMobile ? (isCombined ? 20 : 15) : (isCombined ? 35 : 25);
@@ -472,22 +472,48 @@ document.addEventListener('DOMContentLoaded', () => {
                 breathePhase: 0
             };
 
-            // Create nodes in CONCENTRIC RINGS for even distribution (avoids dark center)
-            const ringCount = this.isMobile ? 5 : 7;
+            // Different shapes for each AI model
+            // 0: ChatGPT - Circle, 1: CLAUDE CODE - Hexagon, 2: GEMINI - Diamond
+            // 3: CURSOR.AI - Triangle, 4: COPILOT - Square, 5: PERPLEXITY - Star
+            const shapeType = this.currentAIIndex % 6;
+            const ringCount = this.isMobile ? 5 : 8;
             const nodesCreated = { count: 0 };
 
+            // Shape vertex counts and rotation offsets
+            const shapeConfig = {
+                0: { sides: 0, rotation: 0 },           // Circle (no sides = circle)
+                1: { sides: 6, rotation: 0 },           // Hexagon
+                2: { sides: 4, rotation: Math.PI / 4 }, // Diamond (rotated square)
+                3: { sides: 3, rotation: -Math.PI / 2 },// Triangle (point up)
+                4: { sides: 4, rotation: 0 },           // Square
+                5: { sides: 5, rotation: -Math.PI / 2 } // Pentagon/Star (point up)
+            };
+
+            const config = shapeConfig[shapeType];
+
             for (let ring = 0; ring < ringCount; ring++) {
-                // Radius increases with each ring - start from outer edge of minimum
                 const ringRadius = 40 + (ring / (ringCount - 1)) * this.clusterSpread;
-                // More nodes in outer rings (proportional to circumference)
                 const nodesInRing = Math.floor(8 + ring * (this.isMobile ? 8 : 12));
 
                 for (let n = 0; n < nodesInRing && nodesCreated.count < this.nodesPerCluster; n++) {
-                    // Evenly distributed around the ring with slight randomization
                     const baseAngle = (n / nodesInRing) * Math.PI * 2;
-                    const angle = baseAngle + (Math.random() - 0.5) * 0.3;
-                    // Slight radius variation within the ring
-                    const radius = ringRadius + (Math.random() - 0.5) * 20;
+                    let angle = baseAngle + (Math.random() - 0.5) * 0.2;
+                    let radius = ringRadius;
+
+                    // Apply shape distortion (except for circle)
+                    if (config.sides > 0) {
+                        // Calculate distance to nearest edge of polygon
+                        const adjustedAngle = angle + config.rotation;
+                        const sideAngle = (Math.PI * 2) / config.sides;
+                        const angleInSide = ((adjustedAngle % sideAngle) + sideAngle) % sideAngle;
+                        const distToCenter = angleInSide - sideAngle / 2;
+                        // Shape factor: 1 at vertices, cos at edges
+                        const shapeFactor = 1 / Math.cos(distToCenter);
+                        radius = ringRadius * Math.min(shapeFactor, 1.3);
+                    }
+
+                    // Add slight randomization
+                    radius += (Math.random() - 0.5) * 15;
 
                     this.nodes.push(this.createNode(angle, radius, 0, nodesCreated.count));
                     nodesCreated.count++;
@@ -506,9 +532,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectedTerms = shuffledTerms.slice(0, this.heroTermCount);
 
             selectedTerms.forEach((term, i) => {
-                // Orbit outside the network
-                const orbitRadius = this.clusterSpread + 60 + Math.random() * 80;
-                const startAngle = (i / this.heroTermCount) * Math.PI * 2 + Math.random() * 0.5;
+                // Orbit outside the network - spread out more
+                const orbitRadius = this.clusterSpread + 80 + Math.random() * 150;
+                const startAngle = (i / this.heroTermCount) * Math.PI * 2 + Math.random() * 0.3;
 
                 this.heroTerms.push({
                     text: term,
@@ -593,6 +619,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentCenterX = cluster.baseCenterX;
             const currentCenterY = cluster.baseCenterY;
 
+            // Gentle up/down bob for label
+            const labelBob = Math.sin(time * 0.002) * 8;
+
             // Fade in/out transition
             const fadeOpacity = this.aiTransitionProgress * this.heroOpacity * pulse * 1.5; // Brighter label
 
@@ -602,11 +631,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const labelAngle = isLeft ? -Math.PI / 4 : -3 * Math.PI / 4; // Upper-right or upper-left (no rotation)
             const labelDistance = this.clusterSpread + (this.isMobile ? 40 : 60); // Shortened line
             const labelX = currentCenterX + Math.cos(labelAngle) * labelDistance;
-            const labelY = currentCenterY + Math.sin(labelAngle) * labelDistance;
+            const labelY = currentCenterY + Math.sin(labelAngle) * labelDistance + labelBob;
 
-            // Connection point on network edge
+            // Connection point on network edge (also bobs slightly)
             const edgeX = currentCenterX + Math.cos(labelAngle) * (this.clusterSpread * 0.7);
-            const edgeY = currentCenterY + Math.sin(labelAngle) * (this.clusterSpread * 0.7);
+            const edgeY = currentCenterY + Math.sin(labelAngle) * (this.clusterSpread * 0.7) + labelBob * 0.3;
 
             this.ctx.save();
 
