@@ -643,11 +643,22 @@ p {
     transform: translateX(4px);
 }
 
-/* Feature Cards Grid */
+/* Feature Cards Grid - horizontal scroll on mobile */
 .cards-grid {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
     gap: var(--space-md);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-sm);
+    scrollbar-width: thin;
+}
+
+.cards-grid > * {
+    flex: 0 0 auto;
+    min-width: 260px;
+    max-width: 300px;
 }
 
 /* ============================================
@@ -752,10 +763,20 @@ p {
 }
 
 .footer-links {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     gap: var(--space-lg);
     margin-bottom: var(--space-xl);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-sm);
+    scrollbar-width: thin;
+}
+
+.footer-links > * {
+    flex: 0 0 auto;
+    min-width: 140px;
 }
 
 .footer-col h4 {
@@ -1684,12 +1705,23 @@ p {
     background: var(--bg-secondary);
 }
 
-/* Card Grid */
+/* Card Grid - horizontal scroll on mobile */
 .card-grid {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
     gap: var(--space-md);
     margin-top: var(--space-lg);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-sm);
+    scrollbar-width: thin;
+}
+
+.card-grid > * {
+    flex: 0 0 auto;
+    min-width: 240px;
+    max-width: 280px;
 }
 
 /* Badge Variants */
@@ -1958,12 +1990,22 @@ p {
     margin: 0;
 }
 
-/* Methodology Selector */
+/* Methodology Selector - horizontal on mobile */
 .methodology-selector {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
     gap: var(--space-sm);
     margin-bottom: var(--space-lg);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-xs);
+    scrollbar-width: thin;
+}
+
+.methodology-selector > * {
+    flex: 0 0 auto;
+    min-width: 120px;
 }
 
 .methodology-btn {
@@ -3132,13 +3174,25 @@ p {
     text-underline-offset: 2px;
 }
 
-/* Info Cards */
+/* Info Cards - horizontal scroll on mobile */
 .info-cards, .score-info-grid, .coverage-grid, .values-grid,
 .safety-principles, .risks-grid, .caution-grid {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
     gap: var(--space-md);
     margin-top: var(--space-lg);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-sm);
+    scrollbar-width: thin;
+}
+
+.info-cards > *, .score-info-grid > *, .coverage-grid > *, .values-grid > *,
+.safety-principles > *, .risks-grid > *, .caution-grid > * {
+    flex: 0 0 auto;
+    min-width: 200px;
+    max-width: 260px;
 }
 
 .info-card, .score-info-card, .coverage-card, .value-card,
@@ -4122,19 +4176,24 @@ body.menu-open {
    ============================================ */
 .acronym-cards {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-md);
-    justify-content: center;
+    flex-wrap: nowrap;
+    gap: var(--space-sm);
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-sm);
+    scrollbar-width: thin;
 }
 
 .acronym-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: var(--space-lg);
+    padding: var(--space-md);
     text-align: center;
-    flex: 1 1 180px;
-    max-width: 220px;
+    flex: 0 0 auto;
+    min-width: 140px;
+    max-width: 180px;
     transition: all var(--transition-normal);
 }
 
@@ -4417,18 +4476,53 @@ body.menu-open {
     opacity: 0.6;
 }
 
-/* Responsive flip cards */
+/* Responsive flip cards - keep horizontal, scale down */
 @media (max-width: 768px) {
     .acronym-card.has-flip .card-inner {
-        height: 260px;
+        height: 220px;
     }
 
     .acronym-card.has-flip .card-front::after {
         content: 'Tap to flip';
+        font-size: 0.6rem;
+    }
+
+    .acronym-card.has-flip .card-front .acronym-letter {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+    }
+
+    .acronym-card.has-flip .card-front h3 {
+        font-size: 0.9rem;
+    }
+
+    .acronym-card.has-flip .card-front p {
+        font-size: 0.7rem;
+    }
+
+    .acronym-card.has-flip .card-back {
+        padding: var(--space-sm);
+    }
+
+    .acronym-card.has-flip .card-back .flip-header {
+        font-size: 0.7rem;
+        margin-bottom: var(--space-xs);
     }
 
     .acronym-card.has-flip .card-back .flip-example {
-        font-size: 0.75rem;
+        font-size: 0.65rem;
+        padding: var(--space-xs);
+        line-height: 1.4;
+    }
+
+    .acronym-card.has-flip .card-back .flip-tags {
+        gap: 2px;
+    }
+
+    .acronym-card.has-flip .card-back .flip-tag {
+        font-size: 0.55rem;
+        padding: 2px 4px;
     }
 }
 
@@ -5204,10 +5298,21 @@ body.menu-open {
 
 /* Readiness Pillars */
 .readiness-pillars {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     gap: var(--space-md);
     margin-top: var(--space-lg);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-sm);
+    scrollbar-width: thin;
+}
+
+.readiness-pillars > * {
+    flex: 0 0 auto;
+    min-width: 180px;
+    max-width: 220px;
 }
 
 .pillar-card {
@@ -5252,11 +5357,22 @@ body.menu-open {
     margin: 0;
 }
 
-/* Tool Cards */
+/* Tool Cards - horizontal scroll on mobile */
 .tool-cards {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     gap: var(--space-lg);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-sm);
+    scrollbar-width: thin;
+}
+
+.tool-cards > * {
+    flex: 0 0 auto;
+    min-width: 280px;
+    max-width: 320px;
 }
 
 .tool-card {
@@ -5340,12 +5456,23 @@ body.menu-open {
     transform: translateX(4px);
 }
 
-/* Path Steps */
+/* Path Steps - horizontal on mobile */
 .path-steps {
     display: flex;
-    flex-direction: column;
-    gap: 0;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: var(--space-md);
     margin-top: var(--space-lg);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-sm);
+    scrollbar-width: thin;
+}
+
+.path-steps > * {
+    flex: 0 0 auto;
+    min-width: 220px;
+    max-width: 260px;
 }
 
 .path-step {
