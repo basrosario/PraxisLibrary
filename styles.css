@@ -4280,6 +4280,161 @@ body.menu-open {
     background: var(--primary);
 }
 
+/* Acronym Card Tooltips */
+.acronym-card.has-tooltip {
+    position: relative;
+    cursor: pointer;
+}
+
+.acronym-tooltip {
+    position: absolute;
+    bottom: calc(100% + 15px);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    width: 320px;
+    background: var(--bg-card);
+    border: 1px solid var(--primary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.acronym-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 10px solid transparent;
+    border-top-color: var(--primary);
+}
+
+.acronym-card.has-tooltip:hover .acronym-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.tooltip-header {
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--primary);
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tooltip-example {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    padding: var(--space-sm);
+    background: rgba(220, 53, 69, 0.05);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--primary);
+    margin-bottom: var(--space-sm);
+    font-style: italic;
+}
+
+.tooltip-breakdown {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.tooltip-tag {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    background: rgba(220, 53, 69, 0.1);
+    color: var(--primary);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+}
+
+/* Responsive tooltip positioning */
+@media (max-width: 768px) {
+    .acronym-tooltip {
+        width: 280px;
+        left: 0;
+        transform: translateX(0) translateY(10px);
+    }
+
+    .acronym-card.has-tooltip:hover .acronym-tooltip {
+        transform: translateX(0) translateY(0);
+    }
+
+    .acronym-tooltip::after {
+        left: 30px;
+    }
+
+    /* Adjust for cards on the right */
+    .acronym-card.has-tooltip:nth-child(4) .acronym-tooltip,
+    .acronym-card.has-tooltip:nth-child(5) .acronym-tooltip {
+        left: auto;
+        right: 0;
+        transform: translateX(0) translateY(10px);
+    }
+
+    .acronym-card.has-tooltip:nth-child(4):hover .acronym-tooltip,
+    .acronym-card.has-tooltip:nth-child(5):hover .acronym-tooltip {
+        transform: translateX(0) translateY(0);
+    }
+
+    .acronym-card.has-tooltip:nth-child(4) .acronym-tooltip::after,
+    .acronym-card.has-tooltip:nth-child(5) .acronym-tooltip::after {
+        left: auto;
+        right: 30px;
+    }
+}
+
+/* Method Reminder Notes */
+.method-reminder {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+    padding: var(--space-md) var(--space-lg);
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.05) 0%, rgba(220, 53, 69, 0.02) 100%);
+    border: 1px solid rgba(220, 53, 69, 0.15);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--primary);
+}
+
+.reminder-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+    font-style: italic;
+}
+
+.reminder-content {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.reminder-content strong {
+    color: var(--text-primary);
+}
+
+.reminder-content em {
+    color: var(--primary);
+    font-style: normal;
+    font-weight: 500;
+}
+
 /* Evolution Cards (CRISPE) */
 .evolution-cards {
     display: flex;
