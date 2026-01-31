@@ -2251,7 +2251,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${this.renderFrameworkCoverage(frameworkFit, selectedFramework)}
                 ${this.renderExcerptHighlights(elementSummary)}
                 ${this.renderStrengths(feedback.strengths)}
-                ${this.renderImprovements(feedback.improvements, feedback.quickWins)}
+                ${this.renderImprovements(feedback.improvements, feedback.quickWins, selectedFramework, elementSummary)}
                 ${this.renderCTA()}
             `;
 
@@ -2386,12 +2386,35 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }
 
-        renderImprovements(improvements, quickWins) {
+        renderImprovements(improvements, quickWins, selectedFramework = 'CRISP', elementSummary = {}) {
             if (improvements.length === 0 && quickWins.length === 0) {
+                // Generate framework-aware success message
+                let successTip = '';
+                const hasExamples = elementSummary.examples?.detected;
+                const hasTone = elementSummary.tone?.detected;
+
+                if (selectedFramework === 'CRISP') {
+                    // CRISP doesn't require examples, but they're a nice bonus
+                    if (!hasExamples && !hasTone) {
+                        successTip = 'For even better results, consider adding tone guidance or examples.';
+                    } else if (!hasExamples) {
+                        successTip = 'Adding an example of desired output can help get more consistent results.';
+                    } else {
+                        successTip = 'You\'ve gone above and beyond with examples - great job!';
+                    }
+                } else if (selectedFramework === 'CRISPE') {
+                    // CRISPE includes examples as a core element
+                    successTip = hasExamples
+                        ? 'Your examples help ensure consistent, high-quality outputs.'
+                        : 'Consider strengthening your examples section for even better results.';
+                } else if (selectedFramework === 'COSTAR') {
+                    successTip = 'Your prompt has excellent structure for content creation.';
+                }
+
                 return `
                     <div class="feedback-section feedback-perfect">
                         <h4>Excellent Work!</h4>
-                        <p>Your prompt covers all the key elements. Consider adding examples for even better results.</p>
+                        <p>Your prompt covers all the key ${selectedFramework} elements. ${successTip}</p>
                     </div>
                 `;
             }
