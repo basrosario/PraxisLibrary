@@ -437,19 +437,20 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Hero mode: Single large neural network with cycling AI names, alternating sides
+        // Hero mode: Layered neural network architecture (Input → Hidden → Output)
         initHeroCluster() {
             this.nodes = [];
             this.aiClusters = [];
             this.heroTerms = [];
+            this.networkLayers = []; // Store layer info for connections
 
-            // Position cluster based on current side (left or right)
+            // Position network based on current side (left or right)
             const leftPos = this.isMobile ? 0.5 : 0.30;
             const rightPos = this.isMobile ? 0.5 : 0.70;
             const centerX = this.width * (this.heroSide === 'left' ? leftPos : rightPos);
             const centerY = this.height * 0.5;
 
-            // Create single large cluster
+            // Create cluster for tracking
             const cluster = {
                 name: AI_NAMES[this.currentAIIndex],
                 baseCenterX: centerX,
@@ -459,71 +460,121 @@ document.addEventListener('DOMContentLoaded', () => {
                 nodeStartIndex: 0,
                 nodeCount: this.nodesPerCluster,
                 pulseOffset: 0,
-                // Enhanced floating animation - more movement
                 floatSpeedX: 0.00015,
                 floatSpeedY: 0.0002,
                 floatAmplitudeX: 25,
                 floatAmplitudeY: 20,
                 floatPhaseX: 0,
                 floatPhaseY: Math.PI / 4,
-                // Breathing effect - scale pulsing
                 breatheSpeed: 0.0008,
-                breatheAmplitude: 0.08, // 8% size variation
+                breatheAmplitude: 0.08,
                 breathePhase: 0
             };
 
-            // Different shapes for each AI model
-            // 0: ChatGPT - Circle, 1: CLAUDE CODE - Hexagon, 2: GEMINI - Diamond
-            // 3: CURSOR.AI - Triangle, 4: COPILOT - Square, 5: PERPLEXITY - Star
-            const shapeType = this.currentAIIndex % 6;
-            const ringCount = this.isMobile ? 5 : 8;
-            const nodesCreated = { count: 0 };
+            // LAYERED NEURAL NETWORK ARCHITECTURE
+            // Define layers: [input, hidden1, hidden2, hidden3, hidden4, output]
+            const layerConfig = this.isMobile
+                ? [6, 10, 14, 10, 6]  // Mobile: fewer nodes
+                : [8, 14, 20, 24, 20, 14, 8]; // Desktop: full architecture
 
-            // Shape vertex counts and rotation offsets
-            const shapeConfig = {
-                0: { sides: 0, rotation: 0 },           // Circle (no sides = circle)
-                1: { sides: 6, rotation: 0 },           // Hexagon
-                2: { sides: 4, rotation: Math.PI / 4 }, // Diamond (rotated square)
-                3: { sides: 3, rotation: -Math.PI / 2 },// Triangle (point up)
-                4: { sides: 4, rotation: 0 },           // Square
-                5: { sides: 5, rotation: -Math.PI / 2 } // Pentagon/Star (point up)
-            };
+            const numLayers = layerConfig.length;
+            const networkWidth = this.clusterSpread * 2;
+            const networkHeight = this.clusterSpread * 1.6;
+            const layerSpacing = networkWidth / (numLayers - 1);
 
-            const config = shapeConfig[shapeType];
+            let nodeIndex = 0;
 
-            for (let ring = 0; ring < ringCount; ring++) {
-                const ringRadius = 40 + (ring / (ringCount - 1)) * this.clusterSpread;
-                const nodesInRing = Math.floor(8 + ring * (this.isMobile ? 8 : 12));
+            // Create nodes for each layer
+            for (let layer = 0; layer < numLayers; layer++) {
+                const nodesInLayer = layerConfig[layer];
+                const layerX = centerX - networkWidth / 2 + layer * layerSpacing;
+                const layerStartIndex = nodeIndex;
 
-                for (let n = 0; n < nodesInRing && nodesCreated.count < this.nodesPerCluster; n++) {
-                    const baseAngle = (n / nodesInRing) * Math.PI * 2;
-                    let angle = baseAngle + (Math.random() - 0.5) * 0.2;
-                    let radius = ringRadius;
+                // Vertical spacing for nodes in this layer
+                const verticalSpacing = networkHeight / (nodesInLayer + 1);
 
-                    // Apply shape distortion (except for circle)
-                    if (config.sides > 0) {
-                        // Calculate distance to nearest edge of polygon
-                        const adjustedAngle = angle + config.rotation;
-                        const sideAngle = (Math.PI * 2) / config.sides;
-                        const angleInSide = ((adjustedAngle % sideAngle) + sideAngle) % sideAngle;
-                        const distToCenter = angleInSide - sideAngle / 2;
-                        // Shape factor: 1 at vertices, cos at edges
-                        const shapeFactor = 1 / Math.cos(distToCenter);
-                        radius = ringRadius * Math.min(shapeFactor, 1.3);
-                    }
+                for (let n = 0; n < nodesInLayer; n++) {
+                    const nodeY = centerY - networkHeight / 2 + (n + 1) * verticalSpacing;
 
-                    // Add slight randomization
-                    radius += (Math.random() - 0.5) * 15;
+                    // Add slight randomization for organic look
+                    const jitterX = (Math.random() - 0.5) * 8;
+                    const jitterY = (Math.random() - 0.5) * 8;
 
-                    this.nodes.push(this.createNode(angle, radius, 0, nodesCreated.count));
-                    nodesCreated.count++;
+                    // Create node with absolute position (stored as layered node)
+                    const node = {
+                        x: layerX + jitterX,
+                        y: nodeY + jitterY,
+                        baseX: layerX + jitterX,
+                        baseY: nodeY + jitterY,
+                        z: 0.5 + Math.random() * 0.5, // Depth for sizing
+                        layer: layer,
+                        indexInLayer: n,
+                        clusterIndex: 0,
+                        pulseOffset: Math.random() * Math.PI * 2,
+                        isLayeredNode: true // Flag for position calculation
+                    };
+
+                    this.nodes.push(node);
+                    nodeIndex++;
                 }
+
+                // Store layer info
+                this.networkLayers.push({
+                    startIndex: layerStartIndex,
+                    nodeCount: nodesInLayer,
+                    x: layerX
+                });
             }
 
+            cluster.nodeCount = nodeIndex;
             this.aiClusters.push(cluster);
 
-            // Initialize orbiting AI terms
+            // Build layer-based connections
+            this.buildLayeredConnections();
+
+            // Initialize AI terms spread around the network
             this.initHeroTerms(centerX, centerY);
+        }
+
+        // Build connections between adjacent layers only
+        buildLayeredConnections() {
+            this.cachedConnections = [];
+
+            for (let layer = 0; layer < this.networkLayers.length - 1; layer++) {
+                const currentLayer = this.networkLayers[layer];
+                const nextLayer = this.networkLayers[layer + 1];
+
+                // Connect each node in current layer to nodes in next layer
+                for (let i = 0; i < currentLayer.nodeCount; i++) {
+                    const nodeAIndex = currentLayer.startIndex + i;
+                    const nodeA = this.nodes[nodeAIndex];
+
+                    // Connect to multiple nodes in next layer (not all, for cleaner look)
+                    const connectionsPerNode = Math.min(nextLayer.nodeCount, this.isMobile ? 3 : 5);
+                    const step = nextLayer.nodeCount / connectionsPerNode;
+
+                    for (let c = 0; c < connectionsPerNode; c++) {
+                        const targetIndex = Math.floor(c * step + Math.random() * step * 0.8);
+                        if (targetIndex >= nextLayer.nodeCount) continue;
+
+                        const nodeBIndex = nextLayer.startIndex + targetIndex;
+                        const nodeB = this.nodes[nodeBIndex];
+
+                        const avgZ = (nodeA.z + nodeB.z) / 2;
+
+                        this.cachedConnections.push({
+                            i: nodeAIndex,
+                            j: nodeBIndex,
+                            avgZ: avgZ,
+                            baseAlpha: 0.15 + avgZ * 0.2,
+                            lineWidth: 0.5 + avgZ * 1,
+                            isProminent: Math.random() > 0.7,
+                            fromLayer: layer,
+                            toLayer: layer + 1
+                        });
+                    }
+                }
+            }
         }
 
         // Initialize orbiting terms for hero mode - spread throughout the network
@@ -894,6 +945,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 return { x: node.x, y: node.y };
             }
 
+            // Layered neural network mode: use direct x/y positions
+            if (node.isLayeredNode) {
+                return { x: node.x, y: node.y };
+            }
+
             // Cluster mode: calculate from cluster center + angle/radius
             const cluster = this.aiClusters[node.clusterIndex];
 
@@ -1076,7 +1132,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const posA = this.getNodePosition(nodeA);
                 const posB = this.getNodePosition(nodeB);
 
-                // Steady alpha - no pulsing, just organic wave movement
+                // Steady alpha - no pulsing
                 const alpha = conn.baseAlpha * heroMult;
 
                 // Draw straight line
@@ -1084,16 +1140,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.ctx.moveTo(posA.x, posA.y);
                 this.ctx.lineTo(posB.x, posB.y);
 
-                // Color based on depth - prominent lines are brighter
-                if (conn.avgZ > 0.6) {
-                    const brightness = conn.isProminent ? 230 : 200;
-                    this.ctx.strokeStyle = `rgba(${brightness}, 80, 70, ${alpha})`;
-                } else if (conn.avgZ > 0.3) {
-                    const brightness = conn.isProminent ? 210 : 180;
-                    this.ctx.strokeStyle = `rgba(${brightness}, 60, 60, ${alpha})`;
+                // Hero mode (layered network): varied colors like real NN diagrams
+                if (isHero && conn.fromLayer !== undefined) {
+                    // Color based on layer - creates visual depth
+                    const layerColors = [
+                        [100, 180, 255], // Blue - input
+                        [255, 150, 100], // Orange
+                        [150, 255, 150], // Green
+                        [255, 100, 150], // Pink
+                        [200, 150, 255], // Purple
+                        [255, 200, 100], // Gold
+                        [100, 255, 200]  // Cyan - output
+                    ];
+                    const colorIdx = conn.fromLayer % layerColors.length;
+                    const color = layerColors[colorIdx];
+                    const bright = conn.isProminent ? 1 : 0.7;
+                    this.ctx.strokeStyle = `rgba(${color[0] * bright}, ${color[1] * bright}, ${color[2] * bright}, ${alpha})`;
                 } else {
-                    const brightness = conn.isProminent ? 170 : 140;
-                    this.ctx.strokeStyle = `rgba(${brightness}, 50, 55, ${alpha})`;
+                    // Original color scheme for non-hero modes
+                    if (conn.avgZ > 0.6) {
+                        const brightness = conn.isProminent ? 230 : 200;
+                        this.ctx.strokeStyle = `rgba(${brightness}, 80, 70, ${alpha})`;
+                    } else if (conn.avgZ > 0.3) {
+                        const brightness = conn.isProminent ? 210 : 180;
+                        this.ctx.strokeStyle = `rgba(${brightness}, 60, 60, ${alpha})`;
+                    } else {
+                        const brightness = conn.isProminent ? 170 : 140;
+                        this.ctx.strokeStyle = `rgba(${brightness}, 50, 55, ${alpha})`;
+                    }
                 }
 
                 this.ctx.lineWidth = conn.lineWidth;
@@ -1109,18 +1183,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Use cached connections instead of recalculating O(n²)
             const conn = this.cachedConnections[Math.floor(Math.random() * this.cachedConnections.length)];
-            const reverse = Math.random() > 0.5;
             const isHero = this.mode === 'hero';
+
+            // In hero mode (layered network): data flows left-to-right (input → output)
+            // Small chance of reverse flow (backpropagation visualization)
+            const reverse = isHero ? (Math.random() > 0.85) : (Math.random() > 0.5);
 
             this.dataPulses.push({
                 startIdx: reverse ? conn.j : conn.i,
                 endIdx: reverse ? conn.i : conn.j,
                 progress: 0,
-                speed: isHero ? 0.018 + Math.random() * 0.024 : 0.008 + Math.random() * 0.012,
-                // Hero mode: skinnier, more delicate pulses (half size)
-                size: isHero ? 0.4 + conn.avgZ * 0.5 : 1.5 + conn.avgZ * 2,
-                brightness: isHero ? 0.4 + conn.avgZ * 0.3 : 0.6 + conn.avgZ * 0.4,
-                z: conn.avgZ
+                speed: isHero ? 0.015 + Math.random() * 0.02 : 0.008 + Math.random() * 0.012,
+                // Hero mode: smaller data particles
+                size: isHero ? 0.6 + conn.avgZ * 0.6 : 1.5 + conn.avgZ * 2,
+                brightness: isHero ? 0.5 + conn.avgZ * 0.3 : 0.6 + conn.avgZ * 0.4,
+                z: conn.avgZ,
+                isBackprop: reverse && isHero // Different color for backprop
             });
 
             this.lastPulseSpawn = time;
@@ -1181,6 +1259,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const brightness = pulse.brightness * heroMult;
 
+                // Colors: red/pink for forward data, green for backpropagation
+                const isBackprop = pulse.isBackprop;
+                const trailColor = isBackprop ? '120, 255, 120' : '255, 120, 120';
+                const glowColorOuter = isBackprop ? '60, 255, 60' : '255, 60, 60';
+                const glowColorInner = isBackprop ? '100, 255, 100' : '255, 100, 100';
+                const coreColor = isBackprop ? '240, 255, 240' : '255, 240, 240';
+
                 // Trail - longer and more visible
                 const trailSteps = this.isMobile ? 4 : 12;
                 for (let t = trailSteps; t >= 0; t--) {
@@ -1194,7 +1279,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     this.ctx.beginPath();
                     this.ctx.arc(tx, ty, trailSize, 0, Math.PI * 2);
-                    this.ctx.fillStyle = `rgba(255, 120, 120, ${trailAlpha})`;
+                    this.ctx.fillStyle = `rgba(${trailColor}, ${trailAlpha})`;
                     this.ctx.fill();
                 }
 
@@ -1202,20 +1287,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!this.isMobile) {
                     this.ctx.beginPath();
                     this.ctx.arc(x, y, pulse.size * 4, 0, Math.PI * 2);
-                    this.ctx.fillStyle = `rgba(255, 60, 60, ${brightness * 0.2})`;
+                    this.ctx.fillStyle = `rgba(${glowColorOuter}, ${brightness * 0.2})`;
                     this.ctx.fill();
 
                     // Inner glow
                     this.ctx.beginPath();
                     this.ctx.arc(x, y, pulse.size * 2.5, 0, Math.PI * 2);
-                    this.ctx.fillStyle = `rgba(255, 100, 100, ${brightness * 0.4})`;
+                    this.ctx.fillStyle = `rgba(${glowColorInner}, ${brightness * 0.4})`;
                     this.ctx.fill();
                 }
 
-                // Core - bright white/pink
+                // Core - bright white/tinted
                 this.ctx.beginPath();
                 this.ctx.arc(x, y, pulse.size, 0, Math.PI * 2);
-                this.ctx.fillStyle = `rgba(255, 240, 240, ${brightness})`;
+                this.ctx.fillStyle = `rgba(${coreColor}, ${brightness})`;
                 this.ctx.fill();
             });
         }
