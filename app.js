@@ -500,18 +500,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     const jitterX = (Math.random() - 0.5) * 8;
                     const jitterY = (Math.random() - 0.5) * 8;
 
+                    const z = 0.5 + Math.random() * 0.5; // Depth for sizing
+
                     // Create node with absolute position (stored as layered node)
                     const node = {
                         x: layerX + jitterX,
                         y: nodeY + jitterY,
                         baseX: layerX + jitterX,
                         baseY: nodeY + jitterY,
-                        z: 0.5 + Math.random() * 0.5, // Depth for sizing
+                        z: z,
                         layer: layer,
                         indexInLayer: n,
                         clusterIndex: 0,
                         pulseOffset: Math.random() * Math.PI * 2,
-                        isLayeredNode: true // Flag for position calculation
+                        isLayeredNode: true,
+                        // Required properties for drawNode
+                        size: this.isMobile ? (2 + z * 2) : (3 + z * 4), // Node size
+                        glowIntensity: 0.7 + z * 0.3 // Glow brightness
                     };
 
                     this.nodes.push(node);
@@ -566,9 +571,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             i: nodeAIndex,
                             j: nodeBIndex,
                             avgZ: avgZ,
-                            baseAlpha: 0.4 + avgZ * 0.4, // Brighter lines
-                            lineWidth: 1 + avgZ * 1.5,   // Thicker lines
-                            isProminent: Math.random() > 0.5, // More prominent lines
+                            baseAlpha: 0.6 + avgZ * 0.35, // Very bright lines
+                            lineWidth: 1.2 + avgZ * 1.8,  // Thicker lines
+                            isProminent: Math.random() > 0.4, // 60% prominent
                             fromLayer: layer,
                             toLayer: layer + 1
                         });
