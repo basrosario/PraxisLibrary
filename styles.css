@@ -149,6 +149,12 @@ p {
 
 .text-primary { color: var(--primary); }
 .text-muted { color: var(--text-muted); }
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
 
 /* ============================================
    LAYOUT
@@ -556,6 +562,10 @@ p {
     height: 44px;
     padding: 0;
     border-radius: var(--radius-md);
+}
+
+.btn-full {
+    width: 100%;
 }
 
 /* ============================================
@@ -5104,7 +5114,7 @@ body.menu-open {
     border-radius: var(--radius-sm);
     padding: var(--space-md);
     margin-top: var(--space-sm);
-    font-family: monospace;
+    font-family: var(--font-mono);
     font-size: 0.8125rem;
     white-space: pre;
     overflow-x: auto;
@@ -6668,7 +6678,7 @@ body.menu-open {
     transition: none !important;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
     .complete-example {
         min-height: 250px;
         padding: calc(var(--space-xl) * 1.25);
@@ -6711,6 +6721,19 @@ body.menu-open {
     font-size: 1rem;
     font-weight: 700;
 }
+
+/* Legend badge color variants (CSP-compliant) */
+.legend-badge--context { background: #DC3545; }
+.legend-badge--role { background: #E85D04; }
+.legend-badge--objective { background: #E85D04; }
+.legend-badge--instruction { background: #2196F3; }
+.legend-badge--style { background: #2196F3; }
+.legend-badge--specifics { background: #9C27B0; }
+.legend-badge--tone { background: #9C27B0; }
+.legend-badge--parameters { background: #4CAF50; }
+.legend-badge--audience { background: #4CAF50; }
+.legend-badge--example { background: #FF9800; }
+.legend-badge--response { background: #FF9800; }
 
 @media (max-width: 480px) {
     .example-card {
@@ -6883,6 +6906,11 @@ body.menu-open {
 
 .faq-answer p:last-child {
     margin-bottom: 0;
+}
+
+.faq-answer ul {
+    margin: var(--space-md) 0;
+    padding-left: var(--space-lg);
 }
 
 .faq-link {

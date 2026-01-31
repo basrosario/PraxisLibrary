@@ -2183,21 +2183,21 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="sub-scores">
                 <div class="sub-score">
                     <div class="sub-score-bar">
-                        <div class="sub-score-fill ${getScoreClass(scores.frameworkCoverage)}" style="width: ${scores.frameworkCoverage}%"></div>
+                        <div class="sub-score-fill ${getScoreClass(scores.frameworkCoverage)}" data-width="${scores.frameworkCoverage}"></div>
                     </div>
                     <span class="sub-score-label">Framework Coverage</span>
                     <span class="sub-score-value">${scores.frameworkCoverage}%</span>
                 </div>
                 <div class="sub-score">
                     <div class="sub-score-bar">
-                        <div class="sub-score-fill ${getScoreClass(scores.sentenceQuality)}" style="width: ${scores.sentenceQuality}%"></div>
+                        <div class="sub-score-fill ${getScoreClass(scores.sentenceQuality)}" data-width="${scores.sentenceQuality}"></div>
                     </div>
                     <span class="sub-score-label">Sentence Quality</span>
                     <span class="sub-score-value">${scores.sentenceQuality}%</span>
                 </div>
                 <div class="sub-score">
                     <div class="sub-score-bar">
-                        <div class="sub-score-fill ${getScoreClass(scores.intentClarity)}" style="width: ${scores.intentClarity}%"></div>
+                        <div class="sub-score-fill ${getScoreClass(scores.intentClarity)}" data-width="${scores.intentClarity}"></div>
                     </div>
                     <span class="sub-score-label">Intent Clarity</span>
                     <span class="sub-score-value">${scores.intentClarity}%</span>
@@ -2215,6 +2215,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
         scoreDisplay.classList.add('visible');
+
+        // Set widths via JavaScript to comply with CSP (no inline styles)
+        scoreDisplay.querySelectorAll('.sub-score-fill[data-width]').forEach(el => {
+            el.style.width = el.dataset.width + '%';
+        });
 
         // Initialize framework tabs
         initFrameworkTabs();
@@ -3158,6 +3163,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${this.renderCTA()}
             `;
 
+            // Set widths via JavaScript to comply with CSP (no inline styles)
+            this.container.querySelectorAll('.sub-score-fill[data-width]').forEach(el => {
+                el.style.width = el.dataset.width + '%';
+            });
+
             this.container.classList.add('visible');
         }
 
@@ -3412,7 +3422,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="sub-scores">
                     <div class="sub-score">
                         <div class="sub-score-bar">
-                            <div class="sub-score-fill ${getScoreClass(selected.coverageRatio * 100)}" style="width: ${selected.coverageRatio * 100}%"></div>
+                            <div class="sub-score-fill ${getScoreClass(selected.coverageRatio * 100)}" data-width="${selected.coverageRatio * 100}"></div>
                         </div>
                         <span class="sub-score-label">${selectedFramework} Coverage</span>
                         <span class="sub-score-value">${selected.coverage}</span>
@@ -3927,9 +3937,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const q = questions[currentQuestion];
+            const progressWidth = (currentQuestion / questions.length) * 100;
             quizContainer.innerHTML = `
                 <div class="quiz-progress">
-                    <div class="quiz-progress-fill" style="width: ${(currentQuestion / questions.length) * 100}%"></div>
+                    <div class="quiz-progress-fill" data-width="${progressWidth}"></div>
                 </div>
                 <div class="quiz-question">
                     <span class="question-number">Question ${currentQuestion + 1} of ${questions.length}</span>
@@ -3941,6 +3952,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     `).join('')}
                 </div>
             `;
+
+            // Set progress bar width via JavaScript to comply with CSP
+            const progressFill = quizContainer.querySelector('.quiz-progress-fill');
+            if (progressFill) {
+                progressFill.style.width = progressFill.dataset.width + '%';
+            }
 
             quizContainer.querySelectorAll('.quiz-option').forEach(btn => {
                 btn.addEventListener('click', () => selectAnswer(parseInt(btn.dataset.index)));
