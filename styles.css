@@ -2827,6 +2827,7 @@ p {
     border: 4px solid var(--primary);
 }
 
+.score-circle.score-exceptional { border-color: #8B5CF6; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1)); }
 .score-circle.score-excellent { border-color: #10B981; }
 .score-circle.score-good { border-color: #3B82F6; }
 .score-circle.score-fair { border-color: #F59E0B; }
@@ -2872,6 +2873,7 @@ p {
     transition: width var(--transition-slow);
 }
 
+.sub-score-fill.score-exceptional { background: linear-gradient(90deg, #8B5CF6, #EC4899); }
 .sub-score-fill.score-excellent { background: #10B981; }
 .sub-score-fill.score-good { background: #3B82F6; }
 .sub-score-fill.score-fair { background: #F59E0B; }
@@ -4303,6 +4305,7 @@ p {
     margin-bottom: var(--space-md);
 }
 
+.example-score.score-exceptional { background: linear-gradient(90deg, #8B5CF6, #EC4899); }
 .example-score.score-excellent { background: #10B981; }
 .example-score.score-good { background: #3B82F6; }
 .example-score.score-fair { background: #F59E0B; }
@@ -6970,6 +6973,77 @@ body.menu-open {
 .score-message-poor {
     background: rgba(220, 53, 69, 0.1);
     color: var(--primary);
+}
+
+.score-message-exceptional {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.15));
+    color: #8B5CF6;
+    font-weight: 600;
+}
+
+/* Score Breakdown Display */
+.score-breakdown {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-top: var(--space-sm);
+    font-size: 0.875rem;
+}
+
+.score-base {
+    color: var(--text-secondary);
+}
+
+.score-bonus {
+    color: #8B5CF6;
+    font-weight: 600;
+}
+
+/* Structural Bonuses Display */
+.feedback-bonuses {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(236, 72, 153, 0.05));
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    margin-top: var(--space-md);
+}
+
+.feedback-bonuses h4 {
+    color: #8B5CF6;
+    margin-bottom: var(--space-sm);
+    font-size: 1rem;
+}
+
+.bonus-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.bonus-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-xs) 0;
+}
+
+.bonus-badge {
+    background: #8B5CF6;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    min-width: 45px;
+    text-align: center;
+}
+
+.bonus-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
 }
 
 /* Feedback Sections */

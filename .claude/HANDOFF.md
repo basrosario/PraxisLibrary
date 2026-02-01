@@ -226,7 +226,23 @@ _public_html/
 | Build-step enhancement | ✅ Done | Added shadows, improved hover states |
 | Scenario tabs enhancement | ✅ Done | Card wrapper with border and shadow |
 
-### Latest Session Work (2026-02-01 - Session 6)
+### Latest Session Work (2026-02-01 - Session 7)
+
+**Completed Tasks:**
+- Task 1.18: Prompt Analyzer Enhancement - Granular Methodology Scoring
+  - Added STRUCTURAL_BONUSES patterns for detecting advanced prompt structures
+  - Six structural bonus categories: Numbered Steps, Section Headers, Output Format, Examples, Edge Cases, Quality Criteria
+  - Scores can now exceed 100% (max 130%) for exceptional prompts
+  - Updated both PROMPT SCORER and PromptAnalyzer class in app.js
+  - Added CSS for exceptional scores (purple gradient theme)
+  - Score breakdown display shows base score + bonuses
+
+**Files Modified:**
+- app.js (STRUCTURAL_BONUSES, detectStructuralBonuses, calculateElementQuality, analyzePrompt, PromptAnalyzer.calculateOverallScore, AnalyzerDisplay)
+- styles.css (score-exceptional, score-message-exceptional, feedback-bonuses, bonus-list, score-breakdown)
+- .claude/HANDOFF.md (documentation update)
+
+### Previous Session Work (2026-02-01 - Session 6)
 
 **Completed Tasks:**
 - About page "Why Praxis?" section refined with personal purpose statement
@@ -520,39 +536,21 @@ Key variables used throughout (defined in styles.css):
      - ARIA labels for all controls
      - Preferences remembered across sessions
 
-10. **Task 1.18:** Prompt Analyzer Enhancement - Granular Methodology Scoring
+10. **Task 1.18:** Prompt Analyzer Enhancement - Granular Methodology Scoring ✅ COMPLETED
    - **Purpose:** Improve scoring accuracy with natural language structure analysis
    - **Reference benchmark:** Detailed, structured prompts = 100% base score
    - **Scoring model:**
      - **100% (Reference):** Prompt includes: clear context, explicit role, step-by-step instructions, specific constraints, defined parameters, and concrete examples
-     - **105-120%:** Exceeds reference with: multiple methodology elements, detailed formatting specs, edge case handling, output validation criteria
+     - **105-130%:** Exceeds reference with: multiple methodology elements, detailed formatting specs, edge case handling, output validation criteria
      - **Below 100%:** Lacks key elements from reference structure
-   - **Reference prompt structure (100% example):**
-     ```
-     You are an expert in [specific domain].
-
-     Context: [Detailed background and situation]
-
-     Task: [Clear, specific instructions with numbered steps]
-     1. First step
-     2. Second step
-     3. Third step
-
-     Constraints:
-     - Constraint 1
-     - Constraint 2
-
-     Output format: [Specific structure required]
-
-     Example: [Concrete example of expected output]
-     ```
-   - **Implementation:**
-     1. Create granular natural language pattern library in app.js
-     2. Score each methodology element independently
-     3. Calculate composite score with weighting
-     4. Provide specific feedback on missing/present elements
-     5. Allow scores to exceed 100% for exceptional prompts
-   - **Files:** app.js (PROMPT ANALYZER section), tools/analyzer.html (scoring display)
+   - **Implementation (Completed):**
+     - Added STRUCTURAL_BONUSES patterns for detecting advanced prompt structures
+     - Bonuses detected: Numbered Steps (+5%), Section Headers (+5%), Output Format (+5%), Example Included (+5%), Edge Cases (+5%), Quality Criteria (+5%)
+     - Maximum total bonus: +30% (capped at 130% overall score)
+     - Updated both PROMPT SCORER and PromptAnalyzer class
+     - Added CSS for exceptional scores (purple gradient theme)
+     - Score breakdown display shows base score + bonuses
+   - **Files Modified:** app.js, styles.css
 
 11. **Task 1.19:** Site-Wide Visual Continuity Audit
    - **Purpose:** Ensure consistent fonts, colors, themes, and sizes across all site content

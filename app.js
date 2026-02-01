@@ -3143,6 +3143,92 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     };
 
+    // ==========================================
+    // STRUCTURAL BONUS PATTERNS
+    // Detect advanced prompt structure for scores above 100%
+    // ==========================================
+
+    const STRUCTURAL_BONUSES = {
+        // Numbered or step-by-step instructions (+5%)
+        numberedSteps: {
+            name: 'Numbered Steps',
+            bonus: 5,
+            patterns: [
+                /\b(step\s*\d|step\s+\d)/i,
+                /^\s*\d+[\.\)]\s+\w/m,
+                /\b(first|second|third|fourth|fifth)\s*[,:]/i,
+                /\b(1\.|2\.|3\.|4\.|5\.)\s+\w/,
+                /\bthen\s*[,:]/i
+            ],
+            description: 'Clear step-by-step structure'
+        },
+        // Clear section headers (+5%)
+        sectionHeaders: {
+            name: 'Section Headers',
+            bonus: 5,
+            patterns: [
+                /^(context|background|role|task|instructions?|objective|constraints?|parameters?|output|format|example|requirements?)\s*:/im,
+                /^##?\s+\w+/m,
+                /\*\*(context|role|task|output)\*\*/i,
+                /\n\s*(context|background|objective|constraints?|output)\s*:\s*\n/i
+            ],
+            description: 'Explicit section organization'
+        },
+        // Output format specification (+5%)
+        outputFormat: {
+            name: 'Output Format',
+            bonus: 5,
+            patterns: [
+                /\b(output|format|response)\s*(format|as|should be|in)\s*:/i,
+                /\b(JSON|markdown|bullet\s*points?|numbered\s*list|table|CSV)\b/i,
+                /\bformat\s+(as|like|the output|your response)\b/i,
+                /\b(respond|reply|answer)\s+(in|with|using)\s+(a|the)?\s*(format|structure)/i,
+                /\bstructure\s+(the|your)\s+(response|output|answer)\b/i
+            ],
+            description: 'Explicit output format specification'
+        },
+        // Example provided (+5%)
+        exampleProvided: {
+            name: 'Example Included',
+            bonus: 5,
+            patterns: [
+                /\b(example|sample|for instance|e\.g\.|such as)\s*:/i,
+                /\bhere'?s?\s+(a|an|the)?\s*example/i,
+                /\blike\s+this\s*:/i,
+                /\bfor\s+example\s*[,:]/i,
+                /\boutput\s+example\s*:/i,
+                /\bsample\s+(output|response|format)\s*:/i
+            ],
+            description: 'Concrete example provided'
+        },
+        // Edge case or error handling (+5%)
+        edgeCases: {
+            name: 'Edge Cases',
+            bonus: 5,
+            patterns: [
+                /\b(edge\s*case|special\s*case|exception|corner\s*case)\b/i,
+                /\b(if\s+.+\s+then|when\s+.+\s*,)/i,
+                /\b(handle|address|consider)\s+(errors?|exceptions?|failures?|issues?)\b/i,
+                /\bwhat\s+(if|happens\s+if|to do\s+if)\b/i,
+                /\b(fallback|default|otherwise)\b/i
+            ],
+            description: 'Addresses edge cases or error handling'
+        },
+        // Validation or quality criteria (+5%)
+        validationCriteria: {
+            name: 'Quality Criteria',
+            bonus: 5,
+            patterns: [
+                /\b(validate|verify|check|ensure|confirm)\s+(that|the|your)\b/i,
+                /\b(quality|success)\s+(criteria|metrics?|standards?)\b/i,
+                /\b(must|should)\s+(include|have|contain|be)\b/i,
+                /\b(accurate|correct|valid|complete)\s+(information|data|content)\b/i,
+                /\brequired\s+(elements?|components?|parts?)\b/i
+            ],
+            description: 'Defines quality or validation criteria'
+        }
+    };
+
     // Scorer state management
     const ScorerState = {
         mode: 'standard',
@@ -3173,6 +3259,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     name: element.name,
                     found,
                     confidence,
+                    matchCount,
                     tip: element.tip,
                     example: element.example
                 };
@@ -3190,29 +3277,91 @@ document.addEventListener('DOMContentLoaded', () => {
         return results;
     }
 
-    // Calculate scores based on framework detection
-    // Scoring: elements detected / total elements = score
-    // 5 elements = 100%, 4 = 80%, 3 = 60%, 2 = 40%, 1 = 20%, 0 = 0%
+    // Detect structural bonuses for exceptional prompts (scores above 100%)
+    function detectStructuralBonuses(prompt) {
+        const bonuses = {
+            detected: [],
+            totalBonus: 0
+        };
+
+        for (const [bonusKey, bonus] of Object.entries(STRUCTURAL_BONUSES)) {
+            const matchCount = bonus.patterns.filter(p => p.test(prompt)).length;
+            const found = matchCount > 0;
+
+            if (found) {
+                bonuses.detected.push({
+                    id: bonusKey,
+                    name: bonus.name,
+                    bonus: bonus.bonus,
+                    description: bonus.description,
+                    matchCount
+                });
+                bonuses.totalBonus += bonus.bonus;
+            }
+        }
+
+        // Cap total bonus at 30% (max score 130%)
+        bonuses.totalBonus = Math.min(bonuses.totalBonus, 30);
+
+        return bonuses;
+    }
+
+    // Calculate element quality score based on pattern match depth
+    function calculateElementQuality(element) {
+        if (!element.found) return 0;
+
+        // Quality scoring based on confidence (pattern match count)
+        // Low confidence (1 pattern): 60% of potential
+        // Medium confidence (2-3 patterns): 80% of potential
+        // High confidence (4+ patterns): 100% of potential
+        if (element.matchCount >= 4) return 1.0;
+        if (element.matchCount >= 2) return 0.8;
+        return 0.6;
+    }
+
+    // Calculate scores based on framework detection with granular quality scoring
+    // Base scoring: elements detected / total elements = base score (max 100%)
+    // Quality multiplier: based on pattern match depth
+    // Structural bonuses: up to +30% for exceptional prompt structure
+    // Maximum possible score: 130%
     function analyzePrompt(prompt) {
         const frameworkResults = detectFrameworkElements(prompt);
+        const structuralBonuses = detectStructuralBonuses(prompt);
 
         // Find best matching framework
         const bestFramework = Object.entries(frameworkResults)
             .sort((a, b) => b[1].percentage - a[1].percentage)[0];
 
-        // Overall score is simply the framework coverage (detected/total * 100)
-        const overall = bestFramework[1].percentage;
+        // Calculate quality-weighted base score
+        const elements = bestFramework[1].detected;
+        let qualityScore = 0;
+        let maxQualityScore = 0;
+
+        for (const [, element] of Object.entries(elements)) {
+            maxQualityScore += 1;
+            qualityScore += calculateElementQuality(element);
+        }
+
+        // Base score weighted by element quality (max 100%)
+        const baseScore = Math.round((qualityScore / maxQualityScore) * 100);
+
+        // Add structural bonuses for exceptional prompts
+        const totalBonus = structuralBonuses.totalBonus;
+        const overall = Math.min(baseScore + totalBonus, 130);
 
         // Generate feedback based on detected elements
         const feedback = generateFrameworkFeedback(bestFramework, frameworkResults);
 
         return {
             overall,
-            frameworkCoverage: overall,
+            baseScore,
+            bonusScore: totalBonus,
+            frameworkCoverage: bestFramework[1].percentage,
             detectedCount: bestFramework[1].coverage,
             totalElements: bestFramework[1].total,
             bestFramework: bestFramework[0],
             frameworkResults,
+            structuralBonuses,
             feedback
         };
     }
@@ -3312,9 +3461,13 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }
 
-        // Overall message
+        // Overall message with support for exceptional prompts (above 100%)
         let overallMessage = '';
-        if (scores.overall >= 80) {
+        if (scores.overall > 100) {
+            overallMessage = '<p class="score-message score-message-exceptional">Outstanding! Your prompt exceeds the reference benchmark with exceptional structure and detail.</p>';
+        } else if (scores.overall === 100) {
+            overallMessage = '<p class="score-message score-message-great">Perfect! Your prompt matches the reference benchmark for a well-structured prompt.</p>';
+        } else if (scores.overall >= 80) {
             overallMessage = '<p class="score-message score-message-great">Excellent prompt structure! You\'ve covered the key elements.</p>';
         } else if (scores.overall >= 60) {
             overallMessage = '<p class="score-message score-message-good">Good foundation! Adding a few more elements will strengthen your prompt.</p>';
@@ -3324,12 +3477,39 @@ document.addEventListener('DOMContentLoaded', () => {
             overallMessage = '<p class="score-message score-message-poor">Your prompt needs more structure. Try adding the suggested elements below.</p>';
         }
 
+        // Structural bonuses HTML (for scores with bonuses)
+        let bonusesHTML = '';
+        if (scores.structuralBonuses && scores.structuralBonuses.detected.length > 0) {
+            bonusesHTML = `
+                <div class="feedback-section feedback-bonuses">
+                    <h4>Structure Bonuses Earned</h4>
+                    <ul class="bonus-list">
+                        ${scores.structuralBonuses.detected.map(b => `
+                            <li class="bonus-item">
+                                <span class="bonus-badge">+${b.bonus}%</span>
+                                <span class="bonus-text">${b.name}: ${b.description}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        // Score breakdown for transparency
+        const scoreBreakdownHTML = scores.bonusScore > 0 ? `
+            <div class="score-breakdown">
+                <span class="score-base">Base: ${scores.baseScore}%</span>
+                <span class="score-bonus">+ Bonuses: ${scores.bonusScore}%</span>
+            </div>
+        ` : '';
+
         scoreDisplay.innerHTML = `
             <div class="score-main">
                 <div class="score-circle ${getScoreClass(scores.overall)}">
                     <span class="score-value">${scores.overall}</span>
                     <span class="score-label">Overall</span>
                 </div>
+                ${scoreBreakdownHTML}
                 ${overallMessage}
             </div>
 
@@ -3344,6 +3524,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="sub-score-value">${scores.detectedCount}/${scores.totalElements}</span>
                 </div>
             </div>
+            ${bonusesHTML}
             ${strengthsHTML}
             ${improvementsHTML}
             <div class="feedback-cta">
@@ -3661,6 +3842,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getScoreClass(score) {
+        if (score > 100) return 'score-exceptional';
         if (score >= 80) return 'score-excellent';
         if (score >= 60) return 'score-good';
         if (score >= 40) return 'score-fair';
@@ -3923,11 +4105,22 @@ document.addEventListener('DOMContentLoaded', () => {
             );
             const elementSummary = this.aggregateElementScores(analyzedSentences);
             const frameworkFit = this.calculateFrameworkFit(elementSummary);
-            const overallScore = this.calculateOverallScore(elementSummary, frameworkFit, selectedFramework);
+            const scoreResult = this.calculateOverallScore(elementSummary, frameworkFit, selectedFramework, prompt);
             const feedback = this.generateFeedback(elementSummary, frameworkFit, selectedFramework);
             const techniques = this.detectTechniques(prompt);
 
-            return { prompt, sentences: analyzedSentences, elementSummary, frameworkFit, overallScore, feedback, techniques };
+            return {
+                prompt,
+                sentences: analyzedSentences,
+                elementSummary,
+                frameworkFit,
+                overallScore: scoreResult.score,
+                baseScore: scoreResult.baseScore,
+                bonusScore: scoreResult.bonusScore,
+                structuralBonuses: scoreResult.structuralBonuses,
+                feedback,
+                techniques
+            };
         }
 
         segmentPrompt(prompt) {
@@ -4102,7 +4295,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return fit;
         }
 
-        calculateOverallScore(elementSummary, frameworkFit, selectedFramework) {
+        calculateOverallScore(elementSummary, frameworkFit, selectedFramework, prompt = '') {
             const frameworkScore = (frameworkFit[selectedFramework]?.coverageRatio || 0) * 100;
             const detectedElements = Object.values(elementSummary).filter(e => e.detected);
             const avgElementScore = detectedElements.length > 0 ? detectedElements.reduce((sum, e) => sum + e.score, 0) / detectedElements.length : 0;
@@ -4130,13 +4323,23 @@ document.addEventListener('DOMContentLoaded', () => {
             // Richness bonus - reward comprehensive prompts
             const richnessBonus = detectedElements.length >= 6 ? 8 : detectedElements.length >= 5 ? 5 : 0;
 
-            // Calculate base score with adjusted weights
-            const baseScore = frameworkScore * 0.45 + avgElementScore * 0.25 + structuralScore * 0.20;
+            // Calculate base score with adjusted weights (capped at 100)
+            const baseScore = Math.min(100, frameworkScore * 0.45 + avgElementScore * 0.25 + structuralScore * 0.20 +
+                Math.min(20, (confidenceBonus + extraElementsBonus + richnessBonus) * 0.5));
 
-            // Add bonuses (capped contribution)
-            const totalBonus = Math.min(20, (confidenceBonus + extraElementsBonus + richnessBonus) * 0.5);
+            // Detect structural bonuses for scores above 100%
+            const structuralBonuses = detectStructuralBonuses(prompt);
+            const totalBonusPercent = structuralBonuses.totalBonus;
 
-            return Math.min(100, Math.max(0, Math.round(baseScore + totalBonus)));
+            // Final score: base (max 100) + structural bonuses (max 30) = max 130
+            const finalScore = Math.min(130, Math.max(0, Math.round(baseScore + totalBonusPercent)));
+
+            return {
+                score: finalScore,
+                baseScore: Math.round(baseScore),
+                bonusScore: totalBonusPercent,
+                structuralBonuses: structuralBonuses.detected
+            };
         }
 
         generateFeedback(elementSummary, frameworkFit, selectedFramework) {
@@ -4291,10 +4494,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         render(results, selectedFramework) {
-            const { overallScore, elementSummary, frameworkFit, feedback, techniques } = results;
+            const { overallScore, baseScore, bonusScore, structuralBonuses, elementSummary, frameworkFit, feedback, techniques } = results;
 
             this.container.innerHTML = `
-                ${this.renderOverallScore(overallScore)}
+                ${this.renderOverallScore(overallScore, baseScore, bonusScore)}
+                ${this.renderStructuralBonuses(structuralBonuses)}
                 ${this.renderElementDetection(elementSummary, selectedFramework)}
                 ${this.renderTechniquesDetected(techniques)}
                 ${this.renderFrameworkCoverage(frameworkFit, selectedFramework)}
@@ -4312,14 +4516,22 @@ document.addEventListener('DOMContentLoaded', () => {
             this.container.classList.add('visible');
         }
 
-        renderOverallScore(score) {
+        renderOverallScore(score, baseScore = score, bonusScore = 0) {
             const scoreClass = getScoreClass(score);
             const messages = {
+                'score-exceptional': 'Outstanding! Your prompt exceeds the reference benchmark with exceptional structure and detail.',
                 'score-excellent': 'Excellent prompt structure! You\'ve covered the key elements.',
                 'score-good': 'Good foundation! Adding a few more elements will strengthen your prompt.',
                 'score-fair': 'Your prompt has some elements but is missing key components.',
                 'score-poor': 'Your prompt needs more structure. Try adding the suggested elements below.'
             };
+
+            const scoreBreakdownHTML = bonusScore > 0 ? `
+                <div class="score-breakdown">
+                    <span class="score-base">Base: ${baseScore}%</span>
+                    <span class="score-bonus">+ Bonuses: ${bonusScore}%</span>
+                </div>
+            ` : '';
 
             return `
                 <div class="score-main">
@@ -4327,7 +4539,26 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="score-value">${score}</span>
                         <span class="score-label">Overall</span>
                     </div>
-                    <p class="score-message ${scoreClass}">${messages[scoreClass]}</p>
+                    ${scoreBreakdownHTML}
+                    <p class="score-message ${scoreClass.replace('score-', 'score-message-')}">${messages[scoreClass]}</p>
+                </div>
+            `;
+        }
+
+        renderStructuralBonuses(bonuses) {
+            if (!bonuses || bonuses.length === 0) return '';
+
+            return `
+                <div class="feedback-section feedback-bonuses">
+                    <h4>Structure Bonuses Earned</h4>
+                    <ul class="bonus-list">
+                        ${bonuses.map(b => `
+                            <li class="bonus-item">
+                                <span class="bonus-badge">+${b.bonus}%</span>
+                                <span class="bonus-text">${b.name}: ${b.description}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
                 </div>
             `;
         }
