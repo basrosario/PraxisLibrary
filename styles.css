@@ -53,6 +53,10 @@
     /* Typography */
     --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'SF Mono', 'Fira Code', monospace;
+
+    /* Accessibility - Text Scaling */
+    --text-scale: 1;
+    --dim-level: 0;
 }
 
 /* Dark Mode */
@@ -8568,5 +8572,426 @@ body.menu-open {
     .glossary-terms {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ==============================================
+   ACCESSIBILITY DASHBOARD (ADL)
+   User-controlled accommodations for UD/UDL
+   ============================================== */
+
+/* Floating Toggle Button
+   -------------------------------------------- */
+.adl-toggle {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    z-index: 9998;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background: #0891B2;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
+    transition: all var(--transition-normal);
+}
+
+.adl-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(8, 145, 178, 0.4);
+}
+
+.adl-toggle:focus {
+    outline: 3px solid rgba(8, 145, 178, 0.5);
+    outline-offset: 2px;
+}
+
+.adl-toggle svg {
+    width: 24px;
+    height: 24px;
+    color: white;
+}
+
+.adl-toggle.is-active {
+    background: var(--bg-dark);
+}
+
+/* Dashboard Panel
+   -------------------------------------------- */
+.adl-panel {
+    position: fixed;
+    bottom: 160px;
+    right: 20px;
+    z-index: 9997;
+    width: 280px;
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    padding: var(--space-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px) scale(0.95);
+    transition: all var(--transition-normal);
+}
+
+.adl-panel.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.adl-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.adl-panel-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.adl-panel-title svg {
+    width: 18px;
+    height: 18px;
+    color: #0891B2;
+}
+
+.adl-close {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.adl-close:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.adl-close svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Control Groups
+   -------------------------------------------- */
+.adl-control {
+    margin-bottom: var(--space-md);
+}
+
+.adl-control:last-child {
+    margin-bottom: 0;
+}
+
+.adl-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-xs);
+}
+
+/* Button Group (Text Size)
+   -------------------------------------------- */
+.adl-btn-group {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.adl-btn {
+    flex: 1;
+    padding: var(--space-sm) var(--space-xs);
+    border: 2px solid var(--border-color);
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.adl-btn:hover {
+    border-color: #0891B2;
+    color: #0891B2;
+}
+
+.adl-btn:focus {
+    outline: 2px solid #0891B2;
+    outline-offset: 1px;
+}
+
+.adl-btn.is-active {
+    background: #0891B2;
+    border-color: #0891B2;
+    color: white;
+}
+
+/* Toggle Switch (Contrast Mode)
+   -------------------------------------------- */
+.adl-switch-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.adl-switch-label {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.adl-switch {
+    position: relative;
+    width: 48px;
+    height: 26px;
+}
+
+.adl-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.adl-switch-track {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-full);
+    transition: all var(--transition-fast);
+}
+
+.adl-switch-track::before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    bottom: 2px;
+    background: white;
+    border-radius: var(--radius-full);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all var(--transition-fast);
+}
+
+.adl-switch input:checked + .adl-switch-track {
+    background: #0891B2;
+    border-color: #0891B2;
+}
+
+.adl-switch input:checked + .adl-switch-track::before {
+    transform: translateX(22px);
+}
+
+.adl-switch input:focus + .adl-switch-track {
+    box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.2);
+}
+
+/* Range Slider (Dimming)
+   -------------------------------------------- */
+.adl-range-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.adl-range {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-full);
+    outline: none;
+}
+
+.adl-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #0891B2;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(8, 145, 178, 0.3);
+    transition: all var(--transition-fast);
+}
+
+.adl-range::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.adl-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: #0891B2;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 6px rgba(8, 145, 178, 0.3);
+}
+
+.adl-range-value {
+    min-width: 32px;
+    text-align: right;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Reset Button
+   -------------------------------------------- */
+.adl-reset {
+    width: 100%;
+    padding: var(--space-sm);
+    margin-top: var(--space-md);
+    border: 2px solid var(--border-color);
+    background: transparent;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.adl-reset:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+}
+
+/* Dimming Overlay
+   -------------------------------------------- */
+.adl-dim-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, var(--dim-level));
+    pointer-events: none;
+    z-index: 9990;
+    transition: background var(--transition-normal);
+}
+
+/* ==============================================
+   TEXT SCALING MODES
+   Applied via data-text-scale attribute on html
+   Uses root font-size scaling for consistent results
+   ============================================== */
+
+/* Base font size (default 16px = 100%) */
+html {
+    font-size: 100%;
+}
+
+/* 2x Text Scale - 125% base font size */
+html[data-text-scale="2"] {
+    font-size: 125%;
+    --text-scale: 1.25;
+}
+
+/* 3x Text Scale - 150% base font size */
+html[data-text-scale="3"] {
+    font-size: 150%;
+    --text-scale: 1.5;
+}
+
+/* Prevent ADL panel from scaling with document */
+.adl-panel,
+.adl-toggle {
+    font-size: 16px !important;
+}
+
+.adl-panel * {
+    font-size: inherit;
+}
+
+.adl-label {
+    font-size: 0.75rem !important;
+}
+
+.adl-btn {
+    font-size: 0.875rem !important;
+}
+
+.adl-switch-label,
+.adl-range-value,
+.adl-reset {
+    font-size: 0.875rem !important;
+}
+
+.adl-panel-title {
+    font-size: 1rem !important;
+}
+
+/* ==============================================
+   HIGH CONTRAST MODE
+   Applied via data-contrast attribute on html
+   ============================================== */
+
+[data-contrast="high"] {
+    --text-primary: #000000;
+    --text-secondary: #1a1a1a;
+    --text-muted: #333333;
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F0F0F0;
+    --bg-card: #FFFFFF;
+    --border-color: #000000;
+}
+
+[data-contrast="high"] .header,
+[data-contrast="high"] .footer {
+    border-color: #000000;
+}
+
+[data-contrast="high"] a {
+    text-decoration: underline;
+}
+
+[data-contrast="high"] .btn {
+    border-width: 3px;
+}
+
+/* ADL Panel - Responsive
+   -------------------------------------------- */
+@media (max-width: 480px) {
+    .adl-toggle {
+        bottom: 80px;
+        right: 12px;
+        width: 44px;
+        height: 44px;
+    }
+
+    .adl-panel {
+        bottom: 135px;
+        right: 12px;
+        left: 12px;
+        width: auto;
     }
 }

@@ -5604,4 +5604,199 @@ document.addEventListener('DOMContentLoaded', () => {
             // Future: open search modal
         }
     });
+
+    // ==============================================
+    // ACCESSIBILITY DASHBOARD (ADL)
+    // User-controlled accommodations for UD/UDL
+    // ==============================================
+
+    const adlToggle = document.querySelector('.adl-toggle');
+    const adlPanel = document.querySelector('.adl-panel');
+    const adlClose = document.querySelector('.adl-close');
+
+    if (adlToggle && adlPanel) {
+        // --- Storage Keys ---
+        const ADL_STORAGE_KEY = 'praxis-adl-preferences';
+
+        // --- Default Preferences ---
+        const defaultPrefs = {
+            textScale: '1',
+            contrast: 'normal',
+            dimLevel: 0
+        };
+
+        /**
+         * Load preferences from localStorage
+         * @returns {Object} User preferences or defaults
+         */
+        function loadADLPreferences() {
+            try {
+                const stored = localStorage.getItem(ADL_STORAGE_KEY);
+                if (stored) {
+                    return { ...defaultPrefs, ...JSON.parse(stored) };
+                }
+            } catch (e) {
+                console.warn('ADL: Could not load preferences', e);
+            }
+            return { ...defaultPrefs };
+        }
+
+        /**
+         * Save preferences to localStorage
+         * @param {Object} prefs - Preferences object
+         */
+        function saveADLPreferences(prefs) {
+            try {
+                localStorage.setItem(ADL_STORAGE_KEY, JSON.stringify(prefs));
+            } catch (e) {
+                console.warn('ADL: Could not save preferences', e);
+            }
+        }
+
+        /**
+         * Apply accessibility preferences to the page
+         * @param {Object} prefs - Preferences object
+         */
+        function applyADLPreferences(prefs) {
+            const html = document.documentElement;
+
+            // Apply text scale
+            if (prefs.textScale === '1') {
+                html.removeAttribute('data-text-scale');
+            } else {
+                html.setAttribute('data-text-scale', prefs.textScale);
+            }
+
+            // Apply contrast mode
+            if (prefs.contrast === 'high') {
+                html.setAttribute('data-contrast', 'high');
+            } else {
+                html.removeAttribute('data-contrast');
+            }
+
+            // Apply dimming
+            const dimOverlay = document.querySelector('.adl-dim-overlay');
+            if (dimOverlay) {
+                html.style.setProperty('--dim-level', prefs.dimLevel / 100);
+            }
+
+            // Update UI controls to match current state
+            updateADLControls(prefs);
+        }
+
+        /**
+         * Update ADL panel controls to reflect current preferences
+         * @param {Object} prefs - Preferences object
+         */
+        function updateADLControls(prefs) {
+            // Update text scale buttons
+            const textBtns = adlPanel.querySelectorAll('.adl-btn[data-scale]');
+            textBtns.forEach(btn => {
+                btn.classList.toggle('is-active', btn.dataset.scale === prefs.textScale);
+            });
+
+            // Update contrast toggle
+            const contrastToggle = adlPanel.querySelector('#adl-contrast-toggle');
+            if (contrastToggle) {
+                contrastToggle.checked = prefs.contrast === 'high';
+            }
+
+            // Update dim slider
+            const dimSlider = adlPanel.querySelector('#adl-dim-slider');
+            const dimValue = adlPanel.querySelector('.adl-range-value');
+            if (dimSlider) {
+                dimSlider.value = prefs.dimLevel;
+            }
+            if (dimValue) {
+                dimValue.textContent = prefs.dimLevel + '%';
+            }
+        }
+
+        // --- Initialize ---
+        let currentPrefs = loadADLPreferences();
+        applyADLPreferences(currentPrefs);
+
+        // --- Toggle Panel ---
+        adlToggle.addEventListener('click', () => {
+            const isOpen = adlPanel.classList.toggle('is-open');
+            adlToggle.classList.toggle('is-active', isOpen);
+            adlToggle.setAttribute('aria-expanded', isOpen);
+        });
+
+        // --- Close Button ---
+        if (adlClose) {
+            adlClose.addEventListener('click', () => {
+                adlPanel.classList.remove('is-open');
+                adlToggle.classList.remove('is-active');
+                adlToggle.setAttribute('aria-expanded', 'false');
+            });
+        }
+
+        // --- Text Scale Buttons ---
+        const textScaleBtns = adlPanel.querySelectorAll('.adl-btn[data-scale]');
+        textScaleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentPrefs.textScale = btn.dataset.scale;
+                saveADLPreferences(currentPrefs);
+                applyADLPreferences(currentPrefs);
+            });
+        });
+
+        // --- Contrast Toggle ---
+        const contrastToggle = adlPanel.querySelector('#adl-contrast-toggle');
+        if (contrastToggle) {
+            contrastToggle.addEventListener('change', () => {
+                currentPrefs.contrast = contrastToggle.checked ? 'high' : 'normal';
+                saveADLPreferences(currentPrefs);
+                applyADLPreferences(currentPrefs);
+            });
+        }
+
+        // --- Dim Slider ---
+        const dimSlider = adlPanel.querySelector('#adl-dim-slider');
+        const dimValue = adlPanel.querySelector('.adl-range-value');
+        if (dimSlider) {
+            dimSlider.addEventListener('input', () => {
+                currentPrefs.dimLevel = parseInt(dimSlider.value, 10);
+                if (dimValue) {
+                    dimValue.textContent = currentPrefs.dimLevel + '%';
+                }
+                applyADLPreferences(currentPrefs);
+            });
+
+            dimSlider.addEventListener('change', () => {
+                saveADLPreferences(currentPrefs);
+            });
+        }
+
+        // --- Reset Button ---
+        const resetBtn = adlPanel.querySelector('.adl-reset');
+        if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                currentPrefs = { ...defaultPrefs };
+                saveADLPreferences(currentPrefs);
+                applyADLPreferences(currentPrefs);
+            });
+        }
+
+        // --- Close on Escape ---
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && adlPanel.classList.contains('is-open')) {
+                adlPanel.classList.remove('is-open');
+                adlToggle.classList.remove('is-active');
+                adlToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // --- Close on Click Outside ---
+        document.addEventListener('click', (e) => {
+            if (adlPanel.classList.contains('is-open') &&
+                !adlPanel.contains(e.target) &&
+                !adlToggle.contains(e.target)) {
+                adlPanel.classList.remove('is-open');
+                adlToggle.classList.remove('is-active');
+                adlToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
 });
