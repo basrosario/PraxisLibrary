@@ -5511,6 +5511,99 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
+    // HERO TYPING ANIMATION
+    // Purpose: Types "AI Interactions" text on load and repeats every 30 seconds
+    // Security: CSP compliant, no eval or dynamic code
+    // ==========================================
+    const typingGradient = document.getElementById('typing-gradient');
+    const typingCursor = document.getElementById('typing-cursor');
+    const startLearningBtn = document.getElementById('start-learning-btn');
+
+    if (typingGradient && typingCursor) {
+        const textToType = 'AI Interactions';
+        const typingSpeed = 100; // milliseconds per character
+        const deleteSpeed = 50; // milliseconds per character when deleting
+        const pauseAfterComplete = 30000; // 30 seconds pause
+
+        let isTyping = false;
+
+        /**
+         * Types text character by character
+         * @param {string} text - Text to type
+         * @param {number} index - Current character index
+         * @param {function} callback - Called when complete
+         */
+        function typeText(text, index, callback) {
+            if (index < text.length) {
+                typingGradient.textContent = text.substring(0, index + 1);
+                setTimeout(() => typeText(text, index + 1, callback), typingSpeed);
+            } else {
+                if (callback) callback();
+            }
+        }
+
+        /**
+         * Deletes text character by character
+         * @param {function} callback - Called when complete
+         */
+        function deleteText(callback) {
+            const currentText = typingGradient.textContent;
+            if (currentText.length > 0) {
+                typingGradient.textContent = currentText.substring(0, currentText.length - 1);
+                setTimeout(() => deleteText(callback), deleteSpeed);
+            } else {
+                if (callback) callback();
+            }
+        }
+
+        /**
+         * Main typing animation cycle
+         */
+        function startTypingCycle() {
+            if (isTyping) return;
+            isTyping = true;
+
+            // Type the text
+            typeText(textToType, 0, () => {
+                // After typing complete, wait then delete
+                setTimeout(() => {
+                    deleteText(() => {
+                        isTyping = false;
+                        // Wait before starting next cycle
+                        setTimeout(startTypingCycle, 500);
+                    });
+                }, pauseAfterComplete);
+            });
+        }
+
+        // Initial typing on page load
+        setTimeout(startTypingCycle, 500);
+    }
+
+    // ==========================================
+    // START LEARNING BUTTON PULSE ANIMATION
+    // Purpose: Draws attention to CTA button every 20 seconds
+    // Security: CSP compliant, uses CSS class toggle
+    // ==========================================
+    if (startLearningBtn) {
+        const pulseInterval = 20000; // 20 seconds
+
+        function pulseButton() {
+            startLearningBtn.classList.add('pulse-attention');
+            // Remove class after animation completes
+            setTimeout(() => {
+                startLearningBtn.classList.remove('pulse-attention');
+            }, 600);
+        }
+
+        // Initial pulse after 3 seconds
+        setTimeout(pulseButton, 3000);
+
+        // Repeat every 20 seconds
+        setInterval(pulseButton, pulseInterval);
+    }
+
+    // ==========================================
     // KEYBOARD SHORTCUTS
     // ==========================================
     document.addEventListener('keydown', (e) => {

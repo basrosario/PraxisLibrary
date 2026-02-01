@@ -1220,6 +1220,46 @@ p {
     background-clip: text;
 }
 
+/* Typing Cursor Animation
+   -------------------------------------------- */
+.typing-cursor {
+    display: inline-block;
+    color: var(--primary);
+    font-weight: 400;
+    animation: blink-cursor 0.7s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.typing-cursor.hidden {
+    display: none;
+}
+
+/* Button Pulse Animation
+   -------------------------------------------- */
+@keyframes btn-attention-pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 25px rgba(220, 53, 69, 0.5);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+    }
+}
+
+.btn-primary.pulse-attention {
+    animation: btn-attention-pulse 0.6s ease-in-out;
+}
+
 .hero-subtitle {
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.7);
