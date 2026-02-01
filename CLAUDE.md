@@ -27,10 +27,56 @@ Before making ANY changes, read these files:
 - Remove all unused code
 
 ### Code Notation (Required)
+
+**Policy: No Surprise Code**
+All code must be labeled and documented. Unlabeled code is unacceptable. Every code block must clearly communicate its purpose to any reader.
+
+**Format Standards:**
 ```
 HTML:  <!-- === SECTION === --> ... <!-- /SECTION -->
 CSS:   /* === SECTION === */ ... /* Component ---- */
 JS:    // === SECTION === ... /** JSDoc comments */
+```
+
+**Required Documentation Elements:**
+
+1. **What the code does** - Clear description of functionality
+   - Purpose of the section/component
+   - Expected behavior
+   - Any dependencies or relationships
+
+2. **Security compliance reference** - How code aligns with standards
+   - CSP compliance notes (why no inline styles/scripts)
+   - OWASP alignment (input validation, output encoding, etc.)
+   - Data handling practices
+
+3. **No Surprise Code principle**
+   - No undocumented functionality
+   - No hidden side effects
+   - No magic numbers without explanation
+   - All external interactions clearly noted
+
+**Example - Properly Documented Code:**
+```javascript
+// === NEURAL NETWORK ANIMATION ===
+// Purpose: Renders animated neural network visualization
+// Security: CSP-compliant (no eval, no inline handlers)
+// OWASP: No user input processed, read-only canvas rendering
+
+/**
+ * Draws neural network nodes and connections
+ * @param {CanvasRenderingContext2D} ctx - Canvas context
+ * @returns {void}
+ */
+function drawNetwork(ctx) { ... }
+```
+
+```css
+/* === CONTENT BADGES ===
+   Purpose: Inline badge display for content areas
+   Security: External stylesheet only (CSP compliant)
+   -------------------------------------------- */
+.content-badges { ... }
 ```
 
 ### Accessibility (WCAG AA)
@@ -43,11 +89,6 @@ JS:    // === SECTION === ... /** JSDoc comments */
 
 ## Prompt Management Rules
 
-### Auto-Compact Policy
-- **At 90% context capacity:** Automatically compact/summarize the conversation
-- **Pre-warning required:** Alert user when approaching 90% total prompt capacity
-- **Never reach "Prompt is full":** Proactively manage context before hitting limits
-- **Preserve critical context:** When compacting, retain current task state and HANDOFF.md updates
 
 ### Context Preservation Priority
 1. Current task status and progress

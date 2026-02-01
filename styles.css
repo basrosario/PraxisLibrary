@@ -93,6 +93,8 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 img {
@@ -187,6 +189,7 @@ p {
 
 .header.scrolled {
     background: rgba(255, 255, 255, 0.95);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     box-shadow: var(--shadow-sm);
 }
@@ -532,6 +535,12 @@ p {
     color: rgba(255, 255, 255, 0.9);
 }
 
+/* Main page hero - white labels with black text */
+.hero .content-badge .badge-label {
+    background: #ffffff;
+    color: #1f2937;
+}
+
 .content-badge .badge-value {
     padding: 0.35rem 0.5rem;
     color: white;
@@ -594,6 +603,157 @@ p {
         margin-bottom: var(--space-md);
     }
 }
+
+/* === BACK TO TOP BAR ===
+   Purpose: Full-width static bar for scrolling back to top
+   Security: External stylesheet only (CSP compliant)
+   -------------------------------------------- */
+.back-to-top-bar {
+    width: 100%;
+    background: #ffffff;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0.48rem 0;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: background 0.2s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Ensure seamless connection - no gaps or borders */
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    border-top: none;
+    border-bottom: none;
+    box-shadow: none;
+}
+
+.back-to-top-bar:hover {
+    background: #f5f5f5;
+}
+
+.back-to-top-bar .back-to-top-arrow {
+    position: absolute;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-top-bar .back-to-top-arrow svg {
+    width: 20px;
+    height: 20px;
+    stroke: #1a1a1a;
+}
+
+.back-to-top-bar .back-to-top-text {
+    color: #1a1a1a;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Hide the old floating button created by JS */
+.back-to-top {
+    display: none !important;
+}
+
+/* === SITE BADGES BAR (Static bar below footer) ===
+   Purpose: Full-width bar at bottom of page with site badges
+   Security: External stylesheet only (CSP compliant)
+   Layout: Horizontal flex, badges stretch to fill full width
+   -------------------------------------------- */
+.site-badges-bar {
+    width: 100%;
+    background: #1e232a;
+    border: none;
+    border-top: none;
+    margin: 0;
+    margin-top: 0 !important;
+    padding: 0;
+    display: flex;
+    box-shadow: none;
+    outline: none;
+}
+
+/* Badges stretch to fill all available space */
+.site-badges-bar .content-badge {
+    flex: 1;
+    font-size: 0.65rem;
+    border-radius: 0;
+    justify-content: center;
+}
+
+/* Badge labels - white background with black text for readability */
+.site-badges-bar .content-badge .badge-label {
+    padding: 0.6rem 0.8rem;
+    text-align: center;
+    white-space: nowrap;
+    flex: 1;
+    justify-content: center;
+    background: #ffffff;
+    color: #1a1a1a;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+}
+
+/* Badge values - keep colored backgrounds with larger text */
+.site-badges-bar .content-badge .badge-value {
+    padding: 0.6rem 0.8rem;
+    text-align: center;
+    white-space: nowrap;
+    flex: 1;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+/* Tablet: Slightly smaller text */
+@media (max-width: 900px) {
+    .site-badges-bar .content-badge {
+        font-size: 0.6rem;
+    }
+
+    .site-badges-bar .content-badge .badge-label {
+        padding: 0.5rem 0.5rem;
+        font-size: 0.65rem;
+    }
+
+    .site-badges-bar .content-badge .badge-value {
+        padding: 0.5rem 0.5rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* Mobile: Wrap to two rows */
+@media (max-width: 640px) {
+    .site-badges-bar {
+        flex-wrap: wrap;
+    }
+
+    .site-badges-bar .content-badge {
+        flex: 1 1 30%;
+    }
+
+    .site-badges-bar .content-badge .badge-label {
+        padding: 0.4rem 0.3rem;
+        font-size: 0.55rem;
+    }
+
+    .site-badges-bar .content-badge .badge-value {
+        padding: 0.4rem 0.3rem;
+        font-size: 0.6rem;
+    }
+}
+
 
 /* ============================================
    HERO SECTION
@@ -744,10 +904,18 @@ p {
 .hero-subtitle {
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.7);
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-lg);
     max-width: 420px;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* Hero Action Buttons Container */
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    justify-content: center;
 }
 
 /* Hero CTA */
@@ -1025,6 +1193,8 @@ p {
     color: white;
     position: relative;
     overflow: hidden;
+    margin: 0;
+    border: none;
 }
 
 .footer > .container {
@@ -1095,7 +1265,10 @@ p {
 
 .footer-bottom {
     padding-top: var(--space-lg);
+    padding-bottom: var(--space-md);
+    margin: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: none;
     text-align: center;
 }
 
@@ -1785,16 +1958,23 @@ p {
 }
 
 .callout.tip {
-    border-left-color: #0d9488;
-    background: rgba(13, 148, 136, 0.15);
+    border-left-color: #DC3545;
+    background: #1a1a1a;
 }
 
 .callout.tip p {
-    color: #134e4a;
+    color: #e5e7eb;
 }
 
 .callout.tip .callout-title {
-    color: #0f766e;
+    color: #ffffff;
+}
+
+/* Highlighted text in tips - red accent */
+.callout.tip .highlight,
+.callout.tip strong {
+    color: #DC3545;
+    font-weight: 700;
 }
 
 .callout.warning {
@@ -2396,6 +2576,7 @@ p {
 
 .guided-input {
     width: 100%;
+    min-height: 60px;
     padding: var(--space-md);
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -4330,21 +4511,21 @@ body.menu-open {
 }
 
 .example-card.good {
-    border-left-color: #059669;
-    background: rgba(5, 150, 105, 0.15);
+    border-left-color: #9ca3af;
+    background: #e5e7eb;
 }
 
 .example-card.good p {
-    color: #065f46;
+    color: #1f2937;
 }
 
 .example-card.bad {
-    border-left-color: #B91C1C;
-    background: rgba(185, 28, 28, 0.12);
+    border-left-color: #1a1a1a;
+    background: #DC3545;
 }
 
 .example-card.bad p {
-    color: #7f1d1d;
+    color: #ffffff;
 }
 
 .example-label {
@@ -4358,11 +4539,11 @@ body.menu-open {
 }
 
 .example-card.good .example-label {
-    color: #047857;
+    color: #374151;
 }
 
 .example-card.bad .example-label {
-    color: #B91C1C;
+    color: #f0e6e6;
 }
 
 .example-card p {
@@ -5140,18 +5321,18 @@ body.menu-open {
     gap: var(--space-md);
     margin-top: var(--space-xl);
     padding: var(--space-md) var(--space-lg);
-    background: linear-gradient(135deg, rgba(220, 53, 69, 0.05) 0%, rgba(220, 53, 69, 0.02) 100%);
-    border: 1px solid rgba(220, 53, 69, 0.15);
+    background: #1a1a1a;
+    border: 1px solid #333333;
     border-radius: var(--radius-lg);
-    border-left: 4px solid var(--primary);
+    border-left: 4px solid #DC3545;
 }
 
 .reminder-icon {
     flex-shrink: 0;
     width: 24px;
     height: 24px;
-    background: var(--primary);
-    color: white;
+    background: #DC3545;
+    color: #ffffff;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -5163,18 +5344,19 @@ body.menu-open {
 
 .reminder-content {
     font-size: 0.9rem;
-    color: var(--text-secondary);
+    color: #e5e7eb;
     line-height: 1.6;
 }
 
 .reminder-content strong {
-    color: var(--text-primary);
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .reminder-content em {
-    color: var(--primary);
+    color: #DC3545;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 /* Evolution Cards (CRISPE) */
@@ -5518,6 +5700,10 @@ body.menu-open {
    ============================================ */
 
 /* Anatomy Cards */
+/* === ANATOMY CARDS ===
+   Purpose: Numbered cards showing prompt anatomy elements
+   Enhanced with colored left border, shadow, and engaging hover state
+   -------------------------------------------- */
 .anatomy-cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -5528,41 +5714,50 @@ body.menu-open {
 .anatomy-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
+    border-left: 4px solid var(--primary);
     border-radius: var(--radius-md);
     padding: var(--space-lg);
     padding-left: calc(var(--space-lg) + 48px);
     position: relative;
     transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
 }
 
 .anatomy-card:hover {
     border-color: var(--primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
 }
 
 .anatomy-number {
     position: absolute;
     left: var(--space-md);
-    top: var(--space-md);
-    width: 32px;
-    height: 32px;
-    background: var(--primary);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 0.875rem;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
 }
 
 .anatomy-card h3 {
     font-size: 1rem;
+    font-weight: 700;
     margin-bottom: var(--space-xs);
+    color: var(--text-primary);
 }
 
 .anatomy-card p {
     font-size: 0.875rem;
     margin: 0;
+    color: var(--text-secondary);
 }
 
 /* Mistake Cards */
@@ -6175,10 +6370,12 @@ body.menu-open {
     border-radius: var(--radius-md);
     overflow: hidden;
     transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
 }
 
 .build-step:hover {
     border-color: var(--primary);
+    box-shadow: var(--shadow-md);
 }
 
 .build-step-header {
@@ -6309,7 +6506,20 @@ body.menu-open {
    ============================================ */
 
 .scenario-tabs-container {
+    margin-top: var(--space-xl);
     margin-bottom: var(--space-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.scenario-tabs-container h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
 }
 
 .scenario-tabs {
@@ -6319,7 +6529,7 @@ body.menu-open {
     padding: var(--space-sm);
     background: var(--bg-secondary);
     border-radius: var(--radius-lg);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-lg);
 }
 
 .scenario-tab {
@@ -7129,6 +7339,13 @@ body.menu-open {
     font-size: 0.95rem;
     line-height: 1.6;
     margin: 0;
+}
+
+.disclaimer-point p em {
+    color: var(--primary);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.05rem;
 }
 
 .disclaimer-banner .callout {

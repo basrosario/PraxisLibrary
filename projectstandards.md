@@ -1,4 +1,4 @@
-# Project Standards - PROMPTLIBRARY
+# Project Standards - Praxis Library
 
 <div align="center">
 
@@ -37,7 +37,7 @@
 
 ## Overview
 
-This document defines the quality standards for all prompts in the PROMPTLIBRARY. Every example prompt must adhere to these guardrails to ensure users receive accurate, verifiable, and responsible AI outputs.
+This document defines the quality standards for all prompts in the Praxis Library. Every example prompt must adhere to these guardrails to ensure users receive accurate, verifiable, and responsible AI outputs.
 
 ### The 7P Protocol
 

@@ -1,4 +1,4 @@
-# Copilot Instructions - Prompt Library Portfolio Site
+# Copilot Instructions - Praxis Library
 
 ## Project Overview
 

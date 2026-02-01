@@ -1631,6 +1631,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 y: (Math.random() - 0.5) * 20 + (Math.random() > 0.5 ? 20 : -20)
             };
             this.termOpacity = 0.15 + Math.random() * 0.15;
+
+            // Firefly highlight effect - subtle red glow
+            this.isHighlighted = false;
+            this.highlightProgress = 0;      // 0 = no highlight, 1 = full highlight
+            this.highlightPhase = 0;         // 0 = line animating, 1 = word glowing, 2 = fading
+            this.highlightTimer = Math.random() * 15000 + 8000; // Random delay 8-23 seconds
+            this.highlightDuration = 2500;   // Total highlight animation duration
         }
 
         update(dt) {
@@ -1658,6 +1665,26 @@ document.addEventListener('DOMContentLoaded', () => {
             // Damping
             this.vx *= 0.999;
             this.vy *= 0.999;
+
+            // Firefly highlight timer - only trigger if has a term
+            if (this.term) {
+                this.highlightTimer -= dt * 16;
+                if (this.highlightTimer <= 0 && !this.isHighlighted) {
+                    this.isHighlighted = true;
+                    this.highlightProgress = 0;
+                    this.highlightPhase = 0;
+                }
+
+                // Update highlight animation
+                if (this.isHighlighted) {
+                    this.highlightProgress += (dt * 16) / this.highlightDuration;
+                    if (this.highlightProgress >= 1) {
+                        this.isHighlighted = false;
+                        this.highlightProgress = 0;
+                        this.highlightTimer = Math.random() * 20000 + 10000; // Next trigger 10-30 seconds
+                    }
+                }
+            }
         }
 
         draw(ctx) {
@@ -1665,9 +1692,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentRadius = this.radius * pulse;
             const currentOpacity = this.opacity * pulse;
 
+            // Calculate highlight intensity (peaks at 0.3 progress for dot)
+            const dotHighlight = this.isHighlighted ?
+                Math.sin(Math.min(this.highlightProgress * 3.3, 1) * Math.PI) * 0.5 : 0;
+
             ctx.beginPath();
-            ctx.arc(this.x, this.y, currentRadius, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255, 255, 255, ${currentOpacity})`;
+            ctx.arc(this.x, this.y, currentRadius * (1 + dotHighlight * 0.3), 0, Math.PI * 2);
+
+            // Blend white to subtle red when highlighted
+            if (dotHighlight > 0) {
+                ctx.fillStyle = `rgba(255, ${255 - dotHighlight * 100}, ${255 - dotHighlight * 120}, ${currentOpacity + dotHighlight * 0.3})`;
+            } else {
+                ctx.fillStyle = `rgba(255, 255, 255, ${currentOpacity})`;
+            }
             ctx.fill();
         }
 
@@ -1678,17 +1715,72 @@ document.addEventListener('DOMContentLoaded', () => {
             const termX = this.x + this.termOffset.x;
             const termY = this.y + this.termOffset.y;
 
+            // Calculate highlight phases:
+            // 0-0.3: line glows red from dot to word
+            // 0.3-0.7: word glows red
+            // 0.7-1.0: fade back to white
+            let lineHighlight = 0;
+            let wordHighlight = 0;
+            let lineProgress = 0;
+
+            if (this.isHighlighted) {
+                const p = this.highlightProgress;
+                if (p < 0.3) {
+                    // Line animating phase
+                    lineProgress = p / 0.3; // 0 to 1 along the line
+                    lineHighlight = 0.6;
+                } else if (p < 0.7) {
+                    // Word glowing phase
+                    lineProgress = 1;
+                    lineHighlight = 0.4;
+                    wordHighlight = Math.sin((p - 0.3) / 0.4 * Math.PI) * 0.7;
+                } else {
+                    // Fade out phase
+                    const fadeProgress = (p - 0.7) / 0.3;
+                    lineHighlight = 0.4 * (1 - fadeProgress);
+                    wordHighlight = 0.7 * (1 - fadeProgress);
+                    lineProgress = 1;
+                }
+            }
+
             // Draw connecting line from node to term
             ctx.beginPath();
-            ctx.moveTo(this.x, this.y);
-            ctx.lineTo(termX, termY);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${this.termOpacity * 0.5 * pulse})`;
-            ctx.lineWidth = 0.5;
+
+            if (lineHighlight > 0 && lineProgress < 1) {
+                // Animate line growing from dot to word
+                const endX = this.x + this.termOffset.x * lineProgress;
+                const endY = this.y + this.termOffset.y * lineProgress;
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(endX, endY);
+                // Subtle red glow on the animated line
+                ctx.strokeStyle = `rgba(255, ${180 - lineHighlight * 80}, ${180 - lineHighlight * 100}, ${(this.termOpacity * 0.5 + lineHighlight * 0.4) * pulse})`;
+                ctx.lineWidth = 0.5 + lineHighlight * 0.5;
+            } else {
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(termX, termY);
+                // Blend to red when highlighted
+                if (lineHighlight > 0) {
+                    ctx.strokeStyle = `rgba(255, ${200 - lineHighlight * 50}, ${200 - lineHighlight * 70}, ${(this.termOpacity * 0.5 + lineHighlight * 0.3) * pulse})`;
+                    ctx.lineWidth = 0.5 + lineHighlight * 0.3;
+                } else {
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${this.termOpacity * 0.5 * pulse})`;
+                    ctx.lineWidth = 0.5;
+                }
+            }
             ctx.stroke();
 
             // Draw term text
             ctx.font = '11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-            ctx.fillStyle = `rgba(255, 255, 255, ${this.termOpacity * pulse})`;
+
+            // Blend white to subtle red when word is highlighted
+            if (wordHighlight > 0) {
+                const r = 255;
+                const g = Math.round(255 - wordHighlight * 120);
+                const b = Math.round(255 - wordHighlight * 140);
+                ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${(this.termOpacity + wordHighlight * 0.25) * pulse})`;
+            } else {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.termOpacity * pulse})`;
+            }
             ctx.textAlign = 'center';
             ctx.fillText(this.term, termX, termY);
         }
@@ -2312,39 +2404,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // BACK TO TOP BUTTON
+    // BACK TO TOP BAR
+    // Purpose: Handles click on static back-to-top bar
+    // Security: CSP-compliant (no inline handlers)
     // ==========================================
-    const backToTop = document.createElement('button');
-    backToTop.className = 'back-to-top';
-    backToTop.setAttribute('aria-label', 'Back to top');
-    backToTop.innerHTML = `
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 15l-6-6-6 6"/>
-        </svg>
-    `;
-    document.body.appendChild(backToTop);
-
-    let backToTopTicking = false;
-
-    function updateBackToTop() {
-        if (window.scrollY > 300) {
-            backToTop.classList.add('visible');
-        } else {
-            backToTop.classList.remove('visible');
-        }
-        backToTopTicking = false;
+    const backToTopBar = document.querySelector('.back-to-top-bar');
+    if (backToTopBar) {
+        backToTopBar.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     }
-
-    window.addEventListener('scroll', () => {
-        if (!backToTopTicking) {
-            requestAnimationFrame(updateBackToTop);
-            backToTopTicking = true;
-        }
-    }, { passive: true });
-
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
 
     // ==========================================
     // TOAST NOTIFICATIONS
@@ -4596,6 +4665,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 3000);
         }
 
+        // === FINAL SCORE DISPLAY ===
+        // Purpose: Shows final hallucination game results
+        // Security: CSP-compliant (no inline onclick, uses event listener)
+        // OWASP: No user input processed, displays hardcoded score values
         function showFinalScore() {
             const percent = Math.round((score / shuffledStatements.length) * 100);
             statementText.innerHTML = `
@@ -4603,11 +4676,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h3>Game Complete!</h3>
                     <p class="score-big">${score}/${shuffledStatements.length}</p>
                     <p>${percent}% accuracy</p>
-                    <button class="btn btn-primary" onclick="location.reload()">Play Again</button>
+                    <button class="btn btn-primary" id="hallucination-replay-btn">Play Again</button>
                 </div>
             `;
             trueBtn.style.display = 'none';
             falseBtn.style.display = 'none';
+
+            // Attach event listener after DOM insertion (CSP-compliant)
+            const replayBtn = document.getElementById('hallucination-replay-btn');
+            if (replayBtn) {
+                replayBtn.addEventListener('click', () => location.reload());
+            }
         }
 
         if (trueBtn && falseBtn) {
@@ -4871,6 +4950,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             pillarBreakdown += '</div>';
 
+            // === QUIZ RESULTS DISPLAY ===
+            // Security: CSP-compliant (no inline onclick, uses event listener)
+            // OWASP: No user input in output, recommendedPath is from hardcoded array
             quizContainer.innerHTML = `
                 <div class="quiz-results">
                     <div class="result-score">${quizScore}/${questions.length}</div>
@@ -4879,11 +4961,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="result-message">${message}</p>
                     ${pillarBreakdown}
                     <div class="result-actions">
-                        <button class="btn btn-primary" onclick="location.reload()">Retake Quiz</button>
+                        <button class="btn btn-primary" id="quiz-retake-btn">Retake Quiz</button>
                         <a href="${recommendedPath}" class="btn btn-secondary">Start Learning</a>
                     </div>
                 </div>
             `;
+
+            // Attach event listener after DOM insertion (CSP-compliant)
+            const retakeBtn = document.getElementById('quiz-retake-btn');
+            if (retakeBtn) {
+                retakeBtn.addEventListener('click', () => location.reload());
+            }
         }
 
         renderQuestion();

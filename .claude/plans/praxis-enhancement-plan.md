@@ -664,6 +664,97 @@ const searchIndex = [
 - [ ] Document any new patterns/conventions
 - [ ] Create maintenance guide
 
+### 7.8 OWASP Interactive Components Audit
+
+**Reference:** SECURITY.md and OWASP Top 10 2021
+
+All interactive components must be audited for OWASP compliance. Since this is a static site with client-side JavaScript, focus areas are:
+
+#### A03:2021 - Injection (XSS Prevention)
+
+- [x] **escapeHtml utility exists** (app.js line 14-18)
+- [ ] **Prompt Analyzer** - All user input escaped before innerHTML
+  - [ ] User prompts never rendered directly into DOM
+  - [ ] Guided mode answers escaped or use textContent
+  - [ ] Framework element display uses hardcoded strings only
+- [ ] **Prompt Builder** - All generated output escaped
+  - [ ] Combined prompt uses textContent for output
+  - [ ] Question inputs properly validated
+- [ ] **Hallucination Spotter** - No user input processed
+  - [x] All statements from hardcoded array
+  - [x] CSP-compliant event handlers (fixed 2026-01-31)
+- [ ] **Readiness Quiz** - No user input processed
+  - [x] All questions from hardcoded array
+  - [x] CSP-compliant event handlers (fixed 2026-01-31)
+- [ ] **Preflight Checklist** - No user input rendered
+  - [ ] Checkbox state tracking only
+
+#### A05:2021 - Security Misconfiguration
+
+- [ ] **No inline event handlers** (onclick, onload, etc.)
+  - [x] Hallucination replay button - FIXED
+  - [x] Quiz retake button - FIXED
+  - [ ] Verify no others exist in app.js
+- [ ] **No eval() or Function() usage**
+- [ ] **No dynamic script/style injection**
+- [ ] **LocalStorage used safely** (non-sensitive data only)
+  - [ ] Verify scorer-mode is the only localStorage key
+  - [ ] No sensitive data stored
+
+#### A07:2021 - Identification/Authentication (N/A)
+
+- [x] No authentication system - static site
+- [x] No session management required
+
+#### CSP Compliance Verification
+
+- [ ] **All scripts external** (app.js only)
+- [ ] **No inline styles** in JavaScript (use CSS classes)
+- [ ] **No external resources** (CDN, API calls)
+- [ ] **Meta CSP tag consistent** across all HTML files
+
+#### Testing Checklist
+
+- [ ] Test Prompt Analyzer with XSS payloads:
+  - `<script>alert('xss')</script>`
+  - `<img src=x onerror=alert('xss')>`
+  - `javascript:alert('xss')`
+- [ ] Test all tools in Chrome, Firefox, Safari
+- [ ] Verify SecurityHeaders.com score remains A+
+- [ ] Verify Lighthouse security audit passes
+
+### 7.9 Code Notation Audit (No Surprise Code Policy)
+
+**Policy Reference:** See CLAUDE.md → Code Notation (Required)
+
+**Audit all code files to ensure compliance with "No Surprise Code" policy:**
+
+- [ ] **app.js - Section Headers**
+  - [ ] All major sections have `// === SECTION NAME ===` headers
+  - [ ] Each section includes Purpose, Security, and OWASP comments
+  - [ ] All functions have JSDoc comments with @param and @returns
+
+- [ ] **app.js - Security Documentation**
+  - [ ] CSP compliance noted for each section handling DOM/events
+  - [ ] OWASP alignment noted for any input processing
+  - [ ] No undocumented external interactions
+
+- [ ] **styles.css - Section Headers**
+  - [ ] All major sections have `/* === SECTION === */` headers
+  - [ ] Each section includes Purpose and Security compliance note
+  - [ ] Component groups clearly separated with `/* ---- */` dividers
+
+- [ ] **HTML Files - Region Markers**
+  - [ ] All major sections have opening `<!-- === SECTION === -->` comments
+  - [ ] Closing `<!-- /SECTION -->` markers present
+  - [ ] Complex components have brief inline comments
+
+- [ ] **No Surprise Code Verification**
+  - [ ] No magic numbers without explanation
+  - [ ] No hidden side effects in functions
+  - [ ] All external interactions clearly documented
+  - [ ] No undocumented functionality
+
 ---
 
 ## File Locations Reference
@@ -736,14 +827,16 @@ const searchIndex = [
 - [ ] Validator scripts created
 - [ ] Link checker working
 
-### Phase 7
-- [ ] Security audit complete
-- [ ] Structure audit complete
-- [ ] Necessity audit complete
-- [ ] Performance audit complete
-- [ ] Accessibility audit complete
-- [ ] Content audit complete
-- [ ] Cleanup complete
+### Phase 7 (Final Audits - Sequential Execution)
+- [ ] 7.1 Security audit complete
+- [ ] 7.2 Structure audit complete
+- [ ] 7.3 Necessity audit complete
+- [ ] 7.4 Performance audit complete
+- [ ] 7.5 Accessibility audit complete
+- [ ] 7.6 Content audit complete
+- [ ] 7.7 Cleanup complete
+- [ ] 7.8 OWASP interactive components audit complete
+- [ ] 7.9 Code notation audit complete (No Surprise Code policy)
 
 ---
 
