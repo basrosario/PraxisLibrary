@@ -372,6 +372,13 @@ Key variables used throughout (defined in styles.css):
    - Cursor changes to pointer on hover over clickable terms
    - Click navigates to glossary page with anchor to specific term
 
+2a. **Task 1.10a:** Navigation menu reorganization ✅ COMPLETED
+   - Moved Patterns Library, Readiness Quiz, AI Safety from Resources to AI Readiness
+   - Updated header navigation in all 23 HTML pages
+   - Updated footer links in all 23 HTML pages
+   - Resources now links to ChatGPT Guide as primary destination
+   - AI Readiness menu order: Prompt Analyzer, Prompt Builder, Preflight Checklist, Hallucination Spotter, Readiness Quiz, Patterns Library, AI Safety
+
 3. **Task 1.11:** Acronym card accent styling
    - **Red cards:** Add thicker left-side accent (10% black, cap-style)
    - **White cards:** Add white version of the accent
