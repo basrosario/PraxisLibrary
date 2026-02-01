@@ -5516,68 +5516,74 @@ document.addEventListener('DOMContentLoaded', () => {
     // Security: CSP compliant, no eval or dynamic code
     // ==========================================
     const typingGradient = document.getElementById('typing-gradient');
-    const typingCursor = document.getElementById('typing-cursor');
     const startLearningBtn = document.getElementById('start-learning-btn');
 
-    if (typingGradient && typingCursor) {
+    if (typingGradient) {
         const textToType = 'AI Interactions';
-        const typingSpeed = 100; // milliseconds per character
-        const deleteSpeed = 50; // milliseconds per character when deleting
+        const typingSpeed = 80; // milliseconds per character
+        const deleteSpeed = 40; // milliseconds per character when deleting
         const pauseAfterComplete = 30000; // 30 seconds pause
 
-        let isTyping = false;
+        let currentIndex = 0;
+        let isDeleting = false;
+        let lastTime = 0;
+        let isPaused = false;
+        let pauseUntil = 0;
 
         /**
-         * Types text character by character
-         * @param {string} text - Text to type
-         * @param {number} index - Current character index
-         * @param {function} callback - Called when complete
+         * Smooth typing animation using requestAnimationFrame
+         * @param {number} timestamp - Current animation timestamp
          */
-        function typeText(text, index, callback) {
-            if (index < text.length) {
-                typingGradient.textContent = text.substring(0, index + 1);
-                setTimeout(() => typeText(text, index + 1, callback), typingSpeed);
-            } else {
-                if (callback) callback();
+        function animateTyping(timestamp) {
+            if (!lastTime) lastTime = timestamp;
+
+            // Handle pause state
+            if (isPaused) {
+                if (timestamp < pauseUntil) {
+                    requestAnimationFrame(animateTyping);
+                    return;
+                }
+                isPaused = false;
             }
-        }
 
-        /**
-         * Deletes text character by character
-         * @param {function} callback - Called when complete
-         */
-        function deleteText(callback) {
-            const currentText = typingGradient.textContent;
-            if (currentText.length > 0) {
-                typingGradient.textContent = currentText.substring(0, currentText.length - 1);
-                setTimeout(() => deleteText(callback), deleteSpeed);
-            } else {
-                if (callback) callback();
+            const elapsed = timestamp - lastTime;
+            const speed = isDeleting ? deleteSpeed : typingSpeed;
+
+            if (elapsed >= speed) {
+                lastTime = timestamp;
+
+                if (!isDeleting) {
+                    // Typing forward
+                    if (currentIndex < textToType.length) {
+                        currentIndex++;
+                        typingGradient.textContent = textToType.substring(0, currentIndex);
+                    } else {
+                        // Finished typing, pause then start deleting
+                        isPaused = true;
+                        pauseUntil = timestamp + pauseAfterComplete;
+                        isDeleting = true;
+                    }
+                } else {
+                    // Deleting
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        typingGradient.textContent = textToType.substring(0, currentIndex);
+                    } else {
+                        // Finished deleting, pause then start typing again
+                        isPaused = true;
+                        pauseUntil = timestamp + 500;
+                        isDeleting = false;
+                    }
+                }
             }
+
+            requestAnimationFrame(animateTyping);
         }
 
-        /**
-         * Main typing animation cycle
-         */
-        function startTypingCycle() {
-            if (isTyping) return;
-            isTyping = true;
-
-            // Type the text
-            typeText(textToType, 0, () => {
-                // After typing complete, wait then delete
-                setTimeout(() => {
-                    deleteText(() => {
-                        isTyping = false;
-                        // Wait before starting next cycle
-                        setTimeout(startTypingCycle, 500);
-                    });
-                }, pauseAfterComplete);
-            });
-        }
-
-        // Initial typing on page load
-        setTimeout(startTypingCycle, 500);
+        // Start the animation after a short delay
+        setTimeout(() => {
+            requestAnimationFrame(animateTyping);
+        }, 300);
     }
 
     // ==========================================

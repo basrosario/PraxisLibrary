@@ -1753,6 +1753,19 @@ p {
     overflow: hidden;
 }
 
+/* Page Hero Background Gradient Overlay - matches main hero */
+.page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+    background:
+        radial-gradient(circle at 20% 30%, var(--primary) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, #4F46E5 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
 .page-hero .neural-canvas,
 .page-hero-neural-bg {
     position: absolute;
