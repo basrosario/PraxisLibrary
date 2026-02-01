@@ -1,10 +1,10 @@
-<div align="center"><h1># Praxis Interactive AI Library</h1></div>
+<div align="center"><h1># Praxis Educational Interactive AI Training & Tool Library</h1></div>
 
 <div align="center">
 
 **Your Curiosity - Unlocks Potential - Builds Tomorrow**
 
-*Master the Art of AI Communication theory through proven methodologies*
+*Master the Art of AI Communication theory through proven methodologies and practices*
 
 ![AI for Everybody](https://img.shields.io/badge/AI_for-Everybody-DC3545?style=for-the-badge&labelColor=ffffff&logoColor=1f2937)
 ![UD/UDL](https://img.shields.io/badge/Built_With-UD%2FUDL-0891B2?style=for-the-badge&labelColor=06B6D4)
