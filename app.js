@@ -5512,23 +5512,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================
     // HERO TYPING ANIMATION
-    // Purpose: Types "AI Interactions" text on load and repeats every 30 seconds
+    // Purpose: Types full title and repeats every 45 seconds
     // Security: CSP compliant, no eval or dynamic code
     // ==========================================
-    const typingGradient = document.getElementById('typing-gradient');
+    const typingText = document.getElementById('typing-text');
     const startLearningBtn = document.getElementById('start-learning-btn');
 
-    if (typingGradient) {
-        const textToType = 'AI Interactions';
-        const typingSpeed = 80; // milliseconds per character
-        const deleteSpeed = 40; // milliseconds per character when deleting
-        const pauseAfterComplete = 30000; // 30 seconds pause
+    if (typingText) {
+        // Full text split into two lines - second line gets gradient styling
+        const line1 = 'Master the Art of';
+        const line2 = 'AI Interactions';
+        const fullText = line1 + '\n' + line2;
+        const typingSpeed = 60; // milliseconds per character
+        const deleteSpeed = 30; // milliseconds per character when deleting
+        const pauseAfterComplete = 45000; // 45 seconds pause
 
         let currentIndex = 0;
         let isDeleting = false;
         let lastTime = 0;
         let isPaused = false;
         let pauseUntil = 0;
+
+        /**
+         * Renders the current text with proper HTML formatting
+         * @param {number} charCount - Number of characters to show
+         */
+        function renderText(charCount) {
+            const visibleText = fullText.substring(0, charCount);
+            const newlineIndex = visibleText.indexOf('\n');
+
+            if (newlineIndex === -1) {
+                // Still on first line
+                typingText.innerHTML = visibleText;
+            } else {
+                // Has reached second line - apply gradient to second part
+                const firstPart = visibleText.substring(0, newlineIndex);
+                const secondPart = visibleText.substring(newlineIndex + 1);
+                typingText.innerHTML = firstPart + '<br><span class="text-gradient">' + secondPart + '</span>';
+            }
+        }
 
         /**
          * Smooth typing animation using requestAnimationFrame
@@ -5554,9 +5576,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (!isDeleting) {
                     // Typing forward
-                    if (currentIndex < textToType.length) {
+                    if (currentIndex < fullText.length) {
                         currentIndex++;
-                        typingGradient.textContent = textToType.substring(0, currentIndex);
+                        renderText(currentIndex);
                     } else {
                         // Finished typing, pause then start deleting
                         isPaused = true;
@@ -5567,7 +5589,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Deleting
                     if (currentIndex > 0) {
                         currentIndex--;
-                        typingGradient.textContent = textToType.substring(0, currentIndex);
+                        renderText(currentIndex);
                     } else {
                         // Finished deleting, pause then start typing again
                         isPaused = true;
