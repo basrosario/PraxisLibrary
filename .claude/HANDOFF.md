@@ -765,7 +765,7 @@ Before committing any changes, verify:
 
 ---
 
-## EXPERIMENTAL: Neural Term Spotlight Animation (Session 9)
+## EXPERIMENTAL: Neural Term Spotlight Animation (Session 9-10)
 
 ### Concept
 A high-quality, high-frame-rate animation that randomly highlights neural network terms with an elaborate "spotlight" effect. Desktop only.
@@ -775,13 +775,17 @@ A high-quality, high-frame-rate animation that randomly highlights neural networ
 - Each cycle activates 1-2 random terms
 - Multiple terms must be on opposite sides of screen
 
-### Animation Sequence (~6-7 seconds total)
-1. **State 1 (Normal):** Tiny ball connected to text by line
-2. **Ball Pulse Phase (~1.5s):** Ball pulses slowly, fading between red and white, ultimately landing on red
-3. **Line Fill Phase (~3.4s):** Line fills like progress bar from ball toward word
-4. **Word Light Phase (~1s):** Letters light up one by one
-5. **Word Glow Phase (~0.5s):** Word grows 3x, glows bright white
-6. **Reverse Phase (~1s):** Word deflates, animation reverses back to State 1
+### Animation Sequence (~17.5 seconds total)
+1. **Phase 0 - Ball Flicker (3.5s):** Ball flickers rapidly between red and white with increasing intensity, glow builds up
+2. **Phase 1 - Line Fill (2.5s):** Thick red line (3px) fills from ball toward word with glowing tip
+3. **Phase 2 - Word Red (3s):** Word fills red letter by letter
+4. **Phase 3 - White Fill (4s):** White fills from ball through line to word, word transitions from red to white
+5. **Phase 4 - Word Grow (4.5s):** Word grows 3x with subtle oscillating movement and glow effect
+
+### Technical Implementation
+- `updateSpotlight(dt)` - Manages phase timings and progress values
+- `drawSpotlightTerm(ctx, termX, termY)` - Renders line and word per phase
+- `draw(ctx)` - Renders ball per phase (flicker, red, white transition)
 
 ### Technical Requirements
 - Desktop only (window.innerWidth > 1024)
@@ -789,6 +793,7 @@ A high-quality, high-frame-rate animation that randomly highlights neural networ
 - High-resolution canvas rendering
 - No movement across screen - animation happens in place
 - Spatial distribution: if 2 terms, they must be on opposite halves
+- LINE_THICKNESS = 3 (thicker red line)
 
 ### Files
 - `app.js` - HeroNeuralBackground class, NeuralNode class
