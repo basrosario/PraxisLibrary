@@ -226,7 +226,31 @@ _public_html/
 | Build-step enhancement | ✅ Done | Added shadows, improved hover states |
 | Scenario tabs enhancement | ✅ Done | Card wrapper with border and shadow |
 
-### Latest Session Work (2026-01-31 - Session 4)
+### Latest Session Work (2026-02-01 - Session 5)
+
+**Completed Tasks:**
+- Task 1.11: Acronym card accent styling ✅
+- Task 1.12: Method comparison text styling ✅
+- Task 1.13: Method use-case guidance for CRISP/CRISPE ✅
+- Task 1.14: Site messaging audit (growth mindset language) ✅
+- Neural animation terms: Replaced AI_TERMS with prompting technique terms ✅
+
+**Growth Mindset Language Changes:**
+- "Weak Prompt" → "Basic Prompt"
+- "Strong Prompt" → "Enhanced Prompt"
+- "Strong X Example" → "Effective X Example"
+- "Best Use Cases" → "Better Use Cases"
+- "Not as strong at" → "Better suited for"
+
+**Files Modified:**
+- app.js (AI_TERMS array, TERM_GLOSSARY_MAP)
+- learn/crisp.html, crispe.html, costar.html, react.html
+- learn/prompt-basics.html
+- tools/analyzer.html
+
+**Pushed:** commit `28184e5`
+
+### Previous Session Work (2026-01-31 - Session 4)
 
 **Task Documentation & Planning:**
 - Documented 8 new tasks from user's .docx file (Tasks 1.9-1.16)
@@ -379,50 +403,24 @@ Key variables used throughout (defined in styles.css):
    - Resources now links to ChatGPT Guide as primary destination
    - AI Readiness menu order: Prompt Analyzer, Prompt Builder, Preflight Checklist, Hallucination Spotter, Readiness Quiz, Patterns Library, AI Safety
 
-3. **Task 1.11:** Acronym card accent styling
-   - **Red cards:** Add thicker left-side accent (10% black, cap-style)
-   - **White cards:** Add white version of the accent
-   - **Black cards:** Increase red accent by ~30%
-   - **Files:** styles.css (`.acronym-card` variants)
-   - **Plan:**
-     1. Locate `.acronym-card` CSS in styles.css
-     2. Add/modify `border-left` or `::before` pseudo-element for cap accent
-     3. Red variant: 10% black accent on left
-     4. White variant: white accent on left
-     5. Black variant: increase existing red accent width by 30%
-     6. Test on CRISP, CRISPE, COSTAR, ReAct pages
+3. **Task 1.11:** Acronym card accent styling ✅ COMPLETED
+   - Thickened left-side accents from 5px to 7-8px
+   - Updated regular cards, flip cards, and variant accents
 
-4. **Task 1.12:** Method comparison text styling
-   - Style "vs. Other Methods" sections on methodology pages
-   - **Main concepts:** Bold text
-   - **Important keywords:** Thermo Fisher Scientific Red (site's primary red)
-   - **Files:** crisp.html, crispe.html, costar.html, react.html + styles.css
-   - **Plan:**
-     1. Add CSS class for red keyword highlighting (`.keyword-highlight`)
-     2. Locate comparison sections in methodology HTML files
-     3. Wrap main concepts in `<strong>` tags
-     4. Wrap important keywords in `<span class="keyword-highlight">`
-     5. Test across all methodology pages
+4. **Task 1.12:** Method comparison text styling ✅ COMPLETED
+   - Added bold + red keyword styling in tip callouts
+   - Updated CRISP, CRISPE, COSTAR, ReAct pages
 
-5. **Task 1.13:** Method use-case guidance text
-   - Add guidance on when to use each method
-   - **CRISP page:** "Great for quick emails and general tasks. Not strong at duplicating exact structure. Use when specific structured output is not required."
-   - **CRISPE page:** "CRISPE Provides Example output, ideal for accurately duplicating structure (e.g., SOPs). The 'E' gives AI an exact example to be as accurate, efficient, and effective as possible."
-   - **Files:** learn/crisp.html, learn/crispe.html
-   - **Plan:**
-     1. Locate appropriate section in each page (likely near "vs. Other Methods")
-     2. Add guidance callout or tip box with use-case info
-     3. Style consistently with existing callout components
+5. **Task 1.13:** Method use-case guidance text ✅ COMPLETED
+   - Added "Better Use Cases for CRISP" callout
+   - Added "When to Use CRISPE" callout with emphasis on examples
 
-6. **Task 1.14:** Site messaging audit - Growth mindset language
-   - **Philosophy:** "No Bad Ideas" vibe - positive outlook, growth-focused
-   - **Not:** Ignoring challenges | **Yes:** "Because challenges exist, I will overcome them"
-   - **Language changes:**
-     - "Strong" → "Stronger"
-     - "Weak" → "Weaker"
-     - Add: "Better Use", "Better Fit"
-     - Avoid finite/absolute terms
-   - **Scope:** Site-wide content audit
+6. **Task 1.14:** Site messaging audit - Growth mindset language ✅ COMPLETED
+   - "Weak Prompt" → "Basic Prompt"
+   - "Strong Prompt" → "Enhanced Prompt"
+   - "Strong X Example" → "Effective X Example"
+   - "Best Use Cases" → "Better Use Cases"
+   - Updated "better suited/better fit" language
    - **Tone:** Subtle but consistent throughout
    - **Core reason:** This is why the resource was built
    - **Files:** All HTML pages, especially:
