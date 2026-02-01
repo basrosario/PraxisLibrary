@@ -509,7 +509,41 @@ Key variables used throughout (defined in styles.css):
      - ARIA labels for all controls
      - Preferences remembered across sessions
 
-10. **Phase 2:** Update `prompt-basics.html`
+10. **Task 1.18:** Prompt Analyzer Enhancement - Granular Methodology Scoring
+   - **Purpose:** Improve scoring accuracy with natural language structure analysis
+   - **Reference benchmark:** Detailed, structured prompts = 100% base score
+   - **Scoring model:**
+     - **100% (Reference):** Prompt includes: clear context, explicit role, step-by-step instructions, specific constraints, defined parameters, and concrete examples
+     - **105-120%:** Exceeds reference with: multiple methodology elements, detailed formatting specs, edge case handling, output validation criteria
+     - **Below 100%:** Lacks key elements from reference structure
+   - **Reference prompt structure (100% example):**
+     ```
+     You are an expert in [specific domain].
+
+     Context: [Detailed background and situation]
+
+     Task: [Clear, specific instructions with numbered steps]
+     1. First step
+     2. Second step
+     3. Third step
+
+     Constraints:
+     - Constraint 1
+     - Constraint 2
+
+     Output format: [Specific structure required]
+
+     Example: [Concrete example of expected output]
+     ```
+   - **Implementation:**
+     1. Create granular natural language pattern library in app.js
+     2. Score each methodology element independently
+     3. Calculate composite score with weighting
+     4. Provide specific feedback on missing/present elements
+     5. Allow scores to exceed 100% for exceptional prompts
+   - **Files:** app.js (PROMPT ANALYZER section), tools/analyzer.html (scoring display)
+
+11. **Phase 2:** Update `prompt-basics.html`
    - Add email example (professional, friendly tone, colleague context)
 
 ---
