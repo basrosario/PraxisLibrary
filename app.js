@@ -5450,14 +5450,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialize badge lightbox if elements exist
-    if (lightbox && lightboxOverlay) {
-        // Add click handlers to all badges with data-badge-type
+    // Disabled on mobile - badges function normally (links navigate, others are static)
+    const isMobileForBadges = window.innerWidth < 768 || 'ontouchstart' in window;
+
+    if (lightbox && lightboxOverlay && !isMobileForBadges) {
+        // Add click handlers to all badges with data-badge-type (desktop only)
         document.querySelectorAll('.content-badge[data-badge-type]').forEach(badge => {
             badge.setAttribute('tabindex', '0');
             badge.setAttribute('role', 'button');
             badge.setAttribute('aria-haspopup', 'dialog');
 
-            badge.addEventListener('click', () => {
+            badge.addEventListener('click', (e) => {
+                // Prevent default for anchor tags so lightbox shows instead of navigation
+                e.preventDefault();
                 const badgeType = badge.dataset.badgeType;
                 openBadgeLightbox(badgeType);
             });
