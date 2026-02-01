@@ -943,17 +943,29 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    transition: background 0.2s ease;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9994;
+    transition: transform 0.3s ease, opacity 0.3s ease, background 0.2s ease;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    /* Ensure seamless connection - no gaps or borders */
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
+    /* Hidden by default - slides up when scrolling */
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
     border-top: none;
     border-bottom: none;
-    box-shadow: none;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Show when scrolling */
+.back-to-top-bar.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .back-to-top-bar:hover {
@@ -987,7 +999,7 @@ p {
     display: none !important;
 }
 
-/* === SITE BADGES BAR (Static bar below footer) ===
+/* === SITE BADGES BAR (Fixed bar - shows on scroll) ===
    Purpose: Full-width bar at bottom of page with site badges
    Security: External stylesheet only (CSP compliant)
    Layout: Horizontal flex, badges stretch to fill full width
@@ -998,11 +1010,32 @@ p {
     border: none;
     border-top: none;
     margin: 0;
-    margin-top: 0 !important;
     padding: 0;
     display: flex;
-    box-shadow: none;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
     outline: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9993;
+    /* Hidden by default - slides up when scrolling */
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Show when scrolling */
+.site-badges-bar.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Back-to-top sits above badges bar when both visible */
+.back-to-top-bar.is-visible {
+    bottom: 32px;
 }
 
 /* Badges stretch to fill all available space */
@@ -1013,15 +1046,15 @@ p {
     justify-content: center;
 }
 
-/* Badge labels - white background with black text for readability */
+/* Badge labels - black background with white text */
 .site-badges-bar .content-badge .badge-label {
     padding: 0.48rem 0.64rem;
     text-align: center;
     white-space: nowrap;
     flex: 1;
     justify-content: center;
-    background: #ffffff;
-    color: #1a1a1a;
+    background: #1a1a1a;
+    color: #ffffff;
     font-weight: 600;
     font-size: 0.6rem;
     letter-spacing: 0.02em;

@@ -2589,6 +2589,60 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
+    // SCROLL-REVEAL BARS (Back-to-top & Badge bars)
+    // Shows on scroll, hides after 2.5s of no scrolling
+    // ==========================================
+    const siteBadgesBar = document.querySelector('.site-badges-bar');
+    let scrollTimeout = null;
+
+    function showScrollBars() {
+        if (backToTopBar) backToTopBar.classList.add('is-visible');
+        if (siteBadgesBar) siteBadgesBar.classList.add('is-visible');
+    }
+
+    function hideScrollBars() {
+        if (backToTopBar) backToTopBar.classList.remove('is-visible');
+        if (siteBadgesBar) siteBadgesBar.classList.remove('is-visible');
+    }
+
+    function handleScroll() {
+        const currentScrollY = window.scrollY;
+
+        // Only show bars if scrolled down at least 100px
+        if (currentScrollY > 100) {
+            showScrollBars();
+
+            // Clear existing timeout
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+
+            // Hide after 2.5 seconds of no scrolling
+            scrollTimeout = setTimeout(() => {
+                hideScrollBars();
+            }, 2500);
+        } else {
+            // At top of page, hide immediately
+            hideScrollBars();
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+        }
+    }
+
+    // Throttle scroll events for performance
+    let scrollTicking = false;
+    window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+            window.requestAnimationFrame(() => {
+                handleScroll();
+                scrollTicking = false;
+            });
+            scrollTicking = true;
+        }
+    }, { passive: true });
+
+    // ==========================================
     // TOAST NOTIFICATIONS
     // ==========================================
     let toastContainer = document.querySelector('.toast-container');
