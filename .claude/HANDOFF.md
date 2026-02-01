@@ -1,6 +1,7 @@
 # Praxis Project Handoff Document
 
 **Last Updated:** 2026-01-31
+**Last Commit:** `8327e5e` - feat: Phase 1 badge relocation + workflow automation system
 **Current Phase:** Phase 1 (In Progress)
 
 ---
@@ -186,11 +187,14 @@ _public_html/
 | 1.1 Remove header badges (desktop) | ✅ Done | All HTML files updated |
 | 1.2 Remove mobile accordion badges | ✅ Done | All HTML files updated |
 | 1.3 Add content badges to Home page | ✅ Done | Between title and subtitle |
-| 1.4 Add content badges to Learn page | ⏳ Pending | Below "Choose Your Path" |
-| 1.5 Add content badges to other pages | ⏳ Pending | Consistent placement |
+| 1.4 Add content badges to Learn page | ✅ Done | In dark page-hero section |
+| 1.5 Add content badges to other pages | ✅ Done | All 18 pages updated |
 | 1.6 Text: "AI Assisted Building" | ✅ Done | Badge text corrected |
 | 1.7 Hero text update | ✅ Done | "Master the Art of AI Interactions" |
+| 1.8 Darken learning content backgrounds | ⏳ Pending | Improve readability |
+| 1.9 Badge lightbox popups | ⏳ Pending | Smoked glass effect |
 | CRISPE Builder fix | ✅ Done | Example field now required |
+| Animation stability fix | ✅ Done | Delta time capping + visibility handler |
 
 ### Phase 2: Natural Language Content - PENDING
 - Update learning pages with NL examples
@@ -236,9 +240,8 @@ _public_html/
 **CSS Location:** styles.css (around line 506, after mobile-badge section)
 
 **Badge Placement Pattern:**
-- Home page: Between hero title and hero subtitle
-- Learn page: Below section subtitle
-- Other pages: Below page title/subtitle
+- Home page: Between hero title and hero subtitle (in hero section)
+- All other pages: In dark `.page-hero` section, after `page-subtitle`
 
 ### Hero Section (Home Page)
 
@@ -275,18 +278,28 @@ Key variables used throughout (defined in styles.css):
 ### Files Modified This Session
 1. `index.html` - Hero section updated, badges added
 2. `styles.css` - Content badges CSS added, subtitle width updated
-3. All HTML files - Header/mobile badges removed (20+ files)
+3. `app.js` - Animation stability fix (delta time capping + visibility handler)
+4. All HTML files - Header/mobile badges removed, content badges added (20+ files)
+
+**Pages with content badges:**
+- Home: `index.html`
+- Learn hub: `learn/index.html`
+- Learn pages: `prompt-basics.html`, `crisp.html`, `crispe.html`, `costar.html`, `react.html`, `advanced.html`, `flipped-interaction.html`
+- Tools hub: `tools/index.html`
+- Tool pages: `analyzer.html`, `guidance.html`, `checklist.html`, `hallucination.html`
+- Resources: `patterns/index.html`, `quiz/index.html`
+- Pages: `about.html`, `ai-safety.html`, `faq.html`, `glossary.html`
 
 ---
 
 ## NEXT STEPS (In Order)
 
-1. **Task 1.4:** Add content badges to `learn/index.html`
-   - Place below "Choose Your Path" subtitle
-   - Reuse existing `.content-badges` styling
+1. **Task 1.8:** Darken learning content backgrounds
+   - Improve readability (white on light skinny font is hard to read)
 
-2. **Task 1.5:** Add content badges to remaining pages
-   - Consistent placement below page titles
+2. **Task 1.9:** Badge lightbox popups
+   - Smoked glass type background
+   - Information regarding each badge focus
 
 3. **Phase 2:** Update `prompt-basics.html`
    - Add email example (professional, friendly tone, colleague context)

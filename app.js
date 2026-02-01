@@ -320,7 +320,15 @@ document.addEventListener('DOMContentLoaded', () => {
         setupEventListeners() {
             this.resizeHandler = () => this.resize();
             window.addEventListener('resize', this.resizeHandler);
-            // No mouse/touch interaction - network animates on its own
+
+            // Tab visibility handler - reset timing when tab becomes visible
+            // This prevents animation issues after being backgrounded
+            this.visibilityHandler = () => {
+                if (!document.hidden) {
+                    this.lastFrameTime = performance.now();
+                }
+            };
+            document.addEventListener('visibilitychange', this.visibilityHandler);
         }
 
         resize() {
@@ -1523,6 +1531,7 @@ document.addEventListener('DOMContentLoaded', () => {
         destroy() {
             cancelAnimationFrame(this.animationId);
             window.removeEventListener('resize', this.resizeHandler);
+            document.removeEventListener('visibilitychange', this.visibilityHandler);
         }
     }
 
@@ -1866,6 +1875,16 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             window.addEventListener('resize', this.resizeHandler);
 
+            // Tab visibility handler - reset timing when tab becomes visible
+            // This prevents animation explosion after being backgrounded
+            this.visibilityHandler = () => {
+                if (!document.hidden) {
+                    // Reset lastFrameTime to prevent huge delta on return
+                    this.lastFrameTime = performance.now();
+                }
+            };
+            document.addEventListener('visibilitychange', this.visibilityHandler);
+
             // Visibility observer - use configured parent selector
             const parentSection = document.querySelector(this.parentSelector);
             if (parentSection) {
@@ -2131,7 +2150,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.createNodes();
             }
 
-            const dt = elapsed / 16.67; // Normalize to 60fps
+            // Cap delta time to prevent animation explosion when tab returns from background
+            // Max 3 frames worth of time (~50ms) - prevents huge jumps after being backgrounded
+            const cappedElapsed = Math.min(elapsed, 50);
+            const dt = cappedElapsed / 16.67; // Normalize to 60fps
             this.update(dt);
             this.draw();
 
@@ -2141,6 +2163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         destroy() {
             cancelAnimationFrame(this.animationId);
             window.removeEventListener('resize', this.resizeHandler);
+            document.removeEventListener('visibilitychange', this.visibilityHandler);
             if (this.observer) {
                 this.observer.disconnect();
             }

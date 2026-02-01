@@ -385,7 +385,27 @@ function calculateScore(results) {
 - [ ] Fix mobile menu not collapsing when clicking items
 - [ ] Fix submenu text color (currently black, should be visible)
 
-### 1.3 UI Polish
+### 1.6 Learning Content Readability
+- [ ] Darken background behind learning content sections
+- [ ] Improve contrast for white text on lighter areas
+- [ ] Subtle adjustments only - maintain existing design aesthetic
+- [ ] Focus on learn/*.html pages where thin white text is hard to read
+
+### 1.7 Badge Lightbox Popups
+- [ ] Create lightbox component with smoked glass background effect
+- [ ] Trigger on badge hover (desktop) / tap (mobile)
+- [ ] Add content for each badge:
+  - **AI for Everybody**: Accessibility commitment, UD/UDL principles, free resources, safety focus
+  - **Built With UD/UDL**: Universal Design explanation, multiple learning paths, inclusive design
+  - **Security A+ 100%**: CSP compliance, no tracking, no external dependencies, data privacy
+  - **Performance 100%**: Lighthouse scores, optimization techniques, fast load times
+  - **AI Assisted Building**: Claude Code workflow, human-AI collaboration, methodology used
+- [ ] Smooth fade-in/fade-out animation
+- [ ] Keyboard accessible (focus/blur triggers)
+- [ ] Mobile-friendly positioning
+- [ ] Close on click outside or Escape key
+
+### 1.8 UI Polish
 - [ ] Add loading animation to analyzer
 - [ ] Improve score visualization
 - [ ] Add "Copy improved prompt" button
