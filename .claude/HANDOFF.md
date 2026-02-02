@@ -1,8 +1,8 @@
 # Praxis Project Handoff Document
 
-**Last Updated:** 2026-02-01 (Session 11)
+**Last Updated:** 2026-02-01 (Session 12)
 **Last Commit:** `d66bcfe` - feat: Level-based quiz with 3-strikes game mechanic + analyzer docs
-**Current Phase:** Phase 4 COMPLETE → Ready for Phase 5 (Search UI)
+**Current Phase:** Phase 5 COMPLETE (Search UI + Comprehensive Glossary)
 
 ---
 
@@ -226,7 +226,66 @@ _public_html/
 | Build-step enhancement | ✅ Done | Added shadows, improved hover states |
 | Scenario tabs enhancement | ✅ Done | Card wrapper with border and shadow |
 
-### Latest Session Work (2026-02-01 - Session 11)
+### Latest Session Work (2026-02-01 - Session 12)
+
+**Phase 5: Search UI Implementation - COMPLETED**
+
+- Implemented Cmd+K / Ctrl+K search modal
+  - Cross-platform OS detection using `navigator.userAgentData` with fallback
+  - `isMacOS()` helper function for proper shortcut display
+  - Modal injected via JavaScript (no HTML file modifications needed)
+
+- Search trigger button in header
+  - Aligned with navigation using flexbox
+  - Shows ⌘K on macOS, Ctrl K on Windows
+  - Consistent spacing with nav items
+
+- Search modal features (720px max-width, 85vh height)
+  - Large search input with placeholder "Search Praxis..."
+  - Help panel with "Quick Guide" and category badges
+  - 6 category badges: Learn, Tools, Glossary, Patterns, FAQ, Resources
+  - Grouped search results with highlighted matches
+  - Keyboard navigation (↑/↓ arrows, Enter to select, Escape to close)
+  - Footer with navigation hints
+
+- CSS added (~250 lines)
+  - `.search-modal-overlay`, `.search-modal`, `.search-modal-header`
+  - `.search-modal-help`, `.search-modal-help-grid`, `.search-help-badge`
+  - `.search-modal-results`, `.search-result-item`, `.search-modal-footer`
+  - `.search-trigger` with header alignment
+
+**Comprehensive AI Glossary Expansion - COMPLETED**
+
+- Expanded glossary from 48 to 193 terms (4x increase)
+  - Added 145 new AI/ML terms organized alphabetically
+  - Full A-Z coverage (all 26 letters now have entries)
+  - New letter sections: D, E, I, J, K, O, Q, U, V, W, X
+
+- Term categories covered:
+  - Core Concepts: AGI, Neural Networks, Transformers, Embeddings
+  - Architecture: Attention, MoE, Tokenization, Quantization
+  - Training: Fine-tuning, RLHF, DPO, Pre-training
+  - Safety: Alignment, Jailbreaking, Guardrails, Red-teaming
+  - Products: GPT, Claude, Gemini, LLaMA, Mistral
+  - Companies: OpenAI, Anthropic, DeepMind, Meta AI
+  - Techniques: RAG, ReAct, CoT, Few-shot, Zero-shot
+  - NLP Tasks: NER, Summarization, Translation, Classification
+  - Metrics: Perplexity, BLEU, ROUGE, F1
+  - Hardware: GPU, TPU, NPU, Inference
+  - Ethics: Bias, Fairness, Explainability, Transparency
+
+- Updated search index (PRAXIS_SEARCH_INDEX)
+  - All 193 glossary terms now searchable
+  - Total searchable entries: 250+
+
+**Files Modified:**
+- app.js (search modal, trigger, navigation, glossary index expansion)
+- styles.css (search UI components ~250 lines)
+- pages/glossary.html (145 new terms, A-Z navigation update)
+
+---
+
+### Previous Session Work (2026-02-01 - Session 11)
 
 **Quiz Redesign - COMPLETED (User Request)**
 
@@ -499,17 +558,35 @@ _public_html/
 
 ### Phase 4: Search Tags & Metadata - COMPLETED ✅
 - [x] Search index schema defined (id, title, category, subcategory, keywords, excerpt, url)
-- [x] 48 Glossary terms indexed (A-Z definitions)
+- [x] 48 Glossary terms indexed (A-Z definitions) → **Expanded to 193 terms**
 - [x] 25+ Learn page sections indexed (all methodologies + subsections)
 - [x] 6 Tools indexed (Analyzer, Builder, Matcher, Checklist, Hallucination, Quiz)
 - [x] 9 Patterns indexed (Chain of Thought, Few-Shot, Role, etc.)
 - [x] 15+ FAQ entries indexed (Getting Started, Methods, Safety, About)
 - [x] 6 Resource pages indexed (Guides + site info)
 - [x] Search API exposed via window.PraxisSearch
-- [x] Total: 107+ searchable entries
+- [x] Total: 250+ searchable entries
 
-### Phases 5-7: PENDING
-- **Phase 5:** Search UI Implementation (NEXT - Cmd+K modal)
+### Phase 5: Search UI Implementation - COMPLETED ✅
+- [x] Search modal with Cmd+K / Ctrl+K keyboard shortcuts
+- [x] Search trigger button in header (aligned with navigation)
+- [x] Results grouped by category (Learn, Tools, Glossary, Patterns, FAQ, Resources)
+- [x] Keyboard navigation (arrows, Enter, Escape)
+- [x] Highlighted matches in excerpts
+- [x] Help panel with category badges and quick guide
+- [x] Mobile-friendly 720px max-width modal
+- [x] Focus trap and accessibility compliance
+- [x] Cross-platform OS detection (macOS vs Windows shortcuts)
+
+### Comprehensive AI Glossary Expansion - COMPLETED ✅
+- [x] Expanded from 48 terms to 193 terms (4x increase)
+- [x] Full A-Z navigation (all 26 letters now have entries)
+- [x] New letter sections added: D, E, I, J, K, O, Q, U, V, W, X
+- [x] Categories covered: Core Concepts, Architecture, Training, Safety, Products, Companies, Techniques, NLP Tasks, Metrics, Hardware, Ethics
+- [x] All 193 terms indexed in search (PRAXIS_SEARCH_INDEX updated)
+- [x] Updated page title and meta description ("190+ terms")
+
+### Phases 6-7: PENDING
 - **Phase 6:** Developer Tooling
 - **Phase 7:** Full Site Audit
 
@@ -610,27 +687,25 @@ Key variables used throughout (defined in styles.css):
 2. **Task 1.10:** Animation term glossary links - PENDING
    - Link floating AI terms to glossary definitions
 
-### Ready for Phase 5: Search UI Implementation
-**Goal:** Build client-side search with category grouping
+### Phase 5: Search UI - COMPLETED ✅
+**All features implemented:**
+- [x] Search modal triggered by Cmd+K / Ctrl+K or search icon
+- [x] Input with placeholder "Search Praxis..."
+- [x] Results grouped by category (Learn, Tools, Glossary, Patterns, FAQ, Resources)
+- [x] Keyboard navigation (arrows, Enter)
+- [x] Highlighted matches in excerpts
+- [x] Close on Escape, click outside, or X button
+- [x] Focus trap for accessibility
+- [x] Mobile-friendly positioning (720px max-width)
 
-**Features:**
-- [ ] Search modal triggered by Cmd+K / Ctrl+K or search icon
-- [ ] Input with placeholder "Search Praxis..."
-- [ ] Results grouped by category (Learn, Tools, Glossary, Patterns, FAQ, Resources)
-- [ ] Keyboard navigation (arrows, Enter)
-- [ ] Highlighted matches in excerpts
-- [ ] Close on Escape, click outside, or X button
-- [ ] Focus trap for accessibility
-- [ ] Mobile-friendly positioning
-
-**Search API (Already Built):**
+**Search API (Built in Phase 4, Extended in Phase 5):**
 ```javascript
 window.PraxisSearch.search('query')  // Returns grouped results
 window.PraxisSearch.getByCategory('Glossary')  // Filter by category
-window.PraxisSearch.totalEntries  // 107+ entries
+window.PraxisSearch.totalEntries  // 250+ entries (expanded)
 ```
 
-### After Phase 5
+### Ready for Phase 6: Developer Tooling
 - **Phase 6:** Developer Tooling (validators, link checker)
 - **Phase 7:** Full Site Audit
 

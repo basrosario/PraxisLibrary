@@ -7158,6 +7158,180 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
+    // GLOSSARY FILTER & SORT
+    // Category filtering and alphabetical sorting for glossary page
+    // ==========================================
+
+    /**
+     * Initialize glossary filter functionality
+     * Handles category filtering and A-Z/Z-A sorting
+     */
+    function initGlossaryFilters() {
+        const filterBar = document.querySelector('.glossary-filter-bar');
+        if (!filterBar) return; // Only run on glossary page
+
+        const filterBtns = filterBar.querySelectorAll('.glossary-filter-btn');
+        const sortBtns = filterBar.querySelectorAll('.glossary-sort-btn');
+        const countDisplay = document.getElementById('glossary-visible-count');
+        const glossarySections = document.querySelectorAll('.glossary-section');
+        const glossaryTerms = document.querySelectorAll('.glossary-term');
+
+        // Category mappings - maps filter buttons to term-tag values
+        const categoryMappings = {
+            'all': null, // Show all
+            'fundamentals': ['Fundamentals', 'Core Concept', 'Concept', 'Field', 'Historical', 'Foundational'],
+            'architecture': ['Architecture', 'Neural Networks', 'Transformers', 'Model', 'Model Type', 'LLM'],
+            'training': ['Training', 'Optimization', 'Process', 'Hyperparameter', 'Data', 'Learning Type'],
+            'prompting': ['Prompting', 'Technique', 'Reasoning', 'Framework', 'Pattern', 'Skill'],
+            'safety': ['Safety', 'Ethics', 'Alignment', 'Security', 'Risk', 'Trust', 'Fairness', 'Transparency'],
+            'products': ['Product', 'Company', 'LLM Provider', 'OpenAI', 'Anthropic', 'Google', 'Meta', 'Microsoft', 'Platform'],
+            'technical': ['Technical', 'API', 'NLP', 'NLP Task', 'ML Task', 'Metrics', 'Evaluation', 'Algorithm', 'Application', 'Integration', 'Infrastructure', 'Hardware', 'Performance']
+        };
+
+        let currentFilter = 'all';
+        let currentSort = 'asc';
+
+        /**
+         * Check if a term matches the current filter
+         * @param {HTMLElement} term - The glossary term element
+         * @param {string} filter - The current filter category
+         * @returns {boolean} - Whether the term matches the filter
+         */
+        function termMatchesFilter(term, filter) {
+            if (filter === 'all') return true;
+
+            const tagElements = term.querySelectorAll('.term-tag');
+            const termTags = Array.from(tagElements).map(tag => tag.textContent.trim());
+            const filterTags = categoryMappings[filter] || [];
+
+            // Check if any of the term's tags match the filter's tags
+            return termTags.some(tag => filterTags.includes(tag));
+        }
+
+        /**
+         * Apply current filter and sort to glossary
+         */
+        function applyFiltersAndSort() {
+            let visibleCount = 0;
+
+            // First, apply filter to all terms
+            glossaryTerms.forEach(term => {
+                if (termMatchesFilter(term, currentFilter)) {
+                    term.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    term.classList.add('hidden');
+                }
+            });
+
+            // Check each section - hide if all terms are hidden
+            glossarySections.forEach(section => {
+                const visibleTerms = section.querySelectorAll('.glossary-term:not(.hidden)');
+                if (visibleTerms.length === 0) {
+                    section.classList.add('hidden');
+                } else {
+                    section.classList.remove('hidden');
+                }
+            });
+
+            // Apply sorting
+            if (currentSort === 'desc') {
+                // Z-A: Reverse the order of visible sections
+                const container = glossarySections[0]?.parentElement;
+                if (container) {
+                    const sectionsArray = Array.from(glossarySections);
+                    sectionsArray.reverse().forEach(section => {
+                        container.appendChild(section);
+                    });
+                }
+            } else {
+                // A-Z: Restore original order
+                const container = glossarySections[0]?.parentElement;
+                if (container) {
+                    const sectionsArray = Array.from(glossarySections);
+                    sectionsArray.sort((a, b) => {
+                        const letterA = a.id.replace('letter-', '').toUpperCase();
+                        const letterB = b.id.replace('letter-', '').toUpperCase();
+                        return letterA.localeCompare(letterB);
+                    });
+                    sectionsArray.forEach(section => {
+                        container.appendChild(section);
+                    });
+                }
+            }
+
+            // Update count
+            if (countDisplay) {
+                countDisplay.textContent = visibleCount;
+            }
+
+            // Show "no results" message if needed
+            handleNoResults(visibleCount === 0);
+        }
+
+        /**
+         * Handle showing/hiding no results message
+         * @param {boolean} show - Whether to show the no results message
+         */
+        function handleNoResults(show) {
+            let noResultsEl = document.querySelector('.glossary-no-results');
+
+            if (show) {
+                if (!noResultsEl) {
+                    noResultsEl = document.createElement('div');
+                    noResultsEl.className = 'glossary-no-results';
+                    noResultsEl.innerHTML = `
+                        <div class="glossary-no-results-icon">🔍</div>
+                        <h3>No terms found</h3>
+                        <p>No glossary terms match the selected filter. Try selecting a different category.</p>
+                    `;
+                    const firstSection = document.querySelector('.glossary-section');
+                    if (firstSection && firstSection.parentElement) {
+                        firstSection.parentElement.insertBefore(noResultsEl, firstSection);
+                    }
+                }
+                noResultsEl.style.display = 'block';
+            } else if (noResultsEl) {
+                noResultsEl.style.display = 'none';
+            }
+        }
+
+        // --- Filter Button Click Handlers ---
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Update current filter and apply
+                currentFilter = btn.dataset.filter;
+                applyFiltersAndSort();
+            });
+        });
+
+        // --- Sort Button Click Handlers ---
+        sortBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                sortBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Update current sort and apply
+                currentSort = btn.dataset.sort;
+                applyFiltersAndSort();
+            });
+        });
+
+        // Initial count
+        if (countDisplay) {
+            countDisplay.textContent = glossaryTerms.length;
+        }
+    }
+
+    // Initialize glossary filters on page load
+    initGlossaryFilters();
+
+    // ==========================================
     // CONTENT LIBRARY SEARCH
     // Site-wide search with granular categorization
     // ==========================================
@@ -7549,64 +7723,241 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     const PRAXIS_SEARCH_INDEX = [
         // ==========================================
-        // GLOSSARY TERMS (48 entries)
+        // GLOSSARY TERMS (190+ entries - Comprehensive AI Glossary)
         // ==========================================
         // Letter A
-        { id: 'term-ai', title: 'AI (Artificial Intelligence)', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['ai', 'artificial intelligence', 'machine learning', 'computer systems', 'automation'], excerpt: 'Computer systems designed to perform tasks that typically require human intelligence, such as understanding language, recognizing patterns, making decisions, and generating content.', url: 'pages/glossary.html#term-ai' },
-        { id: 'term-ai-readiness', title: 'AI Readiness', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['ai readiness', 'skills', 'knowledge', 'preparation', 'competency'], excerpt: 'The skills, knowledge, and mindset needed to use AI tools effectively and responsibly. Includes understanding both capabilities and limitations.', url: 'pages/glossary.html#term-ai-readiness' },
-        { id: 'term-alignment', title: 'Alignment', category: 'Glossary', subcategory: 'AI Safety', keywords: ['alignment', 'safety', 'values', 'human values', 'ethics'], excerpt: 'The challenge of ensuring AI systems behave in ways that match human values and intentions. A key concern in AI safety research.', url: 'pages/glossary.html#term-alignment' },
+        { id: 'term-accuracy', title: 'Accuracy', category: 'Glossary', subcategory: 'Metrics', keywords: ['accuracy', 'metrics', 'evaluation', 'correct predictions'], excerpt: 'A metric measuring how often a model\'s predictions are correct. Calculated as the ratio of correct predictions to total predictions.', url: 'pages/glossary.html#term-accuracy' },
+        { id: 'term-activation-function', title: 'Activation Function', category: 'Glossary', subcategory: 'Neural Networks', keywords: ['activation', 'relu', 'sigmoid', 'tanh', 'non-linearity'], excerpt: 'A mathematical function applied to neurons that introduces non-linearity, enabling neural networks to learn complex patterns.', url: 'pages/glossary.html#term-activation-function' },
+        { id: 'term-adversarial-attack', title: 'Adversarial Attack', category: 'Glossary', subcategory: 'Security', keywords: ['adversarial', 'attack', 'security', 'vulnerability'], excerpt: 'Deliberate attempts to deceive AI systems by providing specially crafted inputs that cause incorrect predictions or harmful outputs.', url: 'pages/glossary.html#term-adversarial-attack' },
+        { id: 'term-agent', title: 'AI Agent', category: 'Glossary', subcategory: 'Architecture', keywords: ['agent', 'autonomous', 'actions', 'tools', 'agentic'], excerpt: 'An AI system that can perceive its environment, make decisions, and take actions to achieve goals using tools and external systems.', url: 'pages/glossary.html#term-agent' },
+        { id: 'term-ai', title: 'AI (Artificial Intelligence)', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['ai', 'artificial intelligence', 'machine learning'], excerpt: 'Computer systems designed to perform tasks that typically require human intelligence, such as understanding language and making decisions.', url: 'pages/glossary.html#term-ai' },
+        { id: 'term-ai-ethics', title: 'AI Ethics', category: 'Glossary', subcategory: 'Ethics', keywords: ['ethics', 'fairness', 'transparency', 'accountability'], excerpt: 'The study of moral principles guiding AI development and use, covering fairness, transparency, privacy, and societal impact.', url: 'pages/glossary.html#term-ai-ethics' },
+        { id: 'term-ai-readiness', title: 'AI Readiness', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['ai readiness', 'skills', 'preparation'], excerpt: 'The skills, knowledge, and mindset needed to use AI tools effectively and responsibly.', url: 'pages/glossary.html#term-ai-readiness' },
+        { id: 'term-alignment', title: 'Alignment', category: 'Glossary', subcategory: 'Safety', keywords: ['alignment', 'safety', 'values', 'human values'], excerpt: 'Ensuring AI systems behave in ways that match human values and intentions. A key concern in AI safety research.', url: 'pages/glossary.html#term-alignment' },
+        { id: 'term-algorithm', title: 'Algorithm', category: 'Glossary', subcategory: 'Fundamentals', keywords: ['algorithm', 'procedure', 'rules', 'steps'], excerpt: 'A step-by-step procedure for solving a problem. In AI, algorithms define how models learn from data and make predictions.', url: 'pages/glossary.html#term-algorithm' },
+        { id: 'term-annotation', title: 'Annotation', category: 'Glossary', subcategory: 'Data', keywords: ['annotation', 'labeling', 'data labeling', 'training data'], excerpt: 'The process of labeling data to create training datasets for supervised learning.', url: 'pages/glossary.html#term-annotation' },
+        { id: 'term-anthropic', title: 'Anthropic', category: 'Glossary', subcategory: 'Companies', keywords: ['anthropic', 'claude', 'ai company', 'safety'], excerpt: 'An AI safety company that created Claude, focused on developing safe and beneficial AI systems.', url: 'pages/glossary.html#term-anthropic' },
+        { id: 'term-api', title: 'API', category: 'Glossary', subcategory: 'Technical', keywords: ['api', 'interface', 'integration', 'endpoint'], excerpt: 'Application Programming Interface - protocols allowing applications to communicate and integrate AI capabilities.', url: 'pages/glossary.html#term-api' },
+        { id: 'term-attention', title: 'Attention Mechanism', category: 'Glossary', subcategory: 'Architecture', keywords: ['attention', 'self-attention', 'transformer', 'focus'], excerpt: 'A technique allowing models to focus on relevant parts of input when producing output. Foundation of transformer architecture.', url: 'pages/glossary.html#term-attention' },
+        { id: 'term-autogen', title: 'AutoGen', category: 'Glossary', subcategory: 'Frameworks', keywords: ['autogen', 'microsoft', 'multi-agent', 'agents', 'collaboration'], excerpt: 'Microsoft\'s framework for building multi-agent AI applications with collaborative AI agents.', url: 'pages/glossary.html#term-autogen' },
+        { id: 'term-autoencoder', title: 'Autoencoder', category: 'Glossary', subcategory: 'Architecture', keywords: ['autoencoder', 'compression', 'representation', 'reconstruction'], excerpt: 'A neural network that learns to compress data into smaller representations and reconstruct it.', url: 'pages/glossary.html#term-autoencoder' },
+        { id: 'term-autoregressive', title: 'Autoregressive Model', category: 'Glossary', subcategory: 'Architecture', keywords: ['autoregressive', 'generation', 'sequential', 'token by token'], excerpt: 'A model generating output one element at a time, using previous outputs to predict the next. How LLMs generate text.', url: 'pages/glossary.html#term-autoregressive' },
         // Letter B
-        { id: 'term-bias', title: 'Bias', category: 'Glossary', subcategory: 'AI Safety', keywords: ['bias', 'fairness', 'discrimination', 'training data', 'prejudice'], excerpt: 'Systematic errors or unfair preferences in AI outputs that reflect biases in training data or system design. Can affect fairness across different groups or perspectives.', url: 'pages/glossary.html#term-bias' },
+        { id: 'term-backpropagation', title: 'Backpropagation', category: 'Glossary', subcategory: 'Training', keywords: ['backpropagation', 'gradient', 'training', 'learning'], excerpt: 'The fundamental algorithm for training neural networks by calculating and propagating error signals backward.', url: 'pages/glossary.html#term-backpropagation' },
+        { id: 'term-batch', title: 'Batch', category: 'Glossary', subcategory: 'Training', keywords: ['batch', 'batch processing', 'training batch'], excerpt: 'A subset of training data processed together in one iteration, improving training efficiency.', url: 'pages/glossary.html#term-batch' },
+        { id: 'term-batch-size', title: 'Batch Size', category: 'Glossary', subcategory: 'Hyperparameters', keywords: ['batch size', 'hyperparameter', 'training'], excerpt: 'The number of training examples processed together before updating model weights.', url: 'pages/glossary.html#term-batch-size' },
+        { id: 'term-beam-search', title: 'Beam Search', category: 'Glossary', subcategory: 'Generation', keywords: ['beam search', 'decoding', 'generation', 'search'], excerpt: 'A search algorithm maintaining multiple candidate sequences during text generation.', url: 'pages/glossary.html#term-beam-search' },
+        { id: 'term-benchmark', title: 'Benchmark', category: 'Glossary', subcategory: 'Evaluation', keywords: ['benchmark', 'evaluation', 'comparison', 'MMLU'], excerpt: 'A standardized test used to evaluate and compare AI model performance.', url: 'pages/glossary.html#term-benchmark' },
+        { id: 'term-bert', title: 'BERT', category: 'Glossary', subcategory: 'Models', keywords: ['bert', 'bidirectional', 'encoder', 'google'], excerpt: 'Bidirectional Encoder Representations from Transformers - an influential language model processing text bidirectionally.', url: 'pages/glossary.html#term-bert' },
+        { id: 'term-bias', title: 'Bias', category: 'Glossary', subcategory: 'Ethics', keywords: ['bias', 'fairness', 'discrimination'], excerpt: 'Systematic errors or unfair preferences in AI outputs reflecting biases in training data or system design.', url: 'pages/glossary.html#term-bias' },
+        { id: 'term-black-box', title: 'Black Box', category: 'Glossary', subcategory: 'Interpretability', keywords: ['black box', 'opaque', 'unexplainable'], excerpt: 'A system whose internal workings are not visible or understandable. Many AI models are considered black boxes.', url: 'pages/glossary.html#term-black-box' },
+        { id: 'term-bpe', title: 'BPE (Byte Pair Encoding)', category: 'Glossary', subcategory: 'Tokenization', keywords: ['bpe', 'tokenization', 'subword', 'encoding'], excerpt: 'A tokenization algorithm breaking text into subword units by iteratively merging frequent character pairs.', url: 'pages/glossary.html#term-bpe' },
         // Letter C
-        { id: 'term-chain-of-thought', title: 'Chain-of-Thought (CoT)', category: 'Glossary', subcategory: 'Techniques', keywords: ['chain of thought', 'cot', 'reasoning', 'step by step', 'thinking'], excerpt: 'A prompting technique that encourages AI to show its reasoning process step-by-step, leading to more accurate and transparent responses for complex problems.', url: 'pages/glossary.html#term-chain-of-thought' },
-        { id: 'term-claude', title: 'Claude', category: 'Glossary', subcategory: 'AI Assistants', keywords: ['claude', 'anthropic', 'ai assistant', 'chatbot'], excerpt: 'An AI assistant created by Anthropic, designed to be helpful, harmless, and honest. Known for nuanced reasoning and longer context handling.', url: 'pages/glossary.html#term-claude' },
-        { id: 'term-context', title: 'Context', category: 'Glossary', subcategory: 'Prompting', keywords: ['context', 'background', 'information', 'situation'], excerpt: 'Background information provided to AI that helps it understand your situation and needs. Essential for getting relevant, accurate responses.', url: 'pages/glossary.html#term-context' },
-        { id: 'term-context-window', title: 'Context Window', category: 'Glossary', subcategory: 'Technical', keywords: ['context window', 'tokens', 'memory', 'conversation length'], excerpt: 'The amount of text (measured in tokens) that an AI can process at once. Determines how much conversation history and reference material the AI can consider.', url: 'pages/glossary.html#term-context-window' },
-        { id: 'term-copilot', title: 'Copilot', category: 'Glossary', subcategory: 'AI Assistants', keywords: ['copilot', 'microsoft', 'github', 'code completion'], excerpt: 'Microsoft\'s AI assistant integrated into their products. Originally focused on code completion (GitHub Copilot), now extended to general assistance across Microsoft 365.', url: 'pages/glossary.html#term-copilot' },
-        { id: 'term-costar', title: 'COSTAR', category: 'Glossary', subcategory: 'Frameworks', keywords: ['costar', 'framework', 'methodology', 'context', 'objective', 'style', 'tone', 'audience', 'response'], excerpt: 'A prompting framework: Context, Objective, Style, Tone, Audience, Response. Ideal for professional content creation with specific voice and audience requirements.', url: 'pages/glossary.html#term-costar' },
-        { id: 'term-crisp', title: 'CRISP', category: 'Glossary', subcategory: 'Frameworks', keywords: ['crisp', 'framework', 'methodology', 'context', 'role', 'instructions', 'specifics', 'parameters'], excerpt: 'A prompting framework: Context, Role, Instructions, Specifics, Parameters. A versatile method for everyday AI tasks and requests.', url: 'pages/glossary.html#term-crisp' },
-        { id: 'term-crispe', title: 'CRISPE', category: 'Glossary', subcategory: 'Frameworks', keywords: ['crispe', 'framework', 'methodology', 'example', 'few-shot'], excerpt: 'An extension of CRISP that adds Examples for few-shot learning. Particularly useful for creative tasks where showing is better than telling.', url: 'pages/glossary.html#term-crispe' },
+        { id: 'term-catastrophic-forgetting', title: 'Catastrophic Forgetting', category: 'Glossary', subcategory: 'Training', keywords: ['catastrophic forgetting', 'continual learning', 'memory'], excerpt: 'The tendency of neural networks to forget previously learned information when trained on new data.', url: 'pages/glossary.html#term-catastrophic-forgetting' },
+        { id: 'term-chain-of-thought', title: 'Chain-of-Thought (CoT)', category: 'Glossary', subcategory: 'Prompting', keywords: ['chain of thought', 'cot', 'reasoning', 'step by step'], excerpt: 'A prompting technique encouraging AI to show its reasoning process step-by-step for more accurate responses.', url: 'pages/glossary.html#term-chain-of-thought' },
+        { id: 'term-chat-completion', title: 'Chat Completion', category: 'Glossary', subcategory: 'API', keywords: ['chat completion', 'api', 'messages', 'conversation'], excerpt: 'An API endpoint where models generate conversational responses from a list of messages.', url: 'pages/glossary.html#term-chat-completion' },
+        { id: 'term-chatgpt', title: 'ChatGPT', category: 'Glossary', subcategory: 'Products', keywords: ['chatgpt', 'openai', 'conversational', 'chatbot'], excerpt: 'OpenAI\'s conversational AI product that popularized LLMs and sparked widespread public interest in AI.', url: 'pages/glossary.html#term-chatgpt' },
+        { id: 'term-classification', title: 'Classification', category: 'Glossary', subcategory: 'ML Tasks', keywords: ['classification', 'categories', 'labels', 'prediction'], excerpt: 'A machine learning task assigning input data to predefined categories like spam detection or sentiment analysis.', url: 'pages/glossary.html#term-classification' },
+        { id: 'term-claude', title: 'Claude', category: 'Glossary', subcategory: 'Products', keywords: ['claude', 'anthropic', 'ai assistant'], excerpt: 'An AI assistant by Anthropic, designed to be helpful, harmless, and honest with strong reasoning capabilities.', url: 'pages/glossary.html#term-claude' },
+        { id: 'term-clustering', title: 'Clustering', category: 'Glossary', subcategory: 'ML Tasks', keywords: ['clustering', 'unsupervised', 'grouping', 'similarity'], excerpt: 'An unsupervised learning technique grouping similar data points together without predefined labels.', url: 'pages/glossary.html#term-clustering' },
+        { id: 'term-cnn', title: 'CNN (Convolutional Neural Network)', category: 'Glossary', subcategory: 'Architecture', keywords: ['cnn', 'convolutional', 'images', 'computer vision'], excerpt: 'A neural network architecture designed for processing images using convolutional layers.', url: 'pages/glossary.html#term-cnn' },
+        { id: 'term-code-generation', title: 'Code Generation', category: 'Glossary', subcategory: 'Applications', keywords: ['code generation', 'programming', 'copilot', 'coding'], excerpt: 'AI models that write programming code from natural language descriptions, powering tools like GitHub Copilot.', url: 'pages/glossary.html#term-code-generation' },
+        { id: 'term-cohere', title: 'Cohere', category: 'Glossary', subcategory: 'Companies', keywords: ['cohere', 'enterprise', 'embeddings', 'command'], excerpt: 'An enterprise AI company providing LLMs for text generation, embeddings, and search with strong RAG capabilities.', url: 'pages/glossary.html#term-cohere' },
+        { id: 'term-computer-vision', title: 'Computer Vision', category: 'Glossary', subcategory: 'Fields', keywords: ['computer vision', 'images', 'visual', 'recognition'], excerpt: 'The AI field enabling machines to interpret visual information from images and videos.', url: 'pages/glossary.html#term-computer-vision' },
+        { id: 'term-constitutional-ai', title: 'Constitutional AI', category: 'Glossary', subcategory: 'Safety', keywords: ['constitutional ai', 'anthropic', 'principles', 'alignment'], excerpt: 'Anthropic\'s approach where models are trained to follow a set of principles guiding their behavior.', url: 'pages/glossary.html#term-constitutional-ai' },
+        { id: 'term-context', title: 'Context', category: 'Glossary', subcategory: 'Prompting', keywords: ['context', 'background', 'information'], excerpt: 'Background information provided to AI that helps it understand your situation and needs.', url: 'pages/glossary.html#term-context' },
+        { id: 'term-context-window', title: 'Context Window', category: 'Glossary', subcategory: 'Technical', keywords: ['context window', 'tokens', 'memory', 'length'], excerpt: 'The amount of text (in tokens) an AI can process at once, ranging from 4K to 200K+ tokens.', url: 'pages/glossary.html#term-context-window' },
+        { id: 'term-copilot', title: 'Copilot', category: 'Glossary', subcategory: 'Products', keywords: ['copilot', 'microsoft', 'github', 'code'], excerpt: 'Microsoft\'s AI assistant for code completion and general assistance across their products.', url: 'pages/glossary.html#term-copilot' },
+        { id: 'term-costar', title: 'COSTAR', category: 'Glossary', subcategory: 'Frameworks', keywords: ['costar', 'framework', 'methodology', 'professional'], excerpt: 'A prompting framework: Context, Objective, Style, Tone, Audience, Response for professional content.', url: 'pages/glossary.html#term-costar' },
+        { id: 'term-crisp', title: 'CRISP', category: 'Glossary', subcategory: 'Frameworks', keywords: ['crisp', 'framework', 'methodology', 'general'], excerpt: 'A prompting framework: Context, Role, Instructions, Specifics, Parameters for everyday AI tasks.', url: 'pages/glossary.html#term-crisp' },
+        { id: 'term-crispe', title: 'CRISPE', category: 'Glossary', subcategory: 'Frameworks', keywords: ['crispe', 'framework', 'examples', 'few-shot'], excerpt: 'CRISP extended with Examples for few-shot learning in creative tasks.', url: 'pages/glossary.html#term-crispe' },
+        { id: 'term-cross-attention', title: 'Cross-Attention', category: 'Glossary', subcategory: 'Architecture', keywords: ['cross-attention', 'encoder-decoder', 'multimodal'], excerpt: 'Attention where queries come from one sequence and keys/values from another, used in multimodal systems.', url: 'pages/glossary.html#term-cross-attention' },
+        { id: 'term-cursor', title: 'Cursor', category: 'Glossary', subcategory: 'Products', keywords: ['cursor', 'ide', 'code editor', 'ai coding'], excerpt: 'An AI-powered code editor built on VS Code, designed for AI-first development.', url: 'pages/glossary.html#term-cursor' },
+        // Letter D
+        { id: 'term-dall-e', title: 'DALL-E', category: 'Glossary', subcategory: 'Models', keywords: ['dall-e', 'image generation', 'openai', 'text to image'], excerpt: 'OpenAI\'s image generation model creating images from text descriptions.', url: 'pages/glossary.html#term-dall-e' },
+        { id: 'term-data-augmentation', title: 'Data Augmentation', category: 'Glossary', subcategory: 'Training', keywords: ['data augmentation', 'training data', 'expansion'], excerpt: 'Techniques to expand training datasets by creating modified versions of existing data.', url: 'pages/glossary.html#term-data-augmentation' },
+        { id: 'term-dataset', title: 'Dataset', category: 'Glossary', subcategory: 'Data', keywords: ['dataset', 'training data', 'collection'], excerpt: 'A collection of data used for training, validating, or testing AI models.', url: 'pages/glossary.html#term-dataset' },
+        { id: 'term-decoder', title: 'Decoder', category: 'Glossary', subcategory: 'Architecture', keywords: ['decoder', 'generation', 'output', 'transformer'], excerpt: 'The neural network component that generates output from encoded representations.', url: 'pages/glossary.html#term-decoder' },
+        { id: 'term-deep-learning', title: 'Deep Learning', category: 'Glossary', subcategory: 'Fields', keywords: ['deep learning', 'neural networks', 'layers', 'ai'], excerpt: 'A subset of machine learning using neural networks with many layers to learn complex patterns.', url: 'pages/glossary.html#term-deep-learning' },
+        { id: 'term-deepmind', title: 'DeepMind', category: 'Glossary', subcategory: 'Companies', keywords: ['deepmind', 'google', 'alphago', 'gemini', 'alphafold'], excerpt: 'Google\'s AI research lab known for AlphaGo, AlphaFold, and Gemini, pioneering reinforcement learning and scientific AI.', url: 'pages/glossary.html#term-deepmind' },
+        { id: 'term-deepseek', title: 'DeepSeek', category: 'Glossary', subcategory: 'Companies', keywords: ['deepseek', 'chinese', 'efficient', 'open model'], excerpt: 'A Chinese AI company known for efficient, high-performing open models at lower computational costs.', url: 'pages/glossary.html#term-deepseek' },
+        { id: 'term-deepfake', title: 'Deepfake', category: 'Glossary', subcategory: 'Risks', keywords: ['deepfake', 'synthetic media', 'fake', 'manipulation'], excerpt: 'AI-generated synthetic media where a person\'s likeness is manipulated, raising misinformation concerns.', url: 'pages/glossary.html#term-deepfake' },
+        { id: 'term-delimiter', title: 'Delimiter', category: 'Glossary', subcategory: 'Prompting', keywords: ['delimiter', 'separator', 'structure', 'xml'], excerpt: 'Characters used in prompts to clearly separate different sections, like triple backticks or XML tags.', url: 'pages/glossary.html#term-delimiter' },
+        { id: 'term-diffusion-model', title: 'Diffusion Model', category: 'Glossary', subcategory: 'Architecture', keywords: ['diffusion', 'image generation', 'stable diffusion'], excerpt: 'A generative architecture creating content by gradually removing noise, powering leading image generators.', url: 'pages/glossary.html#term-diffusion-model' },
+        { id: 'term-dimensionality-reduction', title: 'Dimensionality Reduction', category: 'Glossary', subcategory: 'Techniques', keywords: ['dimensionality reduction', 'features', 'compression'], excerpt: 'Techniques to reduce the number of features in data while preserving important information.', url: 'pages/glossary.html#term-dimensionality-reduction' },
+        { id: 'term-distillation', title: 'Knowledge Distillation', category: 'Glossary', subcategory: 'Training', keywords: ['distillation', 'compression', 'teacher', 'student'], excerpt: 'Transferring knowledge from a large teacher model to a smaller student model.', url: 'pages/glossary.html#term-distillation' },
+        { id: 'term-dpo', title: 'DPO (Direct Preference Optimization)', category: 'Glossary', subcategory: 'Training', keywords: ['dpo', 'preference', 'alignment', 'rlhf alternative'], excerpt: 'A simpler alternative to RLHF that directly optimizes models using preference data.', url: 'pages/glossary.html#term-dpo' },
+        { id: 'term-dropout', title: 'Dropout', category: 'Glossary', subcategory: 'Training', keywords: ['dropout', 'regularization', 'overfitting'], excerpt: 'A regularization technique randomly deactivating neurons during training to prevent overfitting.', url: 'pages/glossary.html#term-dropout' },
+        // Letter E
+        { id: 'term-embedding', title: 'Embedding', category: 'Glossary', subcategory: 'Representation', keywords: ['embedding', 'vector', 'representation', 'semantic'], excerpt: 'A dense vector representation of data where similar items have similar vectors.', url: 'pages/glossary.html#term-embedding' },
+        { id: 'term-emergent-abilities', title: 'Emergent Abilities', category: 'Glossary', subcategory: 'Phenomena', keywords: ['emergent', 'scaling', 'capabilities', 'abilities'], excerpt: 'Capabilities appearing in large AI models that weren\'t present in smaller versions.', url: 'pages/glossary.html#term-emergent-abilities' },
+        { id: 'term-encoder', title: 'Encoder', category: 'Glossary', subcategory: 'Architecture', keywords: ['encoder', 'representation', 'input', 'bert'], excerpt: 'A neural network component transforming input into compressed representations.', url: 'pages/glossary.html#term-encoder' },
+        { id: 'term-endpoint', title: 'Endpoint', category: 'Glossary', subcategory: 'API', keywords: ['endpoint', 'api', 'url', 'service'], excerpt: 'A specific URL where an API can be accessed for different AI functions.', url: 'pages/glossary.html#term-endpoint' },
+        { id: 'term-epoch', title: 'Epoch', category: 'Glossary', subcategory: 'Training', keywords: ['epoch', 'training', 'iteration', 'pass'], excerpt: 'One complete pass through the entire training dataset during model training.', url: 'pages/glossary.html#term-epoch' },
+        { id: 'term-evaluation', title: 'Evaluation', category: 'Glossary', subcategory: 'Process', keywords: ['evaluation', 'testing', 'metrics', 'performance'], excerpt: 'Measuring model performance using metrics, benchmarks, and human assessment.', url: 'pages/glossary.html#term-evaluation' },
+        { id: 'term-explainability', title: 'Explainability (XAI)', category: 'Glossary', subcategory: 'Transparency', keywords: ['explainability', 'xai', 'interpretability', 'transparency'], excerpt: 'The ability to understand and explain how AI models make decisions.', url: 'pages/glossary.html#term-explainability' },
+        { id: 'term-extraction', title: 'Information Extraction', category: 'Glossary', subcategory: 'NLP Tasks', keywords: ['extraction', 'ner', 'entities', 'structured'], excerpt: 'Using AI to identify and extract specific information from unstructured text.', url: 'pages/glossary.html#term-extraction' },
         // Letter F
-        { id: 'term-few-shot', title: 'Few-Shot Learning', category: 'Glossary', subcategory: 'Techniques', keywords: ['few-shot', 'examples', 'learning', 'pattern', 'demonstration'], excerpt: 'A technique where you provide a few examples in your prompt to help AI understand the pattern or format you want. More effective than describing alone for complex outputs.', url: 'pages/glossary.html#term-few-shot' },
-        { id: 'term-fine-tuning', title: 'Fine-Tuning', category: 'Glossary', subcategory: 'Technical', keywords: ['fine-tuning', 'training', 'specialized', 'custom model'], excerpt: 'The process of training a pre-existing AI model on additional, specialized data to improve its performance for specific tasks or domains.', url: 'pages/glossary.html#term-fine-tuning' },
-        { id: 'term-flipped-interaction', title: 'Flipped Interaction', category: 'Glossary', subcategory: 'Frameworks', keywords: ['flipped interaction', 'interview', 'questions', 'personalized'], excerpt: 'A method where you ask AI to ask you questions before providing advice. Leads to more personalized and relevant responses for complex situations.', url: 'pages/glossary.html#term-flipped-interaction' },
+        { id: 'term-f1-score', title: 'F1 Score', category: 'Glossary', subcategory: 'Metrics', keywords: ['f1', 'precision', 'recall', 'metrics'], excerpt: 'A metric combining precision and recall into a single score for classification evaluation.', url: 'pages/glossary.html#term-f1-score' },
+        { id: 'term-feature', title: 'Feature', category: 'Glossary', subcategory: 'Data', keywords: ['feature', 'input', 'variable', 'attribute'], excerpt: 'An individual measurable property of data used as input to a model.', url: 'pages/glossary.html#term-feature' },
+        { id: 'term-feedforward', title: 'Feedforward Neural Network', category: 'Glossary', subcategory: 'Architecture', keywords: ['feedforward', 'mlp', 'neural network'], excerpt: 'A neural network where information flows in one direction from input to output.', url: 'pages/glossary.html#term-feedforward' },
+        { id: 'term-few-shot', title: 'Few-Shot Learning', category: 'Glossary', subcategory: 'Prompting', keywords: ['few-shot', 'examples', 'in-context'], excerpt: 'Providing examples in prompts to help AI understand desired patterns or formats.', url: 'pages/glossary.html#term-few-shot' },
+        { id: 'term-fine-tuning', title: 'Fine-Tuning', category: 'Glossary', subcategory: 'Training', keywords: ['fine-tuning', 'customization', 'specialized'], excerpt: 'Training a pre-existing model on specialized data to improve specific task performance.', url: 'pages/glossary.html#term-fine-tuning' },
+        { id: 'term-flipped-interaction', title: 'Flipped Interaction', category: 'Glossary', subcategory: 'Frameworks', keywords: ['flipped interaction', 'interview', 'questions'], excerpt: 'A method where AI asks clarifying questions before providing advice.', url: 'pages/glossary.html#term-flipped-interaction' },
+        { id: 'term-foundation-model', title: 'Foundation Model', category: 'Glossary', subcategory: 'Models', keywords: ['foundation model', 'base model', 'pre-trained'], excerpt: 'A large AI model trained on broad data that can be adapted to many downstream tasks.', url: 'pages/glossary.html#term-foundation-model' },
+        { id: 'term-function-calling', title: 'Function Calling', category: 'Glossary', subcategory: 'Capabilities', keywords: ['function calling', 'tools', 'api', 'actions'], excerpt: 'LLM capability to generate structured output for calling external functions or APIs.', url: 'pages/glossary.html#term-function-calling' },
         // Letter G
-        { id: 'term-gemini', title: 'Gemini', category: 'Glossary', subcategory: 'AI Assistants', keywords: ['gemini', 'google', 'multimodal', 'bard'], excerpt: 'Google\'s family of AI models, designed for multimodal capabilities (text, images, code, audio). Powers Google\'s AI features across their products.', url: 'pages/glossary.html#term-gemini' },
-        { id: 'term-generative-ai', title: 'Generative AI', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['generative ai', 'gen ai', 'content creation', 'image generation'], excerpt: 'AI systems that can create new content (text, images, code, music) rather than just analyzing existing data. Includes chatbots, image generators, and coding assistants.', url: 'pages/glossary.html#term-generative-ai' },
-        { id: 'term-gpt', title: 'GPT (Generative Pre-trained Transformer)', category: 'Glossary', subcategory: 'Technical', keywords: ['gpt', 'transformer', 'openai', 'chatgpt', 'language model'], excerpt: 'A type of large language model architecture developed by OpenAI. The technology behind ChatGPT and many other AI assistants.', url: 'pages/glossary.html#term-gpt' },
-        { id: 'term-grounding', title: 'Grounding', category: 'Glossary', subcategory: 'Techniques', keywords: ['grounding', 'accuracy', 'verification', 'sources', 'rag'], excerpt: 'Connecting AI outputs to verified information sources to reduce hallucinations and increase accuracy. Often involves retrieval-augmented generation (RAG).', url: 'pages/glossary.html#term-grounding' },
+        { id: 'term-gan', title: 'GAN (Generative Adversarial Network)', category: 'Glossary', subcategory: 'Architecture', keywords: ['gan', 'generator', 'discriminator', 'adversarial'], excerpt: 'A neural network with two competing networks: a generator and a discriminator.', url: 'pages/glossary.html#term-gan' },
+        { id: 'term-gemini', title: 'Gemini', category: 'Glossary', subcategory: 'Models', keywords: ['gemini', 'google', 'multimodal'], excerpt: 'Google\'s multimodal AI models that can process text, images, audio, and video.', url: 'pages/glossary.html#term-gemini' },
+        { id: 'term-generative-ai', title: 'Generative AI', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['generative ai', 'gen ai', 'creation'], excerpt: 'AI systems that create new content rather than just analyzing existing data.', url: 'pages/glossary.html#term-generative-ai' },
+        { id: 'term-gpu', title: 'GPU', category: 'Glossary', subcategory: 'Hardware', keywords: ['gpu', 'graphics', 'nvidia', 'computation'], excerpt: 'Graphics Processing Units that excel at parallel computations needed for AI training.', url: 'pages/glossary.html#term-gpu' },
+        { id: 'term-gpt', title: 'GPT', category: 'Glossary', subcategory: 'Models', keywords: ['gpt', 'openai', 'transformer', 'chatgpt'], excerpt: 'OpenAI\'s Generative Pre-trained Transformer series powering ChatGPT.', url: 'pages/glossary.html#term-gpt' },
+        { id: 'term-grok', title: 'Grok', category: 'Glossary', subcategory: 'Products', keywords: ['grok', 'xai', 'elon musk', 'twitter', 'x'], excerpt: 'An AI assistant by xAI integrated with X (Twitter), known for real-time information access.', url: 'pages/glossary.html#term-grok' },
+        { id: 'term-gradient', title: 'Gradient', category: 'Glossary', subcategory: 'Training', keywords: ['gradient', 'derivative', 'optimization'], excerpt: 'A vector indicating direction and magnitude of change needed to reduce model error.', url: 'pages/glossary.html#term-gradient' },
+        { id: 'term-gradient-descent', title: 'Gradient Descent', category: 'Glossary', subcategory: 'Training', keywords: ['gradient descent', 'optimization', 'sgd', 'adam'], excerpt: 'The optimization algorithm training neural networks by adjusting weights to reduce error.', url: 'pages/glossary.html#term-gradient-descent' },
+        { id: 'term-grounding', title: 'Grounding', category: 'Glossary', subcategory: 'Techniques', keywords: ['grounding', 'accuracy', 'verification', 'sources'], excerpt: 'Connecting AI outputs to verified sources to reduce hallucinations.', url: 'pages/glossary.html#term-grounding' },
+        { id: 'term-guardrails', title: 'Guardrails', category: 'Glossary', subcategory: 'Safety', keywords: ['guardrails', 'safety', 'constraints', 'filters'], excerpt: 'Safety mechanisms constraining AI behavior to prevent harmful outputs.', url: 'pages/glossary.html#term-guardrails' },
         // Letter H
-        { id: 'term-hallucination', title: 'Hallucination', category: 'Glossary', subcategory: 'AI Safety', keywords: ['hallucination', 'fabrication', 'incorrect', 'fake', 'false information'], excerpt: 'When AI generates information that sounds plausible but is actually incorrect or fabricated. Includes fake citations, invented statistics, and fictional events.', url: 'pages/glossary.html#term-hallucination' },
-        { id: 'term-hitl', title: 'Human-in-the-Loop (HITL)', category: 'Glossary', subcategory: 'AI Safety', keywords: ['human in the loop', 'hitl', 'oversight', 'review', 'approval'], excerpt: 'A design approach where humans review, approve, or modify AI outputs before they\'re acted upon. Critical for high-stakes decisions and quality control.', url: 'pages/glossary.html#term-hitl' },
+        { id: 'term-hallucination', title: 'Hallucination', category: 'Glossary', subcategory: 'Limitations', keywords: ['hallucination', 'fabrication', 'incorrect', 'false'], excerpt: 'When AI generates plausible-sounding but incorrect or fabricated information.', url: 'pages/glossary.html#term-hallucination' },
+        { id: 'term-hidden-layer', title: 'Hidden Layer', category: 'Glossary', subcategory: 'Architecture', keywords: ['hidden layer', 'neural network', 'deep'], excerpt: 'Layers between input and output in neural networks that learn complex representations.', url: 'pages/glossary.html#term-hidden-layer' },
+        { id: 'term-hellaswag', title: 'HellaSwag', category: 'Glossary', subcategory: 'Benchmarks', keywords: ['hellaswag', 'benchmark', 'commonsense', 'reasoning'], excerpt: 'A benchmark testing commonsense natural language inference and reasoning capabilities.', url: 'pages/glossary.html#term-hellaswag' },
+        { id: 'term-hitl', title: 'Human-in-the-Loop (HITL)', category: 'Glossary', subcategory: 'Safety', keywords: ['human in the loop', 'hitl', 'oversight', 'review'], excerpt: 'A design approach where humans review AI outputs before they\'re acted upon.', url: 'pages/glossary.html#term-hitl' },
+        { id: 'term-hugging-face', title: 'Hugging Face', category: 'Glossary', subcategory: 'Platforms', keywords: ['hugging face', 'hub', 'models', 'transformers'], excerpt: 'A platform for sharing AI models, datasets, and the popular Transformers library.', url: 'pages/glossary.html#term-hugging-face' },
+        { id: 'term-humaneval', title: 'HumanEval', category: 'Glossary', subcategory: 'Benchmarks', keywords: ['humaneval', 'benchmark', 'code', 'programming'], excerpt: 'A benchmark evaluating code generation capabilities of LLMs with programming problems and tests.', url: 'pages/glossary.html#term-humaneval' },
+        { id: 'term-hyperparameter', title: 'Hyperparameter', category: 'Glossary', subcategory: 'Training', keywords: ['hyperparameter', 'configuration', 'tuning'], excerpt: 'Configuration settings controlling training rather than learned from data.', url: 'pages/glossary.html#term-hyperparameter' },
+        // Letter I
+        { id: 'term-image-generation', title: 'Image Generation', category: 'Glossary', subcategory: 'Applications', keywords: ['image generation', 'text to image', 'visual'], excerpt: 'AI systems creating images from text descriptions using diffusion or GAN models.', url: 'pages/glossary.html#term-image-generation' },
+        { id: 'term-in-context-learning', title: 'In-Context Learning', category: 'Glossary', subcategory: 'Capabilities', keywords: ['in-context learning', 'examples', 'prompt'], excerpt: 'An LLM\'s ability to learn from examples in the prompt without weight updates.', url: 'pages/glossary.html#term-in-context-learning' },
+        { id: 'term-inference', title: 'Inference', category: 'Glossary', subcategory: 'Process', keywords: ['inference', 'prediction', 'running', 'deployment'], excerpt: 'Running a trained model to generate predictions on new data.', url: 'pages/glossary.html#term-inference' },
+        { id: 'term-instruction-tuning', title: 'Instruction Tuning', category: 'Glossary', subcategory: 'Training', keywords: ['instruction tuning', 'following', 'helpful'], excerpt: 'Fine-tuning LLMs to better follow user instructions and requests.', url: 'pages/glossary.html#term-instruction-tuning' },
+        { id: 'term-interpretability', title: 'Interpretability', category: 'Glossary', subcategory: 'Transparency', keywords: ['interpretability', 'understanding', 'trust'], excerpt: 'The degree to which humans can understand how a model makes decisions.', url: 'pages/glossary.html#term-interpretability' },
+        // Letter J
+        { id: 'term-jailbreak', title: 'Jailbreak', category: 'Glossary', subcategory: 'Security', keywords: ['jailbreak', 'bypass', 'safety', 'attack'], excerpt: 'Attempts to bypass AI safety restrictions through crafted prompts.', url: 'pages/glossary.html#term-jailbreak' },
+        { id: 'term-json', title: 'JSON', category: 'Glossary', subcategory: 'Technical', keywords: ['json', 'format', 'structured', 'data'], excerpt: 'A structured data format commonly used for API responses and LLM structured output.', url: 'pages/glossary.html#term-json' },
+        { id: 'term-json-mode', title: 'JSON Mode', category: 'Glossary', subcategory: 'API', keywords: ['json mode', 'structured output', 'format'], excerpt: 'An API setting constraining model output to valid JSON format.', url: 'pages/glossary.html#term-json-mode' },
+        // Letter K
+        { id: 'term-knowledge-cutoff', title: 'Knowledge Cutoff', category: 'Glossary', subcategory: 'Limitations', keywords: ['knowledge cutoff', 'training date', 'outdated'], excerpt: 'The date beyond which an AI model has no training data about events.', url: 'pages/glossary.html#term-knowledge-cutoff' },
+        { id: 'term-knowledge-graph', title: 'Knowledge Graph', category: 'Glossary', subcategory: 'Data Structures', keywords: ['knowledge graph', 'entities', 'relationships', 'facts'], excerpt: 'A structured representation of facts as interconnected entities and relationships.', url: 'pages/glossary.html#term-knowledge-graph' },
+        { id: 'term-kv-cache', title: 'KV Cache', category: 'Glossary', subcategory: 'Optimization', keywords: ['kv cache', 'key value', 'memory', 'speed'], excerpt: 'An optimization storing computed key-value vectors to speed up text generation.', url: 'pages/glossary.html#term-kv-cache' },
         // Letter L
-        { id: 'term-llm', title: 'Large Language Model (LLM)', category: 'Glossary', subcategory: 'Technical', keywords: ['llm', 'large language model', 'ai model', 'neural network'], excerpt: 'An AI system trained on massive amounts of text data to understand and generate human language. The technology powering most modern AI assistants.', url: 'pages/glossary.html#term-llm' },
-        { id: 'term-latency', title: 'Latency', category: 'Glossary', subcategory: 'Technical', keywords: ['latency', 'delay', 'response time', 'speed'], excerpt: 'The time delay between sending a prompt and receiving a response. Affected by model size, server load, and prompt complexity.', url: 'pages/glossary.html#term-latency' },
+        { id: 'term-label', title: 'Label', category: 'Glossary', subcategory: 'Data', keywords: ['label', 'annotation', 'ground truth', 'supervised'], excerpt: 'The correct answer associated with training data in supervised learning.', url: 'pages/glossary.html#term-label' },
+        { id: 'term-latency', title: 'Latency', category: 'Glossary', subcategory: 'Performance', keywords: ['latency', 'delay', 'response time', 'speed'], excerpt: 'The time delay between sending a prompt and receiving a response.', url: 'pages/glossary.html#term-latency' },
+        { id: 'term-learning-rate', title: 'Learning Rate', category: 'Glossary', subcategory: 'Hyperparameters', keywords: ['learning rate', 'step size', 'training'], excerpt: 'A hyperparameter controlling how much weights are adjusted during training.', url: 'pages/glossary.html#term-learning-rate' },
+        { id: 'term-langchain', title: 'LangChain', category: 'Glossary', subcategory: 'Frameworks', keywords: ['langchain', 'framework', 'chains', 'agents', 'tools'], excerpt: 'A popular framework for building applications with LLMs, providing abstractions for chains, agents, and memory.', url: 'pages/glossary.html#term-langchain' },
+        { id: 'term-llamaindex', title: 'LlamaIndex', category: 'Glossary', subcategory: 'Frameworks', keywords: ['llamaindex', 'rag', 'retrieval', 'indexing', 'data'], excerpt: 'A data framework for connecting LLMs to external data sources, specializing in indexing and RAG.', url: 'pages/glossary.html#term-llamaindex' },
+        { id: 'term-llama', title: 'Llama', category: 'Glossary', subcategory: 'Models', keywords: ['llama', 'meta', 'open source', 'open weights'], excerpt: 'Meta\'s open-weight family of large language models enabling widespread use.', url: 'pages/glossary.html#term-llama' },
+        { id: 'term-llm', title: 'Large Language Model (LLM)', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['llm', 'large language model', 'gpt', 'claude'], excerpt: 'An AI system trained on massive text data to understand and generate human language.', url: 'pages/glossary.html#term-llm' },
+        { id: 'term-lora', title: 'LoRA', category: 'Glossary', subcategory: 'Training', keywords: ['lora', 'fine-tuning', 'efficient', 'low rank'], excerpt: 'Low-Rank Adaptation - a parameter-efficient fine-tuning technique.', url: 'pages/glossary.html#term-lora' },
+        { id: 'term-loss-function', title: 'Loss Function', category: 'Glossary', subcategory: 'Training', keywords: ['loss function', 'error', 'objective', 'cost'], excerpt: 'A function measuring how wrong a model\'s predictions are during training.', url: 'pages/glossary.html#term-loss-function' },
+        { id: 'term-lstm', title: 'LSTM', category: 'Glossary', subcategory: 'Architecture', keywords: ['lstm', 'recurrent', 'sequence', 'memory'], excerpt: 'Long Short-Term Memory - a recurrent architecture for capturing long-range dependencies.', url: 'pages/glossary.html#term-lstm' },
         // Letter M
-        { id: 'term-model', title: 'Model', category: 'Glossary', subcategory: 'Technical', keywords: ['model', 'ai model', 'trained system', 'neural network'], excerpt: 'The trained AI system that processes inputs and generates outputs. Different models have different capabilities, sizes, and specializations.', url: 'pages/glossary.html#term-model' },
-        { id: 'term-multimodal', title: 'Multimodal', category: 'Glossary', subcategory: 'Technical', keywords: ['multimodal', 'images', 'audio', 'video', 'multiple formats'], excerpt: 'AI systems that can process and generate multiple types of content (text, images, audio, video) rather than just text.', url: 'pages/glossary.html#term-multimodal' },
+        { id: 'term-machine-learning', title: 'Machine Learning (ML)', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['machine learning', 'ml', 'learning', 'patterns'], excerpt: 'A branch of AI where systems learn patterns from data rather than being explicitly programmed.', url: 'pages/glossary.html#term-machine-learning' },
+        { id: 'term-midjourney', title: 'Midjourney', category: 'Glossary', subcategory: 'Products', keywords: ['midjourney', 'image generation', 'art', 'creative'], excerpt: 'A popular AI image generation service known for artistic, stylized outputs.', url: 'pages/glossary.html#term-midjourney' },
+        { id: 'term-mistral', title: 'Mistral', category: 'Glossary', subcategory: 'Companies', keywords: ['mistral', 'french', 'efficient', 'mixtral'], excerpt: 'A French AI company known for efficient, high-performance open models.', url: 'pages/glossary.html#term-mistral' },
+        { id: 'term-mixture-of-experts', title: 'MoE (Mixture of Experts)', category: 'Glossary', subcategory: 'Architecture', keywords: ['moe', 'mixture of experts', 'sparse', 'efficient'], excerpt: 'An architecture where different expert sub-networks specialize in different inputs.', url: 'pages/glossary.html#term-mixture-of-experts' },
+        { id: 'term-mmlu', title: 'MMLU', category: 'Glossary', subcategory: 'Benchmarks', keywords: ['mmlu', 'benchmark', 'evaluation', 'multitask'], excerpt: 'Massive Multitask Language Understanding - a benchmark testing models on 57 subjects.', url: 'pages/glossary.html#term-mmlu' },
+        { id: 'term-model', title: 'Model', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['model', 'ai model', 'trained', 'neural network'], excerpt: 'The trained AI system that processes inputs and generates outputs.', url: 'pages/glossary.html#term-model' },
+        { id: 'term-model-collapse', title: 'Model Collapse', category: 'Glossary', subcategory: 'Risks', keywords: ['model collapse', 'synthetic data', 'degradation'], excerpt: 'A degradation phenomenon where models trained on AI-generated data lose diversity and quality.', url: 'pages/glossary.html#term-model-collapse' },
+        { id: 'term-model-card', title: 'Model Card', category: 'Glossary', subcategory: 'Documentation', keywords: ['model card', 'documentation', 'limitations', 'ethics'], excerpt: 'Documentation describing a model\'s use, limitations, and ethical considerations.', url: 'pages/glossary.html#term-model-card' },
+        { id: 'term-multi-head-attention', title: 'Multi-Head Attention', category: 'Glossary', subcategory: 'Architecture', keywords: ['multi-head', 'attention', 'parallel', 'transformer'], excerpt: 'Running multiple attention operations in parallel, each focusing on different aspects.', url: 'pages/glossary.html#term-multi-head-attention' },
+        { id: 'term-multimodal', title: 'Multimodal', category: 'Glossary', subcategory: 'Capabilities', keywords: ['multimodal', 'images', 'audio', 'video', 'vision'], excerpt: 'AI systems processing and generating multiple content types (text, images, audio, video).', url: 'pages/glossary.html#term-multimodal' },
         // Letter N
-        { id: 'term-natural-language', title: 'Natural Language', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['natural language', 'human language', 'conversational', 'plain english'], excerpt: 'Human language as we naturally speak and write it. AI assistants are designed to understand natural language, so you don\'t need special syntax or formatting.', url: 'pages/glossary.html#term-natural-language' },
-        { id: 'term-nlp', title: 'Natural Language Processing (NLP)', category: 'Glossary', subcategory: 'Technical', keywords: ['nlp', 'natural language processing', 'text analysis', 'language understanding'], excerpt: 'The field of AI focused on enabling computers to understand, interpret, and generate human language.', url: 'pages/glossary.html#term-nlp' },
+        { id: 'term-named-entity-recognition', title: 'Named Entity Recognition (NER)', category: 'Glossary', subcategory: 'NLP Tasks', keywords: ['ner', 'entities', 'extraction', 'names'], excerpt: 'An NLP task identifying and classifying named entities (people, places, organizations).', url: 'pages/glossary.html#term-named-entity-recognition' },
+        { id: 'term-natural-language', title: 'Natural Language', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['natural language', 'human language', 'conversational'], excerpt: 'Human language as we naturally speak and write it, which AI assistants understand.', url: 'pages/glossary.html#term-natural-language' },
+        { id: 'term-neural-network', title: 'Neural Network', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['neural network', 'neurons', 'layers', 'deep'], excerpt: 'A computing system inspired by biological brains, the foundation of modern AI.', url: 'pages/glossary.html#term-neural-network' },
+        { id: 'term-next-token-prediction', title: 'Next Token Prediction', category: 'Glossary', subcategory: 'Training', keywords: ['next token', 'prediction', 'autoregressive', 'language model'], excerpt: 'The core LLM training objective: predict the next token given previous tokens.', url: 'pages/glossary.html#term-next-token-prediction' },
+        { id: 'term-nlp', title: 'Natural Language Processing (NLP)', category: 'Glossary', subcategory: 'Fields', keywords: ['nlp', 'language', 'text', 'understanding'], excerpt: 'The AI field enabling computers to understand and generate human language.', url: 'pages/glossary.html#term-nlp' },
+        { id: 'term-normalization', title: 'Normalization', category: 'Glossary', subcategory: 'Training', keywords: ['normalization', 'layer norm', 'batch norm', 'stability'], excerpt: 'Techniques to standardize inputs or layer outputs for stable training.', url: 'pages/glossary.html#term-normalization' },
+        // Letter O
+        { id: 'term-one-shot', title: 'One-Shot Learning', category: 'Glossary', subcategory: 'Prompting', keywords: ['one-shot', 'single example', 'demonstration'], excerpt: 'Providing a single example in a prompt to demonstrate desired output format.', url: 'pages/glossary.html#term-one-shot' },
+        { id: 'term-open-source', title: 'Open Source / Open Weight', category: 'Glossary', subcategory: 'Licensing', keywords: ['open source', 'open weight', 'public', 'download'], excerpt: 'AI models with publicly available weights that can be downloaded and run locally.', url: 'pages/glossary.html#term-open-source' },
+        { id: 'term-openai', title: 'OpenAI', category: 'Glossary', subcategory: 'Companies', keywords: ['openai', 'gpt', 'chatgpt', 'company'], excerpt: 'The AI company behind GPT models, ChatGPT, and DALL-E.', url: 'pages/glossary.html#term-openai' },
+        { id: 'term-optimization', title: 'Optimization', category: 'Glossary', subcategory: 'Training', keywords: ['optimization', 'training', 'weights', 'gradient'], excerpt: 'The process of adjusting model parameters to minimize loss during training.', url: 'pages/glossary.html#term-optimization' },
+        { id: 'term-output-layer', title: 'Output Layer', category: 'Glossary', subcategory: 'Architecture', keywords: ['output layer', 'final layer', 'predictions'], excerpt: 'The final layer of a neural network producing the model\'s predictions.', url: 'pages/glossary.html#term-output-layer' },
+        { id: 'term-overfitting', title: 'Overfitting', category: 'Glossary', subcategory: 'Problems', keywords: ['overfitting', 'memorization', 'generalization'], excerpt: 'When a model performs well on training data but poorly on new data.', url: 'pages/glossary.html#term-overfitting' },
         // Letter P
-        { id: 'term-parameters', title: 'Parameters', category: 'Glossary', subcategory: 'Prompting', keywords: ['parameters', 'constraints', 'specifications', 'settings'], excerpt: 'In prompting: constraints and specifications that shape the AI\'s output (length, format, style). In AI models: the internal values learned during training that determine behavior.', url: 'pages/glossary.html#term-parameters' },
-        { id: 'term-prompt', title: 'Prompt', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['prompt', 'input', 'question', 'instruction', 'request'], excerpt: 'The text input you send to an AI assistant. Can be a question, instruction, request, or any combination. The quality of your prompt influences the quality of the response.', url: 'pages/glossary.html#term-prompt' },
-        { id: 'term-prompt-chaining', title: 'Prompt Chaining', category: 'Glossary', subcategory: 'Techniques', keywords: ['prompt chaining', 'sequential', 'multi-step', 'workflow'], excerpt: 'Breaking complex tasks into multiple sequential prompts, where each builds on the previous output. Useful for multi-step workflows.', url: 'pages/glossary.html#term-prompt-chaining' },
-        { id: 'term-prompt-engineering', title: 'Prompt Engineering', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['prompt engineering', 'crafting prompts', 'optimization', 'techniques'], excerpt: 'The practice of crafting effective prompts to get better results from AI systems. Includes techniques, frameworks, and iterative refinement.', url: 'pages/glossary.html#term-prompt-engineering' },
-        { id: 'term-prompt-injection', title: 'Prompt Injection', category: 'Glossary', subcategory: 'AI Safety', keywords: ['prompt injection', 'security', 'attack', 'malicious', 'vulnerability'], excerpt: 'A security concern where malicious instructions are hidden in content that AI processes, potentially causing unintended behavior.', url: 'pages/glossary.html#term-prompt-injection' },
+        { id: 'term-parameters', title: 'Parameters', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['parameters', 'weights', 'billions', 'size'], excerpt: 'The learned weights in AI models. LLMs have billions of parameters.', url: 'pages/glossary.html#term-parameters' },
+        { id: 'term-peft', title: 'PEFT', category: 'Glossary', subcategory: 'Training', keywords: ['peft', 'parameter efficient', 'lora', 'fine-tuning'], excerpt: 'Parameter-Efficient Fine-Tuning techniques training only a subset of parameters.', url: 'pages/glossary.html#term-peft' },
+        { id: 'term-perplexity', title: 'Perplexity', category: 'Glossary', subcategory: 'Metrics', keywords: ['perplexity', 'metric', 'evaluation', 'surprise'], excerpt: 'A metric measuring how "surprised" a language model is by text.', url: 'pages/glossary.html#term-perplexity' },
+        { id: 'term-persona', title: 'Persona', category: 'Glossary', subcategory: 'Prompting', keywords: ['persona', 'role', 'character', 'style'], excerpt: 'A specific character or role assigned to AI through prompting.', url: 'pages/glossary.html#term-persona' },
+        { id: 'term-positional-encoding', title: 'Positional Encoding', category: 'Glossary', subcategory: 'Architecture', keywords: ['positional encoding', 'position', 'rope', 'order'], excerpt: 'A technique injecting position information into transformers.', url: 'pages/glossary.html#term-positional-encoding' },
+        { id: 'term-ppo', title: 'PPO (Proximal Policy Optimization)', category: 'Glossary', subcategory: 'Training', keywords: ['ppo', 'reinforcement learning', 'rlhf', 'policy'], excerpt: 'A reinforcement learning algorithm commonly used in RLHF to train language models.', url: 'pages/glossary.html#term-ppo' },
+        { id: 'term-precision', title: 'Precision', category: 'Glossary', subcategory: 'Metrics', keywords: ['precision', 'metrics', 'fp16', 'quantization'], excerpt: 'In metrics: proportion of positive predictions that are correct. In computing: numerical format.', url: 'pages/glossary.html#term-precision' },
+        { id: 'term-pre-training', title: 'Pre-Training', category: 'Glossary', subcategory: 'Training', keywords: ['pre-training', 'foundation', 'base', 'initial'], excerpt: 'Initial training where models learn general language understanding from vast text.', url: 'pages/glossary.html#term-pre-training' },
+        { id: 'term-prompt', title: 'Prompt', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['prompt', 'input', 'instruction', 'request'], excerpt: 'The text input sent to an AI including context, instructions, and constraints.', url: 'pages/glossary.html#term-prompt' },
+        { id: 'term-prompt-chaining', title: 'Prompt Chaining', category: 'Glossary', subcategory: 'Techniques', keywords: ['prompt chaining', 'sequential', 'multi-step', 'workflow'], excerpt: 'Breaking complex tasks into sequential prompts building on each other.', url: 'pages/glossary.html#term-prompt-chaining' },
+        { id: 'term-prompt-engineering', title: 'Prompt Engineering', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['prompt engineering', 'crafting', 'optimization'], excerpt: 'The practice of crafting effective prompts using techniques and frameworks.', url: 'pages/glossary.html#term-prompt-engineering' },
+        { id: 'term-prompt-injection', title: 'Prompt Injection', category: 'Glossary', subcategory: 'Security', keywords: ['prompt injection', 'security', 'vulnerability', 'attack'], excerpt: 'A security vulnerability where malicious instructions cause unintended behavior.', url: 'pages/glossary.html#term-prompt-injection' },
+        { id: 'term-prompt-template', title: 'Prompt Template', category: 'Glossary', subcategory: 'Prompting', keywords: ['template', 'pattern', 'reusable', 'structure'], excerpt: 'A reusable prompt structure with placeholders for variable content.', url: 'pages/glossary.html#term-prompt-template' },
+        // Letter Q
+        { id: 'term-qlora', title: 'QLoRA', category: 'Glossary', subcategory: 'Training', keywords: ['qlora', 'quantized', 'lora', 'efficient'], excerpt: 'Quantized LoRA enabling fine-tuning on consumer GPUs.', url: 'pages/glossary.html#term-qlora' },
+        { id: 'term-quantization', title: 'Quantization', category: 'Glossary', subcategory: 'Optimization', keywords: ['quantization', '4-bit', '8-bit', 'compression'], excerpt: 'Reducing weight precision to decrease memory usage and increase speed.', url: 'pages/glossary.html#term-quantization' },
+        { id: 'term-query', title: 'Query', category: 'Glossary', subcategory: 'Concepts', keywords: ['query', 'search', 'question', 'attention'], excerpt: 'In RAG/search: the user\'s question. In attention: one of the QKV vectors.', url: 'pages/glossary.html#term-query' },
+        { id: 'term-question-answering', title: 'Question Answering (QA)', category: 'Glossary', subcategory: 'NLP Tasks', keywords: ['question answering', 'qa', 'answers', 'reading'], excerpt: 'An NLP task where models answer questions based on context or knowledge.', url: 'pages/glossary.html#term-question-answering' },
         // Letter R
-        { id: 'term-rag', title: 'RAG (Retrieval-Augmented Generation)', category: 'Glossary', subcategory: 'Techniques', keywords: ['rag', 'retrieval', 'augmented', 'external sources', 'knowledge base'], excerpt: 'A technique that combines AI generation with information retrieval from external sources, improving accuracy and reducing hallucinations.', url: 'pages/glossary.html#term-rag' },
-        { id: 'term-react', title: 'ReAct', category: 'Glossary', subcategory: 'Frameworks', keywords: ['react', 'reasoning', 'acting', 'step by step', 'transparent'], excerpt: 'A prompting framework combining Reasoning and Acting. AI thinks through problems step-by-step, showing its reasoning process transparently.', url: 'pages/glossary.html#term-react' },
-        { id: 'term-role-prompting', title: 'Role Prompting', category: 'Glossary', subcategory: 'Techniques', keywords: ['role prompting', 'persona', 'expertise', 'act as', 'pretend'], excerpt: 'Assigning AI a specific persona, expertise, or perspective to shape its responses. For example, asking it to respond "as a senior developer" or "as a patient teacher."', url: 'pages/glossary.html#term-role-prompting' },
+        { id: 'term-rag', title: 'RAG (Retrieval-Augmented Generation)', category: 'Glossary', subcategory: 'Techniques', keywords: ['rag', 'retrieval', 'augmented', 'knowledge'], excerpt: 'Combining AI generation with information retrieval for accurate, grounded responses.', url: 'pages/glossary.html#term-rag' },
+        { id: 'term-rate-limit', title: 'Rate Limit', category: 'Glossary', subcategory: 'API', keywords: ['rate limit', 'throttling', 'api', 'quota'], excerpt: 'Restrictions on API usage measured in requests or tokens per minute.', url: 'pages/glossary.html#term-rate-limit' },
+        { id: 'term-react', title: 'ReAct', category: 'Glossary', subcategory: 'Frameworks', keywords: ['react', 'reasoning', 'acting', 'agents'], excerpt: 'A framework combining Reasoning and Acting for transparent problem-solving.', url: 'pages/glossary.html#term-react' },
+        { id: 'term-recall', title: 'Recall', category: 'Glossary', subcategory: 'Metrics', keywords: ['recall', 'sensitivity', 'metrics', 'completeness'], excerpt: 'A metric measuring the proportion of actual positives correctly identified.', url: 'pages/glossary.html#term-recall' },
+        { id: 'term-red-team', title: 'Red Team', category: 'Glossary', subcategory: 'Safety', keywords: ['red team', 'testing', 'security', 'adversarial'], excerpt: 'A group testing AI systems by attempting to find vulnerabilities and bypass safety.', url: 'pages/glossary.html#term-red-team' },
+        { id: 'term-regression', title: 'Regression', category: 'Glossary', subcategory: 'ML Tasks', keywords: ['regression', 'prediction', 'continuous', 'values'], excerpt: 'A machine learning task predicting continuous values rather than categories.', url: 'pages/glossary.html#term-regression' },
+        { id: 'term-regularization', title: 'Regularization', category: 'Glossary', subcategory: 'Training', keywords: ['regularization', 'overfitting', 'dropout', 'constraints'], excerpt: 'Techniques preventing overfitting by adding constraints during training.', url: 'pages/glossary.html#term-regularization' },
+        { id: 'term-reinforcement-learning', title: 'Reinforcement Learning (RL)', category: 'Glossary', subcategory: 'Learning Types', keywords: ['reinforcement learning', 'rl', 'rewards', 'agents'], excerpt: 'Learning where agents learn by receiving rewards or penalties for actions.', url: 'pages/glossary.html#term-reinforcement-learning' },
+        { id: 'term-rlhf', title: 'RLHF', category: 'Glossary', subcategory: 'Training', keywords: ['rlhf', 'human feedback', 'alignment', 'preferences'], excerpt: 'Reinforcement Learning from Human Feedback for aligning models with preferences.', url: 'pages/glossary.html#term-rlhf' },
+        { id: 'term-rnn', title: 'RNN (Recurrent Neural Network)', category: 'Glossary', subcategory: 'Architecture', keywords: ['rnn', 'recurrent', 'sequence', 'temporal'], excerpt: 'A neural network processing sequences by maintaining hidden state.', url: 'pages/glossary.html#term-rnn' },
+        { id: 'term-role-prompting', title: 'Role Prompting', category: 'Glossary', subcategory: 'Prompting', keywords: ['role prompting', 'persona', 'act as', 'expertise'], excerpt: 'Assigning AI a specific persona or expertise to shape responses.', url: 'pages/glossary.html#term-role-prompting' },
+        { id: 'term-rope', title: 'RoPE (Rotary Position Embedding)', category: 'Glossary', subcategory: 'Architecture', keywords: ['rope', 'rotary', 'position', 'encoding'], excerpt: 'A positional encoding technique enabling better length generalization.', url: 'pages/glossary.html#term-rope' },
         // Letter S
-        { id: 'term-self-consistency', title: 'Self-Consistency', category: 'Glossary', subcategory: 'Techniques', keywords: ['self-consistency', 'verification', 'multiple answers', 'accuracy'], excerpt: 'A technique where AI generates multiple responses and selects the most common answer. Helps improve accuracy for reasoning tasks.', url: 'pages/glossary.html#term-self-consistency' },
-        { id: 'term-system-prompt', title: 'System Prompt', category: 'Glossary', subcategory: 'Technical', keywords: ['system prompt', 'instructions', 'behavior', 'configuration'], excerpt: 'Instructions given to AI before a conversation that set context, persona, or behavior guidelines. Often hidden from users but shapes all responses.', url: 'pages/glossary.html#term-system-prompt' },
+        { id: 'term-sampling', title: 'Sampling', category: 'Glossary', subcategory: 'Generation', keywords: ['sampling', 'generation', 'random', 'selection'], excerpt: 'The process of selecting the next token during text generation.', url: 'pages/glossary.html#term-sampling' },
+        { id: 'term-scaling-laws', title: 'Scaling Laws', category: 'Glossary', subcategory: 'Research', keywords: ['scaling laws', 'size', 'compute', 'data'], excerpt: 'Empirical relationships showing how performance improves with scale.', url: 'pages/glossary.html#term-scaling-laws' },
+        { id: 'term-self-attention', title: 'Self-Attention', category: 'Glossary', subcategory: 'Architecture', keywords: ['self-attention', 'attention', 'transformer', 'context'], excerpt: 'Attention where a sequence attends to itself, the core transformer operation.', url: 'pages/glossary.html#term-self-attention' },
+        { id: 'term-self-consistency', title: 'Self-Consistency', category: 'Glossary', subcategory: 'Techniques', keywords: ['self-consistency', 'multiple', 'voting', 'reasoning'], excerpt: 'Generating multiple reasoning paths and selecting the most common answer.', url: 'pages/glossary.html#term-self-consistency' },
+        { id: 'term-semantic-kernel', title: 'Semantic Kernel', category: 'Glossary', subcategory: 'Frameworks', keywords: ['semantic kernel', 'microsoft', 'sdk', 'plugins', 'enterprise'], excerpt: 'Microsoft\'s open-source SDK for building AI applications with LLMs and plugin architecture.', url: 'pages/glossary.html#term-semantic-kernel' },
+        { id: 'term-semantic-search', title: 'Semantic Search', category: 'Glossary', subcategory: 'Applications', keywords: ['semantic search', 'meaning', 'embeddings', 'similarity'], excerpt: 'Search based on meaning rather than keyword matching using embeddings.', url: 'pages/glossary.html#term-semantic-search' },
+        { id: 'term-sentiment-analysis', title: 'Sentiment Analysis', category: 'Glossary', subcategory: 'NLP Tasks', keywords: ['sentiment', 'emotion', 'positive', 'negative'], excerpt: 'Determining the emotional tone of text (positive, negative, neutral).', url: 'pages/glossary.html#term-sentiment-analysis' },
+        { id: 'term-sft', title: 'SFT (Supervised Fine-Tuning)', category: 'Glossary', subcategory: 'Training', keywords: ['sft', 'supervised', 'fine-tuning', 'instruction'], excerpt: 'Training models on labeled examples of desired behavior before RLHF.', url: 'pages/glossary.html#term-sft' },
+        { id: 'term-softmax', title: 'Softmax', category: 'Glossary', subcategory: 'Functions', keywords: ['softmax', 'probability', 'normalization', 'distribution'], excerpt: 'A function converting raw scores into probabilities that sum to 1.', url: 'pages/glossary.html#term-softmax' },
+        { id: 'term-stable-diffusion', title: 'Stable Diffusion', category: 'Glossary', subcategory: 'Models', keywords: ['stable diffusion', 'image', 'open source', 'stability'], excerpt: 'An open-source text-to-image model from Stability AI.', url: 'pages/glossary.html#term-stable-diffusion' },
+        { id: 'term-streaming', title: 'Streaming', category: 'Glossary', subcategory: 'API', keywords: ['streaming', 'incremental', 'real-time', 'response'], excerpt: 'Receiving AI output incrementally as it\'s generated for better UX.', url: 'pages/glossary.html#term-streaming' },
+        { id: 'term-summarization', title: 'Summarization', category: 'Glossary', subcategory: 'NLP Tasks', keywords: ['summarization', 'condensing', 'summary', 'tldr'], excerpt: 'Condensing longer text into shorter summaries (extractive or abstractive).', url: 'pages/glossary.html#term-summarization' },
+        { id: 'term-supervised-learning', title: 'Supervised Learning', category: 'Glossary', subcategory: 'Learning Types', keywords: ['supervised', 'labeled', 'training', 'examples'], excerpt: 'Learning from labeled examples where correct answers are provided.', url: 'pages/glossary.html#term-supervised-learning' },
+        { id: 'term-sycophancy', title: 'Sycophancy', category: 'Glossary', subcategory: 'Limitations', keywords: ['sycophancy', 'agreeable', 'flattery', 'bias'], excerpt: 'When AI excessively agrees with users rather than providing accurate information.', url: 'pages/glossary.html#term-sycophancy' },
+        { id: 'term-synthetic-data', title: 'Synthetic Data', category: 'Glossary', subcategory: 'Data', keywords: ['synthetic data', 'generated', 'artificial', 'training'], excerpt: 'Artificially generated data used when real data is scarce or sensitive.', url: 'pages/glossary.html#term-synthetic-data' },
+        { id: 'term-system-prompt', title: 'System Prompt', category: 'Glossary', subcategory: 'Prompting', keywords: ['system prompt', 'instructions', 'configuration', 'behavior'], excerpt: 'Instructions given before conversation that shape all AI responses.', url: 'pages/glossary.html#term-system-prompt' },
         // Letter T
-        { id: 'term-temperature', title: 'Temperature', category: 'Glossary', subcategory: 'Technical', keywords: ['temperature', 'creativity', 'randomness', 'deterministic'], excerpt: 'A setting that controls how creative or random AI responses are. Lower values produce more focused, deterministic outputs; higher values produce more varied, creative outputs.', url: 'pages/glossary.html#term-temperature' },
-        { id: 'term-token', title: 'Token', category: 'Glossary', subcategory: 'Technical', keywords: ['token', 'tokenization', 'words', 'characters', 'pricing'], excerpt: 'The basic unit AI uses to process text. Roughly 4 characters or 0.75 words in English. Context windows and pricing are often measured in tokens.', url: 'pages/glossary.html#term-token' },
-        { id: 'term-training-data', title: 'Training Data', category: 'Glossary', subcategory: 'Technical', keywords: ['training data', 'dataset', 'learning', 'corpus'], excerpt: 'The text, images, and other content used to teach an AI model. The quality and scope of training data significantly affects AI capabilities and biases.', url: 'pages/glossary.html#term-training-data' },
-        { id: 'term-transformer', title: 'Transformer', category: 'Glossary', subcategory: 'Technical', keywords: ['transformer', 'architecture', 'attention', 'neural network'], excerpt: 'The neural network architecture behind most modern AI assistants. Introduced in 2017, it revolutionized language processing through attention mechanisms.', url: 'pages/glossary.html#term-transformer' },
+        { id: 'term-temperature', title: 'Temperature', category: 'Glossary', subcategory: 'Parameters', keywords: ['temperature', 'creativity', 'randomness', 'sampling'], excerpt: 'A parameter controlling randomness in outputs. Lower = focused, higher = creative.', url: 'pages/glossary.html#term-temperature' },
+        { id: 'term-text-generation', title: 'Text Generation', category: 'Glossary', subcategory: 'Applications', keywords: ['text generation', 'writing', 'content', 'creation'], excerpt: 'The AI task of producing human-like text from prompts.', url: 'pages/glossary.html#term-text-generation' },
+        { id: 'term-throughput', title: 'Throughput', category: 'Glossary', subcategory: 'Performance', keywords: ['throughput', 'tokens per second', 'speed', 'capacity'], excerpt: 'The rate at which a system processes requests, measured in tokens per second.', url: 'pages/glossary.html#term-throughput' },
+        { id: 'term-token', title: 'Token', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['token', 'word piece', 'unit', 'tokenization'], excerpt: 'The basic unit AI uses to process text, roughly 4 characters in English.', url: 'pages/glossary.html#term-token' },
+        { id: 'term-tokenization', title: 'Tokenization', category: 'Glossary', subcategory: 'Process', keywords: ['tokenization', 'splitting', 'bpe', 'sentencepiece'], excerpt: 'Breaking text into tokens for model processing using algorithms like BPE.', url: 'pages/glossary.html#term-tokenization' },
+        { id: 'term-top-k', title: 'Top-K Sampling', category: 'Glossary', subcategory: 'Parameters', keywords: ['top-k', 'sampling', 'generation', 'filtering'], excerpt: 'A generation strategy limiting token selection to the K most probable options.', url: 'pages/glossary.html#term-top-k' },
+        { id: 'term-top-p', title: 'Top-P (Nucleus Sampling)', category: 'Glossary', subcategory: 'Parameters', keywords: ['top-p', 'nucleus', 'sampling', 'probability'], excerpt: 'Sampling from tokens until cumulative probability reaches P, adapting to context.', url: 'pages/glossary.html#term-top-p' },
+        { id: 'term-training', title: 'Training', category: 'Glossary', subcategory: 'Process', keywords: ['training', 'learning', 'optimization', 'compute'], excerpt: 'Teaching a model by exposing it to data and adjusting parameters to reduce error.', url: 'pages/glossary.html#term-training' },
+        { id: 'term-training-data', title: 'Training Data', category: 'Glossary', subcategory: 'Data', keywords: ['training data', 'corpus', 'dataset', 'sources'], excerpt: 'The content used to teach AI models, affecting capabilities and biases.', url: 'pages/glossary.html#term-training-data' },
+        { id: 'term-transfer-learning', title: 'Transfer Learning', category: 'Glossary', subcategory: 'Techniques', keywords: ['transfer learning', 'pre-trained', 'adaptation', 'domain'], excerpt: 'Using knowledge from one task to improve performance on another.', url: 'pages/glossary.html#term-transfer-learning' },
+        { id: 'term-transformer', title: 'Transformer', category: 'Glossary', subcategory: 'Architecture', keywords: ['transformer', 'attention', 'architecture', '2017'], excerpt: 'The revolutionary architecture using self-attention that powers modern AI.', url: 'pages/glossary.html#term-transformer' },
+        { id: 'term-tree-of-thought', title: 'Tree-of-Thought', category: 'Glossary', subcategory: 'Prompting', keywords: ['tree of thought', 'reasoning', 'exploration', 'branches'], excerpt: 'A prompting technique exploring multiple reasoning paths simultaneously.', url: 'pages/glossary.html#term-tree-of-thought' },
+        // Letter U
+        { id: 'term-underfitting', title: 'Underfitting', category: 'Glossary', subcategory: 'Problems', keywords: ['underfitting', 'simple', 'capacity', 'poor'], excerpt: 'When a model is too simple to capture patterns, performing poorly on all data.', url: 'pages/glossary.html#term-underfitting' },
+        { id: 'term-unsupervised-learning', title: 'Unsupervised Learning', category: 'Glossary', subcategory: 'Learning Types', keywords: ['unsupervised', 'unlabeled', 'patterns', 'clustering'], excerpt: 'Learning from unlabeled data, discovering patterns without explicit guidance.', url: 'pages/glossary.html#term-unsupervised-learning' },
+        { id: 'term-user-prompt', title: 'User Prompt', category: 'Glossary', subcategory: 'Prompting', keywords: ['user prompt', 'input', 'message', 'request'], excerpt: 'The input provided by users in conversation, distinct from system prompts.', url: 'pages/glossary.html#term-user-prompt' },
+        // Letter V
+        { id: 'term-validation', title: 'Validation', category: 'Glossary', subcategory: 'Evaluation', keywords: ['validation', 'testing', 'held-out', 'tuning'], excerpt: 'Testing model performance on data not used in training.', url: 'pages/glossary.html#term-validation' },
+        { id: 'term-vector', title: 'Vector', category: 'Glossary', subcategory: 'Math', keywords: ['vector', 'embedding', 'numbers', 'representation'], excerpt: 'An ordered list of numbers representing data in mathematical space.', url: 'pages/glossary.html#term-vector' },
+        { id: 'term-vector-database', title: 'Vector Database', category: 'Glossary', subcategory: 'Infrastructure', keywords: ['vector database', 'embeddings', 'search', 'pinecone'], excerpt: 'A database optimized for storing and searching high-dimensional vectors.', url: 'pages/glossary.html#term-vector-database' },
+        { id: 'term-vision-language-model', title: 'Vision-Language Model (VLM)', category: 'Glossary', subcategory: 'Models', keywords: ['vlm', 'vision', 'multimodal', 'images'], excerpt: 'AI models processing both images and text for visual understanding.', url: 'pages/glossary.html#term-vision-language-model' },
+        // Letter W
+        { id: 'term-weight', title: 'Weight', category: 'Glossary', subcategory: 'Core Concepts', keywords: ['weight', 'parameter', 'learned', 'neural network'], excerpt: 'The numerical parameters learned during training that determine model behavior.', url: 'pages/glossary.html#term-weight' },
+        { id: 'term-whisper', title: 'Whisper', category: 'Glossary', subcategory: 'Models', keywords: ['whisper', 'speech', 'transcription', 'audio', 'openai'], excerpt: 'OpenAI\'s speech recognition model for high-accuracy audio transcription.', url: 'pages/glossary.html#term-whisper' },
+        { id: 'term-word-embedding', title: 'Word Embedding', category: 'Glossary', subcategory: 'Representation', keywords: ['word embedding', 'word2vec', 'glove', 'vectors'], excerpt: 'Dense vector representations of words where similar words have similar vectors.', url: 'pages/glossary.html#term-word-embedding' },
+        // Letter X
+        { id: 'term-xai', title: 'XAI (Explainable AI)', category: 'Glossary', subcategory: 'Transparency', keywords: ['xai', 'explainable', 'interpretable', 'understanding'], excerpt: 'The field focused on making AI decisions understandable to humans.', url: 'pages/glossary.html#term-xai' },
+        { id: 'term-xml-tags', title: 'XML Tags (in Prompting)', category: 'Glossary', subcategory: 'Prompting', keywords: ['xml', 'tags', 'structure', 'delimiter'], excerpt: 'Using XML-style tags to structure prompts and delineate sections clearly.', url: 'pages/glossary.html#term-xml-tags' },
+        // Letter Y
+        { id: 'term-yolo', title: 'YOLO (You Only Look Once)', category: 'Glossary', subcategory: 'Architecture', keywords: ['yolo', 'object detection', 'real-time', 'computer vision'], excerpt: 'A real-time object detection algorithm processing images in a single pass for fast detection.', url: 'pages/glossary.html#term-yolo' },
         // Letter Z
-        { id: 'term-zero-shot', title: 'Zero-Shot Learning', category: 'Glossary', subcategory: 'Techniques', keywords: ['zero-shot', 'no examples', 'direct instruction', 'generalization'], excerpt: 'When AI performs a task without being given examples in the prompt. Relies entirely on the AI\'s pre-trained knowledge and clear instructions.', url: 'pages/glossary.html#term-zero-shot' },
+        { id: 'term-zero-shot', title: 'Zero-Shot Learning', category: 'Glossary', subcategory: 'Prompting', keywords: ['zero-shot', 'no examples', 'instruction', 'generalization'], excerpt: 'Performing tasks without examples, relying on pre-trained knowledge.', url: 'pages/glossary.html#term-zero-shot' },
+        { id: 'term-zero-shot-cot', title: 'Zero-Shot Chain-of-Thought', category: 'Glossary', subcategory: 'Prompting', keywords: ['zero-shot cot', 'step by step', 'reasoning', 'simple'], excerpt: 'Adding "Let\'s think step by step" to trigger reasoning without examples.', url: 'pages/glossary.html#term-zero-shot-cot' },
 
         // ==========================================
         // LEARN PAGES - Methodologies & Concepts
@@ -7819,4 +8170,404 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Log search index stats in console for debugging
     console.log(`[Praxis Search] Index loaded: ${PRAXIS_SEARCH_INDEX.length} entries`);
+
+    // ==========================================
+    // SEARCH MODAL UI (Cmd+K / Ctrl+K)
+    // ==========================================
+
+    /**
+     * Category icons for search results
+     */
+    const CATEGORY_ICONS = {
+        Learn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>',
+        Tools: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+        Glossary: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+        Patterns: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
+        FAQ: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+        Resources: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>'
+    };
+
+    /**
+     * Detect if user is on macOS
+     */
+    function isMacOS() {
+        // Modern approach using userAgentData (if available)
+        if (navigator.userAgentData && navigator.userAgentData.platform) {
+            return navigator.userAgentData.platform.toLowerCase().includes('mac');
+        }
+        // Fallback to userAgent string
+        return /Mac|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
+
+    /**
+     * Create and inject search modal HTML
+     */
+    function createSearchModal() {
+        // Check if modal already exists
+        if (document.getElementById('search-modal-overlay')) return;
+
+        const isMac = isMacOS();
+        const shortcutKey = isMac ? '⌘K' : 'Ctrl+K';
+
+        const modalHTML = `
+            <div class="search-modal-overlay" id="search-modal-overlay">
+                <div class="search-modal" role="dialog" aria-modal="true" aria-label="Search Praxis">
+                    <div class="search-modal-header">
+                        <svg class="search-modal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        <input type="text" class="search-modal-input" id="search-modal-input" placeholder="Search methods, tools, terms..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                        <span class="search-modal-shortcut">${shortcutKey}</span>
+                        <button class="search-modal-close" id="search-modal-close" aria-label="Close search">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="search-modal-help">
+                        <div class="search-modal-help-title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            Quick Guide
+                        </div>
+                        <div class="search-modal-help-grid">
+                            <div class="search-modal-help-item">
+                                <span class="search-modal-help-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                                    Learn
+                                </span>
+                                <span>Methods &amp; techniques</span>
+                            </div>
+                            <div class="search-modal-help-item">
+                                <span class="search-modal-help-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                                    Tools
+                                </span>
+                                <span>Analyzer, Builder, Quiz</span>
+                            </div>
+                            <div class="search-modal-help-item">
+                                <span class="search-modal-help-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                                    Glossary
+                                </span>
+                                <span>48 AI terms A-Z</span>
+                            </div>
+                            <div class="search-modal-help-item">
+                                <span class="search-modal-help-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                                    Patterns
+                                </span>
+                                <span>Reusable frameworks</span>
+                            </div>
+                            <div class="search-modal-help-item">
+                                <span class="search-modal-help-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                    FAQ
+                                </span>
+                                <span>Common questions</span>
+                            </div>
+                            <div class="search-modal-help-item">
+                                <span class="search-modal-help-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                                    Resources
+                                </span>
+                                <span>Guides &amp; references</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search-modal-results" id="search-modal-results">
+                        <div class="search-modal-empty">
+                            <svg class="search-modal-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="11" cy="11" r="8"/>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                            <h3>Start typing to search</h3>
+                            <p>Results grouped by category with highlighted matches</p>
+                        </div>
+                    </div>
+                    <div class="search-modal-footer">
+                        <div class="search-modal-footer-hints">
+                            <span class="search-modal-footer-hint"><kbd>↑↓</kbd> Navigate</span>
+                            <span class="search-modal-footer-hint"><kbd>↵</kbd> Open</span>
+                            <span class="search-modal-footer-hint"><kbd>Esc</kbd> Close</span>
+                        </div>
+                        <span class="search-modal-footer-count" id="search-modal-count">${PRAXIS_SEARCH_INDEX.length} indexed items</span>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+    }
+
+    /**
+     * Inject search trigger button into header
+     */
+    function createSearchTrigger() {
+        const header = document.querySelector('.header-container');
+        if (!header || document.getElementById('search-trigger')) return;
+
+        const isMac = isMacOS();
+        const shortcutKey = isMac ? '⌘K' : 'Ctrl K';
+
+        const triggerHTML = `
+            <button class="search-trigger" id="search-trigger" aria-label="Search Praxis">
+                <svg class="search-trigger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <span class="search-trigger-text">Search...</span>
+                <span class="search-trigger-shortcut">${shortcutKey}</span>
+            </button>
+        `;
+
+        // Insert before menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        if (menuToggle) {
+            menuToggle.insertAdjacentHTML('beforebegin', triggerHTML);
+        }
+    }
+
+    /**
+     * Highlight search terms in text
+     */
+    function highlightMatches(text, query) {
+        if (!query || query.length < 2) return escapeHtml(text);
+
+        const terms = query.toLowerCase().split(/\s+/);
+        let result = escapeHtml(text);
+
+        terms.forEach(term => {
+            if (term.length >= 2) {
+                const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                result = result.replace(regex, '<mark>$1</mark>');
+            }
+        });
+
+        return result;
+    }
+
+    /**
+     * Render search results
+     */
+    function renderSearchResults(groupedResults, query) {
+        const container = document.getElementById('search-modal-results');
+        const countEl = document.getElementById('search-modal-count');
+        if (!container) return;
+
+        if (!groupedResults || groupedResults.length === 0) {
+            if (query && query.length >= 2) {
+                container.innerHTML = `
+                    <div class="search-modal-no-results">
+                        <h3>No results found</h3>
+                        <p>Try different keywords or check spelling</p>
+                    </div>
+                `;
+                countEl.textContent = '0 results';
+            } else {
+                container.innerHTML = `
+                    <div class="search-modal-empty">
+                        <svg class="search-modal-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        <h3>Start typing to search</h3>
+                        <p>Results grouped by category with highlighted matches</p>
+                    </div>
+                `;
+                countEl.textContent = `${PRAXIS_SEARCH_INDEX.length} indexed items`;
+            }
+            return;
+        }
+
+        let totalResults = 0;
+        let html = '';
+
+        groupedResults.forEach(group => {
+            const icon = CATEGORY_ICONS[group.category] || CATEGORY_ICONS.Resources;
+            totalResults += group.results.length;
+
+            html += `<div class="search-result-category">`;
+            html += `<div class="search-result-category-title">${escapeHtml(group.category)}</div>`;
+
+            group.results.forEach(result => {
+                html += `
+                    <a href="${escapeHtml(result.url)}" class="search-result-item" data-id="${escapeHtml(result.id)}">
+                        <div class="search-result-icon">${icon}</div>
+                        <div class="search-result-content">
+                            <div class="search-result-title">${highlightMatches(result.title, query)}</div>
+                            <div class="search-result-excerpt">${highlightMatches(result.excerpt, query)}</div>
+                        </div>
+                        <svg class="search-result-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </a>
+                `;
+            });
+
+            html += `</div>`;
+        });
+
+        container.innerHTML = html;
+        countEl.textContent = `${totalResults} result${totalResults === 1 ? '' : 's'}`;
+    }
+
+    /**
+     * Search modal state and functionality
+     */
+    const searchModal = {
+        overlay: null,
+        input: null,
+        results: null,
+        selectedIndex: -1,
+        resultItems: [],
+
+        init() {
+            createSearchModal();
+            createSearchTrigger();
+
+            this.overlay = document.getElementById('search-modal-overlay');
+            this.input = document.getElementById('search-modal-input');
+            this.results = document.getElementById('search-modal-results');
+
+            if (!this.overlay || !this.input) return;
+
+            // Search trigger click
+            const trigger = document.getElementById('search-trigger');
+            if (trigger) {
+                trigger.addEventListener('click', () => this.open());
+            }
+
+            // Close button click
+            const closeBtn = document.getElementById('search-modal-close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => this.close());
+            }
+
+            // Overlay click (close on outside click)
+            this.overlay.addEventListener('click', (e) => {
+                if (e.target === this.overlay) {
+                    this.close();
+                }
+            });
+
+            // Input handler with debounce
+            let debounceTimer;
+            this.input.addEventListener('input', () => {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    const query = this.input.value.trim();
+                    const results = window.PraxisSearch.search(query);
+                    renderSearchResults(results, query);
+                    this.updateResultItems();
+                    this.selectedIndex = -1;
+                }, 150);
+            });
+
+            // Keyboard navigation
+            this.input.addEventListener('keydown', (e) => {
+                switch (e.key) {
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        this.navigateResults(1);
+                        break;
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        this.navigateResults(-1);
+                        break;
+                    case 'Enter':
+                        e.preventDefault();
+                        this.selectResult();
+                        break;
+                    case 'Escape':
+                        e.preventDefault();
+                        this.close();
+                        break;
+                }
+            });
+
+            // Global keyboard shortcut (Cmd+K / Ctrl+K)
+            document.addEventListener('keydown', (e) => {
+                if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                    e.preventDefault();
+                    if (this.isOpen()) {
+                        this.close();
+                    } else {
+                        this.open();
+                    }
+                }
+            });
+        },
+
+        open() {
+            if (!this.overlay) return;
+            this.overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Focus input after animation
+            setTimeout(() => {
+                this.input.focus();
+            }, 100);
+
+            // Reset state
+            this.selectedIndex = -1;
+            this.updateResultItems();
+        },
+
+        close() {
+            if (!this.overlay) return;
+            this.overlay.classList.remove('active');
+            document.body.style.overflow = '';
+            this.input.value = '';
+            this.selectedIndex = -1;
+
+            // Reset to empty state
+            renderSearchResults(null, '');
+        },
+
+        isOpen() {
+            return this.overlay && this.overlay.classList.contains('active');
+        },
+
+        updateResultItems() {
+            this.resultItems = Array.from(this.results.querySelectorAll('.search-result-item'));
+        },
+
+        navigateResults(direction) {
+            if (this.resultItems.length === 0) return;
+
+            // Remove previous selection
+            if (this.selectedIndex >= 0 && this.resultItems[this.selectedIndex]) {
+                this.resultItems[this.selectedIndex].classList.remove('selected');
+            }
+
+            // Calculate new index
+            this.selectedIndex += direction;
+            if (this.selectedIndex < 0) {
+                this.selectedIndex = this.resultItems.length - 1;
+            } else if (this.selectedIndex >= this.resultItems.length) {
+                this.selectedIndex = 0;
+            }
+
+            // Apply new selection
+            const selectedItem = this.resultItems[this.selectedIndex];
+            if (selectedItem) {
+                selectedItem.classList.add('selected');
+                selectedItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            }
+        },
+
+        selectResult() {
+            if (this.selectedIndex >= 0 && this.resultItems[this.selectedIndex]) {
+                const href = this.resultItems[this.selectedIndex].getAttribute('href');
+                if (href) {
+                    window.location.href = href;
+                }
+            }
+        }
+    };
+
+    // Initialize search modal
+    searchModal.init();
 });
