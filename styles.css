@@ -9632,6 +9632,7 @@ body.menu-open {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
+    z-index: 1000;
 }
 
 .search-wrapper {
@@ -9739,7 +9740,7 @@ body.menu-open {
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
-    z-index: 100;
+    z-index: 1001;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
@@ -17261,6 +17262,12 @@ html[data-text-scale="3"] {
 .section-ambient > .container {
     position: relative;
     z-index: 1;
+}
+
+/* Section with search/dropdown - allow overflow and higher z-index */
+.section-ambient--overflow {
+    overflow: visible;
+    z-index: 100;
 }
 
 /* Hide animation on mobile for performance */
