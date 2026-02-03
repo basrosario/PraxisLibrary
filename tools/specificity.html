@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
-    <meta name="description" content="Test your AI readiness with our interactive quiz. Assess your knowledge of prompting frameworks, critical thinking, and AI communication skills.">
-    <title>AI Readiness Quiz - Praxis</title>
+    <meta name="description" content="Specificity Slider Game - Turn vague AI prompts into specific ones by playing clarification cards. Learn what makes prompts effective through gameplay.">
+    <title>Specificity Slider - Prompt Clarity Game - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="preload" href="../styles.css" as="style">
     <link rel="stylesheet" href="../styles.css">
@@ -35,16 +35,16 @@
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="../tools/index.html" class="nav-link">AI Readiness</a>
+                    <a href="index.html" class="nav-link active">AI Readiness</a>
                     <div class="mega-menu">
                         <div class="mega-menu-section">
                             <h4>Tools</h4>
                             <a href="../quiz/index.html">Readiness Quiz</a>
-                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
-                            <a href="../tools/guidance.html">Prompt Builder</a>
-                            <a href="../tools/matcher.html">Framework Matcher</a>
-                            <a href="../tools/checklist.html">Preflight Checklist</a>
-                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="analyzer.html">Prompt Analyzer</a>
+                            <a href="guidance.html">Prompt Builder</a>
+                            <a href="matcher.html">Framework Matcher</a>
+                            <a href="checklist.html">Preflight Checklist</a>
+                            <a href="persona.html">Persona Architect</a>
                             <a href="../patterns/index.html">Patterns Library</a>
                             <a href="../pages/ai-safety.html">AI Safety</a>
                         </div>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="../pages/resources.html" class="nav-link active">Resources</a>
+                    <a href="../pages/resources.html" class="nav-link">Resources</a>
                     <div class="mega-menu">
                         <div class="mega-menu-section">
                             <h4>Explore</h4>
@@ -97,14 +97,16 @@
                 <nav class="breadcrumb fade-in">
                     <a href="../index.html">Home</a>
                     <span class="separator">/</span>
-                    <span class="current">Readiness Quiz</span>
+                    <a href="index.html">AI Readiness</a>
+                    <span class="separator">/</span>
+                    <span class="current">Specificity Slider</span>
                 </nav>
-                <h1 class="page-title fade-in">AI Readiness Quiz</h1>
-                <p class="page-subtitle fade-in">40 questions across 4 levels: Good, Pro, Expert, and Master. Test your knowledge from basics to advanced IDE and API usage.</p>
+                <h1 class="page-title fade-in">Specificity Slider</h1>
+                <p class="page-subtitle fade-in">Turn vague prompts into perfect ones by playing the right clarification cards. Master the art of specific AI requests.</p>
             </div>
         </section>
 
-        <!-- Quiz Section -->
+        <!-- Game Section -->
         <section class="section">
             <div class="container">
                 <div class="content-badges fade-in-up">
@@ -134,80 +136,159 @@
                     </a>
                 </div>
 
-                <div class="quiz-container fade-in-up">
-                    <div id="readiness-quiz" class="readiness-quiz">
-                        <!-- Quiz content will be populated by JavaScript -->
-                        <div class="quiz-loading">
-                            <p>Loading quiz...</p>
+                <div class="tool-container fade-in-up">
+                    <div class="specificity-game" id="specificity-game">
+                        <!-- Game Header -->
+                        <div class="spec-game-header">
+                            <div class="spec-score-display">
+                                <span class="spec-score-label">Score</span>
+                                <span class="spec-score-value" id="spec-score">0</span>
+                            </div>
+                            <div class="spec-round-display">
+                                <span class="spec-round-label">Round</span>
+                                <span class="spec-round-value" id="spec-round">1/5</span>
+                            </div>
+                            <div class="spec-streak-display">
+                                <span class="spec-streak-label">Streak</span>
+                                <span class="spec-streak-value" id="spec-streak">0</span>
+                            </div>
+                        </div>
+
+                        <!-- Vague Prompt Display -->
+                        <div class="spec-prompt-area">
+                            <div class="spec-prompt-label">Vague Prompt:</div>
+                            <div class="spec-prompt-text" id="spec-vague-prompt">Write a recipe.</div>
+                        </div>
+
+                        <!-- Specificity Meter -->
+                        <div class="spec-meter-area">
+                            <div class="spec-meter-label">Specificity Rating</div>
+                            <div class="spec-meter">
+                                <div class="spec-meter-fill" id="spec-meter-fill"></div>
+                                <div class="spec-meter-stars">
+                                    <span class="spec-star" data-star="1">★</span>
+                                    <span class="spec-star" data-star="2">★</span>
+                                    <span class="spec-star" data-star="3">★</span>
+                                    <span class="spec-star" data-star="4">★</span>
+                                    <span class="spec-star" data-star="5">★</span>
+                                </div>
+                            </div>
+                            <div class="spec-meter-hint" id="spec-meter-hint">Add clarifications to improve the prompt</div>
+                        </div>
+
+                        <!-- Card Hand -->
+                        <div class="spec-cards-area">
+                            <div class="spec-cards-label">Your Clarification Cards (select relevant ones):</div>
+                            <div class="spec-cards-hand" id="spec-cards-hand">
+                                <!-- Cards populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Selected Cards -->
+                        <div class="spec-selected-area" id="spec-selected-area">
+                            <div class="spec-selected-label">Applied Clarifications:</div>
+                            <div class="spec-selected-cards" id="spec-selected-cards"></div>
+                        </div>
+
+                        <!-- Enhanced Prompt Preview -->
+                        <div class="spec-preview-area">
+                            <div class="spec-preview-label">Enhanced Prompt:</div>
+                            <div class="spec-preview-text" id="spec-preview-text">Write a recipe.</div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="spec-actions">
+                            <button type="button" id="spec-submit" class="btn btn-primary">Submit Prompt</button>
+                            <button type="button" id="spec-reset" class="btn btn-secondary">Reset Cards</button>
+                        </div>
+
+                        <!-- Result Feedback -->
+                        <div class="spec-result" id="spec-result">
+                            <div class="spec-result-icon" id="spec-result-icon"></div>
+                            <div class="spec-result-message" id="spec-result-message"></div>
+                            <button type="button" id="spec-next" class="btn btn-primary">Next Round</button>
+                        </div>
+
+                        <!-- Game Over -->
+                        <div class="spec-gameover" id="spec-gameover">
+                            <h2>Game Complete!</h2>
+                            <div class="spec-final-score">
+                                <span class="spec-final-label">Final Score</span>
+                                <span class="spec-final-value" id="spec-final-score">0</span>
+                            </div>
+                            <div class="spec-final-message" id="spec-final-message"></div>
+                            <button type="button" id="spec-restart" class="btn btn-primary">Play Again</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- What This Tests -->
+        <!-- How to Play -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">The Four Levels</h2>
-                <p class="section-subtitle fade-in-up">Progress through increasingly advanced AI prompting concepts</p>
+                <h2 class="section-title fade-in-up">How to Play</h2>
+                <p class="section-subtitle fade-in-up">Master the art of specific prompts</p>
 
-                <div class="coverage-grid stagger-children">
-                    <div class="coverage-card">
-                        <h3>Level 1: Good</h3>
-                        <p>Basic prompting concepts, understanding AI limitations, and fundamental principles.</p>
+                <div class="info-cards stagger-children">
+                    <div class="info-card">
+                        <h3>1. See the Vague Prompt</h3>
+                        <p>Each round starts with a vague prompt like "Write a recipe" that needs more detail to be effective.</p>
                     </div>
-
-                    <div class="coverage-card">
-                        <h3>Level 2: Pro</h3>
-                        <p>CRISP, CRISPE, and COSTAR frameworks. When to use each methodology.</p>
+                    <div class="info-card">
+                        <h3>2. Play Clarification Cards</h3>
+                        <p>Select cards that add relevant details. Not all cards are relevant—choose wisely to avoid unnecessary fluff.</p>
                     </div>
-
-                    <div class="coverage-card">
-                        <h3>Level 3: Expert</h3>
-                        <p>Chain-of-Thought, Few-Shot Learning, ReAct method, and Flipped Interaction.</p>
+                    <div class="info-card">
+                        <h3>3. Watch the Meter</h3>
+                        <p>The specificity meter shows how your additions improve the prompt. Aim for 5 stars without over-specifying.</p>
                     </div>
-
-                    <div class="coverage-card">
-                        <h3>Level 4: Master</h3>
-                        <p>Combining methods, IDE usage (Cursor, VS Code), APIs, and advanced reasoning.</p>
+                    <div class="info-card">
+                        <h3>4. Submit &amp; Score</h3>
+                        <p>Submit when you think the prompt is perfect. You'll score based on specificity and relevance of chosen cards.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- After the Quiz -->
+        <!-- Learning Outcomes -->
         <section class="section">
             <div class="container">
-                <h2 class="section-title fade-in-up">Continue Learning</h2>
-                <p class="section-subtitle fade-in-up">Based on your results, explore these resources</p>
+                <h2 class="section-title fade-in-up">What You'll Learn</h2>
+                <p class="section-subtitle fade-in-up">Skills that transfer to real AI interactions</p>
 
-                <div class="card-grid stagger-children">
-                    <a href="../learn/prompt-basics.html" class="card card-glow">
-                        <div class="card-badge badge-green">Level 1</div>
-                        <h3 class="card-title">Prompt Basics</h3>
-                        <p class="card-text">Build your foundation with core prompting principles and concepts.</p>
-                        <span class="card-link">Start Learning</span>
-                    </a>
+                <div class="safety-principles stagger-children">
+                    <div class="principle-card">
+                        <h3>Identify Missing Context</h3>
+                        <p>Learn to spot what information is missing from vague requests that leads AI to make assumptions.</p>
+                    </div>
+                    <div class="principle-card">
+                        <h3>Prioritize Clarifications</h3>
+                        <p>Not all details are equally important. Learn which clarifications have the biggest impact on output quality.</p>
+                    </div>
+                    <div class="principle-card">
+                        <h3>Avoid Over-Specification</h3>
+                        <p>Too many constraints can limit creativity or make prompts unwieldy. Find the balance.</p>
+                    </div>
+                    <div class="principle-card">
+                        <h3>Match Specificity to Task</h3>
+                        <p>A creative writing prompt needs different specificity than a technical documentation request.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                    <a href="../learn/crisp.html" class="card card-glow">
-                        <div class="card-badge">Level 2</div>
-                        <h3 class="card-title">CRISP Framework</h3>
-                        <p class="card-text">Master structured prompting with the CRISP, CRISPE, and COSTAR frameworks.</p>
-                        <span class="card-link">Learn Methodologies</span>
-                    </a>
-
-                    <a href="../learn/advanced.html" class="card card-glow">
-                        <div class="card-badge badge-purple">Level 3</div>
-                        <h3 class="card-title">Advanced Techniques</h3>
-                        <p class="card-text">Chain-of-Thought, Few-Shot Learning, ReAct, and Flipped Interaction.</p>
-                        <span class="card-link">Go Advanced</span>
-                    </a>
-
-                        <div class="card-badge badge-red">Level 4</div>
-                        <h3 class="card-title">IDE Guide</h3>
-                        <p class="card-text">Use AI coding assistants in Cursor, VS Code, and other development tools.</p>
-                        <span class="card-link">Explore IDEs</span>
-                    </a>
+        <!-- CTA -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="cta-card fade-in-up">
+                    <canvas id="cta-neural-bg" class="neural-canvas-secondary"></canvas>
+                    <h2 class="cta-title">Practice Makes Perfect</h2>
+                    <p class="cta-text">Use what you learn here to write better prompts in real AI conversations.</p>
+                    <div class="cta-actions">
+                        <a href="guidance.html" class="btn btn-primary">Build a Prompt</a>
+                        <a href="analyzer.html" class="btn btn-secondary">Analyze Your Prompts</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -236,11 +317,16 @@
 
                 <div class="footer-links">
                     <h4>AI Readiness</h4>
-                    <a href="../tools/analyzer.html">Prompt Analyzer</a>
-                    <a href="../tools/guidance.html">Prompt Builder</a>
-                    <a href="../tools/matcher.html">Framework Matcher</a>
-                    <a href="../tools/checklist.html">Preflight Checklist</a>
-                    <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                    <a href="analyzer.html">Prompt Analyzer</a>
+                    <a href="guidance.html">Prompt Builder</a>
+                    <a href="matcher.html">Framework Matcher</a>
+                    <a href="checklist.html">Preflight Checklist</a>
+                    <a href="hallucination.html">Hallucination Spotter</a>
+                    <a href="persona.html">Persona Architect</a>
+                    <a href="temperature.html">Temperature Visualizer</a>
+                    <a href="bias.html">Bias Radar</a>
+                    <a href="specificity.html">Specificity Slider</a>
+                    <a href="jailbreak.html">Jailbreak Defender</a>
                     <a href="../quiz/index.html">Readiness Quiz</a>
                     <a href="../patterns/index.html">Patterns Library</a>
                     <a href="../pages/ai-safety.html">AI Safety</a>
@@ -248,6 +334,7 @@
 
                 <div class="footer-links">
                     <h4>Resources</h4>
+                    <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
                     <a href="../pages/faq.html">FAQ</a>
                     <a href="../pages/glossary.html">Glossary</a>
                     <a href="../pages/security.html">Security</a>
@@ -276,9 +363,7 @@
         <span class="back-to-top-text">Back to Top</span>
     </button>
 
-    <!-- =============================================
-         BADGE LIGHTBOX - Modal popup for badge info
-         ============================================= -->
+    <!-- Badge Lightbox -->
     <div class="badge-lightbox-overlay" aria-hidden="true"></div>
     <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
         <header class="badge-lightbox-header">
@@ -291,12 +376,8 @@
         </header>
         <div class="badge-lightbox-content"></div>
     </div>
-    <!-- /BADGE LIGHTBOX -->
 
-    <!-- =============================================
-         ACCESSIBILITY DASHBOARD (ADL)
-         User-controlled accommodations for UD/UDL
-         ============================================= -->
+    <!-- Accessibility Dashboard -->
     <div class="adl-dim-overlay" aria-hidden="true"></div>
     <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -362,7 +443,6 @@
         </div>
         <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
     </div>
-    <!-- /ACCESSIBILITY DASHBOARD -->
 
     <script src="../app.js" defer></script>
 </body>

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
-    <meta name="description" content="Learn CRISPE: an extended prompting framework adding Role and Examples to CRISP. Perfect for complex AI tasks requiring specific expertise and output formats.">
-    <title>CRISPE Method - Praxis</title>
+    <meta name="description" content="Learn CRISPE: an extended prompting framework adding Examples to CRISP. Perfect for complex AI tasks requiring specific expertise and output formats.">
+    <title>CRISPE Framework - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="preload" href="../styles.css" as="style">
     <link rel="stylesheet" href="../styles.css">
@@ -23,13 +23,13 @@
                     <a href="index.html" class="nav-link active">Learn</a>
                     <div class="mega-menu">
                         <div class="mega-menu-section">
-                            <h4>Methodologies</h4>
+                            <h4>Frameworks</h4>
                             <a href="prompt-basics.html">Prompt Basics</a>
-                            <a href="crisp.html">CRISP Method</a>
-                            <a href="crispe.html">CRISPE Method</a>
-                            <a href="costar.html">COSTAR Method</a>
-                            <a href="react.html">ReAct Method</a>
-                            <a href="flipped-interaction.html">Flipped Interaction Method</a>
+                            <a href="crisp.html">CRISP Framework</a>
+                            <a href="crispe.html">CRISPE Framework</a>
+                            <a href="costar.html">COSTAR Framework</a>
+                            <a href="react.html">ReAct Framework</a>
+                            <a href="flipped-interaction.html">Flipped Interaction Framework</a>
                             <a href="advanced.html">Advanced Techniques</a>
                         </div>
                     </div>
@@ -39,14 +39,27 @@
                     <div class="mega-menu">
                         <div class="mega-menu-section">
                             <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
                             <a href="../tools/analyzer.html">Prompt Analyzer</a>
                             <a href="../tools/guidance.html">Prompt Builder</a>
-                            <a href="../tools/matcher.html">Method Matcher</a>
+                            <a href="../tools/matcher.html">Framework Matcher</a>
                             <a href="../tools/checklist.html">Preflight Checklist</a>
-                            <a href="../tools/hallucination.html">Hallucination Spotter</a>
-                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
                             <a href="../patterns/index.html">Patterns Library</a>
                             <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../neurodivergence/index.html" class="nav-link">AI + Neurodivergence</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>AI by Neurotype</h4>
+                            <a href="../neurodivergence/adhd.html">AI for ADHD</a>
+                            <a href="../neurodivergence/autism.html">AI for Autism</a>
+                            <a href="../neurodivergence/dyslexia.html">AI for Dyslexia</a>
+                            <a href="../neurodivergence/tools.html">AI Tools Finder</a>
+                            <a href="../neurodivergence/resources.html">Resources</a>
                         </div>
                     </div>
                 </div>
@@ -77,7 +90,7 @@
     </header>
 
     <main id="main-content">
-        <!-- Hero Section -->
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -86,532 +99,591 @@
                     <span class="separator">/</span>
                     <a href="index.html">Learn</a>
                     <span class="separator">/</span>
-                    <span class="current">CRISPE Method</span>
+                    <span class="current">CRISPE Framework</span>
                 </nav>
-                <div class="card-badge">Extended</div>
-                <h1 class="page-title fade-in">The CRISPE Method</h1>
-                <p class="page-subtitle fade-in">An extended prompting framework that adds Role and Example for more consistent, persona-driven AI interactions with few-shot learning.</p>
+                <div class="hero-badge">
+                    <svg class="hero-badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="16"/>
+                        <line x1="8" y1="12" x2="16" y2="12"/>
+                    </svg>
+                    <span class="hero-badge__text">Extended Framework</span>
+                </div>
+                <h1 class="page-title fade-in">The CRISPE Framework</h1>
+                <p class="page-subtitle fade-in">CRISP plus the power of Examples. Show the AI exactly what you want through few-shot learning.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
-        <!-- Acronym Visual -->
+        <!-- === FRAMEWORK EVOLUTION === -->
         <section class="section">
             <div class="container">
-                <div class="acronym-cards six-items stagger-children">
-                    <div class="acronym-card has-flip">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <span class="acronym-letter">C</span>
-                                <h3>Context</h3>
-                                <p>Give background</p>
-                            </div>
-                            <div class="card-back">
-                                <div class="flip-header">Context Example</div>
-                                <div class="flip-example">"I'm a food blogger creating kid-friendly recipes. My audience is busy parents who want healthy meals their picky eaters will enjoy."</div>
-                                <div class="flip-tags">
-                                    <span class="flip-tag">Your role</span>
-                                    <span class="flip-tag">Target audience</span>
-                                    <span class="flip-tag">Goals</span>
-                                </div>
-                            </div>
+                <div class="framework-evolution fade-in-up">
+                    <div class="evolution-base">
+                        <span class="evolution-label">Foundation</span>
+                        <div class="evolution-letters">
+                            <span class="evolution-letter">C</span>
+                            <span class="evolution-letter">R</span>
+                            <span class="evolution-letter">I</span>
+                            <span class="evolution-letter">S</span>
+                            <span class="evolution-letter">P</span>
                         </div>
+                        <span class="evolution-name">CRISP</span>
                     </div>
-                    <div class="acronym-card has-flip">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <span class="acronym-letter">R</span>
-                                <h3>Role</h3>
-                                <p>Tell AI who it is</p>
-                            </div>
-                            <div class="card-back">
-                                <div class="flip-header">Role Example</div>
-                                <div class="flip-example">"Act as a creative chef who specializes in making vegetables appealing to children."</div>
-                                <div class="flip-tags">
-                                    <span class="flip-tag">Expertise</span>
-                                    <span class="flip-tag">Specialty</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="evolution-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12,5 19,12 12,19"/>
+                        </svg>
                     </div>
-                    <div class="acronym-card has-flip">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <span class="acronym-letter">I</span>
-                                <h3>Instruction</h3>
-                                <p>The main ask</p>
-                            </div>
-                            <div class="card-back">
-                                <div class="flip-header">Instruction Example</div>
-                                <div class="flip-example">"Create a week of dinner recipes that hide vegetables in kid-favorite foods."</div>
-                                <div class="flip-tags">
-                                    <span class="flip-tag">Clear task</span>
-                                    <span class="flip-tag">Timeframe</span>
-                                </div>
-                            </div>
+                    <div class="evolution-extended">
+                        <span class="evolution-label">Extended</span>
+                        <div class="evolution-letters">
+                            <span class="evolution-letter">C</span>
+                            <span class="evolution-letter">R</span>
+                            <span class="evolution-letter">I</span>
+                            <span class="evolution-letter">S</span>
+                            <span class="evolution-letter">P</span>
+                            <span class="evolution-letter evolution-letter--highlight">E</span>
                         </div>
+                        <span class="evolution-name">CRISPE</span>
                     </div>
-                    <div class="acronym-card has-flip">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <span class="acronym-letter">S</span>
-                                <h3>Specifics</h3>
-                                <p>Format, length, tone</p>
-                            </div>
-                            <div class="card-back">
-                                <div class="flip-header">Specifics Example</div>
-                                <div class="flip-example">"Each recipe should include prep time under 30 minutes, list the hidden vegetables, and rate kid-appeal 1-5."</div>
-                                <div class="flip-tags">
-                                    <span class="flip-tag">Time limits</span>
-                                    <span class="flip-tag">Required info</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="acronym-card has-flip">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <span class="acronym-letter">P</span>
-                                <h3>Parameters</h3>
-                                <p>Rules and boundaries</p>
-                            </div>
-                            <div class="card-back">
-                                <div class="flip-header">Parameters Example</div>
-                                <div class="flip-example">"No technical jargon. Avoid acronyms. Keep explanations suitable for stakeholders unfamiliar with the project."</div>
-                                <div class="flip-tags">
-                                    <span class="flip-tag">Restrictions</span>
-                                    <span class="flip-tag">Constraints</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="acronym-card acronym-highlight has-flip">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <span class="acronym-letter">E</span>
-                                <h3>Example</h3>
-                                <p>Sample input/output</p>
-                            </div>
-                            <div class="card-back">
-                                <div class="flip-header">Example Example</div>
-                                <div class="flip-example">"Format like: Monday: Veggie Tacos - Prep: 15min - Hidden veggies: peppers, zucchini - Kid appeal: 5/5 (crunchy shells!)"</div>
-                                <div class="flip-tags">
-                                    <span class="flip-tag">Shows format</span>
-                                    <span class="flip-tag">Sets expectations</span>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+
+                <div class="extension-highlight fade-in-up">
+                    <div class="extension-highlight__badge">+E</div>
+                    <div class="extension-highlight__content">
+                        <h3 class="extension-highlight__title">The Example Element</h3>
+                        <p class="extension-highlight__text">Rather than describing what you want, <strong>show it</strong>. Examples unlock few-shot learning—one of the most powerful techniques in prompt engineering.</p>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /FRAMEWORK EVOLUTION -->
 
-        <!-- What Makes CRISPE Different -->
+        <!-- === THE SCIENCE === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">What Makes CRISPE Different</h2>
-                <p class="section-subtitle fade-in-up">CRISP plus one powerful addition</p>
-
-                <div class="content-block fade-in-up">
-                    <p>CRISPE extends CRISP by adding <strong>Example</strong> (few-shot learning). Showing the AI what you want through samples dramatically improves output quality and consistency.</p>
-                </div>
-
-                <div class="evolution-cards stagger-children">
-                    <div class="evolution-card">
-                        <h3>E - Example</h3>
-                        <p>Show the AI what you want through sample input/output pairs. This is called few-shot prompting and dramatically improves output quality.</p>
-                        <div class="evolution-example">
-                            "Example: For a recipe, format like this: 'Monday: Veggie Tacos - Prep: 15 min - Hidden veggies: bell peppers, zucchini - Kid appeal: crunchy shells, fun to build'"
+                <div class="split-section">
+                    <div class="split-section__content">
+                        <span class="section-eyebrow">The Science</span>
+                        <h2 class="section-title">Few-Shot Learning</h2>
+                        <p class="section-intro">When you include examples in your prompt, the AI extracts patterns: format, tone, structure, level of detail, even subtle stylistic choices. This technique is called few-shot learning.</p>
+                        <div class="feature-list feature-list--check">
+                            <div class="feature-list__item">
+                                <span class="feature-list__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </span>
+                                <div class="feature-list__content">
+                                    <span class="feature-list__title">Pattern Recognition</span>
+                                    <span class="feature-list__text">AI identifies format, structure, and style from your examples</span>
+                                </div>
+                            </div>
+                            <div class="feature-list__item">
+                                <span class="feature-list__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </span>
+                                <div class="feature-list__content">
+                                    <span class="feature-list__title">Consistency Boost</span>
+                                    <span class="feature-list__text">Examples dramatically improve output format consistency</span>
+                                </div>
+                            </div>
+                            <div class="feature-list__item">
+                                <span class="feature-list__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </span>
+                                <div class="feature-list__content">
+                                    <span class="feature-list__title">Show Don't Tell</span>
+                                    <span class="feature-list__text">One good example often beats paragraphs of description</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="callout tip fade-in-up">
-                    <div class="callout-title">When to Use CRISPE</div>
-                    <p>Use <strong>CRISPE</strong> when showing <strong>examples</strong> of your desired output format will help the AI understand exactly what you need. Examples are especially powerful for <strong>consistent formatting</strong>, <strong>specific writing styles</strong>, or <strong>complex structures</strong>.</p>
-                </div>
-
-                <div class="callout tip fade-in-up">
-                    <div class="callout-title">CRISPE's Power: The Example</div>
-                    <p><strong>CRISPE</strong> provides <strong>example output</strong>, making it ideal for accurately <strong>duplicating structure</strong> (e.g., SOPs, templates, reports). The <strong>'E' for Example</strong> gives AI an exact reference to be as <strong>accurate</strong>, <strong>efficient</strong>, and <strong>effective</strong> as possible.</p>
-                </div>
-
-                <div class="method-reminder fade-in-up">
-                    <div class="reminder-icon">i</div>
-                    <div class="reminder-content">
-                        <strong>Natural language works best.</strong> Don't write "Context: ... Role: ..." as labels. Just include these elements naturally in your prompt. The framework helps you <em>remember what to include</em>, not how to format it.
+                    <div class="split-section__media">
+                        <div class="stats-highlight">
+                            <div class="stats-highlight__item">
+                                <span class="stats-highlight__number">50%</span>
+                                <span class="stats-highlight__label">More Consistent</span>
+                                <span class="stats-highlight__desc">Format consistency improves dramatically with examples</span>
+                            </div>
+                            <div class="stats-highlight__item">
+                                <span class="stats-highlight__number">1-3</span>
+                                <span class="stats-highlight__label">Examples Needed</span>
+                                <span class="stats-highlight__desc">Just a few examples unlock few-shot power</span>
+                            </div>
+                            <div class="stats-highlight__item">
+                                <span class="stats-highlight__number counter-number" data-count="6">0</span>
+                                <span class="stats-highlight__label">Total Elements</span>
+                                <span class="stats-highlight__desc">CRISP's 5 elements plus the Example</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE SCIENCE -->
 
-        <!-- CRISPE Elements - Accordion Section -->
+        <!-- === THE SIX ELEMENTS === -->
         <section class="section">
             <div class="container">
-                <h2 class="section-title fade-in-up">CRISPE Elements in Detail</h2>
-                <p class="section-subtitle fade-in-up">Click each element to explore what it means and how to use it</p>
-
-                <!-- Accordion Controls -->
-                <div class="accordion-controls">
-                    <button class="accordion-controls-btn" id="expand-all-accordions" type="button">
-                        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-                        Expand All
-                    </button>
-                    <button class="accordion-controls-btn" id="collapse-all-accordions" type="button">
-                        <svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg>
-                        Collapse All
-                    </button>
+                <div class="section-header">
+                    <span class="section-eyebrow">Framework Elements</span>
+                    <h2 class="section-title">The Six Components</h2>
+                    <p class="section-subtitle">Five from CRISP plus the game-changing Example</p>
                 </div>
 
-                <!-- C - Context -->
-                <details class="learn-accordion" id="context">
-                    <summary class="learn-accordion-header">
-                        <span class="learn-accordion-title">
-                            <span class="learn-accordion-letter">C</span>
-                            Context
-                            <span class="learn-accordion-subtitle">Give the AI the background it needs</span>
-                        </span>
-                    </summary>
-                    <div class="learn-accordion-content">
-                        <div class="content-block">
-                            <p>Context provides the situation, background, and relevant details that help the AI understand your world. Without context, responses are generic. With context, they're tailored to your specific needs.</p>
-                        </div>
-
-                        <div class="info-cards stagger-children">
-                            <div class="info-card">
-                                <h3>Your Situation</h3>
-                                <p>"I'm reorganizing our team's document workflow for the first time"</p>
-                            </div>
-                            <div class="info-card">
-                                <h3>The Problem</h3>
-                                <p>"We have scattered files across multiple platforms that make collaboration difficult"</p>
-                            </div>
-                            <div class="info-card">
-                                <h3>Constraints</h3>
-                                <p>"We need to use existing tools and complete migration within Q2"</p>
-                            </div>
-                        </div>
-
-                        <div class="example-card good">
-                            <div class="example-label">Effective Context Example</div>
-                            <p>"I'm an operations coordinator improving our meeting efficiency. Our team has back-to-back meetings with unclear agendas. We use Microsoft Teams and need to respect different time zones across three offices."</p>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- R - Role -->
-                <details class="learn-accordion" id="role">
-                    <summary class="learn-accordion-header">
-                        <span class="learn-accordion-title">
-                            <span class="learn-accordion-letter">R</span>
-                            Role
-                            <span class="learn-accordion-subtitle">Tell the AI who it is</span>
-                        </span>
-                    </summary>
-                    <div class="learn-accordion-content">
-                        <div class="content-block">
-                            <p>The Role component transforms the AI from a generic assistant into a specific expert. Use "Act as..." or "You are..." to assign a persona that brings specialized knowledge and perspective to your task.</p>
-                        </div>
-
-                        <div class="personality-cards stagger-children">
-                            <div class="personality-card">
-                                <h3>Professional Role</h3>
-                                <p>"Act as an interior designer" or "You are an experienced gardener"</p>
-                            </div>
-                            <div class="personality-card">
-                                <h3>Experience Level</h3>
-                                <p>"...with 20 years of experience" or "...who has helped hundreds of families"</p>
-                            </div>
-                            <div class="personality-card">
-                                <h3>Specialization</h3>
-                                <p>"...specializing in remote teams" or "...focused on cross-functional collaboration"</p>
-                            </div>
-                            <div class="personality-card">
-                                <h3>Approach</h3>
-                                <p>"...known for practical solutions" or "...who prioritizes team efficiency"</p>
-                            </div>
-                        </div>
-
-                        <div class="example-card good">
-                            <div class="example-label">Effective Role Example</div>
-                            <p>"Act as a senior project manager who specializes in cross-departmental initiatives. You're known for keeping stakeholders aligned and creating clear action items from complex discussions."</p>
-                        </div>
-
-                        <div class="callout warning">
-                            <div class="callout-title">Role Best Practices</div>
-                            <ul>
-                                <li>Be specific: "Pediatric sleep consultant" beats "parenting expert"</li>
-                                <li>Add relevant experience that matches your problem</li>
-                                <li>Include perspective or approach when it matters</li>
-                            </ul>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- I - Instruction -->
-                <details class="learn-accordion" id="instruction">
-                    <summary class="learn-accordion-header">
-                        <span class="learn-accordion-title">
-                            <span class="learn-accordion-letter">I</span>
-                            Instruction
-                            <span class="learn-accordion-subtitle">The main ask—what you want done</span>
-                        </span>
-                    </summary>
-                    <div class="learn-accordion-content">
-                        <div class="content-block">
-                            <p>The Instruction is your core request. Use clear action verbs and be specific about the deliverable. This is what you want the AI to actually produce.</p>
-                        </div>
-
-                        <div class="verb-grid stagger-children">
-                            <div class="verb-card">
-                                <h3>Creating</h3>
-                                <p>Write, Create, Generate, Design, Draft, Develop</p>
-                            </div>
-                            <div class="verb-card">
-                                <h3>Analyzing</h3>
-                                <p>Analyze, Review, Evaluate, Audit, Assess, Critique</p>
-                            </div>
-                            <div class="verb-card">
-                                <h3>Transforming</h3>
-                                <p>Rewrite, Simplify, Expand, Translate, Summarize, Convert</p>
-                            </div>
-                            <div class="verb-card">
-                                <h3>Strategizing</h3>
-                                <p>Plan, Recommend, Propose, Outline, Prioritize, Organize</p>
-                            </div>
-                        </div>
-
-                        <div class="example-card good">
-                            <div class="example-label">Clear Instruction Example</div>
-                            <p>"Create a weekly meal plan for a family of four, including breakfast, lunch, and dinner, with a grocery shopping list organized by store section."</p>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- S - Specifics -->
-                <details class="learn-accordion" id="specifics">
-                    <summary class="learn-accordion-header">
-                        <span class="learn-accordion-title">
-                            <span class="learn-accordion-letter">S</span>
-                            Specifics
-                            <span class="learn-accordion-subtitle">Define format, length, tone, and scope</span>
-                        </span>
-                    </summary>
-                    <div class="learn-accordion-content">
-                        <div class="content-block">
-                            <p>Specifics tell the AI exactly how you want the output shaped. This includes format, length, tone, and scope. The more specific you are, the closer the output matches your needs.</p>
-                        </div>
-
-                        <div class="style-cards stagger-children">
-                            <div class="style-card">
-                                <h3>Format</h3>
-                                <p>Bullet points, numbered list, table, paragraph, JSON</p>
-                            </div>
-                            <div class="style-card">
-                                <h3>Length</h3>
-                                <p>50 words, 3 paragraphs, one page, 5 bullet points</p>
-                            </div>
-                            <div class="style-card">
-                                <h3>Tone</h3>
-                                <p>Formal, casual, urgent, friendly, professional</p>
-                            </div>
-                            <div class="style-card">
-                                <h3>Scope</h3>
-                                <p>High-level overview, detailed analysis, executive summary</p>
-                            </div>
-                        </div>
-
-                        <div class="example-card good">
-                            <div class="example-label">Specifics Example</div>
-                            <p>"Keep recipes under 30 minutes of prep time. Use a friendly, encouraging tone. Include nutritional info per serving."</p>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- P - Parameters -->
-                <details class="learn-accordion" id="parameters">
-                    <summary class="learn-accordion-header">
-                        <span class="learn-accordion-title">
-                            <span class="learn-accordion-letter">P</span>
-                            Parameters
-                            <span class="learn-accordion-subtitle">Rules and boundaries for the output</span>
-                        </span>
-                    </summary>
-                    <div class="learn-accordion-content">
-                        <div class="content-block">
-                            <p>Parameters set the constraints, requirements, and boundaries for the response. These are the measurable, specific rules the AI must follow.</p>
-                        </div>
-
-                        <div class="param-cards stagger-children">
-                            <div class="param-card">
-                                <h3>Length</h3>
-                                <p>"Maximum 500 words", "Keep each point to 2-3 sentences", "One page summary"</p>
-                            </div>
-                            <div class="param-card">
-                                <h3>Format</h3>
-                                <p>"Numbered list", "Table format", "Use headers for each section"</p>
-                            </div>
-                            <div class="param-card">
-                                <h3>Requirements</h3>
-                                <p>"Include specific metrics", "Reference industry benchmarks", "Add implementation steps"</p>
-                            </div>
-                            <div class="param-card">
-                                <h3>Restrictions</h3>
-                                <p>"No solutions requiring new hires", "Maximum 500 words per section", "Must be mobile-compatible"</p>
-                            </div>
-                        </div>
-
-                        <div class="example-card good">
-                            <div class="example-label">Parameters Example</div>
-                            <p>"Keep the plan to 5 action items maximum. Each item should include: the tactic, expected impact (high/medium/low), implementation effort, and a 1-sentence rationale. No recommendations that require hiring or major tech changes."</p>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- E - Example -->
-                <details class="learn-accordion" id="example">
-                    <summary class="learn-accordion-header">
-                        <span class="learn-accordion-title">
-                            <span class="learn-accordion-letter">E</span>
-                            Example
-                            <span class="learn-accordion-subtitle">Show what you want through sample input/output</span>
-                        </span>
-                    </summary>
-                    <div class="learn-accordion-content">
-                        <div class="content-block">
-                            <p>Examples demonstrate exactly what you're looking for through sample input/output pairs. This technique, called <strong>few-shot prompting</strong>, is one of the most powerful ways to get consistent, high-quality results.</p>
-                        </div>
-
-                        <div class="example-types stagger-children">
-                            <div class="example-type-card">
-                                <h3>Format Examples</h3>
-                                <p>Show the exact structure you want the output to follow</p>
-                                <div class="example-snippet">
-                                    Example output format:<br>
-                                    <strong>[Tactic]:</strong> Simplify form fields<br>
-                                    <strong>[Impact]:</strong> High<br>
-                                    <strong>[Effort]:</strong> Low<br>
-                                    <strong>[Why]:</strong> Reduces friction at highest drop-off point
-                                </div>
-                            </div>
-                            <div class="example-type-card">
-                                <h3>Tone Examples</h3>
-                                <p>Demonstrate the voice and style you're looking for</p>
-                                <div class="example-snippet">
-                                    Good: "Consider A/B testing your CTA placement"<br>
-                                    Not: "You should definitely move your CTA!"
-                                </div>
-                            </div>
-                            <div class="example-type-card">
-                                <h3>Input/Output Pairs</h3>
-                                <p>Show how to transform specific inputs into desired outputs</p>
-                                <div class="example-snippet">
-                                    Input: "8-step checkout process"<br>
-                                    Output: "Consolidate to 3 steps: Cart Review &rarr; Shipping + Payment &rarr; Confirmation"
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="callout tip">
-                            <div class="callout-title">Few-Shot Prompting Power</div>
-                            <p>Even one good example dramatically improves AI output. Two or three examples create even more consistency. Use examples when you need specific formats, consistent tone, or when words alone don't capture what you want.</p>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- Complete CRISPE Example (Static Content) -->
-                <div class="static-content-block fade-in-up" id="complete-example">
-                    <h3 class="static-content-title">Complete CRISPE Example</h3>
-                    <p class="static-content-subtitle">See all six components working together</p>
-
-                    <div class="example-card complete-example">
-                        <div class="example-prompt">
-                            <span class="example-element" data-element="C">I'm a content strategist at a B2B software company launching a new product next quarter.</span>
-                            <span class="example-element" data-element="R">Act as a senior content marketing expert with 10+ years in tech industry campaigns.</span>
-                            <span class="example-element" data-element="I">Create a 3-month content calendar covering blog posts, social media, email sequences, and webinars.</span>
-                            <span class="example-element" data-element="S">Include publishing dates, content themes, target keywords, and distribution channels for each piece.</span>
-                            <span class="example-element" data-element="P">Focus on LinkedIn and email as primary channels. Keep total content to 12 pieces maximum per month.</span>
-                            <span class="example-element" data-element="E">Here's an example format: "Week 1: Blog post on [topic], 3 LinkedIn posts, 1 email to nurture list"</span>
-                        </div>
-                        <div class="example-legend">
-                            <span class="legend-item"><span class="legend-badge legend-badge--context">C</span> Context</span>
-                            <span class="legend-item"><span class="legend-badge legend-badge--role">R</span> Role</span>
-                            <span class="legend-item"><span class="legend-badge legend-badge--instruction">I</span> Instruction</span>
-                            <span class="legend-item"><span class="legend-badge legend-badge--specifics">S</span> Specifics</span>
-                            <span class="legend-item"><span class="legend-badge legend-badge--parameters">P</span> Parameters</span>
-                            <span class="legend-item"><span class="legend-badge legend-badge--example">E</span> Example</span>
+                <div class="element-grid">
+                    <!-- Row 1: CRISP Elements -->
+                    <div class="element-card" id="context">
+                        <div class="element-card__letter">C</div>
+                        <div class="element-card__content">
+                            <h3 class="element-card__title">Context</h3>
+                            <p class="element-card__desc">Background information about your situation, constraints, and goals.</p>
+                            <span class="element-card__example">"I'm a content strategist at a B2B software company..."</span>
                         </div>
                     </div>
 
-                    <div class="callout tip mt-xl">
-                        <div class="callout-title">The Power of Examples</div>
-                        <p>Notice how adding the example at the end shows the AI exactly what format you want. This is few-shot learning in action&mdash;one example dramatically improves consistency.</p>
-                    </div>
-                </div>
-
-                <!-- Two Approaches (Static Content) -->
-                <div class="static-content-block fade-in-up" id="two-approaches">
-                    <h3 class="static-content-title">Two Approaches, Same Results</h3>
-                    <p class="static-content-subtitle">Labels vs natural language—both work equally well</p>
-
-                    <div class="content-block">
-                        <p>Once you understand the six CRISPE components, you can write prompts naturally without explicit labels. Here's the same complex request in both formats.</p>
-                    </div>
-
-                    <div class="approach-comparison stagger-children">
-                        <div class="approach-card">
-                            <div class="approach-header approach-labeled">
-                                <h3>With CRISPE Labels</h3>
-                            </div>
-                            <div class="approach-content">
-                                <div class="approach-prompt">
-                                    <p><strong>Context:</strong> I'm preparing a workshop on presentation skills for new managers.</p>
-                                    <p><strong>Role:</strong> Act as a corporate training facilitator.</p>
-                                    <p><strong>Instruction:</strong> Design a 90-minute interactive workshop agenda.</p>
-                                    <p><strong>Specifics:</strong> Include activities, timing, and learning objectives for each section.</p>
-                                    <p><strong>Parameters:</strong> Maximum 5 main sections, include one role-play exercise.</p>
-                                    <p><strong>Example:</strong> Like: "10:00-10:15 | Icebreaker | Participants share their biggest presentation fear"</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="approach-vs">
-                            <span>=</span>
-                        </div>
-
-                        <div class="approach-card">
-                            <div class="approach-header approach-natural">
-                                <h3>Natural Language</h3>
-                            </div>
-                            <div class="approach-content">
-                                <div class="approach-prompt">
-                                    <p>I need help designing a 90-minute workshop on presentation skills for new managers. Can you create an agenda with about 5 main sections? For each section, include the timing, activity description, and what participants should learn. I'd like at least one role-play exercise included. Format it like this: "10:00-10:15 | Icebreaker | Participants share their biggest presentation fear"</p>
-                                </div>
-                            </div>
+                    <div class="element-card" id="role">
+                        <div class="element-card__letter">R</div>
+                        <div class="element-card__content">
+                            <h3 class="element-card__title">Role</h3>
+                            <p class="element-card__desc">The persona or expertise you want the AI to adopt.</p>
+                            <span class="element-card__example">"Act as a senior content marketing expert..."</span>
                         </div>
                     </div>
 
-                    <div class="callout tip">
-                        <div class="callout-title">Both Approaches Work</div>
-                        <p>The labels are scaffolding to help you structure your thinking. Once you internalize the CRISPE components, your natural requests will automatically include them. Use whichever feels more comfortable.</p>
+                    <div class="element-card" id="instructions">
+                        <div class="element-card__letter">I</div>
+                        <div class="element-card__content">
+                            <h3 class="element-card__title">Instructions</h3>
+                            <p class="element-card__desc">The main task you want accomplished.</p>
+                            <span class="element-card__example">"Create a 3-month content calendar..."</span>
+                        </div>
+                    </div>
+
+                    <div class="element-card" id="specifics">
+                        <div class="element-card__letter">S</div>
+                        <div class="element-card__content">
+                            <h3 class="element-card__title">Specifics</h3>
+                            <p class="element-card__desc">Format, length, tone, and scope requirements.</p>
+                            <span class="element-card__example">"Include publishing dates, target keywords..."</span>
+                        </div>
+                    </div>
+
+                    <div class="element-card" id="parameters">
+                        <div class="element-card__letter">P</div>
+                        <div class="element-card__content">
+                            <h3 class="element-card__title">Parameters</h3>
+                            <p class="element-card__desc">Constraints, boundaries, and rules to follow.</p>
+                            <span class="element-card__example">"Maximum 12 pieces per month..."</span>
+                        </div>
+                    </div>
+
+                    <!-- The Example Element - Highlighted -->
+                    <div class="element-card element-card--highlight" id="example">
+                        <div class="element-card__letter">E</div>
+                        <div class="element-card__content">
+                            <h3 class="element-card__title">Example</h3>
+                            <p class="element-card__desc">Sample input/output showing the exact format you want.</p>
+                            <span class="element-card__example">"Format like: Week 1: Blog post on [topic]..."</span>
+                        </div>
+                        <span class="element-card__badge">New in CRISPE</span>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE SIX ELEMENTS -->
 
-        <!-- Continue Learning -->
+        <!-- === EXAMPLE TYPES === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Deep Dive</span>
+                    <h2 class="section-title">Types of Examples</h2>
+                    <p class="section-subtitle">Different ways to show the AI what you want</p>
+                </div>
+
+                <div class="example-types-grid">
+                    <div class="example-type-card fade-in-up">
+                        <div class="example-type-card__header">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="3" y1="9" x2="21" y2="9"/>
+                                <line x1="9" y1="21" x2="9" y2="9"/>
+                            </svg>
+                            <h3>Format Examples</h3>
+                        </div>
+                        <p class="example-type-card__desc">Show the exact structure you want the output to follow.</p>
+                        <div class="example-type-card__sample">
+                            <span class="sample-label">Example:</span>
+                            <code>[Tactic]: Simplify form<br>[Impact]: High | [Effort]: Low<br>[Rationale]: Reduces friction</code>
+                        </div>
+                        <span class="example-type-card__use">Best for: Reports, SOPs, structured data</span>
+                    </div>
+
+                    <div class="example-type-card fade-in-up">
+                        <div class="example-type-card__header">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                            <h3>Tone Examples</h3>
+                        </div>
+                        <p class="example-type-card__desc">Demonstrate the voice and style you're looking for.</p>
+                        <div class="example-type-card__sample">
+                            <span class="sample-label">Example:</span>
+                            <code>Good: "Consider A/B testing..."<br>Not: "You should definitely..."</code>
+                        </div>
+                        <span class="example-type-card__use">Best for: Brand voice, copywriting</span>
+                    </div>
+
+                    <div class="example-type-card fade-in-up">
+                        <div class="example-type-card__header">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="17,1 21,5 17,9"/>
+                                <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+                                <polyline points="7,23 3,19 7,15"/>
+                                <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+                            </svg>
+                            <h3>Input/Output Pairs</h3>
+                        </div>
+                        <p class="example-type-card__desc">Show how to transform specific inputs into desired outputs.</p>
+                        <div class="example-type-card__sample">
+                            <span class="sample-label">Example:</span>
+                            <code>Input: "8-step checkout"<br>Output: "Consolidate to 3 steps with progress indicator"</code>
+                        </div>
+                        <span class="example-type-card__use">Best for: Transformations, rewrites</span>
+                    </div>
+
+                    <div class="example-type-card fade-in-up">
+                        <div class="example-type-card__header">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14,2 14,8 20,8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                            <h3>Template Examples</h3>
+                        </div>
+                        <p class="example-type-card__desc">Provide a complete template for the AI to follow.</p>
+                        <div class="example-type-card__sample">
+                            <span class="sample-label">Example:</span>
+                            <code>Week 1: [Topic] Blog post<br>- 3 LinkedIn posts<br>- 1 email to nurture list</code>
+                        </div>
+                        <span class="example-type-card__use">Best for: Calendars, plans, schedules</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLE TYPES -->
+
+        <!-- === COMPLETE EXAMPLE === -->
         <section class="section">
             <div class="container">
-                <div class="cta-card fade-in-up">
-                    <canvas id="cta-neural-bg" class="neural-canvas-secondary"></canvas>
-                    <h2 class="cta-title">Continue Learning</h2>
-                    <p class="cta-text">Explore other prompting frameworks or dive into advanced techniques.</p>
-                    <div class="cta-actions">
-                        <a href="costar.html" class="btn btn-primary">Learn COSTAR</a>
-                        <a href="advanced.html" class="btn btn-secondary">Advanced Techniques</a>
+                <div class="section-header">
+                    <span class="section-eyebrow">In Practice</span>
+                    <h2 class="section-title">Complete CRISPE Prompt</h2>
+                    <p class="section-subtitle">See all six components working together</p>
+                </div>
+
+                <div class="prompt-builder-preview fade-in-up">
+                    <div class="prompt-builder-preview__header">
+                        <span class="prompt-builder-preview__title">Full CRISPE Prompt</span>
+                    </div>
+                    <div class="prompt-builder-preview__content">
+                        <div class="prompt-segment prompt-segment--c">
+                            <span class="prompt-segment__label">C</span>
+                            <span class="prompt-segment__text">I'm a content strategist at a B2B software company launching a new product next quarter.</span>
+                        </div>
+                        <div class="prompt-segment prompt-segment--r">
+                            <span class="prompt-segment__label">R</span>
+                            <span class="prompt-segment__text">Act as a senior content marketing expert with 10+ years in tech industry campaigns.</span>
+                        </div>
+                        <div class="prompt-segment prompt-segment--i">
+                            <span class="prompt-segment__label">I</span>
+                            <span class="prompt-segment__text">Create a 3-month content calendar covering blog posts, social media, email sequences, and webinars.</span>
+                        </div>
+                        <div class="prompt-segment prompt-segment--s">
+                            <span class="prompt-segment__label">S</span>
+                            <span class="prompt-segment__text">Include publishing dates, content themes, target keywords, and distribution channels for each piece.</span>
+                        </div>
+                        <div class="prompt-segment prompt-segment--p">
+                            <span class="prompt-segment__label">P</span>
+                            <span class="prompt-segment__text">Focus on LinkedIn and email as primary channels. Keep total content to 12 pieces maximum per month.</span>
+                        </div>
+                        <div class="prompt-segment prompt-segment--e">
+                            <span class="prompt-segment__label">E</span>
+                            <span class="prompt-segment__text">Format like: "Week 1: Blog post on [topic], 3 LinkedIn posts, 1 email to nurture list"</span>
+                        </div>
+                    </div>
+                    <div class="prompt-builder-preview__footer">
+                        <div class="prompt-legend">
+                            <span class="prompt-legend__item"><span class="prompt-legend__dot prompt-legend__dot--c"></span>Context</span>
+                            <span class="prompt-legend__item"><span class="prompt-legend__dot prompt-legend__dot--r"></span>Role</span>
+                            <span class="prompt-legend__item"><span class="prompt-legend__dot prompt-legend__dot--i"></span>Instructions</span>
+                            <span class="prompt-legend__item"><span class="prompt-legend__dot prompt-legend__dot--s"></span>Specifics</span>
+                            <span class="prompt-legend__item"><span class="prompt-legend__dot prompt-legend__dot--p"></span>Parameters</span>
+                            <span class="prompt-legend__item"><span class="prompt-legend__dot prompt-legend__dot--e"></span>Example</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout-card callout-card--highlight fade-in-up">
+                    <div class="callout-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/>
+                        </svg>
+                    </div>
+                    <div class="callout-card__content">
+                        <h4 class="callout-card__title">The Example Makes It Concrete</h4>
+                        <p class="callout-card__text">Notice how the Example (E) at the end shows exactly what format you want. Without it, the AI might produce a calendar in any format. With it, you get consistent, usable output.</p>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /COMPLETE EXAMPLE -->
+
+        <!-- === CRISP VS CRISPE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Decision Guide</span>
+                    <h2 class="section-title">CRISP vs CRISPE</h2>
+                    <p class="section-subtitle">When to add the Example element</p>
+                </div>
+
+                <div class="decision-cards">
+                    <div class="decision-card decision-card--crisp fade-in-up">
+                        <div class="decision-card__header">
+                            <h3>Use CRISP When...</h3>
+                        </div>
+                        <ul class="decision-card__list">
+                            <li>Format is flexible or standard</li>
+                            <li>Task is straightforward</li>
+                            <li>General output is sufficient</li>
+                            <li>Speed matters more than precision</li>
+                            <li>You're exploring possibilities</li>
+                        </ul>
+                        <a href="crisp.html" class="decision-card__link">Learn CRISP</a>
+                    </div>
+
+                    <div class="decision-card decision-card--crispe fade-in-up">
+                        <div class="decision-card__header">
+                            <h3>Use CRISPE When...</h3>
+                        </div>
+                        <ul class="decision-card__list">
+                            <li>Exact format is critical</li>
+                            <li>Creating reusable templates</li>
+                            <li>Matching existing brand voice</li>
+                            <li>Complex data structures needed</li>
+                            <li>"Show don't tell" applies</li>
+                        </ul>
+                        <span class="decision-card__badge">You are here</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CRISP VS CRISPE -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Best Fit</span>
+                    <h2 class="section-title">Ideal Use Cases</h2>
+                    <p class="section-subtitle">CRISPE excels when format consistency matters</p>
+                </div>
+
+                <div class="use-case-grid">
+                    <div class="use-case-card fade-in-up">
+                        <div class="use-case-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14,2 14,8 20,8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-card__title">SOPs & Documentation</h3>
+                        <p class="use-case-card__desc">Standard operating procedures with consistent formatting.</p>
+                    </div>
+                    <div class="use-case-card fade-in-up">
+                        <div class="use-case-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-card__title">Content Calendars</h3>
+                        <p class="use-case-card__desc">Weekly or monthly content plans with specific structure.</p>
+                    </div>
+                    <div class="use-case-card fade-in-up">
+                        <div class="use-case-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="8" y1="6" x2="21" y2="6"/>
+                                <line x1="8" y1="12" x2="21" y2="12"/>
+                                <line x1="8" y1="18" x2="21" y2="18"/>
+                                <line x1="3" y1="6" x2="3.01" y2="6"/>
+                                <line x1="3" y1="12" x2="3.01" y2="12"/>
+                                <line x1="3" y1="18" x2="3.01" y2="18"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-card__title">Report Templates</h3>
+                        <p class="use-case-card__desc">Structured reports with consistent sections and formatting.</p>
+                    </div>
+                    <div class="use-case-card fade-in-up">
+                        <div class="use-case-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                                <line x1="9" y1="9" x2="9.01" y2="9"/>
+                                <line x1="15" y1="9" x2="15.01" y2="9"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-card__title">Brand Voice</h3>
+                        <p class="use-case-card__desc">Content that matches a specific tone or writing style.</p>
+                    </div>
+                    <div class="use-case-card fade-in-up">
+                        <div class="use-case-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-card__title">Data Structures</h3>
+                        <p class="use-case-card__desc">JSON, CSV, or complex multi-column tables.</p>
+                    </div>
+                    <div class="use-case-card fade-in-up">
+                        <div class="use-case-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-card__title">Reusable Prompts</h3>
+                        <p class="use-case-card__desc">Prompts you'll use repeatedly for consistent results.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === OTHER FRAMEWORKS === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Explore</span>
+                    <h2 class="section-title">Other Frameworks</h2>
+                </div>
+
+                <div class="alternative-cards">
+                    <a href="costar.html" class="alternative-card fade-in-up">
+                        <div class="alternative-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div class="alternative-card__content">
+                            <span class="alternative-card__trigger">You need explicit audience targeting</span>
+                            <h4 class="alternative-card__title">COSTAR Framework</h4>
+                            <p class="alternative-card__desc">Adds Audience and Style elements for targeted communication.</p>
+                        </div>
+                        <svg class="alternative-card__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12,5 19,12 12,19"/>
+                        </svg>
+                    </a>
+
+                    <a href="react.html" class="alternative-card fade-in-up">
+                        <div class="alternative-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <div class="alternative-card__content">
+                            <span class="alternative-card__trigger">You need multi-step reasoning</span>
+                            <h4 class="alternative-card__title">ReAct Framework</h4>
+                            <p class="alternative-card__desc">For complex problems requiring reasoning, action, and tool use.</p>
+                        </div>
+                        <svg class="alternative-card__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12,5 19,12 12,19"/>
+                        </svg>
+                    </a>
+
+                    <a href="crisp.html" class="alternative-card fade-in-up">
+                        <div class="alternative-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <div class="alternative-card__content">
+                            <span class="alternative-card__trigger">You want a simpler approach</span>
+                            <h4 class="alternative-card__title">CRISP Framework</h4>
+                            <p class="alternative-card__desc">The foundation—lean and efficient for everyday tasks.</p>
+                        </div>
+                        <svg class="alternative-card__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12,5 19,12 12,19"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- /OTHER FRAMEWORKS -->
+
+        <!-- === SOURCES === -->
+        <section class="section">
+            <div class="container">
+                <section class="citations-section fade-in-up">
+                    <h3 class="citations-title">Sources</h3>
+                    <ol class="citations-list">
+                        <li class="citation-item">
+                            <a href="https://hai.stanford.edu/research" target="_blank" rel="noopener noreferrer">[1] Stanford HAI - Few-Shot Learning in Language Models - 2025</a>
+                        </li>
+                        <li class="citation-item">
+                            <a href="https://arxiv.org/abs/2005.14165" target="_blank" rel="noopener noreferrer">[2] GPT-3 Paper - Few-Shot Learners - 2020</a>
+                        </li>
+                        <li class="citation-item">
+                            <a href="https://hcii.cmu.edu/research" target="_blank" rel="noopener noreferrer">[3] Carnegie Mellon HCI - Prompt Engineering Best Practices - 2025</a>
+                        </li>
+                    </ol>
+                </section>
+            </div>
+        </section>
+        <!-- /SOURCES -->
+
+        <!-- === CTA === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Practice CRISPE</h2>
+                        <p class="cta-corporate__text">Build prompts with our interactive tools or find the right framework for your task.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Try Prompt Builder</a>
+                            <a href="../tools/matcher.html" class="btn btn-secondary">Framework Matcher</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA -->
     </main>
 
     <!-- Footer -->
@@ -621,16 +693,16 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
-                    <p>Master the Art of AI Communication theory through proven methodologies.</p>
+                    <p>Master the Art of AI Communication theory through proven frameworks.</p>
                 </div>
 
                 <div class="footer-links">
                     <h4>Learn</h4>
                     <a href="prompt-basics.html">Prompt Basics</a>
-                    <a href="crisp.html">CRISP Method</a>
-                    <a href="crispe.html">CRISPE Method</a>
-                    <a href="costar.html">COSTAR Method</a>
-                    <a href="react.html">ReAct Method</a>
+                    <a href="crisp.html">CRISP Framework</a>
+                    <a href="crispe.html">CRISPE Framework</a>
+                    <a href="costar.html">COSTAR Framework</a>
+                    <a href="react.html">ReAct Framework</a>
                     <a href="flipped-interaction.html">Flipped Interaction</a>
                     <a href="advanced.html">Advanced</a>
                 </div>
@@ -639,7 +711,7 @@
                     <h4>AI Readiness</h4>
                     <a href="../tools/analyzer.html">Prompt Analyzer</a>
                     <a href="../tools/guidance.html">Prompt Builder</a>
-                    <a href="../tools/matcher.html">Method Matcher</a>
+                    <a href="../tools/matcher.html">Framework Matcher</a>
                     <a href="../tools/checklist.html">Preflight Checklist</a>
                     <a href="../tools/hallucination.html">Hallucination Spotter</a>
                     <a href="../quiz/index.html">Readiness Quiz</a>
@@ -678,34 +750,6 @@
         <span class="back-to-top-text">Back to Top</span>
     </button>
 
-    <!-- Site Badges Bar -->
-    <div class="site-badges-bar">
-        <span class="content-badge content-badge--ai" data-badge-type="ai">
-            <span class="badge-label">AI for</span>
-            <span class="badge-value">Everybody</span>
-        </span>
-        <span class="content-badge content-badge--udl" data-badge-type="udl">
-            <span class="badge-label">Built With</span>
-            <span class="badge-value">UD/UDL</span>
-        </span>
-        <span class="content-badge content-badge--security" data-badge-type="security">
-            <span class="badge-label">Security</span>
-            <span class="badge-value">A+ 100%</span>
-        </span>
-        <span class="content-badge content-badge--performance" data-badge-type="performance">
-            <span class="badge-label">Performance</span>
-            <span class="badge-value">100%</span>
-        </span>
-        <span class="content-badge content-badge--claude" data-badge-type="claude">
-            <span class="badge-label">AI Assisted Building</span>
-            <span class="badge-value">Claude Code</span>
-        </span>
-        <a href="https://github.com/basrosario/PROMPTLIBRARY" target="_blank" rel="noopener noreferrer" class="content-badge content-badge--github" data-badge-type="github">
-            <span class="badge-label">Community</span>
-            <span class="badge-value">GitHub</span>
-        </a>
-    </div>
-
     <!-- =============================================
          BADGE LIGHTBOX - Modal popup for badge info
          ============================================= -->
@@ -725,7 +769,6 @@
 
     <!-- =============================================
          ACCESSIBILITY DASHBOARD (ADL)
-         User-controlled accommodations for UD/UDL
          ============================================= -->
     <div class="adl-dim-overlay" aria-hidden="true"></div>
     <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
@@ -767,6 +810,21 @@
                     <span class="adl-switch-track"></span>
                 </label>
             </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
         </div>
         <div class="adl-control">
             <span class="adl-label">Screen Dimming</span>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
+    <meta name="description" content="Master the fundamentals of AI prompting. Start your learning journey with essential frameworks like CRISP, CRISPE, and COSTAR.">
+    <title>Foundations - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preload" href="../styles.css" as="style">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav">
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link">Learn</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Frameworks</h4>
+                            <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                            <a href="../learn/crisp.html">CRISP Framework</a>
+                            <a href="../learn/crispe.html">CRISPE Framework</a>
+                            <a href="../learn/costar.html">COSTAR Framework</a>
+                            <a href="../learn/react.html">ReAct Framework</a>
+                            <a href="../learn/flipped-interaction.html">Flipped Interaction Framework</a>
+                            <a href="../learn/advanced.html">Advanced Techniques</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link">AI Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Framework Matcher</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../neurodivergence/index.html" class="nav-link">AI + Neurodivergence</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>AI by Neurotype</h4>
+                            <a href="../neurodivergence/adhd.html">AI for ADHD</a>
+                            <a href="../neurodivergence/autism.html">AI for Autism</a>
+                            <a href="../neurodivergence/dyslexia.html">AI for Dyslexia</a>
+                            <a href="../neurodivergence/tools.html">AI Tools Finder</a>
+                            <a href="../neurodivergence/resources.html">Resources</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link">Resources</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Explore</h4>
+                            <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../pages/performance.html">Performance</a>
+                            <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
+                            <a href="../pages/universal-design.html">Universal Design</a>
+                            <a href="../pages/ai-assisted-building.html">AI Assisted</a>
+                            <a href="../pages/about.html">About</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <span class="current">Foundations</span>
+                </nav>
+                <div class="hero-badge" data-aos="fade-down">
+                    <span class="hero-badge__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </span>
+                    <span class="hero-badge__text">Start Here</span>
+                </div>
+                <h1 class="page-title fade-in">Master the Fundamentals</h1>
+                <p class="page-subtitle fade-in">Every great prompt starts with solid foundations. Learn the core principles and frameworks that make AI communication effective, consistent, and reliable.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === ACCENT BAR === -->
+        <div class="accent-bar"></div>
+        <!-- /ACCENT BAR -->
+
+        <!-- === WHY FOUNDATIONS MATTER === -->
+        <section class="section">
+            <div class="container">
+                <div class="callout-card callout-card--highlight" data-aos="fade-up">
+                    <div class="callout-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 16v-4"/>
+                            <path d="M12 8h.01"/>
+                        </svg>
+                    </div>
+                    <div class="callout-card__content">
+                        <h3 class="callout-card__title">The Truth About Modern AI</h3>
+                        <p class="callout-card__text">Yes, today's AI systems understand natural conversation remarkably well. You <em>can</em> just type what you need and often get good results. But understanding <strong>why</strong> certain prompts work better than others makes you consistently effective—not just occasionally lucky. Foundations give you the mental models to diagnose problems and improve results when simple prompts fall short.</p>
+                    </div>
+                </div>
+
+                <div class="stats-highlight" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stats-highlight__item">
+                        <span class="stats-highlight__number" data-count="67" data-suffix="%">0%</span>
+                        <span class="stats-highlight__label">Fewer Revisions</span>
+                        <span class="stats-highlight__desc">Structured prompts need less back-and-forth</span>
+                    </div>
+                    <div class="stats-highlight__item">
+                        <span class="stats-highlight__number" data-count="43" data-suffix="%">0%</span>
+                        <span class="stats-highlight__label">Better Relevance</span>
+                        <span class="stats-highlight__desc">Context improves output quality</span>
+                    </div>
+                    <div class="stats-highlight__item">
+                        <span class="stats-highlight__number" data-count="5" data-suffix=" min">0</span>
+                        <span class="stats-highlight__label">To Learn Basics</span>
+                        <span class="stats-highlight__desc">Small investment, lasting improvement</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHY FOUNDATIONS MATTER -->
+
+        <!-- === LEARNING PATH === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Your Learning Path</h2>
+                <p class="section-subtitle" data-aos="fade-up">Follow this progression or jump to what you need</p>
+
+                <div class="journey-cards" data-aos="fade-up">
+                    <a href="../learn/prompt-basics.html" class="journey-card journey-card--active">
+                        <div class="journey-card__number">1</div>
+                        <div class="journey-card__content">
+                            <span class="journey-card__badge">Start Here</span>
+                            <h3 class="journey-card__title">Prompt Basics</h3>
+                            <p class="journey-card__desc">The fundamentals that apply everywhere. What makes a prompt effective, natural vs. labeled formats, and the iteration mindset.</p>
+                            <span class="journey-card__link">Begin Your Journey →</span>
+                        </div>
+                    </a>
+
+                    <a href="../learn/crisp.html" class="journey-card">
+                        <div class="journey-card__number">2</div>
+                        <div class="journey-card__content">
+                            <span class="journey-card__badge">5 Elements</span>
+                            <h3 class="journey-card__title">CRISP Framework</h3>
+                            <p class="journey-card__desc">A memorable 5-letter acronym for everyday prompts. Context, Role, Instructions, Specifics, Parameters.</p>
+                            <span class="journey-card__link">Learn CRISP →</span>
+                        </div>
+                    </a>
+
+                    <a href="../learn/crispe.html" class="journey-card">
+                        <div class="journey-card__number">3</div>
+                        <div class="journey-card__content">
+                            <span class="journey-card__badge">+ Examples</span>
+                            <h3 class="journey-card__title">CRISPE Framework</h3>
+                            <p class="journey-card__desc">CRISP plus Examples. When you need to show the AI exactly what format or style you want through samples.</p>
+                            <span class="journey-card__link">Learn CRISPE →</span>
+                        </div>
+                    </a>
+
+                    <a href="../learn/costar.html" class="journey-card">
+                        <div class="journey-card__number">4</div>
+                        <div class="journey-card__content">
+                            <span class="journey-card__badge">Audience Focus</span>
+                            <h3 class="journey-card__title">COSTAR Framework</h3>
+                            <p class="journey-card__desc">Audience-first prompting. When who you're writing for matters as much as what you're writing.</p>
+                            <span class="journey-card__link">Learn COSTAR →</span>
+                        </div>
+                    </a>
+
+                    <a href="../learn/context-structure.html" class="journey-card">
+                        <div class="journey-card__number">5</div>
+                        <div class="journey-card__content">
+                            <span class="journey-card__badge">Deep Dive</span>
+                            <h3 class="journey-card__title">Context & Structure</h3>
+                            <p class="journey-card__desc">Understanding context windows, when structure helps versus hinders, and a preview of advanced approaches.</p>
+                            <span class="journey-card__link">Explore →</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- /LEARNING PATH -->
+
+        <!-- === QUICK PICKS BY GOAL === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Quick Picks by Goal</h2>
+                <p class="section-subtitle" data-aos="fade-up">Know what you need? Jump directly there.</p>
+
+                <div class="goal-grid" data-aos="fade-up">
+                    <div class="goal-card">
+                        <div class="goal-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                            </svg>
+                        </div>
+                        <h3 class="goal-card__title">I'm new to AI prompting</h3>
+                        <p class="goal-card__desc">Start with Prompt Basics. Learn the universal principles that apply to every framework and every AI tool.</p>
+                        <a href="../learn/prompt-basics.html" class="goal-card__link">Prompt Basics →</a>
+                    </div>
+
+                    <div class="goal-card">
+                        <div class="goal-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                            </svg>
+                        </div>
+                        <h3 class="goal-card__title">I want quick, reliable prompts</h3>
+                        <p class="goal-card__desc">CRISP gives you a fast, memorable checklist for everyday tasks. Most prompts don't need more than this.</p>
+                        <a href="../learn/crisp.html" class="goal-card__link">Learn CRISP →</a>
+                    </div>
+
+                    <div class="goal-card">
+                        <div class="goal-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="goal-card__title">I need consistent output formats</h3>
+                        <p class="goal-card__desc">CRISPE's Examples component shows the AI exactly what you want. Perfect for templates and repeated tasks.</p>
+                        <a href="../learn/crispe.html" class="goal-card__link">Learn CRISPE →</a>
+                    </div>
+
+                    <div class="goal-card">
+                        <div class="goal-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h3 class="goal-card__title">I'm writing for specific audiences</h3>
+                        <p class="goal-card__desc">COSTAR puts your reader first. Essential for communications where tone and audience matter most.</p>
+                        <a href="../learn/costar.html" class="goal-card__link">Learn COSTAR →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /QUICK PICKS BY GOAL -->
+
+        <!-- === HOW FRAMEWORKS CONNECT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">How the Frameworks Connect</h2>
+                <p class="section-subtitle" data-aos="fade-up">Each builds on and extends the others</p>
+
+                <div class="framework-flow" data-aos="fade-up">
+                    <div class="framework-flow__item">
+                        <div class="framework-flow__marker framework-flow__marker--active">
+                            <span>Basics</span>
+                        </div>
+                        <div class="framework-flow__label">Core Principles</div>
+                        <div class="framework-flow__desc">What, context, specifics</div>
+                    </div>
+                    <div class="framework-flow__connector">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                    <div class="framework-flow__item">
+                        <div class="framework-flow__marker">
+                            <span>CRISP</span>
+                        </div>
+                        <div class="framework-flow__label">5 Elements</div>
+                        <div class="framework-flow__desc">+ Role, Parameters</div>
+                    </div>
+                    <div class="framework-flow__connector">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                    <div class="framework-flow__item">
+                        <div class="framework-flow__marker">
+                            <span>CRISPE</span>
+                        </div>
+                        <div class="framework-flow__label">+ Examples</div>
+                        <div class="framework-flow__desc">Show, don't just tell</div>
+                    </div>
+                    <div class="framework-flow__connector">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                    <div class="framework-flow__item">
+                        <div class="framework-flow__marker">
+                            <span>COSTAR</span>
+                        </div>
+                        <div class="framework-flow__label">Audience Focus</div>
+                        <div class="framework-flow__desc">+ Style, Tone, Audience</div>
+                    </div>
+                </div>
+
+                <div class="callout tip" data-aos="fade-up" data-aos-delay="100">
+                    <div class="callout-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 16v-4"/>
+                            <path d="M12 8h.01"/>
+                        </svg>
+                        They're Not Competing
+                    </div>
+                    <p>These frameworks overlap intentionally. They're different lenses for the same goal: clear communication with AI. Use whichever mental model helps you think most clearly for each task—or combine elements from multiple frameworks.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW FRAMEWORKS CONNECT -->
+
+        <!-- === BEYOND FOUNDATIONS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Beyond Foundations</h2>
+                <p class="section-subtitle" data-aos="fade-up">Once you've mastered the basics, explore these advanced approaches</p>
+
+                <div class="next-steps-cards" data-aos="fade-up">
+                    <a href="../learn/react.html" class="next-step-card">
+                        <div class="next-step-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="23 4 23 10 17 10"/>
+                                <polyline points="1 20 1 14 7 14"/>
+                                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                            </svg>
+                        </div>
+                        <div class="next-step-card__content">
+                            <span class="next-step-card__label">Reasoning Framework</span>
+                            <h3 class="next-step-card__title">ReAct: Think-Act-Observe</h3>
+                            <p class="next-step-card__desc">When the AI needs to reason through complex problems step by step, with transparency into its thinking.</p>
+                        </div>
+                        <span class="next-step-card__arrow">→</span>
+                    </a>
+
+                    <a href="../learn/flipped-interaction.html" class="next-step-card">
+                        <div class="next-step-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="17 1 21 5 17 9"/>
+                                <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+                                <polyline points="7 23 3 19 7 15"/>
+                                <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+                            </svg>
+                        </div>
+                        <div class="next-step-card__content">
+                            <span class="next-step-card__label">Role Reversal</span>
+                            <h3 class="next-step-card__title">Flipped Interaction</h3>
+                            <p class="next-step-card__desc">Let the AI ask you questions to better understand your needs before generating output.</p>
+                        </div>
+                        <span class="next-step-card__arrow">→</span>
+                    </a>
+
+                    <a href="../learn/advanced.html" class="next-step-card">
+                        <div class="next-step-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                            </svg>
+                        </div>
+                        <div class="next-step-card__content">
+                            <span class="next-step-card__label">Advanced Techniques</span>
+                            <h3 class="next-step-card__title">Chain of Thought, Meta-Prompting & More</h3>
+                            <p class="next-step-card__desc">Powerful techniques for complex tasks: reasoning chains, self-correction, and prompt optimization.</p>
+                        </div>
+                        <span class="next-step-card__arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- /BEYOND FOUNDATIONS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark" data-aos="fade-up">
+                    <canvas id="cta-neural-bg" class="neural-canvas-secondary"></canvas>
+                    <span class="cta-corporate__eyebrow">Begin Your Journey</span>
+                    <h2 class="cta-corporate__title">Ready to Start?</h2>
+                    <p class="cta-corporate__text">Begin with Prompt Basics—a 5-minute read that will improve every prompt you write.</p>
+                    <div class="cta-corporate__actions">
+                        <a href="../learn/prompt-basics.html" class="cta-corporate__btn cta-corporate__btn--primary">Start Learning</a>
+                        <a href="../quiz/index.html" class="cta-corporate__btn cta-corporate__btn--secondary">Take the Quiz</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                    <p>Master the Art of AI Communication theory through proven frameworks.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Learn</h4>
+                    <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                    <a href="../learn/crisp.html">CRISP Framework</a>
+                    <a href="../learn/crispe.html">CRISPE Framework</a>
+                    <a href="../learn/costar.html">COSTAR Framework</a>
+                    <a href="../learn/react.html">ReAct Framework</a>
+                    <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                    <a href="../learn/advanced.html">Advanced</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>AI Readiness</h4>
+                    <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                    <a href="../tools/guidance.html">Prompt Builder</a>
+                    <a href="../tools/matcher.html">Framework Matcher</a>
+                    <a href="../tools/checklist.html">Preflight Checklist</a>
+                    <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                    <a href="../quiz/index.html">Readiness Quiz</a>
+                    <a href="../patterns/index.html">Patterns Library</a>
+                    <a href="../pages/ai-safety.html">AI Safety</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                    <a href="../pages/faq.html">FAQ</a>
+                    <a href="../pages/glossary.html">Glossary</a>
+                    <a href="../pages/security.html">Security</a>
+                    <a href="../pages/performance.html">Performance</a>
+                    <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
+                    <a href="../pages/universal-design.html">Universal Design</a>
+                    <a href="../pages/ai-assisted-building.html">AI Assisted</a>
+                    <a href="../pages/about.html">About</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>AI for Everybody</p>
+                <p class="footer-quote">"True innovation in AI isn't just about companies adopting AI as a new technology—it's about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential." <span class="footer-quote-author">— Bas</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Badge Lightbox -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+
+    <!-- Accessibility Dashboard -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
-    <meta name="description" content="Test your AI readiness with our interactive quiz. Assess your knowledge of prompting frameworks, critical thinking, and AI communication skills.">
-    <title>AI Readiness Quiz - Praxis</title>
+    <meta name="description" content="Bias Radar - Scan your prompts for loaded language and biased framing. Get suggestions for more neutral, objective phrasing that leads to better AI responses.">
+    <title>Bias Radar - Detect Loaded Language - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="preload" href="../styles.css" as="style">
     <link rel="stylesheet" href="../styles.css">
@@ -35,16 +35,16 @@
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="../tools/index.html" class="nav-link">AI Readiness</a>
+                    <a href="index.html" class="nav-link active">AI Readiness</a>
                     <div class="mega-menu">
                         <div class="mega-menu-section">
                             <h4>Tools</h4>
                             <a href="../quiz/index.html">Readiness Quiz</a>
-                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
-                            <a href="../tools/guidance.html">Prompt Builder</a>
-                            <a href="../tools/matcher.html">Framework Matcher</a>
-                            <a href="../tools/checklist.html">Preflight Checklist</a>
-                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="analyzer.html">Prompt Analyzer</a>
+                            <a href="guidance.html">Prompt Builder</a>
+                            <a href="matcher.html">Framework Matcher</a>
+                            <a href="checklist.html">Preflight Checklist</a>
+                            <a href="persona.html">Persona Architect</a>
                             <a href="../patterns/index.html">Patterns Library</a>
                             <a href="../pages/ai-safety.html">AI Safety</a>
                         </div>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="nav-item has-dropdown">
-                    <a href="../pages/resources.html" class="nav-link active">Resources</a>
+                    <a href="../pages/resources.html" class="nav-link">Resources</a>
                     <div class="mega-menu">
                         <div class="mega-menu-section">
                             <h4>Explore</h4>
@@ -97,14 +97,16 @@
                 <nav class="breadcrumb fade-in">
                     <a href="../index.html">Home</a>
                     <span class="separator">/</span>
-                    <span class="current">Readiness Quiz</span>
+                    <a href="index.html">AI Readiness</a>
+                    <span class="separator">/</span>
+                    <span class="current">Bias Radar</span>
                 </nav>
-                <h1 class="page-title fade-in">AI Readiness Quiz</h1>
-                <p class="page-subtitle fade-in">40 questions across 4 levels: Good, Pro, Expert, and Master. Test your knowledge from basics to advanced IDE and API usage.</p>
+                <h1 class="page-title fade-in">Bias Radar</h1>
+                <p class="page-subtitle fade-in">Scan your prompts for loaded language that might lead AI to biased conclusions. Get neutral alternatives.</p>
             </div>
         </section>
 
-        <!-- Quiz Section -->
+        <!-- Bias Scanner Tool -->
         <section class="section">
             <div class="container">
                 <div class="content-badges fade-in-up">
@@ -134,80 +136,189 @@
                     </a>
                 </div>
 
-                <div class="quiz-container fade-in-up">
-                    <div id="readiness-quiz" class="readiness-quiz">
-                        <!-- Quiz content will be populated by JavaScript -->
-                        <div class="quiz-loading">
-                            <p>Loading quiz...</p>
+                <div class="tool-container fade-in-up">
+                    <div class="bias-radar" id="bias-radar">
+                        <div class="bias-input-section">
+                            <label for="bias-input" class="bias-label">Enter your prompt to scan for bias:</label>
+                            <textarea id="bias-input" class="bias-textarea" placeholder="e.g., Explain why remote work is terrible for company culture..." rows="4"></textarea>
+                            <button type="button" id="scan-bias" class="btn btn-primary btn-full">Scan for Bias</button>
+                        </div>
+
+                        <!-- Radar Display -->
+                        <div id="bias-results" class="bias-results">
+                            <div class="bias-score-section">
+                                <div class="bias-score-circle" id="bias-score-circle">
+                                    <svg viewBox="0 0 100 100">
+                                        <circle class="bias-score-bg" cx="50" cy="50" r="45"/>
+                                        <circle class="bias-score-fill" id="bias-score-fill" cx="50" cy="50" r="45"/>
+                                    </svg>
+                                    <div class="bias-score-text">
+                                        <span class="bias-score-value" id="bias-score-value">--</span>
+                                        <span class="bias-score-label">Neutrality</span>
+                                    </div>
+                                </div>
+                                <div class="bias-score-desc" id="bias-score-desc">
+                                    Enter a prompt to analyze its neutrality level.
+                                </div>
+                            </div>
+
+                            <div class="bias-findings" id="bias-findings">
+                                <!-- Populated by JavaScript -->
+                            </div>
+
+                            <div class="bias-rewrite" id="bias-rewrite">
+                                <h3>Suggested Neutral Version</h3>
+                                <div class="bias-rewrite-content" id="bias-rewrite-content"></div>
+                                <button type="button" id="copy-neutral" class="btn btn-secondary btn-sm">Copy Neutral Version</button>
+                            </div>
+                        </div>
+
+                        <!-- Example Prompts -->
+                        <div class="bias-examples">
+                            <h3>Try These Examples</h3>
+                            <div class="bias-example-grid">
+                                <button type="button" class="bias-example-btn" data-prompt="Explain why social media is destroying society.">
+                                    <span class="bias-example-type bias-example-type--loaded">Loaded</span>
+                                    <span class="bias-example-text">"Explain why social media is destroying society."</span>
+                                </button>
+                                <button type="button" class="bias-example-btn" data-prompt="What are the positive and negative effects of social media on society?">
+                                    <span class="bias-example-type bias-example-type--neutral">Neutral</span>
+                                    <span class="bias-example-text">"What are the positive and negative effects of social media?"</span>
+                                </button>
+                                <button type="button" class="bias-example-btn" data-prompt="Why is cryptocurrency obviously a scam?">
+                                    <span class="bias-example-type bias-example-type--loaded">Loaded</span>
+                                    <span class="bias-example-text">"Why is cryptocurrency obviously a scam?"</span>
+                                </button>
+                                <button type="button" class="bias-example-btn" data-prompt="Analyze the risks and benefits of cryptocurrency investment.">
+                                    <span class="bias-example-type bias-example-type--neutral">Neutral</span>
+                                    <span class="bias-example-text">"Analyze the risks and benefits of cryptocurrency."</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- What This Tests -->
+        <!-- Why Bias Matters -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">The Four Levels</h2>
-                <p class="section-subtitle fade-in-up">Progress through increasingly advanced AI prompting concepts</p>
+                <h2 class="section-title fade-in-up">Why Bias in Prompts Matters</h2>
+                <p class="section-subtitle fade-in-up">Loaded questions lead to skewed answers</p>
 
-                <div class="coverage-grid stagger-children">
-                    <div class="coverage-card">
-                        <h3>Level 1: Good</h3>
-                        <p>Basic prompting concepts, understanding AI limitations, and fundamental principles.</p>
+                <div class="approach-comparison stagger-children">
+                    <div class="approach-card approach-card--weak fade-in-up">
+                        <div class="approach-header approach-header--weak">
+                            <h3>Biased Prompt</h3>
+                            <span class="approach-badge">Leading</span>
+                        </div>
+                        <div class="approach-content">
+                            <div class="approach-prompt">
+                                <p>"Explain why electric cars are terrible for the environment."</p>
+                            </div>
+                            <div class="approach-result approach-result--weak">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+                                <span>AI focuses only on negatives, confirms your bias</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="coverage-card">
-                        <h3>Level 2: Pro</h3>
-                        <p>CRISP, CRISPE, and COSTAR frameworks. When to use each methodology.</p>
-                    </div>
-
-                    <div class="coverage-card">
-                        <h3>Level 3: Expert</h3>
-                        <p>Chain-of-Thought, Few-Shot Learning, ReAct method, and Flipped Interaction.</p>
-                    </div>
-
-                    <div class="coverage-card">
-                        <h3>Level 4: Master</h3>
-                        <p>Combining methods, IDE usage (Cursor, VS Code), APIs, and advanced reasoning.</p>
+                    <div class="approach-card approach-card--strong fade-in-up">
+                        <div class="approach-header approach-header--strong">
+                            <h3>Neutral Prompt</h3>
+                            <span class="approach-badge">Balanced</span>
+                        </div>
+                        <div class="approach-content">
+                            <div class="approach-prompt">
+                                <p>"What is the environmental impact of electric cars compared to gasoline vehicles?"</p>
+                            </div>
+                            <div class="approach-result approach-result--strong">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                                <span>AI provides balanced analysis with full picture</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- After the Quiz -->
+        <!-- Types of Bias -->
         <section class="section">
             <div class="container">
-                <h2 class="section-title fade-in-up">Continue Learning</h2>
-                <p class="section-subtitle fade-in-up">Based on your results, explore these resources</p>
+                <h2 class="section-title fade-in-up">Types of Prompt Bias</h2>
+                <p class="section-subtitle fade-in-up">Common patterns that skew AI responses</p>
 
-                <div class="card-grid stagger-children">
-                    <a href="../learn/prompt-basics.html" class="card card-glow">
-                        <div class="card-badge badge-green">Level 1</div>
-                        <h3 class="card-title">Prompt Basics</h3>
-                        <p class="card-text">Build your foundation with core prompting principles and concepts.</p>
-                        <span class="card-link">Start Learning</span>
-                    </a>
+                <div class="info-cards stagger-children">
+                    <div class="info-card">
+                        <h3>Loaded Language</h3>
+                        <p>Words with strong emotional charge: "terrible," "amazing," "obviously," "clearly." These prime the AI to match your sentiment.</p>
+                        <p class="info-card-example"><strong>Instead of:</strong> "Why is X terrible?" → <strong>Try:</strong> "What are the drawbacks of X?"</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Presupposition</h3>
+                        <p>Questions that assume the answer: "Why is this failing?" presupposes failure. "Why do people hate X?" assumes hatred.</p>
+                        <p class="info-card-example"><strong>Instead of:</strong> "Why is this failing?" → <strong>Try:</strong> "How is this performing?"</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>False Dichotomy</h3>
+                        <p>Framing with only two options: "Is X good or bad?" ignores nuance. Reality usually has a spectrum.</p>
+                        <p class="info-card-example"><strong>Instead of:</strong> "Is AI good or bad?" → <strong>Try:</strong> "What are the benefits, risks, and trade-offs of AI?"</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Confirmation Seeking</h3>
+                        <p>Asking for agreement: "Don't you think X?" or "Isn't it true that Y?" steers toward validation rather than analysis.</p>
+                        <p class="info-card-example"><strong>Instead of:</strong> "Don't you think X is wrong?" → <strong>Try:</strong> "What are different perspectives on X?"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                    <a href="../learn/crisp.html" class="card card-glow">
-                        <div class="card-badge">Level 2</div>
-                        <h3 class="card-title">CRISP Framework</h3>
-                        <p class="card-text">Master structured prompting with the CRISP, CRISPE, and COSTAR frameworks.</p>
-                        <span class="card-link">Learn Methodologies</span>
-                    </a>
+        <!-- Quick Fixes -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Quick Neutralization Tips</h2>
+                <p class="section-subtitle fade-in-up">Transform biased prompts in seconds</p>
 
-                    <a href="../learn/advanced.html" class="card card-glow">
-                        <div class="card-badge badge-purple">Level 3</div>
-                        <h3 class="card-title">Advanced Techniques</h3>
-                        <p class="card-text">Chain-of-Thought, Few-Shot Learning, ReAct, and Flipped Interaction.</p>
-                        <span class="card-link">Go Advanced</span>
-                    </a>
+                <div class="faq-list stagger-children">
+                    <details class="faq-item">
+                        <summary class="faq-question">Replace "Why is X bad" with "What are the pros and cons of X"</summary>
+                        <div class="faq-answer">
+                            <p>Leading questions that assume a negative conclusion prevent balanced analysis. Asking for both sides opens the door to comprehensive information.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question">Remove emotional adjectives (terrible, amazing, obvious)</summary>
+                        <div class="faq-answer">
+                            <p>Emotional language primes the AI to match your tone. Stick to descriptive, factual language and let the AI provide its own assessment.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question">Use "analyze" or "compare" instead of "explain why"</summary>
+                        <div class="faq-answer">
+                            <p>"Explain why" implies there's a single answer to confirm. "Analyze" or "compare" signals you want examination, not validation.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question">Ask for "different perspectives" explicitly</summary>
+                        <div class="faq-answer">
+                            <p>Explicitly requesting multiple viewpoints ensures the AI doesn't default to a single narrative. Add "from different perspectives" to complex topics.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
 
-                        <div class="card-badge badge-red">Level 4</div>
-                        <h3 class="card-title">IDE Guide</h3>
-                        <p class="card-text">Use AI coding assistants in Cursor, VS Code, and other development tools.</p>
-                        <span class="card-link">Explore IDEs</span>
-                    </a>
+        <!-- CTA -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-card fade-in-up">
+                    <canvas id="cta-neural-bg" class="neural-canvas-secondary"></canvas>
+                    <h2 class="cta-title">Write Better Prompts</h2>
+                    <p class="cta-text">Now that you can spot bias, use our other tools to build comprehensive, effective prompts.</p>
+                    <div class="cta-actions">
+                        <a href="analyzer.html" class="btn btn-primary">Analyze a Prompt</a>
+                        <a href="guidance.html" class="btn btn-secondary">Build a Prompt</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -236,11 +347,14 @@
 
                 <div class="footer-links">
                     <h4>AI Readiness</h4>
-                    <a href="../tools/analyzer.html">Prompt Analyzer</a>
-                    <a href="../tools/guidance.html">Prompt Builder</a>
-                    <a href="../tools/matcher.html">Framework Matcher</a>
-                    <a href="../tools/checklist.html">Preflight Checklist</a>
-                    <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                    <a href="analyzer.html">Prompt Analyzer</a>
+                    <a href="guidance.html">Prompt Builder</a>
+                    <a href="matcher.html">Framework Matcher</a>
+                    <a href="checklist.html">Preflight Checklist</a>
+                    <a href="hallucination.html">Hallucination Spotter</a>
+                    <a href="persona.html">Persona Architect</a>
+                    <a href="temperature.html">Temperature Visualizer</a>
+                    <a href="bias.html">Bias Radar</a>
                     <a href="../quiz/index.html">Readiness Quiz</a>
                     <a href="../patterns/index.html">Patterns Library</a>
                     <a href="../pages/ai-safety.html">AI Safety</a>
@@ -248,6 +362,7 @@
 
                 <div class="footer-links">
                     <h4>Resources</h4>
+                    <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
                     <a href="../pages/faq.html">FAQ</a>
                     <a href="../pages/glossary.html">Glossary</a>
                     <a href="../pages/security.html">Security</a>
@@ -276,9 +391,7 @@
         <span class="back-to-top-text">Back to Top</span>
     </button>
 
-    <!-- =============================================
-         BADGE LIGHTBOX - Modal popup for badge info
-         ============================================= -->
+    <!-- Badge Lightbox -->
     <div class="badge-lightbox-overlay" aria-hidden="true"></div>
     <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
         <header class="badge-lightbox-header">
@@ -291,12 +404,8 @@
         </header>
         <div class="badge-lightbox-content"></div>
     </div>
-    <!-- /BADGE LIGHTBOX -->
 
-    <!-- =============================================
-         ACCESSIBILITY DASHBOARD (ADL)
-         User-controlled accommodations for UD/UDL
-         ============================================= -->
+    <!-- Accessibility Dashboard -->
     <div class="adl-dim-overlay" aria-hidden="true"></div>
     <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -362,7 +471,6 @@
         </div>
         <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
     </div>
-    <!-- /ACCESSIBILITY DASHBOARD -->
 
     <script src="../app.js" defer></script>
 </body>

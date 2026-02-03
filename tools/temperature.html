@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
-    <meta name="description" content="Find the best prompting framework for your task. Describe what you need to do and get matched with the ideal framework.">
-    <title>Framework Matcher - Praxis</title>
+    <meta name="description" content="Temperature Visualizer - Understand AI temperature and Top-P settings with intuitive analogies. Learn when to use strict vs creative settings for different tasks.">
+    <title>Temperature Visualizer - AI Creativity Settings - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="preload" href="../styles.css" as="style">
     <link rel="stylesheet" href="../styles.css">
@@ -99,14 +99,14 @@
                     <span class="separator">/</span>
                     <a href="index.html">AI Readiness</a>
                     <span class="separator">/</span>
-                    <span class="current">Framework Matcher</span>
+                    <span class="current">Temperature Visualizer</span>
                 </nav>
-                <h1 class="page-title fade-in">Framework Matcher</h1>
-                <p class="page-subtitle fade-in">Not sure which prompting framework to use? Describe your task and we'll match you with the perfect approach.</p>
+                <h1 class="page-title fade-in">Temperature Visualizer</h1>
+                <p class="page-subtitle fade-in">Understand AI creativity settings through intuitive analogies. Learn when to dial up creativity or stick to the facts.</p>
             </div>
         </section>
 
-        <!-- Recommender Tool -->
+        <!-- Temperature Tool -->
         <section class="section">
             <div class="container">
                 <div class="content-badges fade-in-up">
@@ -137,15 +137,109 @@
                 </div>
 
                 <div class="tool-container fade-in-up">
-                    <div class="recommender-container">
-                        <div class="recommender-input-group">
-                            <label for="recommender-input" class="recommender-label">Describe what you want to accomplish with AI:</label>
-                            <textarea id="recommender-input" class="recommender-textarea" placeholder="Example: I need to write a professional email to a client explaining a project delay, and I want to maintain a positive relationship while being honest about the situation..." rows="5"></textarea>
+                    <div class="temperature-visualizer" id="temperature-visualizer">
+                        <!-- Temperature Slider -->
+                        <div class="temp-section">
+                            <div class="temp-header">
+                                <h3>Temperature</h3>
+                                <span class="temp-value" id="temp-value">0.7</span>
+                            </div>
+                            <div class="temp-slider-container">
+                                <div class="temp-slider-track">
+                                    <input type="range" id="temp-slider" class="temp-slider" min="0" max="100" value="70">
+                                    <div class="temp-slider-fill" id="temp-fill"></div>
+                                </div>
+                                <div class="temp-labels">
+                                    <span>0.0</span>
+                                    <span>0.5</span>
+                                    <span>1.0</span>
+                                </div>
+                            </div>
+                            <div class="temp-analogy" id="temp-analogy">
+                                <div class="temp-analogy-icon" id="temp-icon">🎯</div>
+                                <div class="temp-analogy-content">
+                                    <h4 id="temp-persona">The Balanced Professional</h4>
+                                    <p id="temp-description">Like a skilled consultant: mostly sticks to proven approaches, but open to creative solutions when appropriate.</p>
+                                </div>
+                            </div>
                         </div>
-                        <button type="button" id="recommender-btn" class="btn btn-primary btn-full">Find My Match</button>
 
-                        <div id="recommender-result" class="recommender-result">
-                            <!-- Results populated by JavaScript -->
+                        <!-- Top-P Slider -->
+                        <div class="temp-section">
+                            <div class="temp-header">
+                                <h3>Top-P (Nucleus Sampling)</h3>
+                                <span class="temp-value" id="topp-value">0.9</span>
+                            </div>
+                            <div class="temp-slider-container">
+                                <div class="temp-slider-track">
+                                    <input type="range" id="topp-slider" class="temp-slider" min="0" max="100" value="90">
+                                    <div class="temp-slider-fill" id="topp-fill"></div>
+                                </div>
+                                <div class="temp-labels">
+                                    <span>0.0</span>
+                                    <span>0.5</span>
+                                    <span>1.0</span>
+                                </div>
+                            </div>
+                            <div class="temp-analogy" id="topp-analogy">
+                                <div class="temp-analogy-icon" id="topp-icon">📚</div>
+                                <div class="temp-analogy-content">
+                                    <h4 id="topp-persona">Wide Reader</h4>
+                                    <p id="topp-description">Considers most options in the vocabulary, like a well-read author drawing from a large repertoire.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Combined Effect Display -->
+                        <div class="temp-combined" id="temp-combined">
+                            <h3>Combined Effect</h3>
+                            <div class="temp-combined-visual">
+                                <div class="temp-meter">
+                                    <div class="temp-meter-fill" id="combined-meter"></div>
+                                </div>
+                                <div class="temp-meter-labels">
+                                    <span>Deterministic</span>
+                                    <span>Creative</span>
+                                </div>
+                            </div>
+                            <p class="temp-combined-desc" id="combined-desc">With these settings, responses will be coherent and focused while allowing for natural variation.</p>
+                        </div>
+
+                        <!-- Task Recommendations -->
+                        <div class="temp-recommendations">
+                            <h3>Recommended Settings for Your Task</h3>
+                            <div class="temp-task-grid" id="task-grid">
+                                <button type="button" class="temp-task-btn" data-temp="20" data-topp="50">
+                                    <span class="temp-task-icon">📊</span>
+                                    <span class="temp-task-name">Data Analysis</span>
+                                    <span class="temp-task-values">T: 0.2 | P: 0.5</span>
+                                </button>
+                                <button type="button" class="temp-task-btn" data-temp="30" data-topp="60">
+                                    <span class="temp-task-icon">💻</span>
+                                    <span class="temp-task-name">Code Generation</span>
+                                    <span class="temp-task-values">T: 0.3 | P: 0.6</span>
+                                </button>
+                                <button type="button" class="temp-task-btn" data-temp="50" data-topp="80">
+                                    <span class="temp-task-icon">📝</span>
+                                    <span class="temp-task-name">Business Writing</span>
+                                    <span class="temp-task-values">T: 0.5 | P: 0.8</span>
+                                </button>
+                                <button type="button" class="temp-task-btn is-selected" data-temp="70" data-topp="90">
+                                    <span class="temp-task-icon">💬</span>
+                                    <span class="temp-task-name">Conversation</span>
+                                    <span class="temp-task-values">T: 0.7 | P: 0.9</span>
+                                </button>
+                                <button type="button" class="temp-task-btn" data-temp="80" data-topp="95">
+                                    <span class="temp-task-icon">🎨</span>
+                                    <span class="temp-task-name">Creative Writing</span>
+                                    <span class="temp-task-values">T: 0.8 | P: 0.95</span>
+                                </button>
+                                <button type="button" class="temp-task-btn" data-temp="95" data-topp="100">
+                                    <span class="temp-task-icon">🎲</span>
+                                    <span class="temp-task-name">Brainstorming</span>
+                                    <span class="temp-task-values">T: 0.95 | P: 1.0</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -155,95 +249,110 @@
         <!-- How It Works -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">How It Works</h2>
-                <p class="section-subtitle fade-in-up">Understanding method selection</p>
+                <h2 class="section-title fade-in-up">Understanding the Settings</h2>
+                <p class="section-subtitle fade-in-up">What temperature and Top-P actually control</p>
 
-                <div class="info-cards stagger-children">
-                    <div class="info-card">
-                        <h3>Task Analysis</h3>
-                        <p>We analyze your task description for keywords and patterns that indicate which methodology would work best.</p>
+                <div class="approach-comparison stagger-children">
+                    <div class="approach-card fade-in-up">
+                        <div class="approach-header approach-labeled">
+                            <h3>Temperature</h3>
+                            <span class="approach-badge">Randomness</span>
+                        </div>
+                        <div class="approach-content">
+                            <div class="approach-prompt">
+                                <p><strong>Controls how "random" the AI's choices are.</strong></p>
+                                <p>At low temperature, the AI picks the most probable next word almost every time. At high temperature, it explores less likely options.</p>
+                            </div>
+                            <div class="approach-result approach-result--strong">
+                                <span class="approach-result-icon">💡</span>
+                                Think: How wild should the AI get?
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card">
-                        <h3>Method Matching</h3>
-                        <p>Each method has specific strengths. We match your task characteristics to the methodology that fits best.</p>
-                    </div>
-                    <div class="info-card">
-                        <h3>Confidence Score</h3>
-                        <p>We show how confident we are in our recommendation, plus alternatives if the match isn't clear-cut.</p>
-                    </div>
-                    <div class="info-card">
-                        <h3>Learn More</h3>
-                        <p>Each recommendation links to the full methodology guide so you can learn the approach in depth.</p>
+
+                    <div class="approach-card fade-in-up">
+                        <div class="approach-header approach-natural">
+                            <h3>Top-P</h3>
+                            <span class="approach-badge">Vocabulary</span>
+                        </div>
+                        <div class="approach-content">
+                            <div class="approach-prompt">
+                                <p><strong>Controls how many words the AI considers.</strong></p>
+                                <p>At low Top-P, the AI only considers the most likely words. At high Top-P, it considers a broader vocabulary before making a choice.</p>
+                            </div>
+                            <div class="approach-result approach-result--strong">
+                                <span class="approach-result-icon">📖</span>
+                                Think: How big is the word pool?
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Quick Method Guide -->
+        <!-- Analogies Section -->
         <section class="section">
             <div class="container">
-                <h2 class="section-title fade-in-up">Quick Method Guide</h2>
-                <p class="section-subtitle fade-in-up">When to use each approach</p>
+                <h2 class="section-title fade-in-up">Real-World Analogies</h2>
+                <p class="section-subtitle fade-in-up">Understanding AI settings through familiar comparisons</p>
 
-                <div class="faq-list stagger-children">
-                    <details class="faq-item">
-                        <summary class="faq-question">CRISP - General Purpose</summary>
-                        <div class="faq-answer">
-                            <p><strong>Best for:</strong> Everyday tasks, simple requests, quick questions, general writing tasks.</p>
-                            <p><strong>Use when:</strong> You have a clear, straightforward task and know what you want.</p>
-                            <a href="../learn/crisp.html" class="faq-link">Learn CRISP Framework →</a>
-                        </div>
-                    </details>
+                <div class="info-cards stagger-children">
+                    <div class="info-card">
+                        <h3>🧊 Low Temperature (0.0-0.3)</h3>
+                        <p><strong>The Strict Librarian:</strong> Always recommends the most popular, proven books. Never suggests anything experimental. Predictable but reliable.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🎯 Medium Temperature (0.4-0.6)</h3>
+                        <p><strong>The Thoughtful Consultant:</strong> Usually goes with best practices, but occasionally suggests a fresh approach. Balanced and professional.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🎨 High Temperature (0.7-0.9)</h3>
+                        <p><strong>The Creative Partner:</strong> Explores interesting angles, makes unexpected connections. May surprise you with novel ideas.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🎲 Max Temperature (1.0)</h3>
+                        <p><strong>The Experimental Artist:</strong> Throws caution to the wind. Exciting but unpredictable. Great for brainstorming, risky for precision work.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                    <details class="faq-item">
-                        <summary class="faq-question">CRISPE - Creative & Consistent</summary>
-                        <div class="faq-answer">
-                            <p><strong>Best for:</strong> Creative writing, style matching, tasks requiring specific formatting or voice.</p>
-                            <p><strong>Use when:</strong> You have examples of what you want, or need consistent style across outputs.</p>
-                            <a href="../learn/crispe.html" class="faq-link">Learn CRISPE Framework →</a>
-                        </div>
-                    </details>
+        <!-- Common Mistakes -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Common Mistakes</h2>
+                <p class="section-subtitle fade-in-up">What to avoid when adjusting settings</p>
 
-                    <details class="faq-item">
-                        <summary class="faq-question">COSTAR - Audience-Focused</summary>
-                        <div class="faq-answer">
-                            <p><strong>Best for:</strong> Professional communications, marketing content, anything where audience matters.</p>
-                            <p><strong>Use when:</strong> The recipient of your content is important and tone/style needs to match them.</p>
-                            <a href="../learn/costar.html" class="faq-link">Learn COSTAR Framework →</a>
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary class="faq-question">ReAct - Complex Problems</summary>
-                        <div class="faq-answer">
-                            <p><strong>Best for:</strong> Debugging, research, analysis, multi-step problems requiring reasoning.</p>
-                            <p><strong>Use when:</strong> You need to understand the AI's thinking process or verify its reasoning.</p>
-                            <a href="../learn/react.html" class="faq-link">Learn ReAct Framework →</a>
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary class="faq-question">Flipped Interaction - Exploration</summary>
-                        <div class="faq-answer">
-                            <p><strong>Best for:</strong> When you're unsure what you need, exploring options, getting personalized advice.</p>
-                            <p><strong>Use when:</strong> You want the AI to ask you questions first to better understand your situation.</p>
-                            <a href="../learn/flipped-interaction.html" class="faq-link">Learn Flipped Interaction →</a>
-                        </div>
-                    </details>
+                <div class="risks-grid stagger-children">
+                    <div class="risk-card">
+                        <h3>High Temp for Facts</h3>
+                        <p><strong>Problem:</strong> Using high temperature for factual queries can lead to "creative" answers that sound confident but are incorrect.</p>
+                        <p><strong>Fix:</strong> Keep temperature low (0.2-0.4) for factual, technical, or code-related tasks.</p>
+                    </div>
+                    <div class="risk-card">
+                        <h3>Low Temp for Creativity</h3>
+                        <p><strong>Problem:</strong> Using low temperature for creative writing produces bland, predictable, generic output.</p>
+                        <p><strong>Fix:</strong> Raise temperature (0.7-0.9) when you want variety, voice, and creative expression.</p>
+                    </div>
+                    <div class="risk-card">
+                        <h3>Changing Both at Once</h3>
+                        <p><strong>Problem:</strong> Adjusting temperature AND Top-P simultaneously makes it hard to understand what's affecting output.</p>
+                        <p><strong>Fix:</strong> Start with temperature alone. Only adjust Top-P if you have specific needs.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- CTA -->
-        <section class="section section-alt">
+        <section class="section">
             <div class="container">
                 <div class="cta-card fade-in-up">
                     <canvas id="cta-neural-bg" class="neural-canvas-secondary"></canvas>
-                    <h2 class="cta-title">Ready to Learn?</h2>
-                    <p class="cta-text">Explore all our prompting frameworkologies and find the approach that works best for you.</p>
+                    <h2 class="cta-title">Apply These Settings</h2>
+                    <p class="cta-text">Now that you understand temperature, use it when configuring AI tools like ChatGPT, Claude, or API calls.</p>
                     <div class="cta-actions">
-                        <a href="../learn/index.html" class="btn btn-primary">View All Methods</a>
-                        <a href="analyzer.html" class="btn btn-secondary">Analyze a Prompt</a>
+                        <a href="../pages/chatgpt-guide.html" class="btn btn-primary">ChatGPT Guide</a>
+                        <a href="persona.html" class="btn btn-secondary">Build a Persona</a>
                     </div>
                 </div>
             </div>
@@ -278,6 +387,9 @@
                     <a href="matcher.html">Framework Matcher</a>
                     <a href="checklist.html">Preflight Checklist</a>
                     <a href="hallucination.html">Hallucination Spotter</a>
+                    <a href="persona.html">Persona Architect</a>
+                    <a href="temperature.html">Temperature Visualizer</a>
+                    <a href="bias.html">Bias Radar</a>
                     <a href="../quiz/index.html">Readiness Quiz</a>
                     <a href="../patterns/index.html">Patterns Library</a>
                     <a href="../pages/ai-safety.html">AI Safety</a>
@@ -314,9 +426,7 @@
         <span class="back-to-top-text">Back to Top</span>
     </button>
 
-    <!-- =============================================
-         BADGE LIGHTBOX - Modal popup for badge info
-         ============================================= -->
+    <!-- Badge Lightbox -->
     <div class="badge-lightbox-overlay" aria-hidden="true"></div>
     <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
         <header class="badge-lightbox-header">
@@ -329,12 +439,8 @@
         </header>
         <div class="badge-lightbox-content"></div>
     </div>
-    <!-- /BADGE LIGHTBOX -->
 
-    <!-- =============================================
-         ACCESSIBILITY DASHBOARD (ADL)
-         User-controlled accommodations for UD/UDL
-         ============================================= -->
+    <!-- Accessibility Dashboard -->
     <div class="adl-dim-overlay" aria-hidden="true"></div>
     <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -400,7 +506,6 @@
         </div>
         <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
     </div>
-    <!-- /ACCESSIBILITY DASHBOARD -->
 
     <script src="../app.js" defer></script>
 </body>

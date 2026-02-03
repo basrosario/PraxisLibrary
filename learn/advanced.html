@@ -23,13 +23,13 @@
                     <a href="index.html" class="nav-link active">Learn</a>
                     <div class="mega-menu">
                         <div class="mega-menu-section">
-                            <h4>Methodologies</h4>
+                            <h4>Frameworks</h4>
                             <a href="prompt-basics.html">Prompt Basics</a>
-                            <a href="crisp.html">CRISP Method</a>
-                            <a href="crispe.html">CRISPE Method</a>
-                            <a href="costar.html">COSTAR Method</a>
-                            <a href="react.html">ReAct Method</a>
-                            <a href="flipped-interaction.html">Flipped Interaction Method</a>
+                            <a href="crisp.html">CRISP Framework</a>
+                            <a href="crispe.html">CRISPE Framework</a>
+                            <a href="costar.html">COSTAR Framework</a>
+                            <a href="react.html">ReAct Framework</a>
+                            <a href="flipped-interaction.html">Flipped Interaction Framework</a>
                             <a href="advanced.html">Advanced Techniques</a>
                         </div>
                     </div>
@@ -39,14 +39,27 @@
                     <div class="mega-menu">
                         <div class="mega-menu-section">
                             <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
                             <a href="../tools/analyzer.html">Prompt Analyzer</a>
                             <a href="../tools/guidance.html">Prompt Builder</a>
-                            <a href="../tools/matcher.html">Method Matcher</a>
+                            <a href="../tools/matcher.html">Framework Matcher</a>
                             <a href="../tools/checklist.html">Preflight Checklist</a>
-                            <a href="../tools/hallucination.html">Hallucination Spotter</a>
-                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
                             <a href="../patterns/index.html">Patterns Library</a>
                             <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../neurodivergence/index.html" class="nav-link">AI + Neurodivergence</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>AI by Neurotype</h4>
+                            <a href="../neurodivergence/adhd.html">AI for ADHD</a>
+                            <a href="../neurodivergence/autism.html">AI for Autism</a>
+                            <a href="../neurodivergence/dyslexia.html">AI for Dyslexia</a>
+                            <a href="../neurodivergence/tools.html">AI Tools Finder</a>
+                            <a href="../neurodivergence/resources.html">Resources</a>
                         </div>
                     </div>
                 </div>
@@ -88,347 +101,519 @@
                     <span class="separator">/</span>
                     <span class="current">Advanced Techniques</span>
                 </nav>
-                <div class="card-badge badge-purple">Expert</div>
+                <div class="card-badge badge-purple">Expert Level</div>
                 <h1 class="page-title fade-in">Advanced Prompting Techniques</h1>
-                <p class="page-subtitle fade-in">Expert-level strategies for maximizing AI capabilities. Chain-of-thought, few-shot learning, and beyond.</p>
+                <p class="page-subtitle fade-in">Power tools for complex tasks. Chain-of-thought reasoning, few-shot learning, and meta-prompting for maximum AI capability.</p>
             </div>
         </section>
 
-        <!-- === ACCORDION CONTROLS === -->
+        <!-- === CONTENT BADGES === -->
         <section class="section">
             <div class="container">
-                <div class="accordion-controls">
-                    <button class="accordion-controls-btn" id="expand-all-accordions" type="button">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                            <path d="M6 9l6 6 6-6"/>
-                        </svg>
-                        Expand All
-                    </button>
-                    <button class="accordion-controls-btn" id="collapse-all-accordions" type="button">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                            <path d="M18 15l-6-6-6 6"/>
-                        </svg>
-                        Collapse All
-                    </button>
+                <div class="content-badges fade-in-up">
+                    <span class="content-badge content-badge--ai" data-badge-type="ai">
+                        <span class="badge-label">AI for</span>
+                        <span class="badge-value">Everybody</span>
+                    </span>
+                    <span class="content-badge content-badge--udl" data-badge-type="udl">
+                        <span class="badge-label">Built With</span>
+                        <span class="badge-value">UD/UDL</span>
+                    </span>
+                    <span class="content-badge content-badge--security" data-badge-type="security">
+                        <span class="badge-label">Security</span>
+                        <span class="badge-value">A+ 100%</span>
+                    </span>
+                    <span class="content-badge content-badge--performance" data-badge-type="performance">
+                        <span class="badge-label">Performance</span>
+                        <span class="badge-value">100%</span>
+                    </span>
+                    <span class="content-badge content-badge--claude" data-badge-type="claude">
+                        <span class="badge-label">AI Assisted Building</span>
+                        <span class="badge-value">Claude Code</span>
+                    </span>
+                    <a href="https://github.com/basrosario/PROMPTLIBRARY" target="_blank" rel="noopener noreferrer" class="content-badge content-badge--github" data-badge-type="github">
+                        <span class="badge-label">Community</span>
+                        <span class="badge-value">GitHub</span>
+                    </a>
                 </div>
-
-                <!-- Chain of Thought -->
-                <details class="learn-accordion" id="chain-of-thought">
-                    <summary class="learn-accordion-header">
-                        <span class="learn-accordion-title">
-                            Chain-of-Thought Prompting
-                            <span class="learn-accordion-subtitle">Encourage the AI to show its reasoning step by step</span>
-                        </span>
-                        <span class="learn-accordion-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M6 9l6 6 6-6"/>
-                            </svg>
-                        </span>
-                    </summary>
-                    <div class="learn-accordion-content">
-                        <div class="content-block">
-                            <p>Chain-of-Thought (CoT) prompting encourages the AI to break down complex reasoning into explicit steps. This dramatically improves performance on tasks requiring logic, math, or multi-step analysis.</p>
-                        </div>
-
-                        <div class="technique-cards stagger-children">
-                            <div class="technique-card">
-                                <h3>Simple Trigger</h3>
-                                <p>Add "Let's think step by step" or "Walk through this step by step" to your prompt.</p>
-                            </div>
-                            <div class="technique-card">
-                                <h3>Structured Trigger</h3>
-                                <p>"Before giving your final answer, show your reasoning process. Consider each factor, then conclude."</p>
-                            </div>
-                        </div>
-
-                        <div class="example-card bad">
-                            <div class="example-label">Without CoT</div>
-                            <p>"What's 15% of 847?" → Answer: 127.05 (no work shown)</p>
-                        </div>
-
-                        <div class="example-card good">
-                            <div class="example-label">With CoT</div>
-                            <p>"What's 15% of 847? Think through this step by step." → 10% of 847 = 84.7. 5% = 42.35. So 15% = 127.05</p>
-                        </div>
-
-                        <div class="callout tip">
-                            <div class="callout-title">When to Use CoT</div>
-                            <p>Use Chain-of-Thought for math problems, logical reasoning, complex analysis, planning, and any task where showing work helps verify correctness.</p>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- Few-Shot Learning -->
-                <details class="learn-accordion" id="few-shot-learning">
-                    <summary class="learn-accordion-header">
-                        <span class="learn-accordion-title">
-                            Few-Shot Learning
-                            <span class="learn-accordion-subtitle">Show the AI what you want through examples</span>
-                        </span>
-                        <span class="learn-accordion-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M6 9l6 6 6-6"/>
-                            </svg>
-                        </span>
-                    </summary>
-                    <div class="learn-accordion-content">
-                        <div class="content-block">
-                            <p>Few-shot learning means providing examples in your prompt to show the AI exactly what you want. Instead of describing the format, you demonstrate it.</p>
-                        </div>
-
-                        <div class="info-cards stagger-children">
-                            <div class="info-card">
-                                <h3>Exact Format</h3>
-                                <p>Examples implicitly communicate the precise structure you expect.</p>
-                            </div>
-                            <div class="info-card">
-                                <h3>Level of Detail</h3>
-                                <p>Show how much depth and specificity you want in responses.</p>
-                            </div>
-                            <div class="info-card">
-                                <h3>Style & Tone</h3>
-                                <p>Demonstrate the voice and approach through real examples.</p>
-                            </div>
-                            <div class="info-card">
-                                <h3>Edge Cases</h3>
-                                <p>Show how to handle tricky situations by including them.</p>
-                            </div>
-                        </div>
-
-                        <div class="template-card">
-                            <h3>Few-Shot Example Template</h3>
-                            <div class="template-content">
-                                <p><strong>Task:</strong> Convert feature descriptions into user-friendly bullet points.</p>
-                                <p><strong>Example 1:</strong><br>
-                                Input: "256-bit AES encryption for data at rest and in transit"<br>
-                                Output: "Bank-level security protects your data everywhere"</p>
-                                <p><strong>Example 2:</strong><br>
-                                Input: "OAuth 2.0 integration with SAML support"<br>
-                                Output: "Single sign-on with your existing company login"</p>
-                                <p><strong>Now convert:</strong> [Your input here]</p>
-                            </div>
-                        </div>
-
-                        <div class="best-practice-cards stagger-children">
-                            <div class="best-practice-card">
-                                <h3>Use 2-5 Examples</h3>
-                                <p>More examples help with complex patterns, but diminishing returns set in quickly.</p>
-                            </div>
-                            <div class="best-practice-card">
-                                <h3>Show Diversity</h3>
-                                <p>Include examples that cover different cases the AI might encounter.</p>
-                            </div>
-                            <div class="best-practice-card">
-                                <h3>Match Real Data</h3>
-                                <p>Your examples should be representative of actual inputs the AI will see.</p>
-                            </div>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- Role Prompting -->
-                <details class="learn-accordion" id="role-prompting">
-                    <summary class="learn-accordion-header">
-                        <span class="learn-accordion-title">
-                            Role Prompting
-                            <span class="learn-accordion-subtitle">Assign personas to activate different modes of thinking</span>
-                        </span>
-                        <span class="learn-accordion-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M6 9l6 6 6-6"/>
-                            </svg>
-                        </span>
-                    </summary>
-                    <div class="learn-accordion-content">
-                        <div class="content-block">
-                            <p>Assigning the AI a specific role or persona changes how it approaches problems. Different roles activate different "modes" of thinking and can dramatically change the output.</p>
-                        </div>
-
-                        <div class="role-cards stagger-children">
-                            <div class="role-card">
-                                <h3>The Critic</h3>
-                                <p>"Act as a devil's advocate and find weaknesses in this plan"</p>
-                                <span class="role-usecase">Use for: Stress-testing ideas</span>
-                            </div>
-                            <div class="role-card">
-                                <h3>The Expert</h3>
-                                <p>"You are a senior data scientist with 15 years of experience"</p>
-                                <span class="role-usecase">Use for: Technical depth</span>
-                            </div>
-                            <div class="role-card">
-                                <h3>The Teacher</h3>
-                                <p>"Explain this as if teaching a bright high school student"</p>
-                                <span class="role-usecase">Use for: Accessible explanations</span>
-                            </div>
-                            <div class="role-card">
-                                <h3>The Editor</h3>
-                                <p>"Review this text as a strict editor for The New York Times"</p>
-                                <span class="role-usecase">Use for: Quality improvement</span>
-                            </div>
-                        </div>
-
-                        <div class="callout warning">
-                            <div class="callout-title">Role Prompting Limitations</div>
-                            <p>Roles influence style and approach, but don't give the AI knowledge it doesn't have. A "legal expert" role doesn't make the AI a lawyer. Always verify important information.</p>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- Constrained Output -->
-                <details class="learn-accordion" id="constrained-output">
-                    <summary class="learn-accordion-header">
-                        <span class="learn-accordion-title">
-                            Constrained Output Formats
-                            <span class="learn-accordion-subtitle">Define exact output structure for programmatic use</span>
-                        </span>
-                        <span class="learn-accordion-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M6 9l6 6 6-6"/>
-                            </svg>
-                        </span>
-                    </summary>
-                    <div class="learn-accordion-content">
-                        <div class="content-block">
-                            <p>When you need structured data, explicitly define the output format. This is essential for programmatic use of AI outputs and ensures consistency.</p>
-                        </div>
-
-                        <div class="format-cards stagger-children">
-                            <div class="format-card">
-                                <h3>JSON Output</h3>
-                                <div class="format-code">
-{
-  "summary": "...",
-  "key_points": ["..."],
-  "sentiment": "positive|negative|neutral",
-  "confidence": 0.0-1.0
-}
-                                </div>
-                            </div>
-                            <div class="format-card">
-                                <h3>Structured Text</h3>
-                                <div class="format-code">
-TITLE: ...
-CATEGORY: ...
-PRIORITY: High/Medium/Low
-ACTION ITEMS:
-- Item 1
-- Item 2
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="example-card good">
-                            <div class="example-label">Format Enforcement Prompt</div>
-                            <p>"Analyze this feedback. Return your analysis in exactly this JSON format, with no additional text: {\"sentiment\": \"positive/negative/neutral\", \"main_issue\": \"...\", \"suggested_action\": \"...\", \"urgency\": 1-5}"</p>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- Self-Consistency -->
-                <details class="learn-accordion" id="self-consistency">
-                    <summary class="learn-accordion-header">
-                        <span class="learn-accordion-title">
-                            Self-Consistency Checking
-                            <span class="learn-accordion-subtitle">Ask the AI to verify its own work</span>
-                        </span>
-                        <span class="learn-accordion-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M6 9l6 6 6-6"/>
-                            </svg>
-                        </span>
-                    </summary>
-                    <div class="learn-accordion-content">
-                        <div class="content-block">
-                            <p>Self-consistency checking catches errors and improves reliability, especially for complex tasks. The AI can review, revise, and validate its own output.</p>
-                        </div>
-
-                        <div class="consistency-cards stagger-children">
-                            <div class="consistency-card">
-                                <h3>Review and Revise</h3>
-                                <p>"After generating your response, review it for accuracy and completeness. If you find any errors, correct them."</p>
-                            </div>
-                            <div class="consistency-card">
-                                <h3>Multiple Approaches</h3>
-                                <p>"Solve this problem using two different methods, then compare answers to verify."</p>
-                            </div>
-                            <div class="consistency-card">
-                                <h3>Confidence Assessment</h3>
-                                <p>"Rate your confidence in each claim (High/Medium/Low) and explain any uncertainties."</p>
-                            </div>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- Prompt Chaining -->
-                <details class="learn-accordion" id="prompt-chaining">
-                    <summary class="learn-accordion-header">
-                        <span class="learn-accordion-title">
-                            Prompt Chaining
-                            <span class="learn-accordion-subtitle">Break complex tasks into a series of connected prompts</span>
-                        </span>
-                        <span class="learn-accordion-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M6 9l6 6 6-6"/>
-                            </svg>
-                        </span>
-                    </summary>
-                    <div class="learn-accordion-content">
-                        <div class="content-block">
-                            <p>Complex tasks work better when broken into a series of prompts, where each step's output feeds into the next. This allows for verification at each stage.</p>
-                        </div>
-
-                        <div class="chain-flow stagger-children">
-                            <div class="chain-step-card">
-                                <span class="chain-number">1</span>
-                                <h3>Research</h3>
-                                <p>"List all factors to consider for [topic]"</p>
-                            </div>
-                            <div class="chain-step-card">
-                                <span class="chain-number">2</span>
-                                <h3>Analyze</h3>
-                                <p>"Given these factors: [output 1], analyze the implications"</p>
-                            </div>
-                            <div class="chain-step-card">
-                                <span class="chain-number">3</span>
-                                <h3>Synthesize</h3>
-                                <p>"Based on this analysis: [output 2], recommend a course of action"</p>
-                            </div>
-                        </div>
-
-                        <div class="info-cards stagger-children">
-                            <div class="info-card">
-                                <h3>Focused Attention</h3>
-                                <p>Each step gets the AI's full focus without context switching.</p>
-                            </div>
-                            <div class="info-card">
-                                <h3>Verify Intermediate Steps</h3>
-                                <p>You can check each output before proceeding to the next step.</p>
-                            </div>
-                            <div class="info-card">
-                                <h3>Easier Debugging</h3>
-                                <p>When something goes wrong, you know exactly which step failed.</p>
-                            </div>
-                            <div class="info-card">
-                                <h3>Reusable Chains</h3>
-                                <p>Well-designed chains can be reused for similar tasks.</p>
-                            </div>
-                        </div>
-                    </div>
-                </details>
             </div>
         </section>
-        <!-- /ACCORDION CONTROLS -->
+        <!-- /CONTENT BADGES -->
 
-        <!-- Continue Learning -->
+        <!-- === YOUR TOOLKIT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Your Advanced Toolkit</h2>
+                <p class="section-subtitle fade-in-up">Six techniques that unlock AI's full potential</p>
+
+                <div class="use-case-grid fade-in-up">
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">🔗</div>
+                        <h3 class="use-case-card__title">Chain-of-Thought</h3>
+                        <p class="use-case-card__desc">Make AI show its reasoning step by step for complex problems.</p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">📚</div>
+                        <h3 class="use-case-card__title">Few-Shot Learning</h3>
+                        <p class="use-case-card__desc">Teach through examples instead of lengthy explanations.</p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">🎭</div>
+                        <h3 class="use-case-card__title">Role Prompting</h3>
+                        <p class="use-case-card__desc">Assign personas to activate different thinking modes.</p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">📋</div>
+                        <h3 class="use-case-card__title">Constrained Output</h3>
+                        <p class="use-case-card__desc">Define exact formats for programmatic use.</p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">✓</div>
+                        <h3 class="use-case-card__title">Self-Consistency</h3>
+                        <p class="use-case-card__desc">Have AI verify and improve its own work.</p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">⛓️</div>
+                        <h3 class="use-case-card__title">Prompt Chaining</h3>
+                        <p class="use-case-card__desc">Break complex tasks into connected steps.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /YOUR TOOLKIT -->
+
+        <!-- === CHAIN OF THOUGHT === -->
+        <section class="section" id="chain-of-thought">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Chain-of-Thought Prompting</h2>
+                <p class="section-subtitle fade-in-up">Encourage explicit step-by-step reasoning</p>
+
+                <div class="science-box fade-in-up">
+                    <div class="science-box__header">
+                        <span class="science-box__icon">🧠</span>
+                        <span class="science-box__title">Why This Works</span>
+                    </div>
+                    <p class="science-box__content">
+                        When you ask AI to "think step by step," you're activating a different processing mode. Instead of jumping straight to an answer, the model generates intermediate reasoning tokens that it then uses as context for subsequent steps. This dramatically reduces errors on multi-step problems because each step constrains the next.
+                    </p>
+                </div>
+
+                <div class="stat-cards fade-in-up">
+                    <div class="stat-card">
+                        <span class="stat-number">40%</span>
+                        <span class="stat-label">accuracy boost</span>
+                        <span class="stat-description">On math and logic problems with chain-of-thought prompting</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">words to trigger</span>
+                        <span class="stat-description">"Let's think step by step" activates reasoning mode</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">Easy</span>
+                        <span class="stat-label">to verify</span>
+                        <span class="stat-description">Visible reasoning lets you catch errors mid-process</span>
+                    </div>
+                </div>
+
+                <div class="approach-comparison fade-in-up">
+                    <div class="approach-card">
+                        <div class="approach-header approach-labeled">
+                            <h3>Without CoT</h3>
+                        </div>
+                        <div class="approach-content">
+                            <div class="approach-prompt">
+                                <p>"What's 15% of 847?"</p>
+                            </div>
+                            <p class="example-result">Answer: 127.05 (no work shown, can't verify)</p>
+                        </div>
+                    </div>
+
+                    <div class="approach-vs">
+                        <span>vs</span>
+                    </div>
+
+                    <div class="approach-card">
+                        <div class="approach-header approach-natural">
+                            <h3>With CoT</h3>
+                        </div>
+                        <div class="approach-content">
+                            <div class="approach-prompt">
+                                <p>"What's 15% of 847? Think through this step by step."</p>
+                            </div>
+                            <p class="example-result">10% of 847 = 84.7. 5% = half of that = 42.35. So 15% = 84.7 + 42.35 = 127.05</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Trigger Phrases</div>
+                    <p>"Let's think step by step" • "Walk through this step by step" • "Show your reasoning" • "Before giving your final answer, work through the logic" • "Explain your thought process as you solve this"</p>
+                </div>
+            </div>
+        </section>
+        <!-- /CHAIN OF THOUGHT -->
+
+        <!-- === FEW-SHOT LEARNING === -->
+        <section class="section section-alt" id="few-shot">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Few-Shot Learning</h2>
+                <p class="section-subtitle fade-in-up">Teach through examples, not explanations</p>
+
+                <div class="science-box fade-in-up">
+                    <div class="science-box__header">
+                        <span class="science-box__icon">📖</span>
+                        <span class="science-box__title">Why This Works</span>
+                    </div>
+                    <p class="science-box__content">
+                        Examples are more powerful than descriptions because they implicitly communicate countless details you might forget to specify. Format, length, tone, level of detail, edge case handling—all of these get transmitted through good examples. The AI pattern-matches your examples and extends that pattern to new inputs.
+                    </p>
+                </div>
+
+                <div class="stat-cards fade-in-up">
+                    <div class="stat-card">
+                        <span class="stat-number">2-5</span>
+                        <span class="stat-label">examples ideal</span>
+                        <span class="stat-description">Enough to establish pattern, not so many it's wasteful</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">50%</span>
+                        <span class="stat-label">better format match</span>
+                        <span class="stat-description">Compared to describing format in words</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">Implicit</span>
+                        <span class="stat-label">communication</span>
+                        <span class="stat-description">Transmits style, tone, detail level automatically</span>
+                    </div>
+                </div>
+
+                <div class="react-example-flow fade-in-up">
+                    <div class="react-step-card thought">
+                        <span class="react-label">Task</span>
+                        <p>Convert technical feature descriptions into user-friendly bullet points.</p>
+                    </div>
+                    <div class="react-step-card action">
+                        <span class="react-label">Example 1</span>
+                        <p><strong>Input:</strong> "256-bit AES encryption for data at rest and in transit"<br>
+                        <strong>Output:</strong> "Bank-level security protects your data everywhere"</p>
+                    </div>
+                    <div class="react-step-card observation">
+                        <span class="react-label">Example 2</span>
+                        <p><strong>Input:</strong> "OAuth 2.0 integration with SAML support"<br>
+                        <strong>Output:</strong> "Single sign-on with your existing company login"</p>
+                    </div>
+                    <div class="react-step-card conclusion">
+                        <span class="react-label">Your Input</span>
+                        <p>Now the AI understands: simplify jargon, focus on benefit, keep it short. Just provide your technical feature and get a user-friendly translation.</p>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Best Practices</div>
+                    <p><strong>Show diversity:</strong> Cover different cases the AI might encounter. <strong>Match real data:</strong> Your examples should resemble actual inputs. <strong>Include edge cases:</strong> Show how to handle tricky situations.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FEW-SHOT LEARNING -->
+
+        <!-- === ROLE PROMPTING === -->
+        <section class="section" id="role-prompting">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Role Prompting</h2>
+                <p class="section-subtitle fade-in-up">Assign personas to activate different thinking modes</p>
+
+                <div class="science-box fade-in-up">
+                    <div class="science-box__header">
+                        <span class="science-box__icon">🎭</span>
+                        <span class="science-box__title">Why This Works</span>
+                    </div>
+                    <p class="science-box__content">
+                        Different roles activate different patterns of thinking in the AI. A "devil's advocate" role surfaces objections and weaknesses. A "teacher" role produces clearer explanations. A "senior engineer" role goes deeper on technical details. You're not giving the AI new knowledge—you're directing how it applies what it already knows.
+                    </p>
+                </div>
+
+                <div class="use-case-grid fade-in-up">
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">⚖️</div>
+                        <h3 class="use-case-card__title">The Critic</h3>
+                        <p class="use-case-card__desc">"Act as a devil's advocate and find weaknesses in this plan."<br><em>Best for: Stress-testing ideas</em></p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">🔬</div>
+                        <h3 class="use-case-card__title">The Expert</h3>
+                        <p class="use-case-card__desc">"You are a senior data scientist with 15 years of experience."<br><em>Best for: Technical depth</em></p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">👩‍🏫</div>
+                        <h3 class="use-case-card__title">The Teacher</h3>
+                        <p class="use-case-card__desc">"Explain this as if teaching a bright high school student."<br><em>Best for: Accessible explanations</em></p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">✏️</div>
+                        <h3 class="use-case-card__title">The Editor</h3>
+                        <p class="use-case-card__desc">"Review this text as a strict editor for The New York Times."<br><em>Best for: Quality improvement</em></p>
+                    </div>
+                </div>
+
+                <div class="callout warning fade-in-up">
+                    <div class="callout-title">Limitations</div>
+                    <p>Roles influence style and approach, but don't give the AI knowledge it doesn't have. A "legal expert" role doesn't make the AI a lawyer. Always verify important information with authoritative sources.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /ROLE PROMPTING -->
+
+        <!-- === CONSTRAINED OUTPUT === -->
+        <section class="section section-alt" id="constrained-output">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Constrained Output Formats</h2>
+                <p class="section-subtitle fade-in-up">Define exact structure for programmatic use</p>
+
+                <div class="science-box fade-in-up">
+                    <div class="science-box__header">
+                        <span class="science-box__icon">📋</span>
+                        <span class="science-box__title">Why This Works</span>
+                    </div>
+                    <p class="science-box__content">
+                        When you need to parse AI output with code, inconsistent formatting breaks everything. By defining exact output structure and explicitly requesting "no additional text," you get reliable, machine-readable responses. This is essential for automation, APIs, and any workflow where AI output feeds into other systems.
+                    </p>
+                </div>
+
+                <div class="approach-comparison fade-in-up">
+                    <div class="approach-card">
+                        <div class="approach-header approach-labeled">
+                            <h3>JSON Format</h3>
+                        </div>
+                        <div class="approach-content">
+                            <div class="approach-prompt">
+                                <p>{<br>
+                                &nbsp;&nbsp;"summary": "...",<br>
+                                &nbsp;&nbsp;"key_points": ["..."],<br>
+                                &nbsp;&nbsp;"sentiment": "positive|negative|neutral",<br>
+                                &nbsp;&nbsp;"confidence": 0.0-1.0<br>
+                                }</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="approach-vs">
+                        <span>or</span>
+                    </div>
+
+                    <div class="approach-card">
+                        <div class="approach-header approach-natural">
+                            <h3>Structured Text</h3>
+                        </div>
+                        <div class="approach-content">
+                            <div class="approach-prompt">
+                                <p>TITLE: ...<br>
+                                CATEGORY: ...<br>
+                                PRIORITY: High/Medium/Low<br>
+                                ACTION ITEMS:<br>
+                                - Item 1<br>
+                                - Item 2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Enforcement Tip</div>
+                    <p>End your prompt with: "Return your analysis in exactly this format, with no additional text or explanation." This prevents the AI from adding conversational fluff that breaks parsing.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /CONSTRAINED OUTPUT -->
+
+        <!-- === SELF-CONSISTENCY === -->
+        <section class="section" id="self-consistency">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Self-Consistency Checking</h2>
+                <p class="section-subtitle fade-in-up">Have AI verify and improve its own work</p>
+
+                <div class="science-box fade-in-up">
+                    <div class="science-box__header">
+                        <span class="science-box__icon">✓</span>
+                        <span class="science-box__title">Why This Works</span>
+                    </div>
+                    <p class="science-box__content">
+                        AI can catch errors when prompted to review its own output. This works because generation and evaluation are different processes—the AI might miss something while generating but catch it when specifically looking for problems. For critical tasks, adding a self-check step significantly improves reliability.
+                    </p>
+                </div>
+
+                <div class="use-case-grid fade-in-up">
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">🔄</div>
+                        <h3 class="use-case-card__title">Review and Revise</h3>
+                        <p class="use-case-card__desc">"After generating your response, review it for accuracy and completeness. If you find any errors, correct them."</p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">🔢</div>
+                        <h3 class="use-case-card__title">Multiple Approaches</h3>
+                        <p class="use-case-card__desc">"Solve this problem using two different methods, then compare your answers to verify."</p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">📊</div>
+                        <h3 class="use-case-card__title">Confidence Rating</h3>
+                        <p class="use-case-card__desc">"Rate your confidence in each claim (High/Medium/Low) and explain any uncertainties."</p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">🔍</div>
+                        <h3 class="use-case-card__title">Assumption Check</h3>
+                        <p class="use-case-card__desc">"List the assumptions you made in this analysis and note which might be incorrect."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /SELF-CONSISTENCY -->
+
+        <!-- === PROMPT CHAINING === -->
+        <section class="section section-alt" id="prompt-chaining">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Prompt Chaining</h2>
+                <p class="section-subtitle fade-in-up">Break complex tasks into connected steps</p>
+
+                <div class="science-box fade-in-up">
+                    <div class="science-box__header">
+                        <span class="science-box__icon">⛓️</span>
+                        <span class="science-box__title">Why This Works</span>
+                    </div>
+                    <p class="science-box__content">
+                        Complex tasks work better as a series of focused steps rather than one giant prompt. Each step gets the AI's full attention, you can verify intermediate results before proceeding, and when something goes wrong, you know exactly which step failed. Think of it as assembly-line production for AI tasks.
+                    </p>
+                </div>
+
+                <div class="learning-path fade-in-up">
+                    <div class="path-node path-node--active">
+                        <span class="path-node__marker">1</span>
+                        <div class="path-node__content">
+                            <h3 class="path-node__title">Research</h3>
+                            <p class="path-node__desc">"List all factors to consider for [topic]"<br>Output: A comprehensive list of factors and considerations.</p>
+                        </div>
+                    </div>
+
+                    <div class="path-node">
+                        <span class="path-node__marker">2</span>
+                        <div class="path-node__content">
+                            <h3 class="path-node__title">Analyze</h3>
+                            <p class="path-node__desc">"Given these factors: [output 1], analyze the implications"<br>Output: Analysis connecting the factors to outcomes.</p>
+                        </div>
+                    </div>
+
+                    <div class="path-node">
+                        <span class="path-node__marker">3</span>
+                        <div class="path-node__content">
+                            <h3 class="path-node__title">Synthesize</h3>
+                            <p class="path-node__desc">"Based on this analysis: [output 2], recommend a course of action"<br>Output: Justified recommendations tied to analysis.</p>
+                        </div>
+                    </div>
+
+                    <div class="path-node">
+                        <span class="path-node__marker">4</span>
+                        <div class="path-node__content">
+                            <h3 class="path-node__title">Refine</h3>
+                            <p class="path-node__desc">Optionally: "Review these recommendations and add implementation steps"<br>Output: Actionable final deliverable.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Benefits</div>
+                    <p><strong>Focused attention:</strong> Each step gets full context. <strong>Verifiable:</strong> Check outputs before proceeding. <strong>Debuggable:</strong> Know exactly where issues occur. <strong>Reusable:</strong> Good chains work for similar tasks.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /PROMPT CHAINING -->
+
+        <!-- === COMBINE TECHNIQUES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Combining Techniques</h2>
+                <p class="section-subtitle fade-in-up">The real power comes from mixing methods</p>
+
+                <div class="react-example-flow fade-in-up">
+                    <div class="react-step-card thought">
+                        <span class="react-label">Chain-of-Thought + Role</span>
+                        <p>"You are a senior financial analyst. Walk through your reasoning step by step to evaluate this investment opportunity."</p>
+                    </div>
+                    <div class="react-step-card action">
+                        <span class="react-label">Few-Shot + Constrained Output</span>
+                        <p>"Here are two examples of properly formatted responses: [examples]. Return your analysis in exactly this JSON format."</p>
+                    </div>
+                    <div class="react-step-card observation">
+                        <span class="react-label">Chaining + Self-Check</span>
+                        <p>"Step 1: Research. Step 2: Analyze. Step 3: Recommend. Step 4: Review your recommendation for any errors."</p>
+                    </div>
+                    <div class="react-step-card conclusion">
+                        <span class="react-label">All Together</span>
+                        <p>Expert role + explicit reasoning + format examples + structured output + verification = maximum reliability for complex tasks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /COMBINE TECHNIQUES -->
+
+        <!-- === CONTINUE LEARNING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Continue Your Journey</h2>
+                <p class="section-subtitle fade-in-up">Explore related frameworks and build on these foundations</p>
+
+                <a href="react.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">🔄</span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Reasoning Framework</span>
+                        <span class="evolution-callout__title">ReAct Framework</span>
+                        <span class="evolution-callout__desc">Structured thought-action-observation cycles for complex problem-solving with transparent reasoning.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">→</span>
+                </a>
+
+                <a href="flipped-interaction.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">🔀</span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Collaborative Technique</span>
+                        <span class="evolution-callout__title">Flipped Interaction</span>
+                        <span class="evolution-callout__desc">Let AI interview you first to gather context before providing personalized advice.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">→</span>
+                </a>
+
+                <a href="../foundations/index.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">📚</span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation Hub</span>
+                        <span class="evolution-callout__title">Master the Fundamentals</span>
+                        <span class="evolution-callout__desc">Review CRISP, CRISPE, and COSTAR frameworks that form the foundation for advanced techniques.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">→</span>
+                </a>
+            </div>
+        </section>
+        <!-- /CONTINUE LEARNING -->
+
+        <!-- CTA -->
         <section class="section">
             <div class="container">
                 <div class="cta-card fade-in-up">
                     <canvas id="cta-neural-bg" class="neural-canvas-secondary"></canvas>
-                    <h2 class="cta-title">Keep Practicing</h2>
-                    <p class="cta-text">Advanced techniques require practice. Start with one technique, master it, then add more to your toolkit.</p>
+                    <h2 class="cta-title">Practice Makes Progress</h2>
+                    <p class="cta-text">Start with one technique, master it, then add more to your toolkit. Try building prompts with our interactive tools.</p>
                     <div class="cta-actions">
-                        <a href="index.html" class="btn btn-primary">All Methods</a>
-                        <a href="prompt-basics.html" class="btn btn-secondary">Review Basics</a>
+                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                        <a href="../tools/analyzer.html" class="btn btn-secondary">Prompt Analyzer</a>
                     </div>
                 </div>
             </div>
@@ -442,16 +627,16 @@ ACTION ITEMS:
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
-                    <p>Master the Art of AI Communication theory through proven methodologies.</p>
+                    <p>Master the Art of AI Communication theory through proven frameworks.</p>
                 </div>
 
                 <div class="footer-links">
                     <h4>Learn</h4>
                     <a href="prompt-basics.html">Prompt Basics</a>
-                    <a href="crisp.html">CRISP Method</a>
-                    <a href="crispe.html">CRISPE Method</a>
-                    <a href="costar.html">COSTAR Method</a>
-                    <a href="react.html">ReAct Method</a>
+                    <a href="crisp.html">CRISP Framework</a>
+                    <a href="crispe.html">CRISPE Framework</a>
+                    <a href="costar.html">COSTAR Framework</a>
+                    <a href="react.html">ReAct Framework</a>
                     <a href="flipped-interaction.html">Flipped Interaction</a>
                     <a href="advanced.html">Advanced</a>
                 </div>
@@ -460,7 +645,7 @@ ACTION ITEMS:
                     <h4>AI Readiness</h4>
                     <a href="../tools/analyzer.html">Prompt Analyzer</a>
                     <a href="../tools/guidance.html">Prompt Builder</a>
-                    <a href="../tools/matcher.html">Method Matcher</a>
+                    <a href="../tools/matcher.html">Framework Matcher</a>
                     <a href="../tools/checklist.html">Preflight Checklist</a>
                     <a href="../tools/hallucination.html">Hallucination Spotter</a>
                     <a href="../quiz/index.html">Readiness Quiz</a>
@@ -499,37 +684,7 @@ ACTION ITEMS:
         <span class="back-to-top-text">Back to Top</span>
     </button>
 
-    <!-- Site Badges Bar -->
-    <div class="site-badges-bar">
-        <span class="content-badge content-badge--ai" data-badge-type="ai">
-            <span class="badge-label">AI for</span>
-            <span class="badge-value">Everybody</span>
-        </span>
-        <span class="content-badge content-badge--udl" data-badge-type="udl">
-            <span class="badge-label">Built With</span>
-            <span class="badge-value">UD/UDL</span>
-        </span>
-        <span class="content-badge content-badge--security" data-badge-type="security">
-            <span class="badge-label">Security</span>
-            <span class="badge-value">A+ 100%</span>
-        </span>
-        <span class="content-badge content-badge--performance" data-badge-type="performance">
-            <span class="badge-label">Performance</span>
-            <span class="badge-value">100%</span>
-        </span>
-        <span class="content-badge content-badge--claude" data-badge-type="claude">
-            <span class="badge-label">AI Assisted Building</span>
-            <span class="badge-value">Claude Code</span>
-        </span>
-        <a href="https://github.com/basrosario/PROMPTLIBRARY" target="_blank" rel="noopener noreferrer" class="content-badge content-badge--github" data-badge-type="github">
-            <span class="badge-label">Community</span>
-            <span class="badge-value">GitHub</span>
-        </a>
-    </div>
-
-    <!-- =============================================
-         BADGE LIGHTBOX - Modal popup for badge info
-         ============================================= -->
+    <!-- Badge Lightbox -->
     <div class="badge-lightbox-overlay" aria-hidden="true"></div>
     <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
         <header class="badge-lightbox-header">
@@ -542,12 +697,8 @@ ACTION ITEMS:
         </header>
         <div class="badge-lightbox-content"></div>
     </div>
-    <!-- /BADGE LIGHTBOX -->
 
-    <!-- =============================================
-         ACCESSIBILITY DASHBOARD (ADL)
-         User-controlled accommodations for UD/UDL
-         ============================================= -->
+    <!-- Accessibility Dashboard -->
     <div class="adl-dim-overlay" aria-hidden="true"></div>
     <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -589,6 +740,21 @@ ACTION ITEMS:
                 </label>
             </div>
         </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
         <div class="adl-control">
             <span class="adl-label">Screen Dimming</span>
             <div class="adl-range-wrapper">
@@ -598,7 +764,6 @@ ACTION ITEMS:
         </div>
         <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
     </div>
-    <!-- /ACCESSIBILITY DASHBOARD -->
 
     <script src="../app.js" defer></script>
 </body>
