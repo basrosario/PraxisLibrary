@@ -16407,6 +16407,9 @@ html[data-text-scale="3"] {
     border-radius: var(--radius-lg);
     border: 1px solid var(--border);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .journey-preview__header {
@@ -16432,6 +16435,7 @@ html[data-text-scale="3"] {
     justify-content: space-between;
     padding: var(--space-lg);
     background: var(--bg-main);
+    flex: 1;
 }
 
 .journey-preview__step {
@@ -17706,12 +17710,15 @@ html[data-text-scale="3"] {
 
     .split-section--stretch .split-section__media {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
     }
 
     .split-section--stretch .split-section__media > * {
         width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     .split-section--stretch .split-section__content {
