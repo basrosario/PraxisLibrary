@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
+    <meta name="description" content="Animation and Features Reference - A comprehensive showcase of all available animations, components, and visual features.">
+    <title>Animation &amp; Features Reference - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preload" href="../styles.css" as="style">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav">
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link">Learn</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Frameworks</h4>
+                            <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                            <a href="../learn/crisp.html">CRISP Framework</a>
+                            <a href="../learn/crispe.html">CRISPE Framework</a>
+                            <a href="../learn/costar.html">COSTAR Framework</a>
+                            <a href="../learn/react.html">ReAct Framework</a>
+                            <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                            <a href="../learn/advanced.html">Advanced Techniques</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link">AI Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="resources.html" class="nav-link active">Resources</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Explore</h4>
+                            <a href="glossary.html">Glossary</a>
+                            <a href="faq.html">FAQ</a>
+                            <a href="about.html">About</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- === SECTION 1: HERO WITH NEURAL BACKGROUND === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <span class="current">Animation &amp; Features</span>
+                </nav>
+                <div class="page-hero__content fade-in">
+                    <h1 class="page-hero__title">Animation &amp; Features</h1>
+                    <p class="page-hero__subtitle">A comprehensive reference showcasing all available animations, components, and visual features for the Praxis Library.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 2: FADE ANIMATIONS (Light) === -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Basic Animations</span>
+                    <h2 class="section-title">Fade-In Animations</h2>
+                    <p class="section-subtitle">Elements fade in as they enter the viewport</p>
+                </div>
+
+                <div class="pillar-grid pillar-grid--3">
+                    <div class="pillar-card fade-in-up">
+                        <div class="pillar-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3 class="pillar-card__title">fade-in-up</h3>
+                        <p class="pillar-card__text">Elements fade in while sliding up from below. Great for cards and content blocks.</p>
+                    </div>
+                    <div class="pillar-card fade-in">
+                        <div class="pillar-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <h3 class="pillar-card__title">fade-in</h3>
+                        <p class="pillar-card__text">Simple fade in animation. Elements appear smoothly without movement.</p>
+                    </div>
+                    <div class="pillar-card fade-in-up">
+                        <div class="pillar-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/>
+                            </svg>
+                        </div>
+                        <h3 class="pillar-card__title">Stagger Ready</h3>
+                        <p class="pillar-card__text">Add stagger-children class to parent for sequential animations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 3: COUNTER ANIMATIONS (Dark) === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Dynamic Numbers</span>
+                    <h2 class="section-title">Counter Animations</h2>
+                    <p class="section-subtitle">Numbers animate from 0 to target value when scrolled into view</p>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-card fade-in-up">
+                        <span class="stat-card__number counter-number" data-count="100">0</span>
+                        <span class="stat-card__label">Percentage</span>
+                    </div>
+                    <div class="stat-card fade-in-up">
+                        <span class="stat-card__number counter-number" data-count="50">0</span>
+                        <span class="stat-card__label">Features</span>
+                    </div>
+                    <div class="stat-card fade-in-up">
+                        <span class="stat-card__number counter-number" data-count="25">0</span>
+                        <span class="stat-card__label">Animations</span>
+                    </div>
+                    <div class="stat-card fade-in-up">
+                        <span class="stat-card__number counter-number" data-count="7">0</span>
+                        <span class="stat-card__label">Frameworks</span>
+                    </div>
+                </div>
+
+                <div class="highlight-box highlight-box--tip fade-in-up">
+                    <h4>How to Use</h4>
+                    <p>Add <code>data-count="X"</code> attribute to any element with the <code>counter-number</code> class. The counter animates when scrolled into view.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 4: AMBIENT BACKGROUNDS (Light with Animation) === -->
+        <section class="section section-ambient">
+            <canvas class="section-ambient__canvas"></canvas>
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Background Effects</span>
+                    <h2 class="section-title">Ambient Section Backgrounds</h2>
+                    <p class="section-subtitle">Subtle floating AI terms create depth and visual interest</p>
+                </div>
+
+                <div class="split-section">
+                    <div class="split-section__content">
+                        <span class="split-section__eyebrow">Canvas Animation</span>
+                        <h3 class="split-section__title">Neural Network Effect</h3>
+                        <p class="split-section__text">The section-ambient class adds a canvas element that displays floating AI-related terms. This creates an engaging background without being distracting.</p>
+                        <div class="feature-list feature-list--check">
+                            <div class="feature-list__item">
+                                <span class="feature-list__icon feature-list__icon--green">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </span>
+                                <div class="feature-list__content">
+                                    <span class="feature-list__title">Performance Optimized</span>
+                                    <span class="feature-list__text">Uses requestAnimationFrame for smooth 60fps</span>
+                                </div>
+                            </div>
+                            <div class="feature-list__item">
+                                <span class="feature-list__icon feature-list__icon--green">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </span>
+                                <div class="feature-list__content">
+                                    <span class="feature-list__title">Reduced Motion Support</span>
+                                    <span class="feature-list__text">Respects prefers-reduced-motion setting</span>
+                                </div>
+                            </div>
+                            <div class="feature-list__item">
+                                <span class="feature-list__icon feature-list__icon--green">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </span>
+                                <div class="feature-list__content">
+                                    <span class="feature-list__title">Visibility Aware</span>
+                                    <span class="feature-list__text">Pauses when tab is not visible to save resources</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__media">
+                        <div class="stats-highlight">
+                            <div class="stats-highlight__item">
+                                <span class="stats-highlight__number">60</span>
+                                <span class="stats-highlight__label">FPS Target</span>
+                                <span class="stats-highlight__desc">Smooth animations at optimal frame rate</span>
+                            </div>
+                            <div class="stats-highlight__item">
+                                <span class="stats-highlight__number">0%</span>
+                                <span class="stats-highlight__label">Layout Shift</span>
+                                <span class="stats-highlight__desc">Canvas doesn't affect page layout</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 5: TIMELINE COMPONENTS (Dark) === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Sequential Content</span>
+                    <h2 class="section-title">Timeline Components</h2>
+                    <p class="section-subtitle">Display step-by-step processes and progressions</p>
+                </div>
+
+                <!-- Horizontal Timeline -->
+                <h3 class="subsection-title fade-in">Horizontal Timeline</h3>
+                <div class="timeline timeline--horizontal fade-in-up">
+                    <div class="timeline__item">
+                        <div class="timeline__marker">1</div>
+                        <h4 class="timeline__title">First Step</h4>
+                        <p class="timeline__text">Begin with the basics and establish foundation</p>
+                    </div>
+                    <div class="timeline__item">
+                        <div class="timeline__marker">2</div>
+                        <h4 class="timeline__title">Second Step</h4>
+                        <p class="timeline__text">Build upon knowledge with intermediate concepts</p>
+                    </div>
+                    <div class="timeline__item">
+                        <div class="timeline__marker">3</div>
+                        <h4 class="timeline__title">Third Step</h4>
+                        <p class="timeline__text">Apply advanced techniques and patterns</p>
+                    </div>
+                    <div class="timeline__item">
+                        <div class="timeline__marker">4</div>
+                        <h4 class="timeline__title">Final Step</h4>
+                        <p class="timeline__text">Master the complete workflow</p>
+                    </div>
+                </div>
+
+                <!-- Element Timeline (Vertical) -->
+                <h3 class="subsection-title fade-in">Vertical Element Timeline</h3>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-block">
+                        <div class="element-block__marker">
+                            <span class="element-block__letter">A</span>
+                        </div>
+                        <div class="element-block__content">
+                            <div class="element-block__header">
+                                <h3 class="element-block__title">Alpha Phase</h3>
+                                <span class="element-block__tagline">Initial setup</span>
+                            </div>
+                            <p class="element-block__desc">The beginning phase where foundations are established and core concepts are introduced.</p>
+                        </div>
+                    </div>
+                    <div class="element-block">
+                        <div class="element-block__marker">
+                            <span class="element-block__letter">B</span>
+                        </div>
+                        <div class="element-block__content">
+                            <div class="element-block__header">
+                                <h3 class="element-block__title">Beta Phase</h3>
+                                <span class="element-block__tagline">Development</span>
+                            </div>
+                            <p class="element-block__desc">The development phase where features are built and tested iteratively.</p>
+                        </div>
+                    </div>
+                    <div class="element-block">
+                        <div class="element-block__marker">
+                            <span class="element-block__letter">C</span>
+                        </div>
+                        <div class="element-block__content">
+                            <div class="element-block__header">
+                                <h3 class="element-block__title">Complete</h3>
+                                <span class="element-block__tagline">Launch ready</span>
+                            </div>
+                            <p class="element-block__desc">The final phase where everything comes together for deployment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 6: CARD VARIANTS (Light) === -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">UI Components</span>
+                    <h2 class="section-title">Card Variants</h2>
+                    <p class="section-subtitle">Different card styles for various content types</p>
+                </div>
+
+                <!-- Pillar Grid -->
+                <h3 class="subsection-title fade-in">Pillar Cards (2 Column)</h3>
+                <div class="pillar-grid pillar-grid--2 fade-in-up">
+                    <div class="pillar-card">
+                        <div class="pillar-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="3" y1="9" x2="21" y2="9"/>
+                                <line x1="9" y1="21" x2="9" y2="9"/>
+                            </svg>
+                        </div>
+                        <h3 class="pillar-card__title">Layout Component</h3>
+                        <p class="pillar-card__text">Pillar cards work great for feature highlights, benefits, or key points. The icon adds visual interest.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            </svg>
+                        </div>
+                        <h3 class="pillar-card__title">Flexible Design</h3>
+                        <p class="pillar-card__text">Use pillar-grid--2 for two columns or pillar-grid--3 for three columns. Cards stretch to equal height.</p>
+                    </div>
+                </div>
+
+                <!-- Use Case Cards -->
+                <h3 class="subsection-title fade-in">Use Case Cards</h3>
+                <div class="use-case-grid fade-in-up">
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-card__title">Email Drafting</h3>
+                        <p class="use-case-card__desc">Professional correspondence and marketing emails</p>
+                    </div>
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14,2 14,8 20,8"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-card__title">Documentation</h3>
+                        <p class="use-case-card__desc">Technical docs, guides, and tutorials</p>
+                    </div>
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="12,2 2,7 12,12 22,7"/>
+                                <polyline points="2,17 12,22 22,17"/>
+                                <polyline points="2,12 12,17 22,12"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-card__title">Code Generation</h3>
+                        <p class="use-case-card__desc">Functions, scripts, and boilerplate code</p>
+                    </div>
+                    <div class="use-case-card">
+                        <div class="use-case-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                                <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-card__title">Problem Solving</h3>
+                        <p class="use-case-card__desc">Analysis, debugging, and solutions</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 7: HIGHLIGHT BOXES (Dark) === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Callouts</span>
+                    <h2 class="section-title">Highlight Boxes</h2>
+                    <p class="section-subtitle">Draw attention to important information</p>
+                </div>
+
+                <div class="highlight-boxes-demo">
+                    <div class="highlight-box fade-in-up">
+                        <h4>Default Highlight Box</h4>
+                        <p>Use for general important information that doesn't fit other categories. Neutral styling that works in any context.</p>
+                    </div>
+
+                    <div class="highlight-box highlight-box--tip fade-in-up">
+                        <h4>Tip Box</h4>
+                        <p>Perfect for pro tips, best practices, and helpful suggestions. The green accent indicates positive, helpful content.</p>
+                    </div>
+
+                    <div class="highlight-box highlight-box--warning fade-in-up">
+                        <h4>Warning Box</h4>
+                        <p>Use for cautions, potential issues, or things to avoid. The amber/orange accent signals "proceed with care."</p>
+                    </div>
+
+                    <div class="highlight-box highlight-box--info fade-in-up">
+                        <h4>Info Box</h4>
+                        <p>For supplementary information, notes, or additional context. Blue accent is informational without urgency.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 8: PROMPT TRANSFORMATION (Light) === -->
+        <section class="section section-ambient">
+            <canvas class="section-ambient__canvas"></canvas>
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Before &amp; After</span>
+                    <h2 class="section-title">Prompt Transformation</h2>
+                    <p class="section-subtitle">Show evolution from basic to complete</p>
+                </div>
+
+                <div class="prompt-transform fade-in-up">
+                    <div class="prompt-transform__before">
+                        <div class="prompt-transform__label prompt-transform__label--before">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="15" y1="9" x2="9" y2="15"/>
+                                <line x1="9" y1="9" x2="15" y2="15"/>
+                            </svg>
+                            Before
+                        </div>
+                        <div class="prompt-transform__text">"Make it better."</div>
+                        <div class="prompt-transform__outcome prompt-transform__outcome--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                <line x1="12" y1="9" x2="12" y2="13"/>
+                                <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                            Vague and unhelpful
+                        </div>
+                    </div>
+
+                    <div class="prompt-transform__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12,5 19,12 12,19"/>
+                        </svg>
+                        <span>Transform</span>
+                    </div>
+
+                    <div class="prompt-transform__after">
+                        <div class="prompt-transform__label prompt-transform__label--after">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22,4 12,14.01 9,11.01"/>
+                            </svg>
+                            After
+                        </div>
+                        <div class="prompt-transform__components">
+                            <div class="prompt-component prompt-component--context">
+                                <span class="prompt-component__tag">Context</span>
+                                <span class="prompt-component__text">Background information</span>
+                            </div>
+                            <div class="prompt-component prompt-component--task">
+                                <span class="prompt-component__tag">Task</span>
+                                <span class="prompt-component__text">Specific action required</span>
+                            </div>
+                            <div class="prompt-component prompt-component--format">
+                                <span class="prompt-component__tag">Format</span>
+                                <span class="prompt-component__text">Desired output structure</span>
+                            </div>
+                        </div>
+                        <div class="prompt-transform__outcome prompt-transform__outcome--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22,4 12,14.01 9,11.01"/>
+                            </svg>
+                            Clear and actionable
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 9: JOURNEY PREVIEW (Dark) === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Progress Display</span>
+                    <h2 class="section-title">Journey Preview Component</h2>
+                    <p class="section-subtitle">Show learning paths and progressions</p>
+                </div>
+
+                <div class="split-section split-section--stretch">
+                    <div class="split-section__content fade-in-up">
+                        <h3 class="split-section__title">Learning Path Card</h3>
+                        <p class="split-section__text">The journey preview component displays a multi-step progression with numbered markers, stats, and an optional quote. Perfect for showing course outlines or process flows.</p>
+                        <div class="feature-list feature-list--check">
+                            <div class="feature-list__item">
+                                <span class="feature-list__icon feature-list__icon--blue">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </span>
+                                <div class="feature-list__content">
+                                    <span class="feature-list__title">Color-Coded Steps</span>
+                                    <span class="feature-list__text">Each step has a unique color for visual distinction</span>
+                                </div>
+                            </div>
+                            <div class="feature-list__item">
+                                <span class="feature-list__icon feature-list__icon--blue">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </span>
+                                <div class="feature-list__content">
+                                    <span class="feature-list__title">Stats Section</span>
+                                    <span class="feature-list__text">Display key metrics with large numbers</span>
+                                </div>
+                            </div>
+                            <div class="feature-list__item">
+                                <span class="feature-list__icon feature-list__icon--blue">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </span>
+                                <div class="feature-list__content">
+                                    <span class="feature-list__title">Quote Footer</span>
+                                    <span class="feature-list__text">Add inspiring quotes to fill space elegantly</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__media fade-in-up">
+                        <div class="journey-preview">
+                            <div class="journey-preview__header">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                    <path d="M2 17l10 5 10-5"/>
+                                    <path d="M2 12l10 5 10-5"/>
+                                </svg>
+                                <span>Sample Journey</span>
+                            </div>
+                            <div class="journey-preview__steps">
+                                <div class="journey-preview__step journey-preview__step--start">
+                                    <span class="journey-preview__number">1</span>
+                                    <span class="journey-preview__label">Start</span>
+                                </div>
+                                <div class="journey-preview__connector"></div>
+                                <div class="journey-preview__step journey-preview__step--step2">
+                                    <span class="journey-preview__number">2</span>
+                                    <span class="journey-preview__label">Learn</span>
+                                </div>
+                                <div class="journey-preview__connector"></div>
+                                <div class="journey-preview__step journey-preview__step--step3">
+                                    <span class="journey-preview__number">3</span>
+                                    <span class="journey-preview__label">Practice</span>
+                                </div>
+                                <div class="journey-preview__connector"></div>
+                                <div class="journey-preview__step journey-preview__step--end">
+                                    <span class="journey-preview__number">4</span>
+                                    <span class="journey-preview__label">Master</span>
+                                </div>
+                            </div>
+                            <div class="journey-preview__stats">
+                                <div class="journey-preview__stat">
+                                    <span class="journey-preview__stat-number">4</span>
+                                    <span class="journey-preview__stat-label">Steps</span>
+                                </div>
+                                <div class="journey-preview__stat">
+                                    <span class="journey-preview__stat-number">∞</span>
+                                    <span class="journey-preview__stat-label">Growth</span>
+                                </div>
+                            </div>
+                            <div class="journey-preview__quote">
+                                <p class="journey-preview__quote-text">"Every expert was once a beginner."</p>
+                                <span class="journey-preview__quote-author">— Helen Hayes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 10: BUTTONS & INTERACTIONS (Light) === -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Interactive Elements</span>
+                    <h2 class="section-title">Buttons &amp; Actions</h2>
+                    <p class="section-subtitle">Various button styles and hover effects</p>
+                </div>
+
+                <div class="button-showcase fade-in-up">
+                    <div class="button-group">
+                        <h4>Primary Buttons</h4>
+                        <a href="#" class="btn btn-primary">Primary Button</a>
+                        <a href="#" class="btn btn-primary btn-primary--large">Large Primary</a>
+                    </div>
+
+                    <div class="button-group">
+                        <h4>Secondary Buttons</h4>
+                        <a href="#" class="btn btn-secondary">Secondary Button</a>
+                        <a href="#" class="btn btn-outline">Outline Button</a>
+                    </div>
+
+                    <div class="button-group">
+                        <h4>Special States</h4>
+                        <a href="#" class="btn btn-primary pulse-attention">Pulse Animation</a>
+                        <a href="#" class="btn btn-ghost">Ghost Button</a>
+                    </div>
+                </div>
+
+                <div class="highlight-box highlight-box--info fade-in-up">
+                    <h4>Hover Effects</h4>
+                    <p>All buttons include smooth hover transitions. Primary buttons scale slightly and increase shadow. Secondary and outline buttons fill or change border color on hover.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 11: FEATURE LISTS (Dark) === -->
+        <section class="section section-alt section-ambient">
+            <canvas class="section-ambient__canvas"></canvas>
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">List Styles</span>
+                    <h2 class="section-title">Feature Lists</h2>
+                    <p class="section-subtitle">Display benefits, features, and checklist items</p>
+                </div>
+
+                <div class="pillar-grid pillar-grid--2">
+                    <div class="feature-list-card fade-in-up">
+                        <h4>Check Style (Green)</h4>
+                        <div class="feature-list feature-list--check">
+                            <div class="feature-list__item">
+                                <span class="feature-list__icon feature-list__icon--green">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </span>
+                                <div class="feature-list__content">
+                                    <span class="feature-list__title">Feature One</span>
+                                    <span class="feature-list__text">Description of the first feature</span>
+                                </div>
+                            </div>
+                            <div class="feature-list__item">
+                                <span class="feature-list__icon feature-list__icon--green">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </span>
+                                <div class="feature-list__content">
+                                    <span class="feature-list__title">Feature Two</span>
+                                    <span class="feature-list__text">Description of the second feature</span>
+                                </div>
+                            </div>
+                            <div class="feature-list__item">
+                                <span class="feature-list__icon feature-list__icon--green">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </span>
+                                <div class="feature-list__content">
+                                    <span class="feature-list__title">Feature Three</span>
+                                    <span class="feature-list__text">Description of the third feature</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-list-card fade-in-up">
+                        <h4>Mixed Colors</h4>
+                        <div class="feature-list feature-list--check">
+                            <div class="feature-list__item">
+                                <span class="feature-list__icon feature-list__icon--blue">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </span>
+                                <div class="feature-list__content">
+                                    <span class="feature-list__title">Blue Icon</span>
+                                    <span class="feature-list__text">Use feature-list__icon--blue</span>
+                                </div>
+                            </div>
+                            <div class="feature-list__item">
+                                <span class="feature-list__icon feature-list__icon--purple">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </span>
+                                <div class="feature-list__content">
+                                    <span class="feature-list__title">Purple Icon</span>
+                                    <span class="feature-list__text">Use feature-list__icon--purple</span>
+                                </div>
+                            </div>
+                            <div class="feature-list__item">
+                                <span class="feature-list__icon feature-list__icon--green">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20,6 9,17 4,12"/>
+                                    </svg>
+                                </span>
+                                <div class="feature-list__content">
+                                    <span class="feature-list__title">Green Icon</span>
+                                    <span class="feature-list__text">Use feature-list__icon--green</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 12: SPLIT SECTIONS (Light) === -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Layout Patterns</span>
+                    <h2 class="section-title">Split Section Layouts</h2>
+                    <p class="section-subtitle">Two-column content with text and media</p>
+                </div>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__eyebrow">Content Side</span>
+                        <h3 class="split-section__title">Standard Split Layout</h3>
+                        <p class="split-section__text">The split section component creates a responsive two-column layout. Content goes on one side, media (images, stats, cards) goes on the other.</p>
+                        <p class="split-section__text">On mobile, columns stack vertically with content first.</p>
+                        <a href="#" class="btn btn-primary">Call to Action</a>
+                    </div>
+                    <div class="split-section__media">
+                        <div class="placeholder-media">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21,15 16,10 5,21"/>
+                            </svg>
+                            <span>Media Area</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 13: CTA WITH NEURAL BACKGROUND (Dark) === -->
+        <section class="cta-card cta-corporate">
+            <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+            <div class="cta-corporate__content">
+                <h2 class="cta-corporate__title">Call to Action Section</h2>
+                <p class="cta-corporate__text">This CTA section includes a neural network canvas background animation. Perfect for important conversion points.</p>
+                <div class="cta-corporate__actions">
+                    <a href="../learn/index.html" class="btn btn-primary btn-primary--large">Primary Action</a>
+                    <a href="../quiz/index.html" class="btn btn-secondary">Secondary Action</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 14: SUMMARY REFERENCE (Light) === -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Quick Reference</span>
+                    <h2 class="section-title">Animation Classes Summary</h2>
+                    <p class="section-subtitle">Copy-paste ready class names</p>
+                </div>
+
+                <div class="reference-grid fade-in-up">
+                    <div class="reference-card">
+                        <h4>Fade Animations</h4>
+                        <ul class="reference-list">
+                            <li><code>fade-in</code> - Simple fade</li>
+                            <li><code>fade-in-up</code> - Fade + slide up</li>
+                            <li><code>stagger-children</code> - Sequential children</li>
+                        </ul>
+                    </div>
+                    <div class="reference-card">
+                        <h4>Section Types</h4>
+                        <ul class="reference-list">
+                            <li><code>section</code> - Light background</li>
+                            <li><code>section section-alt</code> - Dark background</li>
+                            <li><code>section-ambient</code> - With canvas</li>
+                        </ul>
+                    </div>
+                    <div class="reference-card">
+                        <h4>Counter Animation</h4>
+                        <ul class="reference-list">
+                            <li><code>counter-number</code> - Base class</li>
+                            <li><code>data-count="X"</code> - Target number</li>
+                        </ul>
+                    </div>
+                    <div class="reference-card">
+                        <h4>Card Grids</h4>
+                        <ul class="reference-list">
+                            <li><code>pillar-grid--2</code> - 2 columns</li>
+                            <li><code>pillar-grid--3</code> - 3 columns</li>
+                            <li><code>use-case-grid</code> - 4 columns</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                    <p class="footer-tagline">Master the art of AI communication</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">Animation &amp; Features Reference Page</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Bar -->
+    <div class="back-to-top-bar" role="button" tabindex="0" aria-label="Back to top">
+        <span>Back to Top</span>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>
