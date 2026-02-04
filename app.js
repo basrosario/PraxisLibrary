@@ -6964,7 +6964,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
         const typingSpeed = 70; // milliseconds per character
         const deleteSpeed = 35; // milliseconds per character when deleting
-        const pauseAfterComplete = 7770; // 7.77 seconds pause before switching
+        const pauseAfterComplete = 2000; // 2 seconds pause before switching
         const startLearningDelay = 5000; // 5 seconds after typing completes
         const takeQuizDelay = 6000; // 6 seconds after typing completes
 
