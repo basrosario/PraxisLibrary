@@ -587,11 +587,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         const isProminent = Math.random() < 0.25; // 25% of connections are prominent (was 15%)
                         const lineWidth = isHero
                             ? (isProminent ? 1.2 + avgZ * 1.2 : 0.5 + avgZ * 0.8)  // Prominent: 1.2-2.4, Normal: 0.5-1.3 (THICKER)
-                            : 0.5 + avgZ * 1.5; // Normal: 0.5 - 2.0
+                            : 0.8 + avgZ * 1.8; // Normal: 0.8 - 2.6 (THICKER for terms mode)
 
                         const baseAlpha = isHero
                             ? (1 - dist / effectiveMaxDist) * (isProminent ? 0.3 + avgZ * 0.4 : 0.15 + avgZ * 0.25)  // MUCH BRIGHTER
-                            : (1 - dist / maxDist) * (0.15 + avgZ * 0.35);
+                            : (1 - dist / maxDist) * (0.35 + avgZ * 0.45);  // More visible for terms mode
 
                         this.cachedConnections.push({
                             i, j, dist, avgZ,
@@ -1838,12 +1838,12 @@ document.addEventListener('DOMContentLoaded', () => {
             this.baseY = y;
             this.width = width;
             this.height = height;
-            this.radius = 2 + Math.random() * 2;
+            this.radius = 3 + Math.random() * 3;
             this.vx = (Math.random() - 0.5) * 0.3;
             this.vy = (Math.random() - 0.5) * 0.3;
             this.pulsePhase = Math.random() * Math.PI * 2;
             this.pulseSpeed = 0.02 + Math.random() * 0.02;
-            this.opacity = 0.3 + Math.random() * 0.4;
+            this.opacity = 0.5 + Math.random() * 0.4;
 
             // Term/word attached to this node
             this.term = term;
@@ -1851,7 +1851,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 x: (Math.random() - 0.5) * 40 + (Math.random() > 0.5 ? 30 : -30),
                 y: (Math.random() - 0.5) * 20 + (Math.random() > 0.5 ? 20 : -20)
             };
-            this.termOpacity = 0.15 + Math.random() * 0.15;
+            this.termOpacity = 0.35 + Math.random() * 0.25;
 
             // Firefly highlight effect - subtle red glow
             this.isHighlighted = false;
