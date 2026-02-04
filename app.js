@@ -10599,17 +10599,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             this.currentIndex = 0;
             this.interval = 1700; // 1.7 seconds between cycles
-            this.initialDelay = 2000; // 2 second initial delay
             this.timer = null;
             this.isPaused = false;
 
             this.bindEvents();
-            // Start cycling after initial 2 second delay
-            setTimeout(() => {
-                if (!this.isPaused) {
-                    this.startCycling();
-                }
-            }, this.initialDelay);
+            // Start cycling immediately on page load
+            this.startCycling();
         },
 
         bindEvents() {
