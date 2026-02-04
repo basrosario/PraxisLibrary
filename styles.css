@@ -18305,15 +18305,23 @@ html[data-text-scale="3"] {
 /* --- Readiness Hub (2x2 Icon Grid) ---
    Dynamic visual showing interconnected readiness pillars */
 .icon-grid-2x2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
     gap: var(--space-md);
     padding: var(--space-sm);
     position: relative;
     min-height: 340px;
     max-width: 420px;
     margin: auto;
+}
+
+/* Reinforce grid inside split sections */
+.split-section__media .icon-grid-2x2,
+[data-readiness-grid].icon-grid-2x2 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
 }
 
 /* Central hub element */
