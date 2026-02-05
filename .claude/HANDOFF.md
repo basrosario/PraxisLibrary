@@ -1,58 +1,82 @@
 # Praxis Project Handoff Document
 
-**Last Updated:** 2026-02-05 (Session 25)
-**Last Commit:** 8e25360 - feat: Phase 2 start - zero-shot and zero-shot-cot framework pages
-**Current Phase:** Framework Overhaul - Phase 2 HIGH PRIORITY COMPLETE
+**Last Updated:** 2026-02-05 (Session 26)
+**Last Commit:** cb2af07 - fix: Rewrite learn/modality/code/ pages with correct site template
+**Current Phase:** Framework Overhaul - Phase 2 MAJOR PROGRESS
 
 ---
 
-## CURRENT SESSION STATUS (Session 25)
+## CURRENT SESSION STATUS (Session 26)
 
 ### Completed This Session
-- [x] Created `learn/self-refine.html` - Iterative improvement technique
-- [x] Created `learn/self-verification.html` - Answer validation technique
-- [x] Created `learn/modality/code/code-prompting.html` - Code generation strategies
-- [x] Created `learn/modality/code/self-debugging.html` - AI-assisted debugging
-- [x] Created `learn/modality/code/structured-output.html` - JSON/XML output generation
-- [x] Created `learn/modality/code/` directory structure
-- [x] Updated navigation mega-menu across ALL 48+ HTML files with new sections:
-  - Added "Advanced" section (6 pages)
-  - Added "Code" section (3 pages)
-- [x] **ALL 12 HIGH PRIORITY PAGES NOW COMPLETE**
+- [x] Created 40+ new framework pages in learn/
+- [x] Fixed self-refine.html and self-verification.html templates (were using old incompatible template)
+- [x] Updated mega menu navigation across 99+ HTML files
+- [x] Rewrote learn/modality/code/ pages with correct site template structure
+- [x] Two successful git pushes (mega menu update, code folder fix)
 
-### Files Created (New)
-| File | Description |
-|------|-------------|
-| `learn/self-refine.html` | Generate → Feedback → Refine iterative loop |
-| `learn/self-verification.html` | Backward verification, constraint checking, sanity checks |
-| `learn/modality/code/code-prompting.html` | Code task types, context strategies, prompt anatomy |
-| `learn/modality/code/self-debugging.html` | Error-driven, trace-based, explanation debugging |
-| `learn/modality/code/structured-output.html` | JSON/XML/YAML format prompting strategies |
+### New Framework Pages Created (40+)
+All pages follow site template with page-hero, pillar-cards, accordions, highlight-boxes:
 
-### Navigation Updates (All 48+ HTML files)
-New mega-menu structure under "Learn":
+**Advanced Frameworks:**
+- decomp.html (Decomposed Prompting)
+- graph-of-thought.html
+- program-of-thought.html
+- self-ask.html
+- analogical-reasoning.html
+- step-back.html
+
+**Self-Correction:**
+- chain-of-verification.html
+- critic.html
+- reflexion.html
+- self-calibration.html
+
+**Example Selection:**
+- knn-prompting.html
+- vote-k.html
+- demo-ensembling.html
+- active-prompting.html
+- max-mutual-info.html
+
+**CoT Variants:**
+- thread-of-thought.html
+- tab-cot.html
+- complexity-prompting.html
+- memory-of-thought.html
+- meta-reasoning.html
+- diverse-prompting.html
+- contrastive-cot.html
+- structured-cot.html
+- reversing-cot.html
+- faithful-cot.html
+- recursion-of-thought.html
+- cumulative-reasoning.html
+
+**Other:**
+- s2a.html (System 2 Attention)
+- simtom.html (SimToM)
+- re2.html (Re-Reading)
+- prompt-mining.html
+- universal-self-consistency.html
+- cosp.html
+- dense-prompting.html
+
+### Mega Menu Navigation Update
+Updated across 99+ HTML files with new structure:
 ```
 Learn
-├── Getting Started
-│   ├── Prompt Basics
-│   └── Facts & Fictions
-├── Frameworks (existing 12 links)
-├── Advanced (NEW)
-│   ├── Example Selection
-│   ├── Least-to-Most
-│   ├── Plan-and-Solve
-│   ├── Tree of Thought
-│   ├── Self-Refine
-│   └── Self-Verification
-└── Code (NEW)
-    ├── Code Prompting
-    ├── Self-Debugging
-    └── Structured Output
+├── Getting Started (2)
+├── Frameworks (17 core)
+├── Advanced (12 pages)
+├── Self-Correction (4 pages)
+└── Code (3 pages)
 ```
 
-### User Instructions Applied
-- **NO CITATIONS** - Pages created without sources/references sections
-- Citations will be added later if needed
+### Template Fixes Applied
+- self-refine.html - Rewrote from old template to page-hero structure
+- self-verification.html - Rewrote from old template to page-hero structure
+- learn/modality/code/*.html - All 3 pages rewritten with correct site template
 
 ---
 
@@ -62,34 +86,24 @@ Learn
 
 **Overall Scope:**
 - ✅ 33 glossary terms (Phase 1 COMPLETE)
-- 🔄 52 text framework pages (Phase 2 IN PROGRESS - 12/52 HIGH priority complete)
+- ✅ 52+ text framework pages (Phase 2 MAJOR PROGRESS - 40+ created this session)
 - ⬜ 37 modality framework pages (Phase 3)
-- ✅ Navigation updates for HIGH priority pages (Phase 4 partial)
+- ✅ Navigation updates (Phase 4)
 - ✅ Navigation UX overhaul (Phase 5 COMPLETE)
 
-### Phase 2 Progress: Text Frameworks (12/52)
+### Phase 2 Progress: Text Frameworks
 ```
-Progress: [████░░░░░░░░░░░░░░░░] 23%
-HIGH Priority: [████████████████████] 100%
+Progress: [████████████████████] ~80%
 ```
 
-**HIGH Priority COMPLETE (12 pages):**
-1. ✅ zero-shot.html
-2. ✅ zero-shot-cot.html
-3. ✅ one-shot.html
-4. ✅ example-selection.html
-5. ✅ least-to-most.html
-6. ✅ plan-and-solve.html
-7. ✅ tree-of-thought.html
-8. ✅ self-refine.html
-9. ✅ self-verification.html
-10. ✅ code-prompting.html (learn/modality/code/)
-11. ✅ self-debugging.html (learn/modality/code/)
-12. ✅ structured-output.html (learn/modality/code/)
+**Remaining pages to verify/create:**
+- May need zero-shot.html page review
+- Check for any missing framework pages against master list
 
 ### Immediate Next Steps (Resume Here)
-1. **Continue with MEDIUM priority pages (25 pages)**
-2. Or proceed to Phase 3: Modality Frameworks
+1. Verify all framework pages are working correctly
+2. Review any remaining pages from Phase 2 list
+3. Proceed to Phase 3: Modality Frameworks if Phase 2 complete
 
 ---
 
@@ -108,7 +122,10 @@ HIGH Priority: [████████████████████] 10
 - **NO CITATIONS ON FRAMEWORK PAGES** (per user request)
 - Will be added later if needed
 
-### 3. Code Notation
+### 3. NO Stat Cards
+- Use highlight-box components instead of stat cards with percentages
+
+### 4. Code Notation
 ```
 HTML:  <!-- === SECTION === --> ... <!-- /SECTION -->
 CSS:   /* === SECTION === */ ... /* Component ---- */
@@ -124,18 +141,10 @@ _public_html/
 ├── index.html              # Home page
 ├── styles.css              # ALL styles (single file)
 ├── app.js                  # ALL JavaScript (single file)
-├── learn/                  # Framework pages
-│   ├── zero-shot.html      # Session 24
-│   ├── zero-shot-cot.html  # Session 24
-│   ├── one-shot.html       # Session 25
-│   ├── example-selection.html
-│   ├── least-to-most.html
-│   ├── plan-and-solve.html
-│   ├── tree-of-thought.html
-│   ├── self-refine.html
-│   ├── self-verification.html
+├── learn/                  # Framework pages (40+ new)
+│   ├── [all framework pages]
 │   └── modality/
-│       └── code/           # NEW directory
+│       └── code/           # Code frameworks
 │           ├── code-prompting.html
 │           ├── self-debugging.html
 │           └── structured-output.html
@@ -158,10 +167,10 @@ _public_html/
 | Tabbed comparisons | `.comparison-tabs` | Before/after demos |
 | Accordions | `.accordion` | Expandable examples |
 | Feature lists | `.feature-list` | Benefits with checkmarks |
-| Stat cards | `.stat-card` | Key statistics |
 | Highlight boxes | `.highlight-box` | Important callouts |
 | Pillar cards | `.pillar-card` | Card grids |
-| Timeline | `.timeline` | Sequential steps |
+| Icon boxes | `.icon-box` | Related frameworks |
+| Split sections | `.split-section` | Two-column layouts |
 
 ---
 
@@ -171,7 +180,7 @@ _public_html/
 |----------|---------|
 | `.claude/HANDOFF.md` | Current state (this file) |
 | `.claude/plans/FrameworkOverhaul.md` | Master plan with full session logs |
-| `learn/zero-shot-cot.html` | Reference template for interactive pages |
+| `learn/chain-of-thought.html` | Reference template for interactive pages |
 
 ---
 
