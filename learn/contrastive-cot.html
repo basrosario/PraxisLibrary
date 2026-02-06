@@ -132,6 +132,7 @@
     </header>
 
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -146,58 +147,266 @@
                     <span class="hero-badge__text">Thought Generation</span>
                 </div>
                 <h1 class="page-title fade-in">Contrastive Chain-of-Thought</h1>
-                <p class="page-subtitle fade-in">Learn what's right by seeing what's wrong.</p>
+                <p class="page-subtitle fade-in">Don't just show AI the right answer — show it the wrong one too. Contrastive CoT uses both correct and incorrect reasoning examples to sharpen the model's ability to avoid common mistakes.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
-        <section class="section section-alt">
-            <div class="container">
-                <div class="split-section">
-                    <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Good vs Bad Reasoning</h2>
-                        <p class="section-intro">Contrastive CoT provides examples of both correct AND incorrect reasoning chains. By showing common mistakes alongside proper solutions, the model learns to avoid reasoning pitfalls and understands why certain approaches fail.</p>
-                        <div class="highlight-box highlight-box--info">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Power of Contrast</span>
-                                <p>Showing only correct examples leaves ambiguity about what to avoid. Explicit counterexamples clarify boundaries and common errors.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Structure</span>
-                                <p>Include "Correct reasoning: ..." followed by "Incorrect reasoning (common mistake): ..." in your examples.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        <!-- === HISTORICAL CONTEXT === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Example</span>
-                    <h2 class="section-title">Contrastive CoT in Action</h2>
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> Contrastive Chain-of-Thought was published in 2023 by Chia, Chen, Tuan, Poria, and Bing. The technique added a critical missing piece to standard Chain-of-Thought prompting: negative reasoning examples. Where standard CoT demonstrates only the correct path to an answer, Contrastive CoT pairs each correct reasoning chain with an explicitly incorrect one, annotating where and why the bad reasoning fails. This dual-demonstration approach helps models build clearer internal boundaries between valid and invalid reasoning patterns.</p>
+                        <p><strong>Modern LLM Status:</strong> The core insight — that negative examples improve reasoning — remains valuable and practically useful. Modern LLMs like Claude and GPT-4 are stronger reasoners out of the box, but they still benefit measurably from explicit counterexamples, especially in domains with well-known error patterns such as percentage calculations, logical fallacies, and unit conversions. Contrastive CoT is a practical enhancement over standard few-shot CoT that costs little to implement and consistently reduces errors in targeted domains.</p>
+                    </div>
                 </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Mistakes Are Teachers Too</h2>
+                        <p class="split-section__text">Standard Chain-of-Thought prompting shows the model correct reasoning examples and hopes it figures out what NOT to do on its own. This works reasonably well, but it leaves a gap: the model has no explicit understanding of common failure modes. It knows what right looks like, but not what wrong looks like.</p>
+                        <p class="split-section__text"><strong>Contrastive CoT closes this gap.</strong> By providing both correct and incorrect reasoning chains side by side — with clear annotations explaining WHERE the incorrect chain goes wrong and WHY — the model develops a much sharper sense of the boundary between valid and invalid reasoning.</p>
+                        <p class="split-section__text">Think of it like a math teacher who doesn't just show the correct solution on the board, but also walks through the common mistake students make on every exam. "Here's how to solve it correctly, and here's the error that 60% of students make — notice they confuse the percentage with the absolute value right here."</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">The Contrast Effect</span>
+                                <p>Humans learn faster when shown both positive and negative examples. A medical student learns diagnostic patterns more effectively by studying both correct diagnoses and documented misdiagnoses. The same principle applies to LLMs — explicit error patterns create clearer decision boundaries, making the model less likely to stumble into known pitfalls.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Contrastive CoT Process</h2>
+                <p class="section-subtitle fade-in-up">Four steps from examples to error-aware reasoning</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Identify Common Errors</h3>
+                            <p class="element-timeline__text">Analyze the target domain to find recurring mistakes that people and models consistently make. These could be computational errors, logical fallacies, misapplied rules, or overlooked constraints. The better you understand the failure modes, the more effective your contrastive examples will be.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>"Math domain common errors: confusing percentage with absolute value, forgetting order of operations, misreading word problem quantities, swapping numerator and denominator in ratios."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Craft Correct Examples</h3>
+                            <p class="element-timeline__text">Write clear, correct reasoning chains that demonstrate proper problem-solving with explicit step-by-step logic. Each step should be labeled and justified so the model can see exactly how a correct thinker moves from problem to solution.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>"20% off $50: Step 1 — Convert percentage to decimal: 20% = 0.20. Step 2 — Calculate discount: $50 x 0.20 = $10. Step 3 — Subtract discount: $50 - $10 = $40. Final answer: $40."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Craft Incorrect Examples</h3>
+                            <p class="element-timeline__text">Write deliberately wrong reasoning chains that reproduce the identified common errors. Critically, annotate exactly where and why the reasoning fails. The annotation is what transforms a bad example into a teaching tool.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>"20% off $50: Subtract 20 from 50 = $30. ERROR: Confused percentage (20%) with absolute dollar value ($20). The correct approach requires multiplying by 0.20 to find the actual discount amount."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Combine in Prompt</h3>
+                            <p class="element-timeline__text">Present both correct and incorrect examples together in the prompt, clearly labeled, so the model sees the full contrast before attempting new problems. The juxtaposition is the key — seeing right and wrong side by side creates stronger pattern recognition than either alone.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>"Prompt structure: 'CORRECT approach: [full reasoning chain] ... COMMON MISTAKE to avoid: [wrong chain with error annotation] ... Now solve this new problem using correct reasoning:'</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Standard CoT vs Contrastive CoT</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Standard CoT</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt Approach</span>
+                                <p>"Here's how to solve a percentage problem: 30% of $80 means $80 x 0.30 = $24. So the discount is $24 and the final price is $56. Now solve: What is 15% off $120?"</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">What the Model Sees</span>
+                                <p>Only a correct example. The model must infer on its own what mistakes to avoid. If it has a tendency toward a common error pattern, nothing in the prompt warns it away.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Model might still make common errors it hasn't been warned about</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M8 12l3 3 5-5"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Contrastive CoT</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt Approach</span>
+                                <p>"CORRECT: 30% of $80 = $80 x 0.30 = $24 discount, final price $56. COMMON MISTAKE: 30% of $80 = $80 - 30 = $50 (ERROR: treated percentage as dollars). Now solve: What is 15% off $120?"</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">What the Model Sees</span>
+                                <p>Both the correct reasoning and the specific mistake to avoid, with a clear annotation of where and why the error occurs. The model now has explicit anti-patterns to steer away from.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Model explicitly learns what to avoid — errors drop significantly</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Contrastive CoT in Action</h2>
+                <p class="section-subtitle fade-in-up">Real-world scenarios showing correct vs incorrect reasoning pairs</p>
 
                 <div class="accordion fade-in-up" id="contrastive-accordion">
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Math Problem with Contrasts</span>
+                            <span class="accordion-title">Mathematical Reasoning</span>
                             <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </button>
                         <div class="accordion-content">
                             <div class="technique-demo">
                                 <div class="technique-demo__prompt">
-                                    <span class="technique-demo__tag">Correct Reasoning</span>
-                                    <p>"If a store has a 20% off sale and an item costs $50, the discount is $50 × 0.20 = $10, so the final price is $40."</p>
+                                    <span class="technique-demo__tag">Correct Reasoning Chain</span>
+                                    <p><strong>Problem:</strong> A jacket originally costs $80. The store offers 25% off, then an additional 10% off the sale price. What is the final price?</p>
+                                    <p><strong>Step 1:</strong> Calculate the first discount: $80 x 0.25 = $20.<br>
+                                    <strong>Step 2:</strong> Subtract first discount: $80 - $20 = $60.<br>
+                                    <strong>Step 3:</strong> Calculate second discount on the NEW price: $60 x 0.10 = $6.<br>
+                                    <strong>Step 4:</strong> Subtract second discount: $60 - $6 = $54.<br>
+                                    <strong>Final answer:</strong> $54.</p>
                                 </div>
                                 <div class="technique-demo__response">
-                                    <span class="technique-demo__tag">Incorrect Reasoning (Common Mistake)</span>
-                                    <p>"If a store has a 20% off sale and an item costs $50, subtract 20 to get $30." ← This confuses percent with absolute value.</p>
+                                    <span class="technique-demo__tag">Incorrect Reasoning Chain (Common Mistake)</span>
+                                    <p><strong>Step 1:</strong> Add the two discounts: 25% + 10% = 35%.<br>
+                                    <strong>Step 2:</strong> Calculate total discount: $80 x 0.35 = $28.<br>
+                                    <strong>Step 3:</strong> Subtract: $80 - $28 = $52.<br>
+                                    <strong>Final answer:</strong> $52.</p>
+                                    <p><strong>ERROR ANNOTATION:</strong> The mistake is adding percentages that apply to different base values. The 25% applies to $80, but the 10% applies to $60 (the already-discounted price). Stacking percentages only works when they share the same base. Sequential discounts must be calculated sequentially.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Logical Reasoning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Correct Reasoning Chain</span>
+                                    <p><strong>Premise 1:</strong> All dogs are mammals.<br>
+                                    <strong>Premise 2:</strong> Rex is a dog.<br>
+                                    <strong>Conclusion:</strong> Rex is a mammal.</p>
+                                    <p><strong>Analysis:</strong> This is valid deductive reasoning (modus ponens). We know the category "dogs" is a subset of "mammals," and Rex belongs to "dogs," so Rex must also belong to "mammals." The logic is airtight.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Incorrect Reasoning Chain (Common Mistake)</span>
+                                    <p><strong>Premise 1:</strong> All dogs are mammals.<br>
+                                    <strong>Premise 2:</strong> Whiskers is a mammal.<br>
+                                    <strong>Conclusion:</strong> Whiskers is a dog.</p>
+                                    <p><strong>ERROR ANNOTATION:</strong> This is the fallacy of "affirming the consequent." Just because all dogs are mammals does NOT mean all mammals are dogs. Whiskers could be a cat, a horse, or a whale — all mammals, none of them dogs. The error is reversing the direction of the subset relationship. Being in the larger category does not guarantee membership in the smaller one.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Reading Comprehension</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Correct Reasoning Chain</span>
+                                    <p><strong>Passage:</strong> "The company's Q3 revenue grew 12% year-over-year, driven primarily by expansion in the European market. However, operating margins declined due to increased hiring costs."</p>
+                                    <p><strong>Question:</strong> Is the company in good financial health?</p>
+                                    <p><strong>Analysis:</strong> The picture is mixed. Revenue growth of 12% is positive and shows demand is increasing. However, declining operating margins mean that costs are growing faster than revenue. The company is growing its top line but needs to manage expenses. A balanced assessment would be: growing but facing profitability pressure.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Incorrect Reasoning Chain (Common Mistake)</span>
+                                    <p><strong>Analysis:</strong> Revenue grew 12%, so the company is doing great financially. Growth means health.</p>
+                                    <p><strong>ERROR ANNOTATION:</strong> This is the over-generalization fallacy — focusing on one positive data point while ignoring contradictory evidence in the same passage. The passage explicitly states that operating margins declined. Revenue growth alone does not equal financial health; profitability, margins, and cost management are equally important. A correct reading must weigh ALL information presented, not cherry-pick the favorable parts.</p>
                                 </div>
                             </div>
                         </div>
@@ -205,37 +414,301 @@
                 </div>
             </div>
         </section>
+        <!-- /EXAMPLES IN ACTION -->
 
+        <!-- === WHEN TO USE === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="chain-of-thought.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Chain-of-Thought</h3>
-                            <p class="icon-box__content">Standard step-by-step reasoning.</p>
-                        </div>
-                    </a>
-                    <a href="few-shot-learning.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Few-Shot Learning</h3>
-                            <p class="icon-box__content">Learning from examples.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+                <h2 class="section-title fade-in-up">When to Use Contrastive CoT</h2>
+                <p class="section-subtitle fade-in-up">Best for domains with identifiable, recurring reasoning errors</p>
 
-        <section class="section">
-            <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try Contrastive CoT</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Error-Prone Domains</strong>
+                                    <p>Math, logic, and analytical tasks where specific mistakes recur consistently across both human and AI reasoning.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Training and Education</strong>
+                                    <p>Building prompts that teach not just correct solutions but common pitfalls — ideal for educational AI applications.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Quality-Critical Tasks</strong>
+                                    <p>When even small reasoning errors have outsized impact — financial calculations, compliance analysis, safety assessments.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Known Error Patterns</strong>
+                                    <p>When you can identify and document the specific mistakes to avoid — the technique is only as good as your error catalogue.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Open-Ended Creativity</strong>
+                                    <p>Creative writing, brainstorming, and generative tasks where there is no objectively "wrong" reasoning path to contrast against.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Factual Queries</strong>
+                                    <p>Direct lookups and retrieval tasks that don't involve reasoning chains — the model either knows the fact or it doesn't.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Unknown Error Patterns</strong>
+                                    <p>If you can't identify what specific mistakes to demonstrate, standard CoT may suffice. Vague or generic "bad examples" add noise, not clarity.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Contrastive CoT delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Standardized Testing</h3>
+                        <p class="use-case-showcase__desc">Improve accuracy on SAT, GRE, and GMAT-style math by showing common trap answers alongside correct solution paths.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="4" y="4" width="16" height="16" rx="2"/>
+                                <path d="M9 9h6M9 13h6M9 17h4"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Analysis</h3>
+                        <p class="use-case-showcase__desc">Avoid common calculation errors in compound interest, tax rates, and margin computations by contrasting correct and incorrect formulas.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Reasoning</h3>
+                        <p class="use-case-showcase__desc">Show diagnostic pitfalls — like anchoring bias or base rate neglect — alongside correct differential diagnosis patterns.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Legal Analysis</h3>
+                        <p class="use-case-showcase__desc">Demonstrate correct and incorrect applications of legal precedent, showing how misapplied case law leads to faulty conclusions.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Code Review</h3>
+                        <p class="use-case-showcase__desc">Show both correct implementations and common anti-patterns with explanations of why the anti-pattern fails or degrades performance.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                                <polyline points="2 17 12 22 22 17"/>
+                                <polyline points="2 12 12 17 22 12"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Scientific Reasoning</h3>
+                        <p class="use-case-showcase__desc">Contrast correct experimental design with common confounding variable errors and correlation-causation mix-ups.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Contrastive CoT Fits</h2>
+                <p class="section-subtitle fade-in-up">From basic examples to error-aware reasoning</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Few-Shot Learning</span>
+                        <span class="era-marker__title">Example-Based</span>
+                        <span class="era-marker__desc">Learning from demonstrations</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Correct Examples</span>
+                        <span class="era-marker__desc">Step-by-step reasoning</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Contrastive CoT</span>
+                        <span class="era-marker__title">Dual Examples</span>
+                        <span class="era-marker__desc">Correct + incorrect reasoning</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Consistency</span>
+                        <span class="era-marker__title">Path Sampling</span>
+                        <span class="era-marker__desc">Multiple reasoning paths</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Stack Them</div>
+                    <p>Use Contrastive CoT to teach the model what to avoid, then Self-Consistency to sample multiple reasoning paths. The model avoids known pitfalls across all sampled chains, combining error awareness with path diversity for maximum reasoning accuracy.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary reasoning techniques</p>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+                            <path d="M21 3v9h-9"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">Standard correct-only reasoning demonstrations — the baseline that Contrastive CoT enhances with negative examples.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="few-shot-learning.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Technique</span>
+                        <span class="evolution-callout__title">Few-Shot Learning</span>
+                        <span class="evolution-callout__desc">Provide examples for the model to learn from — Contrastive CoT extends this to include what NOT to do.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Enhancement</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">Sample multiple reasoning paths and vote — combines well with contrastive examples to avoid repeated errors.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Sharpen Your Reasoning</h2>
+                        <p class="cta-corporate__text">Build Contrastive CoT prompts that teach AI what to avoid, or explore more reasoning frameworks across the Praxis Library.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
     </main>
 
     <footer class="footer">
@@ -290,6 +763,83 @@
         </div>
     </div>
 </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
 
     <script src="../app.js" defer></script>
 </body>

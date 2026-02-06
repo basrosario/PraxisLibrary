@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Structured Chain-of-Thought: Enforce specific formats and templates for reasoning to improve consistency.">
+    <meta name="description" content="Structured Chain-of-Thought: Enforce specific reasoning templates and formats for consistent, verifiable AI outputs.">
     <title>Structured Chain-of-Thought - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
@@ -132,6 +132,7 @@
     </header>
 
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -146,95 +147,528 @@
                     <span class="hero-badge__text">Structured Reasoning</span>
                 </div>
                 <h1 class="page-title fade-in">Structured Chain-of-Thought</h1>
-                <p class="page-subtitle fade-in">Template-guided reasoning for consistent outputs.</p>
+                <p class="page-subtitle fade-in">Free-form reasoning is unpredictable. Structured CoT channels AI thinking through explicit templates — ensuring every reasoning step follows a consistent, verifiable format.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
-        <section class="section section-alt">
-            <div class="container">
-                <div class="split-section">
-                    <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Templated Reasoning</h2>
-                        <p class="section-intro">Structured CoT provides explicit templates or formats that the model must follow when reasoning. This enforces consistency, makes outputs more predictable, and ensures all required reasoning steps are included.</p>
-                        <div class="highlight-box highlight-box--info">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Why Structure Helps</span>
-                                <p>Templates prevent the model from skipping steps, ensure consistent output format, and make it easier to parse and validate reasoning.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Example Template</span>
-                                <p>Given: [facts]<br>
-                                Goal: [objective]<br>
-                                Steps: [numbered list]<br>
-                                Answer: [result]</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        <!-- === HISTORICAL CONTEXT === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Templates</span>
-                    <h2 class="section-title">Common Structures</h2>
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> Structured Chain-of-Thought (SCoT) was published in 2023 by Li et al. While standard Chain-of-Thought prompting allowed models to reason freely before answering, SCoT introduced the critical addition of structural templates — predefined formats like "Given/Find/Steps/Answer" or "Hypothesis/Evidence/Conclusion" that the model must follow. This transformed reasoning from an open-ended stream of consciousness into a disciplined, repeatable process with clear checkpoints at each stage.</p>
+                        <p><strong>Modern LLM Status:</strong> Structured reasoning templates are now <strong>standard practice</strong> in production AI systems. System prompts routinely specify output formats and reasoning templates. Modern LLMs like Claude, GPT-4, and Gemini respond well to structural constraints and produce more consistent, parseable outputs when given templates. Understanding SCoT helps practitioners design effective reasoning templates that yield reliable, programmatically processable results.</p>
+                    </div>
                 </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Give Reasoning a Blueprint</h2>
+                        <p class="split-section__text">Free-form Chain-of-Thought lets the model reason however it wants. Sometimes it skips critical steps. Sometimes it goes in circles, revisiting the same point three different ways. Sometimes it produces outputs in wildly different formats, making it impossible to parse programmatically.</p>
+                        <p class="split-section__text"><strong>Structured CoT solves this by providing explicit templates the model must fill in.</strong> Instead of "think step by step," you tell the model exactly what each step should contain and what format to use. The model's creative energy goes into filling the template with correct reasoning rather than inventing its own structure.</p>
+                        <p class="split-section__text">Think of it like giving a builder blueprints instead of saying "build something." The creativity goes into the craftsmanship, not into deciding whether to start with the roof or the foundation.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Structure Beats Freedom</span>
+                                <p>Unconstrained reasoning varies wildly in quality. One run might be brilliant and thorough; the next might skip half the logic. Templates guarantee three things that free-form reasoning cannot:</p>
+                                <p><strong>Completeness</strong> — No steps get skipped because the template requires each section to be filled.</p>
+                                <p><strong>Consistency</strong> — Every output follows the same format, whether it is the first query or the thousandth.</p>
+                                <p><strong>Parseability</strong> — Outputs can be programmatically processed because they follow predictable structures.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Structured CoT Process</h2>
+                <p class="section-subtitle fade-in-up">Four steps from template to structured reasoning</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define the Template</h3>
+                            <p class="element-timeline__text">Choose or create a reasoning template appropriate for the task. Different problem types benefit from different structures: problem-analysis-solution for open-ended challenges, hypothesis-evidence-conclusion for analytical tasks, or given-find-steps-answer for mathematical and technical problems.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>"Template: 'Given: [state known facts]. Find: [state the question]. Steps: [numbered reasoning]. Answer: [final result].'"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Demonstrate the Format</h3>
+                            <p class="element-timeline__text">Provide one or more examples showing the template filled in correctly. This establishes the expected structure, the level of detail for each section, and the tone of the reasoning. The model learns not just the format but the depth expected in each field.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>"Given: A tank holds 500 gallons and drains at 20 gal/hr. Find: Time to empty. Steps: 1) Total = 500 gal. 2) Rate = 20 gal/hr. 3) Time = 500/20 = 25 hours. Answer: 25 hours."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Apply to New Problems</h3>
+                            <p class="element-timeline__text">Present the new question and instruct the model to follow the exact template format when reasoning. The model fills in each section with content relevant to the new problem while maintaining the structural framework you established.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>"Using the format above, solve: A pool holds 12,000 gallons and fills at 150 gal/hr."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Validate Structure</h3>
+                            <p class="element-timeline__text">Check the model's output against the template. Missing sections indicate reasoning gaps that might lead to errors. Extra sections may indicate over-elaboration. Structural validation is a quick sanity check that catches problems before content review.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>"Output check: Has 'Given'? Yes. Has 'Find'? Yes. Has numbered 'Steps'? Yes. Has 'Answer'? Yes. Structure valid."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === COMMON TEMPLATES === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Common Reasoning Templates</h2>
+                <p class="section-subtitle fade-in-up">Three proven structures for different task types</p>
 
                 <div class="pillar-grid pillar-grid--3 fade-in-up">
                     <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Problem → Analysis → Solution</h3>
-                        <p class="pillar-card__text">State problem, analyze components, then derive solution.</p>
+                        <h3 class="pillar-card__title">Problem &rarr; Analysis &rarr; Solution</h3>
+                        <p class="pillar-card__text">State the problem clearly, analyze its components and constraints, then derive the solution. This template works by forcing the model to fully understand the problem before jumping to answers, preventing the common failure mode of solving the wrong question.</p>
+                        <span class="pillar-card__tag">Best for: open-ended problem solving, troubleshooting, decision-making</span>
                     </div>
                     <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Hypothesis → Evidence → Conclusion</h3>
-                        <p class="pillar-card__text">Scientific reasoning format for analytical tasks.</p>
+                        <h3 class="pillar-card__title">Hypothesis &rarr; Evidence &rarr; Conclusion</h3>
+                        <p class="pillar-card__text">Propose an answer, gather supporting and contradicting evidence, then conclude based on the weight of evidence. This scientific reasoning format prevents confirmation bias by requiring the model to actively seek contradictory information.</p>
+                        <span class="pillar-card__tag">Best for: scientific reasoning, diagnostic tasks, research analysis</span>
                     </div>
                     <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Numbered Steps</h3>
-                        <p class="pillar-card__text">Explicit step-by-step with numbers enforcing sequence.</p>
+                        <h3 class="pillar-card__title">Given &rarr; Find &rarr; Steps &rarr; Answer</h3>
+                        <p class="pillar-card__text">List known facts, state what you need to find, show numbered steps, then give the final answer. This template excels at mathematical and technical problems because it separates information extraction from computation and makes each step auditable.</p>
+                        <span class="pillar-card__tag">Best for: mathematical problems, technical calculations, structured Q&amp;A</span>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /COMMON TEMPLATES -->
 
-        <section class="section section-alt">
-            <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="chain-of-thought.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Chain-of-Thought</h3>
-                            <p class="icon-box__content">Free-form reasoning.</p>
-                        </div>
-                    </a>
-                    <a href="tab-cot.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Tab-CoT</h3>
-                            <p class="icon-box__content">Tabular structure.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
+        <!-- === EXAMPLES IN ACTION === -->
         <section class="section">
             <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try Structured CoT</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <h2 class="section-title fade-in-up">Structured CoT in Action</h2>
+                <p class="section-subtitle fade-in-up">See how templates transform free-form reasoning into consistent output</p>
+
+                <div class="accordion fade-in-up" id="scot-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Mathematical Problem Solving</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Free-Form Response</span>
+                                    <p>"A store sells 3 types of shirts. Type A costs $25, Type B costs $40, Type C costs $55. A customer buys 4 of Type A and 2 of Type C. Let me think... so the shirts cost different amounts and they bought some of each. The Type A shirts are $25 each so that's $100 for 4 of them. And Type C is $55 each so 2 of those is $110. Total is $210."</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Structured CoT Response</span>
+                                    <p><strong>Given:</strong> Type A = $25/shirt, Type B = $40/shirt, Type C = $55/shirt. Customer purchases: 4 x Type A, 2 x Type C.<br><br>
+                                    <strong>Find:</strong> Total cost of the purchase.<br><br>
+                                    <strong>Steps:</strong><br>
+                                    1) Cost of Type A shirts: 4 x $25 = $100<br>
+                                    2) Cost of Type B shirts: 0 x $40 = $0 (none purchased)<br>
+                                    3) Cost of Type C shirts: 2 x $55 = $110<br>
+                                    4) Total cost: $100 + $0 + $110 = $210<br><br>
+                                    <strong>Answer:</strong> $210<br><br>
+                                    <strong>Why the template helps:</strong> The free-form response skipped Type B entirely without noting it. The template's "Given" section forces the model to list all known information, making the omission of Type B explicit rather than accidental. If the problem had asked about all three types, the free-form version would have silently dropped data.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Diagnostic Reasoning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Scenario</span>
+                                    <p>A production web server is responding slowly. Average response times have increased from 200ms to 3,500ms over the past 24 hours. No code deployments occurred during this period. Apply the Hypothesis/Evidence/Conclusion template.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Structured CoT Response</span>
+                                    <p><strong>Hypothesis 1:</strong> Database connection pool exhaustion is causing slow queries to back up.<br>
+                                    <strong>Supporting Evidence:</strong> No code changes rules out application-level bugs. Connection pool issues cause gradual degradation matching the 24-hour timeline. Database-heavy pages would be disproportionately affected.<br>
+                                    <strong>Contradicting Evidence:</strong> Static assets served from the same server would not be affected by database issues. Need to check if static vs. dynamic page speeds differ.<br><br>
+                                    <strong>Hypothesis 2:</strong> Disk space is filling up, causing swap usage and memory pressure.<br>
+                                    <strong>Supporting Evidence:</strong> Gradual degradation over 24 hours matches disk fill patterns. Affects all request types equally. Common issue when log rotation fails.<br>
+                                    <strong>Contradicting Evidence:</strong> Would typically trigger monitoring alerts if disk thresholds are configured.<br><br>
+                                    <strong>Conclusion:</strong> Both hypotheses are plausible. Recommended diagnostic order: 1) Check disk usage and swap activity first (fastest to verify). 2) Check database connection pool metrics. 3) Review server memory and CPU utilization trends over 24 hours. The gradual onset without code changes points more strongly toward a resource exhaustion issue like Hypothesis 2.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Decision Making</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Scenario</span>
+                                    <p>A mid-size company is deciding whether to migrate their on-premise infrastructure to cloud services. Apply the Problem/Analysis/Solution template.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Structured CoT Response</span>
+                                    <p><strong>Problem:</strong> Current on-premise infrastructure requires dedicated IT staff for maintenance, has fixed capacity that cannot scale during demand spikes, and aging hardware will need replacement within 18 months at significant capital expense.<br><br>
+                                    <strong>Analysis:</strong><br>
+                                    Factors favoring migration: Eliminates upcoming hardware replacement costs ($200K+). Enables elastic scaling for seasonal demand. Reduces on-premise IT maintenance burden. Improves disaster recovery with geographic redundancy.<br>
+                                    Factors against migration: Monthly operational costs replace one-time capital costs. Data transfer and migration risk during transition. Staff retraining required. Potential vendor lock-in. Regulatory compliance requirements may restrict data location.<br>
+                                    Neutral factors: Performance is comparable for most workloads. Security responsibility shifts but does not disappear.<br><br>
+                                    <strong>Solution:</strong> Recommend a phased hybrid migration. Move non-critical workloads to cloud first (3-month pilot). Measure actual costs against projections. Migrate remaining workloads based on pilot results. Retain on-premise capability for compliance-sensitive data until regulatory questions are resolved. This approach reduces risk while capturing most cloud benefits.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Structured CoT</h2>
+                <p class="section-subtitle fade-in-up">Templates add value when consistency and parseability matter</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Production Pipelines</strong>
+                                    <p>When AI output needs to be programmatically parsed and processed downstream. Templates ensure every response has the same extractable fields.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Multi-Step Calculations</strong>
+                                    <p>When every intermediate step needs to be visible and verifiable. Templates prevent the model from jumping to conclusions and hiding its work.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Consistent Reporting</strong>
+                                    <p>When outputs must follow the same format across hundreds of queries. Templates guarantee uniformity whether it is the first report or the five-hundredth.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Team Collaboration</strong>
+                                    <p>When multiple people need to review AI reasoning in a standardized way. Templates create a shared language for evaluating output quality.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative Tasks</strong>
+                                    <p>When rigid structure would constrain imaginative or exploratory thinking. Poetry, brainstorming, and creative writing thrive on freedom.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Queries</strong>
+                                    <p>When the answer is direct and does not benefit from structured reasoning. Asking "What is the capital of France?" does not need a template.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Exploratory Research</strong>
+                                    <p>When the reasoning path is genuinely unknown and cannot be templated in advance. Discovery work needs room to follow unexpected threads.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Structured CoT delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Automated Grading</h3>
+                        <p class="use-case-showcase__desc">Grade student work using consistent rubric-based reasoning templates that evaluate criteria in the same order every time.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Incident Response</h3>
+                        <p class="use-case-showcase__desc">Follow standardized analysis templates for security or system incidents, ensuring no diagnostic step is skipped under pressure.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Triage</h3>
+                        <p class="use-case-showcase__desc">Apply structured assessment templates to patient symptom descriptions, systematically evaluating severity, urgency, and recommended actions.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Auditing</h3>
+                        <p class="use-case-showcase__desc">Use standardized review templates for transaction analysis, ensuring every audit follows the same checklist and produces comparable results.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Code Review</h3>
+                        <p class="use-case-showcase__desc">Apply consistent review templates covering logic, style, security, and performance — ensuring no category is overlooked across reviews.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Research Synthesis</h3>
+                        <p class="use-case-showcase__desc">Summarize papers using structured templates covering objective, methods, findings, and limitations — making cross-paper comparison straightforward.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Structured CoT Fits</h2>
+                <p class="section-subtitle fade-in-up">Structured CoT adds templates to the chain-of-thought reasoning family</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Free-Form</span>
+                        <span class="era-marker__desc">Unstructured reasoning</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Structured CoT</span>
+                        <span class="era-marker__title">Templated</span>
+                        <span class="era-marker__desc">Format-enforced reasoning</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Tab-CoT</span>
+                        <span class="era-marker__title">Tabular</span>
+                        <span class="era-marker__desc">Table-formatted reasoning</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Faithful CoT</span>
+                        <span class="era-marker__title">Verified</span>
+                        <span class="era-marker__desc">Reasoning-answer alignment</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Template Tip</div>
+                    <p>Start with a loose template and tighten it based on where the model goes off-track. Over-constraining too early can prevent the model from exploring useful intermediate reasoning. Watch for patterns in failures — if the model consistently skips a step, add that step explicitly to the template rather than making the entire template more rigid.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore connected reasoning techniques</p>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">Free-form step-by-step reasoning — the unstructured baseline that Structured CoT adds templates to.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="tab-cot.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="3" y1="9" x2="21" y2="9"/>
+                            <line x1="3" y1="15" x2="21" y2="15"/>
+                            <line x1="9" y1="3" x2="9" y2="21"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Variant</span>
+                        <span class="evolution-callout__title">Tab-CoT</span>
+                        <span class="evolution-callout__desc">A specific structural format using tables — columns for step, operation, input, output, and reasoning.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="faithful-cot.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Faithful CoT</span>
+                        <span class="evolution-callout__desc">Ensures reasoning steps genuinely determine the answer — pairs well with structural templates.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Structure Your Reasoning</h2>
+                        <p class="cta-corporate__text">Build template-guided prompts or explore more reasoning frameworks in the Praxis Library.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
     </main>
 
+    <!-- === FOOTER === -->
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -287,6 +721,84 @@
         </div>
     </div>
 </footer>
+    <!-- /FOOTER -->
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
 
     <script src="../app.js" defer></script>
 </body>

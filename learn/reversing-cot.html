@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Reversing Chain-of-Thought: Work backwards from the answer to verify reasoning validity.">
+    <meta name="description" content="Reversing Chain-of-Thought: Verify forward reasoning by working backwards from conclusion to premises, catching errors that forward-only reasoning misses.">
     <title>Reversing Chain-of-Thought - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
@@ -132,6 +132,7 @@
     </header>
 
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -146,61 +147,277 @@
                     <span class="hero-badge__text">Verification</span>
                 </div>
                 <h1 class="page-title fade-in">Reversing Chain-of-Thought</h1>
-                <p class="page-subtitle fade-in">Work backwards to verify forward reasoning.</p>
+                <p class="page-subtitle fade-in">If your reasoning is correct, it should work in reverse. Reversing CoT verifies answers by tracing logic backwards from conclusion to premises — catching errors that forward-only reasoning misses.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
-        <section class="section section-alt">
-            <div class="container">
-                <div class="split-section">
-                    <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Backward Verification</h2>
-                        <p class="section-intro">Reversing CoT verifies reasoning by working backwards from the conclusion to the premises. If an answer is correct, you should be able to trace back through the logic and arrive at the original conditions. Inconsistencies suggest errors.</p>
-                        <div class="highlight-box highlight-box--info">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Principle</span>
-                                <p>Valid reasoning should be reversible. If A leads to B leads to C, then starting from C should trace back to A.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Process</span>
-                                <p>1) Solve forward to get answer. 2) Start from answer, work backward. 3) Check if you reach original problem. 4) If mismatch, revise.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        <!-- === HISTORICAL CONTEXT === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Example</span>
-                    <h2 class="section-title">Reversing in Action</h2>
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> Reversing Chain-of-Thought was published in 2023 by Xue et al. The framework applies the mathematical concept of inverse operations to verify reasoning chains. Just as mathematicians verify solutions by working backwards through equations, Reversing CoT takes a completed chain of reasoning and traces it in reverse — from conclusion back to premises — to check whether each logical step holds when examined from the opposite direction.</p>
+                        <p><strong>Modern LLM Status:</strong> The backward-verification approach is a practical and effective <strong>prompt engineering pattern</strong>. Modern LLMs handle "work backwards to check your answer" instructions well, executing reverse reasoning chains with good fidelity. The technique is especially effective for mathematics, algebra, logic puzzles, and any domain where operations have well-defined inverses. Combining forward reasoning with backward verification in a single prompt produces more reliable outputs than forward reasoning alone.</p>
+                    </div>
                 </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
 
-                <div class="accordion fade-in-up" id="reverse-accordion">
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Proof by Reversal</h2>
+                        <p class="split-section__text">When you solve 3x + 5 = 20 and get x = 5, you verify by plugging back in: 3(5) + 5 = 20. That checks out. This is Reversing Chain-of-Thought applied to all reasoning — not just math.</p>
+                        <p class="split-section__text"><strong>If your forward chain says "A leads to B leads to C," work backwards:</strong> does C imply B? Does B imply A? If the reverse chain reconstructs the original starting conditions, the forward reasoning holds. If it doesn't reach the starting conditions, the forward reasoning had an error somewhere — even if it looked plausible going forward.</p>
+                        <p class="split-section__text">Think of it like reading a proof backwards. Every step that was valid going forward must also be valid in reverse. If you hit a gap, that gap was always there — you just couldn't see it from the forward direction.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Reversal Works</span>
+                                <p>Forward reasoning can contain <strong>compensating errors</strong> — two mistakes that cancel each other out, producing a correct-looking answer through flawed logic. It can also contain <strong>reasoning gaps</strong> — unjustified jumps from one step to the next that seem natural going forward.</p>
+                                <p>Reversing forces you to justify each transition independently from the opposite direction. An error that slips past going forward often becomes obvious going backward, because the inverse step doesn't produce the expected intermediate result.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Reversing CoT Process</h2>
+                <p class="section-subtitle fade-in-up">Four steps from forward solution to backward verification</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Solve Forward</h3>
+                            <p class="element-timeline__text">Apply standard chain-of-thought reasoning to arrive at an answer. This is the claim to be verified — the output of your normal reasoning process, produced without any special verification steps.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Problem: "A train travels at 60 mph for 2.5 hours. How far does it go?" Forward reasoning: Distance = speed x time = 60 x 2.5 = 150 miles.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Start from the Answer</h3>
+                            <p class="element-timeline__text">Take the conclusion and work backwards, applying inverse operations at each step. If you multiplied going forward, divide going backward. If you added, subtract. Reconstruct the original conditions from the answer.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Reverse: Start with 150 miles. Divide by time: 150 / 2.5 = 60 mph. Does this match the given speed? Yes — the original speed was 60 mph.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Compare with Original</h3>
+                            <p class="element-timeline__text">Check whether the backward chain reconstructs the original problem conditions exactly. Every value derived by reversal should match the corresponding value in the original problem statement.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Original conditions: 60 mph speed, 2.5 hours duration. Backward-derived: 60 mph from 150 miles and 2.5 hours. All values match — verification complete.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Identify Discrepancies</h3>
+                            <p class="element-timeline__text">If backward reconstruction doesn't match the original conditions, the divergence point reveals exactly where the forward reasoning went wrong. This pinpoints the error rather than just flagging the answer as incorrect.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>If the backward chain yielded 65 mph but the original stated 60 mph, the forward calculation was wrong. Re-examine: was it really 60 x 2.5, or was a different computation performed? The mismatch localizes the error.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Forward-only vs forward-and-reverse verification</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Forward Only</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Problem</span>
+                                <p>"A recipe calls for 2/3 cup of flour, doubled. How much flour?"</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Forward Reasoning</span>
+                                <p>"2/3 doubled = 2/3 + 2/3 = 4/3 cups."</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Verification</span>
+                                <p>No backward check performed. The answer stands without any validation step.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Looks right, but is it? No way to know without checking</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Forward + Reverse</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Problem</span>
+                                <p>"A recipe calls for 2/3 cup of flour, doubled. How much flour?"</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Forward Reasoning</span>
+                                <p>"2/3 doubled = 2/3 + 2/3 = 4/3 cups."</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Reverse Verification</span>
+                                <p>"Start with 4/3. Halve it: 4/3 / 2 = 4/6 = 2/3. Does this match the original amount? Yes: 2/3 cup."</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Backward verification confirms the forward reasoning is correct</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Reversing CoT in Action</h2>
+                <p class="section-subtitle fade-in-up">See backward verification catch what forward reasoning misses</p>
+
+                <div class="accordion fade-in-up" id="reversing-cot-accordion">
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Math Verification</span>
+                            <span class="accordion-title">Algebraic Equation</span>
                             <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </button>
                         <div class="accordion-content">
                             <div class="technique-demo">
                                 <div class="technique-demo__prompt">
-                                    <span class="technique-demo__tag">Forward Solve</span>
-                                    <p>"If x + 5 = 12, then x = 7"</p>
+                                    <span class="technique-demo__tag">Forward Solution (with error)</span>
+                                    <p>Solve: 3(x + 2) - 5 = 16<br><br>
+                                    Step 1: Expand: 3x + 6 - 5 = 16<br>
+                                    Step 2: Simplify (error here): 3x - 1 = 16 (should be 3x + 1 = 16)<br>
+                                    Step 3: Add 1: 3x = 17<br>
+                                    Step 4: Divide by 3: x = 17/3 = 5.67</p>
                                 </div>
                                 <div class="technique-demo__response">
-                                    <span class="technique-demo__tag">Backward Verify</span>
-                                    <p><strong>Start from answer:</strong> x = 7<br><br>
-                                    <strong>Reverse operation:</strong> 7 + 5 = ?<br><br>
-                                    <strong>Check:</strong> 7 + 5 = 12 ✓<br><br>
-                                    <strong>Matches original equation.</strong> Answer verified.</p>
+                                    <span class="technique-demo__tag">Reverse Catches the Error</span>
+                                    <p><strong>Substitute x = 17/3 into original equation:</strong><br><br>
+                                    3(17/3 + 2) - 5 = 3(17/3 + 6/3) - 5 = 3(23/3) - 5 = 23 - 5 = 18<br><br>
+                                    <strong>Expected:</strong> 16<br>
+                                    <strong>Got:</strong> 18<br><br>
+                                    The reverse check fails — 18 does not equal 16. Re-examining Step 2: 6 - 5 = 1, not -1. The sign error is exposed. Correcting: 3x + 1 = 16, so 3x = 15, x = 5. Reverse verify: 3(5 + 2) - 5 = 21 - 5 = 16. Now it matches.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Percentage Problem</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Forward Solution (with error)</span>
+                                    <p>A store buys a jacket for $80 and marks it up by 25%. What is the selling price?<br><br>
+                                    Student's forward reasoning: "I need to find the price where removing 25% gives me $80." So: $80 = price - 0.25 x price = 0.75 x price. Therefore price = $80 / 0.75 = $106.67.<br><br>
+                                    The student confused markup (percentage of cost) with margin (percentage of selling price).</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Reverse Catches the Error</span>
+                                    <p><strong>Reverse from $106.67:</strong> Remove the "25% markup" to recover the original cost.<br><br>
+                                    If markup means 25% of cost: $106.67 - (0.25 x $80) = $106.67 - $20 = $86.67. This does NOT equal $80. Mismatch detected.<br><br>
+                                    <strong>Correct approach:</strong> Markup of 25% means 25% of cost price. Selling price = $80 + (0.25 x $80) = $80 + $20 = $100.<br><br>
+                                    <strong>Reverse verify:</strong> $100 - (0.25 x $80) = $100 - $20 = $80. Matches the original cost. The backward check reveals the student applied the percentage to the wrong base.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Logic Puzzle</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Forward Solution</span>
+                                    <p>Three friends — Alice, Bob, and Carol — sit in seats 1, 2, and 3.<br><br>
+                                    Constraints: (1) Alice doesn't sit in seat 1. (2) Bob sits next to Carol. (3) Carol doesn't sit in seat 3.<br><br>
+                                    Forward reasoning: "Carol can't be in seat 3, so Carol is in seat 1 or 2. Bob must be next to Carol. If Carol is in seat 1, Bob is in seat 2, and Alice is in seat 3."<br><br>
+                                    Proposed solution: Carol = Seat 1, Bob = Seat 2, Alice = Seat 3.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Reverse Verification</span>
+                                    <p><strong>Check each constraint against the proposed solution:</strong><br><br>
+                                    <strong>Constraint 3:</strong> "Carol doesn't sit in seat 3." Carol is in seat 1. Satisfied.<br>
+                                    <strong>Constraint 2:</strong> "Bob sits next to Carol." Bob is in seat 2, Carol in seat 1. Seats 1 and 2 are adjacent. Satisfied.<br>
+                                    <strong>Constraint 1:</strong> "Alice doesn't sit in seat 1." Alice is in seat 3. Satisfied.<br><br>
+                                    All three constraints verified against the solution. If any constraint had failed — say Alice had been placed in seat 1 — the backward check would have immediately identified the violated rule and pinpointed the error.</p>
                                 </div>
                             </div>
                         </div>
@@ -208,37 +425,302 @@
                 </div>
             </div>
         </section>
+        <!-- /EXAMPLES IN ACTION -->
 
+        <!-- === WHEN TO USE === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="chain-of-thought.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Chain-of-Thought</h3>
-                            <p class="icon-box__content">Forward reasoning.</p>
-                        </div>
-                    </a>
-                    <a href="self-verification.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Self-Verification</h3>
-                            <p class="icon-box__content">Answer validation.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+                <h2 class="section-title fade-in-up">When to Use Reversing CoT</h2>
+                <p class="section-subtitle fade-in-up">Best for domains where operations have well-defined inverses</p>
 
-        <section class="section">
-            <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try Reversing CoT</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Mathematical Problems</strong>
+                                    <p>When operations have clear inverses: addition/subtraction, multiplication/division, exponents/roots. Backward computation definitively confirms or refutes the forward answer.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Logic and Puzzles</strong>
+                                    <p>When you can check each constraint against the proposed solution. Working backwards through conditions catches violated rules that were overlooked going forward.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Code Verification</strong>
+                                    <p>When you can run inputs through generated code and verify outputs match expectations. Feed expected outputs back through inverse logic to confirm correctness.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Equation Solving</strong>
+                                    <p>When solutions can be verified by substitution back into the original equation. This is the most classic application of backward verification.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Non-Reversible Reasoning</strong>
+                                    <p>When there's no clear inverse operation. Opinions, creative writing, and subjective judgments can't be meaningfully reversed to verify correctness.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>One-Way Functions</strong>
+                                    <p>When the forward process can't practically be reversed. Hashing, lossy transformations, and many-to-one mappings lack the invertibility that backward verification requires.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Open-Ended Problems</strong>
+                                    <p>When multiple correct answers exist and backward verification is ambiguous. If many paths lead to the same conclusion, reversal doesn't uniquely reconstruct the premises.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where backward verification delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 20h20M5 20V10l7-7 7 7v10"/>
+                                <path d="M9 20v-6h6v6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Engineering Calculations</h3>
+                        <p class="use-case-showcase__desc">Verify structural, electrical, or mechanical computations by reversing formulas. Calculate load capacity forward, then work backward from the result to recover original material properties.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Reconciliation</h3>
+                        <p class="use-case-showcase__desc">Work backwards from totals to verify individual transactions sum correctly. Start from a final balance and reverse each transaction to confirm the opening balance matches records.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                                <polyline points="2 17 12 22 22 17"/>
+                                <polyline points="2 12 12 17 22 12"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Data Transformations</h3>
+                        <p class="use-case-showcase__desc">Verify ETL pipelines by reversing transformations to recover source data. If forward processing is correct, reversing the pipeline should reconstruct the original dataset.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Test Case Validation</h3>
+                        <p class="use-case-showcase__desc">Generate expected outputs forward, then verify inputs backward. Given the expected output of a function, work backwards to confirm the input conditions that would produce it.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Translation Verification</h3>
+                        <p class="use-case-showcase__desc">Translate forward from one language to another, then translate back to check fidelity. Significant divergence between the original and the back-translation signals translation errors.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Scheduling Verification</h3>
+                        <p class="use-case-showcase__desc">Work backwards from deadlines to verify task start dates and dependencies. If the schedule is correct, backward computation from the delivery date should reconstruct all milestone dates.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Reversing CoT Fits</h2>
+                <p class="section-subtitle fade-in-up">Reversing CoT bridges basic reasoning and systematic verification</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Forward Only</span>
+                        <span class="era-marker__desc">Unverified reasoning</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Verification</span>
+                        <span class="era-marker__title">Self-Check</span>
+                        <span class="era-marker__desc">Answer validation</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Reversing CoT</span>
+                        <span class="era-marker__title">Backward Proof</span>
+                        <span class="era-marker__desc">Reverse reconstruction</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Verification</span>
+                        <span class="era-marker__title">Systematic</span>
+                        <span class="era-marker__desc">Planned verification questions</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine Them</div>
+                    <p>Use Reversing CoT for mathematical and logical verification where operations have clear inverses, then Chain-of-Verification for factual claims that can't be reversed. Together they cover both computable and non-computable verification — backward proof for math, systematic questions for facts.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary verification and reasoning techniques</p>
+
+                <a href="self-verification.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Self-Verification</span>
+                        <span class="evolution-callout__desc">Broader answer validation — Reversing CoT is a specific verification strategy using backward reasoning.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">The forward reasoning chains that Reversing CoT validates by working backwards.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="chain-of-verification.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Chain-of-Verification</span>
+                        <span class="evolution-callout__desc">Systematic verification through planned questions — covers factual claims that reversal can't check.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Verify Your Reasoning</h2>
+                        <p class="cta-corporate__text">Build backward-verified prompts or explore more verification frameworks.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
     </main>
 
     <footer class="footer">
@@ -293,6 +775,83 @@
         </div>
     </div>
 </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
 
     <script src="../app.js" defer></script>
 </body>

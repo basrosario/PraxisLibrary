@@ -1,79 +1,87 @@
 # Praxis Project Handoff Document
 
-**Last Updated:** 2026-02-05 (Session 30)
-**Last Commit:** (pending — Track B foundations timeline)
-**Current Phase:** Framework Quality Redesign (Wave 2 next) + AI Foundations Timeline (complete)
+**Last Updated:** 2026-02-06 (Session 31)
+**Last Commit:** 1182d5e - feat: Add framework timeline directories to AI Foundations page
+**Current Phase:** Framework Quality Redesign (Wave 2 complete, Wave 3 next)
 
 ---
 
-## CURRENT SESSION STATUS (Session 30)
+## CURRENT SESSION STATUS (Session 31)
 
 ### Completed This Session
 
-#### 1. Track B: AI Foundations Framework Timeline — COMPLETE
-Added framework directory grids to `foundations/index.html` under Era IV and Era V:
-- **Era IV (2020-2022):** 23 frameworks in two-column grid with relevancy status badges
-  - 5 tagged "Adopted into LLMs" (Few-Shot, Zero-Shot, One-Shot, Role Prompting, Zero-Shot CoT)
-  - 18 tagged "Still active technique" (Chain-of-Thought, Self-Consistency, ReAct, etc.)
-- **Era V (2023-2026):** 38 frameworks in two-column grid with relevancy status badges
-  - All tagged "Still active technique" (Self-Refine, Tree of Thought, CRITIC, CRISP, CRISPE, COSTAR, etc.)
-- **New CSS added to styles.css:** `.era-frameworks`, `.era-frameworks__grid`, `.era-frameworks__item`, `.era-frameworks__link`, `.framework-status` badges (--active green, --adopted blue, --historical gray)
-- Responsive: two columns on desktop, single column on mobile
-- Each framework name links to its learn page
-- Eras I-III correctly have no frameworks (pre-prompting era)
+#### Wave 2: CoT Variants Quality Redesign — COMPLETE (8 pages)
+Redesigned all 8 CoT variant pages from ~290 lines to 800-857 lines using the 13-section template.
+
+| # | File | Before | After | Status |
+|---|------|--------|-------|--------|
+| 1 | `learn/auto-cot.html` | 290 | 855 | ✅ |
+| 2 | `learn/contrastive-cot.html` | 296 | 846 | ✅ |
+| 3 | `learn/structured-cot.html` | 293 | 805 | ✅ |
+| 4 | `learn/faithful-cot.html` | 290 | 853 | ✅ |
+| 5 | `learn/complexity-prompting.html` | 286 | 837 | ✅ |
+| 6 | `learn/tab-cot.html` | 301 | 844 | ✅ |
+| 7 | `learn/reversing-cot.html` | 299 | 857 | ✅ |
+| 8 | `learn/cumulative-reasoning.html` | 290 | 854 | ✅ |
+
+**Each page now has all 13 sections:**
+1. Hero section with badge + breadcrumb
+2. Historical context notice (highlight-box--warning) with framework date + modern LLM relevance
+3. Concept explanation (split-section with highlight boxes)
+4. How It Works (element-timeline with 4-5 numbered steps + examples)
+5. Visual element (comparison-panel or pillar-card grid)
+6. Examples — 3 accordion items with technique-demo prompt/response pairs
+7. When to Use — Perfect For (4 items) / Skip It When (3 items) feature-lists
+8. Use Cases — 6 use-case-showcase items with SVG icons
+9. Framework Positioning (evolution-timeline with 4 era-markers)
+10. Related Frameworks (3 evolution-callout links)
+11. CTA (cta-corporate with neural bg canvas)
+12. Back-to-top button
+13. Accessibility dashboard dialog (full adl-panel)
+
+**Quality verified:**
+- Zero inline styles (`style=""`) across all 8 files
+- Zero inline scripts (`onclick=""`, `onload=""`, etc.)
+- All styles in styles.css, all scripts via app.js defer
+- Historical context notices on all pages
+- No citations, no stat cards, no content badges
+- Proper HTML comment notation throughout
 
 **Files Modified:**
-- `foundations/index.html` — added framework directory grids to Era IV and Era V
-- `styles.css` — added era-frameworks CSS (~80 lines after history-event section)
+- `learn/auto-cot.html` — 290→855 lines
+- `learn/contrastive-cot.html` — 296→846 lines
+- `learn/structured-cot.html` — 293→805 lines
+- `learn/faithful-cot.html` — 290→853 lines
+- `learn/complexity-prompting.html` — 286→837 lines
+- `learn/tab-cot.html` — 301→844 lines
+- `learn/reversing-cot.html` — 299→857 lines
+- `learn/cumulative-reasoning.html` — 290→854 lines
 - `.claude/HANDOFF.md` — this file
-
-### Commits This Session
-```
-(pending)
-```
 
 ---
 
-## NEXT UP: Track A — Framework Quality Redesign
+## NEXT UP: Wave 3 — Decomposition (6 pages)
 
-### Wave 2: CoT Variants (8 pages) — START HERE
 Each page must be redesigned from ~290 lines to 700-1000+ lines using the 13-section template.
 
 **Reference template:** `learn/critic.html` (898 lines, 13 sections)
 
 | # | File | Current Lines | Target |
 |---|------|--------------|--------|
-| 1 | `learn/auto-cot.html` | ~290 | 700-1000+ |
-| 2 | `learn/contrastive-cot.html` | ~290 | 700-1000+ |
-| 3 | `learn/structured-cot.html` | ~290 | 700-1000+ |
-| 4 | `learn/faithful-cot.html` | ~290 | 700-1000+ |
-| 5 | `learn/complexity-prompting.html` | ~290 | 700-1000+ |
-| 6 | `learn/tab-cot.html` | ~290 | 700-1000+ |
-| 7 | `learn/reversing-cot.html` | ~290 | 700-1000+ |
-| 8 | `learn/cumulative-reasoning.html` | ~290 | 700-1000+ |
+| 1 | `learn/decomp.html` | ~290 | 700-1000+ |
+| 2 | `learn/self-ask.html` | ~290 | 700-1000+ |
+| 3 | `learn/step-back.html` | ~290 | 700-1000+ |
+| 4 | `learn/graph-of-thought.html` | ~290 | 700-1000+ |
+| 5 | `learn/program-of-thought.html` | ~290 | 700-1000+ |
+| 6 | `learn/recursion-of-thought.html` | ~290 | 700-1000+ |
 
-**Per-page template (13 sections):**
-1. Hero section with badge
-2. Historical context notice (highlight-box--warning) — framework date + modern relevance
-3. Concept explanation
-4. How It Works (element-timeline with numbered steps)
-5. Visual element (comparison panel or technique demo)
-6. Examples — 3 accordion items with real prompt/response scenarios
-7. When to Use — Perfect For / Skip It When (feature-list)
-8. Use Cases — 6 use-case-showcase items
-9. Framework Positioning (evolution-timeline)
-10. Related Frameworks (evolution-callout)
-11. CTA (cta-corporate with neural bg)
-12. Back-to-top button
-13. Accessibility dashboard dialog
-
-### Remaining Waves After Wave 2
+### Remaining Waves
 
 | Wave | Pages | Status |
 |------|-------|--------|
 | Wave 1 — Self-Correction | 6 pages | ✅ COMPLETE |
-| Wave 2 — CoT Variants | 8 pages | ⬜ START HERE |
-| Wave 3 — Decomposition | 6 pages (decomp, self-ask, step-back, graph-of-thought, program-of-thought, recursion-of-thought) | ⬜ PENDING |
+| Wave 2 — CoT Variants | 8 pages | ✅ COMPLETE |
+| Wave 3 — Decomposition | 6 pages | ⬜ START HERE |
 | Wave 4 — Advanced Reasoning | 7 pages (analogical-reasoning, meta-reasoning, thread-of-thought, memory-of-thought, simtom, max-mutual-info, universal-self-consistency) | ⬜ PENDING |
 | Wave 5 — Example Methods | 7 pages (active-prompting, knn-prompting, vote-k, demo-ensembling, diverse-prompting, dense-prompting, prompt-mining) | ⬜ PENDING |
 | Wave 6 — Style & Emotion | 6 pages (emotion-prompting, style-prompting, s2a, re2, cosp, rar) | ⬜ PENDING |

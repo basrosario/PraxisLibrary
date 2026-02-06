@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Faithful Chain-of-Thought: Ensure reasoning steps actually contribute to and support the final answer.">
+    <meta name="description" content="Faithful Chain-of-Thought: Ground every reasoning step in verifiable logic using symbolic computation to ensure the chain actually determines the answer.">
     <title>Faithful Chain-of-Thought - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
@@ -132,6 +132,7 @@
     </header>
 
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -146,90 +147,575 @@
                     <span class="hero-badge__text">Reasoning Quality</span>
                 </div>
                 <h1 class="page-title fade-in">Faithful Chain-of-Thought</h1>
-                <p class="page-subtitle fade-in">Ensure reasoning truly supports the conclusion.</p>
+                <p class="page-subtitle fade-in">AI reasoning can look right but be wrong. Faithful CoT grounds every reasoning step in verifiable logic — using symbolic computation to ensure the chain actually determines the answer, not just decorates it.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2022</span>
+                        <p><strong>Introduced:</strong> Faithful Chain-of-Thought was published in 2022 by Lyu et al. to address the problem of <strong>unfaithful reasoning</strong> in language models. The researchers observed that models frequently generate plausible-looking reasoning chains that don't actually determine the answer. Instead, the model arrives at the answer through internal shortcuts — pattern matching, memorization, or statistical correlation — and then produces reasoning as a post-hoc rationalization. The chain looks logical, but it's decoration rather than derivation.</p>
+                        <p><strong>Modern LLM Status:</strong> The two-stage approach of combining natural language reasoning with executable code is now a <strong>native capability</strong> of modern LLMs. Claude, GPT-4, and Gemini all support code execution that grounds reasoning in verifiable computation. When you ask these models to "show your work in Python," you're applying the Faithful CoT principle. Understanding this framework helps you design prompts that leverage code execution for mathematical and logical reliability rather than trusting narrative reasoning alone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === CONCEPT EXPLANATION === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Faithful Reasoning</h2>
-                        <p class="section-intro">Faithful CoT addresses the problem of unfaithful reasoning chains—where the stated steps don't actually lead to or support the answer. It ensures each reasoning step is genuinely used in deriving the conclusion, not just post-hoc rationalization.</p>
+                        <span class="split-section__badge">The Core Problem</span>
+                        <h2 class="split-section__title">When Reasoning Is Just Decoration</h2>
+                        <p class="split-section__text">Here is the uncomfortable truth about AI reasoning: a model can produce a perfectly structured chain of thought — numbered steps, clear logic, confident conclusion — and still be completely wrong. Not because the steps contain an obvious error, but because the steps never actually determined the answer in the first place.</p>
+                        <p class="split-section__text">This happens because the model may have already "decided" the answer through pattern matching or memorization, then invented a plausible-looking chain to justify it. The reasoning is <strong>post-hoc rationalization</strong>, not genuine derivation. It looks like math, but it's storytelling.</p>
+                        <p class="split-section__text"><strong>Faithful CoT solves this by requiring two parallel tracks:</strong> natural language reasoning AND symbolic or code-based reasoning. The NL track explains the approach in human terms. The code track executes the actual computation. If the code produces a different answer than the NL chain suggests, the reasoning was unfaithful — the narrative didn't match the math.</p>
+                    </div>
+                    <div class="split-section__visual">
                         <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Problem</span>
-                                <p>Models sometimes generate plausible-looking reasoning that doesn't actually determine the answer. The answer may come from shortcuts while reasoning is decorative.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Faithful Test</span>
-                                <p>If you changed a reasoning step, would the answer change? If not, that step may not be faithfully contributing.</p>
+                                <span class="highlight-box__title">The Faithfulness Test</span>
+                                <p>Ask yourself: <strong>"If I changed one reasoning step, would the answer change?"</strong></p>
+                                <p>If the answer stays the same regardless of what the intermediate steps say, those steps aren't actually contributing to the conclusion — they're decoration. A truly faithful chain is one where every step mechanically contributes to the final result, like lines of code where changing any variable changes the output.</p>
+                                <p>Faithful CoT enforces this by making the computation explicit and executable.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /CONCEPT EXPLANATION -->
 
+        <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Approach</span>
-                    <h2 class="section-title">Ensuring Faithfulness</h2>
-                </div>
+                <h2 class="section-title fade-in-up">The Faithful CoT Process</h2>
+                <p class="section-subtitle fade-in-up">Four steps from problem to verified answer</p>
 
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Symbolic Grounding</h3>
-                        <p class="pillar-card__text">Use formal logic or code to ensure steps mechanically determine outcomes.</p>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Translate to Natural Language</h3>
+                            <p class="element-timeline__text">Break the problem into clear reasoning steps expressed in plain English. Identify what needs to be computed, what values are given, and what operations must be performed. This creates the human-readable explanation of the approach.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Problem: "A store offers 30% off. With an additional 10% member discount applied after, what's the price of a $200 item?" NL reasoning: "First, calculate the sale price by removing 30% from $200. Then apply the 10% member discount to that reduced price. The discounts are sequential, not additive."</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Step Dependencies</h3>
-                        <p class="pillar-card__text">Explicitly require each step to reference and build on previous steps.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Translate to Symbolic/Code</h3>
+                            <p class="element-timeline__text">Convert the reasoning into executable code or formal logic that can be mechanically verified. Each step from the NL track gets a corresponding line of code. This creates the verifiable computation that determines the actual answer.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>price = 200<br>sale_price = price * (1 - 0.30)  # Apply 30% discount<br>final_price = sale_price * (1 - 0.10)  # Apply 10% member discount<br># = 200 * 0.70 * 0.90</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Counterfactual Check</h3>
-                        <p class="pillar-card__text">Verify that changing steps would change the answer appropriately.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Execute and Verify</h3>
+                            <p class="element-timeline__text">Run the code or symbolic representation to get a provably correct answer. Compare this result against what the natural language reasoning predicted. Agreement between the two tracks confirms the reasoning is faithful.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Code output: $126.00. The NL reasoning also yields $126.00 through sequential discount application. Both tracks agree — the reasoning is faithful and the answer is verified.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Detect Unfaithfulness</h3>
+                            <p class="element-timeline__text">If the natural language chain and the symbolic execution disagree, the reasoning is unfaithful. Identify where the NL chain diverged from the computation and revise it to match the verified result. The code is the source of truth.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>If the NL chain concluded "$130" but the code computed "$126," the NL reasoning contained an error — perhaps treating the discounts as additive (40% off = $120) or miscalculating the sequential application. The code reveals the truth: discounts compound, they don't simply add.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /HOW IT WORKS -->
 
+        <!-- === VISUAL COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="chain-of-thought.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Chain-of-Thought</h3>
-                            <p class="icon-box__content">Standard reasoning chains.</p>
-                        </div>
-                    </a>
-                    <a href="program-of-thought.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Program of Thoughts</h3>
-                            <p class="icon-box__content">Code-grounded reasoning.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why grounded reasoning catches what intuition misses</p>
 
-        <section class="section">
-            <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try Faithful CoT</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Standard CoT (Potentially Unfaithful)</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Problem</span>
+                                <p>"A $200 item is 30% off, plus an additional 10% member discount applied after. What's the final price?"</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">NL-Only Reasoning</span>
+                                <p>Step 1: The item is $200. Step 2: There's a 30% discount and a 10% discount. Step 3: Total discount is 30% + 10% = 40%. Step 4: 40% of $200 = $80 off. Step 5: $200 - $80 = $120. The final price is $120.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Reasoning looks right but gets wrong answer — discounts are sequential, not additive</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="16 18 22 12 16 6"/>
+                                    <polyline points="8 6 2 12 8 18"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Faithful CoT (Grounded)</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">NL + Code Reasoning</span>
+                                <p>NL: "Apply 30% off first, then 10% off the reduced price." Code: price = 200; sale = price * 0.70; final = sale * 0.90; print(final)</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Verified Result</span>
+                                <p>Code execution: 200 * 0.70 = $140.00, then $140.00 * 0.90 = $126.00. NL chain matches code output. Both tracks agree on $126.00 — reasoning is faithful and computationally verified.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Code execution catches the error — sequential discounts verified computationally</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /VISUAL COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Faithful CoT in Action</h2>
+                <p class="section-subtitle fade-in-up">See how grounding reasoning in code catches subtle errors</p>
+
+                <div class="accordion fade-in-up" id="faithful-cot-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Multi-Step Word Problem</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>"A car travels at 60 mph for 2.5 hours, then at 45 mph for 90 minutes. What is the average speed for the entire journey?"</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Faithful CoT Process</span>
+                                    <p><strong>NL Reasoning:</strong> "Calculate the distance for each leg, then divide total distance by total time to get average speed."<br><br>
+                                    <strong>Unfaithful Trap:</strong> A model might average the two speeds: (60 + 45) / 2 = 52.5 mph. This looks reasonable but is mathematically wrong — you can't average speeds without weighting by time.<br><br>
+                                    <strong>Code Verification:</strong><br>
+                                    d1 = 60 * 2.5  # = 150 miles<br>
+                                    d2 = 45 * 1.5  # 90 min = 1.5 hrs, = 67.5 miles<br>
+                                    total_distance = 150 + 67.5  # = 217.5 miles<br>
+                                    total_time = 2.5 + 1.5  # = 4.0 hours<br>
+                                    avg_speed = 217.5 / 4.0  # = 54.375 mph<br><br>
+                                    <strong>Result:</strong> The code catches the unit conversion (90 min to 1.5 hours) and computes the correct weighted average of 54.375 mph — not the naive 52.5 mph.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Logical Deduction</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>"Alice, Bob, and Carol each have a different pet: a cat, a dog, and a fish. Alice doesn't have the cat. Bob doesn't have the dog or the fish. Who has which pet?"</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Faithful CoT Process</span>
+                                    <p><strong>NL Reasoning:</strong> "Use the constraints to eliminate possibilities. Bob can't have dog or fish, so Bob has the cat. Alice can't have the cat, and Bob has it, so Alice has either dog or fish. Carol gets the remaining pet."<br><br>
+                                    <strong>Code Verification (Constraint Satisfaction):</strong><br>
+                                    from itertools import permutations<br>
+                                    pets = ['cat', 'dog', 'fish']<br>
+                                    for perm in permutations(pets):<br>
+                                    &nbsp;&nbsp;alice, bob, carol = perm<br>
+                                    &nbsp;&nbsp;if alice != 'cat' and bob != 'dog' and bob != 'fish':<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;print(f"Alice: {alice}, Bob: {bob}, Carol: {carol}")<br><br>
+                                    <strong>Code Output:</strong> Two valid solutions found: Alice: dog, Bob: cat, Carol: fish AND Alice: fish, Bob: cat, Carol: dog.<br><br>
+                                    <strong>Faithfulness Check:</strong> The NL reasoning correctly determined Bob has the cat, but was incomplete — it didn't note there are TWO valid solutions without additional constraints. The code reveals the NL chain's overconfidence in a single answer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Statistical Reasoning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>"A disease affects 1 in 1,000 people. A test for the disease is 99% accurate (both sensitivity and specificity). If you test positive, what's the probability you actually have the disease?"</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Faithful CoT Process</span>
+                                    <p><strong>Unfaithful NL Reasoning:</strong> "The test is 99% accurate, so if I test positive, there's a 99% chance I have the disease." This is the classic base rate neglect — intuitive but completely wrong.<br><br>
+                                    <strong>Code Verification (Bayes' Theorem):</strong><br>
+                                    prevalence = 1/1000  # 0.001<br>
+                                    sensitivity = 0.99<br>
+                                    specificity = 0.99<br>
+                                    # P(positive) = P(pos|disease)*P(disease) + P(pos|no disease)*P(no disease)<br>
+                                    p_positive = (sensitivity * prevalence) + ((1 - specificity) * (1 - prevalence))<br>
+                                    # Bayes: P(disease|positive) = P(pos|disease) * P(disease) / P(positive)<br>
+                                    p_disease_given_positive = (sensitivity * prevalence) / p_positive<br>
+                                    # Result: approximately 0.0902 = 9.02%<br><br>
+                                    <strong>Result:</strong> The actual probability is only about 9%, not 99%. The code reveals that with a rare disease, even a highly accurate test produces mostly false positives. The NL reasoning committed base rate neglect — a common error that only computational grounding can reliably catch.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Faithful CoT</h2>
+                <p class="section-subtitle fade-in-up">Best for reasoning where correctness can be computationally verified</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Mathematical Reasoning</strong>
+                                    <p>When exact numerical answers matter and computation must be verifiable — financial calculations, engineering formulas, and quantitative analysis.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Logical Deduction</strong>
+                                    <p>When formal logic can verify whether conclusions follow from premises — constraint satisfaction, rule-based determinations, and syllogistic reasoning.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Data Analysis</strong>
+                                    <p>When statistical claims need computational grounding — probability calculations, hypothesis testing, and trend analysis.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Stakes Decisions</strong>
+                                    <p>When incorrect reasoning has real consequences and audit trails matter — medical dosing, legal compliance, and safety-critical systems.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Subjective Reasoning</strong>
+                                    <p>When there's no "correct" answer to compute — opinions, preferences, creative work, or aesthetic judgments can't be verified by code.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Non-Computational Tasks</strong>
+                                    <p>When the reasoning can't meaningfully be translated to code or logic — summarization, emotional analysis, or narrative generation.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Factual Questions</strong>
+                                    <p>When the answer is a direct lookup rather than a computed result — "What's the capital of France?" doesn't benefit from code execution.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Faithful CoT delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="4" y="4" width="16" height="16" rx="2"/>
+                                <path d="M9 9h6M9 13h6M9 17h4"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Modeling</h3>
+                        <p class="use-case-showcase__desc">Verify compound interest, amortization schedules, and projection calculations with executable code rather than trusting narrative math.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Scientific Computing</h3>
+                        <p class="use-case-showcase__desc">Ground physics, chemistry, and engineering calculations in verifiable formulas — unit conversions, force calculations, and reaction stoichiometry.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Legal Compliance</h3>
+                        <p class="use-case-showcase__desc">Translate regulatory rules into formal logic to verify compliance determinations — tax bracket calculations, eligibility checks, and deadline computations.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Dosage</h3>
+                        <p class="use-case-showcase__desc">Ensure drug dosage calculations are computationally verified, not just estimated — weight-based dosing, concentration dilutions, and drip rate formulas.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Engineering Design</h3>
+                        <p class="use-case-showcase__desc">Verify structural, electrical, or thermal calculations with executable simulations — load bearing, circuit analysis, and heat transfer computations.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Academic Assessment</h3>
+                        <p class="use-case-showcase__desc">Check that grading rubric applications are consistent and computationally faithful — weighted scoring, curve calculations, and statistical normalization.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Faithful CoT Fits</h2>
+                <p class="section-subtitle fade-in-up">Faithful CoT bridges narrative reasoning and computational verification</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Natural Language</span>
+                        <span class="era-marker__desc">Free-form reasoning steps</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Faithful CoT</span>
+                        <span class="era-marker__title">NL + Code</span>
+                        <span class="era-marker__desc">Dual-track verified reasoning</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Program of Thought</span>
+                        <span class="era-marker__title">Code-First</span>
+                        <span class="era-marker__desc">Reasoning through programs</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">CRITIC</span>
+                        <span class="era-marker__title">Tool Verification</span>
+                        <span class="era-marker__desc">External tool checking</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine Them</div>
+                    <p>Use Faithful CoT for the initial reasoning to ensure computational accuracy, then CRITIC to verify any factual claims that can't be computed. Together they cover both computational correctness and factual accuracy — the code handles the math, and tool verification handles the facts.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary reasoning verification techniques</p>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+                            <path d="M21 3v9h-9"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">The standard reasoning approach — Faithful CoT adds computational verification to catch when natural language reasoning goes astray.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="program-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Program of Thought</span>
+                        <span class="evolution-callout__desc">Takes the code-grounded approach further by generating complete programs rather than interleaved NL and code tracks.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="critic.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">CRITIC</span>
+                        <span class="evolution-callout__desc">Uses external tools to verify claims — pairs with Faithful CoT's computational verification for comprehensive checking of both math and facts.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Ground Your Reasoning</h2>
+                        <p class="cta-corporate__text">Build computationally faithful prompts or explore more reasoning quality frameworks.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
     </main>
 
     <footer class="footer">
@@ -284,6 +770,83 @@
         </div>
     </div>
 </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
 
     <script src="../app.js" defer></script>
 </body>

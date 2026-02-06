@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tab-CoT: Organize chain-of-thought reasoning in tabular format for clearer structure and easier verification.">
-    <title>Tab-CoT (Tabular CoT) - Praxis</title>
+    <meta name="description" content="Tab-CoT (Tabular Chain-of-Thought): Format AI reasoning into structured tables with explicit columns for step, operation, input, output, and reasoning.">
+    <title>Tab-CoT (Tabular Chain-of-Thought) - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
 </head>
@@ -132,6 +132,7 @@
     </header>
 
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -146,63 +147,264 @@
                     <span class="hero-badge__text">Structured Reasoning</span>
                 </div>
                 <h1 class="page-title fade-in">Tab-CoT (Tabular Chain-of-Thought)</h1>
-                <p class="page-subtitle fade-in">Organize reasoning steps in structured tables.</p>
+                <p class="page-subtitle fade-in">Put reasoning in rows and columns. Tab-CoT forces AI to organize its thinking into structured tables — making every step explicit, auditable, and machine-parseable.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
-        <section class="section section-alt">
-            <div class="container">
-                <div class="split-section">
-                    <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Tabular Structure</h2>
-                        <p class="section-intro">Tab-CoT formats chain-of-thought reasoning as tables with columns for step number, action, reasoning, and intermediate results. This structured format makes reasoning more organized, traceable, and easier to verify.</p>
-                        <div class="highlight-box highlight-box--info">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Benefits</span>
-                                <p>Tables force explicit separation of steps, make it easy to spot errors, and provide clear documentation of the reasoning process.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Common Columns</span>
-                                <p>Step | Operation | Input | Output | Reasoning</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        <!-- === HISTORICAL CONTEXT === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Example</span>
-                    <h2 class="section-title">Tab-CoT in Action</h2>
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> Tab-CoT (Tabular Chain-of-Thought) was published in 2023 by Jin and Lu. It formalized the practice of formatting chain-of-thought reasoning steps as structured table rows, with explicit columns for step number, operation performed, input values, output results, and reasoning notes. This tabular format makes each reasoning step individually auditable, forces the model to produce explicit intermediate results at every stage, and creates machine-parseable reasoning chains that downstream systems can validate programmatically.</p>
+                        <p><strong>Modern LLM Status:</strong> Tabular reasoning formats are <strong>widely supported</strong> by modern LLMs. Markdown tables are a natural output format for models like Claude and GPT-4, making Tab-CoT's core principle immediately practical without special prompting infrastructure. The approach of organizing reasoning into structured tabular format is widely adopted in production prompting for audit trails, debugging, and downstream processing. Tab-CoT remains practical for any scenario requiring step-by-step accountability, parseable output, or systematic error detection in multi-step reasoning chains.</p>
+                    </div>
                 </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
 
-                <div class="accordion fade-in-up" id="tab-accordion">
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Reasoning You Can Audit Row by Row</h2>
+                        <p class="split-section__text">Prose-based reasoning chains are notoriously hard to debug. When the final answer is wrong, which step actually failed? The error hides somewhere in a paragraph of natural language, and isolating it requires careful re-reading and mental bookkeeping.</p>
+                        <p class="split-section__text"><strong>Tab-CoT solves this by putting each reasoning step in its own table row with explicit columns:</strong> what operation was performed, what values were used, and what result was produced. Every intermediate value is visible. Every transition between steps is explicit.</p>
+                        <p class="split-section__text">Think of it like a spreadsheet for thinking. Each cell is individually verifiable, each row builds on the previous one, and if something goes wrong, you can pinpoint the exact row where reasoning broke down.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Tables Beat Paragraphs</span>
+                                <p>Free-form reasoning hides errors in walls of text. A paragraph might say "so that gives us 45, and then with tax..." — but did you catch that the multiplication was wrong? Tables force explicit intermediate values at every step. If step 3 has the wrong output, you know exactly where reasoning broke. No re-reading paragraphs. No mental math to check. Just look at the row.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Tab-CoT Process</h2>
+                <p class="section-subtitle fade-in-up">Four steps from problem to tabular reasoning</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define Table Columns</h3>
+                            <p class="element-timeline__text">Choose columns appropriate for the task at hand. The column structure should capture every meaningful aspect of each reasoning step. Common layouts include: Step | Operation | Input | Result | Notes for general reasoning. For math problems: Step | Expression | Calculation | Value. For logical deductions: Step | Premise | Rule Applied | Conclusion. The key is matching column structure to the type of reasoning required.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>"Columns: Step | What I'm Doing | Values | Result"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Demonstrate with Example</h3>
+                            <p class="element-timeline__text">Show a completed table for a sample problem, establishing the expected format and level of detail. This demonstration teaches the model what belongs in each column and how granular each row should be. The example sets the standard for all subsequent reasoning.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>| 1 | Find total cost | 3 items x $15 | $45 |<br>| 2 | Apply 10% tax | $45 x 0.10 | $4.50 |<br>| 3 | Calculate final | $45 + $4.50 | $49.50 |</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Instruct Table Format</h3>
+                            <p class="element-timeline__text">Tell the model to solve the new problem using the same tabular format. Specify that each row must contain one atomic operation — no combining multiple calculations in a single row. This constraint is what makes each step individually verifiable and keeps the reasoning chain honest.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>"Solve this problem using a table with columns: Step | Operation | Calculation | Result. One operation per row."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Verify Row by Row</h3>
+                            <p class="element-timeline__text">Check each table row independently. Verify that each row's calculation is correct and that each row builds logically on previous rows. The tabular format makes this verification mechanical rather than interpretive — each cell either matches the expected result or it does not.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Row 1: 3 x $15 = $45. Row 2: $45 x 0.10 = $4.50. Row 3: $45 + $4.50 = $49.50. All rows verified.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Prose reasoning vs tabular reasoning</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Prose CoT</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Output</span>
+                                <p>"The store has 3 items at $15 each, so that's $45 total. Then with 10% tax that adds $4.50, making it $49.50 total."</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Structure</span>
+                                <p>All reasoning compressed into one paragraph. Individual calculations are embedded in natural language. Hard to isolate and verify each operation independently.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>If the answer were wrong, which part of this paragraph failed?</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                    <line x1="3" y1="9" x2="21" y2="9"/>
+                                    <line x1="3" y1="15" x2="21" y2="15"/>
+                                    <line x1="9" y1="3" x2="9" y2="21"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Tab-CoT</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Step | Operation | Calculation | Result</span>
+                                <p>1 | Total cost | 3 x $15 | $45<br>2 | Tax amount | $45 x 0.10 | $4.50<br>3 | Final price | $45 + $4.50 | $49.50</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Structure</span>
+                                <p>Each operation in its own row. Input values, calculations, and results are separated into distinct columns. Every step is independently verifiable at a glance.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Every calculation isolated — errors caught at the exact row they occur</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Tab-CoT in Action</h2>
+                <p class="section-subtitle fade-in-up">See tabular reasoning applied to different problem types</p>
+
+                <div class="accordion fade-in-up" id="tabcot-accordion">
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Math Problem Table</span>
+                            <span class="accordion-title">Multi-Step Arithmetic</span>
                             <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </button>
                         <div class="accordion-content">
                             <div class="technique-demo">
                                 <div class="technique-demo__prompt">
                                     <span class="technique-demo__tag">Problem</span>
-                                    <p>"A baker has 48 cupcakes. She sells 1/3, then bakes 12 more. How many does she have?"</p>
+                                    <p>A baker makes 48 cupcakes in the morning, sells 15 before lunch, bakes 24 more in the afternoon, and gives 8 away to neighbors. How many cupcakes does the baker have at the end of the day?</p>
                                 </div>
                                 <div class="technique-demo__response">
-                                    <span class="technique-demo__tag">Tabular Solution</span>
-                                    <p>| Step | Operation | Value | Result |<br>
-                                    |------|-----------|-------|--------|<br>
-                                    | 1 | Start | 48 | 48 |<br>
-                                    | 2 | Sell 1/3 | 48 × 1/3 = 16 sold | 32 |<br>
-                                    | 3 | Bake more | +12 | 44 |<br><br>
-                                    <strong>Answer: 44 cupcakes</strong></p>
+                                    <span class="technique-demo__tag">Tab-CoT Response</span>
+                                    <p><strong>Step | Action | Amount | Running Total</strong><br><br>
+                                    1 | Morning batch baked | +48 | 48<br>
+                                    2 | Sold before lunch | -15 | 33<br>
+                                    3 | Afternoon batch baked | +24 | 57<br>
+                                    4 | Given to neighbors | -8 | 49<br><br>
+                                    <strong>Final Answer:</strong> The baker has 49 cupcakes at the end of the day. Each row tracks one event, and the running total column lets you verify every transition independently. Row 2: 48 - 15 = 33. Row 3: 33 + 24 = 57. Row 4: 57 - 8 = 49.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Unit Conversion Chain</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>Convert 26.2 miles (a marathon distance) into kilometers, then into meters, then into centimeters.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Tab-CoT Response</span>
+                                    <p><strong>Step | Conversion | Formula | Result</strong><br><br>
+                                    1 | Miles to kilometers | 26.2 mi x 1.60934 km/mi | 42.165 km<br>
+                                    2 | Kilometers to meters | 42.165 km x 1,000 m/km | 42,165 m<br>
+                                    3 | Meters to centimeters | 42,165 m x 100 cm/m | 4,216,500 cm<br><br>
+                                    <strong>Final Answer:</strong> 26.2 miles = 42,165 meters = 4,216,500 centimeters. Each conversion factor is explicit in its own row, and each intermediate value can be independently verified against known conversion rates.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Budget Allocation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>A project has a $120,000 budget. Allocate it across four phases: Planning (15%), Development (45%), Testing (25%), and Deployment (15%). Show how much each phase receives and track the remaining budget after each allocation.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Tab-CoT Response</span>
+                                    <p><strong>Phase | Allocation % | Amount | Running Remainder</strong><br><br>
+                                    1 - Planning | 15% | $18,000 | $102,000<br>
+                                    2 - Development | 45% | $54,000 | $48,000<br>
+                                    3 - Testing | 25% | $30,000 | $18,000<br>
+                                    4 - Deployment | 15% | $18,000 | $0<br><br>
+                                    <strong>Verification:</strong> Percentages sum to 100% (15 + 45 + 25 + 15). Amounts sum to $120,000 ($18k + $54k + $30k + $18k). Running remainder reaches exactly $0. All allocations verified — no rounding errors, no missing funds.</p>
                                 </div>
                             </div>
                         </div>
@@ -210,37 +412,301 @@
                 </div>
             </div>
         </section>
+        <!-- /EXAMPLES IN ACTION -->
 
+        <!-- === WHEN TO USE === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="chain-of-thought.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Chain-of-Thought</h3>
-                            <p class="icon-box__content">Standard reasoning format.</p>
-                        </div>
-                    </a>
-                    <a href="modality/code/structured-output.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Structured Output</h3>
-                            <p class="icon-box__content">Formatted response generation.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+                <h2 class="section-title fade-in-up">When to Use Tab-CoT</h2>
+                <p class="section-subtitle fade-in-up">Best for reasoning that requires auditable, step-by-step accountability</p>
 
-        <section class="section">
-            <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try Tab-CoT</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Multi-Step Calculations</strong>
+                                    <p>When tracking intermediate values across many sequential operations where each step depends on the previous result.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Audit Requirements</strong>
+                                    <p>When every reasoning step must be individually verifiable and documented for compliance, review, or quality assurance purposes.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Programmatic Processing</strong>
+                                    <p>When downstream systems need to parse and validate each reasoning step — tables are far easier to parse than free-form prose.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Error Debugging</strong>
+                                    <p>When you need to pinpoint exactly which step in a reasoning chain produced an error, rather than re-reading entire paragraphs.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Qualitative Reasoning</strong>
+                                    <p>When reasoning involves subjective judgments, nuanced arguments, or evaluative criteria that do not fit cleanly into table columns.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Problems</strong>
+                                    <p>When one or two reasoning steps are sufficient and the overhead of defining columns and populating a table is not justified.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative Tasks</strong>
+                                    <p>When structured tables would constrain free-form ideation, brainstorming, or creative writing where rigid format limits output quality.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Tab-CoT delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Calculations</h3>
+                        <p class="use-case-showcase__desc">Track each step of compound interest, amortization, or tax computation in auditable tables where every intermediate value is explicit.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Scientific Experiments</h3>
+                        <p class="use-case-showcase__desc">Document each measurement, conversion, and calculation step in lab-style tables that mirror established scientific methodology.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Project Scheduling</h3>
+                        <p class="use-case-showcase__desc">Break task duration estimates into table rows with dependencies, start dates, end dates, and critical path calculations.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Inventory Management</h3>
+                        <p class="use-case-showcase__desc">Track stock movements row by row: starting inventory, additions from suppliers, deductions from sales, and final count per item.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Grade Computation</h3>
+                        <p class="use-case-showcase__desc">Calculate weighted averages with each assignment, its weight percentage, raw score, and weighted contribution shown in separate rows.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Recipe Scaling</h3>
+                        <p class="use-case-showcase__desc">Scale recipe ingredients with each conversion shown explicitly: original amount, scale factor, and new amount in separate columns.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Tab-CoT Fits</h2>
+                <p class="section-subtitle fade-in-up">Tab-CoT adds tabular structure to the evolution of chain-of-thought reasoning</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Prose Format</span>
+                        <span class="era-marker__desc">Free-form reasoning</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Structured CoT</span>
+                        <span class="era-marker__title">Templates</span>
+                        <span class="era-marker__desc">Format-guided reasoning</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Tab-CoT</span>
+                        <span class="era-marker__title">Tables</span>
+                        <span class="era-marker__desc">Row-by-row auditable reasoning</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Faithful CoT</span>
+                        <span class="era-marker__title">Verified</span>
+                        <span class="era-marker__desc">Code-grounded reasoning</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Format Match</div>
+                    <p>Use Tab-CoT when you need auditable intermediate values. Use Structured CoT for broader template enforcement. Use Faithful CoT when you need computational verification. Each adds a different kind of structure to the reasoning process — Tab-CoT specializes in making every step visible and parseable through tabular organization.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary structured reasoning techniques</p>
+
+                <a href="structured-cot.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="3" y1="9" x2="21" y2="9"/>
+                            <line x1="9" y1="21" x2="9" y2="9"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Structured CoT</span>
+                        <span class="evolution-callout__desc">Broader template enforcement for reasoning — Tab-CoT is a specific structural variant using tables.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">Free-form step-by-step reasoning — Tab-CoT adds tabular organization on top.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="faithful-cot.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Faithful CoT</span>
+                        <span class="evolution-callout__desc">Grounds reasoning in executable code — combine with Tab-CoT for both structural clarity and computational verification.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Tabulate Your Thinking</h2>
+                        <p class="cta-corporate__text">Build tabular reasoning prompts or explore more structured frameworks in the Praxis Library.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
     </main>
 
     <footer class="footer">
@@ -295,6 +761,83 @@
         </div>
     </div>
 </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
 
     <script src="../app.js" defer></script>
 </body>
