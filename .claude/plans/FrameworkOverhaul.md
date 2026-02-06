@@ -3,7 +3,7 @@
 **Project:** Comprehensive expansion of Praxis Library frameworks based on The Prompt Report
 **Source:** arXiv:2406.06608v6 - "The Prompt Report: A Systematic Survey of Prompting Techniques"
 **Start Date:** 2026-02-04
-**Last Updated:** 2026-02-05 (Session 27)
+**Last Updated:** 2026-02-05 (Session 30)
 
 ---
 
@@ -264,29 +264,44 @@ Based on the Facts & Fictions page methodology, ALL factual claims must follow t
 
 ## Visual Consistency
 
-### Page Structure Template
+### Page Structure Template (Updated Session 29)
 ```html
 1. Skip link
 2. Header with navigation
 3. Hero section (page-hero class)
-4. Content badges row
-5. Main content sections
-6. Related frameworks / CTA
-7. Footer
-8. Accessibility dialog
-9. Scripts (deferred)
+4. Historical context notice (highlight-box--warning)
+5. Concept explanation
+6. How It Works (element-timeline)
+7. Visual element (comparison panel / technique demo)
+8. Examples (3 accordions)
+9. When to Use (Perfect For / Skip It When feature lists)
+10. Use Cases (6 use-case-showcase items)
+11. Framework Positioning (evolution-timeline)
+12. Related Frameworks (evolution-callout)
+13. CTA (cta-corporate)
+14. Back-to-top button
+15. Footer
+16. Accessibility dialog
+17. Scripts (deferred)
 ```
 
-### Required Components Per Framework Page
+### Required Components Per Framework Page (Updated Session 29)
 
 | Component | Purpose |
 |-----------|---------|
 | Hero badge | Category indicator (Foundation, Advanced, etc.) |
-| Content badges | AI for Everybody, UD/UDL, Security, Performance, Claude, GitHub |
-| Section eyebrow | Category label above section title |
-| Feature list | Checkmark items for benefits |
-| Example boxes | Prompt examples with before/after |
-| Related frameworks | Navigation to related content |
+| Historical context notice | Framework origin date + modern LLM relevancy status |
+| Element timeline | Step-by-step how-it-works process |
+| Comparison panel | Before/after, side-by-side demonstrations |
+| Accordion examples | 3 expandable prompt/response examples |
+| Feature lists | Perfect For / Skip It When checklists |
+| Use case showcase | 6 application scenarios |
+| Evolution timeline | Framework positioning in prompt engineering history |
+| Evolution callout | Related framework links |
+| CTA corporate | Call to action with neural background |
+| Accessibility dashboard | Dialog with accessibility info |
+
+**Note:** Content badges were removed from all learn pages (Session 29). No citations on framework pages (Session 25).
 
 ### CSS Variables (Use These)
 
@@ -763,6 +778,96 @@ Resources (mega-menu)
 
 # SESSION LOG
 
+## Session 30 (2026-02-05)
+
+**Focus:** Track B — AI Foundations Framework Timeline
+**Status:** COMPLETE (handoff prepared)
+
+**Completed:**
+- [x] **Track B: AI Foundations Framework Timeline**
+  - Added framework directory grids to `foundations/index.html` under Era IV (2020-2022) and Era V (2023-2026)
+  - Era IV: 23 frameworks (Few-Shot, Zero-Shot, One-Shot, Role Prompting, Chain-of-Thought, Self-Consistency, Least-to-Most, Zero-Shot CoT, KNN Prompting, Example Selection, Self-Calibration, Vote-k, Complexity-Based Prompting, Decomposed Prompting, Self-Ask, Auto-CoT, ReAct, DiVeRSe, Program of Thought, Prompt Mining, Self-Verification, Prompt Chaining, Constrained Output)
+  - Era V: 38 frameworks (Faithful CoT, Active Prompting, Self-Refine, Reflexion, Plan-and-Solve, Tree of Thought, CRITIC, Memory of Thought, Tab-CoT, Structured CoT, COSP, Recursion of Thought, Emotion Prompting, Graph of Thought, Cumulative Reasoning, RE2, Chain-of-Verification, Analogical Reasoning, Step-Back, Contrastive CoT, S2A, SimToM, RaR, Thread of Thought, Universal Self-Consistency, Meta-Reasoning, Style Prompting, Dense Prompting, Max Mutual Information, Demo Ensembling, Reversing CoT, Self-Debugging, CRISP, CRISPE, COSTAR, Flipped Interaction, Code Prompting, Structured Output)
+  - Relevancy status badges: "Adopted into LLMs" (blue) for 5 foundational techniques, "Still active technique" (green) for all others
+  - New CSS: `.era-frameworks`, `.era-frameworks__grid`, `.era-frameworks__item`, `.framework-status` badges
+  - Two-column responsive grid (collapses to single column on mobile)
+  - Each framework links to its learn page
+
+**Files Modified:**
+- `foundations/index.html` (added ~230 lines of framework directory HTML)
+- `styles.css` (added ~80 lines of era-frameworks CSS)
+- `.claude/HANDOFF.md`
+- `.claude/plans/FrameworkOverhaul.md` (this file)
+
+**Next Session:** Start Wave 2 — CoT Variants (8 pages: auto-cot, contrastive-cot, structured-cot, faithful-cot, complexity-prompting, tab-cot, reversing-cot, cumulative-reasoning)
+
+---
+
+## Session 29 (2026-02-05)
+
+**Focus:** Wave 1 Quality Redesigns + Glossary Expansion + Homepage Hero + AI Foundations planning
+**Status:** COMPLETE (handoff prepared)
+
+**Completed:**
+- [x] **Wave 1 — Self-Correction Quality Redesigns (6 pages)**
+  - Redesigned to match ReAct (1,044 lines), Flipped Interaction (999 lines), COSTAR (828 lines) quality standard
+  - `learn/critic.html` — 324→898 lines (5-step CRITIC process, comparison panel, 3 accordion examples)
+  - `learn/chain-of-verification.html` — 290→887 lines (4-step CoVe chain, 3 execution modes)
+  - `learn/reflexion.html` — 324→881 lines (3-component architecture, 5-step loop)
+  - `learn/self-calibration.html` — 290→750 lines (confidence pipeline, calibration comparison)
+  - `learn/self-refine.html` — 366→787 lines (draft-critique-revise loop, 3 strategies)
+  - `learn/self-verification.html` — 381→790 lines (3 verification strategies, 4-step pipeline)
+  - Each page has: concept explanation, how-it-works timeline, comparison panel, 3 accordion examples, Perfect For/Skip It When lists, 6 use cases, framework positioning, related frameworks, CTA, back-to-top, accessibility dashboard
+  - Historical context notices added to all 6 pages
+- [x] **Content Badges Removed** from ALL learn pages (20+ files) — badges and badge lightboxes removed
+- [x] **Homepage Hero Update**
+  - Static title: "The Open Standard" / "for AI Literacy" (red gradient)
+  - Removed ~120 lines of typing animation JS
+  - CTAs: "Explore the Library" + "Search the Glossary"
+  - Subtitle: "2,000+ terms, logic frameworks, and cognitive tools"
+- [x] **Glossary Expansion (414 → 2,141 terms)**
+  - Generated 1,850 new terms across 10+ domains via 6 parallel agents
+  - Domains: ML Fundamentals, Neural Networks, NLP, Generative AI, Computer Vision, RL, AI Hardware, Ethics & Safety, History of AI, Prompt Engineering, Evaluation Metrics, Vector Databases
+  - Moved ALL terms from inline HTML to `data/glossary.json` (818 KB)
+  - `pages/glossary.html` reduced from 19,883→686 lines (mobile-friendly shells)
+  - JSON loader rewritten using DOM API (createElement/textContent) — no innerHTML
+  - Search index updated to 2,218 entries
+  - Added `content-visibility: auto` for lazy rendering
+- [x] **Mobile Menu Fix** — AI & ND section reset to normal mobile styling
+- [x] **AI Foundations Framework Timeline** — Research and exploration completed; implementation planned but paused for handoff
+
+**Commits:**
+```
+d0addec feat: Expand glossary to 2,141 terms with JSON lazy loading
+359ba01 feat: Update hero to static "The Open Standard for AI Literacy" + fix mobile menu
+0715973 feat: Redesign Wave 1 (Self-Correction family) + remove content badges
+```
+
+**Files Modified:**
+- 29 learn/*.html files (Wave 1 redesigns + badge removal)
+- index.html (hero update)
+- app.js (removed typing animation, rewrote glossary loader with DOM API)
+- styles.css (mobile menu fix, content-visibility for glossary)
+- pages/glossary.html (expanded to 19K lines, then stripped to 686 lines)
+- data/glossary.json (expanded from 33 to 2,141 terms)
+- data/search-index.json (expanded to 2,218 entries)
+- .claude/HANDOFF.md
+
+---
+
+## Session 28 (2026-02-05)
+
+**Focus:** Wave 1 Quality Redesign planning
+**Status:** COMPLETE (merged into Session 29)
+
+**Completed:**
+- [x] Created 40-page redesign plan (Waves 1-6)
+- [x] Established 13-section per-page template
+- [x] Defined quality standard based on ReAct/COSTAR/Flipped Interaction
+- [x] Plan approved and Wave 1 execution began (completed in Session 29)
+
+---
+
 ## Session 27 (2026-02-05)
 
 **Focus:** Mega menu CSS fixes + Documentation update
@@ -1018,13 +1123,17 @@ Answer Engineering, Beam Search, Cloze Prompt, Context Window, Continuous Prompt
 
 ## Batch Progress Tracking
 
-### Phase 1: Glossary (33/33) ✅ COMPLETE
+### Phase 1: Glossary (2,141/2,141) ✅ COMPLETE
 ```
 Progress: [████████████████████] 100%
 ```
-- [x] Created data/glossary.json with 33 prompting terms
-- [x] Added JS to load and render terms from JSON
-- [x] Updated search-index.json with all terms
+- [x] Created data/glossary.json with 33 prompting terms (Session 23)
+- [x] Added JS to load and render terms from JSON (Session 23)
+- [x] Updated search-index.json with all terms (Session 23)
+- [x] Expanded to 2,141 terms across 10+ domains (Session 29)
+- [x] Migrated all terms from inline HTML to JSON lazy loading (Session 29)
+- [x] Rewrote JSON loader using DOM API — no innerHTML (Session 29)
+- [x] Added content-visibility: auto for lazy rendering (Session 29)
 
 ### Phase 2: Text Frameworks (47/52)
 ```
@@ -1106,6 +1215,23 @@ LOW Priority: [██████████████████░░] 88%
 5. uncertainty-cot.html
 
 **Note:** Navigation updated with Advanced + Self-Correction + Code sections in all 99+ files
+
+### Quality Redesign Waves (6/40 pages complete) — NEW Track (Session 29)
+```
+Progress: [███░░░░░░░░░░░░░░░░░] 15%
+```
+All 40 existing framework pages being redesigned to match ReAct/COSTAR/Flipped Interaction quality standard (13-section template, 700-1000+ lines each).
+
+| Wave | Pages | Status |
+|------|-------|--------|
+| Wave 1 — Self-Correction | 6 pages (critic, chain-of-verification, reflexion, self-calibration, self-refine, self-verification) | ✅ COMPLETE |
+| Wave 2 — CoT Variants | 8 pages (auto-cot, contrastive-cot, structured-cot, faithful-cot, complexity-prompting, tab-cot, reversing-cot, cumulative-reasoning) | ⬜ PENDING |
+| Wave 3 — Decomposition | 6 pages (decomp, self-ask, step-back, graph-of-thought, program-of-thought, recursion-of-thought) | ⬜ PENDING |
+| Wave 4 — Advanced Reasoning | 7 pages (analogical-reasoning, meta-reasoning, thread-of-thought, memory-of-thought, simtom, max-mutual-info, universal-self-consistency) | ⬜ PENDING |
+| Wave 5 — Example Methods | 7 pages (active-prompting, knn-prompting, vote-k, demo-ensembling, diverse-prompting, dense-prompting, prompt-mining) | ⬜ PENDING |
+| Wave 6 — Style & Emotion | 6 pages (emotion-prompting, style-prompting, s2a, re2, cosp, rar) | ⬜ PENDING |
+
+**Reference template:** `learn/critic.html` (898 lines, 13 sections, historical context notice)
 
 ### Phase 3: Modality Frameworks (0/37)
 ```
