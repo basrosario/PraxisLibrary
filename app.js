@@ -8672,6 +8672,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
+            // Close modal and handle navigation when a result is clicked
+            this.results.addEventListener('click', (e) => {
+                const resultLink = e.target.closest('.search-result-item');
+                if (resultLink) {
+                    e.preventDefault();
+                    this.close();
+                    this.navigateToResult(resultLink.getAttribute('href'));
+                }
+            });
+
             // Input handler with debounce
             let debounceTimer;
             this.input.addEventListener('input', () => {
@@ -8791,9 +8801,32 @@ document.addEventListener('DOMContentLoaded', () => {
             if (this.selectedIndex >= 0 && this.resultItems[this.selectedIndex]) {
                 const href = this.resultItems[this.selectedIndex].getAttribute('href');
                 if (href) {
-                    window.location.href = href;
+                    this.close();
+                    this.navigateToResult(href);
                 }
             }
+        },
+
+        /**
+         * Navigate to a search result, handling same-page hash links
+         * @param {string} href - The result URL
+         */
+        navigateToResult(href) {
+            // Check if this is a same-page hash link (e.g., glossary term on glossary page)
+            const hashIndex = href.indexOf('#');
+            if (hashIndex !== -1) {
+                const targetId = href.substring(hashIndex + 1);
+                const targetEl = document.getElementById(targetId);
+                if (targetEl) {
+                    // Same-page anchor — scroll to it directly
+                    window.location.hash = '#' + targetId;
+                    requestAnimationFrame(() => {
+                        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    });
+                    return;
+                }
+            }
+            window.location.href = href;
         }
     };
 
