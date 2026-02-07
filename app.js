@@ -7567,9 +7567,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Load JSON terms, then initialize filters
+    // Load JSON terms, then initialize filters, then scroll to hash target
     loadGlossaryFromJSON().then(() => {
         initGlossaryFilters();
+
+        // After terms are loaded, scroll to hash target if present
+        // This handles links from search results like glossary.html#term-xxx
+        const hash = window.location.hash;
+        if (hash && hash.startsWith('#term-')) {
+            const target = document.getElementById(hash.substring(1));
+            if (target) {
+                requestAnimationFrame(() => {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            }
+        }
     });
 
     // ==========================================
@@ -8291,7 +8303,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Group by category
         const grouped = {};
-        const categoryOrder = ['Learn', 'Tools', 'Glossary', 'Patterns', 'FAQ', 'Resources'];
+        const categoryOrder = ['Glossary', 'Learn', 'Tools', 'Patterns', 'FAQ', 'Resources'];
 
         results.forEach(result => {
             if (!grouped[result.category]) {
@@ -8300,13 +8312,14 @@ document.addEventListener('DOMContentLoaded', () => {
             grouped[result.category].push(result);
         });
 
-        // Convert to ordered array
+        // Convert to ordered array — Glossary gets more results since it has 2,000+ terms
         const orderedResults = [];
         categoryOrder.forEach(cat => {
             if (grouped[cat] && grouped[cat].length > 0) {
+                const limit = cat === 'Glossary' ? (options.maxPerCategory || 10) : (options.maxPerCategory || 5);
                 orderedResults.push({
                     category: cat,
-                    results: grouped[cat].slice(0, options.maxPerCategory || 5)
+                    results: grouped[cat].slice(0, limit)
                 });
             }
         });
@@ -8415,10 +8428,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             </svg>
                         </button>
                     </div>
-                    <div class="search-modal-help">
-                        <div class="search-modal-help-title">
+                    <div class="search-modal-help collapsed" id="search-modal-help">
+                        <div class="search-modal-help-title" id="search-modal-help-toggle" role="button" tabindex="0" aria-expanded="false" aria-controls="search-modal-help-grid">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                             Quick Links
+                            <svg class="search-modal-help-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                         </div>
                         <div class="search-modal-help-grid">
                             <a href="${getSearchLinkPath('learn/index.html')}" class="search-modal-help-item search-modal-quick-link">
@@ -8632,6 +8646,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const closeBtn = document.getElementById('search-modal-close');
             if (closeBtn) {
                 closeBtn.addEventListener('click', () => this.close());
+            }
+
+            // Quick Links toggle (collapsible)
+            const helpToggle = document.getElementById('search-modal-help-toggle');
+            const helpPanel = document.getElementById('search-modal-help');
+            if (helpToggle && helpPanel) {
+                const toggleHelp = () => {
+                    const isCollapsed = helpPanel.classList.toggle('collapsed');
+                    helpToggle.setAttribute('aria-expanded', String(!isCollapsed));
+                };
+                helpToggle.addEventListener('click', toggleHelp);
+                helpToggle.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleHelp();
+                    }
+                });
             }
 
             // Overlay click (close on outside click)

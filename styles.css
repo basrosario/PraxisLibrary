@@ -11021,12 +11021,12 @@ body.menu-open {
 /* Modal Container */
 .search-modal {
     position: fixed;
-    top: 8%;
+    top: 5%;
     left: 50%;
     transform: translateX(-50%) scale(0.95);
-    width: 94%;
-    max-width: 720px;
-    max-height: 85vh;
+    width: 80%;
+    max-width: 80vw;
+    max-height: 88vh;
     background: var(--bg-primary);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg), 0 0 0 1px var(--border-color);
@@ -11111,7 +11111,7 @@ body.menu-open {
 
 /* Search Help/Instructions Panel */
 .search-modal-help {
-    padding: var(--space-lg) var(--space-xl);
+    padding: var(--space-sm) var(--space-xl);
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border-light);
 }
@@ -11120,10 +11120,13 @@ body.menu-open {
     font-size: 0.8125rem;
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: var(--space-sm);
+    margin-bottom: 0;
     display: flex;
     align-items: center;
     gap: var(--space-xs);
+    cursor: pointer;
+    user-select: none;
+    padding: var(--space-xs) 0;
 }
 
 .search-modal-help-title svg {
@@ -11132,10 +11135,34 @@ body.menu-open {
     color: var(--primary);
 }
 
+.search-modal-help-toggle {
+    margin-left: auto;
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+    transition: transform var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.search-modal-help.collapsed .search-modal-help-toggle {
+    transform: rotate(-90deg);
+}
+
 .search-modal-help-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-sm) var(--space-lg);
+    overflow: hidden;
+    max-height: 200px;
+    transition: max-height 0.25s ease, opacity 0.2s ease, padding 0.25s ease;
+    padding-top: var(--space-sm);
+    opacity: 1;
+}
+
+.search-modal-help.collapsed .search-modal-help-grid {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
 }
 
 .search-modal-help-item {
