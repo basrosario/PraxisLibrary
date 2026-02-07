@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Active Prompting: Identify uncertain questions and annotate chain-of-thought for those specific cases.">
+    <meta name="description" content="Active Prompting: Identify the model's most uncertain questions and focus chain-of-thought annotation effort where it matters most for improved reasoning performance.">
     <title>Active Prompting - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
@@ -22,7 +22,7 @@
                         <div class="mega-menu-section">
                             <h4>Getting Started</h4>
                             <a href="prompt-basics.html">Prompt Basics</a>
-                            <a href="facts-fictions.html">Facts & Fictions</a>
+                            <a href="facts-fictions.html">Facts &amp; Fictions</a>
                         </div>
                         <div class="mega-menu-section">
                             <h4>Frameworks</h4>
@@ -108,7 +108,7 @@
                             <a href="../pages/performance.html">Performance</a>
                         </div>
                         <div class="mega-menu-section mega-menu-section--featured">
-                            <h4>AI & ND</h4>
+                            <h4>AI &amp; ND</h4>
                             <a href="../neurodivergence/index.html">ND Hub</a>
                             <a href="../neurodivergence/adhd.html">AI for ADHD</a>
                             <a href="../neurodivergence/autism.html">AI for Autism</a>
@@ -131,7 +131,10 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -143,95 +146,586 @@
                     <span class="current">Active Prompting</span>
                 </nav>
                 <div class="hero-badge">
-                    <span class="hero-badge__text">Active Learning</span>
+                    <span class="hero-badge__text">Active Learning Technique</span>
                 </div>
                 <h1 class="page-title fade-in">Active Prompting</h1>
-                <p class="page-subtitle fade-in">Target annotation effort where the model is most uncertain.</p>
+                <p class="page-subtitle fade-in">Not all questions are equally hard for a model. Active Prompting identifies the questions where the model is most uncertain &mdash; where its answers disagree across multiple samples &mdash; and focuses human annotation effort on crafting chain-of-thought reasoning for exactly those cases. The result: better few-shot examples with less human work.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> Active Prompting was published in 2023 by Diao et al. The technique applies active learning principles to chain-of-thought prompting. Rather than randomly selecting questions for human-annotated CoT demonstrations, Active Prompting queries the model multiple times on each question, measures the disagreement across answers (uncertainty), and selects the most uncertain questions for annotation. Humans then write detailed chain-of-thought reasoning for only those high-uncertainty cases, producing a focused, high-impact set of few-shot exemplars.</p>
+                        <p><strong>Modern LLM Status:</strong> The core insight &mdash; that annotation effort should target where the model struggles most &mdash; remains a <strong>sound principle for optimizing few-shot CoT examples</strong>. However, modern LLMs like Claude, GPT-4, and Gemini have significantly improved at zero-shot reasoning, reducing the need for carefully curated few-shot demonstrations in many scenarios. Active Prompting is most relevant today when you are building a <strong>production pipeline that relies on few-shot CoT</strong> and want to maximize the return on human annotation investment. For everyday prompting tasks, simpler approaches often suffice.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Uncertainty-Guided Annotation</h2>
-                        <p class="section-intro">Active Prompting identifies questions where the model shows high uncertainty (disagreement across multiple samples), then prioritizes annotating chain-of-thought reasoning for those specific questions. This focuses human effort where it's most needed.</p>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Let the Model Tell You Where It Needs Help</h2>
+                        <p class="split-section__text">Traditional chain-of-thought prompting uses a fixed set of hand-picked examples as few-shot demonstrations. The problem? Those examples are chosen by humans guessing which questions are &ldquo;representative&rdquo; &mdash; not by measuring where the model actually struggles. A question that seems difficult to a human may be trivially easy for the model, while a seemingly simple question might consistently trip it up.</p>
+                        <p class="split-section__text"><strong>Active Prompting flips the selection process.</strong> Instead of guessing which examples to annotate, you ask the model itself. By generating multiple answers to each question (using temperature sampling) and measuring how much those answers disagree, you get a direct signal of model uncertainty. High disagreement means the model is unsure &mdash; and that is exactly where a well-crafted chain-of-thought demonstration will have the greatest impact.</p>
+                        <p class="split-section__text">Think of it like a teacher who, instead of preparing lesson plans based on what they assume students find hard, first gives a diagnostic quiz. The questions students answer inconsistently reveal the real knowledge gaps &mdash; and that is where the teacher focuses their instruction.</p>
+                    </div>
+                    <div class="split-section__visual">
                         <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Insight</span>
-                                <p>High disagreement across samples indicates the model is unsure. These uncertain cases benefit most from human-annotated reasoning chains.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Four Steps</span>
-                                <p>1) Sample multiple answers per question. 2) Measure disagreement. 3) Annotate CoT for high-uncertainty questions. 4) Use as demonstrations.</p>
+                                <span class="highlight-box__title">Why Uncertainty-Driven Selection Outperforms Random Selection</span>
+                                <p>When you randomly select questions for CoT annotation, you inevitably waste effort on questions the model can already handle and miss the ones where it truly falters. Active Prompting&rsquo;s uncertainty metric acts as a triage system: it surfaces the cases where the model&rsquo;s internal reasoning is most fragile, ensuring that every annotated example addresses a <strong>real weakness</strong> rather than reinforcing what the model already knows. This targeted approach yields stronger few-shot performance with fewer annotated examples.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE CONCEPT -->
 
+        <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Process</span>
-                    <h2 class="section-title">Active Prompting Pipeline</h2>
-                </div>
+                <h2 class="section-title fade-in-up">The Active Prompting Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from uncertainty measurement to optimized demonstrations</p>
 
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">1. Sample</h3>
-                        <p class="pillar-card__text">Generate multiple answers for each question using temperature sampling.</p>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Sample Multiple Answers per Question</h3>
+                            <p class="element-timeline__text">For each question in your dataset, query the model multiple times using non-zero temperature settings to introduce variation. Each query produces a different reasoning path and potentially a different final answer. Typically, five to ten samples per question provide a reliable signal without excessive cost.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Question: &ldquo;A store had 47 apples. It sold 19 on Monday and received a shipment of 32 on Tuesday. How many apples does it have?&rdquo; &mdash; Generate 8 independent responses at temperature 0.7, yielding answers like: 60, 60, 60, 56, 60, 60, 60, 60.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">2. Measure</h3>
-                        <p class="pillar-card__text">Calculate uncertainty based on answer disagreement or entropy.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Measure Uncertainty and Disagreement</h3>
+                            <p class="element-timeline__text">Calculate how much the model&rsquo;s answers disagree across samples. The original paper uses metrics like disagreement ratio (fraction of answers that differ from the majority) or entropy across answer distributions. Questions where the model produces consistent answers have low uncertainty; questions that split the model reveal genuine difficulty.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The apple question above shows 7/8 agreement (low uncertainty &mdash; the model mostly gets it right). But a question about probability where the model splits 4-4 between two answers has high uncertainty &mdash; this is a prime candidate for annotation.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">3. Annotate</h3>
-                        <p class="pillar-card__text">Create chain-of-thought for the most uncertain questions.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Select and Annotate High-Uncertainty Questions</h3>
+                            <p class="element-timeline__text">Rank all questions by their uncertainty score and select the top-k most uncertain ones. Human annotators then write detailed chain-of-thought reasoning for these specific questions &mdash; step-by-step explanations that show exactly how to arrive at the correct answer. This is the only step that requires human labor, and it is concentrated where it matters most.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>From a pool of 200 math questions, the top 8 most uncertain are selected. An annotator writes: &ldquo;Step 1: Identify the total number of combinations. Step 2: Calculate favorable outcomes. Step 3: Divide to get the probability&hellip;&rdquo; for each one.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Use Annotated Examples as Few-Shot Demonstrations</h3>
+                            <p class="element-timeline__text">The annotated chain-of-thought examples become your few-shot demonstrations. When the model encounters new questions, these carefully targeted examples guide its reasoning through the exact patterns it previously struggled with. Because the demonstrations address the model&rsquo;s actual weak points, they produce stronger performance gains than randomly selected examples of equal quantity.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The 8 annotated CoT examples are prepended as few-shot demonstrations. On the same test set, the model&rsquo;s accuracy jumps from 78% (with random CoT examples) to 86% (with uncertainty-selected CoT examples) &mdash; same annotation budget, better results.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /HOW IT WORKS -->
 
+        <!-- === VISUAL: THE COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="chain-of-thought.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Chain-of-Thought</h3>
-                            <p class="icon-box__content">Reasoning demonstrations.</p>
-                        </div>
-                    </a>
-                    <a href="vote-k.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Vote-K</h3>
-                            <p class="icon-box__content">Model-guided selection.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why targeted annotation outperforms random example selection</p>
 
-        <section class="section">
-            <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try Active Prompting</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Direct CoT (Random Examples)</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Manually pick a few questions that seem representative. Write chain-of-thought annotations for them. Use those as few-shot demonstrations for all new questions.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>Some examples target problems the model can already solve. Other real failure modes are never addressed. Annotation effort is spread thin across easy and hard cases alike, with no way to know which examples are actually helping.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Untargeted effort, wasted annotations, blind to actual model weaknesses</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Active Prompting</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Sample multiple answers per question. Measure disagreement. Rank by uncertainty. Annotate CoT reasoning only for the questions where the model disagrees with itself most. Use those targeted examples as demonstrations.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>Every annotated example addresses a verified model weakness. The demonstrations teach the model exactly the reasoning patterns it was missing. Same annotation budget produces measurably higher accuracy on the target task.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Data-driven selection, efficient annotation, directly targets model uncertainty</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Active Prompting in Action</h2>
+                <p class="section-subtitle fade-in-up">See how uncertainty-driven annotation improves reasoning quality</p>
+
+                <div class="accordion fade-in-up" id="active-prompting-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Mathematical Reasoning: Identifying Weak Spots</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Uncertainty Sampling</span>
+                                    <p><strong>Question:</strong> &ldquo;A farmer has 3 fields. The first yields 240 bushels per acre across 5 acres. The second yields 180 bushels per acre across 8 acres. The third yields 310 bushels per acre across 3 acres. What is the weighted average yield per acre?&rdquo;</p>
+                                    <p><strong>8 sampled answers:</strong> 222.5, 230.6, 222.5, 245.0, 222.5, 230.6, 222.5, 230.6</p>
+                                    <p><strong>Disagreement:</strong> High &mdash; three distinct answers appear, indicating the model inconsistently handles weighted averaging versus simple averaging.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Annotated CoT Demonstration</span>
+                                    <p><strong>Step 1:</strong> Calculate total bushels per field.<br>
+                                    Field 1: 240 &times; 5 = 1,200 bushels<br>
+                                    Field 2: 180 &times; 8 = 1,440 bushels<br>
+                                    Field 3: 310 &times; 3 = 930 bushels<br><br>
+                                    <strong>Step 2:</strong> Sum all bushels: 1,200 + 1,440 + 930 = 3,570 bushels<br><br>
+                                    <strong>Step 3:</strong> Sum all acres: 5 + 8 + 3 = 16 acres<br><br>
+                                    <strong>Step 4:</strong> Weighted average = total bushels / total acres = 3,570 / 16 = 223.125 bushels per acre<br><br>
+                                    <strong>Key insight:</strong> A weighted average divides total output by total units, not by averaging the per-unit rates directly. The answer is 223.125 bushels per acre.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Logical Reasoning: Resolving Ambiguity</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Uncertainty Sampling</span>
+                                    <p><strong>Question:</strong> &ldquo;All managers attend the Monday meeting. Some engineers are managers. Does it follow that some engineers attend the Monday meeting?&rdquo;</p>
+                                    <p><strong>8 sampled answers:</strong> Yes, Yes, No, Yes, No, Yes, Yes, No</p>
+                                    <p><strong>Disagreement:</strong> High &mdash; the model splits 5/3 between &ldquo;Yes&rdquo; and &ldquo;No,&rdquo; revealing confusion about syllogistic reasoning with quantifiers.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Annotated CoT Demonstration</span>
+                                    <p><strong>Step 1:</strong> Identify the premises.<br>
+                                    Premise A: All managers attend the Monday meeting.<br>
+                                    Premise B: Some engineers are managers.<br><br>
+                                    <strong>Step 2:</strong> Apply the syllogism.<br>
+                                    From Premise B, there exists at least one person who is both an engineer and a manager. Call this person X.<br><br>
+                                    <strong>Step 3:</strong> Apply Premise A to X.<br>
+                                    Since X is a manager, and all managers attend the Monday meeting, X attends the Monday meeting.<br><br>
+                                    <strong>Step 4:</strong> Draw the conclusion.<br>
+                                    Since X is an engineer who attends the Monday meeting, it follows that some engineers attend the Monday meeting.<br><br>
+                                    <strong>Answer:</strong> Yes. This is a valid syllogism &mdash; the intersection of &ldquo;some engineers are managers&rdquo; with &ldquo;all managers attend&rdquo; guarantees that those engineer-managers attend.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Commonsense Reasoning: Navigating Tricky Scenarios</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Uncertainty Sampling</span>
+                                    <p><strong>Question:</strong> &ldquo;Sarah put a frozen pizza in the oven and set a timer for 15 minutes. She then went to water her garden. When she came back inside, the kitchen was filled with smoke. What most likely happened?&rdquo;</p>
+                                    <p><strong>8 sampled answers:</strong> The pizza burned (3), She forgot to turn on the oven and something else caught fire (2), The timer was wrong and she was outside too long (2), The oven malfunctioned (1)</p>
+                                    <p><strong>Disagreement:</strong> High &mdash; four distinct explanations with no clear majority, indicating the model cannot consistently prioritize the most likely causal chain.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Annotated CoT Demonstration</span>
+                                    <p><strong>Step 1:</strong> Identify the key facts.<br>
+                                    A frozen pizza was placed in the oven. A 15-minute timer was set. Sarah went outside. She returned to a smoke-filled kitchen.<br><br>
+                                    <strong>Step 2:</strong> Consider the most common cause of kitchen smoke.<br>
+                                    Smoke in a kitchen with an active oven most commonly results from food burning or overheating. The oven was on and contained a pizza.<br><br>
+                                    <strong>Step 3:</strong> Evaluate the timeline.<br>
+                                    Watering a garden could easily take longer than 15 minutes, especially if Sarah did not hear the timer while outside. If she exceeded the cooking time significantly, the pizza would burn.<br><br>
+                                    <strong>Step 4:</strong> Assess alternative explanations.<br>
+                                    Oven malfunction is possible but less likely than the simplest explanation. Something else catching fire has no supporting evidence in the scenario.<br><br>
+                                    <strong>Answer:</strong> The most likely explanation is that Sarah spent longer watering her garden than she realized, missed the timer, and the pizza burned in the oven. The simplest causal chain &mdash; food left in a hot oven too long produces smoke &mdash; is the most probable.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Active Prompting</h2>
+                <p class="section-subtitle fade-in-up">Best for optimizing few-shot demonstration selection at scale</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Production CoT Pipelines</strong>
+                                    <p>When building systems that rely on few-shot chain-of-thought demonstrations at scale, Active Prompting ensures your annotation budget is spent on the examples that will improve accuracy the most.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Limited Annotation Budgets</strong>
+                                    <p>When you can only afford to annotate a small number of examples, uncertainty-driven selection guarantees that each annotation targets a genuine model weakness rather than a question it already handles well.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Task-Specific Accuracy Optimization</strong>
+                                    <p>For domain-specific tasks like medical reasoning, legal analysis, or financial calculations where correctness is critical and you need to systematically identify and address failure modes.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Model Weakness Diagnostics</strong>
+                                    <p>Even if you do not use the full annotation pipeline, the uncertainty sampling step alone reveals which question types your model struggles with &mdash; valuable intelligence for prompt design.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Zero-Shot Tasks Work Fine</strong>
+                                    <p>If your model already performs well on the task without any few-shot examples, the overhead of uncertainty sampling and annotation is unnecessary. Modern LLMs handle many tasks without demonstrations.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>One-Off Prompting Scenarios</strong>
+                                    <p>Active Prompting is designed for systematic optimization across a dataset. For single questions or ad-hoc use, simply writing a good prompt or using zero-shot CoT is far more practical.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative or Subjective Tasks</strong>
+                                    <p>Active Prompting relies on measuring answer disagreement as a proxy for uncertainty. For tasks with no single correct answer &mdash; like creative writing, brainstorming, or opinion generation &mdash; disagreement is expected, not a signal of weakness.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Active Prompting delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Question Answering</h3>
+                        <p class="use-case-showcase__desc">Identify which clinical reasoning questions the model answers inconsistently, then annotate chain-of-thought demonstrations for those specific diagnostic patterns to improve reliability in healthcare AI systems.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Calculation Pipelines</h3>
+                        <p class="use-case-showcase__desc">Surface the types of financial calculations where the model disagrees with itself &mdash; compound interest edge cases, tax bracket transitions, amortization schedules &mdash; and build targeted few-shot examples for each.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Standardized Test Preparation</h3>
+                        <p class="use-case-showcase__desc">Run uncertainty analysis across a bank of practice questions to find the problem types that need the most reasoning support, then create targeted CoT exemplars for tutoring systems.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Legal Contract Analysis</h3>
+                        <p class="use-case-showcase__desc">Discover which contract clause interpretations produce inconsistent model outputs, then annotate reasoning chains that clarify the legal logic for those ambiguous clause types.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Quality Assurance Automation</h3>
+                        <p class="use-case-showcase__desc">In automated testing pipelines, use uncertainty sampling to identify the edge cases where the model&rsquo;s test generation or bug classification is unreliable, then focus annotation on those failure patterns.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Safety-Critical Classification</h3>
+                        <p class="use-case-showcase__desc">For content moderation or safety screening, identify the borderline cases where the model is most uncertain about classification, then provide clear CoT demonstrations that establish consistent decision boundaries.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Active Prompting Fits</h2>
+                <p class="section-subtitle fade-in-up">Active Prompting bridges static CoT and adaptive example selection</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Fixed Demonstrations</span>
+                        <span class="era-marker__desc">Hand-picked CoT examples for all questions</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Auto-CoT</span>
+                        <span class="era-marker__title">Automatic Clustering</span>
+                        <span class="era-marker__desc">Machine-selected diverse examples</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Active Prompting</span>
+                        <span class="era-marker__title">Uncertainty-Driven</span>
+                        <span class="era-marker__desc">Target the model&rsquo;s actual weak points</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Consistency</span>
+                        <span class="era-marker__title">Multi-Path Voting</span>
+                        <span class="era-marker__desc">Sample many paths, take the majority answer</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine with Self-Consistency</div>
+                    <p>Active Prompting and Self-Consistency are natural complements. Active Prompting uses disagreement across samples to <strong>select better demonstrations</strong>, while Self-Consistency uses disagreement across samples to <strong>select better final answers</strong> at inference time. You can use Active Prompting to build your demonstration set, then apply Self-Consistency when running those demonstrations to squeeze maximum accuracy from both the example selection and the answer selection stages.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary reasoning and selection techniques</p>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">The step-by-step reasoning technique that Active Prompting optimizes &mdash; by selecting which CoT demonstrations to annotate based on model uncertainty.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="example-selection.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Example Selection</span>
+                        <span class="evolution-callout__desc">Broader strategies for choosing which examples to include in few-shot prompts &mdash; Active Prompting provides one specific, uncertainty-based method for this selection problem.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">Uses the same multi-sample approach but for answer selection at inference time &mdash; while Active Prompting uses it for example selection during preparation.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Optimize Your Demonstrations</h2>
+                        <p class="cta-corporate__text">Apply Active Prompting principles to find where your model needs the most help, or explore our tools to build stronger prompts from the ground up.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
     </main>
 
+
+    <!-- === FOOTER + BACK-TO-TOP === -->
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -284,6 +778,85 @@
         </div>
     </div>
 </footer>
+    <!-- /FOOTER + BACK-TO-TOP -->
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- === ACCESSIBILITY DASHBOARD === -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+    <!-- /ACCESSIBILITY DASHBOARD -->
 
     <script src="../app.js" defer></script>
 </body>

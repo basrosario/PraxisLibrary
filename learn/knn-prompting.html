@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="KNN Prompting: Select few-shot examples dynamically using k-nearest neighbors based on similarity to the input.">
+    <meta name="description" content="KNN Prompting: Dynamically select the most relevant few-shot examples using nearest-neighbor retrieval for improved in-context learning performance.">
     <title>KNN Prompting - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
@@ -22,7 +22,7 @@
                         <div class="mega-menu-section">
                             <h4>Getting Started</h4>
                             <a href="prompt-basics.html">Prompt Basics</a>
-                            <a href="facts-fictions.html">Facts & Fictions</a>
+                            <a href="facts-fictions.html">Facts &amp; Fictions</a>
                         </div>
                         <div class="mega-menu-section">
                             <h4>Frameworks</h4>
@@ -108,7 +108,7 @@
                             <a href="../pages/performance.html">Performance</a>
                         </div>
                         <div class="mega-menu-section mega-menu-section--featured">
-                            <h4>AI & ND</h4>
+                            <h4>AI &amp; ND</h4>
                             <a href="../neurodivergence/index.html">ND Hub</a>
                             <a href="../neurodivergence/adhd.html">AI for ADHD</a>
                             <a href="../neurodivergence/autism.html">AI for Autism</a>
@@ -131,7 +131,10 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -143,119 +146,573 @@
                     <span class="current">KNN Prompting</span>
                 </nav>
                 <div class="hero-badge">
-                    <span class="hero-badge__text">Example Selection</span>
+                    <span class="hero-badge__text">Example Selection Technique</span>
                 </div>
                 <h1 class="page-title fade-in">KNN Prompting</h1>
-                <p class="page-subtitle fade-in">Select the most relevant examples using nearest-neighbor retrieval.</p>
+                <p class="page-subtitle fade-in">Not all few-shot examples are created equal. KNN Prompting dynamically selects the most relevant demonstrations for each query using nearest-neighbor retrieval &mdash; replacing static example lists with context-aware, similarity-driven selection that adapts to every input.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
-        <section class="section section-alt">
-            <div class="container">
-                <div class="split-section">
-                    <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Dynamic Example Selection</h2>
-                        <p class="section-intro">KNN Prompting retrieves few-shot examples that are most similar to the current input. Instead of using fixed examples, it dynamically selects from a pool based on semantic similarity, ensuring the demonstrations are maximally relevant.</p>
-                        <div class="highlight-box highlight-box--info">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">How It Works</span>
-                                <p>Encode examples and the query into embeddings, find the k closest examples to the query, and use those as few-shot demonstrations.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Requirements</span>
-                                <p>1) Pool of labeled examples. 2) Embedding model for similarity. 3) Retrieval mechanism to find nearest neighbors.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        <!-- === HISTORICAL CONTEXT === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Process</span>
-                    <h2 class="section-title">KNN Pipeline</h2>
-                </div>
-
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">1. Embed</h3>
-                        <p class="pillar-card__text">Convert all pool examples and the input query into vector embeddings.</p>
-                    </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">2. Retrieve</h3>
-                        <p class="pillar-card__text">Find the k examples with highest similarity to the query embedding.</p>
-                    </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">3. Prompt</h3>
-                        <p class="pillar-card__text">Use retrieved examples as few-shot demonstrations in the prompt.</p>
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2022</span>
+                        <p><strong>Introduced:</strong> KNN Prompting was published in 2022 by Xu et al. The technique addresses a fundamental limitation of standard few-shot prompting: the examples you choose dramatically affect performance, yet most practitioners select them arbitrarily or use the same fixed set for every query. KNN Prompting formalizes example selection as a retrieval problem &mdash; for each new input, it encodes the query into a vector embedding, searches a pool of labeled examples for the k nearest neighbors by cosine similarity, and uses those semantically closest examples as few-shot demonstrations. The result is a prompt that is tailored to the specific characteristics of each individual query.</p>
+                        <p><strong>Modern LLM Status:</strong> The core principle of selecting relevant examples based on semantic similarity has become <strong>foundational to retrieval-augmented systems</strong> and remains highly practical. Modern embedding models like text-embedding-3 and open-source sentence transformers make KNN-style retrieval faster and more accurate than ever. While today&rsquo;s large models are more robust to example choice than their 2022 predecessors, dynamically selected examples still consistently outperform random ones &mdash; especially in specialized domains, low-resource languages, and tasks where the input distribution is highly varied. The principle lives on in every RAG pipeline that retrieves contextually relevant content.</p>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /HISTORICAL CONTEXT -->
 
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Benefits</span>
-                    <h2 class="section-title">Why Use KNN</h2>
-                </div>
-
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Relevance</h3>
-                        <p class="pillar-card__text">Similar examples provide better guidance than random or generic ones.</p>
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Similar Examples Teach Better</h2>
+                        <p class="split-section__text">When you show a model how to handle a task, the examples you provide act as implicit instructions. If those examples closely resemble the current query &mdash; in structure, topic, vocabulary, or complexity &mdash; the model extracts more relevant patterns. A sentiment analysis prompt for a product review about headphones benefits far more from seeing other electronics reviews than from seeing restaurant reviews.</p>
+                        <p class="split-section__text"><strong>KNN Prompting automates this intuition.</strong> Instead of hand-picking examples or cycling through a fixed set, it treats example selection as a search problem. Every candidate example and the incoming query are converted into vector embeddings &mdash; dense numerical representations that capture semantic meaning. The system then retrieves the k examples whose embeddings are closest to the query&rsquo;s embedding, ensuring maximum relevance on every single prompt.</p>
+                        <p class="split-section__text">Think of it like a librarian who, instead of handing you the same three reference books regardless of your question, goes into the stacks and pulls the most topically relevant volumes for each specific inquiry you bring.</p>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Scalability</h3>
-                        <p class="pillar-card__text">Can leverage large example pools without fitting all into the prompt.</p>
-                    </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Adaptability</h3>
-                        <p class="pillar-card__text">Automatically adjusts to different input types and domains.</p>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Embedding-Based Similarity</span>
+                                <p>Vector embeddings compress text into high-dimensional numerical space where semantically similar texts land near each other. &ldquo;I love this phone&rdquo; and &ldquo;This device is amazing&rdquo; end up close together despite sharing no words, while &ldquo;The bank was steep&rdquo; and &ldquo;The bank approved my loan&rdquo; land far apart despite sharing a keyword. KNN Prompting leverages this geometric property to find examples that are <strong>meaningfully</strong> similar &mdash; not just superficially similar.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE CONCEPT -->
 
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The KNN Prompting Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from example pool to dynamically assembled prompt</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Build the Example Pool</h3>
+                            <p class="element-timeline__text">Curate a diverse collection of labeled input-output pairs that cover the range of your task. Each example should include the input text and its corresponding correct output. The pool should be large enough to contain relevant neighbors for any likely query &mdash; hundreds to thousands of examples is typical. Quality matters: noisy or mislabeled examples will propagate errors into every prompt that retrieves them.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>For a sentiment classifier, assemble 500+ product reviews each labeled as positive, negative, or neutral &mdash; spanning categories like electronics, clothing, food, and software to ensure broad coverage.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Encode into Vector Embeddings</h3>
+                            <p class="element-timeline__text">Pass every example in the pool through an embedding model to generate a vector representation for each one. These embeddings are computed once and stored in a vector index for fast retrieval. When a new query arrives, it is also encoded using the same embedding model. The choice of embedding model determines what &ldquo;similarity&rdquo; means for your retrieval &mdash; domain-specific embeddings often outperform general-purpose ones.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Using a sentence transformer, convert each review into a 768-dimensional vector. Store all vectors in a FAISS index for sub-millisecond retrieval. When a new review arrives, embed it with the same model to produce a query vector.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Retrieve k Nearest Neighbors</h3>
+                            <p class="element-timeline__text">Compute the cosine similarity between the query vector and every example vector in the pool, then select the top k most similar examples. The value of k is a tunable parameter &mdash; typically 3 to 8, balancing between providing enough context and staying within token limits. Some implementations also apply diversity filters to avoid retrieving near-duplicate examples that waste prompt space.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>For a query about wireless earbuds, the retriever returns 5 nearest examples: three headphone reviews, one Bluetooth speaker review, and one smartwatch review &mdash; all semantically close to the audio-device domain.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Construct the Prompt</h3>
+                            <p class="element-timeline__text">Assemble the final prompt by placing the retrieved examples as few-shot demonstrations followed by the actual query. The examples serve as in-context demonstrations that prime the model with patterns most relevant to the current input. Order matters &mdash; placing the most similar example closest to the query often yields the best results, as models tend to attend more strongly to nearby context.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Prompt:</strong> Classify the sentiment of each review.<br>Review: &ldquo;These headphones have incredible noise cancellation.&rdquo; Sentiment: Positive<br>Review: &ldquo;The Bluetooth keeps disconnecting from my phone.&rdquo; Sentiment: Negative<br>Review: &ldquo;Battery life is about average for this price range.&rdquo; Sentiment: Neutral<br>Review: &ldquo;The sound quality on these wireless earbuds blew me away.&rdquo; Sentiment:</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why dynamically selected examples outperform fixed ones</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Fixed Few-Shot</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Same Examples for Every Query</span>
+                                <p><strong>Example 1:</strong> &ldquo;The pizza was cold and stale.&rdquo; &rarr; Negative<br><strong>Example 2:</strong> &ldquo;Great customer service!&rdquo; &rarr; Positive<br><strong>Example 3:</strong> &ldquo;The movie was okay, nothing special.&rdquo; &rarr; Neutral</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Query</span>
+                                <p>&ldquo;The firmware update bricked my router and support was unhelpful.&rdquo; &mdash; The model must generalize from food, service, and movie examples to a technical hardware complaint.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Mismatched domain, model must bridge a large semantic gap</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">KNN Prompting</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Dynamically Retrieved per Query</span>
+                                <p><strong>Example 1:</strong> &ldquo;After the update, my device won&rsquo;t even turn on.&rdquo; &rarr; Negative<br><strong>Example 2:</strong> &ldquo;Tech support resolved my connectivity issue quickly.&rdquo; &rarr; Positive<br><strong>Example 3:</strong> &ldquo;The new firmware fixed some bugs but introduced others.&rdquo; &rarr; Neutral</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Query</span>
+                                <p>&ldquo;The firmware update bricked my router and support was unhelpful.&rdquo; &mdash; The model sees closely related tech-support examples and classifies with high confidence.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Domain-matched examples, minimal generalization gap</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">KNN Prompting in Action</h2>
+                <p class="section-subtitle fade-in-up">See how dynamic example retrieval improves performance across domains</p>
+
+                <div class="accordion fade-in-up" id="knn-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Sentiment Analysis: Mixed Product Reviews</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Query Input</span>
+                                    <p>&ldquo;The noise cancellation on these earbuds is phenomenal, but the charging case feels cheap and flimsy.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">KNN-Retrieved Examples</span>
+                                    <p><strong>Retrieved Example 1 (similarity: 0.94):</strong><br>
+                                    &ldquo;Sound quality is top-tier for the price, but the build quality leaves a lot to be desired.&rdquo; &rarr; Mixed<br><br>
+                                    <strong>Retrieved Example 2 (similarity: 0.91):</strong><br>
+                                    &ldquo;ANC works great on the train, though the ear tips don&rsquo;t stay in well during workouts.&rdquo; &rarr; Mixed<br><br>
+                                    <strong>Retrieved Example 3 (similarity: 0.89):</strong><br>
+                                    &ldquo;Battery life is excellent but the Bluetooth connection drops every few minutes.&rdquo; &rarr; Mixed<br><br>
+                                    <strong>Model Output:</strong> Mixed &mdash; The model correctly identifies the positive-negative structure because all retrieved examples demonstrate the same &ldquo;good feature, bad feature&rdquo; pattern in the audio-device domain.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Code Generation: API Endpoint Creation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Query Input</span>
+                                    <p>&ldquo;Write a REST endpoint that accepts a user ID and returns their order history with pagination.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">KNN-Retrieved Examples</span>
+                                    <p><strong>Retrieved Example 1:</strong><br>
+                                    &ldquo;Write a REST endpoint that takes a customer ID and returns their purchase records.&rdquo; &rarr; GET /customers/:id/purchases with query params for limit and offset, including error handling for invalid IDs.<br><br>
+                                    <strong>Retrieved Example 2:</strong><br>
+                                    &ldquo;Create an API route that fetches paginated transaction data for a given account.&rdquo; &rarr; GET /accounts/:id/transactions with cursor-based pagination, returning next_cursor and has_more fields.<br><br>
+                                    <strong>Retrieved Example 3:</strong><br>
+                                    &ldquo;Build an endpoint to retrieve a user&rsquo;s activity log with filtering by date range.&rdquo; &rarr; GET /users/:id/activity with start_date and end_date params, paginated response with total_count.<br><br>
+                                    <strong>Result:</strong> The model generates a well-structured paginated endpoint because it saw three closely related parameterized data-retrieval examples &mdash; far more useful than generic CRUD examples would have been.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Medical Triage: Symptom Classification</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Query Input</span>
+                                    <p>&ldquo;Patient reports sudden onset of severe headache, stiff neck, and sensitivity to light. No history of migraines.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">KNN-Retrieved Examples</span>
+                                    <p><strong>Retrieved Example 1 (similarity: 0.93):</strong><br>
+                                    &ldquo;Patient presents with acute headache, neck rigidity, and photophobia following a two-day fever.&rdquo; &rarr; Urgent: Possible meningitis. Immediate evaluation required.<br><br>
+                                    <strong>Retrieved Example 2 (similarity: 0.88):</strong><br>
+                                    &ldquo;Sudden severe headache described as the worst of their life, with neck stiffness.&rdquo; &rarr; Emergency: Rule out subarachnoid hemorrhage. CT and lumbar puncture recommended.<br><br>
+                                    <strong>Retrieved Example 3 (similarity: 0.85):</strong><br>
+                                    &ldquo;Patient with fever, headache, and photophobia. Recent travel to endemic region.&rdquo; &rarr; Urgent: Screen for infectious causes including meningitis and encephalitis.<br><br>
+                                    <strong>Result:</strong> The model correctly triages as urgent/emergency because all retrieved examples share the same symptom cluster and demonstrate appropriate escalation. Random examples about ankle sprains or skin rashes would have provided no useful signal for this critical assessment.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use KNN Prompting</h2>
+                <p class="section-subtitle fade-in-up">Best when your task has diverse inputs and a rich example pool</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Variance Input Distributions</strong>
+                                    <p>When queries span many topics, styles, or domains &mdash; no single fixed example set can cover the full range, but KNN retrieval adapts to each input automatically.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Classification at Scale</strong>
+                                    <p>Sentiment analysis, intent detection, topic categorization &mdash; any classification task where performance depends heavily on seeing relevant labeled examples in context.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Specialized or Niche Domains</strong>
+                                    <p>Legal, medical, scientific, or technical tasks where domain-specific examples dramatically outperform generic demonstrations from unrelated fields.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Large Example Libraries</strong>
+                                    <p>When you have hundreds or thousands of labeled examples but can only fit a handful into any single prompt &mdash; KNN retrieval makes the entire pool accessible on demand.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Uniform Input Distribution</strong>
+                                    <p>If all your queries are structurally identical &mdash; same format, same domain, same complexity &mdash; fixed examples work just as well without the retrieval overhead.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>No Labeled Example Pool Available</strong>
+                                    <p>KNN Prompting requires a pre-built pool of labeled input-output pairs. If you have no labeled data or only a handful of examples, the retrieval step adds complexity with no benefit.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Latency-Constrained Environments</strong>
+                                    <p>The embedding and retrieval step adds latency before the LLM call even begins. For real-time applications where every millisecond counts, the overhead may be prohibitive.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where KNN Prompting delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Customer Support Routing</h3>
+                        <p class="use-case-showcase__desc">Classify incoming support tickets by retrieving examples from similar past tickets, ensuring the model sees domain-relevant intent patterns for accurate routing to the right team.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Document Classification</h3>
+                        <p class="use-case-showcase__desc">Categorize legal documents, research papers, or compliance reports by matching each incoming document against a pool of pre-labeled examples from the same regulatory or academic domain.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Multilingual Tasks</h3>
+                        <p class="use-case-showcase__desc">Retrieve examples in the same language or language family as the query, ensuring the model sees structurally relevant demonstrations rather than unrelated language patterns.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Code Translation</h3>
+                        <p class="use-case-showcase__desc">When converting code between languages or frameworks, retrieve translation examples that use similar APIs, patterns, or data structures to the specific code being translated.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Clinical Note Processing</h3>
+                        <p class="use-case-showcase__desc">Extract structured data from clinical notes by retrieving similar notes from the same specialty, ensuring the model recognizes domain-specific terminology and documentation conventions.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Threat Intelligence</h3>
+                        <p class="use-case-showcase__desc">Classify security alerts by retrieving examples from similar attack vectors, network patterns, or vulnerability types &mdash; ensuring the model applies the correct threat categorization framework.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where KNN Prompting Fits</h2>
+                <p class="section-subtitle fade-in-up">Bridging static few-shot learning and full retrieval-augmented generation</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Zero-Shot</span>
+                        <span class="era-marker__title">No Examples</span>
+                        <span class="era-marker__desc">Task description only, no demonstrations</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Few-Shot Learning</span>
+                        <span class="era-marker__title">Fixed Examples</span>
+                        <span class="era-marker__desc">Same static demonstrations for every query</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">KNN Prompting</span>
+                        <span class="era-marker__title">Dynamic Retrieval</span>
+                        <span class="era-marker__desc">Similarity-driven example selection per query</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">RAG Systems</span>
+                        <span class="era-marker__title">Full Knowledge Retrieval</span>
+                        <span class="era-marker__desc">Retrieve documents, passages, and context at scale</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The Retrieval Sweet Spot</div>
+                    <p>KNN Prompting occupies a practical sweet spot on the retrieval spectrum. It is simpler to implement than full RAG pipelines &mdash; you need only an embedding model and a vector index, not a complete document-chunking infrastructure. Yet it captures most of the performance gains that come from context relevance. For classification, structured output, and domain-specific tasks, KNN Prompting often delivers RAG-level improvements with significantly less engineering overhead.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
         <section class="section">
             <div class="container">
                 <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="shot-prompting.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Shot Prompting</h3>
-                            <p class="icon-box__content">Few-shot learning basics.</p>
-                        </div>
-                    </a>
-                    <a href="example-selection.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Example Selection</h3>
-                            <p class="icon-box__content">Choosing effective demonstrations.</p>
-                        </div>
-                    </a>
-                </div>
+                <p class="section-subtitle fade-in-up">Explore complementary example selection and retrieval techniques</p>
+
+                <a href="few-shot-learning.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Few-Shot Learning</span>
+                        <span class="evolution-callout__desc">The static example-based prompting technique that KNN Prompting enhances by making example selection dynamic and query-dependent rather than fixed.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="example-selection.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Parent Category</span>
+                        <span class="evolution-callout__title">Example Selection</span>
+                        <span class="evolution-callout__desc">The broader family of techniques for choosing optimal few-shot examples &mdash; KNN Prompting is one specific strategy within this category, using embedding similarity as its selection criterion.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">Combine KNN-selected examples with self-consistency&rsquo;s multiple sampling paths &mdash; retrieve relevant examples, generate multiple answers, and take the majority vote for maximum reliability.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
             </div>
         </section>
+        <!-- /RELATED FRAMEWORKS -->
 
-        <section class="section section-alt">
+        <!-- === CTA SECTION === -->
+        <section class="section">
             <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try KNN Prompting</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Select Smarter Examples</h2>
+                        <p class="cta-corporate__text">Start building retrieval-enhanced prompts with dynamically selected examples or explore our full framework library.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /CTA SECTION -->
     </main>
 
+
+    <!-- === FOOTER + BACK-TO-TOP === -->
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -264,7 +721,6 @@
                 <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
                 <p>Master the Art of AI Communication theory through proven frameworks.</p>
             </div>
-
             <div class="footer-links">
                 <h4>Learn</h4>
                 <a href="prompt-basics.html">Prompt Basics</a>
@@ -275,7 +731,6 @@
                 <a href="flipped-interaction.html">Flipped Interaction</a>
                 <a href="chain-of-thought.html">Chain-of-Thought</a>
             </div>
-
             <div class="footer-links">
                 <h4>AI Readiness</h4>
                 <a href="../tools/analyzer.html">Prompt Analyzer</a>
@@ -287,7 +742,6 @@
                 <a href="../patterns/index.html">Patterns Library</a>
                 <a href="../pages/ai-safety.html">AI Safety</a>
             </div>
-
             <div class="footer-links">
                 <h4>Resources</h4>
                 <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
@@ -301,13 +755,91 @@
                 <a href="../pages/about.html">About</a>
             </div>
         </div>
-
         <div class="footer-bottom">
             <p>AI for Everybody</p>
             <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Bas</span></p>
         </div>
     </div>
 </footer>
+    <!-- /FOOTER + BACK-TO-TOP -->
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- === ACCESSIBILITY DASHBOARD === -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+    <!-- /ACCESSIBILITY DASHBOARD -->
 
     <script src="../app.js" defer></script>
 </body>

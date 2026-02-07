@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="DiVeRSe Prompting: Generate diverse reasoning paths and verify answers for robust problem-solving.">
+    <meta name="description" content="DiVeRSe Prompting: Combine diverse reasoning paths with step-by-step verification scoring to produce more reliable answers through verified ensemble voting.">
     <title>DiVeRSe Prompting - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
@@ -132,6 +132,7 @@
     </header>
 
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -143,95 +144,575 @@
                     <span class="current">DiVeRSe</span>
                 </nav>
                 <div class="hero-badge">
-                    <span class="hero-badge__text">Ensemble Methods</span>
+                    <span class="hero-badge__text">Ensemble Technique</span>
                 </div>
                 <h1 class="page-title fade-in">DiVeRSe Prompting</h1>
-                <p class="page-subtitle fade-in">Diverse paths plus verification for robust answers.</p>
+                <p class="page-subtitle fade-in">When a single reasoning path can mislead, DiVeRSe generates multiple diverse solution approaches and verifies each step individually &mdash; then uses verification scores to weight a final vote, combining the power of diversity with the precision of step-level quality control.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2022</span>
+                        <p><strong>Introduced:</strong> DiVeRSe &mdash; Diverse Verifier on Reasoning Steps &mdash; was published in 2022 by Li et al. The technique addresses a fundamental limitation of simple majority voting: not all reasoning paths are equally trustworthy. DiVeRSe introduces three interlocking components. First, it uses <strong>diverse prompts</strong> with varied examples and phrasings to generate solution approaches from genuinely different angles. Second, it produces <strong>multiple reasoning paths</strong> per prompt through sampling. Third, it scores each individual reasoning step with a <strong>trained verifier model</strong>, then uses those verification scores to weight the final aggregation rather than treating every path equally.</p>
+                        <p><strong>Modern LLM Status:</strong> The core insight of DiVeRSe &mdash; combining diversity with verification &mdash; has been <strong>absorbed into broader best practices</strong> for reliable AI systems. Modern approaches like Best-of-N sampling with reward-model scoring and process-reward models (PRMs) achieve similar goals with simpler implementations. The trained step-level verifier that DiVeRSe requires is now effectively built into RLHF-trained models and external reward models. However, the principle remains highly relevant: when accuracy matters, generating diverse solutions and verifying each step before aggregating will outperform naive majority voting.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Diversity + Verification</h2>
-                        <p class="section-intro">DiVeRSe (Diverse Verifier on Reasoning Steps) combines diverse reasoning paths with step-by-step verification. It generates multiple different solution approaches, verifies each step's correctness, and uses verification scores to select the best answer.</p>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Diversity Alone Isn&rsquo;t Enough &mdash; Verify Every Step</h2>
+                        <p class="split-section__text">Self-Consistency showed that sampling multiple reasoning paths and taking a majority vote improves accuracy. But it treats every path as equally valid &mdash; a path with a flawed intermediate step gets the same vote weight as a path with flawless logic. When most sampled paths share the same error, majority vote confidently returns the wrong answer.</p>
+                        <p class="split-section__text"><strong>DiVeRSe attacks this from two directions.</strong> First, it maximizes the chance that at least one path gets it right by using genuinely different prompts &mdash; not just temperature-based sampling variations of the same prompt. Different examples and phrasings push the model to explore different solution strategies. Second, it scores each step of each path with a verification model, so paths with sound reasoning carry more weight in the final vote than paths that stumble on intermediate steps.</p>
+                        <p class="split-section__text">Think of it like a panel of judges scoring a gymnastics routine: instead of just counting how many judges say &ldquo;gold medal,&rdquo; each judge evaluates every individual move, and the final score reflects the quality of each element performed &mdash; not just the overall impression.</p>
+                    </div>
+                    <div class="split-section__visual">
                         <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">Three Components</span>
-                                <p>1) Diverse prompts generate varied reasoning. 2) Verifier checks each step. 3) Voting weighted by verification scores.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Key Innovation</span>
-                                <p>Unlike simple majority voting, answers from more verified chains count more heavily.</p>
+                                <span class="highlight-box__title">Why Verified Voting Beats Simple Majority</span>
+                                <p>Simple majority voting assumes errors are random and independent &mdash; so the correct answer will naturally appear most often. But in practice, certain types of problems cause <strong>systematic errors</strong> where the model makes the same mistake across multiple paths. DiVeRSe&rsquo;s step-level verification catches these systematic failures because a flawed step will score poorly <strong>regardless</strong> of how many paths contain it, effectively down-weighting the incorrect reasoning before it can dominate the vote.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE CONCEPT -->
 
+        <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Process</span>
-                    <h2 class="section-title">DiVeRSe Pipeline</h2>
-                </div>
+                <h2 class="section-title fade-in-up">The DiVeRSe Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from diverse generation to verified consensus</p>
 
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Diversify</h3>
-                        <p class="pillar-card__text">Use different prompts and sampling to generate varied reasoning approaches.</p>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Create Diverse Prompts</h3>
+                            <p class="element-timeline__text">Construct multiple prompt variants that approach the same problem from different angles. Each prompt uses different few-shot examples, different phrasings, or different solution strategies. The goal is genuine diversity &mdash; not minor wording tweaks, but fundamentally different ways of framing the problem so the model is steered toward different reasoning approaches.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>For a math problem: Prompt A uses algebraic examples, Prompt B uses arithmetic examples, Prompt C uses word-problem-style examples &mdash; each guiding the model toward a different solution strategy.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Verify</h3>
-                        <p class="pillar-card__text">Score each reasoning chain based on step-by-step correctness checks.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Generate Multiple Reasoning Paths per Prompt</h3>
+                            <p class="element-timeline__text">For each diverse prompt, sample multiple completions using temperature-based decoding. This produces a rich pool of candidate solutions: the diverse prompts ensure different strategies, and the sampling within each prompt ensures variation within each strategy. The result is a large set of reasoning paths that cover the solution space far more thoroughly than sampling from a single prompt.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>With 3 diverse prompts and 5 samples each, you generate 15 distinct reasoning paths &mdash; spanning different strategies and different executions of each strategy.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Select</h3>
-                        <p class="pillar-card__text">Vote on final answer with weights from verification scores.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Score Each Reasoning Step with a Verifier</h3>
+                            <p class="element-timeline__text">A trained verification model examines each individual step in every reasoning path and assigns a correctness score. This is the critical innovation: rather than evaluating only the final answer, the verifier assesses whether each intermediate step logically follows from the previous one. A path that reaches the right answer through flawed logic will receive low step scores, while a path with sound reasoning throughout will score highly.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Path A has 4 steps scored [0.95, 0.92, 0.88, 0.91] &mdash; solid throughout. Path B has steps scored [0.93, 0.41, 0.85, 0.90] &mdash; the verifier flags step 2 as likely incorrect, reducing this path&rsquo;s overall credibility.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Weighted Vote Using Verification Scores</h3>
+                            <p class="element-timeline__text">Instead of a simple majority vote where each path counts equally, DiVeRSe weights each path&rsquo;s vote by the product of its step-level verification scores. Paths with consistently high-quality reasoning contribute more to the final answer, while paths with flagged errors are effectively down-weighted. The answer with the highest total weighted vote wins.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>If 8 of 15 paths say &ldquo;Answer: 42&rdquo; but have low verification scores, while 7 paths say &ldquo;Answer: 36&rdquo; with high verification scores, the weighted vote selects 36 &mdash; overriding the numerical majority because the verified reasoning is stronger.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /HOW IT WORKS -->
 
+        <!-- === VISUAL: THE COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="self-consistency.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Self-Consistency</h3>
-                            <p class="icon-box__content">Simple majority voting.</p>
-                        </div>
-                    </a>
-                    <a href="self-verification.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Self-Verification</h3>
-                            <p class="icon-box__content">Answer validation.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why verified diverse voting outperforms simple majority</p>
 
-        <section class="section">
-            <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try DiVeRSe</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Simple Majority Vote</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Setup</span>
+                                <p>Sample 10 reasoning paths from a single prompt. Count answers: 6 paths say &ldquo;Answer: 156&rdquo; and 4 paths say &ldquo;Answer: 132.&rdquo; Majority vote selects 156.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Problem</span>
+                                <p>All 6 paths reaching 156 share the same arithmetic error in step 3. The 4 correct paths are outvoted because errors from a single prompt tend to be correlated &mdash; the same flawed reasoning pattern repeats across samples.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Correlated errors dominate, no quality filtering, wrong answer wins</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">DiVeRSe Verified Vote</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Setup</span>
+                                <p>Generate 15 paths across 3 diverse prompts (5 samples each). The verifier scores each step: paths reaching 156 have step 3 flagged with scores of 0.25&ndash;0.40. Paths reaching 132 score 0.85+ on all steps.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Outcome</span>
+                                <p>Despite 8 paths saying 156, their low step-3 verification scores drag down their weighted votes. The 7 paths saying 132 with high verification scores across all steps accumulate a higher total weighted vote. DiVeRSe correctly selects 132.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Step-level verification catches errors, quality-weighted vote, correct answer wins</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">DiVeRSe in Action</h2>
+                <p class="section-subtitle fade-in-up">See how diversity plus verification improves reasoning accuracy</p>
+
+                <div class="accordion fade-in-up" id="diverse-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Math Word Problem</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;A store sells apples in bags of 6 and oranges in bags of 8. Maria buys 3 bags of apples and 2 bags of oranges, then gives away a third of all her fruit. How many pieces of fruit does she have left?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">DiVeRSe Process</span>
+                                    <p><strong>Prompt A (algebraic approach):</strong> Total = (3 &times; 6) + (2 &times; 8) = 18 + 16 = 34. Gives away 34 &divide; 3 = 11.33, rounds to 11. Remaining: 23.<br>
+                                    <em>Verifier flags:</em> Step 3 scored 0.30 &mdash; fractional fruit count indicates a likely misinterpretation.<br><br>
+                                    <strong>Prompt B (step-by-step counting):</strong> Apples: 3 &times; 6 = 18. Oranges: 2 &times; 8 = 16. Total: 34. A third of 34 is not a whole number &mdash; re-reading the problem: &ldquo;a third of all her fruit&rdquo; yields a non-integer. Possible rounding. Answer: approximately 23.<br>
+                                    <em>Verifier flags:</em> Step 4 scored 0.35 &mdash; ambiguous rounding detected.<br><br>
+                                    <strong>Prompt C (unit-based reasoning):</strong> Apples: 18. Oranges: 16. Total: 34. Gives away a third: 34 &divide; 3 is not whole, so she gives away 12 (rounding 11.33 up to nearest whole fruit). Keeps 34 &minus; 12 = 22. More naturally: she keeps two-thirds, floor(34 &times; 2/3) = 22.<br>
+                                    <em>Verifier scores:</em> All steps 0.75+ &mdash; reasoning acknowledges ambiguity and handles it explicitly.<br><br>
+                                    <strong>Weighted vote:</strong> Paths from Prompt C with answer 22 carry the highest verification weight. Final answer: <strong>22 pieces of fruit</strong> (with a note that the problem contains a fractional ambiguity).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Logical Reasoning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;All managers in the company have completed leadership training. Alex has completed leadership training. Is Alex a manager?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">DiVeRSe Process</span>
+                                    <p><strong>Prompt A (formal logic examples):</strong> Premise: Manager &rarr; Training. Alex has Training. This is affirming the consequent &mdash; a logical fallacy. We cannot conclude Alex is a manager. Answer: <strong>Cannot be determined.</strong><br>
+                                    <em>Verifier scores:</em> [0.97, 0.95, 0.94] &mdash; all steps logically sound.<br><br>
+                                    <strong>Prompt B (everyday reasoning examples):</strong> Since all managers did the training and Alex did the training, Alex is likely a manager. Answer: <strong>Yes.</strong><br>
+                                    <em>Verifier flags:</em> Step 2 scored 0.22 &mdash; the inference is logically invalid. &ldquo;All A are B&rdquo; does not mean &ldquo;All B are A.&rdquo;<br><br>
+                                    <strong>Prompt C (set theory examples):</strong> Managers is a subset of Training completers. Alex is an element of Training completers. Alex may or may not be in the Managers subset. Answer: <strong>Cannot be determined.</strong><br>
+                                    <em>Verifier scores:</em> [0.96, 0.93, 0.95] &mdash; reasoning is valid.<br><br>
+                                    <strong>Weighted vote:</strong> Paths answering &ldquo;Cannot be determined&rdquo; dominate the weighted vote due to high verification scores. The paths answering &ldquo;Yes&rdquo; are down-weighted by their flagged logical error. Final answer: <strong>Cannot be determined</strong> &mdash; completing leadership training is necessary for managers but not sufficient to identify someone as one.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Scientific Analysis</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;A sealed container holds 2 moles of an ideal gas at 300K and 1 atm. The temperature is doubled while the volume is held constant. What is the final pressure?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">DiVeRSe Process</span>
+                                    <p><strong>Prompt A (gas law formula approach):</strong> Using PV = nRT. Initial: P1 = 1 atm, T1 = 300K. Final: T2 = 600K, V constant. P2/P1 = T2/T1. P2 = 1 &times; (600/300) = 2 atm.<br>
+                                    <em>Verifier scores:</em> [0.98, 0.97, 0.96] &mdash; correct application of Gay-Lussac&rsquo;s law.<br><br>
+                                    <strong>Prompt B (proportional reasoning):</strong> Pressure is proportional to temperature at constant volume. Temperature doubles from 300K to 600K, so pressure doubles from 1 atm to 2 atm.<br>
+                                    <em>Verifier scores:</em> [0.95, 0.94] &mdash; valid proportional reasoning.<br><br>
+                                    <strong>Prompt C (combined gas law):</strong> Using P1V1/T1 = P2V2/T2. Since V1 = V2, simplifies to P1/T1 = P2/T2. P2 = P1 &times; T2/T1 = 1 &times; 600/300 = 2 atm.<br>
+                                    <em>Verifier scores:</em> [0.97, 0.96, 0.95] &mdash; correct derivation.<br><br>
+                                    <strong>Weighted vote:</strong> All diverse approaches converge on the same answer with high verification scores. This strong consensus with verified reasoning gives high confidence. Final answer: <strong>2 atm.</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use DiVeRSe</h2>
+                <p class="section-subtitle fade-in-up">Best for high-stakes reasoning where accuracy demands both breadth and quality control</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Mathematical Reasoning</strong>
+                                    <p>Multi-step math problems where a single error in any step cascades to the wrong answer &mdash; step verification catches these intermediate failures before they pollute the vote.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Stakes Decision Support</strong>
+                                    <p>When the cost of an incorrect answer is significant &mdash; medical, legal, or financial analysis where you need confidence that the reasoning, not just the answer, is sound.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Problems with Known Systematic Errors</strong>
+                                    <p>When you know the model tends to make the same mistake repeatedly on certain problem types &mdash; diverse prompting breaks the error correlation that defeats simple majority vote.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Batch Processing Pipelines</strong>
+                                    <p>Automated systems processing many reasoning tasks where human review of each output is impractical &mdash; the verifier acts as an automated quality filter at scale.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Latency-Sensitive Applications</strong>
+                                    <p>DiVeRSe requires generating many paths across multiple prompts plus running a verifier on each &mdash; the computational cost is substantial and unsuitable for real-time interactions.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple or Single-Step Questions</strong>
+                                    <p>Questions with straightforward answers gain little from the overhead of diverse prompting and step verification &mdash; the machinery is designed for multi-step reasoning.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative or Subjective Tasks</strong>
+                                    <p>Writing, brainstorming, and opinion-based tasks have no objectively verifiable steps &mdash; the verifier model needs ground-truth correctness to function, which subjective tasks lack.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where DiVeRSe delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Competitive Math</h3>
+                        <p class="use-case-showcase__desc">Solve competition-level math problems by generating solutions from algebraic, geometric, and combinatorial perspectives, then verifying each derivation step for logical soundness.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Diagnosis</h3>
+                        <p class="use-case-showcase__desc">Evaluate differential diagnoses by prompting from symptom-first, history-first, and test-result-first angles, then scoring each diagnostic inference step for clinical validity.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Code Debugging</h3>
+                        <p class="use-case-showcase__desc">Diagnose software bugs using diverse analysis approaches &mdash; trace execution, examine data flow, review type constraints &mdash; then verify each hypothesis step before committing to a fix.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Legal Contract Review</h3>
+                        <p class="use-case-showcase__desc">Analyze contract clauses from liability, compliance, and commercial perspectives simultaneously, verifying each legal interpretation step against established precedent and statutory language.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Modeling</h3>
+                        <p class="use-case-showcase__desc">Validate financial projections by generating forecasts using DCF, comparable analysis, and precedent transaction methods, then scoring each assumption and calculation step for reasonableness.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Safety-Critical Systems</h3>
+                        <p class="use-case-showcase__desc">Verify reasoning in safety-critical domains like aerospace or nuclear engineering, where every inference step must be independently validated before any conclusion is acted upon.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where DiVeRSe Fits</h2>
+                <p class="section-subtitle fade-in-up">DiVeRSe bridges simple ensemble voting and modern reward-model verification</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Consistency</span>
+                        <span class="era-marker__title">Majority Vote</span>
+                        <span class="era-marker__desc">Sample multiple paths, vote on answers</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">DiVeRSe</span>
+                        <span class="era-marker__title">Verified Diverse Vote</span>
+                        <span class="era-marker__desc">Diverse prompts + step verification + weighted vote</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Process Reward Models</span>
+                        <span class="era-marker__title">Learned Step Scoring</span>
+                        <span class="era-marker__desc">Neural verifiers trained on step-level labels</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Best-of-N + RM</span>
+                        <span class="era-marker__title">Modern Verification</span>
+                        <span class="era-marker__desc">Sample and select via reward model scoring</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The Diversity Principle Lives On</div>
+                    <p>While DiVeRSe&rsquo;s specific three-component architecture &mdash; diverse prompts, step verifier, weighted vote &mdash; has been superseded by simpler implementations, its core principle is now a standard best practice: <strong>never rely on a single reasoning path when accuracy matters</strong>. Modern systems like OpenAI&rsquo;s process reward models and Anthropic&rsquo;s constitutional AI both incorporate forms of step-level verification. The lesson from DiVeRSe is that diversity of approach and quality of verification are complementary forces, and the best results come from combining both.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary ensemble and verification techniques</p>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">The majority-voting technique that DiVeRSe extends &mdash; sample multiple paths and vote, but without step verification or prompt diversity.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-verification.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Self-Verification</span>
+                        <span class="evolution-callout__desc">Uses the model itself as the verifier to check its own outputs &mdash; a lighter-weight alternative to DiVeRSe&rsquo;s trained external verifier.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="example-selection.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Demonstration Ensembling</span>
+                        <span class="evolution-callout__desc">Explores how different example selections influence model behavior &mdash; the diversity mechanism that powers DiVeRSe&rsquo;s multiple prompt construction.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Verify Your Reasoning</h2>
+                        <p class="cta-corporate__text">Apply the principles of diverse generation and step-level verification to your own prompts, or explore ensemble techniques with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
     </main>
 
+    <!-- === FOOTER + BACK-TO-TOP === -->
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -284,6 +765,85 @@
         </div>
     </div>
 </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+    <!-- /FOOTER + BACK-TO-TOP -->
+
+    <!-- === ACCESSIBILITY DASHBOARD === -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+    <!-- /ACCESSIBILITY DASHBOARD -->
 
     <script src="../app.js" defer></script>
 </body>

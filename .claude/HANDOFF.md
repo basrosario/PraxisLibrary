@@ -1,34 +1,34 @@
 # Praxis Project Handoff Document
 
-**Last Updated:** 2026-02-06 (Session 34)
-**Last Commit:** (pending — Wave 4 complete, awaiting commit)
-**Current Phase:** Framework Quality Redesign (Waves 1-4 complete, Wave 5 next)
+**Last Updated:** 2026-02-07 (Session 35)
+**Last Commit:** (pending push) - feat: Redesign Wave 5 (Example Methods) — 7 pages expanded to 13-section template
+**Current Phase:** Framework Quality Redesign (Waves 1-5 complete, Wave 6 next)
 
 ---
 
-## CURRENT SESSION STATUS (Session 34)
+## CURRENT SESSION STATUS (Session 35)
 
 ### Completed This Session
 
-#### Wave 4 — Advanced Reasoning: Full Redesign (7 pages)
+#### Wave 5 — Example Methods: Full Redesign (7 pages)
 
-All 7 pages redesigned from ~290 lines to 830-850 lines using the 13-section template (self-ask.html reference).
+All 7 pages redesigned from ~290 lines to 844-863 lines using the 13-section template (self-ask.html reference).
 
 | # | File | Lines | Framework Category | Year/Authors |
 |---|------|-------|--------------------|--------------|
-| 1 | `learn/analogical-reasoning.html` | 839 | Thought Generation | 2023, Yasunaga et al. |
-| 2 | `learn/meta-reasoning.html` | 836 | Strategy Selection | 2024, Xu et al. |
-| 3 | `learn/thread-of-thought.html` | 850 | Long Context Processing | 2023, Zhou et al. |
-| 4 | `learn/memory-of-thought.html` | 847 | Memory Systems | 2023, Li et al. |
-| 5 | `learn/simtom.html` | 849 | Perspective Taking | 2023, Wilf et al. |
-| 6 | `learn/max-mutual-info.html` | 830 | Example Selection | 2022 |
-| 7 | `learn/universal-self-consistency.html` | 846 | Ensemble Methods | 2023, Chen et al. |
+| 1 | `learn/active-prompting.html` | 863 | Active Learning | 2023, Diao et al. |
+| 2 | `learn/knn-prompting.html` | 845 | Example Selection | 2022, Xu et al. |
+| 3 | `learn/vote-k.html` | 854 | Active Learning | 2022, Su et al. |
+| 4 | `learn/demo-ensembling.html` | 856 | Ensemble Methods | 2022 |
+| 5 | `learn/diverse-prompting.html` | 849 | Ensemble Methods | 2022, Li et al. |
+| 6 | `learn/dense-prompting.html` | 846 | Prompt Design | 2023 |
+| 7 | `learn/prompt-mining.html` | 844 | Prompt Automation | 2022, Jiang et al. |
 
 **Quality checks passed:** 0 inline styles, 0 inline scripts, 0 external resources, all 13 sections present in every file, accessibility dashboard included.
 
 ---
 
-## NEXT UP: Wave 5 — Example Methods (7 pages)
+## NEXT UP: Wave 6 — Style & Emotion (6 pages)
 
 Each page must be redesigned from ~290 lines to 700-1000+ lines using the 13-section template.
 
@@ -36,13 +36,12 @@ Each page must be redesigned from ~290 lines to 700-1000+ lines using the 13-sec
 
 | # | File | Current Lines | Target |
 |---|------|--------------|--------|
-| 1 | `learn/active-prompting.html` | ~290 | 700-1000+ |
-| 2 | `learn/knn-prompting.html` | ~290 | 700-1000+ |
-| 3 | `learn/vote-k.html` | ~290 | 700-1000+ |
-| 4 | `learn/demo-ensembling.html` | ~290 | 700-1000+ |
-| 5 | `learn/diverse-prompting.html` | ~290 | 700-1000+ |
-| 6 | `learn/dense-prompting.html` | ~290 | 700-1000+ |
-| 7 | `learn/prompt-mining.html` | ~290 | 700-1000+ |
+| 1 | `learn/emotion-prompting.html` | ~290 | 700-1000+ |
+| 2 | `learn/style-prompting.html` | ~290 | 700-1000+ |
+| 3 | `learn/s2a.html` | ~290 | 700-1000+ |
+| 4 | `learn/re2.html` | ~290 | 700-1000+ |
+| 5 | `learn/cosp.html` | ~290 | 700-1000+ |
+| 6 | `learn/rar.html` | ~290 | 700-1000+ |
 
 ### Remaining Waves
 
@@ -52,8 +51,8 @@ Each page must be redesigned from ~290 lines to 700-1000+ lines using the 13-sec
 | Wave 2 — CoT Variants | 8 pages | ✅ COMPLETE |
 | Wave 3 — Decomposition | 6 pages | ✅ COMPLETE |
 | Wave 4 — Advanced Reasoning | 7 pages | ✅ COMPLETE |
-| Wave 5 — Example Methods | 7 pages (active-prompting, knn-prompting, vote-k, demo-ensembling, diverse-prompting, dense-prompting, prompt-mining) | ⬜ START HERE |
-| Wave 6 — Style & Emotion | 6 pages (emotion-prompting, style-prompting, s2a, re2, cosp, rar) | ⬜ PENDING |
+| Wave 5 — Example Methods | 7 pages | ✅ COMPLETE |
+| Wave 6 — Style & Emotion | 6 pages (emotion-prompting, style-prompting, s2a, re2, cosp, rar) | ⬜ START HERE |
 
 ---
 

@@ -3,7 +3,7 @@
 **Project:** Comprehensive expansion of Praxis Library frameworks based on The Prompt Report
 **Source:** arXiv:2406.06608v6 - "The Prompt Report: A Systematic Survey of Prompting Techniques"
 **Start Date:** 2026-02-04
-**Last Updated:** 2026-02-06 (Session 34)
+**Last Updated:** 2026-02-07 (Session 35)
 
 ---
 
@@ -778,6 +778,33 @@ Resources (mega-menu)
 
 # SESSION LOG
 
+## Session 35 (2026-02-07)
+
+**Focus:** Wave 5 — Example Methods Quality Redesign (7 pages)
+**Status:** COMPLETE
+
+**Completed:**
+- [x] **Wave 5: Example Methods Quality Redesign (7 pages)**
+  - `learn/active-prompting.html` — 290→863 lines (Active Learning, 2023 by Diao et al.)
+  - `learn/knn-prompting.html` — 290→845 lines (Example Selection, 2022 by Xu et al.)
+  - `learn/vote-k.html` — 290→854 lines (Active Learning, 2022 by Su et al.)
+  - `learn/demo-ensembling.html` — 290→856 lines (Ensemble Methods, 2022)
+  - `learn/diverse-prompting.html` — 290→849 lines (Ensemble Methods, 2022 by Li et al.)
+  - `learn/dense-prompting.html` — 290→846 lines (Prompt Design, 2023)
+  - `learn/prompt-mining.html` — 290→844 lines (Prompt Automation, 2022 by Jiang et al.)
+  - All 13 sections, zero inline styles/scripts, historical context notices
+  - Quality checks: 0 CSP violations, all sections verified
+
+**Files Modified:**
+- 7 learn/*.html files (full redesigns)
+- `.claude/HANDOFF.md` (session update)
+- `.claude/COMPLETED.md` (archived Session 34)
+- `.claude/plans/FrameworkOverhaul.md` (this file)
+
+**Next Session:** Wave 6 — Style & Emotion (6 pages: emotion-prompting, style-prompting, s2a, re2, cosp, rar)
+
+---
+
 ## Session 34 (2026-02-06)
 
 **Focus:** Wave 4 — Advanced Reasoning Quality Redesign (7 pages)
@@ -1331,9 +1358,9 @@ LOW Priority: [██████████████████░░] 88%
 
 **Note:** Navigation updated with Advanced + Self-Correction + Code sections in all 99+ files
 
-### Quality Redesign Waves (27/40 pages complete) — Track Started Session 29
+### Quality Redesign Waves (34/40 pages complete) — Track Started Session 29
 ```
-Progress: [█████████████░░░░░░░] 68%
+Progress: [█████████████████░░░] 85%
 ```
 All 40 existing framework pages being redesigned to match ReAct/COSTAR/Flipped Interaction quality standard (13-section template, 700-1000+ lines each).
 
@@ -1343,8 +1370,8 @@ All 40 existing framework pages being redesigned to match ReAct/COSTAR/Flipped I
 | Wave 2 — CoT Variants | 8 pages (auto-cot, contrastive-cot, structured-cot, faithful-cot, complexity-prompting, tab-cot, reversing-cot, cumulative-reasoning) | ✅ COMPLETE (Session 31) |
 | Wave 3 — Decomposition | 6 pages (decomp, self-ask, step-back, graph-of-thought, program-of-thought, recursion-of-thought) | ✅ COMPLETE (Session 32) |
 | Wave 4 — Advanced Reasoning | 7 pages (analogical-reasoning, meta-reasoning, thread-of-thought, memory-of-thought, simtom, max-mutual-info, universal-self-consistency) | ✅ COMPLETE (Session 34) |
-| Wave 5 — Example Methods | 7 pages (active-prompting, knn-prompting, vote-k, demo-ensembling, diverse-prompting, dense-prompting, prompt-mining) | ⬜ START HERE |
-| Wave 6 — Style & Emotion | 6 pages (emotion-prompting, style-prompting, s2a, re2, cosp, rar) | ⬜ PENDING |
+| Wave 5 — Example Methods | 7 pages (active-prompting, knn-prompting, vote-k, demo-ensembling, diverse-prompting, dense-prompting, prompt-mining) | ✅ COMPLETE (Session 35) |
+| Wave 6 — Style & Emotion | 6 pages (emotion-prompting, style-prompting, s2a, re2, cosp, rar) | ⬜ START HERE |
 
 **Reference templates:** `learn/critic.html` (898 lines) or `learn/auto-cot.html` (855 lines) — both have all 13 sections
 

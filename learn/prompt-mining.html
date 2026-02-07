@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Prompt Mining: Automatically discover effective prompt templates by searching through possible phrasings.">
+    <meta name="description" content="Prompt Mining: Automatically discover effective prompt templates by systematically searching through candidate phrasings, evaluating performance, and surfacing optimal formulations that humans would never think to try.">
     <title>Prompt Mining - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
@@ -22,7 +22,7 @@
                         <div class="mega-menu-section">
                             <h4>Getting Started</h4>
                             <a href="prompt-basics.html">Prompt Basics</a>
-                            <a href="facts-fictions.html">Facts & Fictions</a>
+                            <a href="facts-fictions.html">Facts &amp; Fictions</a>
                         </div>
                         <div class="mega-menu-section">
                             <h4>Frameworks</h4>
@@ -108,7 +108,7 @@
                             <a href="../pages/performance.html">Performance</a>
                         </div>
                         <div class="mega-menu-section mega-menu-section--featured">
-                            <h4>AI & ND</h4>
+                            <h4>AI &amp; ND</h4>
                             <a href="../neurodivergence/index.html">ND Hub</a>
                             <a href="../neurodivergence/adhd.html">AI for ADHD</a>
                             <a href="../neurodivergence/autism.html">AI for Autism</a>
@@ -131,7 +131,10 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -143,95 +146,567 @@
                     <span class="current">Prompt Mining</span>
                 </nav>
                 <div class="hero-badge">
-                    <span class="hero-badge__text">Automation</span>
+                    <span class="hero-badge__text">Prompt Automation Technique</span>
                 </div>
                 <h1 class="page-title fade-in">Prompt Mining</h1>
-                <p class="page-subtitle fade-in">Automatically discover effective prompt templates.</p>
+                <p class="page-subtitle fade-in">Instead of hand-crafting prompts through intuition and trial-and-error, Prompt Mining automates the discovery of effective prompt templates &mdash; systematically searching through candidate phrasings, evaluating each one against real tasks, and surfacing formulations that humans would never think to try.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2022, Jiang et al.</span>
+                        <p><strong>Introduced:</strong> Prompt Mining was introduced by Jiang et al. in 2022 as an automated approach to prompt discovery. The core idea is straightforward but powerful: instead of relying on human intuition to craft the perfect prompt, the technique systematically searches through possible phrasings to find templates that maximize task performance. The original method focused on fill-in-the-blank cloze-style templates, mining large text corpora (such as Wikipedia) to discover naturally occurring sentence patterns that could serve as effective prompts for masked language models. By treating prompt design as a search problem rather than an art form, the technique removed the bottleneck of manual prompt engineering.</p>
+                        <p><strong>Modern LLM Status:</strong> The idea of systematically searching for optimal prompts has evolved into broader prompt optimization frameworks. Modern tools like DSPy and automatic prompt engineering systems build on these foundational ideas, using gradient-based methods, evolutionary search, and LLM-driven rewriting to discover high-performing prompts at scale. The specific corpus-mining approach &mdash; searching for cloze templates in text corpora &mdash; is less common with today&rsquo;s instruction-tuned models, which respond well to natural language instructions. However, the <strong>core principle remains deeply relevant</strong>: small phrasing differences can dramatically affect model performance, and automated search consistently finds formulations that outperform human-crafted prompts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Automated Prompt Discovery</h2>
-                        <p class="section-intro">Prompt Mining automatically searches for effective prompt phrasings rather than relying on manual trial and error. By systematically exploring variations and measuring performance, it discovers templates that work well for specific tasks.</p>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Phrasing Is Performance</h2>
+                        <p class="split-section__text">A surprising truth about language models: the exact words you use in a prompt can swing accuracy by double-digit percentages. Asking &ldquo;Is this review positive or negative?&rdquo; versus &ldquo;The sentiment of this review is ___&rdquo; versus &ldquo;This review expresses a ___ opinion&rdquo; can produce wildly different results on the same model with the same data. Human prompt engineers typically test a handful of variations and pick the best one, but the search space of possible phrasings is enormous.</p>
+                        <p class="split-section__text"><strong>Prompt Mining turns prompt design into a search problem.</strong> Instead of relying on intuition, it generates hundreds or thousands of candidate prompt templates, evaluates each one against a validation set, and selects the top performers. The technique treats the prompt as a variable to be optimized, not a fixed input to be guessed at. This is the same philosophical shift that transformed machine learning itself &mdash; replacing hand-tuned features with learned representations.</p>
+                        <p class="split-section__text">Think of it like testing a thousand different keys on a lock rather than trying to pick it by hand. Most keys will not fit, but the automated search will find the ones that do &mdash; including shapes no locksmith would have thought to try.</p>
+                    </div>
+                    <div class="split-section__visual">
                         <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Insight</span>
-                                <p>Small phrasing changes can significantly impact performance. Mining explores this space systematically to find optimal formulations.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Process</span>
-                                <p>1) Generate prompt variations. 2) Test on validation set. 3) Select best performers. 4) Refine and iterate.</p>
+                                <span class="highlight-box__title">Why Automated Search Beats Human Intuition</span>
+                                <p>Human prompt engineers bring useful domain knowledge, but they also bring biases. We tend to phrase prompts in ways that sound natural to us, favoring grammatically elegant or verbose instructions. Models, however, often respond better to terse, unusual, or even grammatically awkward phrasings that no human would naturally write. Prompt Mining explores this counter-intuitive space &mdash; discovering that sometimes <strong>&ldquo;Review. Sentiment:&rdquo;</strong> outperforms a carefully worded paragraph of instructions.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE CONCEPT -->
 
+        <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Methods</span>
-                    <h2 class="section-title">Mining Approaches</h2>
-                </div>
+                <h2 class="section-title fade-in-up">The Prompt Mining Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from task definition to optimized template</p>
 
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Template Search</h3>
-                        <p class="pillar-card__text">Try different sentence structures and phrasings for the same instruction.</p>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define the Task and Evaluation Criteria</h3>
+                            <p class="element-timeline__text">Start by clearly specifying what the prompt needs to accomplish and how you will measure success. This means selecting a task (sentiment analysis, relation extraction, question answering), assembling a labeled validation set, and choosing a performance metric such as accuracy, F1 score, or exact match. Without a concrete evaluation framework, automated search has no signal to optimize against.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Task: Classify movie reviews as positive or negative. Metric: Accuracy on 500 labeled reviews. Baseline: 72% with the hand-crafted prompt &ldquo;Is this review positive or negative?&rdquo;</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Paraphrase Generation</h3>
-                        <p class="pillar-card__text">Use models to generate paraphrases, then test which work best.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Generate Candidate Prompt Variations</h3>
+                            <p class="element-timeline__text">Produce a large pool of candidate prompts using one or more generation strategies. The original Prompt Mining technique searched text corpora for naturally occurring sentence patterns containing the relevant entities. Modern approaches include paraphrasing existing prompts, using an LLM to generate alternative phrasings, applying template transformations (active to passive, question to statement), and even evolutionary mutation of high-performing candidates.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>From the seed &ldquo;Is this review positive or negative?&rdquo; &mdash; generate 200 variations: &ldquo;This review is ___&rdquo;, &ldquo;The sentiment expressed here is ___&rdquo;, &ldquo;Rate the tone: ___&rdquo;, &ldquo;Review polarity:&rdquo;, &ldquo;[Review] Overall feeling:&rdquo;, and hundreds more.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Gradient-Guided</h3>
-                        <p class="pillar-card__text">Use optimization signals to guide prompt modification toward better performance.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Evaluate Each Candidate on the Validation Set</h3>
+                            <p class="element-timeline__text">Run every candidate prompt against the validation examples and score the results. This is the computationally expensive step &mdash; each candidate requires a full pass through the evaluation data. Efficient implementations use early stopping (discarding clearly underperforming candidates after a subset), batching, and stratified sampling to manage cost while maintaining statistical reliability.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>200 candidates tested on 500 reviews each = 100,000 model calls. With early stopping after 50 reviews, poor candidates are eliminated quickly, reducing total calls to roughly 15,000. Top 10 candidates are then evaluated on the full set.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Select Top Performers and Optionally Refine</h3>
+                            <p class="element-timeline__text">Rank candidates by their validation performance and select the best template. Optionally, use the top performers as seeds for a second round of generation &mdash; creating variations of the winners and evaluating again. This iterative refinement narrows in on the optimal phrasing. The final prompt can also be ensembled: using multiple high-performing templates together and aggregating their outputs for even greater reliability.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Winner: &ldquo;[Review] Sentiment:&rdquo; scores 84% accuracy &mdash; a 12-point improvement over the baseline. The top 3 candidates are ensembled for production, boosting accuracy to 87%.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /HOW IT WORKS -->
 
+        <!-- === THE COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="auto-cot.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Auto-CoT</h3>
-                            <p class="icon-box__content">Automated example generation.</p>
-                        </div>
-                    </a>
-                    <a href="rar.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Rephrase and Respond</h3>
-                            <p class="icon-box__content">Rephrasing for clarity.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why systematic search outperforms manual prompt crafting</p>
 
-        <section class="section">
-            <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try Prompt Mining</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Manual Prompt Crafting</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Engineer writes: &ldquo;Please analyze the following customer review and determine whether the overall sentiment is positive or negative. Consider the tone, word choice, and any explicit opinions expressed.&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Outcome</span>
+                                <p>Tests 3&ndash;5 variations over a few hours. Settles on the best guess. Achieves 74% accuracy. Confident it&rsquo;s &ldquo;good enough&rdquo; because the prompt sounds thorough and well-structured to a human reader.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Small search space, human bias, no performance guarantee</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Prompt Mining</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>System generates 500 candidate templates from corpus patterns, paraphrases, and structural transformations. Each is evaluated against 200 labeled examples. Top candidates are refined through a second generation round.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Outcome</span>
+                                <p>Discovers that the terse template &ldquo;[Review] Sentiment:&rdquo; achieves 86% accuracy &mdash; a phrasing no human engineer tested because it &ldquo;doesn&rsquo;t look like a real prompt.&rdquo; The model prefers concise, structured inputs over verbose instructions for this task.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Exhaustive search, data-driven selection, measurable improvement</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Prompt Mining in Action</h2>
+                <p class="section-subtitle fade-in-up">See how automated search discovers unexpected high-performing prompts</p>
+
+                <div class="accordion fade-in-up" id="prompt-mining-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Sentiment Classification</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task Setup</span>
+                                    <p>Classify product reviews as positive or negative. The human-crafted baseline prompt is: &ldquo;Read the following review and determine whether the customer&rsquo;s overall sentiment is positive or negative.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Mining Results</span>
+                                    <p><strong>Candidate pool:</strong> 300 templates generated from corpus mining and paraphrase generation.<br><br>
+                                    <strong>Top 5 discovered templates:</strong><br>
+                                    1. &ldquo;[Review] Overall:&rdquo; &mdash; 85.2% accuracy<br>
+                                    2. &ldquo;The review expressed a ___ sentiment.&rdquo; &mdash; 84.8% accuracy<br>
+                                    3. &ldquo;Review tone: ___&rdquo; &mdash; 84.1% accuracy<br>
+                                    4. &ldquo;This is a ___ review.&rdquo; &mdash; 83.6% accuracy<br>
+                                    5. &ldquo;Sentiment of the above:&rdquo; &mdash; 83.2% accuracy<br><br>
+                                    <strong>Human baseline:</strong> 76.4% accuracy<br><br>
+                                    <strong>Key insight:</strong> The winning template is shorter and less &ldquo;polite&rdquo; than any human-written version. The verbose, instruction-style prompt actually confused the model by introducing unnecessary context that diluted the classification signal.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Relation Extraction</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task Setup</span>
+                                    <p>Given a sentence containing two entities, identify the relationship between them (e.g., &ldquo;born in,&rdquo; &ldquo;works for,&rdquo; &ldquo;founded&rdquo;). The human-crafted baseline: &ldquo;What is the relationship between [Entity A] and [Entity B] in the following sentence?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Mining Results</span>
+                                    <p><strong>Corpus mining approach:</strong> Searched Wikipedia for sentences containing known entity pairs and extracted the connecting phrases as candidate templates.<br><br>
+                                    <strong>Discovery:</strong> The pattern &ldquo;[Entity A] ___ [Entity B]&rdquo; with a simple fill-in-the-blank format outperformed question-style prompts by a wide margin. The corpus yielded templates like &ldquo;[Entity A] was born in [Entity B]&rdquo; and &ldquo;[Entity A], who founded [Entity B]&rdquo; that naturally matched the model&rsquo;s pre-training distribution.<br><br>
+                                    <strong>Key insight:</strong> Prompts that mirror the patterns the model encountered during pre-training activate stronger associations than novel question formats. Mining the training-like corpus surfaces these natural patterns automatically.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Question Answering</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task Setup</span>
+                                    <p>Given a passage and a question, extract the correct answer span. The human-crafted baseline: &ldquo;Based on the passage above, answer the following question.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Mining Results</span>
+                                    <p><strong>Generation strategy:</strong> Combined corpus mining with LLM-based paraphrasing to produce 400 candidate templates varying in structure, verbosity, and instruction framing.<br><br>
+                                    <strong>Surprising finding:</strong> Templates that placed the question before the passage (&ldquo;Question: [Q]. Context: [P]. Answer:&rdquo;) consistently outperformed passage-first formats, despite passage-first being the more &ldquo;natural&rdquo; reading order. Additionally, adding the single word &ldquo;Answer:&rdquo; at the end of any template improved performance by 3&ndash;5 percentage points across all variations.<br><br>
+                                    <strong>Key insight:</strong> Structural choices (ordering, termination tokens) matter as much as word choice. Prompt Mining explores these structural dimensions automatically, discovering patterns that challenge human assumptions about how prompts should be organized.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Prompt Mining</h2>
+                <p class="section-subtitle fade-in-up">Best for high-stakes tasks where prompt quality directly impacts outcomes</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Production Classification Systems</strong>
+                                    <p>When a prompt runs millions of times, even a small accuracy improvement translates to thousands fewer errors &mdash; making the upfront search cost trivial by comparison.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Model Migration</strong>
+                                    <p>When switching between models or updating to a new version, previously optimized prompts may underperform &mdash; Prompt Mining re-optimizes templates for the new model&rsquo;s characteristics.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Benchmarking and Research</strong>
+                                    <p>When reporting model performance on tasks, Prompt Mining ensures results reflect the model&rsquo;s true capability rather than the researcher&rsquo;s prompt-writing skill.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Non-English and Specialized Domains</strong>
+                                    <p>Human intuition about effective phrasing is weakest in unfamiliar languages or technical domains &mdash; automated search fills the expertise gap systematically.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>One-Off or Exploratory Tasks</strong>
+                                    <p>If you are running a prompt once or a few times, the overhead of generating and evaluating hundreds of candidates far exceeds any accuracy benefit.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>No Labeled Evaluation Data</strong>
+                                    <p>Prompt Mining requires a validation set with known correct answers to score candidates. Without labeled data, there is no objective signal to guide the search.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative or Subjective Outputs</strong>
+                                    <p>Tasks like creative writing, brainstorming, or opinion generation have no single correct answer &mdash; making automated scoring unreliable and the mining process ill-defined.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Prompt Mining delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Moderation</h3>
+                        <p class="use-case-showcase__desc">Optimize classification prompts for detecting harmful content at scale, where even a 2% accuracy improvement prevents thousands of toxic posts from reaching users daily.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Document Processing</h3>
+                        <p class="use-case-showcase__desc">Mine optimal extraction templates for pulling structured data from contracts, invoices, or medical records &mdash; tasks where prompt phrasing directly affects extraction accuracy.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Search and Retrieval</h3>
+                        <p class="use-case-showcase__desc">Discover optimal query reformulation templates that improve semantic search relevance by finding phrasings that better align with how information is stored in vector databases.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Multi-Language Deployment</h3>
+                        <p class="use-case-showcase__desc">Automatically find high-performing prompt templates for languages where the engineering team lacks native fluency, removing the human-expertise bottleneck from localization.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical NLP</h3>
+                        <p class="use-case-showcase__desc">Optimize prompts for clinical text understanding &mdash; extracting diagnoses, medications, and procedures from notes &mdash; where domain-specific phrasing patterns differ dramatically from general language.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">A/B Testing Pipelines</h3>
+                        <p class="use-case-showcase__desc">Use Prompt Mining as the candidate generation phase for prompt A/B testing pipelines, producing a diverse set of high-quality candidates to test against live production traffic.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Prompt Mining Fits</h2>
+                <p class="section-subtitle fade-in-up">From manual craft to automated optimization</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Manual Prompting</span>
+                        <span class="era-marker__title">Human Intuition</span>
+                        <span class="era-marker__desc">Trial-and-error prompt writing</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Prompt Mining</span>
+                        <span class="era-marker__title">Automated Search</span>
+                        <span class="era-marker__desc">Corpus-based template discovery</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Auto-CoT / APE</span>
+                        <span class="era-marker__title">LLM-Driven Optimization</span>
+                        <span class="era-marker__desc">Models generate and refine their own prompts</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">DSPy / OPRO</span>
+                        <span class="era-marker__title">Programmatic Frameworks</span>
+                        <span class="era-marker__desc">End-to-end prompt compilation and optimization</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The Broader Trend: Prompts as Learned Parameters</div>
+                    <p>Prompt Mining represents a pivotal conceptual shift: treating prompts not as static instructions written by humans, but as <strong>optimizable parameters</strong> that can be searched, tuned, and refined through data-driven methods. This same principle now drives the entire field of automatic prompt engineering &mdash; from soft prompt tuning in research to production optimization frameworks like DSPy. The lesson endures: whenever you have labeled data and a clear metric, let the algorithm find the prompt.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary prompt automation techniques</p>
+
+                <a href="zero-shot-cot.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related Discovery</span>
+                        <span class="evolution-callout__title">Auto-CoT / Zero-Shot CoT</span>
+                        <span class="evolution-callout__desc">Another prompt automation breakthrough &mdash; discovering that &ldquo;Let&rsquo;s think step by step&rdquo; unlocks reasoning without examples, found through systematic prompt search rather than manual design.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="rar.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Rephrase and Respond (RAR)</span>
+                        <span class="evolution-callout__desc">Instead of mining corpora for templates, RAR asks the model itself to rephrase the prompt before answering &mdash; a lightweight, model-driven approach to finding better phrasings on the fly.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="example-selection.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Example Selection</span>
+                        <span class="evolution-callout__desc">While Prompt Mining optimizes the template text, Example Selection optimizes which few-shot examples to include &mdash; a complementary dimension of prompt optimization that can be combined for maximum effect.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Optimize Your Prompts</h2>
+                        <p class="cta-corporate__text">Stop guessing at prompt phrasing. Use our tools to analyze, build, and refine your prompts with data-driven methods.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../tools/analyzer.html" class="btn btn-secondary">Prompt Analyzer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
     </main>
 
+
+    <!-- === FOOTER + BACK-TO-TOP === -->
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -284,6 +759,85 @@
         </div>
     </div>
 </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+    <!-- /FOOTER + BACK-TO-TOP -->
+
+    <!-- === ACCESSIBILITY DASHBOARD === -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+    <!-- /ACCESSIBILITY DASHBOARD -->
 
     <script src="../app.js" defer></script>
 </body>

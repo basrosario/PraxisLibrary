@@ -105,6 +105,19 @@
 
 ## Session Work Logs (Archived)
 
+### Session 35 (2026-02-07)
+**Wave 5 — Example Methods: Full Redesign (7 pages)**
+- Redesigned all 7 pages from ~290 lines to 844-863 lines using 13-section template
+- active-prompting.html (863 lines) — Active Learning, 2023 by Diao et al.
+- knn-prompting.html (845 lines) — Example Selection, 2022 by Xu et al.
+- vote-k.html (854 lines) — Active Learning, 2022 by Su et al.
+- demo-ensembling.html (856 lines) — Ensemble Methods, 2022
+- diverse-prompting.html (849 lines) — Ensemble Methods, 2022 by Li et al.
+- dense-prompting.html (846 lines) — Prompt Design, 2023
+- prompt-mining.html (844 lines) — Prompt Automation, 2022 by Jiang et al.
+- Quality checks: 0 inline styles, 0 inline scripts, 0 external resources, all 13 sections present
+- 7 background agents used for parallel page generation
+
 ### Session 34 (2026-02-06)
 **Wave 4 — Advanced Reasoning: Full Redesign (7 pages)**
 - Redesigned all 7 pages from ~290 lines to 830-850 lines using 13-section template

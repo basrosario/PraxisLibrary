@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Vote-K: Have the model vote on which unlabeled examples would be most useful to label for few-shot learning.">
-    <title>Vote-K - Praxis</title>
+    <meta name="description" content="Vote-K Prompting: Let the model vote on which unlabeled examples would be most valuable to annotate, focusing human effort on the most impactful demonstrations.">
+    <title>Vote-K Prompting - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
 </head>
@@ -22,7 +22,7 @@
                         <div class="mega-menu-section">
                             <h4>Getting Started</h4>
                             <a href="prompt-basics.html">Prompt Basics</a>
-                            <a href="facts-fictions.html">Facts & Fictions</a>
+                            <a href="facts-fictions.html">Facts &amp; Fictions</a>
                         </div>
                         <div class="mega-menu-section">
                             <h4>Frameworks</h4>
@@ -108,7 +108,7 @@
                             <a href="../pages/performance.html">Performance</a>
                         </div>
                         <div class="mega-menu-section mega-menu-section--featured">
-                            <h4>AI & ND</h4>
+                            <h4>AI &amp; ND</h4>
                             <a href="../neurodivergence/index.html">ND Hub</a>
                             <a href="../neurodivergence/adhd.html">AI for ADHD</a>
                             <a href="../neurodivergence/autism.html">AI for Autism</a>
@@ -131,7 +131,10 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -143,119 +146,576 @@
                     <span class="current">Vote-K</span>
                 </nav>
                 <div class="hero-badge">
-                    <span class="hero-badge__text">Active Learning</span>
+                    <span class="hero-badge__text">Active Learning Technique</span>
                 </div>
-                <h1 class="page-title fade-in">Vote-K</h1>
-                <p class="page-subtitle fade-in">Let the model vote on which examples to annotate.</p>
+                <h1 class="page-title fade-in">Vote-K Prompting</h1>
+                <p class="page-subtitle fade-in">Not all unlabeled data is created equal. Vote-K lets the model itself vote on which examples from an unlabeled pool would be most valuable to annotate &mdash; concentrating expensive human effort on the demonstrations that will actually move the needle.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
-        <section class="section section-alt">
-            <div class="container">
-                <div class="split-section">
-                    <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Selective Annotation</h2>
-                        <p class="section-intro">Vote-K is an active learning approach where the model helps select which unlabeled examples would be most valuable to annotate. By voting on candidate examples, it identifies the ones most likely to improve performance when added to the demonstration pool.</p>
-                        <div class="highlight-box highlight-box--info">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Key Benefit</span>
-                                <p>Reduces annotation effort by focusing labeling work on examples the model finds most informative, rather than randomly selected ones.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Process</span>
-                                <p>1) Present unlabeled candidates. 2) Model votes on usefulness. 3) Annotate top-voted examples. 4) Add to demonstration pool.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        <!-- === HISTORICAL CONTEXT === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Workflow</span>
-                    <h2 class="section-title">Vote-K Steps</h2>
-                </div>
-
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Candidate Pool</h3>
-                        <p class="pillar-card__text">Gather unlabeled examples that could potentially be annotated and used as demonstrations.</p>
-                    </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Voting</h3>
-                        <p class="pillar-card__text">Ask the model to select k examples it believes would be most helpful if labeled.</p>
-                    </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Integration</h3>
-                        <p class="pillar-card__text">After annotation, add voted examples to improve future few-shot prompts.</p>
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2022, Su et al.</span>
+                        <p><strong>Introduced:</strong> Vote-K was proposed by Su et al. in 2022 as an active learning strategy for in-context learning. The core idea is elegant: rather than randomly selecting which unlabeled examples to annotate for few-shot demonstrations, let the language model itself &ldquo;vote&rdquo; on which k candidates from an unlabeled pool would be most informative. The model evaluates each candidate&rsquo;s potential contribution to the demonstration set, effectively identifying examples that sit near decision boundaries or cover underrepresented patterns. This transforms demonstration pool construction from a guessing game into a guided, model-informed selection process.</p>
+                        <p><strong>Modern LLM Status:</strong> The concept of model-guided data selection remains highly relevant for building high-quality demonstration pools, especially in specialized domains where annotation is expensive. While modern LLMs like Claude, GPT-4, and Gemini have reduced the need for carefully curated few-shot examples in general tasks, Vote-K&rsquo;s principles shine in domain-specific applications &mdash; medical coding, legal classification, and technical support routing &mdash; where each annotated example costs real time and expert attention. The broader insight that <strong>strategic data curation outperforms brute-force data collection</strong> has become a foundational principle in applied AI.</p>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /HISTORICAL CONTEXT -->
 
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Use Cases</span>
-                    <h2 class="section-title">When Vote-K Helps</h2>
-                </div>
-
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Limited Budget</h3>
-                        <p class="pillar-card__text">When you can only afford to label a small number of examples.</p>
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Model-Guided Selective Annotation</h2>
+                        <p class="split-section__text">When building a demonstration pool for few-shot prompting, the default approach is to annotate examples at random. But random selection wastes effort on easy, redundant cases that the model already handles well. The examples that matter most are the ones the model finds confusing, ambiguous, or novel &mdash; exactly the cases where a labeled demonstration would teach it something new.</p>
+                        <p class="split-section__text"><strong>Vote-K flips annotation from passive to active.</strong> Instead of blindly labeling data, you present the model with unlabeled candidates and ask it to vote on which k examples it most wants to see annotated. The model identifies its own uncertainty: examples where it is least confident, where multiple valid classifications seem possible, or where the input pattern differs from anything in the current demonstration set. These high-value votes guide human annotators toward the data points that will deliver the greatest learning impact per label.</p>
+                        <p class="split-section__text">Think of it like a student who, instead of being assigned random homework problems, gets to point at the specific problems they find most confusing &mdash; then a teacher works through those targeted examples to maximize learning efficiency.</p>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Iterative Building</h3>
-                        <p class="pillar-card__text">Progressively growing a demonstration set over multiple rounds.</p>
-                    </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Domain Coverage</h3>
-                        <p class="pillar-card__text">Ensuring examples cover diverse aspects of the problem space.</p>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Targeted Annotation Beats Random Selection</span>
+                                <p>A randomly selected demonstration pool often contains many similar, easy examples that teach the model nothing new &mdash; while leaving difficult edge cases unrepresented. Vote-K concentrates annotation effort on the examples the model finds <strong>most uncertain or informative</strong>, building a demonstration set where every labeled example carries maximum instructional weight. The result: better performance from fewer annotations, which directly translates to lower cost and faster deployment.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE CONCEPT -->
 
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Vote-K Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from unlabeled data to an optimized demonstration pool</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Start with a Labeled Seed Pool and Unlabeled Candidates</h3>
+                            <p class="element-timeline__text">Begin with a small set of already-labeled examples (the seed pool) and a larger collection of unlabeled data. The seed pool gives the model a baseline understanding of the task, while the unlabeled candidates represent the raw material from which the model will select its most-wanted annotations.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>You have 20 labeled customer support tickets across 5 categories, plus 500 unlabeled tickets waiting to be classified. The model can already handle straightforward cases but struggles with edge cases and ambiguous tickets.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Model Votes on K Most Useful Unlabeled Examples</h3>
+                            <p class="element-timeline__text">The model evaluates unlabeled candidates against the current demonstration set and votes on which k examples would be most valuable to annotate. It prioritizes examples where its prediction confidence is lowest, where it detects novel patterns not covered by existing demonstrations, or where the input lies near the boundary between multiple categories.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The model reviews 500 unlabeled tickets and votes for 10 it finds most confusing &mdash; including a complaint that blends billing and technical issues, a request written in mixed language, and tickets from a product line not represented in the seed pool.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Human Annotates the Top-Voted Examples</h3>
+                            <p class="element-timeline__text">A domain expert reviews and labels the k examples the model selected. Because these are the cases the model found most challenging, each annotation carries outsized instructional value. The human effort is concentrated exactly where it matters most, rather than spread thinly across easy cases the model already understands.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The support team lead labels the 10 voted tickets: the billing-plus-technical ticket gets classified as &ldquo;Billing&rdquo; with a note about routing, the mixed-language ticket gets its primary category, and the new product line tickets establish fresh category patterns.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Add to Demonstration Pool and Repeat</h3>
+                            <p class="element-timeline__text">The newly annotated examples join the demonstration pool, expanding the model&rsquo;s reference set. The process can repeat iteratively &mdash; each cycle the model votes on the next batch of most-valuable candidates, and each round of annotation targets a different frontier of the model&rsquo;s uncertainty. Performance improves with each iteration as the demonstration pool becomes increasingly comprehensive and strategically composed.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>After three rounds of Vote-K selection, the demonstration pool grows from 20 to 50 examples &mdash; but those 50 strategically chosen examples outperform a randomly selected pool of 200 because they cover the exact edge cases and boundary conditions where the model needed guidance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why model-guided selection outperforms random annotation</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Random Annotation</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Randomly select 50 unlabeled examples from a pool of 500, send them to domain experts for labeling, and add all 50 to the demonstration set regardless of their instructional value.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Outcome</span>
+                                <p>35 of the 50 annotated examples are straightforward cases the model already classifies correctly. Only 15 cover novel patterns or edge cases. The annotation budget is largely spent on redundant demonstrations that add no new learning signal.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Wasteful &mdash; most annotations duplicate what the model already knows</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Vote-K Guided Annotation</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>The model votes on which 50 examples from the pool of 500 it finds most uncertain or informative. Only these model-selected candidates go to domain experts for labeling.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Outcome</span>
+                                <p>All 50 annotated examples target the model&rsquo;s actual weaknesses &mdash; ambiguous edge cases, underrepresented categories, and boundary-straddling inputs. Every annotation teaches the model something new, producing a demonstration pool that delivers superior performance with fewer labels.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Efficient &mdash; every annotation maximizes learning impact per label</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Vote-K in Action</h2>
+                <p class="section-subtitle fade-in-up">See how model-guided selection optimizes annotation across domains</p>
+
+                <div class="accordion fade-in-up" id="vote-k-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Customer Support Categorization</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Scenario</span>
+                                    <p>A support team needs to classify incoming tickets into categories: Billing, Technical, Account Access, Feature Request, and General Inquiry. They have 15 labeled examples but 800 unlabeled tickets. Budget allows labeling only 30 more.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Vote-K Selection</span>
+                                    <p><strong>Model votes for these high-value candidates:</strong><br><br>
+                                    <strong>Voted #1:</strong> &ldquo;I was charged twice but also can&rsquo;t log in to check my invoice.&rdquo;<br>
+                                    <strong>Why voted:</strong> Straddles Billing and Account Access &mdash; the model is uncertain which category takes priority when both apply.<br><br>
+                                    <strong>Voted #2:</strong> &ldquo;The export button doesn&rsquo;t work. Can you add CSV export?&rdquo;<br>
+                                    <strong>Why voted:</strong> Blends Technical (bug report) with Feature Request &mdash; the model needs guidance on how to classify mixed-intent tickets.<br><br>
+                                    <strong>Voted #3:</strong> &ldquo;Hola, necesito ayuda con mi cuenta pero no hablo ingl&eacute;s bien.&rdquo;<br>
+                                    <strong>Why voted:</strong> Non-English input not represented in seed pool &mdash; the model has no reference for how to handle language-mixed tickets.<br><br>
+                                    <strong>Result:</strong> After annotating 30 model-selected tickets, classification accuracy improved by 23% compared to annotating 30 random tickets &mdash; with the biggest gains on multi-category and edge-case tickets.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Legal Clause Extraction</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Scenario</span>
+                                    <p>A legal tech company needs to identify and classify clauses in contracts: Limitation of Liability, Indemnification, Termination, Confidentiality, and Force Majeure. They have 25 labeled clause examples from standard templates but 2,000 unlabeled clauses from diverse real-world contracts.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Vote-K Selection</span>
+                                    <p><strong>Model votes for these high-value candidates:</strong><br><br>
+                                    <strong>Voted #1:</strong> A clause that combines indemnification obligations with liability caps in a single paragraph.<br>
+                                    <strong>Why voted:</strong> Overlaps two categories &mdash; the model cannot determine whether to classify it as Limitation of Liability or Indemnification without a labeled example showing the precedent.<br><br>
+                                    <strong>Voted #2:</strong> A pandemic-specific termination clause referencing government shutdown orders.<br>
+                                    <strong>Why voted:</strong> Blends Force Majeure language with Termination provisions &mdash; a pattern absent from the standard-template seed pool.<br><br>
+                                    <strong>Voted #3:</strong> An informal clause from a startup contract written in plain English rather than legal terminology.<br>
+                                    <strong>Why voted:</strong> The model&rsquo;s seed pool contains only formal legal language &mdash; it has no reference for recognizing clause types when expressed colloquially.<br><br>
+                                    <strong>Result:</strong> After two Vote-K rounds (40 total annotations), clause extraction F1 score reached 0.89 &mdash; a level that random annotation required 120 labeled examples to achieve.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Product Review Analysis</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Scenario</span>
+                                    <p>An e-commerce company wants to classify product reviews by sentiment (Positive, Negative, Neutral) and extract specific aspect mentions (Quality, Price, Shipping, Customer Service). They have 30 labeled reviews but 5,000 unlabeled reviews across product categories.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Vote-K Selection</span>
+                                    <p><strong>Model votes for these high-value candidates:</strong><br><br>
+                                    <strong>Voted #1:</strong> &ldquo;The product is amazing but the shipping was a nightmare and customer service was unhelpful. 3 stars.&rdquo;<br>
+                                    <strong>Why voted:</strong> Mixed sentiment across multiple aspects &mdash; the model cannot determine overall sentiment when individual aspects conflict.<br><br>
+                                    <strong>Voted #2:</strong> &ldquo;Returned it. Twice. Third one worked fine I guess.&rdquo;<br>
+                                    <strong>Why voted:</strong> Terse, ambiguous language with implied negative experience but a partially positive resolution &mdash; the model finds the sentiment boundary unclear.<br><br>
+                                    <strong>Voted #3:</strong> A review that uses heavy sarcasm: &ldquo;Oh sure, I love waiting three weeks for something that breaks on day one. Five stars for the entertainment value.&rdquo;<br>
+                                    <strong>Why voted:</strong> Sarcasm inverts surface-level positive language into negative sentiment &mdash; a pattern the seed pool does not address.<br><br>
+                                    <strong>Result:</strong> Vote-K-guided annotation produced a demonstration pool where sentiment accuracy on edge cases improved by 31% over random selection, with sarcasm detection improving from near-chance to 78% accuracy.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Vote-K</h2>
+                <p class="section-subtitle fade-in-up">Best for building high-quality demonstration pools with limited annotation budgets</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Expensive Annotation Domains</strong>
+                                    <p>Medical, legal, financial, or scientific domains where each labeled example requires costly expert time &mdash; Vote-K ensures every annotation delivers maximum value.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Large Unlabeled Data Pools</strong>
+                                    <p>When you have thousands of unlabeled examples but can only afford to label a small fraction &mdash; Vote-K identifies the highest-impact subset to annotate.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Iterative Few-Shot Improvement</strong>
+                                    <p>When you want to systematically improve few-shot performance over multiple rounds &mdash; each Vote-K cycle targets a different frontier of model uncertainty.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Edge Case Discovery</strong>
+                                    <p>When your task has many ambiguous or boundary-straddling examples that random sampling tends to miss &mdash; Vote-K surfaces exactly these hard cases.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Annotation Is Cheap</strong>
+                                    <p>If labeling examples is fast and inexpensive, the overhead of running Vote-K selection may not justify the efficiency gains &mdash; just label everything directly.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Small Unlabeled Pools</strong>
+                                    <p>If you only have a handful of unlabeled examples, the selection overhead is unnecessary &mdash; simply annotate them all and skip the voting step.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Zero-Shot Performance Is Sufficient</strong>
+                                    <p>If the model already performs well enough on the task without any demonstrations, building an elaborate demonstration pool provides diminishing returns.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Vote-K delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Record Coding</h3>
+                        <p class="use-case-showcase__desc">Identify the most ambiguous clinical notes for expert coding &mdash; focusing annotation on cases where diagnosis codes overlap or symptom descriptions are atypical, rather than wasting physician time on clear-cut records.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Contract Classification</h3>
+                        <p class="use-case-showcase__desc">Surface contract clauses that defy standard templates for legal expert review &mdash; hybrid provisions, unusual language, and jurisdiction-specific variations that the model cannot confidently categorize.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Support Ticket Routing</h3>
+                        <p class="use-case-showcase__desc">Let the model identify tickets it cannot confidently route between departments, then have team leads label those boundary cases to build a demonstration set that resolves the trickiest routing decisions.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Moderation</h3>
+                        <p class="use-case-showcase__desc">Focus moderator annotation on content the model finds ambiguous &mdash; sarcasm, cultural context, and borderline cases &mdash; rather than clearly benign or clearly violating posts the model already handles reliably.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Transaction Tagging</h3>
+                        <p class="use-case-showcase__desc">Identify transactions the model struggles to categorize &mdash; unusual merchant names, cross-category purchases, and subscription patterns &mdash; then have accountants label those specific cases for maximum classification improvement.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Research Paper Tagging</h3>
+                        <p class="use-case-showcase__desc">Surface interdisciplinary papers that span multiple research domains for expert categorization, building a demonstration set that teaches the model to handle cross-field publications that defy single-category classification.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Vote-K Fits</h2>
+                <p class="section-subtitle fade-in-up">Vote-K bridges passive data selection and intelligent demonstration engineering</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Random Selection</span>
+                        <span class="era-marker__title">Passive Sampling</span>
+                        <span class="era-marker__desc">Annotate examples at random</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Vote-K</span>
+                        <span class="era-marker__title">Model-Guided Selection</span>
+                        <span class="era-marker__desc">Model votes on most valuable candidates</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Active Prompting</span>
+                        <span class="era-marker__title">Uncertainty-Driven</span>
+                        <span class="era-marker__desc">Select based on prediction disagreement</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">KNN Prompting</span>
+                        <span class="era-marker__title">Similarity-Based</span>
+                        <span class="era-marker__desc">Retrieve nearest neighbors as demonstrations</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine with Example Selection</div>
+                    <p>Vote-K and Example Selection are natural partners. Use Vote-K to build a high-quality, strategically annotated demonstration pool, then use Example Selection techniques (similarity-based, diversity-based, or task-specific retrieval) to pick the best demonstrations from that pool for each new input at inference time. This two-stage pipeline &mdash; Vote-K for pool construction, Example Selection for runtime retrieval &mdash; maximizes both annotation efficiency and per-query performance.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
         <section class="section">
             <div class="container">
                 <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="knn-prompting.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">KNN Prompting</h3>
-                            <p class="icon-box__content">Similarity-based selection.</p>
-                        </div>
-                    </a>
-                    <a href="active-prompting.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Active Prompting</h3>
-                            <p class="icon-box__content">Uncertainty-based annotation.</p>
-                        </div>
-                    </a>
-                </div>
+                <p class="section-subtitle fade-in-up">Explore complementary data selection and demonstration techniques</p>
+
+                <a href="few-shot-learning.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Few-Shot Learning</span>
+                        <span class="evolution-callout__desc">The demonstration-based prompting paradigm that Vote-K optimizes &mdash; Vote-K makes few-shot learning more efficient by ensuring every demonstration in the pool earns its place.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="example-selection.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Example Selection</span>
+                        <span class="evolution-callout__desc">While Vote-K decides which examples to annotate, Example Selection decides which annotated examples to use for each query &mdash; the natural second stage after Vote-K builds the pool.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">Uses voting across multiple reasoning paths to find the best answer &mdash; a parallel concept to Vote-K&rsquo;s voting mechanism, applied to output selection rather than data selection.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
             </div>
         </section>
+        <!-- /RELATED FRAMEWORKS -->
 
-        <section class="section section-alt">
+        <!-- === CTA SECTION === -->
+        <section class="section">
             <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try Vote-K</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Optimize Your Annotation Budget</h2>
+                        <p class="cta-corporate__text">Apply Vote-K principles to build smarter demonstration pools, or explore our tools for crafting effective few-shot prompts.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /CTA SECTION -->
     </main>
 
+
+    <!-- === FOOTER === -->
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -308,6 +768,86 @@
         </div>
     </div>
 </footer>
+    <!-- /FOOTER -->
+
+    <!-- === BACK TO TOP === -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+    <!-- /BACK TO TOP -->
+
+    <!-- === ACCESSIBILITY DASHBOARD === -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+    <!-- /ACCESSIBILITY DASHBOARD -->
 
     <script src="../app.js" defer></script>
 </body>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dense Prompting: Pack more information and context into prompts for comprehensive task understanding.">
+    <meta name="description" content="Dense Prompting: Learn how comprehensive, information-rich prompts with structured context, constraints, examples, and quality criteria reduce ambiguity and improve AI output quality.">
     <title>Dense Prompting - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
@@ -131,7 +131,10 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -143,95 +146,569 @@
                     <span class="current">Dense Prompting</span>
                 </nav>
                 <div class="hero-badge">
-                    <span class="hero-badge__text">Prompt Design</span>
+                    <span class="hero-badge__text">Prompt Design Technique</span>
                 </div>
                 <h1 class="page-title fade-in">Dense Prompting</h1>
-                <p class="page-subtitle fade-in">Pack comprehensive context into your prompts.</p>
+                <p class="page-subtitle fade-in">Minimal instructions produce minimal results. Dense Prompting packs rich context, precise constraints, concrete examples, format specifications, edge cases, and quality criteria into a single comprehensive prompt &mdash; giving the model everything it needs to deliver exactly what you want on the first attempt.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> Dense Prompting emerged in 2023 as prompt engineering matured from simple instruction-giving into a structured discipline. The technique formalized what experienced practitioners had been discovering through trial and error: that comprehensive, information-rich prompts consistently outperform sparse, minimal ones. Rather than relying on the model to fill in gaps with assumptions, Dense Prompting front-loads the prompt with all relevant context &mdash; task description, constraints, audience specifications, format requirements, edge case handling, quality criteria, and representative examples &mdash; to eliminate ambiguity before generation begins.</p>
+                        <p><strong>Modern LLM Status:</strong> Dense prompting principles have become <strong>standard best practice in prompt engineering</strong>. The insight that well-structured, comprehensive prompts outperform minimal ones is now widely adopted across all major LLM platforms. Claude, GPT-4, and Gemini all respond significantly better to information-dense prompts than to vague instructions. However, the specific strategies for organizing dense context &mdash; how to prioritize information, structure sections, balance detail with clarity, and avoid overwhelming the model &mdash; continue to evolve as context windows expand and model capabilities advance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Information-Rich Prompts</h2>
-                        <p class="section-intro">Dense Prompting emphasizes including comprehensive context, constraints, and guidance in prompts. Rather than minimal instructions, it provides rich detail that helps the model fully understand the task requirements and nuances.</p>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Why Context Density Matters</h2>
+                        <p class="split-section__text">Every gap in your prompt is an invitation for the model to guess. When you write &ldquo;Summarize this article,&rdquo; the model must assume the target audience, the desired length, the tone, the level of technical detail, and which points matter most. Each assumption is a coin flip that might land on something you did not want. Dense Prompting eliminates these coin flips by replacing assumptions with explicit instructions.</p>
+                        <p class="split-section__text"><strong>The goal is not to write the longest prompt possible.</strong> Dense Prompting is about information density, not word count. Every sentence in a dense prompt should carry meaningful signal &mdash; a constraint the model needs, an example that clarifies intent, or a quality criterion that defines success. Padding a prompt with repetitive instructions or irrelevant context dilutes density and can actually degrade output quality.</p>
+                        <p class="split-section__text">Think of it like briefing a skilled contractor. You would not just say &ldquo;build a shelf.&rdquo; You would specify the dimensions, materials, weight capacity, mounting surface, finish, and placement &mdash; not because the contractor is incapable, but because the more precisely you communicate your vision, the closer the result matches what you actually need.</p>
+                    </div>
+                    <div class="split-section__visual">
                         <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Principle</span>
-                                <p>More relevant context generally improves output quality. Dense prompts leave less ambiguity and fewer gaps for the model to fill incorrectly.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">What to Include</span>
-                                <p>Context, constraints, examples, format requirements, edge cases, and quality criteria.</p>
+                                <span class="highlight-box__title">Density vs. Length: The Balance</span>
+                                <p>A common misconception is that Dense Prompting means &ldquo;write more.&rdquo; In practice, the most effective dense prompts are carefully edited for signal-to-noise ratio. Every element earns its place: context that shapes the response, constraints that prevent unwanted outputs, examples that calibrate quality, and format specifications that ensure usability. <strong>If a sentence does not change the model&rsquo;s output, it should not be in the prompt.</strong></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE CONCEPT -->
 
+        <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Elements</span>
-                    <h2 class="section-title">Dense Prompt Components</h2>
-                </div>
+                <h2 class="section-title fade-in-up">The Dense Prompting Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from task requirement to high-quality output</p>
 
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Background Context</h3>
-                        <p class="pillar-card__text">Relevant information about the domain, situation, or user needs.</p>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define the Complete Task Context and Constraints</h3>
+                            <p class="element-timeline__text">Begin by identifying everything the model needs to know to produce an ideal response. This includes the task objective, the target audience, the domain or subject matter, relevant background information, and any constraints or limitations. The goal is to eliminate every assumption the model would otherwise have to make on its own.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;You are writing a product description for a B2B SaaS landing page targeting CTOs at mid-market companies (500&ndash;2,000 employees). The product is an API monitoring platform. The audience is technically sophisticated but time-constrained. Avoid marketing jargon and focus on concrete capabilities.&rdquo;</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Explicit Constraints</h3>
-                        <p class="pillar-card__text">Clear boundaries on format, length, style, and content restrictions.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Structure Information in Clear, Logical Sections</h3>
+                            <p class="element-timeline__text">Organize the dense context into distinct, labeled sections so the model can parse each requirement cleanly. Use headers, bullet points, numbered lists, and separators to create visual hierarchy within the prompt. Well-structured density is far more effective than a wall of unformatted text &mdash; the model processes organized information more reliably than stream-of-consciousness instructions.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Separate the prompt into labeled blocks: &ldquo;Context,&rdquo; &ldquo;Requirements,&rdquo; &ldquo;Tone and Style,&rdquo; &ldquo;Format,&rdquo; and &ldquo;Quality Criteria&rdquo; &mdash; each containing focused, relevant instructions for that dimension of the task.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Quality Criteria</h3>
-                        <p class="pillar-card__text">What makes a good response? Define success explicitly.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Include Format Specifications, Edge Cases, and Quality Criteria</h3>
+                            <p class="element-timeline__text">Specify the exact output format you expect, including structure, length, and any formatting conventions. Anticipate edge cases or potential misinterpretations and address them directly. Define what &ldquo;good&rdquo; looks like by providing concrete quality benchmarks &mdash; this gives the model a target to aim for rather than leaving quality to chance.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Output a 150&ndash;200 word description in three paragraphs. First paragraph: the core value proposition. Second: three key features as a bulleted list. Third: a single-sentence call to action. Do not use superlatives like &lsquo;best&rsquo; or &lsquo;revolutionary.&rsquo; If the feature list exceeds three items, prioritize by impact to the CTO persona.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Test and Refine the Dense Prompt for Optimal Output</h3>
+                            <p class="element-timeline__text">Run the prompt and evaluate the output against your quality criteria. Dense prompts benefit enormously from iterative refinement &mdash; each test reveals which instructions were followed, which were ignored, and where new constraints are needed. Adjust the density: add specificity where the model guessed wrong, and remove instructions that added no value. A well-refined dense prompt becomes a reusable asset.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>After testing, you discover the model keeps using the phrase &ldquo;cutting-edge.&rdquo; Add to your constraints: &ldquo;Banned phrases: cutting-edge, next-generation, game-changing, state-of-the-art.&rdquo; The prompt gets denser but the output gets better.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /HOW IT WORKS -->
 
+        <!-- === VISUAL: THE COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="prompt-basics.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Prompt Basics</h3>
-                            <p class="icon-box__content">Foundational prompt design.</p>
-                        </div>
-                    </a>
-                    <a href="shot-prompting.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Shot Prompting</h3>
-                            <p class="icon-box__content">Adding example density.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why comprehensive prompts produce dramatically better results</p>
 
-        <section class="section">
-            <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try Dense Prompting</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Sparse/Minimal Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Write a blog post about remote work.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>A generic 500-word post covering well-known remote work benefits like flexibility and no commute, written in a vague tone for an undefined audience, with no clear structure or actionable takeaways.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Generic, unfocused, requires multiple revision rounds</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Dense Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Dense Prompt Structure</span>
+                                <p><strong>Context:</strong> Blog for a SaaS company&rsquo;s engineering blog, targeting engineering managers considering hybrid policies.<br><strong>Task:</strong> Write a 1,200-word post on async-first communication patterns for distributed teams.<br><strong>Constraints:</strong> Focus on implementation, not advocacy. Include 3 concrete patterns with before/after examples. No platitudes about &ldquo;the future of work.&rdquo;<br><strong>Format:</strong> H2 headers for each pattern, code-block style examples for communication templates, summary table at the end.<br><strong>Quality:</strong> Each pattern must include a failure mode and mitigation strategy.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>A precisely structured post with three async communication patterns, each with concrete before/after examples, failure modes, and mitigations &mdash; formatted exactly as specified with headers, templates, and a summary table.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Targeted, structured, actionable &mdash; usable on first draft</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Dense Prompting in Action</h2>
+                <p class="section-subtitle fade-in-up">See how information density transforms output quality across domains</p>
+
+                <div class="accordion fade-in-up" id="dense-prompting-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Content Writing Brief</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Dense Prompt</span>
+                                    <p><strong>Role:</strong> You are a senior content strategist writing for a fintech startup&rsquo;s customer education blog.<br><br>
+                                    <strong>Task:</strong> Write a guide explaining compound interest to first-time investors aged 22&ndash;30 who have no finance background.<br><br>
+                                    <strong>Constraints:</strong> No jargon without immediate plain-language definitions. Use relatable analogies (coffee purchases, streaming subscriptions). Maximum reading level: Grade 8. Avoid condescending language &mdash; respect the reader&rsquo;s intelligence while meeting them at their knowledge level.<br><br>
+                                    <strong>Format:</strong> 800&ndash;1,000 words. Open with a relatable scenario, not a definition. Include one worked numerical example with a table showing year-over-year growth. Close with three specific next steps the reader can take today.<br><br>
+                                    <strong>Quality Criteria:</strong> Every claim must be mathematically accurate. The worked example must use realistic interest rates (4&ndash;7% annually). Do not use phrases like &ldquo;it&rsquo;s that simple&rdquo; or &ldquo;just think of it as.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>This dense prompt eliminates guesswork across six dimensions: audience (young, non-expert investors), tone (respectful, not condescending), structure (scenario opening, worked example, actionable close), constraints (no unexplained jargon, grade 8 reading level), format (word count, table, specific sections), and quality (mathematical accuracy, realistic rates, banned phrases). The model cannot produce a generic &ldquo;What is compound interest?&rdquo; article because every element of the output is specified. A sparse prompt like &ldquo;Explain compound interest&rdquo; would require five revision rounds to reach the same quality.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">API Documentation Generation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Dense Prompt</span>
+                                    <p><strong>Context:</strong> You are documenting a REST API endpoint for an internal developer platform. The audience is backend engineers who are already familiar with REST conventions but new to this specific service.<br><br>
+                                    <strong>Task:</strong> Write documentation for a POST /api/v2/deployments endpoint that triggers a new deployment.<br><br>
+                                    <strong>Required Sections:</strong> (1) One-sentence description, (2) Authentication requirements, (3) Request headers table, (4) Request body schema with types and required/optional flags, (5) Response codes with descriptions, (6) Two curl examples &mdash; one minimal, one with all optional parameters, (7) Common error scenarios with troubleshooting steps.<br><br>
+                                    <strong>Style:</strong> Terse, scannable, no prose paragraphs longer than two sentences. Use code blocks for all technical content. Tables for structured data. Match the voice of Stripe&rsquo;s API documentation.<br><br>
+                                    <strong>Edge Cases:</strong> Address what happens when a deployment is already in progress, when the target environment does not exist, and when the request body exceeds the 5MB payload limit.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>The prompt specifies the exact documentation structure (seven sections in order), the stylistic benchmark (Stripe&rsquo;s docs), the audience&rsquo;s existing knowledge level, and three specific edge cases that a sparse prompt would never surface. By including both a minimal and a full-parameter curl example, the prompt ensures the documentation serves both quick-start users and thorough implementers. The result is production-ready documentation rather than a generic template that requires heavy editing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Data Analysis Request</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Dense Prompt</span>
+                                    <p><strong>Context:</strong> You are a data analyst preparing a quarterly business review for the VP of Sales. The audience makes decisions based on trends, not raw numbers. They have 10 minutes to review your analysis.<br><br>
+                                    <strong>Data Description:</strong> Q3 sales data with 12,000 transactions across 4 product lines and 6 regions. Includes fields: date, product_line, region, revenue, units_sold, customer_type (new/returning), sales_rep_id.<br><br>
+                                    <strong>Analysis Requirements:</strong> (1) Revenue trend by product line with month-over-month growth rates, (2) Regional performance ranked by revenue per capita, (3) New vs. returning customer revenue split with quarter-over-quarter comparison, (4) Top 10 and bottom 10 sales reps by conversion rate.<br><br>
+                                    <strong>Format:</strong> Executive summary (3 bullets, max 25 words each) followed by four sections matching the analysis requirements. Each section: one key insight sentence, one supporting data table, one recommendation.<br><br>
+                                    <strong>Constraints:</strong> Round all percentages to one decimal place. Flag any metric that changed more than 15% quarter-over-quarter. Do not include raw data dumps &mdash; every number must support an insight. If data is insufficient for a conclusion, state that explicitly rather than speculating.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>This prompt preempts the most common data analysis failures: unfocused exploration, raw data without insights, and analysis that does not match the audience&rsquo;s decision-making needs. By specifying the audience&rsquo;s time constraint (10 minutes), the executive summary format (3 bullets, 25 words each), and the section structure (insight, table, recommendation), the prompt ensures the output is immediately usable in a business context. The constraint about flagging 15% changes and explicitly acknowledging insufficient data prevents both false confidence and buried signals.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Dense Prompting</h2>
+                <p class="section-subtitle fade-in-up">Maximum value for high-stakes tasks where precision matters</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Stakes Content Production</strong>
+                                    <p>Client deliverables, published articles, and professional documentation where revision rounds are expensive and first-draft quality directly impacts credibility.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Repeatable Workflows</strong>
+                                    <p>Tasks you perform regularly &mdash; weekly reports, code reviews, customer responses &mdash; where investing in a dense prompt template pays dividends across hundreds of uses.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Multi-Requirement Tasks</strong>
+                                    <p>Outputs that must satisfy multiple stakeholders, adhere to brand guidelines, follow regulatory constraints, and hit specific technical specifications simultaneously.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Delegation to Non-Experts</strong>
+                                    <p>When creating prompt templates for team members who are not prompt engineering specialists &mdash; the density compensates for the user&rsquo;s inexperience with iterative prompting.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Quick Exploratory Questions</strong>
+                                    <p>When you are brainstorming, exploring ideas, or asking simple factual questions &mdash; the overhead of constructing a dense prompt exceeds the value of a polished response.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Open-Ended Creative Discovery</strong>
+                                    <p>When you intentionally want the model to surprise you with unexpected approaches &mdash; over-constraining a creative task can eliminate the serendipity you are seeking.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Rapid Iterative Conversations</strong>
+                                    <p>When you are refining output through back-and-forth dialogue &mdash; in conversational workflows, it can be more efficient to start sparse and add density incrementally based on the model&rsquo;s responses.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Dense Prompting delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Technical Documentation</h3>
+                        <p class="use-case-showcase__desc">Produce API references, user guides, and system architecture documents that meet style standards, cover edge cases, and include properly formatted code examples on the first generation.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Marketing</h3>
+                        <p class="use-case-showcase__desc">Generate blog posts, email sequences, and social media content that precisely matches brand voice, audience demographics, SEO requirements, and conversion goals without generic filler.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Code Generation</h3>
+                        <p class="use-case-showcase__desc">Specify language, framework, coding standards, error handling patterns, test coverage requirements, and performance constraints to produce production-ready code rather than toy examples.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Business Analysis</h3>
+                        <p class="use-case-showcase__desc">Transform raw data into executive-ready reports by specifying the audience, decision context, required metrics, visualization format, and the level of confidence needed for each conclusion.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Customer Communication</h3>
+                        <p class="use-case-showcase__desc">Craft support responses, onboarding emails, and account updates that match tone guidelines, address specific customer segments, and follow compliance requirements for regulated industries.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Policy and Compliance</h3>
+                        <p class="use-case-showcase__desc">Draft internal policies, compliance checklists, and audit documentation with precise regulatory references, jurisdiction-specific requirements, and structured approval workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Dense Prompting Fits</h2>
+                <p class="section-subtitle fade-in-up">Dense Prompting bridges casual instructions and structured frameworks</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Zero-Shot</span>
+                        <span class="era-marker__title">Minimal Instructions</span>
+                        <span class="era-marker__desc">Simple task, no examples or context</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Dense Prompting</span>
+                        <span class="era-marker__title">Rich Context</span>
+                        <span class="era-marker__desc">Comprehensive constraints and specifications</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Few-Shot Learning</span>
+                        <span class="era-marker__title">Example-Driven</span>
+                        <span class="era-marker__desc">Concrete input/output pairs guide the model</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Structured Frameworks</span>
+                        <span class="era-marker__title">CRISP / COSTAR</span>
+                        <span class="era-marker__desc">Formalized prompt architecture systems</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Dense Prompting as a Foundation</div>
+                    <p>Dense Prompting is not an alternative to structured frameworks like CRISP or COSTAR &mdash; it is the underlying principle that makes them work. Every effective prompt framework is essentially a template for organizing dense context. Understanding why density matters will make you more effective with any framework, because you will know what to put in each section and why it belongs there. Think of Dense Prompting as the &ldquo;why&rdquo; and structured frameworks as the &ldquo;how.&rdquo;</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary approaches to prompt design</p>
+
+                <a href="crisp.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Structured Framework</span>
+                        <span class="evolution-callout__title">CRISP</span>
+                        <span class="evolution-callout__desc">A five-component framework (Context, Role, Instructions, Scope, Parameters) that provides a structured template for organizing the dense context that Dense Prompting advocates.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="costar.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Structured Framework</span>
+                        <span class="evolution-callout__title">COSTAR</span>
+                        <span class="evolution-callout__desc">Context, Objective, Style, Tone, Audience, Response &mdash; another systematic approach to building comprehensive prompts that aligns naturally with Dense Prompting principles.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="few-shot-learning.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Few-Shot Learning</span>
+                        <span class="evolution-callout__desc">While Dense Prompting relies on explicit instructions and constraints, Few-Shot Learning adds density through concrete input/output examples &mdash; combine both for maximum prompt effectiveness.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Build Denser Prompts</h2>
+                        <p class="cta-corporate__text">Put Dense Prompting principles into practice with our interactive tools, or explore structured frameworks that organize density for you.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
     </main>
 
+
+    <!-- === FOOTER + BACK-TO-TOP === -->
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -284,6 +761,85 @@
         </div>
     </div>
 </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+    <!-- /FOOTER + BACK-TO-TOP -->
+
+    <!-- === ACCESSIBILITY DASHBOARD === -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+    <!-- /ACCESSIBILITY DASHBOARD -->
 
     <script src="../app.js" defer></script>
 </body>
