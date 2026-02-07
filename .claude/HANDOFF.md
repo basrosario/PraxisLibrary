@@ -1,78 +1,31 @@
 # Praxis Project Handoff Document
 
-**Last Updated:** 2026-02-07 (Session 37)
-**Last Commit:** (pending) — Session 37 changes not yet committed
-**Current Phase:** Part B — Full Navigation Update (next task)
+**Last Updated:** 2026-02-07 (Session 39)
+**Last Commit:** (pending) — Session 37+38+39 changes ready to commit
+**Current Phase:** Homepage Redesign Complete — ready for commit
 
 ---
 
-## CURRENT SESSION STATUS (Session 37)
+## CURRENT SESSION STATUS (Session 39)
 
 ### Completed This Session
 
-#### Part A — 22-Page 13-Section Redesign (ALL COMPLETE)
+#### Homepage Redesign — IMPLEMENTED
 
-22 framework pages that still used the old template were rewritten from scratch to the 13-section template (self-ask.html reference). Completed in 4 waves of parallel agents:
+Replaced all `<main id="main-content">` content in `index.html` (old lines 196-479) with 6 new sections:
 
-| Wave | Files | New Lines | Status |
-|------|-------|-----------|--------|
-| **A — Foundation** | chain-of-thought (827), few-shot-learning (818), zero-shot (816), one-shot (825), role-prompting (818), self-consistency (829) | 4,933 total | ✅ |
-| **B — Structured** | crisp (861), crispe (869), costar (892), constrained-output (833), context-structure (875), prompt-chaining (845) | 5,175 total | ✅ |
-| **C — Advanced** | tree-of-thought (858), plan-and-solve (857), least-to-most (853), example-selection (829), shot-prompting (834) | 4,231 total | ✅ |
-| **D — Flagship** | react (859), flipped-interaction (848), prompt-basics (840), zero-shot-cot (840), facts-fictions (834) | 4,221 total | ✅ |
+1. **Library at a Glance** — Updated counter-grid: 62+ Frameworks, 2,141+ Glossary Terms, 12 Interactive Tools, 100% Free & Accessible
+2. **Explore Frameworks by Category** — 6 icon-box cards (Structured 5, Reasoning 14, Decomposition 7, Self-Correction 7, ICL 9, Advanced 11) + CTA to learn/index.html
+3. **Interactive Tools** — 6 icon-box cards (Analyzer, Builder, Matcher, Checklist, Persona, Quiz) + CTA to tools/index.html
+4. **AI Foundations & Glossary** — split-section with feature-list (5 eras, 61 frameworks, Turing to LLMs) + highlight-box about 2,141+ glossary terms
+5. **Why Praxis** — split-section with feature-list--check (Free, Accessible, ND-inclusive) + highlight-box about ND resources (NO emoji)
+6. **Getting Started CTA** — cta-corporate--gradient with quiz + prompt basics buttons
 
-**Quality checks passed:** 0 inline styles, 0 inline scripts, 0 CSP meta tags, all 13 sections present, all files 700+ lines.
-
-#### HR/Remote Work Content Cleanup
-
-Removed ALL examples referencing remote work, HR, hiring, job postings, etc. from ~15 learn pages. Replaced with technology, science, education, and general business examples.
-
-#### AI For Everybody Text Update
-
-Updated "Who Praxis Serves" section on `pages/ai-for-everybody.html` with user's rewritten text.
+**Quality checks passed:** 0 inline styles, 0 inline scripts, 0 emoji, 0 external resources, all root-level paths, `<!-- === SECTION === -->` notation throughout.
 
 ### NOT YET COMMITTED
 
-All Session 37 changes are uncommitted and need to be committed before starting Part B.
-
----
-
-## NEXT TASK: Part B — Full Navigation Update (~100 HTML pages)
-
-### What Needs to Happen
-
-The header mega-menu currently lists only ~47 learn pages but there are now 62+ framework pages. ALL HTML pages across the entire site need their header nav, footer, and mobile nav updated to a single canonical version.
-
-### Approach
-
-1. **Define canonical nav HTML** for 3 depth levels:
-   - Root level (index.html) — paths like `learn/foo.html`
-   - One-deep (~96 files) — paths like `../learn/foo.html`
-   - Two-deep (3 files) — paths like `../../learn/foo.html`
-
-2. **Use parallel agents** to update files in batches by directory
-
-3. **Mega-menu Learn section** must include ALL 62+ framework pages organized by category
-
-### File Inventory (100 total)
-
-| Directory | Files | Depth |
-|-----------|-------|-------|
-| Root `index.html` | 1 | root |
-| `pages/*.html` | 12 | one-deep |
-| `tools/*.html` | 12 | one-deep |
-| `foundations/index.html` | 1 | one-deep |
-| `patterns/index.html` | 1 | one-deep |
-| `quiz/index.html` | 1 | one-deep |
-| `neurodivergence/*.html` | 6 | one-deep |
-| `learn/*.html` | ~63 (excl. temp files) | one-deep |
-| `learn/modality/code/*.html` | 3 | two-deep |
-
-**Note:** learn/ contains 4 temp files to ignore: `_mmi_temp.html`, `analogical-reasoning-new.html`, `graph-of-thought-new.html`, `mot_new.html`
-
-### Full Plan Details
-
-See `.claude/plans/FrameworkOverhaul.md` → "PART B — Full Navigation Update" section for complete specifications.
+All Session 37 + Session 38 + Session 39 changes are uncommitted (~100 HTML files + homepage redesign).
 
 ---
 

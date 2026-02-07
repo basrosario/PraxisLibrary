@@ -105,6 +105,53 @@
 
 ## Session Work Logs (Archived)
 
+### Session 39 (2026-02-07)
+**Homepage Redesign — Full Implementation**
+- Replaced all `<main>` content in `index.html` with 6 new sections
+- Section 1: Library at a Glance — counter-grid (62+ Frameworks, 2,141+ Glossary Terms, 12 Tools, 100% Free)
+- Section 2: Explore Frameworks by Category — 6 icon-box cards with category counts
+- Section 3: Interactive Tools — 6 icon-box cards (expanded from 3)
+- Section 4: AI Foundations & Glossary — split-section with feature-list + highlight-box
+- Section 5: Why Praxis — split-section with feature-list--check + ND highlight-box (no emoji)
+- Section 6: Getting Started CTA — cta-corporate--gradient with quiz + basics buttons
+- All existing CSS components reused, zero new CSS needed
+- Quality checks: 0 inline styles, 0 inline scripts, 0 emoji, 0 external resources
+- Files: index.html, HANDOFF.md, COMPLETED.md
+
+### Session 38 (2026-02-07)
+**Part B — Full Navigation Update (100 files) + Homepage Redesign Plan**
+- Python batch script (`update_nav.py`) updated header, footer, and `<head>` across ALL 100 HTML files
+- Expanded mega-menu from ~47 to 65 links (62 framework + 3 code) organized into 9 categories:
+  - Getting Started (2), Structured Frameworks (5), In-Context Learning (9)
+  - Reasoning & CoT (14), Decomposition (7), Self-Correction (7)
+  - Ensemble Methods (7), Advanced Techniques (11), Code (3)
+- Correct active nav-link per directory (learn→Learn, tools→AI Readiness, pages→Resources, foundations→AI Foundations, neurodivergence→Resources, root→none)
+- Correct relative paths for 3 depth levels (root, one-deep `../`, two-deep `../../`)
+- `<head>` cleanup: removed all CSP meta, referrer meta, preload links; normalized viewport
+- Canonical footer with updated Learn links across all pages
+- Quality checks: 0 CSP meta, 0 preload, 0 referrer, 0 inline styles in learn/
+- Homepage redesign plan created and approved (6 sections) — not yet implemented
+- Files: 100 HTML files, HANDOFF.md, FrameworkOverhaul.md
+
+### Session 37 (2026-02-07)
+**Part A — 22-Page 13-Section Redesign (4 Waves) + HR Content Cleanup**
+- Commit: `17009ee`
+- Wave A — Foundation Frameworks (6 pages): chain-of-thought (827), few-shot-learning (818), zero-shot (816), one-shot (825), role-prompting (818), self-consistency (829)
+- Wave B — Structured Frameworks (6 pages): crisp (861), crispe (869), costar (892), constrained-output (833), context-structure (875), prompt-chaining (845)
+- Wave C — Advanced Techniques (5 pages): tree-of-thought (858), plan-and-solve (857), least-to-most (853), example-selection (829), shot-prompting (834)
+- Wave D — Flagship Pages (5 pages): react (859), flipped-interaction (848), prompt-basics (840), zero-shot-cot (840), facts-fictions (834)
+- HR/Remote Work Content Cleanup — Removed all HR/remote work examples from ~15 pages, replaced with tech/science/education examples
+- AI For Everybody Update — Updated "Who Praxis Serves" text per user request
+- Quality checks: 0 inline styles, 0 inline scripts, 0 CSP meta tags, all 13 sections verified
+
+### Session 36 (2026-02-07)
+**Wave 6 — Style & Emotion: Full Redesign (6 pages)**
+- Commit: `8b9e87d`
+- Redesigned all 6 pages to 13-section template:
+  - emotion-prompting.html, style-prompting.html, s2a.html, re2.html, cosp.html, rar.html
+- All 13 sections, zero inline styles/scripts, historical context notices
+- Quality checks: 0 CSP violations, all sections verified
+
 ### Session 35 (2026-02-07)
 **Wave 5 — Example Methods: Full Redesign (7 pages)**
 - Redesigned all 7 pages from ~290 lines to 844-863 lines using 13-section template
