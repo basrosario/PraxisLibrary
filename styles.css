@@ -27511,6 +27511,161 @@ html[data-text-scale="3"] {
     text-decoration: underline;
 }
 
+/* === DISCOVER HUB === */
+
+/* Filter Row ---- */
+.discover-filters {
+    position: sticky;
+    top: 70px;
+    z-index: 90;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--space-sm) 0;
+}
+
+.discover-filters__row {
+    display: flex;
+    gap: var(--space-sm);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--space-xs) 0;
+}
+
+.discover-filters__row::-webkit-scrollbar {
+    display: none;
+}
+
+.discover-filters__btn {
+    white-space: nowrap;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.discover-filters__btn:hover,
+.discover-filters__btn.is-active {
+    color: var(--primary);
+    border-color: var(--primary);
+    background: rgba(220, 53, 69, 0.08);
+}
+
+/* Discover Grid ---- */
+.discover-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+}
+
+/* Discover Card ---- */
+.discover-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all var(--transition-normal);
+}
+
+.discover-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.discover-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+}
+
+.discover-card__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.discover-card__year {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.discover-card__desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0 0 var(--space-md);
+    line-height: 1.5;
+    flex: 1;
+}
+
+/* Category Count Badge ---- */
+.discover-category__count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.75rem;
+    height: 1.75rem;
+    padding: 0 var(--space-sm);
+    border-radius: var(--radius-full);
+    background: var(--primary);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-left: var(--space-sm);
+    vertical-align: middle;
+}
+
+/* Category Link ---- */
+.discover-category__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.discover-category__link:hover {
+    text-decoration: underline;
+}
+
+/* Anchor Scroll Offsets ---- */
+[id^="cat-"] {
+    scroll-margin-top: 140px;
+}
+
+/* Discover Hub Responsive ---- */
+@media (max-width: 768px) {
+    .discover-filters {
+        top: 60px;
+    }
+
+    .discover-grid {
+        grid-template-columns: 1fr;
+    }
+
+    [id^="cat-"] {
+        scroll-margin-top: 120px;
+    }
+}
+
+/* /DISCOVER HUB */
+
 /* Timeline Mobile Responsive */
 @media (max-width: 768px) {
     .history-timeline {
