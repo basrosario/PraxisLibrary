@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
-    <meta name="description" content="Master the Constrained Output Framework: Define exact output formats for programmatic use. A foundation framework for structured AI responses.">
-    <title>Constrained Output Framework - Praxis</title>
+    <meta name="description" content="Constrained Output: Control LLM responses by specifying exact formats, length limits, and structural requirements for reliable, production-ready AI output.">
+    <title>Constrained Output - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <link rel="preload" href="../styles.css" as="style">
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Header -->
     <header class="header" id="header">
         <div class="header-container">
             <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
@@ -102,7 +98,7 @@
                             <a href="../pages/glossary.html">Glossary</a>
                             <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
                             <a href="../pages/faq.html">FAQ</a>
-                            </div>
+                        </div>
                         <div class="mega-menu-section">
                             <h4>Principles</h4>
                             <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
@@ -135,6 +131,8 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
         <!-- === HERO SECTION === -->
         <section class="page-hero">
@@ -148,186 +146,383 @@
                     <span class="current">Constrained Output</span>
                 </nav>
                 <div class="hero-badge">
-                    <svg class="hero-badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/>
-                        <line x1="3" y1="9" x2="21" y2="9"/>
-                        <line x1="9" y1="21" x2="9" y2="9"/>
-                    </svg>
-                    <span class="hero-badge__text">Foundation Framework</span>
+                    <span class="hero-badge__text">Output Control</span>
                 </div>
-                <h1 class="page-title fade-in">Constrained Output Framework</h1>
-                <p class="page-subtitle fade-in">Define exact output formats for programmatic use. Get reliable, machine-readable responses every time.</p>
+                <h1 class="page-title fade-in">Constrained Output</h1>
+                <p class="page-subtitle fade-in">LLMs are verbose by default &mdash; they explain, elaborate, and editorialize. Constrained Output strips away that freedom, forcing the model to deliver responses in exact formats, within strict length limits, and following precise structural rules that downstream systems can reliably parse.</p>
             </div>
         </section>
         <!-- /HERO SECTION -->
 
-<!-- === WHY CONSTRAINED OUTPUT === -->
-        <section class="section section-alt">
-            <div class="container">
-                <div class="split-section">
-                    <div class="split-section__content">
-                        <span class="section-eyebrow">Why This Framework</span>
-                        <h2 class="section-title">Structure Matters for Automation</h2>
-                        <p class="section-intro">When you need to parse AI output with code, inconsistent formatting breaks everything. By defining exact output structure and explicitly requesting "no additional text," you get reliable, machine-readable responses.</p>
-                        <div class="feature-list feature-list--check">
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Predictable Output</span>
-                                    <span class="feature-list__text">Same structure every time makes parsing reliable</span>
-                                </div>
-                            </div>
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">API Integration</span>
-                                    <span class="feature-list__text">Perfect for workflows where AI feeds into other systems</span>
-                                </div>
-                            </div>
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">No Conversational Fluff</span>
-                                    <span class="feature-list__text">Prevent "Here's what I found:" text that breaks parsing</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="callout tip">
-                            <div class="callout-title">Enforcement Tip</div>
-                            <p>End your prompt with: "Return your analysis in exactly this format, with no additional text or explanation." This prevents conversational fluff that breaks parsing.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /WHY CONSTRAINED OUTPUT -->
-
-        <!-- === FORMAT EXAMPLES === -->
+        <!-- === HISTORICAL CONTEXT === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Common Formats</span>
-                    <h2 class="section-title">Output Format Examples</h2>
-                    <p class="section-subtitle">Choose the format that best fits your use case</p>
-                </div>
-
-                <div class="comparison-panels fade-in-up">
-                    <div class="comparison-panel comparison-panel--after">
-                        <div class="comparison-panel__header">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                            </svg>
-                            <span>JSON Format</span>
-                        </div>
-                        <div class="comparison-panel__content">
-                            <div class="comparison-panel__result">
-                                <code>{
-  "summary": "...",
-  "key_points": ["..."],
-  "sentiment": "positive",
-  "confidence": 0.92
-}</code>
-                            </div>
-                            <p class="comparison-panel__note">Best for: APIs, databases, programmatic parsing</p>
-                        </div>
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2020</span>
+                        <p><strong>Introduced:</strong> Constrained Output techniques emerged organically around 2020 as practitioners moved from experimental AI usage to production systems. Rather than originating from a single paper, the approach evolved from the practical necessity of parsing LLM responses programmatically. Early adopters discovered that without explicit format instructions, models would wrap JSON in explanatory prose, ignore word-count limits, and add conversational preambles that broke automated pipelines. The technique formalized what developers learned through trial and error: you must tell the model <strong>exactly</strong> what shape the output should take and explicitly prohibit everything else.</p>
+                        <p><strong>Modern LLM Status:</strong> Constrained Output has become <strong>more important than ever</strong> in the age of function calling and structured generation. Modern APIs from OpenAI, Anthropic, and Google now offer native JSON mode, tool-use schemas, and response-format parameters that enforce constraints at the infrastructure level. However, prompt-level constraints remain essential for controlling length, tone, section structure, and any format not covered by built-in modes. The technique is foundational &mdash; nearly every production LLM application uses some form of output constraint, making it one of the most universally applied prompting patterns.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
 
-                    <div class="comparison-panel comparison-panel--after">
-                        <div class="comparison-panel__header">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="8" y1="6" x2="21" y2="6"/>
-                                <line x1="8" y1="12" x2="21" y2="12"/>
-                                <line x1="8" y1="18" x2="21" y2="18"/>
-                                <line x1="3" y1="6" x2="3.01" y2="6"/>
-                                <line x1="3" y1="12" x2="3.01" y2="12"/>
-                                <line x1="3" y1="18" x2="3.01" y2="18"/>
-                            </svg>
-                            <span>Structured Text</span>
-                        </div>
-                        <div class="comparison-panel__content">
-                            <div class="comparison-panel__result">
-                                <code>TITLE: ...
-CATEGORY: ...
-PRIORITY: High/Med/Low
-ACTION ITEMS:
-- Item 1
-- Item 2</code>
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Tell the Model What Shape to Fill</h2>
+                        <p class="split-section__text">Language models generate text token by token with no inherent concept of &ldquo;format.&rdquo; Left unconstrained, they default to conversational prose &mdash; helpful for chat, but catastrophic for any system that needs to parse, store, or route the output. A JSON parser does not care about the model&rsquo;s friendly preamble; it crashes on &ldquo;Sure! Here&rsquo;s the data you requested:&rdquo; before the actual payload.</p>
+                        <p class="split-section__text"><strong>Constrained Output solves this by replacing ambiguity with specification.</strong> Instead of asking &ldquo;What are the key points?&rdquo; you define the exact container: the data format (JSON, XML, CSV, markdown table), the field names and types, the length boundaries (word counts, character limits, number of items), and an explicit prohibition on anything outside the specification. The model fills the mold you provide rather than inventing its own shape.</p>
+                        <p class="split-section__text">Think of it like giving someone a form to complete instead of asking them to write a letter. The form has labeled fields, character limits, and checkboxes &mdash; there is no room for tangents, no space for pleasantries, and no ambiguity about what goes where.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Explicit Constraints Beat Hoping for the Best</span>
+                                <p>Without constraints, the same prompt can produce wildly different output structures across runs &mdash; sometimes bullet points, sometimes paragraphs, sometimes numbered lists with explanatory headers. This inconsistency is invisible in casual use but becomes a pipeline-breaking problem at scale. Constrained Output eliminates structural variance by making the format part of the instruction, not an afterthought. The result: <strong>every response fits the same predictable shape</strong>, whether it is the first call or the ten-thousandth.</p>
                             </div>
-                            <p class="comparison-panel__note">Best for: Human review, simple parsing, reports</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /FORMAT EXAMPLES -->
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Constrained Output Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from open-ended request to precisely formatted response</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define the Output Format</h3>
+                            <p class="element-timeline__text">Choose the exact structure your response must follow. This could be a data format like JSON or XML, a document structure with specific headings and sections, a table with defined columns, or a simple list with a fixed number of items. The key is specificity &mdash; name every field, specify every section, and leave nothing to the model&rsquo;s discretion.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Respond in valid JSON with these exact fields: title (string), summary (string, max 50 words), tags (array of 3 strings), priority (one of: high, medium, low).&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Set Length and Quantity Boundaries</h3>
+                            <p class="element-timeline__text">Specify exactly how much content you need. Word counts, character limits, number of list items, number of paragraphs &mdash; every quantitative dimension should be explicitly bounded. Models are poor at estimating length on their own, so concrete numbers dramatically improve compliance. Ranges work better than exact counts for natural-sounding text.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Write exactly 3 bullet points, each between 15 and 25 words. Do not include an introduction or conclusion.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Prohibit Unwanted Additions</h3>
+                            <p class="element-timeline__text">Explicitly forbid the model from adding content outside your specification. Without this step, models routinely prepend &ldquo;Here is the result:&rdquo; or append &ldquo;Let me know if you need anything else!&rdquo; &mdash; text that seems helpful but breaks parsers. The prohibition should be clear and direct: no preambles, no explanations, no commentary beyond what you specified.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Return only the JSON object. Do not include any text before or after the JSON. Do not wrap it in markdown code fences. Do not add explanations.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Validate and Enforce</h3>
+                            <p class="element-timeline__text">Even with clear constraints, models occasionally deviate. Production systems pair prompt-level constraints with programmatic validation: parse the JSON, check field types, count words, verify enum values. When validation fails, the prompt can be re-sent with feedback about the specific violation. This creates a reliable constraint-and-verify loop.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Parse the response as JSON. If parsing fails or required fields are missing, retry with: &ldquo;Your previous response was not valid JSON. Return only the JSON object with all required fields.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why explicit format constraints produce reliable, parseable output</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Unconstrained Output</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Analyze this customer review and tell me the sentiment and key topics.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Sure! I&rsquo;d be happy to analyze this review for you. The customer seems quite positive overall, mentioning that they love the product quality and fast shipping. However, they did express some frustration with the packaging. The main topics covered are product quality, shipping speed, and packaging issues. Overall, I&rsquo;d say the sentiment is mostly positive with minor concerns. Let me know if you&rsquo;d like me to go deeper!</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Conversational fluff, unparseable, inconsistent structure across runs</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Constrained Output</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Constrained Prompt</span>
+                                <p>Analyze this customer review. Respond in valid JSON with exactly these fields: sentiment (positive/negative/mixed), confidence (0.0&ndash;1.0), topics (array of max 3 strings), summary (max 20 words). Return only the JSON object with no additional text.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>{"sentiment": "mixed", "confidence": 0.85, "topics": ["product quality", "shipping speed", "packaging"], "summary": "Positive on quality and delivery but frustrated with damaged packaging."}</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Machine-readable, consistent structure, directly parseable by code</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Constrained Output in Action</h2>
+                <p class="section-subtitle fade-in-up">See how different constraint types shape LLM responses</p>
+
+                <div class="accordion fade-in-up" id="constrained-output-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Format Constraints: Enforcing JSON Structure</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Constrained Prompt</span>
+                                    <p>&ldquo;Extract the following from this product listing. Respond in valid JSON with these exact fields: product_name (string), brand (string), category (string), price_range (object with min and max as integers), key_features (array of strings, max 5 items), warranty_years (integer). Return only the JSON object. No markdown, no explanation.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Constrained Response</span>
+                                    <p>{"product_name": "ProDisplay 4K Monitor", "brand": "Acme Tech", "category": "Computer Monitors", "price_range": {"min": 599, "max": 749}, "key_features": ["4K UHD Resolution", "USB-C Connectivity", "HDR10 Support", "100Hz Refresh Rate", "Built-in Speakers"], "warranty_years": 3}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Length Constraints: Controlling Verbosity</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Constrained Prompt</span>
+                                    <p>&ldquo;Summarize this article in exactly 3 bullet points. Each bullet must be one sentence of 10&ndash;20 words. Begin each bullet with a strong action verb. Do not include a title, introduction, or conclusion. Output only the 3 bullet points.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Constrained Response</span>
+                                    <p>&bull; Reduce infrastructure costs by migrating legacy batch jobs to event-driven serverless architectures.<br><br>&bull; Eliminate single points of failure through automated health checks and multi-region failover routing.<br><br>&bull; Accelerate deployment cycles by implementing trunk-based development with feature flags and canary releases.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Structural Constraints: Defining Section Layout</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Constrained Prompt</span>
+                                    <p>&ldquo;Write a product comparison using exactly this structure. Use these section headers in this order: OVERVIEW (2 sentences), STRENGTHS (3 bullets), WEAKNESSES (2 bullets), VERDICT (1 sentence). Use the exact header names in all caps followed by a colon. No additional sections. No introductory text before OVERVIEW.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Constrained Response</span>
+                                    <p><strong>OVERVIEW:</strong> The XR-500 is a mid-range noise-canceling headphone targeting professionals and commuters. It competes directly with the Sony WH-1000XM5 at two-thirds the price.<br><br><strong>STRENGTHS:</strong><br>&bull; Battery life exceeds 40 hours, outlasting every competitor in its price range<br>&bull; Multipoint Bluetooth connects to two devices simultaneously without manual switching<br>&bull; Microphone array delivers clear voice isolation even in open-office environments<br><br><strong>WEAKNESSES:</strong><br>&bull; Active noise cancellation underperforms on low-frequency sounds like airplane engines<br>&bull; Ear cushions use synthetic leather that retains heat during extended wear sessions<br><br><strong>VERDICT:</strong> The XR-500 offers the best value in its category for professionals who prioritize battery life and call quality over premium noise cancellation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
 
         <!-- === WHEN TO USE === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Best Fit</span>
-                    <h2 class="section-title">When to Use Constrained Output</h2>
-                    <p class="section-subtitle">Essential for automation and consistent data processing</p>
-                </div>
+                <h2 class="section-title fade-in-up">When to Use Constrained Output</h2>
+                <p class="section-subtitle fade-in-up">Essential when output must be predictable, parseable, or pipeline-ready</p>
 
-                <div class="use-case-grid">
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>API and Pipeline Integration</strong>
+                                    <p>When LLM output feeds directly into code, databases, or other systems &mdash; unparseable responses break the entire chain.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Batch Processing at Scale</strong>
+                                    <p>Processing hundreds or thousands of items where every response must follow an identical structure for automated downstream handling.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Consistent Report Generation</strong>
+                                    <p>When stakeholders expect identical section layouts across reports &mdash; executive summaries, status updates, and audit documents that must match a template.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Token and Cost Optimization</strong>
+                                    <p>When you need concise output and cannot afford verbose responses &mdash; length constraints reduce token consumption and API costs directly.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative or Exploratory Writing</strong>
+                                    <p>When you want the model to surprise you &mdash; brainstorming, storytelling, or ideation tasks where rigid structure would stifle the output.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Conversational Interfaces</strong>
+                                    <p>Chatbots and assistants where natural, flowing dialogue is the goal &mdash; heavy constraints make responses feel robotic and unnatural to human users.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Reasoning Tasks</strong>
+                                    <p>When the model needs freedom to think through a problem step by step &mdash; premature format constraints can force answers before reasoning is complete.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Constrained Output delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polyline points="16 18 22 12 16 6"/>
                                 <polyline points="8 6 2 12 8 18"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-card__title">API Integration</h3>
-                        <p class="use-case-card__desc">When AI output needs to be parsed by code or fed into other systems.</p>
+                        <h3 class="use-case-showcase__title">API Response Formatting</h3>
+                        <p class="use-case-showcase__desc">Force LLM output into valid JSON, XML, or CSV that downstream services can parse without error handling for unexpected prose or formatting.</p>
                     </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <ellipse cx="12" cy="5" rx="9" ry="3"/>
                                 <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
                                 <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-card__title">Database Entry</h3>
-                        <p class="use-case-card__desc">Structured data that needs to go directly into a database.</p>
+                        <h3 class="use-case-showcase__title">Database Population</h3>
+                        <p class="use-case-showcase__desc">Extract structured records from unstructured text &mdash; ensuring each output maps cleanly to database columns with correct types and value ranges.</p>
                     </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                                <line x1="3" y1="9" x2="21" y2="9"/>
-                                <line x1="9" y1="21" x2="9" y2="9"/>
-                            </svg>
-                        </div>
-                        <h3 class="use-case-card__title">Spreadsheet Import</h3>
-                        <p class="use-case-card__desc">Generating data for CSV or Excel import.</p>
-                    </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                            </svg>
-                        </div>
-                        <h3 class="use-case-card__title">Automation Workflows</h3>
-                        <p class="use-case-card__desc">Zapier, Make, or custom automation pipelines.</p>
-                    </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                                 <polyline points="14 2 14 8 20 8"/>
@@ -335,41 +530,124 @@ ACTION ITEMS:
                                 <line x1="16" y1="17" x2="8" y2="17"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-card__title">Report Generation</h3>
-                        <p class="use-case-card__desc">Consistent report formats for business use.</p>
+                        <h3 class="use-case-showcase__title">Templated Reports</h3>
+                        <p class="use-case-showcase__desc">Generate standardized business documents with identical section layouts, ensuring every weekly status report or audit summary follows the same structure.</p>
                     </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-                                <path d="M21 3v9h-9"/>
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="3" y1="9" x2="21" y2="9"/>
+                                <line x1="9" y1="21" x2="9" y2="9"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-card__title">Batch Processing</h3>
-                        <p class="use-case-card__desc">Processing many items with identical output structure.</p>
+                        <h3 class="use-case-showcase__title">Spreadsheet Generation</h3>
+                        <p class="use-case-showcase__desc">Produce CSV or tab-delimited output ready for direct import into Excel or Google Sheets without manual reformatting or cleanup.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Chatbot Slot Filling</h3>
+                        <p class="use-case-showcase__desc">Extract specific fields from user messages in conversational AI &mdash; intent, entities, sentiment &mdash; in a fixed schema that the dialog manager can route reliably.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Moderation Labels</h3>
+                        <p class="use-case-showcase__desc">Classify content into predefined categories with confidence scores, outputting only the label and number &mdash; no explanatory commentary that would slow automated filtering.</p>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /WHEN TO USE -->
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Constrained Output Fits</h2>
+                <p class="section-subtitle fade-in-up">From free-form prompting to schema-enforced generation</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Free-Form Prompting</span>
+                        <span class="era-marker__title">No Constraints</span>
+                        <span class="era-marker__desc">Model decides structure and length</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Constrained Output</span>
+                        <span class="era-marker__title">Prompt-Level Control</span>
+                        <span class="era-marker__desc">Format, length, and structure specified in instructions</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Structured Output</span>
+                        <span class="era-marker__title">Schema Enforcement</span>
+                        <span class="era-marker__desc">JSON schemas and type systems validate output</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Function Calling</span>
+                        <span class="era-marker__title">Native API Constraints</span>
+                        <span class="era-marker__desc">Model infrastructure enforces output shape</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Layer Your Constraints</div>
+                    <p>The most reliable production systems combine prompt-level constraints with API-level enforcement. Use Constrained Output techniques in your prompt <strong>and</strong> enable JSON mode or response format parameters in the API call. When the prompt tells the model what shape to produce and the API layer validates compliance, format violations drop to near zero &mdash; even across millions of requests.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
 
         <!-- === RELATED FRAMEWORKS === -->
         <section class="section">
             <div class="container">
                 <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <p class="section-subtitle fade-in-up">Explore frameworks that complement Constrained Output</p>
+                <p class="section-subtitle fade-in-up">Explore techniques that complement output control</p>
 
-                <a href="few-shot-learning.html" class="evolution-callout fade-in-up">
+                <a href="modality/code/structured-output.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <line x1="3" y1="9" x2="21" y2="9"/>
+                            <line x1="9" y1="21" x2="9" y2="9"/>
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Example Framework</span>
-                        <span class="evolution-callout__title">Few-Shot Learning Framework</span>
-                        <span class="evolution-callout__desc">Combine with examples to show the exact output format you want.</span>
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Structured Output</span>
+                        <span class="evolution-callout__desc">Takes constrained output further with formal JSON schemas, type validation, and API-level enforcement for guaranteed format compliance.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="crisp.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">CRISP Framework</span>
+                        <span class="evolution-callout__desc">A comprehensive prompt framework that includes output specification as one of its core components &mdash; giving output constraints a structured context.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -386,28 +664,9 @@ ACTION ITEMS:
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Workflow Framework</span>
-                        <span class="evolution-callout__title">Prompt Chaining Framework</span>
-                        <span class="evolution-callout__desc">Use structured output to pass data between chained prompts.</span>
-                    </div>
-                    <span class="evolution-callout__arrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </span>
-                </a>
-
-                <a href="self-consistency.html" class="evolution-callout fade-in-up">
-                    <span class="evolution-callout__icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                            <polyline points="22 4 12 14.01 9 11.01"/>
-                        </svg>
-                    </span>
-                    <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Verification Framework</span>
-                        <span class="evolution-callout__title">Self-Consistency Framework</span>
-                        <span class="evolution-callout__desc">Validate structured output with self-checking prompts.</span>
+                        <span class="evolution-callout__label">Workflow</span>
+                        <span class="evolution-callout__title">Prompt Chaining</span>
+                        <span class="evolution-callout__desc">Use constrained output to create reliable handoff points between chained prompts &mdash; each step&rsquo;s structured output becomes the next step&rsquo;s clean input.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -419,39 +678,26 @@ ACTION ITEMS:
         </section>
         <!-- /RELATED FRAMEWORKS -->
 
-        <!-- === SOURCES === -->
-        <section class="section citations-section">
-            <div class="container">
-                <h2>Sources</h2>
-                <ul class="citation-list">
-                    <li class="citation-item">
-                        <a href="https://hai.stanford.edu/ai-index/2024-ai-index-report" target="_blank" rel="noopener noreferrer">AI Index Report 2024 - Stanford Human-Centered AI Institute</a>
-                    </li>
-                </ul>
-            </div>
-        </section>
-        <!-- /SOURCES -->
-
-        <!-- === CTA === -->
+        <!-- === CTA SECTION === -->
         <section class="section">
             <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
                     <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
                     <div class="cta-corporate__content">
                         <h2 class="cta-corporate__title">Build Structured Prompts</h2>
-                        <p class="cta-corporate__text">Create prompts with precise output requirements using our interactive tools.</p>
+                        <p class="cta-corporate__text">Create prompts with precise output constraints using our interactive tools, or test your existing prompts for format compliance.</p>
                         <div class="cta-corporate__actions">
-                            <a href="../tools/guidance.html" class="btn btn-primary">Try Prompt Builder</a>
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
                             <a href="../tools/analyzer.html" class="btn btn-secondary">Analyze a Prompt</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /CTA -->
+        <!-- /CTA SECTION -->
     </main>
 
-    <!-- Footer -->
+
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -515,7 +761,7 @@ ACTION ITEMS:
         <span class="back-to-top-text">Back to Top</span>
     </button>
 
-<!-- Accessibility Dashboard -->
+    <!-- Accessibility Dashboard -->
     <div class="adl-dim-overlay" aria-hidden="true"></div>
     <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

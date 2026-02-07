@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
-    <meta name="description" content="Least-to-Most Prompting: Break complex problems into simpler sub-problems, solve them in order, and build toward the final answer systematically.">
+    <meta name="description" content="Least-to-Most Prompting: Break complex problems into simpler sub-problems, solve them progressively from easiest to hardest, and build toward the final answer systematically.">
     <title>Least-to-Most Prompting - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <link rel="preload" href="../styles.css" as="style">
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Header -->
     <header class="header" id="header">
         <div class="header-container">
             <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
@@ -102,7 +98,7 @@
                             <a href="../pages/glossary.html">Glossary</a>
                             <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
                             <a href="../pages/faq.html">FAQ</a>
-                            </div>
+                        </div>
                         <div class="mega-menu-section">
                             <h4>Principles</h4>
                             <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
@@ -135,6 +131,8 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
         <!-- === HERO SECTION === -->
         <section class="page-hero">
@@ -148,59 +146,44 @@
                     <span class="current">Least-to-Most</span>
                 </nav>
                 <div class="hero-badge">
-                    <svg class="hero-badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="8" y1="6" x2="21" y2="6"/>
-                        <line x1="8" y1="12" x2="21" y2="12"/>
-                        <line x1="8" y1="18" x2="21" y2="18"/>
-                        <line x1="3" y1="6" x2="3.01" y2="6"/>
-                        <line x1="3" y1="12" x2="3.01" y2="12"/>
-                        <line x1="3" y1="18" x2="3.01" y2="18"/>
-                    </svg>
-                    <span class="hero-badge__text">Decomposition Technique</span>
+                    <span class="hero-badge__text">Decomposition</span>
                 </div>
                 <h1 class="page-title fade-in">Least-to-Most Prompting</h1>
-                <p class="page-subtitle fade-in">Conquer complexity by starting small. Break problems into sub-problems, solve them in order, and build to the answer.</p>
+                <p class="page-subtitle fade-in">Complex problems become manageable when you break them into simpler pieces and solve them in order. Least-to-Most decomposes a hard question into easy sub-questions, solves each one progressively, and passes every answer forward &mdash; building a staircase of understanding from the ground up.</p>
             </div>
         </section>
         <!-- /HERO SECTION -->
 
-<!-- === THE CONCEPT === -->
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2022</span>
+                        <p><strong>Introduced:</strong> Least-to-Most Prompting was published in 2022 by Zhou et al. at Google Research. The technique was designed to overcome a key limitation of chain-of-thought prompting: the inability to generalize to problems harder than those shown in the few-shot examples. Least-to-Most introduces a two-stage protocol &mdash; first decompose the complex problem into a sequence of simpler sub-problems, then solve each sub-problem from easiest to hardest, passing the context of previously solved sub-problems forward. The original paper demonstrated dramatic improvements on symbolic manipulation, compositional generalization (SCAN benchmark), and math word problems.</p>
+                        <p><strong>Modern LLM Status:</strong> The progressive decomposition strategy of Least-to-Most has been <strong>partially absorbed into modern LLM reasoning capabilities</strong>. Claude, GPT-4, and Gemini can often decompose problems implicitly when prompted with chain-of-thought. However, Least-to-Most&rsquo;s explicit two-stage structure remains valuable when you need <strong>guaranteed decomposition before solving</strong>, when dealing with problems that require length generalization beyond the examples provided, or when each sub-problem&rsquo;s solution must be independently verifiable. The technique is especially relevant for compositional tasks, multi-step math, and any domain where building from simple to complex is the natural problem-solving strategy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Approach</span>
-                        <h2 class="section-title">Divide and Conquer for AI</h2>
-                        <p class="section-intro">Least-to-Most prompting handles problems that are too complex to solve in one step. First, decompose the problem into simpler sub-problems. Then solve each sub-problem, using earlier answers to inform later ones.</p>
-                        <div class="highlight-box highlight-box--info">
-                            <div class="highlight-box__icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <line x1="12" y1="16" x2="12" y2="12"/>
-                                    <line x1="12" y1="8" x2="12.01" y2="8"/>
-                                </svg>
-                            </div>
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Why It Works</span>
-                                <p>By solving easier problems first, the model builds context and intermediate results that make harder problems tractable. Each answer becomes a stepping stone.</p>
-                            </div>
-                        </div>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Progressive Decomposition: Simple to Complex</h2>
+                        <p class="split-section__text">Most complex problems are not monolithic &mdash; they are stacks of simpler problems in disguise. A multi-step math word problem, a long sequence of instructions, or a reading comprehension question spanning several paragraphs all share the same structure: solve the easy parts first, then use those answers to tackle the hard parts.</p>
+                        <p class="split-section__text"><strong>Least-to-Most formalizes this intuition into a two-stage process.</strong> In Stage 1, the model decomposes the original problem into an ordered list of sub-problems, arranged from simplest to most complex. In Stage 2, the model solves each sub-problem in order, and critically, the answer to each sub-problem is appended to the context before attempting the next one. This means each successive sub-problem benefits from all previously established answers.</p>
+                        <p class="split-section__text">Think of it like building a staircase. You don&rsquo;t leap to the top floor &mdash; you lay one step at a time, and each new step rests on the ones beneath it. The final step reaches the answer that a single leap could never reliably achieve.</p>
                     </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="8" y1="6" x2="21" y2="6"/>
-                                    <line x1="8" y1="12" x2="21" y2="12"/>
-                                    <line x1="8" y1="18" x2="21" y2="18"/>
-                                    <line x1="3" y1="6" x2="3.01" y2="6"/>
-                                    <line x1="3" y1="12" x2="3.01" y2="12"/>
-                                    <line x1="3" y1="18" x2="3.01" y2="18"/>
-                                </svg>
-                            </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">Two-Stage Process</span>
-                                <p>First decompose into subproblems, then solve from simplest to most complex. Each solution builds on the last.</p>
+                                <span class="highlight-box__title">Why Progressive Solving Beats Monolithic Reasoning</span>
+                                <p>When a model attempts to solve a complex problem in a single pass, it must hold all dependencies, intermediate values, and logical connections in working memory simultaneously. This leads to dropped steps, arithmetic errors, and hallucinated shortcuts. Least-to-Most eliminates this cognitive overload by ensuring the model only ever faces a problem it can solve with the information already established &mdash; turning a high-wire act into a series of confident, grounded steps.</p>
                             </div>
                         </div>
                     </div>
@@ -209,162 +192,226 @@
         </section>
         <!-- /THE CONCEPT -->
 
-        <!-- === TWO STAGES === -->
+        <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">The Process</span>
-                    <h2 class="section-title">Two-Stage Framework</h2>
-                    <p class="section-subtitle">Decomposition followed by sequential solving</p>
-                </div>
+                <h2 class="section-title fade-in-up">The Least-to-Most Process</h2>
+                <p class="section-subtitle fade-in-up">Two stages from complex problem to reliable answer</p>
 
-                <div class="timeline fade-in-up">
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <h3 class="timeline-title">Stage 1: Decomposition</h3>
-                            <p class="timeline-desc">Break the complex problem into a sequence of simpler sub-problems. Order them from easiest to hardest, or in logical dependency order.</p>
-                            <span class="timeline-meta">Prompt: "What sub-problems need to be solved first?"</span>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Receive the Complex Problem</h3>
+                            <p class="element-timeline__text">Start with a problem that is too complex or too long to solve reliably in a single step. These are typically problems with chained dependencies, compositional structures, or requirements that exceed what the model has seen in its few-shot examples.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Amy has 4 times as many apples as Ben. Ben has 3 more apples than Carl. Carl has 2 apples. How many apples does Amy have?&rdquo;</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <h3 class="timeline-title">Stage 2a: Solve First Sub-Problem</h3>
-                            <p class="timeline-desc">Solve the simplest or foundational sub-problem. This establishes a base of knowledge for subsequent steps.</p>
-                            <span class="timeline-meta">Start with what you can answer directly</span>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Stage 1: Decompose Into Ordered Sub-Problems</h3>
+                            <p class="element-timeline__text">The model identifies the sub-problems hidden within the original question and orders them from simplest to most complex. Each sub-problem should be solvable using only the original information plus answers from earlier sub-problems. This decomposition step is what distinguishes Least-to-Most from standard chain-of-thought &mdash; the problem structure is made explicit before any solving begins.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Sub-problems identified:</strong><br>1. How many apples does Carl have?<br>2. How many apples does Ben have?<br>3. How many apples does Amy have?</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <h3 class="timeline-title">Stage 2b: Solve Next Sub-Problem</h3>
-                            <p class="timeline-desc">Using the answer from the previous step, solve the next sub-problem. The earlier answer provides context.</p>
-                            <span class="timeline-meta">Build on established answers</span>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Stage 2: Solve Progressively, Passing Context Forward</h3>
+                            <p class="element-timeline__text">Solve each sub-problem in order, starting with the easiest. After solving each one, append its answer to the context for the next sub-problem. This progressive accumulation of solved results means the model never faces a sub-problem without the prerequisite knowledge it needs. Each answer becomes a stepping stone for the next.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Q1:</strong> Carl has 2 apples (given directly).<br><strong>Q2:</strong> Ben has 3 more than Carl. Carl has 2, so Ben has 2 + 3 = 5 apples.<br><strong>Q3:</strong> Amy has 4 times as many as Ben. Ben has 5, so Amy has 5 &times; 4 = <strong>20 apples</strong>.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="timeline-item timeline-item--active">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <h3 class="timeline-title">Stage 2c: Continue Until Complete</h3>
-                            <p class="timeline-desc">Repeat until all sub-problems are solved. The final sub-problem's answer is typically the answer to the original complex problem.</p>
-                            <span class="timeline-meta">Final answer emerges from the sequence</span>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Deliver the Final Answer</h3>
+                            <p class="element-timeline__text">The answer to the final (most complex) sub-problem is the answer to the original question. Because every intermediate step was solved explicitly and its answer was carried forward, the final result is grounded in a verifiable chain of reasoning rather than an opaque leap of logic.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Final answer:</strong> Amy has 20 apples. The answer was built step by step: Carl (2) &rarr; Ben (5) &rarr; Amy (20).</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /TWO STAGES -->
+        <!-- /HOW IT WORKS -->
 
-        <!-- === INTERACTIVE EXAMPLE === -->
+        <!-- === VISUAL: THE COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">In Action</span>
-                    <h2 class="section-title">Least-to-Most Example</h2>
-                    <p class="section-subtitle">See how a complex word problem becomes manageable</p>
-                </div>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why progressive decomposition outperforms direct solving</p>
 
-                <div class="comparison-tabs fade-in-up" data-component="comparison-tabs">
-                    <div class="comparison-tabs__nav" role="tablist">
-                        <button class="comparison-tabs__tab is-active" role="tab" aria-selected="true" data-tab="direct">Direct Approach</button>
-                        <button class="comparison-tabs__tab" role="tab" aria-selected="false" data-tab="ltm">Least-to-Most</button>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Direct Solving</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>A train travels from City A to City B at 60 mph for the first leg, then from City B to City C at 90 mph for the second leg. The first leg is 180 miles and the second leg is 270 miles. A car leaves City A at the same time traveling directly to City C (a 400-mile route) at a constant speed. The car arrives 30 minutes after the train. How fast was the car going?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>The car was traveling at about 72 mph. [Skips showing intermediate calculations, may confuse legs or misapply time calculations]</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Single-pass attempt, error-prone, no visible reasoning</span>
+                        </div>
                     </div>
 
-                    <div class="comparison-tabs__content">
-                        <div class="comparison-tabs__panel is-active" data-panel="direct">
-                            <div class="comparison-grid">
-                                <div class="comparison-card comparison-card--before">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">All At Once</span>
-                                        <span class="comparison-card__badge comparison-card__badge--error">Overwhelmed</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Problem:</strong> Amy has 4 times as many apples as Ben. Ben has 3 more apples than Carl. Carl has 2 apples. How many apples does Amy have?
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Direct attempt:</strong> The model must track multiple relationships simultaneously, often losing track or making arithmetic errors in the chain.
-                                    </div>
-                                    <div class="comparison-card__analysis">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="12" cy="12" r="10"/>
-                                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                                            <line x1="12" y1="17" x2="12.01" y2="17"/>
-                                        </svg>
-                                        <span>Too many relationships to track at once</span>
-                                    </div>
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Least-to-Most</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Progressive Decomposition</span>
+                                <p><strong>Sub-problem 1:</strong> How long does the train take for leg 1?<br><strong>Answer:</strong> 180 miles / 60 mph = 3 hours.<br><strong>Sub-problem 2:</strong> How long does the train take for leg 2?<br><strong>Answer:</strong> 270 miles / 90 mph = 3 hours.<br><strong>Sub-problem 3:</strong> What is the train&rsquo;s total travel time?<br><strong>Answer:</strong> 3 + 3 = 6 hours.<br><strong>Sub-problem 4:</strong> How long does the car take?<br><strong>Answer:</strong> 6 hours + 0.5 hours = 6.5 hours.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Final Answer</span>
+                                <p>The car&rsquo;s speed = 400 miles / 6.5 hours &approx; <strong>61.5 mph</strong>. Each step is independently verifiable.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Each sub-problem solved and verified before proceeding</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Least-to-Most in Action</h2>
+                <p class="section-subtitle fade-in-up">See how progressive decomposition handles different problem types</p>
+
+                <div class="accordion fade-in-up" id="ltm-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Multi-Step Math Problem</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Original Problem</span>
+                                    <p>&ldquo;A store offers a 20% discount on all items. Sarah buys 3 shirts at $45 each and 2 pairs of pants at $60 each. She also has a coupon for $15 off her total after the discount. If tax is 8%, what is her final bill?&rdquo;</p>
                                 </div>
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">What Happens</span>
-                                        <span class="comparison-card__badge comparison-card__badge--error">Error-Prone</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Common Errors:</strong><br>
-                                        - Confuses who has more than whom<br>
-                                        - Applies multiplier at wrong step<br>
-                                        - Loses track of intermediate values
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Result:</strong> Wrong answer or inconsistent reasoning
-                                    </div>
-                                    <div class="comparison-card__analysis">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="12" cy="12" r="10"/>
-                                            <line x1="15" y1="9" x2="9" y2="15"/>
-                                            <line x1="9" y1="9" x2="15" y2="15"/>
-                                        </svg>
-                                        <span>Cognitive overload leads to mistakes</span>
-                                    </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Least-to-Most Decomposition</span>
+                                    <p><strong>Sub-problem 1:</strong> What is the pre-discount total?<br>
+                                    <strong>Answer:</strong> Shirts: 3 &times; $45 = $135. Pants: 2 &times; $60 = $120. Total: $135 + $120 = $255.<br><br>
+                                    <strong>Sub-problem 2:</strong> What is the total after the 20% discount?<br>
+                                    <strong>Answer:</strong> Discount: $255 &times; 0.20 = $51. After discount: $255 &minus; $51 = $204.<br><br>
+                                    <strong>Sub-problem 3:</strong> What is the total after the $15 coupon?<br>
+                                    <strong>Answer:</strong> $204 &minus; $15 = $189.<br><br>
+                                    <strong>Sub-problem 4:</strong> What is the final bill with 8% tax?<br>
+                                    <strong>Answer:</strong> Tax: $189 &times; 0.08 = $15.12. Final bill: $189 + $15.12 = <strong>$204.12</strong>.</p>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="comparison-tabs__panel" data-panel="ltm">
-                            <div class="comparison-grid">
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Stage 1: Decompose</span>
-                                        <span class="comparison-card__badge comparison-card__badge--success">Clear Steps</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Sub-problems identified:</strong><br>
-                                        1. How many apples does Carl have?<br>
-                                        2. How many apples does Ben have?<br>
-                                        3. How many apples does Amy have?
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Order:</strong> Carl → Ben → Amy (dependency chain)
-                                    </div>
-                                    <div class="comparison-card__analysis comparison-card__analysis--success">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                            <polyline points="22 4 12 14.01 9 11.01"/>
-                                        </svg>
-                                        <span>Clear dependency ordering</span>
-                                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Reading Comprehension Chain</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Original Problem</span>
+                                    <p>&ldquo;Given the passage describing a company&rsquo;s restructuring: The CEO announced that the marketing division would merge with sales, the resulting team would report to a new VP, and all affected employees would receive retention bonuses. How many organizational changes are described, and which change would have the most direct impact on day-to-day workflows?&rdquo;</p>
                                 </div>
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Stage 2: Solve Sequentially</span>
-                                        <span class="comparison-card__badge comparison-card__badge--success">Step by Step</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Solving each:</strong><br>
-                                        Q1: Carl has 2 apples (given)<br>
-                                        Q2: Ben = Carl + 3 = 2 + 3 = 5 apples<br>
-                                        Q3: Amy = Ben × 4 = 5 × 4 = <strong>20 apples</strong>
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Final Answer:</strong> Amy has 20 apples
-                                    </div>
-                                    <div class="comparison-card__analysis comparison-card__analysis--success">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                            <polyline points="22 4 12 14.01 9 11.01"/>
-                                        </svg>
-                                        <span>Each step builds on previous, verifiable</span>
-                                    </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Least-to-Most Decomposition</span>
+                                    <p><strong>Sub-problem 1:</strong> What distinct organizational changes are described?<br>
+                                    <strong>Answer:</strong> Three changes: (1) merging marketing with sales, (2) new VP reporting structure, (3) retention bonuses for affected employees.<br><br>
+                                    <strong>Sub-problem 2:</strong> Which of these changes affect day-to-day workflows?<br>
+                                    <strong>Answer:</strong> The merger directly changes who employees work with and what tasks they handle daily. The new VP changes the reporting line. Retention bonuses are one-time compensation with no workflow impact.<br><br>
+                                    <strong>Sub-problem 3:</strong> Which change has the most direct daily impact?<br>
+                                    <strong>Answer:</strong> The merger of marketing and sales has the most direct impact on day-to-day workflows, as it changes team composition, collaboration patterns, and potentially job responsibilities for everyone in both divisions. There are <strong>3 organizational changes</strong>, and the <strong>division merger</strong> most directly affects daily work.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Symbolic Reasoning Task</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Original Problem</span>
+                                    <p>&ldquo;Concatenate the last letter of each word in this sentence: Artificial intelligence transforms modern education.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Least-to-Most Decomposition</span>
+                                    <p><strong>Sub-problem 1:</strong> What is the last letter of &ldquo;Artificial&rdquo;?<br>
+                                    <strong>Answer:</strong> &ldquo;l&rdquo;<br><br>
+                                    <strong>Sub-problem 2:</strong> What is the last letter of &ldquo;intelligence&rdquo;?<br>
+                                    <strong>Answer:</strong> &ldquo;e&rdquo;<br><br>
+                                    <strong>Sub-problem 3:</strong> What is the last letter of &ldquo;transforms&rdquo;?<br>
+                                    <strong>Answer:</strong> &ldquo;s&rdquo;<br><br>
+                                    <strong>Sub-problem 4:</strong> What is the last letter of &ldquo;modern&rdquo;?<br>
+                                    <strong>Answer:</strong> &ldquo;n&rdquo;<br><br>
+                                    <strong>Sub-problem 5:</strong> What is the last letter of &ldquo;education&rdquo;?<br>
+                                    <strong>Answer:</strong> &ldquo;n&rdquo;<br><br>
+                                    <strong>Final concatenation:</strong> l + e + s + n + n = <strong>&ldquo;lesnn&rdquo;</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -372,123 +419,261 @@
                 </div>
             </div>
         </section>
-        <!-- /INTERACTIVE EXAMPLE -->
+        <!-- /EXAMPLES IN ACTION -->
 
         <!-- === WHEN TO USE === -->
-        <section class="section">
+        <section class="section section-alt">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Applications</span>
-                    <h2 class="section-title">When Least-to-Most Excels</h2>
-                </div>
+                <h2 class="section-title fade-in-up">When to Use Least-to-Most</h2>
+                <p class="section-subtitle fade-in-up">Best for problems with layered dependencies that benefit from progressive solving</p>
 
-                <div class="use-case-grid">
-                    <div class="use-case-card use-case-card--success fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="16 18 22 12 16 6"/>
-                                <polyline points="8 6 2 12 8 18"/>
-                            </svg>
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Multi-Step Math Problems</strong>
+                                    <p>Word problems with chained relationships where each value depends on previous calculations &mdash; the progressive context passing eliminates arithmetic drift.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Compositional Generalization</strong>
+                                    <p>Tasks that combine primitive operations into longer sequences &mdash; Least-to-Most enables solving sequences longer and harder than the examples provided.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Length Generalization</strong>
+                                    <p>When the target problem is significantly harder or longer than the few-shot examples &mdash; decomposition bridges the complexity gap that chain-of-thought cannot.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Dependency-Chain Problems</strong>
+                                    <p>Any problem where the answer to one part is required input for the next &mdash; Least-to-Most makes the dependency order explicit and ensures nothing is skipped.</p>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="use-case-card__title">Multi-Step Word Problems</h3>
-                        <p class="use-case-card__desc">Math problems with chained relationships where each value depends on previous calculations.</p>
                     </div>
-                    <div class="use-case-card use-case-card--success fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                                <line x1="3" y1="9" x2="21" y2="9"/>
-                                <line x1="9" y1="21" x2="9" y2="9"/>
-                            </svg>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Single-Step Problems</strong>
+                                    <p>Problems solvable with one direct calculation or lookup &mdash; decomposition adds overhead without benefit when there is nothing to decompose.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Parallel Sub-Problems</strong>
+                                    <p>When sub-problems are independent and don&rsquo;t build on each other &mdash; Least-to-Most&rsquo;s sequential context-passing adds no value if there are no dependencies between parts.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative or Open-Ended Tasks</strong>
+                                    <p>Writing, brainstorming, or subjective tasks where there is no objectively correct decomposition order &mdash; Least-to-Most is designed for structured, deterministic problem-solving.</p>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="use-case-card__title">Compositional Tasks</h3>
-                        <p class="use-case-card__desc">Commands like "turn left twice then jump" that combine multiple primitive operations.</p>
-                    </div>
-                    <div class="use-case-card use-case-card--success fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                            </svg>
-                        </div>
-                        <h3 class="use-case-card__title">Complex Debugging</h3>
-                        <p class="use-case-card__desc">Finding bugs by first understanding the expected behavior, then tracing actual behavior, then identifying the discrepancy.</p>
-                    </div>
-                    <div class="use-case-card use-case-card--success fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                            </svg>
-                        </div>
-                        <h3 class="use-case-card__title">Reading Comprehension</h3>
-                        <p class="use-case-card__desc">Questions requiring synthesis from multiple passages, where understanding earlier parts informs later understanding.</p>
                     </div>
                 </div>
             </div>
         </section>
         <!-- /WHEN TO USE -->
 
-        <!-- === VS OTHER METHODS === -->
-        <section class="section section-alt">
+        <!-- === USE CASES === -->
+        <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Comparison</span>
-                    <h2 class="section-title">Least-to-Most vs. Chain-of-Thought</h2>
-                </div>
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Least-to-Most delivers the most value</p>
 
-                <div class="pillar-grid pillar-grid--2 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <div class="pillar-card__icon">
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="6" cy="6" r="3"/>
-                                <circle cx="18" cy="18" r="3"/>
-                                <path d="M6 9v6c0 3 3 3 6 3h3"/>
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
                             </svg>
                         </div>
-                        <h3 class="pillar-card__title">Chain-of-Thought</h3>
-                        <p class="pillar-card__text">Generates reasoning steps linearly. Good for problems where the path forward is clear. May struggle when the problem structure isn't immediately obvious.</p>
-                        <span class="pillar-card__tag">Linear reasoning</span>
+                        <h3 class="use-case-showcase__title">Complex Debugging</h3>
+                        <p class="use-case-showcase__desc">Trace bugs through layered systems by first understanding expected behavior, then actual behavior, then isolating the discrepancy &mdash; each step building on the last.</p>
                     </div>
 
-                    <div class="pillar-card pillar-card--interactive">
-                        <div class="pillar-card__icon">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="8" y1="6" x2="21" y2="6"/>
-                                <line x1="8" y1="12" x2="21" y2="12"/>
-                                <line x1="8" y1="18" x2="21" y2="18"/>
-                                <line x1="3" y1="6" x2="3.01" y2="6"/>
-                                <line x1="3" y1="12" x2="3.01" y2="12"/>
-                                <line x1="3" y1="18" x2="3.01" y2="18"/>
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
                             </svg>
                         </div>
-                        <h3 class="pillar-card__title">Least-to-Most</h3>
-                        <p class="pillar-card__text">Explicitly decomposes first, then solves. Better for problems requiring structural understanding. Two-stage approach ensures problem structure is clear before solving.</p>
-                        <span class="pillar-card__tag">Structured decomposition</span>
+                        <h3 class="use-case-showcase__title">Educational Tutoring</h3>
+                        <p class="use-case-showcase__desc">Teach students by decomposing hard problems into prerequisite concepts, ensuring mastery of each foundation before advancing to the next level of complexity.</p>
                     </div>
-                </div>
 
-                <div class="highlight-box highlight-box--tip fade-in-up">
-                    <div class="highlight-box__icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                            <path d="M2 17l10 5 10-5"/>
-                            <path d="M2 12l10 5 10-5"/>
-                        </svg>
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Legal Analysis</h3>
+                        <p class="use-case-showcase__desc">Break regulatory compliance questions into jurisdiction-specific sub-questions, solving each dependency before combining them into a comprehensive legal assessment.</p>
                     </div>
-                    <div class="highlight-box__content">
-                        <span class="highlight-box__title">When to Choose Least-to-Most</span>
-                        <p>Use Least-to-Most when: (1) The problem has clear sub-problems with dependencies, (2) Chain-of-Thought loses track mid-reasoning, (3) You need to explain or verify each step independently.</p>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Modeling</h3>
+                        <p class="use-case-showcase__desc">Build financial projections by solving base assumptions first, then intermediate calculations, then final projections &mdash; each layer grounded in verified prior results.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="3" y1="9" x2="21" y2="9"/>
+                                <line x1="9" y1="21" x2="9" y2="9"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Compositional Instructions</h3>
+                        <p class="use-case-showcase__desc">Execute long command sequences like &ldquo;turn left twice, jump, then run forward&rdquo; by solving each primitive operation before combining them into the full sequence.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Scientific Problem-Solving</h3>
+                        <p class="use-case-showcase__desc">Tackle multi-variable science problems by solving for one variable at a time, using each established value to unlock the next calculation in the chain.</p>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /VS OTHER METHODS -->
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Least-to-Most Fits</h2>
+                <p class="section-subtitle fade-in-up">Least-to-Most bridges linear reasoning and modular decomposition</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Linear Steps</span>
+                        <span class="era-marker__desc">Reasoning as continuous prose</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Least-to-Most</span>
+                        <span class="era-marker__title">Progressive Solving</span>
+                        <span class="era-marker__desc">Decompose then solve simple to complex</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Plan-and-Solve</span>
+                        <span class="era-marker__title">Planned Execution</span>
+                        <span class="era-marker__desc">Devise plan then carry out steps</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Decomposed Prompting</span>
+                        <span class="era-marker__title">Modular Handlers</span>
+                        <span class="era-marker__desc">Specialized solvers per sub-task</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine with Few-Shot Examples</div>
+                    <p>Least-to-Most was originally demonstrated with few-shot examples for both the decomposition and solving stages. For maximum effectiveness, provide the model with 1&ndash;2 examples of how to decompose a similar problem and how to solve each sub-problem. This scaffolding helps the model learn the decomposition pattern for your specific domain, enabling it to generalize to harder problems than any single example covers.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
 
         <!-- === RELATED FRAMEWORKS === -->
         <section class="section">
             <div class="container">
                 <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <p class="section-subtitle fade-in-up">Other decomposition approaches</p>
+                <p class="section-subtitle fade-in-up">Explore complementary decomposition and reasoning techniques</p>
+
+                <a href="plan-and-solve.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Plan-and-Solve</span>
+                        <span class="evolution-callout__desc">Extends Least-to-Most by having the model devise an explicit plan before executing each step &mdash; adding strategic planning to progressive decomposition.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="decomp.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Decomposed Prompting</span>
+                        <span class="evolution-callout__desc">Takes decomposition further by routing each sub-task to specialized handlers &mdash; a modular extension where different solvers handle different sub-problem types.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
 
                 <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
@@ -499,47 +684,9 @@
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Foundation Framework</span>
+                        <span class="evolution-callout__label">Foundation</span>
                         <span class="evolution-callout__title">Chain-of-Thought</span>
-                        <span class="evolution-callout__desc">Linear step-by-step reasoning for problems with clear progression.</span>
-                    </div>
-                    <span class="evolution-callout__arrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </span>
-                </a>
-
-                <a href="prompt-chaining.html" class="evolution-callout fade-in-up">
-                    <span class="evolution-callout__icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-                        </svg>
-                    </span>
-                    <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Related Technique</span>
-                        <span class="evolution-callout__title">Prompt Chaining</span>
-                        <span class="evolution-callout__desc">Connect multiple prompts where each output feeds the next input.</span>
-                    </div>
-                    <span class="evolution-callout__arrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </span>
-                </a>
-
-                <a href="self-consistency.html" class="evolution-callout fade-in-up">
-                    <span class="evolution-callout__icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                            <polyline points="22 4 12 14.01 9 11.01"/>
-                        </svg>
-                    </span>
-                    <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Enhancement</span>
-                        <span class="evolution-callout__title">Self-Consistency</span>
-                        <span class="evolution-callout__desc">Apply multiple reasoning paths and vote on the answer for verification.</span>
+                        <span class="evolution-callout__desc">The linear step-by-step reasoning technique that Least-to-Most extends with explicit decomposition and progressive context accumulation.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -551,45 +698,26 @@
         </section>
         <!-- /RELATED FRAMEWORKS -->
 
-        <!-- === SOURCES === -->
-        <section class="section citations-section">
-            <div class="container">
-                <h2>Sources</h2>
-                <ul class="citation-list">
-                    <li class="citation-item">
-                        <a href="https://arxiv.org/abs/2205.10625" target="_blank" rel="noopener noreferrer">Least-to-Most Prompting Enables Complex Reasoning in Large Language Models - Zhou et al., 2022</a>
-                    </li>
-                    <li class="citation-item">
-                        <a href="https://arxiv.org/abs/2406.06608" target="_blank" rel="noopener noreferrer">The Prompt Report: A Systematic Survey of Prompting Techniques - Schulhoff et al., 2024</a>
-                    </li>
-                    <li class="citation-item">
-                        <a href="https://arxiv.org/abs/2201.11903" target="_blank" rel="noopener noreferrer">Chain-of-Thought Prompting Elicits Reasoning in Large Language Models - Wei et al., 2022</a>
-                    </li>
-                </ul>
-            </div>
-        </section>
-        <!-- /SOURCES -->
-
-        <!-- === CTA === -->
+        <!-- === CTA SECTION === -->
         <section class="section">
             <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
                     <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
                     <div class="cta-corporate__content">
                         <h2 class="cta-corporate__title">Break Down Complex Problems</h2>
-                        <p class="cta-corporate__text">Practice decomposition with our interactive prompt tools.</p>
+                        <p class="cta-corporate__text">Try Least-to-Most decomposition on your own multi-step challenges or build structured prompts with our tools.</p>
                         <div class="cta-corporate__actions">
-                            <a href="../tools/guidance.html" class="btn btn-primary">Try Prompt Builder</a>
-                            <a href="../tools/analyzer.html" class="btn btn-secondary">Analyze a Prompt</a>
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /CTA -->
+        <!-- /CTA SECTION -->
     </main>
 
-    <!-- Footer -->
+
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -653,7 +781,7 @@
         <span class="back-to-top-text">Back to Top</span>
     </button>
 
-<!-- Accessibility Dashboard -->
+    <!-- Accessibility Dashboard -->
     <div class="adl-dim-overlay" aria-hidden="true"></div>
     <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

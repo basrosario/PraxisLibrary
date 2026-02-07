@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
-    <meta name="description" content="Master the Few-Shot Learning Framework: Teach AI through examples instead of lengthy explanations. A foundation framework for pattern-based AI communication.">
-    <title>Few-Shot Learning Framework - Praxis</title>
+    <meta name="description" content="Few-Shot Learning: Teach AI new tasks by providing a handful of input-output examples directly in the prompt, eliminating the need for fine-tuning.">
+    <title>Few-Shot Learning - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <link rel="preload" href="../styles.css" as="style">
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Header -->
     <header class="header" id="header">
         <div class="header-container">
             <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
@@ -102,7 +98,7 @@
                             <a href="../pages/glossary.html">Glossary</a>
                             <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
                             <a href="../pages/faq.html">FAQ</a>
-                            </div>
+                        </div>
                         <div class="mega-menu-section">
                             <h4>Principles</h4>
                             <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
@@ -135,6 +131,8 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
         <!-- === HERO SECTION === -->
         <section class="page-hero">
@@ -148,270 +146,473 @@
                     <span class="current">Few-Shot Learning</span>
                 </nav>
                 <div class="hero-badge">
-                    <svg class="hero-badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                        <line x1="8" y1="7" x2="16" y2="7"/>
-                        <line x1="8" y1="11" x2="14" y2="11"/>
-                    </svg>
-                    <span class="hero-badge__text">Foundation Framework</span>
+                    <span class="hero-badge__text">In-Context Learning</span>
                 </div>
-                <h1 class="page-title fade-in">Few-Shot Learning Framework</h1>
-                <p class="page-subtitle fade-in">Teach AI through examples instead of lengthy explanations. Show the pattern you want, and AI will extend it.</p>
+                <h1 class="page-title fade-in">Few-Shot Learning</h1>
+                <p class="page-subtitle fade-in">Instead of describing the task you want done, show it. Provide a handful of input-output examples directly in the prompt, and the model learns the pattern on the fly &mdash; no fine-tuning, no training data, no code required.</p>
             </div>
         </section>
         <!-- /HERO SECTION -->
 
-<!-- === WHY FEW-SHOT === -->
-        <section class="section section-alt">
-            <div class="container">
-                <div class="split-section">
-                    <div class="split-section__content">
-                        <span class="section-eyebrow">Why This Framework</span>
-                        <h2 class="section-title">Examples Are More Powerful Than Descriptions</h2>
-                        <p class="section-intro">Examples implicitly communicate countless details you might forget to specify. Format, length, tone, level of detail, edge case handling—all transmitted through good examples.</p>
-                        <div class="feature-list feature-list--check">
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Pattern Matching</span>
-                                    <span class="feature-list__text">AI recognizes patterns in examples and extends them to new inputs</span>
-                                </div>
-                            </div>
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Implicit Communication</span>
-                                    <span class="feature-list__text">Format, tone, and style are shown rather than described</span>
-                                </div>
-                            </div>
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Efficient Learning</span>
-                                    <span class="feature-list__text">A few clear examples establish the pattern without wasting tokens</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="technique-demo technique-demo--examples">
-                            <div class="technique-demo__header">
-                                <span class="technique-demo__label">Few-Shot Pattern</span>
-                            </div>
-                            <div class="technique-demo__content">
-                                <div class="technique-demo__example">
-                                    <span class="technique-demo__tag">Example 1</span>
-                                    <p><strong>In:</strong> "256-bit AES encryption"<br>
-                                    <strong>Out:</strong> "Bank-level security protects your data"</p>
-                                </div>
-                                <div class="technique-demo__example">
-                                    <span class="technique-demo__tag">Example 2</span>
-                                    <p><strong>In:</strong> "OAuth 2.0 with SAML"<br>
-                                    <strong>Out:</strong> "Single sign-on with your company login"</p>
-                                </div>
-                                <div class="technique-demo__example technique-demo__example--new">
-                                    <span class="technique-demo__tag">Your Input</span>
-                                    <p>Now AI understands: simplify jargon, focus on benefit, keep it short.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /WHY FEW-SHOT -->
-
-        <!-- === BEST PRACTICES === -->
+        <!-- === HISTORICAL CONTEXT === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">How to Use It</span>
-                    <h2 class="section-title">Best Practices</h2>
-                    <p class="section-subtitle">Guidelines for creating effective few-shot examples</p>
-                </div>
-
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                            </svg>
-                        </div>
-                        <h3 class="pillar-card__title">Show Diversity</h3>
-                        <p class="pillar-card__text">Cover different cases the AI might encounter in your examples.</p>
-                    </div>
-
-                    <div class="pillar-card">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                                <line x1="3" y1="9" x2="21" y2="9"/>
-                                <line x1="9" y1="21" x2="9" y2="9"/>
-                            </svg>
-                        </div>
-                        <h3 class="pillar-card__title">Match Real Data</h3>
-                        <p class="pillar-card__text">Your examples should resemble actual inputs you'll provide.</p>
-                    </div>
-
-                    <div class="pillar-card">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                                <line x1="12" y1="9" x2="12" y2="13"/>
-                                <line x1="12" y1="17" x2="12.01" y2="17"/>
-                            </svg>
-                        </div>
-                        <h3 class="pillar-card__title">Include Edge Cases</h3>
-                        <p class="pillar-card__text">Show how to handle tricky or unusual situations.</p>
-                    </div>
-
-                    <div class="pillar-card">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="2" y1="12" x2="22" y2="12"/>
-                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                            </svg>
-                        </div>
-                        <h3 class="pillar-card__title">Consistent Format</h3>
-                        <p class="pillar-card__text">Keep input/output structure the same across all examples.</p>
-                    </div>
-
-                    <div class="pillar-card">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="4 7 4 4 20 4 20 7"/>
-                                <line x1="9" y1="20" x2="15" y2="20"/>
-                                <line x1="12" y1="4" x2="12" y2="20"/>
-                            </svg>
-                        </div>
-                        <h3 class="pillar-card__title">Quality Over Quantity</h3>
-                        <p class="pillar-card__text">2-3 excellent examples beat 10 mediocre ones.</p>
-                    </div>
-
-                    <div class="pillar-card">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                <polyline points="22 4 12 14.01 9 11.01"/>
-                            </svg>
-                        </div>
-                        <h3 class="pillar-card__title">Clear Separation</h3>
-                        <p class="pillar-card__text">Label examples clearly so AI knows where each begins and ends.</p>
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2020</span>
+                        <p><strong>Introduced:</strong> Few-Shot Learning was popularized by Brown et al. in the landmark 2020 GPT-3 paper &ldquo;Language Models are Few-Shot Learners.&rdquo; The paper demonstrated that sufficiently large language models could learn entirely new tasks from just a handful of examples placed in the prompt &mdash; without any gradient updates or fine-tuning. This was a paradigm shift: previously, adapting a model to a new task required collecting labeled datasets and retraining. GPT-3 showed that 2&ndash;5 demonstrations were often enough to match or exceed fine-tuned baselines on dozens of NLP benchmarks.</p>
+                        <p><strong>Modern LLM Status:</strong> Few-Shot Learning remains <strong>the single most widely used prompting technique</strong> across all LLM applications. Every major model &mdash; Claude, GPT-4, Gemini, Llama &mdash; excels at learning from in-context examples. While modern models are increasingly capable at zero-shot tasks (following instructions without examples), few-shot prompting consistently delivers more precise, format-compliant, and reliable outputs. It is the default strategy recommended by virtually every LLM provider&rsquo;s documentation, and the foundation upon which more advanced techniques like Example Selection and Chain-of-Thought are built.</p>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /BEST PRACTICES -->
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Show, Don&rsquo;t Tell</h2>
+                        <p class="split-section__text">Describing exactly what you want from a language model is surprisingly hard. You might specify the format, the tone, and the level of detail &mdash; and still get output that misses the mark. The problem is that natural language instructions are inherently ambiguous. &ldquo;Be concise&rdquo; means different things to different people, and to different models.</p>
+                        <p class="split-section__text"><strong>Few-Shot Learning sidesteps this ambiguity entirely.</strong> Instead of describing the desired output, you demonstrate it. You provide 2&ndash;5 concrete examples of input-output pairs, and the model reverse-engineers the pattern: the format, the reasoning style, the level of detail, the edge-case handling &mdash; all communicated implicitly through examples rather than explicit instructions.</p>
+                        <p class="split-section__text">Think of it like training a new employee. You could hand them a 20-page style guide, or you could show them three finished pieces and say &ldquo;like this.&rdquo; The examples communicate thousands of implicit decisions that would be exhausting to spell out in words.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Examples Beat Instructions</span>
+                                <p>A single example implicitly encodes dozens of decisions: output length, vocabulary level, formatting choices, what to include, what to omit, how to handle ambiguity. When you write &ldquo;Summarize this article in a professional tone,&rdquo; the model must interpret every word. When you show three summaries you&rsquo;ve already written, the model can see exactly what &ldquo;professional&rdquo; and &ldquo;summary&rdquo; mean <strong>to you</strong>. This is why few-shot prompting consistently outperforms zero-shot instructions for tasks requiring specific formatting or style.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">How Few-Shot Learning Works</h2>
+                <p class="section-subtitle fade-in-up">Three steps from examples to accurate output</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Craft Your Demonstrations</h3>
+                            <p class="element-timeline__text">Select 2&ndash;5 representative input-output pairs that illustrate the task you want the model to perform. Each example should show a clear mapping from input to desired output. Choose examples that cover the range of variations the model might encounter &mdash; different categories, edge cases, or difficulty levels.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>For a sentiment classification task, include one clearly positive review, one clearly negative review, and one nuanced or mixed review to show how you handle ambiguity.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Structure the Prompt</h3>
+                            <p class="element-timeline__text">Place your examples in the prompt using a consistent format. Each example follows the same input-output structure, clearly labeled so the model can distinguish between the demonstration pairs and the actual query. Consistency is critical &mdash; the model uses the repeated pattern to understand what it should produce.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Review:</strong> &ldquo;The battery life is incredible and the screen is gorgeous.&rdquo;<br><strong>Sentiment:</strong> Positive<br><br><strong>Review:</strong> &ldquo;Broke after two weeks. Complete waste of money.&rdquo;<br><strong>Sentiment:</strong> Negative<br><br><strong>Review:</strong> [your actual input here]<br><strong>Sentiment:</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Model Completes the Pattern</h3>
+                            <p class="element-timeline__text">The model reads your examples, infers the underlying task and format, and applies the same pattern to your new input. It generates output that matches the style, format, and reasoning demonstrated in your examples. The more consistent and clear your examples, the more accurately the model reproduces the pattern.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Given the structured examples above, the model outputs a single-word sentiment label that matches the format of the demonstrations &mdash; no extra explanation, no hedging, just the classification you showed it how to produce.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why a few examples dramatically improve output quality</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Zero-Shot</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Classify the following customer feedback as &ldquo;Bug Report,&rdquo; &ldquo;Feature Request,&rdquo; or &ldquo;General Feedback.&rdquo;<br><br>Feedback: &ldquo;It would be great if you added dark mode to the mobile app.&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>This feedback is a Feature Request. The customer is expressing a desire for a new feature (dark mode) to be added to the mobile application. This isn&rsquo;t reporting a bug or providing general feedback, but rather suggesting a specific enhancement they&rsquo;d like to see implemented.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Correct label but verbose &mdash; format unpredictable, hard to parse programmatically</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Few-Shot</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt with Examples</span>
+                                <p><strong>Feedback:</strong> &ldquo;The app crashes every time I try to upload a photo.&rdquo;<br><strong>Category:</strong> Bug Report<br><br><strong>Feedback:</strong> &ldquo;Love the new update! Everything feels so much smoother.&rdquo;<br><strong>Category:</strong> General Feedback<br><br><strong>Feedback:</strong> &ldquo;Can you add support for CSV file exports?&rdquo;<br><strong>Category:</strong> Feature Request<br><br><strong>Feedback:</strong> &ldquo;It would be great if you added dark mode to the mobile app.&rdquo;<br><strong>Category:</strong></p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Feature Request</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Clean, consistent format &mdash; parseable output, matches demonstrated pattern exactly</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Few-Shot Learning in Action</h2>
+                <p class="section-subtitle fade-in-up">See how examples teach the model different tasks</p>
+
+                <div class="accordion fade-in-up" id="few-shot-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Text Classification</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Few-Shot Prompt</span>
+                                    <p><strong>Email:</strong> &ldquo;Hi, I noticed I was charged twice for my last order #4521. Could you please refund the duplicate?&rdquo;<br><strong>Intent:</strong> Billing Issue<br><br><strong>Email:</strong> &ldquo;Just wanted to say your customer service rep Sarah was absolutely fantastic! She went above and beyond.&rdquo;<br><strong>Intent:</strong> Positive Feedback<br><br><strong>Email:</strong> &ldquo;I&rsquo;ve been waiting 3 weeks for my delivery. Your tracking page says it shipped but nothing has arrived.&rdquo;<br><strong>Intent:</strong> Shipping Complaint<br><br><strong>Email:</strong> &ldquo;Can I change my subscription from monthly to annual billing?&rdquo;<br><strong>Intent:</strong></p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Model Output</span>
+                                    <p>Account Management</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Style-Consistent Translation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Few-Shot Prompt</span>
+                                    <p><strong>Technical:</strong> &ldquo;The API endpoint returns a 429 status code when the rate limit is exceeded.&rdquo;<br><strong>User-Friendly:</strong> &ldquo;You&rsquo;ve made too many requests too quickly. Wait a moment and try again.&rdquo;<br><br><strong>Technical:</strong> &ldquo;The SSL/TLS handshake failed due to an expired certificate on the origin server.&rdquo;<br><strong>User-Friendly:</strong> &ldquo;We can&rsquo;t establish a secure connection right now. Our team has been notified and is working on it.&rdquo;<br><br><strong>Technical:</strong> &ldquo;A race condition in the session management module caused intermittent authentication failures.&rdquo;<br><strong>User-Friendly:</strong></p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Model Output</span>
+                                    <p>&ldquo;You may have been logged out unexpectedly. Please sign in again &mdash; we&rsquo;ve fixed the issue that was causing this.&rdquo;</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Structured Reasoning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Few-Shot Prompt</span>
+                                    <p><strong>Question:</strong> A store sells apples for $2 each and oranges for $3 each. If Maria buys 4 apples and 2 oranges, how much does she spend?<br><strong>Reasoning:</strong> Apples: 4 x $2 = $8. Oranges: 2 x $3 = $6. Total: $8 + $6 = $14.<br><strong>Answer:</strong> $14<br><br><strong>Question:</strong> A train travels at 60 mph for 2.5 hours, then at 80 mph for 1.5 hours. What is the total distance?<br><strong>Reasoning:</strong> First leg: 60 x 2.5 = 150 miles. Second leg: 80 x 1.5 = 120 miles. Total: 150 + 120 = 270 miles.<br><strong>Answer:</strong> 270 miles<br><br><strong>Question:</strong> A rectangle has a perimeter of 36 cm. If the length is twice the width, what is the area?<br><strong>Reasoning:</strong></p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Model Output</span>
+                                    <p><strong>Reasoning:</strong> Let width = w. Length = 2w. Perimeter: 2(2w + w) = 36, so 6w = 36, w = 6 cm. Length = 12 cm. Area: 12 x 6 = 72 sq cm.<br><strong>Answer:</strong> 72 square centimeters</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
 
         <!-- === WHEN TO USE === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Best Fit</span>
-                    <h2 class="section-title">When to Use Few-Shot Learning</h2>
-                    <p class="section-subtitle">This framework excels when showing is easier than telling</p>
-                </div>
+                <h2 class="section-title fade-in-up">When to Use Few-Shot Learning</h2>
+                <p class="section-subtitle fade-in-up">Best for tasks where showing is easier than telling</p>
 
-                <div class="use-case-grid">
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                <polyline points="14 2 14 8 20 8"/>
-                            </svg>
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Format-Sensitive Tasks</strong>
+                                    <p>When output must follow a precise structure &mdash; JSON schemas, table formats, labeling conventions &mdash; examples communicate the exact format more reliably than descriptions.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Classification and Labeling</strong>
+                                    <p>Sentiment analysis, intent detection, content moderation &mdash; any task where you need the model to assign items to predefined categories consistently.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Style and Tone Matching</strong>
+                                    <p>When you need output in a specific voice &mdash; brand copy, academic writing, casual tone &mdash; showing examples conveys nuance that instructions miss.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Data Transformation</strong>
+                                    <p>Converting between formats &mdash; technical jargon to plain language, raw data to structured output, one schema to another &mdash; where the mapping is best shown by example.</p>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="use-case-card__title">Format Matching</h3>
-                        <p class="use-case-card__desc">When you need output in a specific style or structure.</p>
                     </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                            </svg>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple, Well-Defined Tasks</strong>
+                                    <p>If a clear instruction like &ldquo;Translate this to Spanish&rdquo; or &ldquo;Summarize in one paragraph&rdquo; gets reliable results, adding examples wastes tokens without improving output.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Token-Constrained Environments</strong>
+                                    <p>Each example consumes prompt tokens. When working with strict token limits or high-volume pipelines where cost per call matters, zero-shot may be more economical.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Highly Creative or Open-Ended Tasks</strong>
+                                    <p>Brainstorming, creative writing, or open-ended exploration can be overly constrained by examples &mdash; the model may mimic rather than innovate.</p>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="use-case-card__title">Tone & Style</h3>
-                        <p class="use-case-card__desc">Teaching a particular voice or writing style through examples.</p>
-                    </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="16 18 22 12 16 6"/>
-                                <polyline points="8 6 2 12 8 18"/>
-                            </svg>
-                        </div>
-                        <h3 class="use-case-card__title">Data Transformation</h3>
-                        <p class="use-case-card__desc">Converting data from one format to another consistently.</p>
-                    </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
-                        </div>
-                        <h3 class="use-case-card__title">Classification</h3>
-                        <p class="use-case-card__desc">Categorizing items when categories are hard to describe.</p>
-                    </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="2" y1="12" x2="22" y2="12"/>
-                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                            </svg>
-                        </div>
-                        <h3 class="use-case-card__title">Translation Tasks</h3>
-                        <p class="use-case-card__desc">Language translation or domain-specific terminology.</p>
-                    </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                            </svg>
-                        </div>
-                        <h3 class="use-case-card__title">Quality Standards</h3>
-                        <p class="use-case-card__desc">When you want outputs to meet specific quality criteria.</p>
                     </div>
                 </div>
             </div>
         </section>
         <!-- /WHEN TO USE -->
 
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Few-Shot Learning delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Customer Support Triage</h3>
+                        <p class="use-case-showcase__desc">Classify incoming tickets into categories like billing, technical, shipping, or account issues by showing a few labeled examples of each type.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Standardization</h3>
+                        <p class="use-case-showcase__desc">Rewrite product descriptions, blog excerpts, or marketing copy to match a specific brand voice by demonstrating the desired style through examples.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Code Generation Patterns</h3>
+                        <p class="use-case-showcase__desc">Show the model a few examples of your codebase&rsquo;s conventions &mdash; naming patterns, error handling, documentation style &mdash; so generated code matches your project standards.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Localization and Translation</h3>
+                        <p class="use-case-showcase__desc">Provide translated pairs that capture your preferred terminology, formality level, and regional conventions so all translations stay consistent.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Data Extraction</h3>
+                        <p class="use-case-showcase__desc">Extract structured fields from unstructured text &mdash; names, dates, amounts, addresses &mdash; by showing a few examples of source text mapped to extracted fields.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Moderation</h3>
+                        <p class="use-case-showcase__desc">Teach the model your specific moderation policies by showing examples of content that passes, gets flagged, or gets removed &mdash; calibrating the boundary through demonstrations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Few-Shot Learning Fits</h2>
+                <p class="section-subtitle fade-in-up">Few-Shot Learning is the foundation of in-context learning</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Zero-Shot</span>
+                        <span class="era-marker__title">Instructions Only</span>
+                        <span class="era-marker__desc">Task described in words, no examples</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">One-Shot</span>
+                        <span class="era-marker__title">Single Example</span>
+                        <span class="era-marker__desc">One demonstration to set the pattern</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Few-Shot</span>
+                        <span class="era-marker__title">Multiple Examples</span>
+                        <span class="era-marker__desc">2&ndash;5 demonstrations for robust pattern learning</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Example Selection</span>
+                        <span class="era-marker__title">Optimized Examples</span>
+                        <span class="era-marker__desc">Dynamically chosen examples for each input</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Quality Over Quantity</div>
+                    <p>Research consistently shows that 2&ndash;5 well-chosen examples outperform 10+ poorly chosen ones. Focus on diversity (covering different cases), consistency (same format every time), and representativeness (examples that match the actual inputs the model will see). When combined with Example Selection techniques, you can dynamically choose the most relevant demonstrations for each new query, getting the best of both worlds.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
         <!-- === RELATED FRAMEWORKS === -->
         <section class="section">
             <div class="container">
                 <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <p class="section-subtitle fade-in-up">Explore frameworks that complement Few-Shot Learning</p>
+                <p class="section-subtitle fade-in-up">Explore techniques that build on few-shot learning</p>
 
-                <a href="constrained-output.html" class="evolution-callout fade-in-up">
+                <a href="one-shot.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2"/>
-                            <line x1="3" y1="9" x2="21" y2="9"/>
-                            <line x1="9" y1="21" x2="9" y2="9"/>
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Structure Framework</span>
-                        <span class="evolution-callout__title">Constrained Output Framework</span>
-                        <span class="evolution-callout__desc">Define exact output formats for programmatic use and consistent results.</span>
+                        <span class="evolution-callout__label">Minimal Variant</span>
+                        <span class="evolution-callout__title">One-Shot Prompting</span>
+                        <span class="evolution-callout__desc">When token budget is tight or the task is simple, a single example may be all you need to establish the pattern.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -420,18 +621,16 @@
                     </span>
                 </a>
 
-                <a href="crispe.html" class="evolution-callout fade-in-up">
+                <a href="shot-prompting.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                            <path d="M2 17l10 5 10-5"/>
-                            <path d="M2 12l10 5 10-5"/>
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Foundation Framework</span>
-                        <span class="evolution-callout__title">CRISPE Framework</span>
-                        <span class="evolution-callout__desc">Includes Examples as a core element for showing AI exactly what you want.</span>
+                        <span class="evolution-callout__label">Baseline</span>
+                        <span class="evolution-callout__title">Zero-Shot Prompting</span>
+                        <span class="evolution-callout__desc">The no-example baseline &mdash; understand when instructions alone suffice and when examples become essential.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -440,17 +639,19 @@
                     </span>
                 </a>
 
-                <a href="role-prompting.html" class="evolution-callout fade-in-up">
+                <a href="example-selection.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="8" r="5"/>
-                            <path d="M20 21a8 8 0 1 0-16 0"/>
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Persona Framework</span>
-                        <span class="evolution-callout__title">Role Prompting Framework</span>
-                        <span class="evolution-callout__desc">Combine with roles to get examples in a specific expert's style.</span>
+                        <span class="evolution-callout__label">Advanced Extension</span>
+                        <span class="evolution-callout__title">Example Selection</span>
+                        <span class="evolution-callout__desc">Takes few-shot further by dynamically choosing the most relevant examples for each new input, maximizing demonstration quality.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -462,39 +663,26 @@
         </section>
         <!-- /RELATED FRAMEWORKS -->
 
-        <!-- === SOURCES === -->
-        <section class="section citations-section">
-            <div class="container">
-                <h2>Sources</h2>
-                <ul class="citation-list">
-                    <li class="citation-item">
-                        <a href="https://hai.stanford.edu/ai-index/2024-ai-index-report" target="_blank" rel="noopener noreferrer">AI Index Report 2024 - Stanford Human-Centered AI Institute</a>
-                    </li>
-                </ul>
-            </div>
-        </section>
-        <!-- /SOURCES -->
-
-        <!-- === CTA === -->
+        <!-- === CTA SECTION === -->
         <section class="section">
             <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
                     <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
                     <div class="cta-corporate__content">
-                        <h2 class="cta-corporate__title">Practice Few-Shot Learning</h2>
-                        <p class="cta-corporate__text">Build prompts with examples using our interactive tools.</p>
+                        <h2 class="cta-corporate__title">Build Better Prompts with Examples</h2>
+                        <p class="cta-corporate__text">Put few-shot learning into practice with our interactive tools, or explore the full library of prompting frameworks.</p>
                         <div class="cta-corporate__actions">
-                            <a href="../tools/guidance.html" class="btn btn-primary">Try Prompt Builder</a>
-                            <a href="../tools/analyzer.html" class="btn btn-secondary">Analyze a Prompt</a>
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /CTA -->
+        <!-- /CTA SECTION -->
     </main>
 
-    <!-- Footer -->
+
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -558,7 +746,7 @@
         <span class="back-to-top-text">Back to Top</span>
     </button>
 
-<!-- Accessibility Dashboard -->
+    <!-- Accessibility Dashboard -->
     <div class="adl-dim-overlay" aria-hidden="true"></div>
     <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

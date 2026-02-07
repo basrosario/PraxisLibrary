@@ -1,49 +1,78 @@
 # Praxis Project Handoff Document
 
-**Last Updated:** 2026-02-07 (Session 36)
-**Last Commit:** (pending) - feat: Redesign Wave 6 (Style & Emotion) — 6 pages expanded to 13-section template
-**Current Phase:** Framework Quality Redesign — ALL 40 PAGES COMPLETE (Waves 1-6)
+**Last Updated:** 2026-02-07 (Session 37)
+**Last Commit:** (pending) — Session 37 changes not yet committed
+**Current Phase:** Part B — Full Navigation Update (next task)
 
 ---
 
-## CURRENT SESSION STATUS (Session 36)
+## CURRENT SESSION STATUS (Session 37)
 
 ### Completed This Session
 
-#### Wave 6 — Style & Emotion: Full Redesign (6 pages) — FINAL WAVE
+#### Part A — 22-Page 13-Section Redesign (ALL COMPLETE)
 
-All 6 pages redesigned from ~290-322 lines to 812-836 lines using the 13-section template (self-ask.html reference).
+22 framework pages that still used the old template were rewritten from scratch to the 13-section template (self-ask.html reference). Completed in 4 waves of parallel agents:
 
-| # | File | Lines | Framework Category | Year/Authors |
-|---|------|-------|--------------------|--------------|
-| 1 | `learn/emotion-prompting.html` | 817 | Zero-Shot Technique | 2023, Li et al. |
-| 2 | `learn/style-prompting.html` | 836 | Zero-Shot Technique | 2023, Lu et al. |
-| 3 | `learn/s2a.html` | 812 | Context Optimization | 2023, Weston & Sukhbaatar |
-| 4 | `learn/re2.html` | 823 | Comprehension Enhancement | 2023, Xu et al. |
-| 5 | `learn/cosp.html` | 827 | Self-Adaptive Prompting | 2023, Wan et al. |
-| 6 | `learn/rar.html` | 833 | Zero-Shot Technique | 2023, Deng et al. |
+| Wave | Files | New Lines | Status |
+|------|-------|-----------|--------|
+| **A — Foundation** | chain-of-thought (827), few-shot-learning (818), zero-shot (816), one-shot (825), role-prompting (818), self-consistency (829) | 4,933 total | ✅ |
+| **B — Structured** | crisp (861), crispe (869), costar (892), constrained-output (833), context-structure (875), prompt-chaining (845) | 5,175 total | ✅ |
+| **C — Advanced** | tree-of-thought (858), plan-and-solve (857), least-to-most (853), example-selection (829), shot-prompting (834) | 4,231 total | ✅ |
+| **D — Flagship** | react (859), flipped-interaction (848), prompt-basics (840), zero-shot-cot (840), facts-fictions (834) | 4,221 total | ✅ |
 
-**Quality checks passed:** 0 inline styles, 0 inline scripts, 0 external resources, all 13 sections present in every file, accessibility dashboard included.
+**Quality checks passed:** 0 inline styles, 0 inline scripts, 0 CSP meta tags, all 13 sections present, all files 700+ lines.
 
-**Overall Progress: 40/40 pages (100%) — QUALITY REDESIGN COMPLETE**
+#### HR/Remote Work Content Cleanup
+
+Removed ALL examples referencing remote work, HR, hiring, job postings, etc. from ~15 learn pages. Replaced with technology, science, education, and general business examples.
+
+#### AI For Everybody Text Update
+
+Updated "Who Praxis Serves" section on `pages/ai-for-everybody.html` with user's rewritten text.
+
+### NOT YET COMMITTED
+
+All Session 37 changes are uncommitted and need to be committed before starting Part B.
 
 ---
 
-## ALL WAVES COMPLETE
+## NEXT TASK: Part B — Full Navigation Update (~100 HTML pages)
 
-| Wave | Pages | Status |
-|------|-------|--------|
-| Wave 1 — Self-Correction | 6 pages | ✅ COMPLETE (Session 29) |
-| Wave 2 — CoT Variants | 8 pages | ✅ COMPLETE (Session 31) |
-| Wave 3 — Decomposition | 6 pages | ✅ COMPLETE (Session 32) |
-| Wave 4 — Advanced Reasoning | 7 pages | ✅ COMPLETE (Session 34) |
-| Wave 5 — Example Methods | 7 pages | ✅ COMPLETE (Session 35) |
-| Wave 6 — Style & Emotion | 6 pages | ✅ COMPLETE (Session 36) |
+### What Needs to Happen
 
-### Next Steps (Post-Quality Redesign)
-- Phase 2 remaining: 5 pages (many-shot, example-ordering, self-generated-icl, active-example, uncertainty-cot)
-- Phase 3: Modality Frameworks (37 pages)
-- Phase 4: Site Integration (Learn Hub, Search Index, Framework Matcher)
+The header mega-menu currently lists only ~47 learn pages but there are now 62+ framework pages. ALL HTML pages across the entire site need their header nav, footer, and mobile nav updated to a single canonical version.
+
+### Approach
+
+1. **Define canonical nav HTML** for 3 depth levels:
+   - Root level (index.html) — paths like `learn/foo.html`
+   - One-deep (~96 files) — paths like `../learn/foo.html`
+   - Two-deep (3 files) — paths like `../../learn/foo.html`
+
+2. **Use parallel agents** to update files in batches by directory
+
+3. **Mega-menu Learn section** must include ALL 62+ framework pages organized by category
+
+### File Inventory (100 total)
+
+| Directory | Files | Depth |
+|-----------|-------|-------|
+| Root `index.html` | 1 | root |
+| `pages/*.html` | 12 | one-deep |
+| `tools/*.html` | 12 | one-deep |
+| `foundations/index.html` | 1 | one-deep |
+| `patterns/index.html` | 1 | one-deep |
+| `quiz/index.html` | 1 | one-deep |
+| `neurodivergence/*.html` | 6 | one-deep |
+| `learn/*.html` | ~63 (excl. temp files) | one-deep |
+| `learn/modality/code/*.html` | 3 | two-deep |
+
+**Note:** learn/ contains 4 temp files to ignore: `_mmi_temp.html`, `analogical-reasoning-new.html`, `graph-of-thought-new.html`, `mot_new.html`
+
+### Full Plan Details
+
+See `.claude/plans/FrameworkOverhaul.md` → "PART B — Full Navigation Update" section for complete specifications.
 
 ---
 
@@ -89,6 +118,7 @@ function resolveInternalUrl(targetPath) {
 - **NO citations on framework pages** (per user request, Session 25)
 - **NO stat cards** — Use highlight-box components instead
 - **NO content badges** — Removed from all learn pages (Session 29)
+- **NO HR or remote work examples** — Removed site-wide (Session 37)
 - **Historical context notices required** on all framework pages
 
 ### 3. Code Notation
@@ -119,19 +149,23 @@ _public_html/
 ├── app.js                  # ALL JavaScript (single file)
 ├── foundations/
 │   └── index.html          # AI Foundations timeline (5 eras + framework directories)
-├── learn/                  # Framework pages (40+)
-│   ├── [all framework pages]
+├── learn/                  # Framework pages (62+)
+│   ├── index.html          # Learn hub
+│   ├── [62 framework pages] # All redesigned to 13-section template
 │   └── modality/code/      # Code frameworks (3 pages)
 ├── data/
 │   ├── glossary.json       # 2,141 AI terms (lazy loaded)
 │   └── search-index.json   # 2,218 searchable entries
-├── pages/
-│   └── glossary.html       # Glossary page (686 lines, shells only)
+├── pages/                  # 12 content pages
+├── tools/                  # 12 AI readiness tools
+├── neurodivergence/        # 6 ND pages
+├── patterns/               # 1 page
+├── quiz/                   # 1 page
 └── .claude/
     ├── HANDOFF.md           # THIS FILE
     ├── COMPLETED.md         # Archive of completed work
     └── plans/
-        └── FrameworkOverhaul.md   # Master plan + 40-page redesign waves
+        └── FrameworkOverhaul.md   # Master plan with all phases
 ```
 
 ---
@@ -167,9 +201,8 @@ _public_html/
 |----------|---------|
 | `.claude/HANDOFF.md` | Current state (this file) |
 | `.claude/COMPLETED.md` | Archived completed work |
-| `.claude/plans/FrameworkOverhaul.md` | Master plan with session logs + 40-page redesign waves |
-| `learn/critic.html` | Reference template for quality redesign (898 lines, 13 sections) |
-| `learn/auto-cot.html` | Alternate reference template (855 lines, 13 sections) |
+| `.claude/plans/FrameworkOverhaul.md` | Master plan — see "PART B" section for nav update specs |
+| `learn/self-ask.html` | Canonical 13-section template (855 lines) |
 
 ---
 

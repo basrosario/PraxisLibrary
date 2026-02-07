@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
-    <meta name="description" content="Example Selection: Choose the right demonstrations for few-shot learning. Learn strategies for picking examples that maximize AI performance.">
+    <meta name="description" content="Example Selection: Learn how choosing the right few-shot demonstrations can improve AI performance by 20-30% over random selection through similarity-based, diversity-based, and task-specific strategies.">
     <title>Example Selection - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <link rel="preload" href="../styles.css" as="style">
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Header -->
     <header class="header" id="header">
         <div class="header-container">
             <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
@@ -102,7 +98,7 @@
                             <a href="../pages/glossary.html">Glossary</a>
                             <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
                             <a href="../pages/faq.html">FAQ</a>
-                            </div>
+                        </div>
                         <div class="mega-menu-section">
                             <h4>Principles</h4>
                             <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
@@ -135,6 +131,8 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
         <!-- === HERO SECTION === -->
         <section class="page-hero">
@@ -148,467 +146,342 @@
                     <span class="current">Example Selection</span>
                 </nav>
                 <div class="hero-badge">
-                    <svg class="hero-badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                    </svg>
-                    <span class="hero-badge__text">In-Context Learning</span>
+                    <span class="hero-badge__text">Few-Shot Optimization</span>
                 </div>
                 <h1 class="page-title fade-in">Example Selection</h1>
-                <p class="page-subtitle fade-in">The right examples teach more than the right words. Choose demonstrations that maximize AI understanding.</p>
+                <p class="page-subtitle fade-in">The examples you choose for few-shot prompting matter more than the number you provide. Strategic selection &mdash; matching examples by similarity, diversity, and task relevance &mdash; can improve performance by 20&ndash;30% over random choices.</p>
             </div>
         </section>
         <!-- /HERO SECTION -->
 
-<!-- === WHY SELECTION MATTERS === -->
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2021</span>
+                        <p><strong>Introduced:</strong> Example Selection was formalized by Liu et al. in 2021, who demonstrated that the choice of in-context examples can swing few-shot accuracy by more than 20 percentage points &mdash; often mattering more than the number of examples provided. Their work showed that retrieving semantically similar examples using nearest-neighbor methods dramatically outperformed random selection, establishing a new paradigm for how practitioners approach few-shot learning.</p>
+                        <p><strong>Modern LLM Status:</strong> The core principles of Example Selection remain <strong>highly relevant and actively practiced</strong> in modern prompting workflows. While Claude, GPT-4, and Gemini are more robust to example quality than earlier models, strategic selection still yields measurable gains on classification, extraction, and reasoning tasks. The technique has evolved into embedding-based retrieval pipelines and forms the foundation for more advanced methods like KNN Prompting and Vote-k selection. For production systems processing thousands of queries, automated example selection is now considered standard practice.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Challenge</span>
-                        <h2 class="section-title">Not All Examples Are Equal</h2>
-                        <p class="section-intro">Research shows that example selection can swing few-shot accuracy by over 20 percentage points. The difference between good and bad examples often matters more than the number of examples.</p>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Not All Examples Are Created Equal</h2>
+                        <p class="split-section__text">When you provide examples in a few-shot prompt, the model doesn&rsquo;t just learn the task format &mdash; it learns the <strong>distribution</strong> of your examples. If your examples are semantically similar to the test input, the model receives a stronger signal about what kind of output is expected. If they are from a completely different domain, the model must bridge a wider gap, and accuracy suffers.</p>
+                        <p class="split-section__text"><strong>Example Selection turns this insight into a method.</strong> Rather than grabbing random demonstrations from a pool, you deliberately choose examples that maximize relevance to the specific query at hand. This can mean selecting by semantic similarity (choosing examples closest in meaning to the input), by diversity (covering different aspects of the task space), or by task-specific criteria (matching complexity, format, or domain).</p>
+                        <p class="split-section__text">Think of it like choosing study materials for an exam. Reviewing practice problems that closely resemble the actual test questions is far more effective than studying random exercises from unrelated chapters &mdash; even if you study the same total number of problems.</p>
+                    </div>
+                    <div class="split-section__visual">
                         <div class="highlight-box highlight-box--info">
-                            <div class="highlight-box__icon">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Selection Beats Quantity</span>
+                                <p>Liu et al.&rsquo;s landmark finding was striking: three well-chosen examples consistently outperformed ten randomly selected ones across multiple benchmarks. The model extracts more useful patterns from a small set of highly relevant demonstrations than from a large set of loosely related ones. This means <strong>smarter selection can actually reduce token costs</strong> while improving accuracy &mdash; a rare win-win in prompt engineering.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Example Selection Process</h2>
+                <p class="section-subtitle fade-in-up">Three stages from candidate pool to optimized demonstration set</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Build a Candidate Pool</h3>
+                            <p class="element-timeline__text">Assemble a diverse collection of labeled input-output pairs that represent your task. This pool should cover different categories, edge cases, complexity levels, and domains. The richer and more varied your candidate pool, the better your selection algorithms can find optimal matches for any given query.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>For a sentiment classification task, collect 50&ndash;100 labeled reviews spanning positive, negative, neutral, and mixed sentiments across product categories like electronics, food, clothing, and services.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Score and Rank Candidates</h3>
+                            <p class="element-timeline__text">For each incoming query, evaluate every candidate example against a selection criterion. The most common approach is semantic similarity &mdash; compute embedding vectors for both the query and each candidate, then rank by cosine similarity. Alternatively, you can score by diversity (maximize coverage of the label space), complexity matching (align example difficulty with query difficulty), or a hybrid of multiple criteria.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Given a query about a &ldquo;wireless headphone battery issue,&rdquo; embed the query and compare it against all candidates. The top matches might be reviews about Bluetooth earbuds, wireless speakers, and laptop battery problems &mdash; all semantically close to the input.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Assemble and Order the Prompt</h3>
+                            <p class="element-timeline__text">Select the top-k candidates and arrange them in your prompt. Research shows that example ordering matters &mdash; models exhibit recency bias, giving more weight to examples closer to the query. Place your most representative or most similar example last, immediately before the test input. Ensure the final set balances similarity with enough diversity to avoid biasing the model toward a single output pattern.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Select 3 examples: one covering a different product category (diversity), one with mixed sentiment (boundary case), and one highly similar to the query (placed last for recency). Insert them in this order before the query in your few-shot prompt.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why strategically selected examples outperform random ones</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <circle cx="12" cy="12" r="10"/>
-                                    <line x1="12" y1="16" x2="12" y2="12"/>
-                                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    <path d="M12 8v4M12 16h.01"/>
                                 </svg>
-                            </div>
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Core Insight</span>
-                                <p>Examples that are semantically similar to your query outperform random examples. The model learns from the pattern match between example inputs and your actual input.</p>
-                            </div>
+                            </span>
+                            <h3 class="comparison-panel__title">Random Examples</h3>
                         </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p><strong>Task:</strong> Classify this tech support ticket.<br><br><strong>Examples:</strong><br>&ldquo;Great pizza!&rdquo; &rarr; POSITIVE<br>&ldquo;The movie was boring&rdquo; &rarr; NEGATIVE<br>&ldquo;Nice weather today&rdquo; &rarr; POSITIVE<br><br><strong>Query:</strong> &ldquo;My laptop won&rsquo;t connect to WiFi after the update&rdquo;</p>
                             </div>
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Quality Over Quantity</span>
-                                <p>Well-chosen examples consistently outperform poorly chosen ones. The right selection strategy matters more than adding more examples.</p>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>NEGATIVE<br><em>Model applied sentiment labels instead of support categories &mdash; examples from the wrong domain taught the wrong task entirely.</em></p>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /WHY SELECTION MATTERS -->
-
-        <!-- === SELECTION STRATEGIES === -->
-        <section class="section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Strategies</span>
-                    <h2 class="section-title">How to Choose Examples</h2>
-                    <p class="section-subtitle">Four proven approaches ranked by effectiveness</p>
-                </div>
-
-                <div class="pillar-grid pillar-grid--2 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="11" cy="11" r="8"/>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                            </svg>
-                        </div>
-                        <h3 class="pillar-card__title">1. Semantic Similarity</h3>
-                        <p class="pillar-card__text">Choose examples whose inputs are semantically similar to your query. If classifying a product review, use reviews about similar products or with similar language patterns.</p>
-                        <span class="pillar-card__tag">Most Effective</span>
-                    </div>
-
-                    <div class="pillar-card pillar-card--interactive">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="7" height="7"/>
-                                <rect x="14" y="3" width="7" height="7"/>
-                                <rect x="14" y="14" width="7" height="7"/>
-                                <rect x="3" y="14" width="7" height="7"/>
-                            </svg>
-                        </div>
-                        <h3 class="pillar-card__title">2. Diversity Coverage</h3>
-                        <p class="pillar-card__text">Cover different categories, edge cases, and variations. If your task has 5 categories, include at least one example from each to show the model the full output space.</p>
-                        <span class="pillar-card__tag">High Effectiveness</span>
-                    </div>
-
-                    <div class="pillar-card pillar-card--interactive">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 20V10"/>
-                                <path d="M18 20V4"/>
-                                <path d="M6 20v-4"/>
-                            </svg>
-                        </div>
-                        <h3 class="pillar-card__title">3. Complexity Matching</h3>
-                        <p class="pillar-card__text">Match example complexity to your query. Simple queries benefit from simple examples; complex queries need examples that demonstrate thorough reasoning.</p>
-                        <span class="pillar-card__tag">Medium Effectiveness</span>
-                    </div>
-
-                    <div class="pillar-card pillar-card--interactive">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-                            </svg>
-                        </div>
-                        <h3 class="pillar-card__title">4. Boundary Examples</h3>
-                        <p class="pillar-card__text">Include examples near decision boundaries. For sentiment analysis, show clearly positive, clearly negative, AND borderline cases to teach nuance.</p>
-                        <span class="pillar-card__tag">For Edge Cases</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /SELECTION STRATEGIES -->
-
-        <!-- === INTERACTIVE COMPARISON === -->
-        <section class="section section-alt">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">See the Difference</span>
-                    <h2 class="section-title">Good vs. Poor Example Selection</h2>
-                    <p class="section-subtitle">Watch how example choice affects classification accuracy</p>
-                </div>
-
-                <div class="comparison-tabs fade-in-up" data-component="comparison-tabs">
-                    <div class="comparison-tabs__nav" role="tablist">
-                        <button class="comparison-tabs__tab is-active" role="tab" aria-selected="true" data-tab="similarity">Semantic Match</button>
-                        <button class="comparison-tabs__tab" role="tab" aria-selected="false" data-tab="diversity">Diversity</button>
-                        <button class="comparison-tabs__tab" role="tab" aria-selected="false" data-tab="complexity">Complexity</button>
-                    </div>
-
-                    <div class="comparison-tabs__content">
-                        <div class="comparison-tabs__panel is-active" data-panel="similarity">
-                            <div class="comparison-grid">
-                                <div class="comparison-card comparison-card--before">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Random Examples</span>
-                                        <span class="comparison-card__badge comparison-card__badge--error">Poor Match</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Task:</strong> Classify this tech support ticket<br><br>
-                                        <strong>Examples:</strong><br>
-                                        "Great pizza!" → POSITIVE<br>
-                                        "The movie was boring" → NEGATIVE<br><br>
-                                        <strong>Query:</strong> "My laptop won't connect to WiFi after the update"
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Result:</strong> Model confused—examples about food and movies don't help with tech support classification
-                                    </div>
-                                    <div class="comparison-card__analysis">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="12" cy="12" r="10"/>
-                                            <line x1="15" y1="9" x2="9" y2="15"/>
-                                            <line x1="9" y1="9" x2="15" y2="15"/>
-                                        </svg>
-                                        <span>Unrelated domain, wrong task type</span>
-                                    </div>
-                                </div>
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Semantically Similar</span>
-                                        <span class="comparison-card__badge comparison-card__badge--success">Good Match</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Task:</strong> Classify this tech support ticket<br><br>
-                                        <strong>Examples:</strong><br>
-                                        "Bluetooth stopped working after restart" → CONNECTIVITY<br>
-                                        "Can't print to network printer" → CONNECTIVITY<br><br>
-                                        <strong>Query:</strong> "My laptop won't connect to WiFi after the update"
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Result:</strong> CONNECTIVITY<br>
-                                        <em>Confidence: High—pattern matches similar issues</em>
-                                    </div>
-                                    <div class="comparison-card__analysis comparison-card__analysis--success">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                            <polyline points="22 4 12 14.01 9 11.01"/>
-                                        </svg>
-                                        <span>Same domain, similar problem type</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="comparison-tabs__panel" data-panel="diversity">
-                            <div class="comparison-grid">
-                                <div class="comparison-card comparison-card--before">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Homogeneous Examples</span>
-                                        <span class="comparison-card__badge comparison-card__badge--error">Limited Coverage</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Task:</strong> Classify customer intent<br><br>
-                                        <strong>Examples (all REFUND):</strong><br>
-                                        "I want my money back" → REFUND<br>
-                                        "Please refund my order" → REFUND<br>
-                                        "Can I get a refund?" → REFUND<br><br>
-                                        <strong>Query:</strong> "Where is my package?"
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Result:</strong> REFUND (?)<br>
-                                        <em>Model only knows one category</em>
-                                    </div>
-                                    <div class="comparison-card__analysis">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="12" cy="12" r="10"/>
-                                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                                            <line x1="12" y1="17" x2="12.01" y2="17"/>
-                                        </svg>
-                                        <span>No variety, biased toward shown category</span>
-                                    </div>
-                                </div>
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Diverse Examples</span>
-                                        <span class="comparison-card__badge comparison-card__badge--success">Full Coverage</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Task:</strong> Classify customer intent<br><br>
-                                        <strong>Examples (diverse):</strong><br>
-                                        "I want my money back" → REFUND<br>
-                                        "How do I reset my password?" → ACCOUNT<br>
-                                        "When will my order arrive?" → TRACKING<br><br>
-                                        <strong>Query:</strong> "Where is my package?"
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Result:</strong> TRACKING<br>
-                                        <em>Correct—similar to tracking example</em>
-                                    </div>
-                                    <div class="comparison-card__analysis comparison-card__analysis--success">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                            <polyline points="22 4 12 14.01 9 11.01"/>
-                                        </svg>
-                                        <span>Shows full category space</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="comparison-tabs__panel" data-panel="complexity">
-                            <div class="comparison-grid">
-                                <div class="comparison-card comparison-card--before">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Mismatched Complexity</span>
-                                        <span class="comparison-card__badge comparison-card__badge--error">Too Simple</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Task:</strong> Analyze legal clause<br><br>
-                                        <strong>Simple Examples:</strong><br>
-                                        "Pay $100" → PAYMENT_OBLIGATION<br>
-                                        "Sign here" → SIGNATURE_REQUIRED<br><br>
-                                        <strong>Query:</strong> "Notwithstanding the foregoing, in the event of force majeure..."
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Result:</strong> Oversimplified analysis that misses legal nuance
-                                    </div>
-                                    <div class="comparison-card__analysis">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="12" cy="12" r="10"/>
-                                            <line x1="8" y1="12" x2="16" y2="12"/>
-                                        </svg>
-                                        <span>Examples too simple for complex query</span>
-                                    </div>
-                                </div>
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Matched Complexity</span>
-                                        <span class="comparison-card__badge comparison-card__badge--success">Appropriate</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Task:</strong> Analyze legal clause<br><br>
-                                        <strong>Complex Examples:</strong><br>
-                                        "Subject to Section 4.2(b), the indemnifying party shall..." → INDEMNIFICATION with CONDITIONS<br><br>
-                                        <strong>Query:</strong> "Notwithstanding the foregoing, in the event of force majeure..."
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Result:</strong> EXCEPTION_CLAUSE with proper analysis of conditions and implications
-                                    </div>
-                                    <div class="comparison-card__analysis comparison-card__analysis--success">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                            <polyline points="22 4 12 14.01 9 11.01"/>
-                                        </svg>
-                                        <span>Example complexity matches query</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /INTERACTIVE COMPARISON -->
-
-        <!-- === SELECTION CHECKLIST === -->
-        <section class="section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Quick Reference</span>
-                    <h2 class="section-title">Example Selection Checklist</h2>
-                </div>
-
-                <div class="feature-grid fade-in-up">
-                    <div class="feature-card">
-                        <div class="feature-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="9 11 12 14 22 4"/>
-                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-                            </svg>
-                        </div>
-                        <h3 class="feature-card__title">Relevance Check</h3>
-                        <p class="feature-card__text">Are examples from the same domain as your query? Tech examples for tech tasks, legal for legal, etc.</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-card__icon">
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="12" cy="12" r="10"/>
-                                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                                <line x1="9" y1="9" x2="9.01" y2="9"/>
-                                <line x1="15" y1="9" x2="15.01" y2="9"/>
+                                <path d="M8 12h8"/>
                             </svg>
+                            <span>Wrong domain, wrong label space, misleading signal</span>
                         </div>
-                        <h3 class="feature-card__title">Clarity Check</h3>
-                        <p class="feature-card__text">Is each example unambiguous? Could a human confidently label it the same way?</p>
                     </div>
 
-                    <div class="feature-card">
-                        <div class="feature-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
-                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
-                            </svg>
-                        </div>
-                        <h3 class="feature-card__title">Coverage Check</h3>
-                        <p class="feature-card__text">Do examples cover all expected output categories? Include at least one per class.</p>
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
                     </div>
 
-                    <div class="feature-card">
-                        <div class="feature-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                                <path d="M2 17l10 5 10-5"/>
-                                <path d="M2 12l10 5 10-5"/>
-                            </svg>
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Strategically Selected</h3>
                         </div>
-                        <h3 class="feature-card__title">Balance Check</h3>
-                        <p class="feature-card__text">Are examples roughly balanced across categories? Avoid overrepresenting one class.</p>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Curated Examples</span>
+                                <p><strong>Task:</strong> Classify this tech support ticket.<br><br><strong>Examples:</strong><br>&ldquo;Bluetooth stopped working after restart&rdquo; &rarr; CONNECTIVITY<br>&ldquo;App crashes when I open settings&rdquo; &rarr; SOFTWARE_BUG<br>&ldquo;Can&rsquo;t print to network printer&rdquo; &rarr; CONNECTIVITY<br><br><strong>Query:</strong> &ldquo;My laptop won&rsquo;t connect to WiFi after the update&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>CONNECTIVITY<br><em>Semantically similar examples from the same domain taught the correct label space and category boundaries.</em></p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Same domain, correct labels, strong pattern match</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /SELECTION CHECKLIST -->
+        <!-- /THE COMPARISON -->
 
-        <!-- === COMMON MISTAKES === -->
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Example Selection in Action</h2>
+                <p class="section-subtitle fade-in-up">Three strategies for choosing optimal demonstrations</p>
+
+                <div class="accordion fade-in-up" id="example-selection-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Similarity-Based Selection</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Strategy</span>
+                                    <p>Choose examples whose inputs are most semantically similar to the test query. Compute embeddings for all candidates and the query, then select the nearest neighbors by cosine similarity.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Application</span>
+                                    <p><strong>Query:</strong> &ldquo;The battery drains too fast on my new tablet&rdquo;<br><br>
+                                    <strong>Selected examples (by similarity):</strong><br>
+                                    1. &ldquo;My phone battery dies within 3 hours of full charge&rdquo; &rarr; HARDWARE &mdash; BATTERY<br>
+                                    2. &ldquo;Laptop shuts down at 30% battery remaining&rdquo; &rarr; HARDWARE &mdash; BATTERY<br>
+                                    3. &ldquo;Wireless earbuds won&rsquo;t hold charge after update&rdquo; &rarr; HARDWARE &mdash; BATTERY<br><br>
+                                    <strong>Result:</strong> The model correctly classifies the query as HARDWARE &mdash; BATTERY with high confidence. Each example shares semantic features with the query: portable devices, battery complaints, and the same category label.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Diversity-Based Selection</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Strategy</span>
+                                    <p>Choose examples that cover different categories, formats, and edge cases to show the model the full output space. Ensure at least one example per expected label to prevent the model from being biased toward any single category.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Application</span>
+                                    <p><strong>Query:</strong> &ldquo;Where is my package? I ordered it two weeks ago&rdquo;<br><br>
+                                    <strong>Selected examples (by diversity):</strong><br>
+                                    1. &ldquo;I want my money back for this defective item&rdquo; &rarr; REFUND<br>
+                                    2. &ldquo;How do I reset my account password?&rdquo; &rarr; ACCOUNT<br>
+                                    3. &ldquo;When will my order ship?&rdquo; &rarr; TRACKING<br><br>
+                                    <strong>Result:</strong> The model correctly classifies as TRACKING. By seeing one example from each category, it understands the full label space and can distinguish between REFUND, ACCOUNT, and TRACKING intents rather than defaulting to the most-represented category.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Task-Specific Selection</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Strategy</span>
+                                    <p>Choose examples that match the specific characteristics of the task &mdash; complexity level, output format, reasoning depth, or domain conventions. For a complex legal analysis, use complex legal examples; for a simple label task, use concise, clear-cut demonstrations.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Application</span>
+                                    <p><strong>Query:</strong> &ldquo;Notwithstanding the foregoing, in the event of force majeure as defined in Section 12.1, neither party shall be held liable for delays in performance&rdquo;<br><br>
+                                    <strong>Selected examples (by task match):</strong><br>
+                                    1. &ldquo;Subject to Section 4.2(b), the indemnifying party shall hold harmless...&rdquo; &rarr; INDEMNIFICATION with CONDITIONS &mdash; References external section, establishes conditional obligation<br>
+                                    2. &ldquo;Except as otherwise provided herein, all warranties express or implied are disclaimed...&rdquo; &rarr; WARRANTY DISCLAIMER with EXCEPTION &mdash; Broad exclusion with carve-out language<br><br>
+                                    <strong>Result:</strong> EXCEPTION CLAUSE with LIABILITY LIMITATION &mdash; The model produces a nuanced analysis matching the complexity of the input because the examples demonstrated the expected depth of legal reasoning.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Avoid These</span>
-                    <h2 class="section-title">Common Selection Mistakes</h2>
-                </div>
+                <h2 class="section-title fade-in-up">When to Use Example Selection</h2>
+                <p class="section-subtitle fade-in-up">Best when few-shot performance depends on demonstration quality</p>
 
-                <div class="accordion fade-in-up" id="mistakes-accordion">
-                    <div class="accordion-item">
-                        <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Using only easy examples</span>
-                            <span class="accordion-icon">
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"/>
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
                                 </svg>
-                            </span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="technique-demo">
-                                <div class="technique-demo__content">
-                                    <div class="technique-demo__prompt">
-                                        <span class="technique-demo__tag">Problem</span>
-                                        <p>If all your examples are clear-cut cases, the model won't learn to handle ambiguous inputs. "I LOVE this!" is easy to classify; "It's fine, I guess" teaches more.</p>
-                                    </div>
-                                    <div class="technique-demo__response">
-                                        <span class="technique-demo__tag">Solution</span>
-                                        <p>Include 1-2 examples near decision boundaries. Show how edge cases should be handled.</p>
-                                    </div>
+                                <div>
+                                    <strong>Classification at Scale</strong>
+                                    <p>When processing thousands of inputs through a few-shot pipeline, automated example retrieval ensures every query gets the most relevant demonstrations rather than a static, one-size-fits-all set.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Domain-Specific Tasks</strong>
+                                    <p>Legal, medical, financial, or technical tasks where generic examples fail &mdash; similarity-based selection ensures demonstrations share the vocabulary, structure, and conventions of the target domain.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Multi-Label or Many-Class Problems</strong>
+                                    <p>When the output space has dozens of possible labels, diversity-based selection ensures the model sees the full category landscape instead of a biased subset.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Token-Constrained Environments</strong>
+                                    <p>When context window limits force you to use fewer examples, strategic selection maximizes the signal from each demonstration &mdash; three curated examples can outperform ten random ones.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Copying examples verbatim from prompts</span>
-                            <span class="accordion-icon">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"/>
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
                                 </svg>
-                            </span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="technique-demo">
-                                <div class="technique-demo__content">
-                                    <div class="technique-demo__prompt">
-                                        <span class="technique-demo__tag">Problem</span>
-                                        <p>Models may latch onto surface features. If all your positive examples contain "amazing," it might learn that word = positive, missing the actual pattern.</p>
-                                    </div>
-                                    <div class="technique-demo__response">
-                                        <span class="technique-demo__tag">Solution</span>
-                                        <p>Vary vocabulary and phrasing across examples. Use synonyms and different sentence structures.</p>
-                                    </div>
+                                <div>
+                                    <strong>Zero-Shot Tasks</strong>
+                                    <p>If the model performs well without any examples, adding a selection pipeline introduces unnecessary complexity. Test zero-shot performance first before investing in example curation.</p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Ignoring example order</span>
-                            <span class="accordion-icon">
+                            <div class="feature-list__item feature-list__item--neutral">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"/>
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
                                 </svg>
-                            </span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="technique-demo">
-                                <div class="technique-demo__content">
-                                    <div class="technique-demo__prompt">
-                                        <span class="technique-demo__tag">Problem</span>
-                                        <p>Research shows recency bias—examples at the end of your prompt have more influence than those at the beginning.</p>
-                                    </div>
-                                    <div class="technique-demo__response">
-                                        <span class="technique-demo__tag">Solution</span>
-                                        <p>Place your most representative example last. If one example best matches your query, put it closest to the query.</p>
-                                    </div>
+                                <div>
+                                    <strong>Homogeneous Input Streams</strong>
+                                    <p>When all your queries are nearly identical in structure and domain, a single static set of well-chosen examples works just as well as dynamic retrieval &mdash; the overhead of per-query selection is not justified.</p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Too many examples</span>
-                            <span class="accordion-icon">
+                            <div class="feature-list__item feature-list__item--neutral">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"/>
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
                                 </svg>
-                            </span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="technique-demo">
-                                <div class="technique-demo__content">
-                                    <div class="technique-demo__prompt">
-                                        <span class="technique-demo__tag">Problem</span>
-                                        <p>More isn't always better. After 5-10 examples, returns diminish and you waste context window. Quality beats quantity.</p>
-                                    </div>
-                                    <div class="technique-demo__response">
-                                        <span class="technique-demo__tag">Solution</span>
-                                        <p>Start with 3-5 well-chosen examples. Only add more if performance requires it. Test with fewer before adding more.</p>
-                                    </div>
+                                <div>
+                                    <strong>Creative or Open-Ended Generation</strong>
+                                    <p>For brainstorming, creative writing, or exploratory tasks where there is no single correct output format, rigid example selection can constrain the model rather than help it.</p>
                                 </div>
                             </div>
                         </div>
@@ -616,13 +489,127 @@
                 </div>
             </div>
         </section>
-        <!-- /COMMON MISTAKES -->
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where strategic example selection delivers measurable impact</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Customer Intent Classification</h3>
+                        <p class="use-case-showcase__desc">Route support tickets to the correct department by selecting examples from similar product lines, complaint types, and language patterns for each incoming query.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Document Extraction</h3>
+                        <p class="use-case-showcase__desc">Extract structured data from invoices, contracts, or forms by selecting template examples that match the document layout, field structure, and formatting conventions of each input.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Coding</h3>
+                        <p class="use-case-showcase__desc">Assign diagnosis or procedure codes to clinical notes by retrieving examples with similar symptoms, specialties, and coding patterns from a curated pool of annotated records.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Security Log Triage</h3>
+                        <p class="use-case-showcase__desc">Classify security alerts by severity and type by matching each new event against examples from similar attack vectors, network segments, and historical incident patterns.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Moderation</h3>
+                        <p class="use-case-showcase__desc">Detect policy violations in user-generated content by selecting boundary-case examples that teach the model to distinguish between acceptable and prohibited content in context-specific scenarios.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Sentiment</h3>
+                        <p class="use-case-showcase__desc">Analyze earnings calls, analyst reports, and market commentary by selecting examples from the same sector, time period, and financial instrument type to capture domain-specific language nuances.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Example Selection Fits</h2>
+                <p class="section-subtitle fade-in-up">From random demonstrations to intelligent retrieval-augmented selection</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Few-Shot Learning</span>
+                        <span class="era-marker__title">Random Examples</span>
+                        <span class="era-marker__desc">Static demonstrations chosen by hand</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Example Selection</span>
+                        <span class="era-marker__title">Strategic Retrieval</span>
+                        <span class="era-marker__desc">Similarity and diversity-based curation</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">KNN Prompting</span>
+                        <span class="era-marker__title">Nearest-Neighbor Lookup</span>
+                        <span class="era-marker__desc">Embedding-based retrieval at inference</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Vote-k Selection</span>
+                        <span class="era-marker__title">Consensus Filtering</span>
+                        <span class="era-marker__desc">Model-guided example quality scoring</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine Similarity with Diversity</div>
+                    <p>The most effective selection strategies blend both approaches. Start by retrieving a larger set of similar candidates (for example, the top 10 by embedding distance), then apply a diversity filter to ensure the final set of 3&ndash;5 examples covers different labels, formats, or edge cases. This hybrid approach captures the benefits of semantic relevance while avoiding the tunnel vision that pure similarity selection can create.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
 
         <!-- === RELATED FRAMEWORKS === -->
         <section class="section">
             <div class="container">
                 <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <p class="section-subtitle fade-in-up">Use these with effective example selection</p>
+                <p class="section-subtitle fade-in-up">Explore the techniques that Example Selection builds on and enables</p>
 
                 <a href="few-shot-learning.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
@@ -634,9 +621,9 @@
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Foundation Framework</span>
+                        <span class="evolution-callout__label">Foundation</span>
                         <span class="evolution-callout__title">Few-Shot Learning</span>
-                        <span class="evolution-callout__desc">Learn the core few-shot technique that example selection optimizes.</span>
+                        <span class="evolution-callout__desc">The core technique that Example Selection optimizes &mdash; providing demonstrations in the prompt to teach the model a task through examples rather than instructions alone.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -645,18 +632,16 @@
                     </span>
                 </a>
 
-                <a href="one-shot.html" class="evolution-callout fade-in-up">
+                <a href="shot-prompting.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                            <line x1="3" y1="9" x2="21" y2="9"/>
-                            <line x1="9" y1="21" x2="9" y2="9"/>
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Single Example</span>
-                        <span class="evolution-callout__title">One-Shot Learning</span>
-                        <span class="evolution-callout__desc">When you can only provide one example, selection becomes even more critical.</span>
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">KNN Prompting</span>
+                        <span class="evolution-callout__desc">Takes Example Selection further by using k-nearest-neighbor retrieval at inference time to dynamically assemble the most relevant demonstrations for every query.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -665,18 +650,19 @@
                     </span>
                 </a>
 
-                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="6" cy="6" r="3"/>
-                            <circle cx="18" cy="18" r="3"/>
-                            <path d="M6 9v6c0 3 3 3 6 3h3"/>
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Reasoning Examples</span>
-                        <span class="evolution-callout__title">Chain-of-Thought</span>
-                        <span class="evolution-callout__desc">Apply selection principles to choose examples that demonstrate clear reasoning chains.</span>
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Active Example Selection</span>
+                        <span class="evolution-callout__desc">Extends selection with model feedback &mdash; using the LLM&rsquo;s own confidence scores to iteratively refine which examples produce the most reliable outputs.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -688,45 +674,26 @@
         </section>
         <!-- /RELATED FRAMEWORKS -->
 
-        <!-- === SOURCES === -->
-        <section class="section citations-section">
-            <div class="container">
-                <h2>Sources</h2>
-                <ul class="citation-list">
-                    <li class="citation-item">
-                        <a href="https://arxiv.org/abs/2101.06804" target="_blank" rel="noopener noreferrer">What Makes Good In-Context Examples for GPT-3? - Liu et al., DeepMind (2022)</a>
-                    </li>
-                    <li class="citation-item">
-                        <a href="https://arxiv.org/abs/2005.14165" target="_blank" rel="noopener noreferrer">Language Models are Few-Shot Learners - Brown et al., NeurIPS 2020</a>
-                    </li>
-                    <li class="citation-item">
-                        <a href="https://arxiv.org/abs/2406.06608" target="_blank" rel="noopener noreferrer">The Prompt Report: A Systematic Survey of Prompting Techniques - Schulhoff et al., 2024</a>
-                    </li>
-                </ul>
-            </div>
-        </section>
-        <!-- /SOURCES -->
-
-        <!-- === CTA === -->
+        <!-- === CTA SECTION === -->
         <section class="section">
             <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
                     <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
                     <div class="cta-corporate__content">
-                        <h2 class="cta-corporate__title">Build Better Prompts</h2>
-                        <p class="cta-corporate__text">Apply example selection principles with our interactive tools.</p>
+                        <h2 class="cta-corporate__title">Optimize Your Examples</h2>
+                        <p class="cta-corporate__text">Apply example selection strategies to your few-shot prompts or explore our tools for building better demonstrations.</p>
                         <div class="cta-corporate__actions">
-                            <a href="../tools/guidance.html" class="btn btn-primary">Try Prompt Builder</a>
-                            <a href="../tools/analyzer.html" class="btn btn-secondary">Analyze a Prompt</a>
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /CTA -->
+        <!-- /CTA SECTION -->
     </main>
 
-    <!-- Footer -->
+
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -790,7 +757,7 @@
         <span class="back-to-top-text">Back to Top</span>
     </button>
 
-<!-- Accessibility Dashboard -->
+    <!-- Accessibility Dashboard -->
     <div class="adl-dim-overlay" aria-hidden="true"></div>
     <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

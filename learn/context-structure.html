@@ -2,19 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
-    <meta name="description" content="Understand context windows and structuring approaches for AI prompts. Learn when to use paragraphs, labels, or XML tags for optimal results.">
-    <title>Context & Structure - Praxis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Context Structure: Learn how organizing, ordering, and delimiting information in prompts dramatically affects LLM comprehension, accuracy, and output quality.">
+    <title>Context Structure - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <link rel="preload" href="../styles.css" as="style">
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Header -->
     <header class="header" id="header">
         <div class="header-container">
             <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
@@ -135,8 +131,10 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
-        <!-- Hero Section -->
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -145,313 +143,603 @@
                     <span class="separator">/</span>
                     <a href="index.html">Learn</a>
                     <span class="separator">/</span>
-                    <span class="current">Context & Structure</span>
+                    <span class="current">Context Structure</span>
                 </nav>
-                <div class="card-badge badge-blue">Bridge</div>
-                <h1 class="page-title fade-in">Context & Structure</h1>
-                <p class="page-subtitle fade-in">From frameworks to flow: understanding how modern AI handles context and when structure helps versus hinders your prompts.</p>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Context Optimization</span>
+                </div>
+                <h1 class="page-title fade-in">Context Structure</h1>
+                <p class="page-subtitle fade-in">The same information arranged differently can produce dramatically different results. Context Structure is the discipline of organizing, ordering, and delimiting the information you feed to a language model &mdash; turning a raw pile of facts into a coherent briefing the model can actually use.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
-<!-- === FROM FRAMEWORKS TO FLOW === -->
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> Research into how context organization affects LLM performance gained momentum in 2023, driven by work from multiple research groups including Liu et al.&rsquo;s influential &ldquo;Lost in the Middle&rdquo; paper. As context windows expanded from 4K to 100K+ tokens, it became clear that simply dumping more information into a prompt was not enough &mdash; the <strong>structure and ordering</strong> of that information mattered as much as its content. Researchers demonstrated that models disproportionately attend to information at the beginning and end of their context, often neglecting material buried in the middle.</p>
+                        <p><strong>Modern LLM Status:</strong> While newer models like Claude, GPT-4, and Gemini have improved their ability to attend to information across long contexts, the fundamental principles of Context Structure remain <strong>highly relevant in practice</strong>. Well-organized prompts with clear delimiters, logical ordering, and explicit section headers consistently outperform unstructured information dumps &mdash; especially as prompts grow longer or incorporate multiple sources. Context Structure is not a single paper&rsquo;s technique but a convergent set of best practices drawn from retrieval-augmented generation (RAG), prompt engineering research, and production LLM system design.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">From Frameworks to Flow</h2>
-                <p class="section-subtitle fade-in-up">How AI communication has evolved</p>
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Organization Is a Force Multiplier</h2>
+                        <p class="split-section__text">Language models process context sequentially, building an internal representation token by token. When information arrives as an unstructured wall of text, the model must do double duty: first figuring out <strong>what</strong> each piece of information is, then figuring out <strong>how</strong> it relates to the question at hand. Structure eliminates that first step by making the organization explicit.</p>
+                        <p class="split-section__text"><strong>Context Structure treats your prompt like a well-organized briefing document.</strong> Instead of a stream-of-consciousness dump, you provide clear sections, labeled boundaries, and a logical flow that mirrors how you want the model to reason. Delimiters like headers, XML tags, or markdown separators tell the model where one piece of context ends and another begins &mdash; preventing cross-contamination between unrelated information sources.</p>
+                        <p class="split-section__text">Think of it like the difference between handing someone a stack of unsorted papers and handing them a tabbed binder with a table of contents. The information is identical, but the structured version lets the reader find and connect what they need far more efficiently.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">The &ldquo;Lost in the Middle&rdquo; Problem</span>
+                                <p>Research has shown that LLMs pay the most attention to information at the <strong>beginning</strong> and <strong>end</strong> of their context window, with recall dropping significantly for material in the middle. This U-shaped attention curve means that burying critical information in the center of a long prompt can cause the model to overlook it entirely. Context Structure techniques &mdash; like placing key facts at the start, using explicit section headers, and summarizing critical points &mdash; directly combat this phenomenon.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Context Structure Process</h2>
+                <p class="section-subtitle fade-in-up">Four steps from raw information to optimized prompt context</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Audit Your Information Sources</h3>
+                            <p class="element-timeline__text">Before writing the prompt, inventory all the information the model will need. Identify distinct sources &mdash; documents, data tables, conversation history, instructions, examples &mdash; and note where they overlap or conflict. This audit prevents you from accidentally burying critical context inside irrelevant material.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>For a contract analysis task, you identify three sources: the contract text itself, the client&rsquo;s specific questions, and relevant legal precedent summaries. Each serves a different role and should be clearly separated.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Establish a Logical Ordering</h3>
+                            <p class="element-timeline__text">Arrange your context with the most important information first. Place your task instructions and key constraints at the beginning of the prompt, followed by the primary source material, then any supplementary context. If the model needs to reference specific facts to answer a question, position those facts <strong>before</strong> the question &mdash; not after it.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Structure: (1) Role and task description, (2) Primary document, (3) Supporting context, (4) Specific questions to answer. The model encounters the instructions first, then the evidence, then knows what to do with it.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Apply Delimiters and Section Headers</h3>
+                            <p class="element-timeline__text">Use explicit markers to separate different types of content. XML tags, markdown headers, triple dashes, or labeled sections all work &mdash; the key is consistency. Delimiters prevent the model from confusing instructions with examples, or treating one document&rsquo;s claims as another&rsquo;s. They create a visual and semantic boundary the model can parse reliably.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Wrap each source in XML tags: &lt;contract&gt;...&lt;/contract&gt;, &lt;client-questions&gt;...&lt;/client-questions&gt;, &lt;precedent&gt;...&lt;/precedent&gt;. The model can now reference each source by name without ambiguity.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Trim and Prioritize Within the Window</h3>
+                            <p class="element-timeline__text">Context windows are large but not infinite. Remove irrelevant or redundant information, summarize lengthy passages where full text is not needed, and duplicate critical constraints at both the beginning and end of the prompt if the context is very long. This combats attention decay and ensures the model has headroom for its response.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>A 50-page report is too long to include verbatim. Instead, include the executive summary in full, relevant sections quoted with page references, and a final instruction reminding the model to focus on Sections 3 and 7.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">How structure transforms the same information into a better prompt</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Unstructured Context</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Here is an email from a customer who is upset about their order and also some notes from the warehouse team about inventory issues and the return policy says items must be returned within 30 days and the customer ordered on March 1st and the delivery was late by 2 weeks and the product was damaged when it arrived. The warehouse says they ran out of the original item. What should we tell the customer?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>The model produces a generic apology that misses key details, conflates the inventory issue with the damage issue, and forgets to address the return policy timeline.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Mixed sources, buried facts, easy to miss key details</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Structured Context</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Organized Prompt</span>
+                                <p><strong>Task:</strong> Draft a customer response addressing all issues below.<br><br>
+                                <strong>Customer complaint:</strong> Order placed March 1st. Delivery delayed 2 weeks. Product arrived damaged.<br><br>
+                                <strong>Warehouse notes:</strong> Original item out of stock. Replacement available in 5 business days.<br><br>
+                                <strong>Return policy:</strong> 30-day return window from delivery date. Damaged items eligible for immediate replacement.<br><br>
+                                <strong>Tone:</strong> Empathetic, solution-focused.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>The model addresses each issue separately: apologizes for the delay, acknowledges the damage, offers immediate replacement under the damage policy, confirms the customer is within the return window, and provides a clear timeline for the replacement shipment.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Clear separation, every source labeled, nothing lost</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Context Structure in Action</h2>
+                <p class="section-subtitle fade-in-up">See how deliberate organization improves real-world prompt outcomes</p>
+
+                <div class="accordion fade-in-up" id="context-structure-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Document Analysis with Multiple Sources</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Structured Prompt</span>
+                                    <p><strong>Role:</strong> You are a financial analyst reviewing a potential acquisition.<br><br>
+                                    <strong>&lt;target-company-financials&gt;</strong><br>
+                                    Revenue: $12M (2024), $15M (2025 projected)<br>
+                                    EBITDA margin: 18%<br>
+                                    Customer concentration: Top client = 35% of revenue<br>
+                                    <strong>&lt;/target-company-financials&gt;</strong><br><br>
+                                    <strong>&lt;market-research&gt;</strong><br>
+                                    Industry growth rate: 12% CAGR<br>
+                                    Key competitors: 3 major players, target holds 8% market share<br>
+                                    Regulatory risk: Medium (pending legislation in Q3)<br>
+                                    <strong>&lt;/market-research&gt;</strong><br><br>
+                                    <strong>&lt;deal-parameters&gt;</strong><br>
+                                    Asking price: $45M (3x revenue)<br>
+                                    Our budget ceiling: $40M<br>
+                                    Integration timeline: 18 months<br>
+                                    <strong>&lt;/deal-parameters&gt;</strong><br><br>
+                                    <strong>Question:</strong> Provide a risk assessment with a go/no-go recommendation.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Structure Works</span>
+                                    <p>Each information source is wrapped in descriptive tags. The model can reference &ldquo;target-company-financials&rdquo; and &ldquo;market-research&rdquo; without confusing which numbers come from which source. The deal parameters are separated from the analysis inputs, and the question comes last so the model has all evidence in hand before it begins reasoning. This structure virtually eliminates the risk of the model attributing market growth numbers to the target company or vice versa.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Multi-Source Context Consolidation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Structured Prompt</span>
+                                    <p><strong>Task:</strong> Synthesize these three sources into a briefing on the current state of enterprise cybersecurity policy.<br><br>
+                                    <strong>&lt;source-1 type=&rdquo;survey&rdquo; date=&rdquo;2024-Q4&rdquo;&gt;</strong><br>
+                                    73% of enterprises have adopted zero-trust architecture. Phishing remains the top attack vector at 36% of breaches. Average time to detect a breach dropped from 207 to 194 days year-over-year.<br>
+                                    <strong>&lt;/source-1&gt;</strong><br><br>
+                                    <strong>&lt;source-2 type=&rdquo;academic&rdquo; date=&rdquo;2024&rdquo;&gt;</strong><br>
+                                    MIT study: Organizations with mandatory security training saw 45% fewer successful phishing attacks. Multi-factor authentication reduced account compromise by 99.2%. AI-powered threat detection produced 28% more false positives than rule-based systems.<br>
+                                    <strong>&lt;/source-2&gt;</strong><br><br>
+                                    <strong>&lt;source-3 type=&rdquo;industry-report&rdquo; date=&rdquo;2025-Q1&rdquo;&gt;</strong><br>
+                                    Ransomware payments exceeded $1.1 billion globally. Supply-chain attacks increased 78% over two years. Organizations using AI-driven security tools reported 40% faster incident response times.<br>
+                                    <strong>&lt;/source-3&gt;</strong><br><br>
+                                    <strong>Instructions:</strong> Attribute each claim to its source. Flag any contradictions between sources. Conclude with an evidence-based recommendation.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Structure Works</span>
+                                    <p>Numbered, typed, and dated source tags let the model attribute claims accurately. The instruction to &ldquo;flag contradictions&rdquo; leverages the clear separation &mdash; the model can compare source-1&rsquo;s productivity claim against source-2&rsquo;s findings without confusion. Without this structure, the model might blend survey data with academic findings and present them as a single consensus, obscuring important nuances.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Hierarchical Context with Priority Levels</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Structured Prompt</span>
+                                    <p><strong>&lt;system-instructions priority=&rdquo;highest&rdquo;&gt;</strong><br>
+                                    You are a medical triage assistant. Never provide diagnoses. Always recommend consulting a healthcare professional. Flag any mention of emergency symptoms.<br>
+                                    <strong>&lt;/system-instructions&gt;</strong><br><br>
+                                    <strong>&lt;patient-context priority=&rdquo;high&rdquo;&gt;</strong><br>
+                                    Age: 45, Male<br>
+                                    Current medications: Lisinopril 10mg, Metformin 500mg<br>
+                                    Known conditions: Type 2 diabetes, hypertension<br>
+                                    <strong>&lt;/patient-context&gt;</strong><br><br>
+                                    <strong>&lt;symptom-report priority=&rdquo;high&rdquo;&gt;</strong><br>
+                                    Patient reports persistent headaches for 3 days, mild dizziness when standing, and occasional blurred vision.<br>
+                                    <strong>&lt;/symptom-report&gt;</strong><br><br>
+                                    <strong>&lt;reference-guidelines priority=&rdquo;medium&rdquo;&gt;</strong><br>
+                                    Standard triage protocol: headache + dizziness + vision changes in hypertensive patient = urgent follow-up recommended within 24 hours.<br>
+                                    <strong>&lt;/reference-guidelines&gt;</strong><br><br>
+                                    <strong>Question:</strong> Based on the above, what triage recommendation should be made?</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Structure Works</span>
+                                    <p>Priority tags create a clear hierarchy: safety instructions override everything, patient context and symptoms carry high weight, and reference guidelines inform but do not dictate. The model knows that its &ldquo;never provide diagnoses&rdquo; constraint is non-negotiable, while the triage guidelines are reference material. This hierarchical structure is essential in safety-critical applications where some context must always take precedence over others.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Context Structure</h2>
+                <p class="section-subtitle fade-in-up">Best for complex, multi-source, or high-stakes prompts</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Multi-Document Analysis</strong>
+                                    <p>When your prompt includes information from multiple sources that must be kept distinct &mdash; contracts, reports, emails, or data tables that the model needs to reference without cross-contamination.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Long-Context Prompts</strong>
+                                    <p>When your prompt approaches or exceeds several thousand tokens, structure combats the &ldquo;lost in the middle&rdquo; effect and ensures the model attends to all critical information evenly.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>RAG and Retrieval Pipelines</strong>
+                                    <p>When feeding retrieved documents into a prompt programmatically, consistent delimiters and metadata tags let the model distinguish between retrieved chunks and treat each with appropriate attribution.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Safety-Critical Applications</strong>
+                                    <p>When certain instructions must take absolute precedence &mdash; safety guardrails, compliance rules, or output constraints &mdash; hierarchical structure makes the priority ordering explicit.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Single-Source Prompts</strong>
+                                    <p>For short, straightforward prompts with one piece of context and one question, elaborate structure adds overhead without benefit. Natural language works perfectly.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Conversational Interactions</strong>
+                                    <p>In back-and-forth chat, the conversation itself provides natural structure. Adding XML tags to every message creates friction without improving comprehension.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative Brainstorming</strong>
+                                    <p>When you want the model to free-associate or explore ideas loosely, rigid structure can constrain the creative process rather than enhance it.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Context Structure delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Legal Document Review</h3>
+                        <p class="use-case-showcase__desc">Separate contract clauses, regulatory requirements, and client instructions into labeled sections so the model can cross-reference without confusing which obligations belong to which party.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Research Synthesis</h3>
+                        <p class="use-case-showcase__desc">Tag each study or source with metadata like date, methodology, and sample size, enabling the model to weight evidence appropriately and flag conflicting findings.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">RAG Pipeline Design</h3>
+                        <p class="use-case-showcase__desc">Structure retrieved document chunks with consistent delimiters and source attribution so the model can cite its sources and distinguish between retrieved facts and its own knowledge.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Customer Support Systems</h3>
+                        <p class="use-case-showcase__desc">Organize customer history, product documentation, and policy rules into distinct sections so the support model never confuses one customer&rsquo;s case with another&rsquo;s policies.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Compliance and Audit</h3>
+                        <p class="use-case-showcase__desc">Place non-negotiable safety constraints and regulatory requirements in high-priority sections that the model treats as absolute rules, separate from informational context.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Data Analysis Reports</h3>
+                        <p class="use-case-showcase__desc">Separate raw data, analysis instructions, and output format specifications so the model processes each independently and produces structured, reproducible results.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Context Structure Fits</h2>
+                <p class="section-subtitle fade-in-up">Context Structure bridges basic prompting and systematic information architecture</p>
 
                 <div class="evolution-timeline fade-in-up">
                     <div class="era-marker">
-                        <span class="era-marker__year">2022</span>
-                        <span class="era-marker__title">Rigid Frameworks</span>
-                        <span class="era-marker__desc">Strict formats needed</span>
-                    </div>
-                    <div class="era-marker">
-                        <span class="era-marker__year">2023-24</span>
-                        <span class="era-marker__title">Flexible Prompting</span>
-                        <span class="era-marker__desc">Natural language works</span>
+                        <span class="era-marker__year">Natural Language</span>
+                        <span class="era-marker__title">Unstructured Prompts</span>
+                        <span class="era-marker__desc">Conversational input, no explicit organization</span>
                     </div>
                     <div class="era-marker era-marker--active">
-                        <span class="era-marker__year">2025-26</span>
-                        <span class="era-marker__title">Conversational AI</span>
-                        <span class="era-marker__desc">Structure optional</span>
+                        <span class="era-marker__year">Context Structure</span>
+                        <span class="era-marker__title">Organized Information</span>
+                        <span class="era-marker__desc">Delimiters, headers, logical ordering</span>
                     </div>
-                </div>
-
-                <div class="content-block fade-in-up">
-                    <p>Early AI systems required careful prompt engineering with specific formats. Today's models understand natural conversation remarkably well. So when does structure still help?</p>
-                    <p>The answer: <strong>structure becomes valuable when your prompt is complex, when you need consistent output, or when you're working with large amounts of context.</strong></p>
-                </div>
-            </div>
-        </section>
-        <!-- /FROM FRAMEWORKS TO FLOW -->
-
-        <!-- === CONTEXT WINDOWS EXPLAINED === -->
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title fade-in-up">Understanding Context Windows</h2>
-                <p class="section-subtitle fade-in-up">How much can an AI "remember" in a single conversation?</p>
-
-                <div class="science-box fade-in-up">
-                    <div class="science-box__header">
-                        <span class="science-box__icon">📊</span>
-                        <span class="science-box__title">What is a Context Window?</span>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Prompt Chaining</span>
+                        <span class="era-marker__title">Multi-Step Pipelines</span>
+                        <span class="era-marker__desc">Structured context flows between stages</span>
                     </div>
-                    <p class="science-box__content">
-                        A context window is the total amount of text an AI can process at once—your prompt plus its response. Think of it as the AI's "working memory." Modern models have large context windows (100K+ tokens), but <strong>more context isn't always better</strong>. Relevant, well-organized context outperforms massive dumps of information.
-                    </p>
-                </div>
-
-                <div class="callout tip fade-in-up">
-                    <div class="callout-title">Practical Insight</div>
-                    <p>Don't worry about hitting context limits for most tasks. Focus on including <em>relevant</em> information rather than <em>all</em> information. A well-organized 500-word prompt often outperforms a 5,000-word info dump.</p>
-                </div>
-            </div>
-        </section>
-        <!-- /CONTEXT WINDOWS -->
-
-        <!-- === WHY STRUCTURE MATTERS === -->
-        <section class="section section-alt">
-            <div class="container">
-                <h2 class="section-title fade-in-up">Why Structure Matters</h2>
-                <p class="section-subtitle fade-in-up">The cognitive science behind organized prompts</p>
-
-                <div class="science-box fade-in-up">
-                    <div class="science-box__header">
-                        <span class="science-box__icon">🧠</span>
-                        <span class="science-box__title">Reducing Cognitive Load</span>
-                    </div>
-                    <p class="science-box__content">
-                        Structure isn't just for the AI—it's for you. When you organize your thoughts into clear sections, you're more likely to include all necessary information and catch gaps in your reasoning. <strong>External structure reduces mental load</strong>, freeing your brain to focus on content rather than organization.
-                    </p>
-                </div>
-
-                <div class="use-case-grid fade-in-up">
-                    <div class="use-case-card">
-                        <div class="use-case-card__icon">📄</div>
-                        <h3 class="use-case-card__title">When Structure Helps</h3>
-                        <p class="use-case-card__desc">Complex multi-part requests, technical documentation, consistent output formats, team templates, or when you need the AI to follow specific rules.</p>
-                        <span class="use-case-card__tag">Use Structure</span>
-                    </div>
-
-                    <div class="use-case-card">
-                        <div class="use-case-card__icon">💬</div>
-                        <h3 class="use-case-card__title">When Structure Hinders</h3>
-                        <p class="use-case-card__desc">Simple questions, creative brainstorming, casual conversation, or when the overhead of structuring exceeds the benefit.</p>
-                        <span class="use-case-card__tag">Keep It Simple</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /WHY STRUCTURE MATTERS -->
-
-        <!-- === STRUCTURING APPROACHES === -->
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title fade-in-up">Three Structuring Approaches</h2>
-                <p class="section-subtitle fade-in-up">From natural to highly organized</p>
-
-                <div class="approach-comparison stagger-children">
-                    <div class="approach-card fade-in-up">
-                        <div class="approach-header approach-natural">
-                            <h3>Natural Paragraphs</h3>
-                        </div>
-                        <div class="approach-content">
-                            <div class="approach-prompt">
-                                <p>I'm planning a surprise birthday party for my mom who's turning 60. She loves gardening and Italian food. We have about 20 guests coming and a budget of $500. Can you help me plan the menu and decorations?</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="approach-card fade-in-up">
-                        <div class="approach-header approach-labeled">
-                            <h3>Labeled Sections</h3>
-                        </div>
-                        <div class="approach-content">
-                            <div class="approach-prompt">
-                                <p><strong>Event:</strong> Surprise 60th birthday party</p>
-                                <p><strong>Guest of honor:</strong> My mom (loves gardening, Italian food)</p>
-                                <p><strong>Guests:</strong> 20 people</p>
-                                <p><strong>Budget:</strong> $500</p>
-                                <p><strong>Need help with:</strong> Menu and decorations</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="approach-card fade-in-up">
-                        <div class="approach-header" data-style="xml">
-                            <h3>XML Tags</h3>
-                        </div>
-                        <div class="approach-content">
-                            <div class="approach-prompt">
-                                <p>&lt;event&gt;Surprise 60th birthday&lt;/event&gt;</p>
-                                <p>&lt;honoree&gt;</p>
-                                <p>  &lt;interests&gt;gardening, Italian food&lt;/interests&gt;</p>
-                                <p>&lt;/honoree&gt;</p>
-                                <p>&lt;constraints&gt;</p>
-                                <p>  &lt;guests&gt;20&lt;/guests&gt;</p>
-                                <p>  &lt;budget&gt;$500&lt;/budget&gt;</p>
-                                <p>&lt;/constraints&gt;</p>
-                                <p>&lt;request&gt;Plan menu and decorations&lt;/request&gt;</p>
-                            </div>
-                        </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">RAG Systems</span>
+                        <span class="era-marker__title">Dynamic Context Assembly</span>
+                        <span class="era-marker__desc">Retrieved documents structured at runtime</span>
                     </div>
                 </div>
 
                 <div class="callout tip fade-in-up">
-                    <div class="callout-title">All Three Work</div>
-                    <p>For this simple request, all three approaches produce excellent results. The natural paragraph is fastest. Labels help ensure completeness. XML becomes valuable for complex, technical, or programmatic use cases.</p>
+                    <div class="callout-title">The Foundation for Everything Else</div>
+                    <p>Context Structure is not a standalone technique &mdash; it is the foundation that makes every other prompting method more effective. Chain-of-Thought works better when the input facts are clearly organized. Few-Shot Learning is more reliable when examples are delimited from instructions. RAG systems depend entirely on consistent context structure to present retrieved documents without confusion. Mastering context organization pays dividends across every prompting technique you use.</p>
                 </div>
             </div>
         </section>
-        <!-- /STRUCTURING APPROACHES -->
+        <!-- /FRAMEWORK POSITIONING -->
 
-        <!-- === INTRODUCTION TO XML === -->
-        <section class="section section-alt">
-            <div class="container">
-                <h2 class="section-title fade-in-up">Preview: XML Tags</h2>
-                <p class="section-subtitle fade-in-up">A glimpse at advanced structuring techniques</p>
-
-                <div class="content-block fade-in-up">
-                    <p>XML (eXtensible Markup Language) tags provide the most explicit structure. They're not required for most prompts, but become powerful when you need:</p>
-                </div>
-
-                <div class="info-cards stagger-children">
-                    <div class="info-card fade-in-up">
-                        <h3>Clear Boundaries</h3>
-                        <p>Unambiguous separation between instructions, context, and examples.</p>
-                    </div>
-                    <div class="info-card fade-in-up">
-                        <h3>Nested Information</h3>
-                        <p>Hierarchical data that labels alone can't cleanly represent.</p>
-                    </div>
-                    <div class="info-card fade-in-up">
-                        <h3>Programmatic Use</h3>
-                        <p>Building prompts dynamically in code or templates.</p>
-                    </div>
-                    <div class="info-card fade-in-up">
-                        <h3>Complex Instructions</h3>
-                        <p>Multi-step processes with conditional logic or references.</p>
-                    </div>
-                </div>
-
-                <div class="highlight-box highlight-box--tip fade-in-up">
-                    <span class="highlight-box-icon">💡</span>
-                    <h4 class="highlight-box-title">Coming Soon</h4>
-                    <p class="highlight-box-text">XML containerization and other advanced structuring techniques will be covered in detail in our Modern Methods section. For most everyday prompting, natural language or simple labels work perfectly well.</p>
-                </div>
-            </div>
-        </section>
-        <!-- /INTRODUCTION TO XML -->
-
-        <!-- === DECISION GUIDE === -->
+        <!-- === RELATED FRAMEWORKS === -->
         <section class="section">
             <div class="container">
-                <h2 class="section-title fade-in-up">When to Use What</h2>
-                <p class="section-subtitle fade-in-up">A quick decision guide</p>
-
-                <div class="framework-comparison fade-in-up">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Situation</th>
-                                <th>Approach</th>
-                                <th>Why</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Quick question or simple task</td>
-                                <td>Natural language</td>
-                                <td>Fast and effective</td>
-                            </tr>
-                            <tr>
-                                <td>Multi-part request</td>
-                                <td>Labels or framework</td>
-                                <td>Ensures completeness</td>
-                            </tr>
-                            <tr>
-                                <td>Consistent output format needed</td>
-                                <td>Labels + example</td>
-                                <td>Shows expected structure</td>
-                            </tr>
-                            <tr>
-                                <td>Technical/complex instructions</td>
-                                <td>XML tags</td>
-                                <td>Maximum clarity</td>
-                            </tr>
-                            <tr>
-                                <td>Template for repeated use</td>
-                                <td>Labels or XML</td>
-                                <td>Easy to fill in</td>
-                            </tr>
-                            <tr>
-                                <td>Creative brainstorming</td>
-                                <td>Natural language</td>
-                                <td>Don't constrain creativity</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-        <!-- /DECISION GUIDE -->
-
-        <!-- === EVOLUTION CALLOUT === -->
-        <section class="section section-alt">
-            <div class="container">
-                <h2 class="section-title fade-in-up">Continue Learning</h2>
-                <p class="section-subtitle fade-in-up">Build on these concepts with practical frameworks</p>
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore techniques that build on structured context</p>
 
                 <a href="crisp.html" class="evolution-callout fade-in-up">
-                    <span class="evolution-callout__icon">🔤</span>
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Foundation Framework</span>
-                        <span class="evolution-callout__title">CRISP: Structure Made Simple</span>
-                        <span class="evolution-callout__desc">A memorable acronym that ensures you include the essential elements in every prompt.</span>
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">CRISP Framework</span>
+                        <span class="evolution-callout__desc">A structured acronym for organizing prompts into Context, Role, Instructions, Specifics, and Parameters &mdash; built-in context structure in a memorable format.</span>
                     </div>
-                    <span class="evolution-callout__arrow">→</span>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
                 </a>
 
-                <a href="react.html" class="evolution-callout fade-in-up">
-                    <span class="evolution-callout__icon">🔄</span>
+                <a href="prompt-chaining.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Reasoning Framework</span>
-                        <span class="evolution-callout__title">ReAct: Structured Thinking</span>
-                        <span class="evolution-callout__desc">When the AI needs to reason through complex problems step by step.</span>
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Prompt Chaining</span>
+                        <span class="evolution-callout__desc">Extends context structure across multiple prompts, passing organized output from one stage as structured input to the next in a multi-step pipeline.</span>
                     </div>
-                    <span class="evolution-callout__arrow">→</span>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
                 </a>
 
-                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
-                    <span class="evolution-callout__icon">🚀</span>
+                <a href="self-ask.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Go Deeper</span>
-                        <span class="evolution-callout__title">Chain-of-Thought Framework</span>
-                        <span class="evolution-callout__desc">Guide AI through step-by-step reasoning for complex problems.</span>
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Self-Ask Prompting</span>
+                        <span class="evolution-callout__desc">While Context Structure organizes input information, Self-Ask structures the model&rsquo;s reasoning process &mdash; making each inference step explicit and auditable.</span>
                     </div>
-                    <span class="evolution-callout__arrow">→</span>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
                 </a>
             </div>
         </section>
-        <!-- /EVOLUTION CALLOUT -->
+        <!-- /RELATED FRAMEWORKS -->
 
-        <!-- CTA -->
+        <!-- === CTA SECTION === -->
         <section class="section">
             <div class="container">
-                <div class="cta-card fade-in-up">
-                    <canvas id="cta-neural-bg" class="neural-canvas-secondary"></canvas>
-                    <h2 class="cta-title">Practice What You've Learned</h2>
-                    <p class="cta-text">Try our interactive tools to build and analyze prompts using these principles.</p>
-                    <div class="cta-actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
-                        <a href="../tools/analyzer.html" class="btn btn-secondary">Analyze a Prompt</a>
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Structure Your Next Prompt</h2>
+                        <p class="cta-corporate__text">Apply Context Structure principles to your own prompts or use our tools to build well-organized, high-performance prompts from scratch.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /CTA SECTION -->
     </main>
 
-    <!-- Footer -->
+
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -515,7 +803,7 @@
         <span class="back-to-top-text">Back to Top</span>
     </button>
 
-<!-- Accessibility Dashboard -->
+    <!-- Accessibility Dashboard -->
     <div class="adl-dim-overlay" aria-hidden="true"></div>
     <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

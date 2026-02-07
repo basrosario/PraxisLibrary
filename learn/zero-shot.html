@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
-    <meta name="description" content="Master Zero-Shot Prompting: Get AI to perform tasks without examples. The foundation technique for immediate AI responses using only clear instructions.">
+    <meta name="description" content="Zero-Shot Prompting: The foundational technique for getting AI to perform tasks without any examples, relying entirely on clear instructions and pre-trained knowledge.">
     <title>Zero-Shot Prompting - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <link rel="preload" href="../styles.css" as="style">
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Header -->
     <header class="header" id="header">
         <div class="header-container">
             <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
@@ -102,7 +98,7 @@
                             <a href="../pages/glossary.html">Glossary</a>
                             <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
                             <a href="../pages/faq.html">FAQ</a>
-                            </div>
+                        </div>
                         <div class="mega-menu-section">
                             <h4>Principles</h4>
                             <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
@@ -135,6 +131,8 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
         <!-- === HERO SECTION === -->
         <section class="page-hero">
@@ -145,277 +143,332 @@
                     <span class="separator">/</span>
                     <a href="index.html">Learn</a>
                     <span class="separator">/</span>
-                    <span class="current">Zero-Shot Prompting</span>
+                    <span class="current">Zero-Shot</span>
                 </nav>
                 <div class="hero-badge">
-                    <svg class="hero-badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M12 6v6l4 2"/>
-                    </svg>
-                    <span class="hero-badge__text">Foundation Technique</span>
+                    <span class="hero-badge__text">Zero-Shot Technique</span>
                 </div>
                 <h1 class="page-title fade-in">Zero-Shot Prompting</h1>
-                <p class="page-subtitle fade-in">Give AI a task with no examples. The simplest, fastest way to get started with prompt engineering.</p>
+                <p class="page-subtitle fade-in">The most fundamental prompting technique &mdash; give the model a task with no examples and rely entirely on clear instructions and pre-trained knowledge to get the job done. Every other prompting method builds on this foundation.</p>
             </div>
         </section>
         <!-- /HERO SECTION -->
 
-<!-- === WHAT IS ZERO-SHOT === -->
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2019</span>
+                        <p><strong>Introduced:</strong> Zero-shot task performance was prominently demonstrated by Radford et al. with GPT-2 in 2019. The key finding was striking: a language model trained only on next-word prediction could perform tasks it was never explicitly trained for &mdash; translation, summarization, question answering &mdash; simply by framing the task in natural language with no demonstration examples. This challenged the prevailing assumption that task-specific training data was always necessary.</p>
+                        <p><strong>Modern LLM Status:</strong> Zero-shot capability has become the <strong>default interaction mode</strong> for modern large language models. Claude, GPT-4, and Gemini are instruction-tuned specifically to excel at zero-shot tasks, making this the starting point for virtually every prompt. Today&rsquo;s models handle zero-shot classification, generation, extraction, and reasoning with remarkable accuracy. The technique remains essential as the <strong>baseline against which all other prompting methods are measured</strong> &mdash; you should always try zero-shot first and only escalate to few-shot or advanced techniques when simpler instructions fall short.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Basics</span>
-                        <h2 class="section-title">No Examples Needed</h2>
-                        <p class="section-intro">Zero-shot prompting means asking AI to perform a task without providing any examples of how to do it. You rely entirely on the model's pre-trained knowledge and your clear instructions.</p>
-                        <div class="feature-list feature-list--check">
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Fastest to Write</span>
-                                    <span class="feature-list__text">No time spent crafting examples—just describe what you want</span>
-                                </div>
-                            </div>
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Tests Model Knowledge</span>
-                                    <span class="feature-list__text">Reveals what the AI already knows how to do</span>
-                                </div>
-                            </div>
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Starting Point for All Tasks</span>
-                                    <span class="feature-list__text">Try zero-shot first; add examples only if needed</span>
-                                </div>
-                            </div>
-                        </div>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Just Describe the Task</h2>
+                        <p class="split-section__text">Zero-shot prompting is deceptively simple: you describe what you want the model to do, provide the input, and let the model&rsquo;s pre-trained knowledge handle the rest. No demonstrations, no examples, no few-shot scaffolding. The entire technique rests on one insight &mdash; modern language models have already absorbed patterns for thousands of tasks during pre-training, and a well-worded instruction is often enough to activate the right one.</p>
+                        <p class="split-section__text"><strong>Clarity is your only lever.</strong> Without examples to anchor the model&rsquo;s behavior, the quality of your instruction determines the quality of the output. Vague requests produce vague results. Specific, action-oriented instructions &mdash; &ldquo;Classify the sentiment as positive, negative, or neutral&rdquo; rather than &ldquo;What do you think about this?&rdquo; &mdash; activate the model&rsquo;s task-specific knowledge with precision.</p>
+                        <p class="split-section__text">Think of it like giving directions to a highly skilled professional who has never seen your specific project. You do not need to teach them their craft &mdash; you just need to tell them exactly what you want done.</p>
                     </div>
-                    <div class="split-section__media">
-                        <div class="technique-demo">
-                            <div class="technique-demo__header">
-                                <span class="technique-demo__label">Zero-Shot Example</span>
-                            </div>
-                            <div class="technique-demo__content">
-                                <div class="technique-demo__prompt">
-                                    <span class="technique-demo__tag">Prompt</span>
-                                    <p>"Classify the sentiment of this review as positive, negative, or neutral: 'The battery life exceeded my expectations but the screen is too dim.'"</p>
-                                </div>
-                                <div class="technique-demo__response">
-                                    <span class="technique-demo__tag">Response</span>
-                                    <p><strong>Neutral</strong> - The review contains both positive feedback (battery life) and negative feedback (dim screen), making the overall sentiment mixed/neutral.</p>
-                                </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Zero-Shot Should Be Your Default</span>
+                                <p>Every example you add to a prompt costs tokens, increases latency, and introduces potential bias from your chosen demonstrations. Zero-shot prompting avoids all three costs. If the model can perform a task correctly without examples, adding them is pure overhead. Start zero-shot, measure the results, and only escalate to few-shot or chain-of-thought when the baseline output genuinely falls short. This <strong>escalation-first mindset</strong> keeps your prompts lean and your token budgets intact.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /WHAT IS ZERO-SHOT -->
+        <!-- /THE CONCEPT -->
 
         <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Under the Hood</span>
-                    <h2 class="section-title">Why Zero-Shot Works</h2>
-                    <p class="section-subtitle">Modern LLMs are trained on vast datasets that encode patterns for countless tasks</p>
-                </div>
+                <h2 class="section-title fade-in-up">The Zero-Shot Process</h2>
+                <p class="section-subtitle fade-in-up">Three steps from task description to model output</p>
 
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                            </svg>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
                         </div>
-                        <h3 class="pillar-card__title">Pre-trained Knowledge</h3>
-                        <p class="pillar-card__text">The model has seen millions of classification, summarization, and reasoning examples during training</p>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define the Task with a Clear Instruction</h3>
+                            <p class="element-timeline__text">Write a specific, action-oriented instruction that tells the model exactly what task to perform. Use direct verbs like &ldquo;Classify,&rdquo; &ldquo;Summarize,&rdquo; &ldquo;Translate,&rdquo; or &ldquo;Extract.&rdquo; Include any constraints on the output format &mdash; such as response length, label choices, or structure requirements &mdash; directly in the instruction.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Classify the following customer review as positive, negative, or neutral. Respond with only the label.&rdquo;</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="pillar-card">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                <polyline points="14 2 14 8 20 8"/>
-                                <line x1="16" y1="13" x2="8" y2="13"/>
-                                <line x1="16" y1="17" x2="8" y2="17"/>
-                            </svg>
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
                         </div>
-                        <h3 class="pillar-card__title">Instruction Following</h3>
-                        <p class="pillar-card__text">Instruction-tuned models are specifically trained to understand and follow natural language commands</p>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Provide the Input Data</h3>
+                            <p class="element-timeline__text">Supply the content the model should process. This could be text to classify, a passage to summarize, a sentence to translate, or raw data to analyze. Keep the input clearly separated from the instruction so the model knows where the task description ends and the content begins.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Review: The hotel room was spacious and clean, but the noise from the street made it hard to sleep at night.&rdquo;</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="pillar-card">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M8 12h8"/>
-                                <path d="M12 8v8"/>
-                            </svg>
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
                         </div>
-                        <h3 class="pillar-card__title">Task Generalization</h3>
-                        <p class="pillar-card__text">Knowledge transfers across similar tasks—sentiment analysis training helps with opinion mining</p>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Receive the Model&rsquo;s Output</h3>
+                            <p class="element-timeline__text">The model draws on its pre-trained knowledge to perform the requested task without any demonstration examples. It recognizes the task pattern from training data and applies learned capabilities directly. If the output quality is insufficient, you can refine the instruction, add format constraints, or escalate to few-shot prompting.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Neutral&rdquo; &mdash; The model identifies mixed sentiment (positive: spacious and clean; negative: street noise) and correctly labels the overall review.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
         <!-- /HOW IT WORKS -->
 
-        <!-- === BEST PRACTICES === -->
+        <!-- === VISUAL: THE COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Make It Work</span>
-                    <h2 class="section-title">Zero-Shot Best Practices</h2>
-                    <p class="section-subtitle">Clear instructions are your only tool—make them count</p>
-                </div>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why specific zero-shot instructions outperform vague requests</p>
 
-                <div class="use-case-grid">
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                            </svg>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Vague Prompt</h3>
                         </div>
-                        <h3 class="use-case-card__title">Be Specific About Format</h3>
-                        <p class="use-case-card__desc">Tell the model exactly how you want the output: "Respond with only one word: positive, negative, or neutral."</p>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>What do you think about this email?<br><br>&ldquo;Dear valued customer, your account has been compromised. Click here immediately to verify your identity and restore access.&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>This email looks like it could be a phishing attempt. It uses urgency and asks you to click a link. I would recommend being cautious and not clicking any links. You should verify through official channels instead. There are several red flags here that suggest it may not be legitimate...</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Rambling, no clear structure, no definitive classification</span>
+                        </div>
                     </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-                                <polyline points="2 17 12 22 22 17"/>
-                                <polyline points="2 12 12 17 22 12"/>
-                            </svg>
-                        </div>
-                        <h3 class="use-case-card__title">Define the Task Clearly</h3>
-                        <p class="use-case-card__desc">Use action verbs: "Classify," "Extract," "Summarize," "Translate"—not vague requests like "help with."</p>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
                     </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                                <line x1="9" y1="9" x2="15" y2="15"/>
-                                <line x1="15" y1="9" x2="9" y2="15"/>
-                            </svg>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Structured Zero-Shot</h3>
                         </div>
-                        <h3 class="use-case-card__title">Constrain the Output</h3>
-                        <p class="use-case-card__desc">Limit options when possible: "Choose from: A, B, or C" prevents unexpected responses.</p>
-                    </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            </svg>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Classify the following email as LEGITIMATE or PHISHING. Then list exactly 3 indicators that support your classification.<br><br>&ldquo;Dear valued customer, your account has been compromised. Click here immediately to verify your identity and restore access.&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p><strong>PHISHING</strong><br><br>1. Creates artificial urgency with &ldquo;immediately&rdquo; to bypass rational thinking<br>2. Uses a generic greeting (&ldquo;valued customer&rdquo;) instead of addressing the recipient by name<br>3. Directs the user to click an unspecified link rather than providing official support channels</p>
+                            </div>
                         </div>
-                        <h3 class="use-case-card__title">Provide Context</h3>
-                        <p class="use-case-card__desc">Include relevant background: "You are reviewing product feedback from an electronics store."</p>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Decisive classification, structured evidence, actionable output</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /BEST PRACTICES -->
+        <!-- /THE COMPARISON -->
 
-        <!-- === WHEN TO USE === -->
+        <!-- === EXAMPLES IN ACTION === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Decision Guide</span>
-                    <h2 class="section-title">When Zero-Shot Works Best</h2>
-                    <p class="section-subtitle">Start with zero-shot, escalate to few-shot only when needed</p>
-                </div>
+                <h2 class="section-title fade-in-up">Zero-Shot in Action</h2>
+                <p class="section-subtitle fade-in-up">See how clear instructions replace the need for examples</p>
 
-                <div class="split-section">
+                <div class="accordion fade-in-up" id="zero-shot-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Sentiment Classification</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt</span>
+                                    <p>Classify the sentiment of the following product review as positive, negative, or neutral. Respond with only the sentiment label.<br><br>Review: &ldquo;The battery life exceeded my expectations, but the screen is too dim for outdoor use and the speaker quality is disappointing.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Response</span>
+                                    <p><strong>Negative</strong></p>
+                                    <p>The model correctly identifies that two negative points (dim screen, poor speakers) outweigh one positive point (battery life), producing a clean single-label response exactly as instructed.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Text Summarization</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt</span>
+                                    <p>Summarize the following passage in exactly two sentences. Preserve the key finding and its implication.<br><br>Passage: &ldquo;Researchers at MIT have developed a new type of concrete that can actually absorb carbon dioxide from the atmosphere as it cures. The material uses a specially engineered mix of calcium silicate and biochar that reacts with CO2 during the hardening process. In laboratory tests, a standard building block made from this concrete absorbed approximately 12 kilograms of CO2 over a 28-day curing period. If adopted at scale in the construction industry, this technology could transform buildings from carbon sources into carbon sinks.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Response</span>
+                                    <p>MIT researchers have created a concrete formula using calcium silicate and biochar that absorbs carbon dioxide as it hardens, with lab tests showing a single building block capturing about 12 kilograms of CO2 in 28 days. Widespread adoption in construction could turn buildings from net carbon emitters into carbon sinks.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Language Translation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt</span>
+                                    <p>Translate the following English sentence into French, Spanish, and German. Format your response as a labeled list with one translation per line.<br><br>Sentence: &ldquo;The meeting has been rescheduled to next Thursday at 3 PM due to a scheduling conflict.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Response</span>
+                                    <p><strong>French:</strong> La r&eacute;union a &eacute;t&eacute; report&eacute;e &agrave; jeudi prochain &agrave; 15 heures en raison d&rsquo;un conflit d&rsquo;horaire.<br><strong>Spanish:</strong> La reuni&oacute;n se ha reprogramado para el pr&oacute;ximo jueves a las 15:00 debido a un conflicto de horarios.<br><strong>German:</strong> Das Meeting wurde aufgrund eines Terminkonflikts auf n&auml;chsten Donnerstag um 15 Uhr verschoben.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Zero-Shot</h2>
+                <p class="section-subtitle fade-in-up">Your default starting point for every prompting task</p>
+
+                <div class="split-section fade-in-up">
                     <div class="split-section__content">
-                        <h3 class="h4">Ideal for Zero-Shot</h3>
-                        <div class="feature-list feature-list--check">
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Common Tasks</span>
-                                    <span class="feature-list__text">Translation, summarization, sentiment analysis</span>
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Common NLP Tasks</strong>
+                                    <p>Classification, summarization, translation, and extraction &mdash; tasks the model has encountered millions of times during training and performs reliably without demonstrations.</p>
                                 </div>
                             </div>
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Standard Formats</span>
-                                    <span class="feature-list__text">JSON, bullet points, numbered lists</span>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Rapid Prototyping</strong>
+                                    <p>When you need to test a prompt idea quickly without spending time crafting example pairs &mdash; zero-shot lets you iterate on instructions in seconds.</p>
                                 </div>
                             </div>
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Quick Iteration</span>
-                                    <span class="feature-list__text">Rapid prototyping where speed matters</span>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Token-Constrained Environments</strong>
+                                    <p>When context window space is limited or cost matters &mdash; zero-shot prompts use the fewest tokens possible by eliminating example overhead.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Standard Output Formats</strong>
+                                    <p>JSON, bullet lists, numbered steps, and other widely-known formats that models already understand without demonstration.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="split-section__content">
-                        <h3 class="h4">Consider Few-Shot Instead</h3>
-                        <div class="feature-list feature-list--x">
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon feature-list__icon--warning">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <line x1="18" y1="6" x2="6" y2="18"/>
-                                        <line x1="6" y1="6" x2="18" y2="18"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Custom Formats</span>
-                                    <span class="feature-list__text">Proprietary templates, unusual structures</span>
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Custom or Proprietary Formats</strong>
+                                    <p>When output must match a specific internal template, style guide, or labeling taxonomy the model has never seen &mdash; examples are the only way to demonstrate the pattern.</p>
                                 </div>
                             </div>
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon feature-list__icon--warning">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <line x1="18" y1="6" x2="6" y2="18"/>
-                                        <line x1="6" y1="6" x2="18" y2="18"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Domain-Specific Jargon</span>
-                                    <span class="feature-list__text">Medical, legal, or technical terminology</span>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Nuanced Domain-Specific Tasks</strong>
+                                    <p>When the task requires subtle distinctions in specialized fields &mdash; medical coding, legal classification, or technical grading &mdash; where examples calibrate the model&rsquo;s judgment.</p>
                                 </div>
                             </div>
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon feature-list__icon--warning">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <line x1="18" y1="6" x2="6" y2="18"/>
-                                        <line x1="6" y1="6" x2="18" y2="18"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Nuanced Classification</span>
-                                    <span class="feature-list__text">Subtle distinctions that need demonstration</span>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Multi-Step Reasoning</strong>
+                                    <p>When the task requires chaining multiple logical steps &mdash; chain-of-thought or self-ask prompting provides the structured scaffolding zero-shot lacks.</p>
                                 </div>
                             </div>
                         </div>
@@ -425,99 +478,124 @@
         </section>
         <!-- /WHEN TO USE -->
 
-        <!-- === EXAMPLES === -->
-        <section class="section section-alt">
+        <!-- === USE CASES === -->
+        <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">In Practice</span>
-                    <h2 class="section-title">Zero-Shot Examples</h2>
-                    <p class="section-subtitle">Real prompts showing zero-shot techniques</p>
-                </div>
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where zero-shot prompting delivers immediate value</p>
 
-                <div class="accordion fade-in-up" id="examples-accordion">
-                    <div class="accordion-item">
-                        <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Text Classification</span>
-                            <span class="accordion-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"/>
-                                </svg>
-                            </span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="technique-demo">
-                                <div class="technique-demo__content">
-                                    <div class="technique-demo__prompt">
-                                        <span class="technique-demo__tag">Prompt</span>
-                                        <p>Classify the following email as spam or not spam. Respond with only "SPAM" or "NOT SPAM".<br><br>Email: "Congratulations! You've been selected to receive a $1000 gift card. Click here to claim your prize immediately!"</p>
-                                    </div>
-                                    <div class="technique-demo__response">
-                                        <span class="technique-demo__tag">Response</span>
-                                        <p>SPAM</p>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
                         </div>
+                        <h3 class="use-case-showcase__title">Customer Support Triage</h3>
+                        <p class="use-case-showcase__desc">Classify incoming tickets by category, urgency, and department with a single instruction &mdash; no training examples needed for standard support taxonomies.</p>
                     </div>
 
-                    <div class="accordion-item">
-                        <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Information Extraction</span>
-                            <span class="accordion-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"/>
-                                </svg>
-                            </span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="technique-demo">
-                                <div class="technique-demo__content">
-                                    <div class="technique-demo__prompt">
-                                        <span class="technique-demo__tag">Prompt</span>
-                                        <p>Extract the product name, price, and color from this text. Format as JSON.<br><br>Text: "I just bought the Nike Air Max 90 in white for $120 at the mall."</p>
-                                    </div>
-                                    <div class="technique-demo__response">
-                                        <span class="technique-demo__tag">Response</span>
-                                        <p>{"product": "Nike Air Max 90", "price": "$120", "color": "white"}</p>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
                         </div>
+                        <h3 class="use-case-showcase__title">Content Summarization</h3>
+                        <p class="use-case-showcase__desc">Condense meeting notes, articles, reports, or documentation into key takeaways at any length &mdash; from one-line abstracts to detailed executive summaries.</p>
                     </div>
 
-                    <div class="accordion-item">
-                        <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Text Transformation</span>
-                            <span class="accordion-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"/>
-                                </svg>
-                            </span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="technique-demo">
-                                <div class="technique-demo__content">
-                                    <div class="technique-demo__prompt">
-                                        <span class="technique-demo__tag">Prompt</span>
-                                        <p>Rewrite the following technical explanation for a 10-year-old audience:<br><br>"Photosynthesis is the process by which chloroplasts convert solar radiation into chemical energy stored in glucose molecules."</p>
-                                    </div>
-                                    <div class="technique-demo__response">
-                                        <span class="technique-demo__tag">Response</span>
-                                        <p>Plants are like little chefs! They use sunlight as their stove, and the green parts of their leaves as their kitchen. They cook up their own food (a type of sugar) using just light, water, and air. It's like magic, but it's actually science!</p>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
                         </div>
+                        <h3 class="use-case-showcase__title">Security Screening</h3>
+                        <p class="use-case-showcase__desc">Flag emails, messages, or URLs as potential phishing, spam, or social engineering attempts with clear classification instructions and structured output.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Language Translation</h3>
+                        <p class="use-case-showcase__desc">Translate text between languages with format preservation &mdash; models handle translation as a zero-shot task with high accuracy for common language pairs.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Data Extraction</h3>
+                        <p class="use-case-showcase__desc">Pull structured information from unstructured text &mdash; names, dates, prices, addresses, and entities extracted into JSON or tabular formats on demand.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Moderation</h3>
+                        <p class="use-case-showcase__desc">Screen user-generated content for policy violations, toxicity, or inappropriate material using straightforward classification instructions at scale.</p>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /EXAMPLES -->
+        <!-- /USE CASES -->
 
-        <!-- === RELATED TECHNIQUES === -->
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Zero-Shot Fits</h2>
+                <p class="section-subtitle fade-in-up">The foundation that every other prompting technique builds upon</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Zero-Shot</span>
+                        <span class="era-marker__title">No Examples</span>
+                        <span class="era-marker__desc">Instruction-only task execution</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Few-Shot</span>
+                        <span class="era-marker__title">Demonstration-Based</span>
+                        <span class="era-marker__desc">Learning from provided examples</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Reasoning Steps</span>
+                        <span class="era-marker__desc">Step-by-step logical scaffolding</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Advanced Methods</span>
+                        <span class="era-marker__title">Structured Protocols</span>
+                        <span class="era-marker__desc">Self-Ask, Tree of Thought, ReAct</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The Escalation Principle</div>
+                    <p>Prompt engineering follows a natural escalation path: start with zero-shot, add examples if needed (few-shot), introduce reasoning structure if accuracy matters (chain-of-thought), and deploy advanced protocols for the hardest problems. Each step adds capability but also adds complexity and token cost. Zero-shot is not a &ldquo;beginner&rdquo; technique &mdash; it is the efficient baseline that professionals use whenever simpler instructions suffice.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
         <section class="section">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
                 <p class="section-subtitle fade-in-up">Build on zero-shot with these complementary approaches</p>
 
                 <a href="few-shot-learning.html" class="evolution-callout fade-in-up">
@@ -532,7 +610,7 @@
                     <div class="evolution-callout__content">
                         <span class="evolution-callout__label">Add Examples</span>
                         <span class="evolution-callout__title">Few-Shot Learning</span>
-                        <span class="evolution-callout__desc">When zero-shot falls short, add 2-5 examples to guide the model toward your desired output.</span>
+                        <span class="evolution-callout__desc">When zero-shot falls short, add 2&ndash;5 demonstration examples to guide the model toward your desired output format and quality.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -552,7 +630,7 @@
                     <div class="evolution-callout__content">
                         <span class="evolution-callout__label">Add Reasoning</span>
                         <span class="evolution-callout__title">Zero-Shot Chain-of-Thought</span>
-                        <span class="evolution-callout__desc">Add "Let's think step by step" to unlock reasoning without examples.</span>
+                        <span class="evolution-callout__desc">Append &ldquo;Let&rsquo;s think step by step&rdquo; to unlock structured reasoning without any examples &mdash; zero-shot&rsquo;s most powerful single-line upgrade.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -571,7 +649,7 @@
                     <div class="evolution-callout__content">
                         <span class="evolution-callout__label">Add Persona</span>
                         <span class="evolution-callout__title">Role Prompting</span>
-                        <span class="evolution-callout__desc">Assign an expert identity to improve zero-shot performance on specialized tasks.</span>
+                        <span class="evolution-callout__desc">Assign an expert identity to improve zero-shot performance on specialized tasks &mdash; &ldquo;You are a senior data analyst&rdquo; activates domain-specific knowledge.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -581,47 +659,28 @@
                 </a>
             </div>
         </section>
-        <!-- /RELATED TECHNIQUES -->
+        <!-- /RELATED FRAMEWORKS -->
 
-        <!-- === SOURCES === -->
-        <section class="section citations-section">
-            <div class="container">
-                <h2>Sources</h2>
-                <ul class="citation-list">
-                    <li class="citation-item">
-                        <a href="https://arxiv.org/abs/2205.11916" target="_blank" rel="noopener noreferrer">Large Language Models are Zero-Shot Reasoners - Kojima et al. (2022)</a>
-                    </li>
-                    <li class="citation-item">
-                        <a href="https://direct.mit.edu/coli/article/50/1/237/118498/Can-Large-Language-Models-Transform-Computational" target="_blank" rel="noopener noreferrer">Can Large Language Models Transform Computational Social Science? - MIT Press (2024)</a>
-                    </li>
-                    <li class="citation-item">
-                        <a href="https://aclanthology.org/2024.naacl-long.17/" target="_blank" rel="noopener noreferrer">Self-Prompting Large Language Models for Zero-Shot Open-Domain QA - NAACL (2024)</a>
-                    </li>
-                </ul>
-            </div>
-        </section>
-        <!-- /SOURCES -->
-
-        <!-- === CTA === -->
+        <!-- === CTA SECTION === -->
         <section class="section">
             <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
                     <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
                     <div class="cta-corporate__content">
                         <h2 class="cta-corporate__title">Try Zero-Shot Prompting</h2>
-                        <p class="cta-corporate__text">Build and test zero-shot prompts with our interactive tools.</p>
+                        <p class="cta-corporate__text">Build and test zero-shot prompts with our interactive tools, or explore how other techniques build on this foundation.</p>
                         <div class="cta-corporate__actions">
-                            <a href="../tools/guidance.html" class="btn btn-primary">Try Prompt Builder</a>
-                            <a href="../tools/analyzer.html" class="btn btn-secondary">Analyze a Prompt</a>
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /CTA -->
+        <!-- /CTA SECTION -->
     </main>
 
-    <!-- Footer -->
+
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -685,7 +744,7 @@
         <span class="back-to-top-text">Back to Top</span>
     </button>
 
-<!-- Accessibility Dashboard -->
+    <!-- Accessibility Dashboard -->
     <div class="adl-dim-overlay" aria-hidden="true"></div>
     <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

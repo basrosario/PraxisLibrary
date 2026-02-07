@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
-    <meta name="description" content="Master the Self-Consistency Framework: Have AI verify and improve its own work. A foundation framework for reliable AI outputs.">
-    <title>Self-Consistency Framework - Praxis</title>
+    <meta name="description" content="Self-Consistency Prompting: Sample multiple reasoning paths and take a majority vote to dramatically improve accuracy on reasoning tasks.">
+    <title>Self-Consistency - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <link rel="preload" href="../styles.css" as="style">
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Header -->
     <header class="header" id="header">
         <div class="header-container">
             <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
@@ -102,7 +98,7 @@
                             <a href="../pages/glossary.html">Glossary</a>
                             <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
                             <a href="../pages/faq.html">FAQ</a>
-                            </div>
+                        </div>
                         <div class="mega-menu-section">
                             <h4>Principles</h4>
                             <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
@@ -135,6 +131,8 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
         <!-- === HERO SECTION === -->
         <section class="page-hero">
@@ -148,256 +146,486 @@
                     <span class="current">Self-Consistency</span>
                 </nav>
                 <div class="hero-badge">
-                    <svg class="hero-badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                        <polyline points="22 4 12 14.01 9 11.01"/>
-                    </svg>
-                    <span class="hero-badge__text">Foundation Framework</span>
+                    <span class="hero-badge__text">Ensemble Method</span>
                 </div>
-                <h1 class="page-title fade-in">Self-Consistency Framework</h1>
-                <p class="page-subtitle fade-in">Have AI verify and improve its own work. Built-in quality control for critical tasks.</p>
+                <h1 class="page-title fade-in">Self-Consistency</h1>
+                <p class="page-subtitle fade-in">One reasoning path can mislead. Self-Consistency samples multiple chains of thought from the same prompt, then takes a majority vote on the final answer &mdash; exploiting the insight that correct reasoning tends to converge while errors scatter randomly.</p>
             </div>
         </section>
         <!-- /HERO SECTION -->
 
-<!-- === WHY SELF-CONSISTENCY === -->
-        <section class="section section-alt">
-            <div class="container">
-                <div class="split-section">
-                    <div class="split-section__content">
-                        <span class="section-eyebrow">Why This Framework</span>
-                        <h2 class="section-title">Generation and Evaluation Are Different</h2>
-                        <p class="section-intro">AI can catch errors when prompted to review its own output. This works because generation and evaluation are different processes—the AI might miss something while generating but catch it when specifically looking for problems.</p>
-                        <div class="feature-list feature-list--check">
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Built-In Quality Control</span>
-                                    <span class="feature-list__text">Self-check catches errors that generation misses</span>
-                                </div>
-                            </div>
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Improved Reliability</span>
-                                    <span class="feature-list__text">Critical tasks benefit significantly from verification</span>
-                                </div>
-                            </div>
-                            <div class="feature-list__item">
-                                <span class="feature-list__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                </span>
-                                <div class="feature-list__content">
-                                    <span class="feature-list__title">Confidence Ratings</span>
-                                    <span class="feature-list__text">Know which parts of the output to trust most</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="progressive-build">
-                            <div class="progressive-build__item">
-                                <div class="progressive-build__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-                                        <path d="M21 3v9h-9"/>
-                                    </svg>
-                                </div>
-                                <div class="progressive-build__content">
-                                    <h3 class="progressive-build__title">Review and Revise</h3>
-                                    <p class="progressive-build__text">"After generating your response, review it for accuracy. Correct any errors."</p>
-                                </div>
-                            </div>
-                            <div class="progressive-build__item">
-                                <div class="progressive-build__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <line x1="8" y1="6" x2="21" y2="6"/>
-                                        <line x1="8" y1="12" x2="21" y2="12"/>
-                                        <line x1="8" y1="18" x2="21" y2="18"/>
-                                        <line x1="3" y1="6" x2="3.01" y2="6"/>
-                                        <line x1="3" y1="12" x2="3.01" y2="12"/>
-                                        <line x1="3" y1="18" x2="3.01" y2="18"/>
-                                    </svg>
-                                </div>
-                                <div class="progressive-build__content">
-                                    <h3 class="progressive-build__title">Multiple Approaches</h3>
-                                    <p class="progressive-build__text">"Solve this using two different methods, then compare answers to verify."</p>
-                                </div>
-                            </div>
-                            <div class="progressive-build__item">
-                                <div class="progressive-build__icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M12 20h9"/>
-                                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-                                    </svg>
-                                </div>
-                                <div class="progressive-build__content">
-                                    <h3 class="progressive-build__title">Confidence Rating</h3>
-                                    <p class="progressive-build__text">"Rate your confidence in each claim (High/Medium/Low) and explain uncertainties."</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /WHY SELF-CONSISTENCY -->
-
-        <!-- === APPROACHES === -->
+        <!-- === HISTORICAL CONTEXT === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">How to Use It</span>
-                    <h2 class="section-title">Three Verification Approaches</h2>
-                    <p class="section-subtitle">Choose the level of verification that matches your needs</p>
-                </div>
-
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-                                <path d="M21 3v9h-9"/>
-                            </svg>
-                        </div>
-                        <h3 class="pillar-card__title">Review & Revise</h3>
-                        <p class="pillar-card__text">"After generating your response, review it for accuracy. Correct any errors."</p>
-                        <span class="pillar-card__tag">Quick verification</span>
-                    </div>
-
-                    <div class="pillar-card">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="8" y1="6" x2="21" y2="6"/>
-                                <line x1="8" y1="12" x2="21" y2="12"/>
-                                <line x1="8" y1="18" x2="21" y2="18"/>
-                            </svg>
-                        </div>
-                        <h3 class="pillar-card__title">Multiple Methods</h3>
-                        <p class="pillar-card__text">"Solve this using two different methods, then compare answers to verify."</p>
-                        <span class="pillar-card__tag">Cross-validation</span>
-                    </div>
-
-                    <div class="pillar-card">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 20h9"/>
-                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-                            </svg>
-                        </div>
-                        <h3 class="pillar-card__title">Confidence Rating</h3>
-                        <p class="pillar-card__text">"Rate confidence in each claim (High/Medium/Low) and explain uncertainties."</p>
-                        <span class="pillar-card__tag">Transparency</span>
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2022</span>
+                        <p><strong>Introduced:</strong> Self-Consistency was published in 2022 by Wang et al. The technique addresses a fundamental limitation of Chain-of-Thought prompting &mdash; that a single reasoning path, no matter how detailed, can still arrive at the wrong answer through one flawed step. Self-Consistency solves this by sampling multiple diverse reasoning paths using temperature-based decoding, then selecting the most frequent final answer through majority voting. The original paper demonstrated dramatic accuracy improvements across arithmetic, commonsense, and symbolic reasoning benchmarks.</p>
+                        <p><strong>Modern LLM Status:</strong> Self-Consistency&rsquo;s core principle &mdash; that ensembling multiple reasoning attempts outperforms any single attempt &mdash; remains <strong>highly relevant and widely used</strong>. Modern LLMs like Claude, GPT-4, and Gemini still benefit measurably from multi-sample voting on difficult reasoning tasks. The technique has become a <strong>foundational building block</strong> for more advanced ensemble methods like Universal Self-Consistency, DiVeRSe, and complexity-based prompting. While single-pass accuracy has improved with model scaling, Self-Consistency continues to push the frontier on tasks where reasoning reliability matters more than speed or cost.</p>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /APPROACHES -->
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Correct Answers Agree, Errors Diverge</h2>
+                        <p class="split-section__text">When you ask a model to reason through a problem once, it follows a single path. If that path contains even one misstep &mdash; a calculation error, a logical slip, a misremembered fact &mdash; the final answer is wrong, and you have no way to detect it. The output looks just as confident whether the reasoning was sound or flawed.</p>
+                        <p class="split-section__text"><strong>Self-Consistency exploits a statistical truth:</strong> correct reasoning paths, despite taking different routes, tend to converge on the same answer. Incorrect paths, by contrast, scatter across different wrong answers. By sampling many reasoning chains and counting which final answer appears most often, the correct answer naturally rises to the top &mdash; the signal emerges from the noise.</p>
+                        <p class="split-section__text">Think of it like asking a classroom of students to solve the same math problem independently. Some will make mistakes, but each will make <em>different</em> mistakes. The answer that most students arrive at is overwhelmingly likely to be the correct one &mdash; not because any individual student is infallible, but because correctness is consistent while errors are random.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Voting Beats Single-Pass Reasoning</span>
+                                <p>A single Chain-of-Thought trace is like a single coin flip &mdash; it might land correctly, but you cannot tell from one trial whether the coin is fair. Self-Consistency flips the coin many times. If the model&rsquo;s reasoning is fundamentally sound, the correct answer will dominate across samples. If different samples produce wildly different answers, that disagreement itself is a valuable signal that the problem is harder than it appears or that the model&rsquo;s knowledge is uncertain. Either way, you gain <strong>information that a single pass cannot provide</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Self-Consistency Process</h2>
+                <p class="section-subtitle fade-in-up">Three stages from single prompt to consensus answer</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Prompt with Chain-of-Thought</h3>
+                            <p class="element-timeline__text">Start with a standard Chain-of-Thought prompt &mdash; either few-shot with reasoning examples or zero-shot with &ldquo;Let&rsquo;s think step by step.&rdquo; The key difference is that instead of greedy decoding (taking the single most likely output), you use temperature-based sampling to generate multiple completions. Each sample follows a different reasoning trajectory because the stochastic decoding introduces diversity at each token.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;If a store sells 3 shirts at $25 each and offers a 20% discount on the total, how much does the customer pay? Think step by step.&rdquo; &mdash; Generate 5 independent completions at temperature 0.7.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Sample Multiple Reasoning Paths</h3>
+                            <p class="element-timeline__text">Each sampled completion reasons through the problem independently. Some paths may be longer, some shorter. Some may approach the problem differently &mdash; one might calculate the total first then apply the discount, another might calculate the per-item discount first. The diversity of approaches is a feature, not a bug. What matters is not whether the paths match, but whether the final answers agree.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Path 1:</strong> 3 &times; $25 = $75, then 20% of $75 = $15, so $75 &minus; $15 = <strong>$60</strong><br><strong>Path 2:</strong> 20% off means pay 80%, so 3 &times; $25 &times; 0.8 = <strong>$60</strong><br><strong>Path 3:</strong> Each shirt discounted: $25 &times; 0.8 = $20, then 3 &times; $20 = <strong>$60</strong><br><strong>Path 4:</strong> $25 &times; 3 = $75, discount = $75 &times; 0.2 = $15, total = <strong>$60</strong><br><strong>Path 5:</strong> 3 shirts = $75, minus 20% &hellip; 20% of 75 is 25 &hellip; so <strong>$50</strong> (error)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Majority Vote on Final Answers</h3>
+                            <p class="element-timeline__text">Ignore the intermediate reasoning steps entirely and extract only the final answer from each path. Count how many times each distinct answer appears. The answer with the highest count wins. In this example, four paths say $60 and one says $50 &mdash; so $60 is selected with 80% agreement. The vote margin itself serves as a built-in confidence signal: unanimous agreement suggests high reliability, while a narrow margin warns of uncertainty.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Vote tally:</strong> $60 appears 4 times, $50 appears 1 time. <strong>Majority answer: $60</strong> (4/5 = 80% consensus). The single incorrect path made an arithmetic error (computing 20% of 75 as 25 instead of 15), but it was outvoted by the four correct paths.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why multiple paths with voting outperform a single reasoning chain</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Single-Path CoT</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>A train travels 120 miles in 2 hours, then 90 miles in 1.5 hours. What is the average speed for the entire trip?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Single Response</span>
+                                <p>First leg: 120/2 = 60 mph. Second leg: 90/1.5 = 60 mph. Average speed = (60 + 60) / 2 = <strong>60 mph</strong>.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Correct by luck &mdash; averaging speeds is wrong here but gave same result; no way to detect the flawed method</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Self-Consistency</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Multiple Reasoning Paths</span>
+                                <p><strong>Path 1:</strong> Total distance = 210 miles, total time = 3.5 hours. 210/3.5 = <strong>60 mph</strong>.<br><strong>Path 2:</strong> 120 + 90 = 210 miles in 2 + 1.5 = 3.5 hours. Speed = 210 &divide; 3.5 = <strong>60 mph</strong>.<br><strong>Path 3:</strong> Average of 60 and 60 = <strong>60 mph</strong>.<br><strong>Path 4:</strong> Total distance / total time = 210/3.5 = <strong>60 mph</strong>.<br><strong>Path 5:</strong> Weighted average: (60&times;2 + 60&times;1.5)/3.5 = <strong>60 mph</strong>.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Majority Vote</span>
+                                <p>All 5 paths agree: <strong>60 mph</strong>. Multiple valid methods converged on the same answer, including the correct total-distance/total-time approach. 100% consensus provides high confidence.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Multiple methods confirm the answer; consensus strength signals reliability</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Self-Consistency in Action</h2>
+                <p class="section-subtitle fade-in-up">See how majority voting across diverse reasoning paths improves accuracy</p>
+
+                <div class="accordion fade-in-up" id="self-consistency-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Math Problem: Multi-Step Arithmetic</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Question</span>
+                                    <p>&ldquo;A baker makes 4 batches of cookies. Each batch uses 2.5 cups of flour. She already had 3 cups and bought a 10-cup bag. How much flour does she have left after baking?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Sampled Paths &amp; Vote</span>
+                                    <p><strong>Path 1:</strong> Total flour = 3 + 10 = 13 cups. Used = 4 &times; 2.5 = 10 cups. Left = 13 &minus; 10 = <strong>3 cups</strong>.<br><br>
+                                    <strong>Path 2:</strong> She needs 4 &times; 2.5 = 10 cups. She has 3 + 10 = 13. Remaining = 13 &minus; 10 = <strong>3 cups</strong>.<br><br>
+                                    <strong>Path 3:</strong> 2.5 &times; 4 = 10 cups needed. Starting supply: 13 cups. 13 &minus; 10 = <strong>3 cups</strong>.<br><br>
+                                    <strong>Path 4:</strong> Each batch is 2.5, so 4 batches is 2.5 + 2.5 + 2.5 + 2.5 = 10. Had 3, bought 10, so 13 total. 13 &minus; 10 = <strong>3 cups</strong>.<br><br>
+                                    <strong>Path 5:</strong> Flour bought = 10, flour had = 3, total = 13. Per batch = 2.5, total batches = 4. Used = 4 &times; 2.5 = 12 &hellip; wait, that&rsquo;s wrong &hellip; 4 &times; 2.5 = 10. Left = 13 &minus; 10 = <strong>3 cups</strong>.<br><br>
+                                    <strong>Majority vote:</strong> 5/5 paths say <strong>3 cups</strong>. Unanimous consensus &mdash; high confidence in the answer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Logic Reasoning: Deductive Puzzle</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Question</span>
+                                    <p>&ldquo;All roses are flowers. Some flowers fade quickly. Can we conclude that some roses fade quickly?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Sampled Paths &amp; Vote</span>
+                                    <p><strong>Path 1:</strong> All roses are flowers, but &ldquo;some flowers fade quickly&rdquo; doesn&rsquo;t specify which ones. The ones that fade quickly might not include any roses. <strong>No, we cannot conclude this</strong>.<br><br>
+                                    <strong>Path 2:</strong> This is a syllogism. &ldquo;Some flowers fade quickly&rdquo; &mdash; roses are flowers, so at least some roses could be among those that fade. Actually, &ldquo;some&rdquo; doesn&rsquo;t guarantee overlap. <strong>No, we cannot conclude this</strong>.<br><br>
+                                    <strong>Path 3:</strong> All roses are flowers. Some flowers fade quickly. Since roses are a subset of flowers, and some flowers fade, some of those could be roses. But &ldquo;could be&rdquo; is not &ldquo;must be.&rdquo; <strong>No, we cannot conclude this</strong>.<br><br>
+                                    <strong>Path 4:</strong> Some flowers fade. Roses are flowers. So some roses fade. <strong>Yes, some roses fade quickly</strong>.<br><br>
+                                    <strong>Path 5:</strong> In formal logic, &ldquo;All A are B&rdquo; and &ldquo;Some B are C&rdquo; does not entail &ldquo;Some A are C.&rdquo; The &ldquo;some B&rdquo; that are C might be entirely non-A members. <strong>No, we cannot conclude this</strong>.<br><br>
+                                    <strong>Majority vote:</strong> 4/5 say <strong>No</strong>, 1 says Yes. Self-Consistency correctly selects &ldquo;No&rdquo; &mdash; the single incorrect path made the classic undistributed middle fallacy, but it was outvoted.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Commonsense: Everyday Reasoning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Question</span>
+                                    <p>&ldquo;Samantha left a glass of ice water on the kitchen counter and went to work. When she came home 8 hours later, what did she find?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Sampled Paths &amp; Vote</span>
+                                    <p><strong>Path 1:</strong> Ice melts at room temperature. After 8 hours, the ice would have completely melted and the water would be at room temperature. She found <strong>a glass of room-temperature water</strong>.<br><br>
+                                    <strong>Path 2:</strong> The ice would melt within the first hour or two. Over 8 hours the water would reach ambient temperature. She found <strong>a glass of room-temperature water</strong>, possibly with condensation on the outside that had dried.<br><br>
+                                    <strong>Path 3:</strong> At room temperature, ice melts quickly. After 8 hours she&rsquo;d find <strong>a glass of water at room temperature</strong> with no ice remaining.<br><br>
+                                    <strong>Path 4:</strong> 8 hours is more than enough for ice to melt and water to warm up. She found <strong>a glass of lukewarm or room-temperature water</strong>.<br><br>
+                                    <strong>Path 5:</strong> The ice melted and the water warmed to room temperature. She found <strong>a glass of room-temperature water</strong>.<br><br>
+                                    <strong>Majority vote:</strong> 5/5 paths agree: <strong>a glass of room-temperature water with no ice</strong>. Unanimous consensus on the commonsense outcome.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
 
         <!-- === WHEN TO USE === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Best Fit</span>
-                    <h2 class="section-title">When to Use Self-Consistency</h2>
-                    <p class="section-subtitle">Essential for critical tasks where accuracy matters</p>
-                </div>
+                <h2 class="section-title fade-in-up">When to Use Self-Consistency</h2>
+                <p class="section-subtitle fade-in-up">Best for reasoning tasks where accuracy justifies the cost of multiple samples</p>
 
-                <div class="use-case-grid">
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            </svg>
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Math and Arithmetic Tasks</strong>
+                                    <p>Problems where a single calculation error derails the answer &mdash; voting across paths catches arithmetic mistakes that any individual path might make.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Stakes Decisions</strong>
+                                    <p>When the cost of a wrong answer far exceeds the cost of sampling multiple times &mdash; medical reasoning, legal analysis, financial calculations.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Logic and Commonsense Reasoning</strong>
+                                    <p>Problems with definite correct answers where the model might be led astray by surface-level patterns &mdash; syllogisms, word problems, causal reasoning.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Confidence Estimation</strong>
+                                    <p>When you need to know how certain the model is &mdash; the vote margin directly measures agreement, giving you a built-in reliability signal.</p>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="use-case-card__title">Critical Decisions</h3>
-                        <p class="use-case-card__desc">High-stakes outputs where errors have significant consequences.</p>
                     </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="12" y1="1" x2="12" y2="23"/>
-                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                            </svg>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Open-Ended Creative Tasks</strong>
+                                    <p>Writing, brainstorming, or opinion-based questions have no single correct answer to vote on &mdash; multiple samples would just give you variety, not convergence.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Latency-Sensitive Applications</strong>
+                                    <p>Sampling 5&ndash;40 reasoning paths multiplies both time and token cost &mdash; if speed or budget is the primary constraint, single-pass methods are more appropriate.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Trivially Easy Questions</strong>
+                                    <p>If the model already answers correctly on a single pass with near-100% reliability, the overhead of multiple samples adds cost without improving accuracy.</p>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="use-case-card__title">Calculations</h3>
-                        <p class="use-case-card__desc">Math, financial analysis, or any numerical work.</p>
-                    </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                                <line x1="12" y1="17" x2="12.01" y2="17"/>
-                            </svg>
-                        </div>
-                        <h3 class="use-case-card__title">Fact Checking</h3>
-                        <p class="use-case-card__desc">Verifying claims, dates, statistics, and factual statements.</p>
-                    </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="16 18 22 12 16 6"/>
-                                <polyline points="8 6 2 12 8 18"/>
-                            </svg>
-                        </div>
-                        <h3 class="use-case-card__title">Code Review</h3>
-                        <p class="use-case-card__desc">Having AI check its own code for bugs and issues.</p>
-                    </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                <polyline points="14 2 14 8 20 8"/>
-                            </svg>
-                        </div>
-                        <h3 class="use-case-card__title">Legal/Medical Content</h3>
-                        <p class="use-case-card__desc">Any content requiring extra accuracy and caution.</p>
-                    </div>
-                    <div class="use-case-card fade-in-up">
-                        <div class="use-case-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-                                <polyline points="2 17 12 22 22 17"/>
-                                <polyline points="2 12 12 17 22 12"/>
-                            </svg>
-                        </div>
-                        <h3 class="use-case-card__title">Complex Analysis</h3>
-                        <p class="use-case-card__desc">Multi-factor analysis where multiple approaches help.</p>
                     </div>
                 </div>
             </div>
         </section>
         <!-- /WHEN TO USE -->
 
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Self-Consistency delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Calculations</h3>
+                        <p class="use-case-showcase__desc">Multi-step tax computations, interest calculations, and budget projections where a single arithmetic slip can cascade into a materially wrong result.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Reasoning</h3>
+                        <p class="use-case-showcase__desc">Differential diagnosis questions where sampling diverse reasoning paths and voting reduces the chance of a single flawed inference leading to a wrong conclusion.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Code Bug Detection</h3>
+                        <p class="use-case-showcase__desc">Asking the model to trace through code logic multiple times &mdash; if most paths identify the same bug, confidence in that finding increases dramatically.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Standardized Test Prep</h3>
+                        <p class="use-case-showcase__desc">Multiple-choice reasoning questions in STEM, law, or medicine where voting across sampled paths consistently outperforms single-pass answers on benchmark evaluations.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                                <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Fact Verification</h3>
+                        <p class="use-case-showcase__desc">Checking factual claims by having the model reason through them multiple times &mdash; consistent answers suggest reliable knowledge, while disagreement flags potential hallucinations.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Data Analysis</h3>
+                        <p class="use-case-showcase__desc">Interpreting charts, tables, or statistical data where different reasoning angles can catch misreadings &mdash; the majority vote filters out misinterpretations of the data.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Self-Consistency Fits</h2>
+                <p class="section-subtitle fade-in-up">Self-Consistency bridges single-path reasoning and advanced ensemble methods</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Single Path</span>
+                        <span class="era-marker__desc">One reasoning chain, greedy decoding</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Self-Consistency</span>
+                        <span class="era-marker__title">Multiple Paths + Vote</span>
+                        <span class="era-marker__desc">Sample diverse chains, majority decides</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">DiVeRSe</span>
+                        <span class="era-marker__title">Diverse Verifier</span>
+                        <span class="era-marker__desc">Multiple prompts plus verification scoring</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Universal SC</span>
+                        <span class="era-marker__title">Free-Form Voting</span>
+                        <span class="era-marker__desc">Extends voting to open-ended outputs</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Tuning the Sample Count</div>
+                    <p>The original paper tested between 5 and 40 sampled paths. More samples generally improve accuracy but with diminishing returns &mdash; most of the gain comes within the first 10&ndash;15 samples. For practical use, start with 5 samples at temperature 0.5&ndash;0.7. If the vote is not decisive (e.g., a 3/5 vs. 2/5 split), increase the sample count. A near-unanimous vote (e.g., 5/5 or 9/10) is a strong signal that the answer is correct; a highly fragmented vote is a valuable warning that the model is uncertain.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
         <!-- === RELATED FRAMEWORKS === -->
         <section class="section">
             <div class="container">
                 <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <p class="section-subtitle fade-in-up">Explore frameworks that complement Self-Consistency</p>
+                <p class="section-subtitle fade-in-up">Explore techniques that build on or complement Self-Consistency</p>
 
                 <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="6" cy="6" r="3"/>
-                            <circle cx="18" cy="18" r="3"/>
-                            <path d="M6 9v6c0 3 3 3 6 3h3"/>
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Reasoning Framework</span>
-                        <span class="evolution-callout__title">Chain-of-Thought Framework</span>
-                        <span class="evolution-callout__desc">Combine with visible reasoning for verifiable step-by-step analysis.</span>
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">The single-path reasoning technique that Self-Consistency enhances by sampling multiple chains and voting on the final answer.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -406,17 +634,17 @@
                     </span>
                 </a>
 
-                <a href="react.html" class="evolution-callout fade-in-up">
+                <a href="self-verification.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-                            <path d="M21 3v9h-9"/>
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Reasoning Framework</span>
-                        <span class="evolution-callout__title">ReAct Framework</span>
-                        <span class="evolution-callout__desc">Built-in observation steps provide natural verification points.</span>
+                        <span class="evolution-callout__label">Extension</span>
+                        <span class="evolution-callout__title">Self-Verification</span>
+                        <span class="evolution-callout__desc">Rather than simple voting, Self-Verification scores each candidate answer by checking whether it satisfies the original conditions &mdash; a more targeted selection method.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -425,17 +653,16 @@
                     </span>
                 </a>
 
-                <a href="../tools/hallucination.html" class="evolution-callout fade-in-up">
+                <a href="tree-of-thought.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Interactive Tool</span>
-                        <span class="evolution-callout__title">Hallucination Spotter</span>
-                        <span class="evolution-callout__desc">Practice identifying AI errors with our interactive tool.</span>
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Tree of Thought</span>
+                        <span class="evolution-callout__desc">Where Self-Consistency samples complete paths independently, Tree of Thought explores and prunes partial reasoning branches &mdash; a more structured search over the reasoning space.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -447,39 +674,26 @@
         </section>
         <!-- /RELATED FRAMEWORKS -->
 
-        <!-- === SOURCES === -->
-        <section class="section citations-section">
-            <div class="container">
-                <h2>Sources</h2>
-                <ul class="citation-list">
-                    <li class="citation-item">
-                        <a href="https://hai.stanford.edu/ai-index/2024-ai-index-report" target="_blank" rel="noopener noreferrer">AI Index Report 2024 - Stanford Human-Centered AI Institute</a>
-                    </li>
-                </ul>
-            </div>
-        </section>
-        <!-- /SOURCES -->
-
-        <!-- === CTA === -->
+        <!-- === CTA SECTION === -->
         <section class="section">
             <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
                     <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
                     <div class="cta-corporate__content">
-                        <h2 class="cta-corporate__title">Practice Critical Thinking</h2>
-                        <p class="cta-corporate__text">Learn to spot AI errors with our Hallucination Spotter tool.</p>
+                        <h2 class="cta-corporate__title">Boost Your Reasoning Accuracy</h2>
+                        <p class="cta-corporate__text">Apply Self-Consistency to your own reasoning challenges or explore ensemble methods with our prompt tools.</p>
                         <div class="cta-corporate__actions">
-                            <a href="../tools/hallucination.html" class="btn btn-primary">Hallucination Spotter</a>
-                            <a href="../tools/analyzer.html" class="btn btn-secondary">Analyze a Prompt</a>
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /CTA -->
+        <!-- /CTA SECTION -->
     </main>
 
-    <!-- Footer -->
+
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -543,7 +757,7 @@
         <span class="back-to-top-text">Back to Top</span>
     </button>
 
-<!-- Accessibility Dashboard -->
+    <!-- Accessibility Dashboard -->
     <div class="adl-dim-overlay" aria-hidden="true"></div>
     <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

@@ -778,6 +778,36 @@ Resources (mega-menu)
 
 # SESSION LOG
 
+## Session 37 (2026-02-07)
+
+**Focus:** Part A — 22-Page Redesign (Waves A-D) + HR Content Cleanup
+**Status:** COMPLETE — Part B (Nav Update) next
+
+**Completed:**
+- [x] **Wave A: Foundation Frameworks (6 pages)**
+  - chain-of-thought (827), few-shot-learning (818), zero-shot (816), one-shot (825), role-prompting (818), self-consistency (829)
+- [x] **Wave B: Structured Frameworks (6 pages)**
+  - crisp (861), crispe (869), costar (892), constrained-output (833), context-structure (875), prompt-chaining (845)
+- [x] **Wave C: Advanced Techniques (5 pages)**
+  - tree-of-thought (858), plan-and-solve (857), least-to-most (853), example-selection (829), shot-prompting (834)
+- [x] **Wave D: Flagship Pages (5 pages)**
+  - react (859), flipped-interaction (848), prompt-basics (840), zero-shot-cot (840), facts-fictions (834)
+- [x] **HR/Remote Work Content Cleanup** — Removed all HR/remote work examples from ~15 pages, replaced with tech/science/education examples
+- [x] **AI For Everybody Update** — Updated "Who Praxis Serves" text per user request
+- [x] **Plan stored** — Part B navigation update plan added to FrameworkOverhaul.md
+
+**Quality checks:** 0 inline styles, 0 inline scripts, 0 CSP meta tags, all 13 sections verified across all 22 pages.
+
+**Files Modified:**
+- 22 learn/*.html files (full 13-section redesigns)
+- ~15 learn/*.html files (HR/remote work content swaps)
+- `pages/ai-for-everybody.html` (text update)
+- `.claude/HANDOFF.md`, `.claude/plans/FrameworkOverhaul.md`
+
+**Next Session:** Part B — Full Navigation Update across ~100 HTML pages
+
+---
+
 ## Session 35 (2026-02-07)
 
 **Focus:** Wave 5 — Example Methods Quality Redesign (7 pages)
@@ -1358,11 +1388,11 @@ LOW Priority: [██████████████████░░] 88%
 
 **Note:** Navigation updated with Advanced + Self-Correction + Code sections in all 99+ files
 
-### Quality Redesign Waves (34/40 pages complete) — Track Started Session 29
+### Quality Redesign Waves (40/40 pages complete) — Track Started Session 29
 ```
-Progress: [█████████████████░░░] 85%
+Progress: [████████████████████] 100%
 ```
-All 40 existing framework pages being redesigned to match ReAct/COSTAR/Flipped Interaction quality standard (13-section template, 700-1000+ lines each).
+All 40 existing framework pages redesigned to match ReAct/COSTAR/Flipped Interaction quality standard (13-section template, 700-1000+ lines each).
 
 | Wave | Pages | Status |
 |------|-------|--------|
@@ -1371,9 +1401,204 @@ All 40 existing framework pages being redesigned to match ReAct/COSTAR/Flipped I
 | Wave 3 — Decomposition | 6 pages (decomp, self-ask, step-back, graph-of-thought, program-of-thought, recursion-of-thought) | ✅ COMPLETE (Session 32) |
 | Wave 4 — Advanced Reasoning | 7 pages (analogical-reasoning, meta-reasoning, thread-of-thought, memory-of-thought, simtom, max-mutual-info, universal-self-consistency) | ✅ COMPLETE (Session 34) |
 | Wave 5 — Example Methods | 7 pages (active-prompting, knn-prompting, vote-k, demo-ensembling, diverse-prompting, dense-prompting, prompt-mining) | ✅ COMPLETE (Session 35) |
-| Wave 6 — Style & Emotion | 6 pages (emotion-prompting, style-prompting, s2a, re2, cosp, rar) | ⬜ START HERE |
+| Wave 6 — Style & Emotion | 6 pages (emotion-prompting, style-prompting, s2a, re2, cosp, rar) | ✅ COMPLETE (Session 36) |
 
-**Reference templates:** `learn/critic.html` (898 lines) or `learn/auto-cot.html` (855 lines) — both have all 13 sections
+**Reference templates:** `learn/self-ask.html` (855 lines) — canonical 13-section template
+
+---
+
+## NEXT: Phase 2 Remaining — 22-Page Redesign + Full Navigation Update
+
+### Context
+
+Waves 1-6 redesigned 40 learn pages to the 13-section template (700-900 lines each).
+22 framework pages STILL use the old template and need the same 13-section redesign.
+Additionally, ALL HTML pages across the entire site need their header nav, footer, and
+mobile nav updated to a single canonical version.
+
+---
+
+### PART A — 13-Section Content Redesign (22 pages)
+
+Use parallel background Task agents (5-6 per wave) to redesign these pages. Each page
+must be rewritten from scratch using the 13-section template from `learn/self-ask.html`.
+
+#### Template: 13-Section Structure (reference: learn/self-ask.html, 855 lines)
+
+Every page MUST include all 13 sections in this exact order:
+1. **Hero** — breadcrumb, hero-badge, title, subtitle
+2. **Historical Context** — highlight-box--warning with year, authors, modern LLM status
+3. **The Concept** — split-section with core insight explanation
+4. **How It Works** — element-timeline with 3-4 numbered steps
+5. **Comparison Panel** — before/after with VS divider
+6. **Examples in Action** — 3 accordion examples with technique-demo
+7. **When to Use** — Perfect For (4 items) / Skip It When (3 items) feature lists
+8. **Use Cases** — 6 use-case-showcase items
+9. **Framework Positioning** — evolution-timeline with 4 era-markers
+10. **Related Frameworks** — 3 evolution-callout links
+11. **CTA Section** — cta-corporate with canvas
+12. **Back-to-Top** button
+13. **Accessibility Dashboard** — full dialog panel
+
+#### Critical Rules (CSP A+ Compliance)
+- 0 inline styles (`style=""`)
+- 0 inline scripts (`onclick=""`, `onload=""`, etc.)
+- 0 external resources (no CDNs, Google Fonts, external APIs)
+- NO `Content-Security-Policy` meta tags (remove from old pages)
+- NO `rel="preload"` hints (remove from old pages)
+- Use `&mdash;` `&ldquo;` `&rdquo;` `&rsquo;` for typographic characters
+- No citations, no stat cards, no content badges
+- Historical context notice required on every framework page
+
+#### Head section format (match self-ask.html exactly):
+```html
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="[page-specific description]">
+    <title>[Page Name] - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+```
+
+#### Pages to Redesign (22 total — 4 waves of 5-6 agents each)
+
+**Wave A — Foundation Frameworks (6 pages):**
+| File | Current Lines | Category |
+|------|--------------|----------|
+| learn/chain-of-thought.html | 622 | Reasoning Enhancement |
+| learn/few-shot-learning.html | 630 | In-Context Learning |
+| learn/zero-shot.html | 757 | Zero-Shot Technique |
+| learn/one-shot.html | 909 | In-Context Learning |
+| learn/role-prompting.html | 589 | Zero-Shot Technique |
+| learn/self-consistency.html | 615 | Ensemble Method |
+
+**Wave B — Structured Frameworks (6 pages):**
+| File | Current Lines | Category |
+|------|--------------|----------|
+| learn/crisp.html | 848 | Structured Framework |
+| learn/crispe.html | 849 | Structured Framework |
+| learn/costar.html | 815 | Structured Framework |
+| learn/constrained-output.html | 587 | Output Control |
+| learn/context-structure.html | 587 | Context Optimization |
+| learn/prompt-chaining.html | 626 | Multi-Step Prompting |
+
+**Wave C — Advanced Techniques (5 pages):**
+| File | Current Lines | Category |
+|------|--------------|----------|
+| learn/tree-of-thought.html | 759 | Advanced Reasoning |
+| learn/plan-and-solve.html | 660 | Decomposition |
+| learn/least-to-most.html | 725 | Decomposition |
+| learn/example-selection.html | 862 | Few-Shot Optimization |
+| learn/shot-prompting.html | 618 | In-Context Learning |
+
+**Wave D — Flagship Pages (5 pages):**
+| File | Current Lines | Category |
+|------|--------------|----------|
+| learn/react.html | 996 | Agentic Framework |
+| learn/flipped-interaction.html | 952 | Interactive Framework |
+| learn/prompt-basics.html | 934 | Getting Started |
+| learn/zero-shot-cot.html | 858 | Reasoning Enhancement |
+| learn/facts-fictions.html | 1101 | Getting Started |
+
+#### Agent Instructions
+For each agent: Read `learn/self-ask.html` to get the exact header/nav HTML (lines 1-132)
+and footer/back-to-top/accessibility HTML (lines 723-855). Use these EXACTLY. Then read
+the current version of the page being redesigned to understand its content. Write the
+full page with all 13 sections using the Write tool. Each page should be 700-900 lines.
+
+#### Verification After Each Wave
+- grep for `style="` → must be 0 in all files
+- grep for `onclick|onload|onmouse` → must be 0
+- grep for `Content-Security-Policy` → must be 0 (removed from old pages)
+- Line count check: all files 700+ lines
+- Verify all 13 section comments present
+
+#### Part A Progress
+```
+Progress: [████████████████████] 100%
+```
+| Wave | Pages | Status |
+|------|-------|--------|
+| Wave A — Foundation Frameworks | 6 pages (chain-of-thought, few-shot-learning, zero-shot, one-shot, role-prompting, self-consistency) | ✅ COMPLETE (Session 37) |
+| Wave B — Structured Frameworks | 6 pages (crisp, crispe, costar, constrained-output, context-structure, prompt-chaining) | ✅ COMPLETE (Session 37) |
+| Wave C — Advanced Techniques | 5 pages (tree-of-thought, plan-and-solve, least-to-most, example-selection, shot-prompting) | ✅ COMPLETE (Session 37) |
+| Wave D — Flagship Pages | 5 pages (react, flipped-interaction, prompt-basics, zero-shot-cot, facts-fictions) | ✅ COMPLETE (Session 37) |
+
+---
+
+### PART B — Full Navigation Update (ALL ~100 HTML pages)
+
+After Part A content redesign is complete, update the header nav, footer, and mobile nav
+on EVERY HTML page across the entire site to match a single canonical version.
+
+#### Why This Is Needed
+The header mega-menu currently lists only ~47 learn pages but there are 62+ framework
+pages. Many pages were added in Waves 1-6 but never added to the nav. The footer and
+mobile nav also need to be consistent across all pages.
+
+#### Scope — All HTML files grouped by directory depth
+
+**Root level (paths relative to root):** 1 file
+- `index.html`
+
+**One level deep (paths use `../` prefix):** ~96 files
+- `pages/*.html` (12 files: about, ai-assisted-building, ai-for-everybody, ai-safety,
+  animation-features, chatgpt-guide, faq, glossary, performance, resources, security,
+  universal-design)
+- `tools/*.html` (12 files: index, analyzer, bias, checklist, guidance, hallucination,
+  jailbreak, matcher, persona, scorer, specificity, temperature)
+- `patterns/index.html` (1 file)
+- `foundations/index.html` (1 file)
+- `quiz/index.html` (1 file)
+- `neurodivergence/*.html` (6 files: index, adhd, autism, dyslexia, resources, tools)
+- `learn/*.html` (~63 files — all framework pages + index)
+
+**Two levels deep (paths use `../../` prefix):** 3 files
+- `learn/modality/code/*.html` (code-prompting, self-debugging, structured-output)
+
+#### Navigation Update Process
+1. Define CANONICAL nav HTML for each directory depth level (root, one-deep, two-deep)
+   — the only difference between them is the relative path prefixes
+2. Use parallel agents to update files in batches:
+   - Agent per directory (pages/, tools/, neurodivergence/, etc.)
+   - For learn/*.html, batch into groups of ~10 files per agent
+3. Header nav, mega-menu, footer, and mobile menu button are all the same HTML —
+   updating header and footer covers desktop AND mobile nav
+
+#### What Specifically Needs Updating
+- **Header mega-menu Learn section**: Add all 62+ framework pages organized by category
+- **Header mega-menu AI Readiness section**: Verify all tools are listed
+- **Header mega-menu Resources section**: Verify all resource pages are listed
+- **Footer links**: Update to include key pages from all sections
+- **Active state**: Each learn page should have `class="nav-link active"` on the Learn link
+- **Consistent structure**: Remove any old CSP meta tags, preload hints from headers
+
+#### Verification After Nav Update
+- Spot-check 5 files from different directories to confirm nav matches canonical version
+- grep for `Content-Security-Policy` across all HTML → should only appear where intended
+- Verify all relative paths resolve correctly (`../` vs `../../` vs `./`)
+
+#### Part B Progress
+```
+Progress: [░░░░░░░░░░░░░░░░░░░░] 0%
+```
+- [ ] Define canonical nav HTML (root level)
+- [ ] Define canonical nav HTML (one-deep level)
+- [ ] Define canonical nav HTML (two-deep level)
+- [ ] Update root: index.html
+- [ ] Update pages/*.html (12 files)
+- [ ] Update tools/*.html (12 files)
+- [ ] Update patterns/index.html
+- [ ] Update foundations/index.html
+- [ ] Update quiz/index.html
+- [ ] Update neurodivergence/*.html (6 files)
+- [ ] Update learn/*.html (~63 files)
+- [ ] Update learn/modality/code/*.html (3 files)
+- [ ] Verification pass
+
+---
 
 ### Phase 3: Modality Frameworks (0/37)
 ```
@@ -1399,40 +1624,6 @@ Progress: [████████████████████] 100%
 - [x] 5D: Featured section styling (AI & ND)
 - [x] 5E: HTML/ARIA updates (aria-expanded on nav-items)
 - [x] 5F: Update all 48 navigation files
-
----
-
-## Quick Reference: Implementation Order
-
-### HIGH Priority Pages (Do First) - 12 pages
-1. zero-shot.html
-2. zero-shot-cot.html
-3. one-shot.html
-4. example-selection.html
-5. least-to-most.html
-6. plan-and-solve.html
-7. tree-of-thought.html
-8. self-refine.html
-9. self-verification.html
-10. code-prompting.html
-11. self-debugging.html
-12. structured-output.html
-
-### MEDIUM Priority Pages - 25 pages
-*(To be done after HIGH priority)*
-
-### LOW Priority Pages - 52 pages
-*(To be done last)*
-
----
-
-## File Templates
-
-### Framework Page Template Location
-`learn/_template-framework.html` (to be created)
-
-### Modality Page Template Location
-`learn/modality/_template-modality.html` (to be created)
 
 ---
 

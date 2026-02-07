@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
-    <meta name="description" content="Plan-and-Solve Prompting: Create a plan before solving. Devise a strategy, then execute it step by step for better reasoning outcomes.">
+    <meta name="description" content="Plan-and-Solve Prompting: A two-phase zero-shot technique that first devises a plan then executes it step by step for improved multi-step reasoning.">
     <title>Plan-and-Solve Prompting - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <link rel="preload" href="../styles.css" as="style">
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Header -->
     <header class="header" id="header">
         <div class="header-container">
             <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
@@ -102,7 +98,7 @@
                             <a href="../pages/glossary.html">Glossary</a>
                             <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
                             <a href="../pages/faq.html">FAQ</a>
-                            </div>
+                        </div>
                         <div class="mega-menu-section">
                             <h4>Principles</h4>
                             <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
@@ -135,6 +131,8 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
         <!-- === HERO SECTION === -->
         <section class="page-hero">
@@ -148,55 +146,44 @@
                     <span class="current">Plan-and-Solve</span>
                 </nav>
                 <div class="hero-badge">
-                    <svg class="hero-badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                        <line x1="16" y1="13" x2="8" y2="13"/>
-                        <line x1="16" y1="17" x2="8" y2="17"/>
-                        <polyline points="10 9 9 9 8 9"/>
-                    </svg>
-                    <span class="hero-badge__text">Planning Technique</span>
+                    <span class="hero-badge__text">Decomposition</span>
                 </div>
                 <h1 class="page-title fade-in">Plan-and-Solve Prompting</h1>
-                <p class="page-subtitle fade-in">Think before you act. Devise a plan, then execute it methodically for complex problem-solving.</p>
+                <p class="page-subtitle fade-in">Most reasoning errors happen because models rush into execution without thinking ahead. Plan-and-Solve forces a two-phase approach &mdash; first devise a clear strategy, then carry it out step by step &mdash; turning impulsive solving into methodical problem resolution.</p>
             </div>
         </section>
         <!-- /HERO SECTION -->
 
-<!-- === THE CONCEPT === -->
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> Plan-and-Solve was published in 2023 by Wang et al. The technique was designed to address a key weakness in Zero-Shot Chain-of-Thought prompting: while &ldquo;Let&rsquo;s think step by step&rdquo; encourages sequential reasoning, it provides no guidance on <em>how</em> to structure those steps. Plan-and-Solve replaces that open-ended trigger with a two-phase instruction &mdash; &ldquo;Let&rsquo;s first understand the problem and devise a plan to solve it. Then, let&rsquo;s carry out the plan and solve the problem step by step.&rdquo; The enhanced PS+ variant adds explicit instructions to extract relevant variables, calculate intermediate results, and verify calculations.</p>
+                        <p><strong>Modern LLM Status:</strong> The explicit planning paradigm introduced by Plan-and-Solve has been <strong>substantially internalized by frontier models</strong>. Claude, GPT-4, and Gemini naturally engage in planning behavior when facing complex problems. However, the technique remains valuable when working with <strong>smaller models, high-stakes calculations, or problems where you need guaranteed separation between planning and execution phases</strong>. The PS+ variant&rsquo;s emphasis on variable extraction and verification is particularly relevant for mathematical and analytical tasks where precision matters.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Method</span>
-                        <h2 class="section-title">Planning Before Execution</h2>
-                        <p class="section-intro">Plan-and-Solve prompting explicitly separates planning from execution. First, the model devises a strategy for solving the problem. Then, it follows the plan step by step. This prevents the model from diving in without thinking.</p>
-                        <div class="highlight-box highlight-box--info">
-                            <div class="highlight-box__icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <line x1="12" y1="16" x2="12" y2="12"/>
-                                    <line x1="12" y1="8" x2="12.01" y2="8"/>
-                                </svg>
-                            </div>
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Trigger Phrase</span>
-                                <p>"Let's first understand the problem and devise a plan to solve it. Then, let's carry out the plan and solve the problem step by step."</p>
-                            </div>
-                        </div>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Plan First, Solve Second</h2>
+                        <p class="split-section__text">When you ask a model to &ldquo;think step by step,&rdquo; it starts solving immediately &mdash; picking an approach on the fly and hoping it leads somewhere useful. This works for simple problems, but for multi-step reasoning, the model often commits to a flawed strategy early and then compounds errors through every subsequent step. The result: confident-sounding answers built on shaky foundations.</p>
+                        <p class="split-section__text"><strong>Plan-and-Solve separates thinking from doing.</strong> Phase one asks the model to understand the problem fully &mdash; what information is given, what needs to be found, and what approach makes sense. Phase two then executes that plan methodically. By forcing a pause between strategy and action, the technique catches structural errors before they cascade through the solution.</p>
+                        <p class="split-section__text">Think of it like an architect who draws blueprints before construction begins. You would never build a house by laying bricks in whatever direction feels right &mdash; you plan the structure first, then execute the plan. Plan-and-Solve applies this same discipline to reasoning.</p>
                     </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
-                                    <rect x="9" y="3" width="6" height="4" rx="2"/>
-                                    <path d="M9 12l2 2 4-4"/>
-                                </svg>
-                            </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">Two-Phase Approach</span>
-                                <p>First devise a plan, then execute it step by step. This separation improves reasoning quality.</p>
+                                <span class="highlight-box__title">Why Planning Beats Improvisation</span>
+                                <p>Zero-Shot CoT&rsquo;s &ldquo;think step by step&rdquo; trigger produces reasoning that is <em>sequential</em> but not necessarily <em>strategic</em>. The model may calculate correctly at each step yet still follow a flawed overall approach. Plan-and-Solve&rsquo;s explicit planning phase ensures the model commits to a <strong>sound strategy before any computation begins</strong>, reducing both missing-step errors and calculation mistakes that stem from unclear variable tracking.</p>
                             </div>
                         </div>
                     </div>
@@ -205,170 +192,230 @@
         </section>
         <!-- /THE CONCEPT -->
 
-        <!-- === THE PROMPT FORMAT === -->
+        <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Template</span>
-                    <h2 class="section-title">Plan-and-Solve Prompt Structure</h2>
-                    <p class="section-subtitle">The two key phases and how to trigger them</p>
-                </div>
+                <h2 class="section-title fade-in-up">The Plan-and-Solve Process</h2>
+                <p class="section-subtitle fade-in-up">Two distinct phases turning complex problems into structured solutions</p>
 
-                <div class="pillar-grid pillar-grid--2 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                            </svg>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
                         </div>
-                        <h3 class="pillar-card__title">Phase 1: Planning</h3>
-                        <p class="pillar-card__text">"First, understand the problem: What are we given? What do we need to find? What approach should we use?"</p>
-                        <span class="pillar-card__tag">Strategy Development</span>
-                    </div>
-
-                    <div class="pillar-card pillar-card--interactive">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="9 11 12 14 22 4"/>
-                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-                            </svg>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Understand the Problem</h3>
+                            <p class="element-timeline__text">The model begins by comprehending what is being asked. It identifies the given information, the unknowns, and the constraints. This diagnostic step prevents the model from rushing into calculations before it fully grasps the problem structure.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;A store sells notebooks for $4 each and pens for $1.50 each. Maria buys 3 notebooks and twice as many pens as notebooks. She pays with a $50 bill. How much change does she receive?&rdquo;</p>
+                            </div>
                         </div>
-                        <h3 class="pillar-card__title">Phase 2: Execution</h3>
-                        <p class="pillar-card__text">"Now, carry out the plan step by step. Extract relevant variables, perform calculations, and verify the answer."</p>
-                        <span class="pillar-card__tag">Systematic Solving</span>
                     </div>
-                </div>
 
-                <div class="highlight-box highlight-box--tip fade-in-up">
-                    <div class="highlight-box__icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                        </svg>
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Devise the Plan</h3>
+                            <p class="element-timeline__text">Before any computation, the model lays out a step-by-step strategy. This is the signature contribution of Plan-and-Solve &mdash; an explicit roadmap that identifies which calculations to perform and in what order. The PS+ variant adds instructions to extract relevant variables and their values at this stage.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Plan:</strong> (1) Identify notebook price and quantity. (2) Calculate number of pens from the &ldquo;twice as many&rdquo; relationship. (3) Compute total cost of notebooks. (4) Compute total cost of pens. (5) Sum both costs. (6) Subtract from $50 to find change.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="highlight-box__content">
-                        <span class="highlight-box__title">PS+ Enhancement</span>
-                        <p>Plan-and-Solve+ (PS+) adds more detailed instructions: "Extract relevant variables and their values. Calculate intermediate results. Check calculations for accuracy." This reduces calculation errors.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Execute the Plan</h3>
+                            <p class="element-timeline__text">With the roadmap in hand, the model works through each planned step sequentially. Each calculation follows directly from the plan, ensuring no steps are skipped or performed out of order. Intermediate results are recorded explicitly so they can feed into subsequent steps.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Step 1:</strong> Notebooks = 3 at $4 each.<br><strong>Step 2:</strong> Pens = 2 &times; 3 = 6 pens.<br><strong>Step 3:</strong> Notebook cost = 3 &times; $4 = $12.<br><strong>Step 4:</strong> Pen cost = 6 &times; $1.50 = $9.<br><strong>Step 5:</strong> Total = $12 + $9 = $21.<br><strong>Step 6:</strong> Change = $50 &minus; $21 = $29.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Verify and Conclude</h3>
+                            <p class="element-timeline__text">The PS+ variant adds a verification phase where the model reviews its calculations for accuracy. This final check catches arithmetic errors and confirms that the answer addresses the original question. The result is a well-grounded conclusion supported by a visible chain of reasoning.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Verification:</strong> $12 (notebooks) + $9 (pens) = $21 total. $50 &minus; $21 = $29. The answer checks out. <strong>Maria receives $29 in change.</strong></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /THE PROMPT FORMAT -->
+        <!-- /HOW IT WORKS -->
 
-        <!-- === INTERACTIVE COMPARISON === -->
+        <!-- === VISUAL: THE COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Comparison</span>
-                    <h2 class="section-title">Plan-and-Solve vs. Standard CoT</h2>
-                    <p class="section-subtitle">See how explicit planning improves problem-solving</p>
-                </div>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why explicit planning produces more reliable solutions</p>
 
-                <div class="comparison-tabs fade-in-up" data-component="comparison-tabs">
-                    <div class="comparison-tabs__nav" role="tablist">
-                        <button class="comparison-tabs__tab is-active" role="tab" aria-selected="true" data-tab="math">Math Problem</button>
-                        <button class="comparison-tabs__tab" role="tab" aria-selected="false" data-tab="logic">Logic Problem</button>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Direct Solving</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>A factory produces 120 widgets per hour. After a 15% efficiency upgrade, it runs for 8 hours but shuts down for 45 minutes due to maintenance. How many widgets were produced that day?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>120 widgets &times; 1.15 = 138 per hour. 8 hours &times; 138 = 1,104 widgets. Minus 45 minutes downtime... about 1,001 widgets.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Imprecise downtime calculation, no clear variable tracking</span>
+                        </div>
                     </div>
 
-                    <div class="comparison-tabs__content">
-                        <div class="comparison-tabs__panel is-active" data-panel="math">
-                            <div class="comparison-grid">
-                                <div class="comparison-card comparison-card--before">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Standard CoT</span>
-                                        <span class="comparison-card__badge comparison-card__badge--error">May Miss Steps</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Prompt:</strong> "A store has 45 apples. They sold 1/3 in the morning and 1/5 of the remaining in the afternoon. How many are left? Let's think step by step."
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>CoT Response:</strong><br>
-                                        1/3 of 45 = 15 sold<br>
-                                        45 - 15 = 30 remaining<br>
-                                        1/5 of 45 = 9 sold...<br>
-                                        <em>(Error: used original amount instead of remaining)</em>
-                                    </div>
-                                    <div class="comparison-card__analysis">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="12" cy="12" r="10"/>
-                                            <line x1="15" y1="9" x2="9" y2="15"/>
-                                            <line x1="9" y1="9" x2="15" y2="15"/>
-                                        </svg>
-                                        <span>Jumped into calculation without clear plan</span>
-                                    </div>
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Plan-and-Solve</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Planned Approach</span>
+                                <p><strong>Plan:</strong> (1) Calculate upgraded production rate. (2) Convert downtime to hours. (3) Find effective working hours. (4) Multiply rate by effective hours.<br><br><strong>Execute:</strong><br>Upgraded rate: 120 &times; 1.15 = 138 widgets/hr<br>Downtime: 45 min = 0.75 hours<br>Effective hours: 8 &minus; 0.75 = 7.25 hours<br>Total: 138 &times; 7.25 = 1,000.5 &rarr; 1,000 widgets</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Final Answer</span>
+                                <p>The factory produced 1,000 complete widgets that day (138 per hour for 7.25 effective hours, with partial widget rounded down).</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Clear plan, precise conversions, every variable tracked</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Plan-and-Solve in Action</h2>
+                <p class="section-subtitle fade-in-up">See how explicit planning improves reasoning across different domains</p>
+
+                <div class="accordion fade-in-up" id="plan-solve-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Math Word Problem</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;A train travels from City A to City B at 80 km/h. The return trip is at 120 km/h. If the total round-trip takes 5 hours, what is the distance between the two cities?&rdquo;</p>
                                 </div>
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Plan-and-Solve</span>
-                                        <span class="comparison-card__badge comparison-card__badge--success">Structured</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Prompt:</strong> "...Let's first understand and devise a plan..."
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Plan:</strong> 1) Find morning sales 2) Calculate remaining 3) Find afternoon sales from remaining 4) Calculate final amount<br><br>
-                                        <strong>Execute:</strong><br>
-                                        Morning: 45 × 1/3 = 15 sold<br>
-                                        After morning: 45 - 15 = 30<br>
-                                        Afternoon: 30 × 1/5 = 6 sold<br>
-                                        Final: 30 - 6 = <strong>24 apples</strong>
-                                    </div>
-                                    <div class="comparison-card__analysis comparison-card__analysis--success">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                            <polyline points="22 4 12 14.01 9 11.01"/>
-                                        </svg>
-                                        <span>Plan prevents variable confusion</span>
-                                    </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Plan-and-Solve Response</span>
+                                    <p><strong>Understanding:</strong> We need to find the distance d between two cities, given two different speeds and a total time of 5 hours.<br><br>
+                                    <strong>Plan:</strong> (1) Set distance as variable d. (2) Express time for each leg using time = distance/speed. (3) Set up equation: time_1 + time_2 = 5. (4) Solve for d.<br><br>
+                                    <strong>Execution:</strong><br>
+                                    Time A to B: d/80 hours<br>
+                                    Time B to A: d/120 hours<br>
+                                    Equation: d/80 + d/120 = 5<br>
+                                    Common denominator (240): 3d/240 + 2d/240 = 5<br>
+                                    5d/240 = 5<br>
+                                    d = 240 km<br><br>
+                                    <strong>Verification:</strong> 240/80 = 3 hours + 240/120 = 2 hours = 5 hours total. Confirmed.<br><br>
+                                    <strong>Answer:</strong> The distance between City A and City B is 240 kilometers.</p>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="comparison-tabs__panel" data-panel="logic">
-                            <div class="comparison-grid">
-                                <div class="comparison-card comparison-card--before">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Standard CoT</span>
-                                        <span class="comparison-card__badge comparison-card__badge--error">Unstructured</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Problem:</strong> "Who is taller: Person A is shorter than B, B is shorter than C, D is taller than A but shorter than B."
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>CoT Response:</strong><br>
-                                        A is shorter than B... D is taller than A... so D might be between A and B... let me think... <em>(loses track of relationships)</em>
-                                    </div>
-                                    <div class="comparison-card__analysis">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="12" cy="12" r="10"/>
-                                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                                            <line x1="12" y1="17" x2="12.01" y2="17"/>
-                                        </svg>
-                                        <span>No systematic approach to ordering</span>
-                                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Multi-Step Analysis</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;A company&rsquo;s revenue grew 20% in Q1, declined 10% in Q2, then grew 15% in Q3. If they started the year at $2 million, what was the Q3 ending revenue, and what is the overall growth rate so far?&rdquo;</p>
                                 </div>
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Plan-and-Solve</span>
-                                        <span class="comparison-card__badge comparison-card__badge--success">Systematic</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>With Plan-and-Solve:</strong>
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Plan:</strong> 1) List all constraints 2) Build ordering from constraints 3) Place each person in sequence<br><br>
-                                        <strong>Execute:</strong><br>
-                                        Constraints: A&lt;B, B&lt;C, A&lt;D&lt;B<br>
-                                        Order: A &lt; D &lt; B &lt; C<br>
-                                        <strong>C is tallest</strong>
-                                    </div>
-                                    <div class="comparison-card__analysis comparison-card__analysis--success">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                            <polyline points="22 4 12 14.01 9 11.01"/>
-                                        </svg>
-                                        <span>Plan creates clear methodology</span>
-                                    </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Plan-and-Solve Response</span>
+                                    <p><strong>Understanding:</strong> We have a starting revenue and three sequential percentage changes. We need to apply them in order and calculate both the final figure and the cumulative growth rate.<br><br>
+                                    <strong>Plan:</strong> (1) Extract starting revenue. (2) Apply Q1 growth of +20%. (3) Apply Q2 decline of &minus;10% to Q1 result. (4) Apply Q3 growth of +15% to Q2 result. (5) Calculate overall growth rate from start to Q3 end.<br><br>
+                                    <strong>Execution:</strong><br>
+                                    Start: $2,000,000<br>
+                                    After Q1: $2,000,000 &times; 1.20 = $2,400,000<br>
+                                    After Q2: $2,400,000 &times; 0.90 = $2,160,000<br>
+                                    After Q3: $2,160,000 &times; 1.15 = $2,484,000<br>
+                                    Overall growth: ($2,484,000 &minus; $2,000,000) / $2,000,000 = 24.2%<br><br>
+                                    <strong>Verification:</strong> 1.20 &times; 0.90 &times; 1.15 = 1.242, which is a 24.2% increase. Confirmed.<br><br>
+                                    <strong>Answer:</strong> Q3 ending revenue is $2,484,000, representing a 24.2% overall growth for the year so far.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Strategic Planning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;A team has 4 developers, 2 designers, and 1 project manager. They need to build a feature with a backend API, a frontend UI, and user testing &mdash; each task depending on the previous. If each developer can do 1 unit of work per day, each designer 1 unit per day, and tasks require 8, 6, and 3 units respectively, what is the minimum calendar time to complete all three tasks?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Plan-and-Solve Response</span>
+                                    <p><strong>Understanding:</strong> Three sequential tasks with different resource requirements. Tasks are dependent (each must finish before the next starts). We need to calculate elapsed time considering parallel work within each task.<br><br>
+                                    <strong>Plan:</strong> (1) Determine who can work on each task. (2) Calculate days per task based on available workers and units needed. (3) Sum the sequential task durations since they are dependent.<br><br>
+                                    <strong>Execution:</strong><br>
+                                    Backend API (8 units): 4 developers working in parallel = 8/4 = 2 days<br>
+                                    Frontend UI (6 units): 2 designers working in parallel = 6/2 = 3 days<br>
+                                    User Testing (3 units): Assuming PM coordinates with 2 designers = 3/2 = 1.5 days, round up to 2 days<br>
+                                    Total: 2 + 3 + 2 = 7 calendar days<br><br>
+                                    <strong>Answer:</strong> The minimum calendar time is 7 days, with the frontend UI phase being the bottleneck at 3 days.</p>
                                 </div>
                             </div>
                         </div>
@@ -376,89 +423,220 @@
                 </div>
             </div>
         </section>
-        <!-- /INTERACTIVE COMPARISON -->
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Plan-and-Solve</h2>
+                <p class="section-subtitle fade-in-up">Best for multi-step problems that benefit from upfront strategic thinking</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Math Word Problems</strong>
+                                    <p>Multi-step calculations where variables need careful extraction and tracking &mdash; the original use case where Plan-and-Solve showed its biggest gains.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Sequential Dependency Tasks</strong>
+                                    <p>Problems where later steps depend on earlier results &mdash; the plan ensures the correct execution order and prevents skipped dependencies.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Zero-Shot Scenarios</strong>
+                                    <p>When you cannot provide examples but still need structured reasoning &mdash; Plan-and-Solve delivers decomposition without requiring few-shot demonstrations.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Smaller or Open-Source Models</strong>
+                                    <p>Models that lack strong built-in planning behavior benefit most from explicit plan-then-execute instructions that scaffold their reasoning process.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple, Single-Step Tasks</strong>
+                                    <p>Questions that require a single lookup or straightforward answer &mdash; planning adds unnecessary overhead when the problem needs no decomposition.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative or Open-Ended Generation</strong>
+                                    <p>Writing stories, brainstorming, or opinion tasks where rigid planning can constrain the organic flow of creative output.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Latency-Sensitive Applications</strong>
+                                    <p>When response speed is critical &mdash; the planning phase adds tokens and processing time that may not be justified for time-sensitive use cases.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
 
         <!-- === USE CASES === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Applications</span>
-                    <h2 class="section-title">When Plan-and-Solve Excels</h2>
-                </div>
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Plan-and-Solve delivers the most value</p>
 
-                <div class="use-case-grid">
-                    <div class="use-case-card use-case-card--success fade-in-up">
-                        <div class="use-case-card__icon">
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <line x1="12" y1="1" x2="12" y2="23"/>
                                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-card__title">Multi-Step Math</h3>
-                        <p class="use-case-card__desc">Word problems requiring multiple operations where variables need careful tracking.</p>
+                        <h3 class="use-case-showcase__title">Financial Modeling</h3>
+                        <p class="use-case-showcase__desc">Multi-step calculations involving revenue projections, compound interest, or budget allocations where each variable must be extracted and tracked through sequential operations.</p>
                     </div>
-                    <div class="use-case-card use-case-card--success fade-in-up">
-                        <div class="use-case-card__icon">
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polygon points="12 2 2 7 12 12 22 7 12 2"/>
                                 <polyline points="2 17 12 22 22 17"/>
                                 <polyline points="2 12 12 17 22 12"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-card__title">Constraint Satisfaction</h3>
-                        <p class="use-case-card__desc">Problems with multiple conditions that must all be satisfied simultaneously.</p>
+                        <h3 class="use-case-showcase__title">Data Pipeline Design</h3>
+                        <p class="use-case-showcase__desc">Planning transformation steps for data processing workflows where the output of each stage feeds into the next, and the overall architecture must be mapped before implementation.</p>
                     </div>
-                    <div class="use-case-card use-case-card--success fade-in-up">
-                        <div class="use-case-card__icon">
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Diagnostic Reasoning</h3>
+                        <p class="use-case-showcase__desc">Systematic troubleshooting of technical issues where a plan prevents jumping to conclusions &mdash; first gather symptoms, then hypothesize, then test each hypothesis methodically.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
                                 <line x1="3" y1="9" x2="21" y2="9"/>
                                 <line x1="9" y1="21" x2="9" y2="9"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-card__title">Project Planning</h3>
-                        <p class="use-case-card__desc">Breaking down complex projects into phases with dependencies.</p>
+                        <h3 class="use-case-showcase__title">Project Estimation</h3>
+                        <p class="use-case-showcase__desc">Breaking down complex project timelines into resource allocation, dependency mapping, and milestone calculation where planning prevents overlooked constraints.</p>
                     </div>
-                    <div class="use-case-card use-case-card--success fade-in-up">
-                        <div class="use-case-card__icon">
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polyline points="16 18 22 12 16 6"/>
                                 <polyline points="8 6 2 12 8 18"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-card__title">Algorithm Design</h3>
-                        <p class="use-case-card__desc">Creating step-by-step procedures before writing actual code.</p>
+                        <h3 class="use-case-showcase__title">Algorithm Development</h3>
+                        <p class="use-case-showcase__desc">Designing algorithms by first outlining the approach, identifying edge cases, and establishing the logical structure before writing any pseudocode or implementation.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Academic Problem Solving</h3>
+                        <p class="use-case-showcase__desc">Science and engineering homework where students benefit from seeing the model separate understanding from execution, creating a template for structured problem-solving.</p>
                     </div>
                 </div>
             </div>
         </section>
         <!-- /USE CASES -->
 
-        <!-- === RELATED FRAMEWORKS === -->
+        <!-- === FRAMEWORK POSITIONING === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <p class="section-subtitle fade-in-up">Other planning and reasoning approaches</p>
+                <h2 class="section-title fade-in-up">Where Plan-and-Solve Fits</h2>
+                <p class="section-subtitle fade-in-up">Plan-and-Solve bridges unguided reasoning and full decomposition</p>
 
-                <a href="zero-shot-cot.html" class="evolution-callout fade-in-up">
-                    <span class="evolution-callout__icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="6" cy="6" r="3"/>
-                            <circle cx="18" cy="18" r="3"/>
-                            <path d="M6 9v6c0 3 3 3 6 3h3"/>
-                        </svg>
-                    </span>
-                    <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Foundation</span>
-                        <span class="evolution-callout__title">Zero-Shot Chain-of-Thought</span>
-                        <span class="evolution-callout__desc">The technique Plan-and-Solve improves upon with explicit planning.</span>
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Zero-Shot CoT</span>
+                        <span class="era-marker__title">Unguided Steps</span>
+                        <span class="era-marker__desc">&ldquo;Think step by step&rdquo; with no structure</span>
                     </div>
-                    <span class="evolution-callout__arrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </span>
-                </a>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Plan-and-Solve</span>
+                        <span class="era-marker__title">Planned Execution</span>
+                        <span class="era-marker__desc">Devise strategy, then execute methodically</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Least-to-Most</span>
+                        <span class="era-marker__title">Progressive Build-Up</span>
+                        <span class="era-marker__desc">Solve simplest sub-problems first</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Decomposed Prompting</span>
+                        <span class="era-marker__title">Modular Delegation</span>
+                        <span class="era-marker__desc">Specialized handlers per sub-task</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">PS+ for Higher Accuracy</div>
+                    <p>The Plan-and-Solve+ (PS+) variant extends the basic trigger with more specific instructions: &ldquo;Extract relevant variables and their corresponding numerals. Calculate intermediate results. Pay attention to calculation and commonsense.&rdquo; This additional guidance significantly reduces missing-step errors and calculation mistakes, particularly on mathematical reasoning benchmarks where precision matters most.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary reasoning and decomposition techniques</p>
 
                 <a href="least-to-most.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
@@ -472,9 +650,9 @@
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Similar Approach</span>
+                        <span class="evolution-callout__label">Complementary Approach</span>
                         <span class="evolution-callout__title">Least-to-Most</span>
-                        <span class="evolution-callout__desc">Another decomposition technique that builds from simpler to complex.</span>
+                        <span class="evolution-callout__desc">Where Plan-and-Solve creates a plan then executes it, Least-to-Most progressively solves from the simplest sub-problem upward &mdash; a bottom-up alternative to top-down planning.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -483,17 +661,36 @@
                     </span>
                 </a>
 
-                <a href="react.html" class="evolution-callout fade-in-up">
+                <a href="decomp.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <polygon points="10 8 16 12 10 16 10 8"/>
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Action-Oriented</span>
-                        <span class="evolution-callout__title">ReAct Framework</span>
-                        <span class="evolution-callout__desc">Combines reasoning with action for tasks requiring external tool use.</span>
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Decomposed Prompting</span>
+                        <span class="evolution-callout__desc">Takes the planning idea further by routing each sub-task to specialized handlers &mdash; a modular extension where different sub-problems get different solvers.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="zero-shot-cot.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="6" cy="6" r="3"/>
+                            <circle cx="18" cy="18" r="3"/>
+                            <path d="M6 9v6c0 3 3 3 6 3h3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Zero-Shot CoT</span>
+                        <span class="evolution-callout__desc">The technique Plan-and-Solve directly improves upon &mdash; replacing the generic &ldquo;think step by step&rdquo; trigger with structured planning and execution phases.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -505,26 +702,26 @@
         </section>
         <!-- /RELATED FRAMEWORKS -->
 
-        <!-- === CTA === -->
+        <!-- === CTA SECTION === -->
         <section class="section">
             <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
                     <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
                     <div class="cta-corporate__content">
-                        <h2 class="cta-corporate__title">Plan Your Prompts</h2>
-                        <p class="cta-corporate__text">Build structured prompts with our interactive tools.</p>
+                        <h2 class="cta-corporate__title">Plan Your Approach</h2>
+                        <p class="cta-corporate__text">Apply Plan-and-Solve thinking to your own complex problems or build structured prompts with our interactive tools.</p>
                         <div class="cta-corporate__actions">
-                            <a href="../tools/guidance.html" class="btn btn-primary">Try Prompt Builder</a>
-                            <a href="../tools/analyzer.html" class="btn btn-secondary">Analyze a Prompt</a>
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /CTA -->
+        <!-- /CTA SECTION -->
     </main>
 
-    <!-- Footer -->
+
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -588,7 +785,7 @@
         <span class="back-to-top-text">Back to Top</span>
     </button>
 
-<!-- Accessibility Dashboard -->
+    <!-- Accessibility Dashboard -->
     <div class="adl-dim-overlay" aria-hidden="true"></div>
     <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

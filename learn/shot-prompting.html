@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Shot Prompting Guide: Master Zero-Shot, One-Shot, Few-Shot, and Many-Shot prompting techniques. Learn when to use examples and how many for optimal AI results.">
-    <title>Shot Prompting Guide: Zero to Many-Shot | Praxis</title>
+    <meta name="description" content="Shot Prompting: The foundational spectrum of in-context learning examples, from zero-shot to many-shot. Learn how to choose the right number of examples for every AI task.">
+    <title>Shot Prompting - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
 </head>
@@ -131,8 +131,10 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
-        <!-- === HERO === -->
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -144,315 +146,215 @@
                     <span class="current">Shot Prompting</span>
                 </nav>
                 <div class="hero-badge">
-                    <span class="hero-badge__text">Foundational Technique</span>
+                    <span class="hero-badge__text">In-Context Learning</span>
                 </div>
                 <h1 class="page-title fade-in">Shot Prompting</h1>
-                <p class="page-subtitle fade-in">From zero examples to many: choosing the right amount of context for every task.</p>
+                <p class="page-subtitle fade-in">The foundational spectrum of in-context learning &mdash; from zero examples to many. Shot prompting is the art of deciding how much demonstration a model needs to understand your intent, balancing token cost against accuracy and format consistency.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
-        <!-- === CONTENT BADGES === -->
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2020</span>
+                        <p><strong>Introduced:</strong> The &ldquo;shot&rdquo; paradigm was formalized in the landmark GPT-3 paper by Brown et al. (2020), which demonstrated that large language models could perform tasks through in-context learning &mdash; simply by being shown examples in the prompt. The paper systematically compared zero-shot, one-shot, and few-shot performance across dozens of benchmarks, establishing that the number of demonstration examples profoundly affects output quality. This single insight became the conceptual foundation for all example-based prompting techniques that followed.</p>
+                        <p><strong>Modern LLM Status:</strong> Modern models like Claude, GPT-4, and Gemini have <strong>shifted the optimal number of shots downward</strong>. Tasks that once required five or more examples now often succeed with zero or one, thanks to improved instruction-following capabilities. However, the shot prompting spectrum remains essential knowledge: understanding <strong>when</strong> to add examples, <strong>how many</strong> to include, and <strong>what kind</strong> to choose is still the single most impactful lever for controlling AI output quality. The concept is foundational &mdash; every example-based technique (few-shot learning, example selection, analogical reasoning) builds on this framework.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
 
-<!-- === CORE CONCEPT === -->
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">Core Concept</span>
-                        <h2 class="section-title">Examples as Context</h2>
-                        <p class="section-intro">"Shot" in prompting refers to examples. Zero-shot means no examples, one-shot means one example, few-shot means a few, and many-shot means many. The number of examples you provide dramatically affects how well the model understands your intent.</p>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Examples Are Instructions by Demonstration</h2>
+                        <p class="split-section__text">In prompting, a &ldquo;shot&rdquo; is a single input-output example provided to the model before your actual request. Zero-shot means no examples &mdash; you rely entirely on instructions and the model&rsquo;s training. One-shot provides a single demonstration. Few-shot offers two to five examples. Many-shot supplies ten or more. Each level on this spectrum trades token cost for increasing control over the model&rsquo;s behavior.</p>
+                        <p class="split-section__text"><strong>The power of shot prompting lies in its simplicity.</strong> Rather than writing elaborate instructions describing the exact format, tone, or reasoning pattern you want, you simply <em>show</em> the model what you mean. A well-chosen example communicates structure, style, and decision boundaries more efficiently than paragraphs of explanation. The model learns your intent from the pattern in your demonstrations.</p>
+                        <p class="split-section__text">Think of it like teaching someone a card game. You could read the rulebook aloud (zero-shot with instructions), play one hand as a demonstration (one-shot), play several rounds covering different scenarios (few-shot), or run a full practice session covering every edge case (many-shot). The right choice depends on the complexity of the game and the experience of the player.</p>
+                    </div>
+                    <div class="split-section__visual">
                         <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Central Question</span>
-                                <p>How much context does the model need to understand what you want? Sometimes none. Sometimes a lot. Knowing when to use each approach is the key skill.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Quick Rule</span>
-                                <p>Start with zero-shot. If results aren't right, add one example. Still not working? Add more. Don't over-engineer from the start.</p>
+                                <span class="highlight-box__title">The Shot Spectrum at a Glance</span>
+                                <p><strong>Zero-shot:</strong> No examples. Relies on clear instructions and the model&rsquo;s pre-trained knowledge. Fastest and cheapest.</p>
+                                <p><strong>One-shot:</strong> One example. Establishes format, tone, or structure with minimal token cost.</p>
+                                <p><strong>Few-shot:</strong> Two to five examples. Covers variation, edge cases, and decision boundaries.</p>
+                                <p><strong>Many-shot:</strong> Ten or more examples. Approaches in-context fine-tuning for highly specialized or proprietary tasks.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE CONCEPT -->
 
-        <!-- === THE SPECTRUM === -->
+        <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">The Spectrum</span>
-                    <h2 class="section-title">From Zero to Many</h2>
-                    <p class="section-subtitle">Each level serves different purposes and task types</p>
-                </div>
+                <h2 class="section-title fade-in-up">Choosing the Right Number of Shots</h2>
+                <p class="section-subtitle fade-in-up">A systematic process for calibrating example count to task complexity</p>
 
-                <div class="comparison-tabs fade-in-up" data-component="comparison-tabs">
-                    <div class="comparison-tabs__nav" role="tablist">
-                        <button class="comparison-tabs__tab is-active" role="tab" aria-selected="true" data-tab="zero">Zero-Shot</button>
-                        <button class="comparison-tabs__tab" role="tab" aria-selected="false" data-tab="one">One-Shot</button>
-                        <button class="comparison-tabs__tab" role="tab" aria-selected="false" data-tab="few">Few-Shot</button>
-                        <button class="comparison-tabs__tab" role="tab" aria-selected="false" data-tab="many">Many-Shot</button>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Start at Zero</h3>
+                            <p class="element-timeline__text">Begin every task with a zero-shot prompt &mdash; clear instructions and no examples. Modern LLMs handle standard tasks like translation, summarization, and simple Q&amp;A well without demonstrations. If the output matches your expectations in format, accuracy, and style, you are done. Zero-shot is your baseline and often your best option.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Translate the following English text to French: &lsquo;The quarterly report is due by Friday.&rsquo;&rdquo; &mdash; No examples needed for a well-understood task.</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="comparison-tabs__content">
-                        <!-- ZERO-SHOT -->
-                        <div class="comparison-tabs__panel is-active" data-panel="zero">
-                            <div class="comparison-grid">
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Zero-Shot</span>
-                                        <span class="comparison-card__badge comparison-card__badge--success">No Examples</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>What it is:</strong><br>
-                                        No examples provided. Relies entirely on clear instructions and the model's pre-trained knowledge.
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Example prompt:</strong><br>
-                                        "Translate the following English text to French: 'Hello, how are you today?'"
-                                    </div>
-                                    <div class="comparison-card__analysis comparison-card__analysis--success">
-                                        <span>Best for simple, well-defined tasks the model already knows how to do</span>
-                                    </div>
-                                </div>
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">When to Use</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Ideal scenarios:</strong>
-                                        <ul>
-                                            <li>Standard tasks (translation, summarization, Q&A)</li>
-                                            <li>Clear, unambiguous instructions</li>
-                                            <li>Tasks where format is obvious</li>
-                                            <li>When you want speed over precision</li>
-                                        </ul>
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Advantages:</strong>
-                                        <ul>
-                                            <li>Fastest to write</li>
-                                            <li>Uses least tokens</li>
-                                            <li>Good baseline to test from</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Add One Example for Format</h3>
+                            <p class="element-timeline__text">When the zero-shot output is roughly correct but misses your desired format, structure, or style, add a single demonstration. One-shot prompting is remarkably effective for establishing output patterns &mdash; the model infers the template from a single input-output pair and replicates it. This is the most token-efficient way to communicate custom formatting requirements.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Show one product review transformed into your specific JSON schema. The model extracts the pattern and applies it to subsequent reviews without further instruction.</p>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- ONE-SHOT -->
-                        <div class="comparison-tabs__panel" data-panel="one">
-                            <div class="comparison-grid">
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">One-Shot</span>
-                                        <span class="comparison-card__badge comparison-card__badge--success">1 Example</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>What it is:</strong><br>
-                                        A single example demonstrates the expected input-output pattern before your actual request.
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Example prompt:</strong><br>
-                                        "Convert to title case:<br><br>
-                                        Input: the quick brown fox<br>
-                                        Output: The Quick Brown Fox<br><br>
-                                        Input: hello world from AI<br>
-                                        Output:"
-                                    </div>
-                                    <div class="comparison-card__analysis comparison-card__analysis--success">
-                                        <span>Best for format-sensitive tasks and custom output structures</span>
-                                    </div>
-                                </div>
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">When to Use</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Ideal scenarios:</strong>
-                                        <ul>
-                                            <li>Custom formatting requirements</li>
-                                            <li>Specific output structure needed</li>
-                                            <li>Pattern is clear from one example</li>
-                                            <li>Balancing context with efficiency</li>
-                                        </ul>
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Advantages:</strong>
-                                        <ul>
-                                            <li>Shows exact format expected</li>
-                                            <li>Minimal token overhead</li>
-                                            <li>Often sufficient for many tasks</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Add Few Examples for Boundaries</h3>
+                            <p class="element-timeline__text">When the task involves ambiguous categories, subjective judgment, or edge cases that one example cannot capture, move to few-shot. Two to five examples let you demonstrate variation &mdash; showing the model how to handle different scenarios, where category boundaries fall, and what counts as an exception. Choose examples that are maximally diverse, not repetitive.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Sentiment classification with examples covering clearly positive, clearly negative, neutral, sarcastic, and mixed-sentiment inputs &mdash; each showing the model where boundaries lie.</p>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- FEW-SHOT -->
-                        <div class="comparison-tabs__panel" data-panel="few">
-                            <div class="comparison-grid">
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Few-Shot</span>
-                                        <span class="comparison-card__badge comparison-card__badge--success">2-5 Examples</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>What it is:</strong><br>
-                                        Multiple examples show variation and reinforce the pattern, helping the model understand nuances and edge cases.
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Example prompt:</strong><br>
-                                        "Classify the sentiment:<br><br>
-                                        Text: I love this product!<br>
-                                        Sentiment: Positive<br><br>
-                                        Text: Worst purchase ever.<br>
-                                        Sentiment: Negative<br><br>
-                                        Text: It works as expected.<br>
-                                        Sentiment: Neutral<br><br>
-                                        Text: Amazing quality, highly recommend!<br>
-                                        Sentiment:"
-                                    </div>
-                                    <div class="comparison-card__analysis comparison-card__analysis--success">
-                                        <span>Best for complex reasoning, edge cases, and establishing clear patterns</span>
-                                    </div>
-                                </div>
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">When to Use</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Ideal scenarios:</strong>
-                                        <ul>
-                                            <li>Classification tasks with multiple categories</li>
-                                            <li>Complex transformations</li>
-                                            <li>Tasks requiring reasoning</li>
-                                            <li>When edge cases matter</li>
-                                        </ul>
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Best practices:</strong>
-                                        <ul>
-                                            <li>Cover different scenarios</li>
-                                            <li>Include edge cases if relevant</li>
-                                            <li>Maintain consistent formatting</li>
-                                            <li>3-5 examples is usually optimal</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
                         </div>
-
-                        <!-- MANY-SHOT -->
-                        <div class="comparison-tabs__panel" data-panel="many">
-                            <div class="comparison-grid">
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Many-Shot</span>
-                                        <span class="comparison-card__badge comparison-card__badge--success">10+ Examples</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>What it is:</strong><br>
-                                        Extensive examples for highly specialized or unusual tasks. Approaches in-context "fine-tuning" by providing substantial demonstration data.
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Use case:</strong><br>
-                                        A company's specific email classification system with 15+ examples covering all their custom categories, edge cases, and priority rules.
-                                    </div>
-                                    <div class="comparison-card__analysis comparison-card__analysis--success">
-                                        <span>Best for domain-specific patterns, proprietary formats, and unusual tasks</span>
-                                    </div>
-                                </div>
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">When to Use</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Ideal scenarios:</strong>
-                                        <ul>
-                                            <li>Proprietary classification systems</li>
-                                            <li>Company-specific terminology</li>
-                                            <li>Highly specialized domains</li>
-                                            <li>Tasks the model has never seen</li>
-                                        </ul>
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Considerations:</strong>
-                                        <ul>
-                                            <li>Higher token cost</li>
-                                            <li>May hit context limits</li>
-                                            <li>Diminishing returns after ~20 examples</li>
-                                            <li>Consider fine-tuning for production</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Go Many-Shot for Specialized Domains</h3>
+                            <p class="element-timeline__text">Reserve many-shot (ten or more examples) for highly specialized tasks the model has not seen during training: proprietary classification systems, company-specific terminology, or unusual output formats. Many-shot approaches in-context fine-tuning, but watch for diminishing returns &mdash; performance typically plateaus after fifteen to twenty examples. If many-shot still falls short, consider actual fine-tuning instead.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>A medical coding system with twelve examples covering different diagnosis-to-code mappings, including rare edge cases unique to the organization&rsquo;s internal taxonomy.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /HOW IT WORKS -->
 
-        <!-- === DECISION GUIDE === -->
+        <!-- === VISUAL: THE COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Decision Guide</span>
-                    <h2 class="section-title">Choosing the Right Approach</h2>
-                </div>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">How adding examples transforms model output quality</p>
 
-                <div class="pillar-grid pillar-grid--2 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Start Simple</h3>
-                        <p class="pillar-card__text">Always begin with zero-shot. It's the fastest to test and often works for standard tasks. Only add examples when results don't match expectations.</p>
-                        <span class="pillar-card__tag">First Step</span>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Zero-Shot</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Classify this customer support ticket by priority level: &ldquo;My account was charged twice for the same order and I need a refund immediately.&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Priority: High. This is a billing issue that requires immediate attention as the customer has been overcharged.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Reasonable guess, but uses generic priority labels instead of our system</span>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Add Minimally</h3>
-                        <p class="pillar-card__text">When zero-shot fails, add just one example first. Many tasks only need a single demonstration to click into place.</p>
-                        <span class="pillar-card__tag">Efficiency</span>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Cover Variation</h3>
-                        <p class="pillar-card__text">If one example isn't enough, add examples that show different scenarios—not just more of the same. Diversity beats repetition.</p>
-                        <span class="pillar-card__tag">Quality</span>
-                    </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Know the Limits</h3>
-                        <p class="pillar-card__text">More examples have diminishing returns. If 5 examples don't work, 20 probably won't either. Consider if the task needs a different approach.</p>
-                        <span class="pillar-card__tag">Reality Check</span>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Few-Shot</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt with 3 Examples</span>
+                                <p><strong>Ticket:</strong> &ldquo;How do I update my shipping address?&rdquo;<br><strong>Priority:</strong> P3-Low | Category: Account | Route: Self-Service<br><br><strong>Ticket:</strong> &ldquo;My order arrived damaged and I need a replacement.&rdquo;<br><strong>Priority:</strong> P2-Medium | Category: Fulfillment | Route: Returns-Team<br><br><strong>Ticket:</strong> &ldquo;Your website is showing my personal data to other users.&rdquo;<br><strong>Priority:</strong> P0-Critical | Category: Security | Route: Incident-Response<br><br><strong>Ticket:</strong> &ldquo;My account was charged twice for the same order and I need a refund immediately.&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p><strong>Priority:</strong> P1-High | Category: Billing | Route: Finance-Team</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Matches our exact priority format, category system, and routing convention</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE COMPARISON -->
 
-        <!-- === COMPLETE EXAMPLE === -->
+        <!-- === EXAMPLES IN ACTION === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Complete Example</span>
-                    <h2 class="section-title">The Same Task, Four Ways</h2>
-                    <p class="section-subtitle">See how each approach handles product categorization</p>
-                </div>
+                <h2 class="section-title fade-in-up">Shot Prompting in Action</h2>
+                <p class="section-subtitle fade-in-up">Three scenarios showing different points on the shot spectrum</p>
 
-                <div class="accordion fade-in-up" id="example-accordion">
+                <div class="accordion fade-in-up" id="shot-prompting-accordion">
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Zero-Shot Approach</span>
+                            <span class="accordion-title">Zero-Shot: Direct Task Execution</span>
                             <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </button>
                         <div class="accordion-content">
                             <div class="technique-demo">
                                 <div class="technique-demo__prompt">
-                                    <span class="technique-demo__tag">Prompt</span>
-                                    <p>Categorize this product into one of: Electronics, Clothing, Home & Garden, or Sports.<br><br>Product: "Wireless Bluetooth Earbuds with Noise Cancellation"<br><br>Category:</p>
+                                    <span class="technique-demo__tag">Zero-Shot Prompt</span>
+                                    <p>&ldquo;Summarize the following article in three bullet points, focusing on the key business implications.&rdquo;<br><br>[Article text about a company&rsquo;s quarterly earnings report]</p>
                                 </div>
                                 <div class="technique-demo__response">
-                                    <span class="technique-demo__tag">Result</span>
-                                    <p>Works well here because product categorization is a common task the model understands.</p>
+                                    <span class="technique-demo__tag">Why Zero-Shot Works Here</span>
+                                    <p>Summarization is a well-understood task that modern LLMs handle natively. The instructions are clear and unambiguous: three bullet points, business focus. No examples are needed because the model already knows what a summary looks like, what bullet points are, and how to filter for business implications. Adding examples here would waste tokens without improving quality.<br><br><strong>Key principle:</strong> If the model already understands the task format and the instructions are specific enough to constrain the output, zero-shot is optimal.</p>
                                 </div>
                             </div>
                         </div>
@@ -460,18 +362,18 @@
 
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">One-Shot Approach</span>
+                            <span class="accordion-title">One-Shot: Format Matching</span>
                             <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </button>
                         <div class="accordion-content">
                             <div class="technique-demo">
                                 <div class="technique-demo__prompt">
-                                    <span class="technique-demo__tag">Prompt</span>
-                                    <p>Categorize products into: Electronics, Clothing, Home & Garden, or Sports.<br><br>Product: "Cotton Running Shorts"<br>Category: Clothing<br><br>Product: "Wireless Bluetooth Earbuds with Noise Cancellation"<br>Category:</p>
+                                    <span class="technique-demo__tag">One-Shot Prompt</span>
+                                    <p>&ldquo;Convert these meeting notes into a structured action-item format.<br><br><strong>Meeting notes:</strong> We discussed the Q3 budget. Sarah will prepare the revised forecast by Tuesday. Marketing needs approval on the campaign spend.<br><strong>Action items:</strong><br>- [Owner: Sarah] Prepare revised Q3 forecast (Due: Tuesday)<br>- [Owner: Marketing Lead] Submit campaign spend for approval (Due: Not specified)<br><br><strong>Meeting notes:</strong> Product demo went well. Engineering needs to fix the login bug before launch. Design team will deliver the updated mockups by end of week. CEO wants a go/no-go decision by next Monday.&rdquo;</p>
                                 </div>
                                 <div class="technique-demo__response">
-                                    <span class="technique-demo__tag">Result</span>
-                                    <p>The example demonstrates the expected format clearly.</p>
+                                    <span class="technique-demo__tag">Why One-Shot Works Here</span>
+                                    <p>The task itself &mdash; extracting action items &mdash; is straightforward. But the <em>format</em> is custom: bracketed owner names, parenthetical due dates, specific handling of unspecified deadlines. A single example communicates this entire structure more efficiently than writing out formatting rules. The model sees the pattern once and replicates it precisely.<br><br><strong>Key principle:</strong> When the challenge is not <em>what</em> to do but <em>how to format</em> the result, one example is usually sufficient.</p>
                                 </div>
                             </div>
                         </div>
@@ -479,37 +381,18 @@
 
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Few-Shot Approach</span>
+                            <span class="accordion-title">Few-Shot: Classification with Boundaries</span>
                             <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </button>
                         <div class="accordion-content">
                             <div class="technique-demo">
                                 <div class="technique-demo__prompt">
-                                    <span class="technique-demo__tag">Prompt</span>
-                                    <p>Categorize products into: Electronics, Clothing, Home & Garden, or Sports.<br><br>Product: "Cotton Running Shorts"<br>Category: Clothing<br><br>Product: "Ceramic Plant Pot Set"<br>Category: Home & Garden<br><br>Product: "USB-C Laptop Charger"<br>Category: Electronics<br><br>Product: "Yoga Mat with Carrying Strap"<br>Category: Sports<br><br>Product: "Wireless Bluetooth Earbuds with Noise Cancellation"<br>Category:</p>
+                                    <span class="technique-demo__tag">Few-Shot Prompt</span>
+                                    <p>&ldquo;Classify each customer support ticket into the correct team.<br><br><strong>Ticket:</strong> My application crashes every time I try to export a PDF.<br><strong>Team:</strong> Technical Support<br><br><strong>Ticket:</strong> I was charged twice for my subscription this month.<br><strong>Team:</strong> Billing<br><br><strong>Ticket:</strong> I need to transfer my license to a different user in our organization.<br><strong>Team:</strong> Account Management<br><br><strong>Ticket:</strong> My order has been stuck in transit for two weeks with no tracking updates.<br><strong>Team:</strong> Shipping &amp; Logistics<br><br><strong>Ticket:</strong> I can&rsquo;t figure out how to set up automated reports in the dashboard.&rdquo;</p>
                                 </div>
                                 <div class="technique-demo__response">
-                                    <span class="technique-demo__tag">Result</span>
-                                    <p>Examples cover all four categories, showing clear patterns for each.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Many-Shot Approach</span>
-                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="technique-demo">
-                                <div class="technique-demo__prompt">
-                                    <span class="technique-demo__tag">Prompt</span>
-                                    <p>For a task this simple, many-shot is overkill. But for a company with custom subcategories like "Smart Home Electronics" vs "Personal Electronics" vs "Computer Accessories," 10-15 examples showing the distinctions would help the model understand the proprietary classification system.</p>
-                                </div>
-                                <div class="technique-demo__response">
-                                    <span class="technique-demo__tag">When to use</span>
-                                    <p>Reserve many-shot for complex, domain-specific classification that requires extensive examples to define boundaries.</p>
+                                    <span class="technique-demo__tag">Why Few-Shot Works Here</span>
+                                    <p>This task involves a company-specific routing system with categories the model cannot guess from training data alone. &ldquo;Account Management&rdquo; vs. &ldquo;Billing&rdquo; have overlapping boundaries that differ by organization. The four examples each demonstrate a different team, teaching the model the boundaries between categories. Without examples, the model might route the license transfer request to &ldquo;Billing&rdquo; or &ldquo;General Support&rdquo; instead of &ldquo;Account Management.&rdquo;<br><br><strong>Key principle:</strong> When categories are proprietary or boundaries are ambiguous, few-shot examples define the decision rules that instructions alone cannot communicate.</p>
                                 </div>
                             </div>
                         </div>
@@ -517,48 +400,304 @@
                 </div>
             </div>
         </section>
+        <!-- /EXAMPLES IN ACTION -->
 
-        <!-- === RELATED === -->
+        <!-- === WHEN TO USE === -->
         <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Shot Prompting</h2>
+                <p class="section-subtitle fade-in-up">Match your example count to the task&rsquo;s complexity and ambiguity</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Custom Output Formats</strong>
+                                    <p>When you need the model to match a specific structure, schema, or template that cannot be easily described with instructions alone &mdash; one or two examples define the pattern instantly.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Classification with Proprietary Categories</strong>
+                                    <p>Any task where the categories, labels, or routing rules are organization-specific &mdash; examples teach the model your taxonomy far better than written definitions.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Tone and Style Calibration</strong>
+                                    <p>When written descriptions of tone fall flat &mdash; &ldquo;write in a warm but professional voice&rdquo; is ambiguous, but one example of that voice is unambiguous.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Ambiguous Decision Boundaries</strong>
+                                    <p>Tasks where the line between categories is subjective or context-dependent &mdash; examples demonstrate where you draw the line, not just where the line theoretically exists.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Well-Understood Tasks</strong>
+                                    <p>Standard tasks like translation, simple summarization, or factual Q&amp;A where the model already knows the expected format and approach. Adding examples wastes tokens without improving quality.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Token-Constrained Environments</strong>
+                                    <p>When context window space is precious and every token counts &mdash; examples consume significant prompt real estate. Invest those tokens in better instructions instead.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Open-Ended Creative Tasks</strong>
+                                    <p>When you want the model to be creative and unconstrained &mdash; examples can anchor the model to specific patterns and actually reduce the diversity and originality of outputs.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where calibrating example count delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Classification</h3>
+                        <p class="use-case-showcase__desc">Use few-shot examples to teach proprietary category systems &mdash; customer ticket routing, content moderation tiers, or lead scoring frameworks that are unique to your organization.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Brand Voice Matching</h3>
+                        <p class="use-case-showcase__desc">One or two examples of your brand&rsquo;s communication style anchor the model&rsquo;s tone more precisely than pages of style guide instructions. Show, don&rsquo;t tell.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 20V10"/>
+                                <path d="M18 20V4"/>
+                                <path d="M6 20v-4"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Data Transformation</h3>
+                        <p class="use-case-showcase__desc">Converting between data formats &mdash; CSV to JSON, unstructured text to structured records, or legacy formats to modern schemas. One example defines the mapping; three cover edge cases.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Educational Assessment</h3>
+                        <p class="use-case-showcase__desc">Grading rubric calibration through examples showing how specific student responses map to score levels, ensuring consistent evaluation across different graders and contexts.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Report Generation</h3>
+                        <p class="use-case-showcase__desc">Show one example of your organization&rsquo;s report format &mdash; section headers, data presentation style, executive summary structure &mdash; and the model replicates it for new data inputs.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Code Pattern Enforcement</h3>
+                        <p class="use-case-showcase__desc">Few-shot examples of your team&rsquo;s coding conventions &mdash; naming patterns, error handling approaches, documentation style &mdash; produce more consistent code than written style guides alone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Shot Prompting Fits</h2>
+                <p class="section-subtitle fade-in-up">The foundational concept underlying all example-based prompting</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Shot Prompting</span>
+                        <span class="era-marker__title">The Foundation</span>
+                        <span class="era-marker__desc">Zero/one/few/many-shot spectrum</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Few-Shot Learning</span>
+                        <span class="era-marker__title">Structured Examples</span>
+                        <span class="era-marker__desc">Systematic example-driven patterns</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Example Selection</span>
+                        <span class="era-marker__title">Optimized Curation</span>
+                        <span class="era-marker__desc">Choosing which examples to include</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Analogical Reasoning</span>
+                        <span class="era-marker__title">Self-Generated Examples</span>
+                        <span class="era-marker__desc">Model creates its own demonstrations</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The Escalation Principle</div>
+                    <p>The most efficient prompting strategy is progressive escalation: start at zero-shot, move to one-shot if format is wrong, escalate to few-shot if boundaries are unclear, and only reach for many-shot when the task is truly novel to the model. Each step adds cost but also adds control. The skill is knowing when you&rsquo;ve reached the right level &mdash; and when adding more examples won&rsquo;t help and you need a fundamentally different approach.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
             <div class="container">
                 <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="example-selection.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Example Selection</h3>
-                            <p class="icon-box__content">Choosing the right examples for few-shot.</p>
-                        </div>
-                    </a>
-                    <a href="chain-of-thought.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Chain-of-Thought</h3>
-                            <p class="icon-box__content">Combine with examples showing reasoning.</p>
-                        </div>
-                    </a>
-                    <a href="zero-shot-cot.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Zero-Shot CoT</h3>
-                            <p class="icon-box__content">Zero-shot with reasoning trigger phrases.</p>
-                        </div>
-                    </a>
-                </div>
+                <p class="section-subtitle fade-in-up">Techniques that build on the shot prompting foundation</p>
+
+                <a href="zero-shot-cot.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Zero-Shot Extension</span>
+                        <span class="evolution-callout__title">Zero-Shot CoT</span>
+                        <span class="evolution-callout__desc">Adds reasoning capabilities to zero-shot prompting through trigger phrases like &ldquo;Let&rsquo;s think step by step&rdquo; &mdash; getting chain-of-thought benefits without any examples.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="few-shot-learning.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Deep Dive</span>
+                        <span class="evolution-callout__title">Few-Shot Learning</span>
+                        <span class="evolution-callout__desc">Expands on the few-shot segment of the spectrum with advanced strategies for structuring, ordering, and formatting your demonstration examples for maximum impact.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="one-shot.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Focused Technique</span>
+                        <span class="evolution-callout__title">One-Shot Prompting</span>
+                        <span class="evolution-callout__desc">A dedicated exploration of single-example prompting &mdash; the most token-efficient way to communicate custom formats, when to use it, and how to choose the single best example.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
             </div>
         </section>
+        <!-- /RELATED FRAMEWORKS -->
 
-        <!-- === CTA === -->
+        <!-- === CTA SECTION === -->
         <section class="section">
             <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Practice Shot Prompting</h2>
-                    <p class="cta-corporate__text">Experiment with different example counts in our interactive tools.</p>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
-                        <a href="../tools/analyzer.html" class="btn btn-secondary">Prompt Analyzer</a>
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Calibrate Your Examples</h2>
+                        <p class="cta-corporate__text">Experiment with different shot counts in our interactive tools, or explore how specific frameworks build on the shot prompting foundation.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /CTA SECTION -->
     </main>
+
 
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
@@ -612,6 +751,83 @@
         </div>
     </div>
 </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
 
     <script src="../app.js" defer></script>
 </body>

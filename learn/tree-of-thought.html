@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self'; form-action 'none'; base-uri 'none'; font-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
-    <meta name="description" content="Tree of Thought: Explore multiple reasoning paths before committing to an answer. Branch, evaluate, and backtrack for complex problem-solving.">
+    <meta name="description" content="Tree of Thought: Explore multiple reasoning paths as a tree structure, evaluate branches, and prune dead ends for complex problem-solving with LLMs.">
     <title>Tree of Thought - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <link rel="preload" href="../styles.css" as="style">
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Header -->
     <header class="header" id="header">
         <div class="header-container">
             <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
@@ -102,7 +98,7 @@
                             <a href="../pages/glossary.html">Glossary</a>
                             <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
                             <a href="../pages/faq.html">FAQ</a>
-                            </div>
+                        </div>
                         <div class="mega-menu-section">
                             <h4>Principles</h4>
                             <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
@@ -135,6 +131,8 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
         <!-- === HERO SECTION === -->
         <section class="page-hero">
@@ -148,61 +146,44 @@
                     <span class="current">Tree of Thought</span>
                 </nav>
                 <div class="hero-badge">
-                    <svg class="hero-badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2L12 6"/>
-                        <path d="M12 6L6 12"/>
-                        <path d="M12 6L18 12"/>
-                        <path d="M6 12L3 18"/>
-                        <path d="M6 12L9 18"/>
-                        <path d="M18 12L15 18"/>
-                        <path d="M18 12L21 18"/>
-                    </svg>
                     <span class="hero-badge__text">Advanced Reasoning</span>
                 </div>
                 <h1 class="page-title fade-in">Tree of Thought</h1>
-                <p class="page-subtitle fade-in">Explore multiple paths before committing. Branch out, evaluate options, and backtrack when needed.</p>
+                <p class="page-subtitle fade-in">When a single reasoning chain is not enough, branch out. Tree of Thought explores multiple paths simultaneously, evaluates each branch&rsquo;s promise, and backtracks from dead ends &mdash; turning the model into a deliberate problem-solver rather than a one-shot guesser.</p>
             </div>
         </section>
         <!-- /HERO SECTION -->
 
-<!-- === THE CONCEPT === -->
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> Tree of Thought (ToT) was published in 2023 by Yao et al. The technique generalizes Chain-of-Thought prompting by structuring reasoning as a tree rather than a single chain. At each step, the model generates multiple candidate &ldquo;thoughts&rdquo; (partial solutions), evaluates how promising each branch is, and uses search algorithms &mdash; breadth-first search (BFS) or depth-first search (DFS) &mdash; to navigate the tree. Crucially, ToT can backtrack from unpromising paths, something linear prompting cannot do. The original paper demonstrated dramatic improvements on tasks like the Game of 24, creative writing, and crossword puzzles.</p>
+                        <p><strong>Modern LLM Status:</strong> The core insight of ToT &mdash; exploring and evaluating multiple reasoning paths before committing &mdash; has influenced how modern LLMs approach complex tasks internally. Claude, GPT-4, and Gemini show improved deliberative reasoning compared to earlier models. However, <strong>explicit ToT prompting remains highly valuable</strong> for tasks that genuinely require search and exploration: mathematical puzzles, strategic planning, constraint satisfaction, and creative ideation where the first path is rarely the best path. The technique is especially powerful when paired with structured evaluation criteria that let the model systematically assess each branch&rsquo;s viability.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Breakthrough</span>
-                        <h2 class="section-title">Think Like a Chess Player</h2>
-                        <p class="section-intro">Tree of Thought (ToT) allows AI to explore multiple reasoning branches simultaneously, evaluate their promise, and pursue the most likely paths to a solution. Unlike linear Chain-of-Thought, ToT can backtrack from dead ends.</p>
-                        <div class="highlight-box highlight-box--info">
-                            <div class="highlight-box__icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <line x1="12" y1="16" x2="12" y2="12"/>
-                                    <line x1="12" y1="8" x2="12.01" y2="8"/>
-                                </svg>
-                            </div>
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Key Difference</span>
-                                <p>Chain-of-Thought generates one path forward. Tree of Thought generates multiple paths, evaluates them, and can abandon unpromising branches—similar to how humans solve complex puzzles.</p>
-                            </div>
-                        </div>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Reasoning as Search, Not Narration</h2>
+                        <p class="split-section__text">Standard prompting treats reasoning like writing a paragraph &mdash; one sentence follows the next in a single forward direction. If the model takes a wrong turn at step two, everything that follows inherits that error. There is no mechanism to reconsider, compare alternatives, or recover from mistakes. Chain-of-Thought improved things by making the reasoning explicit, but it is still a single chain with no branches.</p>
+                        <p class="split-section__text"><strong>Tree of Thought reframes reasoning as a search problem.</strong> Instead of generating one linear sequence, the model builds a tree where each node is a partial solution and each edge represents a reasoning step. At every node, the model generates multiple candidate next-steps, evaluates which branches look most promising, and decides where to explore next. When a branch leads nowhere, the model backtracks to a previous node and tries a different direction.</p>
+                        <p class="split-section__text">Think of it like a chess player who considers several possible moves, mentally plays out each one a few turns ahead, discards the ones that lead to bad positions, and then commits to the most promising line of play.</p>
                     </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M12 2L12 6"/>
-                                    <path d="M12 6L6 12"/>
-                                    <path d="M12 6L18 12"/>
-                                    <path d="M6 12L3 18"/>
-                                    <path d="M6 12L9 18"/>
-                                    <path d="M18 12L15 18"/>
-                                    <path d="M18 12L21 18"/>
-                                </svg>
-                            </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">Three Core Operations</span>
-                                <p>Branch (generate options), Evaluate (rate promise), Select (choose path)—the cycle that makes ToT powerful.</p>
+                                <span class="highlight-box__title">Why Trees Beat Chains for Hard Problems</span>
+                                <p>Many real-world problems have a branching solution space &mdash; multiple valid approaches, dead ends that look promising at first, and solutions that only emerge after trying and discarding alternatives. A single chain commits to one path and hopes it works. A tree explores the landscape systematically, concentrating effort on the most promising regions and abandoning paths that evaluation reveals as unlikely to succeed. This is the same principle behind how search algorithms, game-playing AI, and human experts solve difficult problems.</p>
                             </div>
                         </div>
                     </div>
@@ -211,177 +192,233 @@
         </section>
         <!-- /THE CONCEPT -->
 
-        <!-- === THREE OPERATIONS === -->
+        <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">The Process</span>
-                    <h2 class="section-title">Three Core Operations</h2>
-                    <p class="section-subtitle">How Tree of Thought explores the solution space</p>
-                </div>
+                <h2 class="section-title fade-in-up">The Tree of Thought Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from problem to explored solution tree</p>
 
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 2L12 8"/>
-                                <path d="M12 8L6 14"/>
-                                <path d="M12 8L18 14"/>
-                            </svg>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
                         </div>
-                        <h3 class="pillar-card__title">1. Generate Thoughts</h3>
-                        <p class="pillar-card__text">Create multiple possible next steps or partial solutions. Each thought is a coherent unit of reasoning that moves toward the goal.</p>
-                        <span class="pillar-card__tag">Branching</span>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Decompose into Thought Steps</h3>
+                            <p class="element-timeline__text">Break the problem into intermediate reasoning steps, where each step represents a coherent &ldquo;thought&rdquo; &mdash; a partial solution that moves toward the goal. The granularity depends on the problem: for the Game of 24, each thought might be a single arithmetic operation; for creative writing, each thought might be a paragraph plan.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Make 24 from the numbers 4, 5, 6, 10.&rdquo; Each thought is one arithmetic operation combining two numbers, progressively reducing the set until one number remains.</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="pillar-card pillar-card--interactive">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                <polyline points="22 4 12 14.01 9 11.01"/>
-                            </svg>
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
                         </div>
-                        <h3 class="pillar-card__title">2. Evaluate States</h3>
-                        <p class="pillar-card__text">Assess how promising each branch is. Rate thoughts as "sure to succeed," "likely," "unlikely," or "impossible" to guide exploration.</p>
-                        <span class="pillar-card__tag">Assessment</span>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Generate Candidate Branches</h3>
+                            <p class="element-timeline__text">At each node in the tree, produce multiple candidate thoughts &mdash; different possible next steps from the current state. This is the branching step that distinguishes ToT from linear reasoning. The model proposes several alternatives rather than committing to a single continuation, creating a tree of possibilities to explore.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>From [4, 5, 6, 10], generate branches: &ldquo;10 - 4 = 6, leaving [5, 6, 6]&rdquo; / &ldquo;5 + 6 = 11, leaving [4, 10, 11]&rdquo; / &ldquo;10 - 6 = 4, leaving [4, 4, 5]&rdquo; / &ldquo;4 &times; 5 = 20, leaving [6, 10, 20].&rdquo;</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="pillar-card pillar-card--interactive">
-                        <div class="pillar-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="9 18 15 12 9 6"/>
-                            </svg>
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
                         </div>
-                        <h3 class="pillar-card__title">3. Search & Select</h3>
-                        <p class="pillar-card__text">Use search algorithms (BFS or DFS) to navigate the tree. Pursue promising branches, backtrack from dead ends, and find the solution path.</p>
-                        <span class="pillar-card__tag">Navigation</span>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Evaluate and Prune</h3>
+                            <p class="element-timeline__text">Assess each candidate branch for its likelihood of leading to a correct solution. The model (or a separate evaluator) rates each state &mdash; &ldquo;sure,&rdquo; &ldquo;maybe,&rdquo; or &ldquo;impossible&rdquo; &mdash; and prunes branches that cannot succeed. This evaluation step prevents wasted exploration and focuses computational effort on the most promising regions of the search space.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Evaluate: [5, 6, 6] &rarr; &ldquo;sure&rdquo; (5 &times; 6 - 6 = 24). [4, 10, 11] &rarr; &ldquo;maybe&rdquo; (could work but not obvious). [4, 4, 5] &rarr; &ldquo;impossible&rdquo; (no combination reaches 24). Prune the impossible branch.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Search and Backtrack</h3>
+                            <p class="element-timeline__text">Use a search algorithm to navigate the tree. Breadth-first search (BFS) explores all branches at one depth before going deeper &mdash; good when evaluation is reliable. Depth-first search (DFS) follows one promising path deep, then backtracks if it fails &mdash; good when solutions are deep in the tree. The ability to backtrack and try alternative branches is the key advantage over linear reasoning.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>BFS explores the &ldquo;sure&rdquo; branch first: [5, 6, 6] &rarr; 5 &times; 6 = 30 &rarr; 30 - 6 = <strong>24</strong>. Solution found. If this had failed, the algorithm would backtrack and try the &ldquo;maybe&rdquo; branch next.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /THREE OPERATIONS -->
+        <!-- /HOW IT WORKS -->
 
-        <!-- === VISUAL COMPARISON === -->
+        <!-- === VISUAL: THE COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Comparison</span>
-                    <h2 class="section-title">Linear vs. Tree Reasoning</h2>
-                    <p class="section-subtitle">Why trees beat chains for complex problems</p>
-                </div>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why tree-structured exploration outperforms linear chains on hard problems</p>
 
-                <div class="comparison-tabs fade-in-up" data-component="comparison-tabs">
-                    <div class="comparison-tabs__nav" role="tablist">
-                        <button class="comparison-tabs__tab is-active" role="tab" aria-selected="true" data-tab="cot">Chain-of-Thought</button>
-                        <button class="comparison-tabs__tab" role="tab" aria-selected="false" data-tab="tot">Tree of Thought</button>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Chain-of-Thought (Linear)</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Problem</span>
+                                <p>Make 24 from the numbers [4, 5, 6, 10]. Think step by step.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Let me try: 4 + 5 = 9. Then 9 + 6 = 15. Then 15 + 10 = 25. That&rsquo;s not 24. Let me try again: 10 - 5 = 5. Then 5 + 6 = 11. Then 11 + 4 = 15. Still not 24. I&rsquo;m not sure how to make 24 from these numbers.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Tries random paths, no systematic exploration, gives up after two attempts</span>
+                        </div>
                     </div>
 
-                    <div class="comparison-tabs__content">
-                        <div class="comparison-tabs__panel is-active" data-panel="cot">
-                            <div class="comparison-grid">
-                                <div class="comparison-card comparison-card--before">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Chain-of-Thought</span>
-                                        <span class="comparison-card__badge comparison-card__badge--error">Linear Only</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Structure:</strong><br>
-                                        Step 1 → Step 2 → Step 3 → Answer<br><br>
-                                        <strong>Problem:</strong> Make 24 from [4, 5, 6, 10]
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>CoT tries one path:</strong><br>
-                                        4 + 5 = 9<br>
-                                        9 + 6 = 15<br>
-                                        15 + 10 = 25... wrong<br>
-                                        <em>(Cannot backtrack, stuck)</em>
-                                    </div>
-                                    <div class="comparison-card__analysis">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="12" cy="12" r="10"/>
-                                            <line x1="15" y1="9" x2="9" y2="15"/>
-                                            <line x1="9" y1="9" x2="15" y2="15"/>
-                                        </svg>
-                                        <span>Commits to first path, can't recover from wrong turns</span>
-                                    </div>
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Tree of Thought (Branching)</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Structured Exploration</span>
+                                <p><strong>Branch A:</strong> 10 - 4 = 6 &rarr; [5, 6, 6] &rarr; Evaluate: &ldquo;sure&rdquo; (can reach 24)<br><strong>Branch B:</strong> 5 + 6 = 11 &rarr; [4, 10, 11] &rarr; Evaluate: &ldquo;maybe&rdquo;<br><strong>Branch C:</strong> 4 &times; 5 = 20 &rarr; [6, 10, 20] &rarr; Evaluate: &ldquo;maybe&rdquo;<br><strong>Pursue A:</strong> 5 &times; (10 - 4) = 5 &times; 6 = 30. Then 30 - 6 = 24.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Final Answer</span>
+                                <p>Solution: 5 &times; (10 - 4) - 6 = 24. Found by generating three candidate branches, evaluating each for promise, and pursuing the most likely path first.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Systematic branching, evaluation-guided search, solution found efficiently</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Tree of Thought in Action</h2>
+                <p class="section-subtitle fade-in-up">See how branching and evaluation solve problems that stump linear reasoning</p>
+
+                <div class="accordion fade-in-up" id="tot-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Game of 24: Mathematical Puzzle</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;Using the numbers 1, 5, 5, 5, make 24 using basic arithmetic operations. Each number must be used exactly once.&rdquo;</p>
                                 </div>
-                                <div class="comparison-card comparison-card--before">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Limitations</span>
-                                        <span class="comparison-card__badge comparison-card__badge--error">No Exploration</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Cannot:</strong><br>
-                                        - Explore alternative approaches<br>
-                                        - Backtrack from dead ends<br>
-                                        - Compare multiple solutions<br>
-                                        - Recognize early mistakes
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Works best for:</strong><br>
-                                        Problems with clear, linear solutions where the first approach is likely correct.
-                                    </div>
-                                    <div class="comparison-card__analysis">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <circle cx="12" cy="12" r="10"/>
-                                            <line x1="8" y1="12" x2="16" y2="12"/>
-                                        </svg>
-                                        <span>Good for simple problems, limited for puzzles</span>
-                                    </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Tree of Thought Exploration</span>
+                                    <p><strong>Step 1 &mdash; Generate branches:</strong><br>
+                                    Branch A: 5 + 5 = 10, remaining [1, 5, 10]<br>
+                                    Branch B: 5 - 1 = 4, remaining [5, 5, 4]<br>
+                                    Branch C: 5 &times; 5 = 25, remaining [1, 5, 25]<br><br>
+                                    <strong>Step 2 &mdash; Evaluate:</strong><br>
+                                    Branch A: &ldquo;maybe&rdquo; &mdash; 10 and 5 and 1 could combine<br>
+                                    Branch B: &ldquo;sure&rdquo; &mdash; 4 &times; 5 = 20, plus 5 is 25, not quite, but 5 + 5 &times; 4 could work<br>
+                                    Branch C: &ldquo;maybe&rdquo; &mdash; 25 - 1 = 24, but that leaves unused 5<br><br>
+                                    <strong>Step 3 &mdash; Pursue Branch B deeper:</strong><br>
+                                    (5 - 1) &times; 5 = 20, then 20 + 5 = 25. Dead end. Backtrack.<br>
+                                    Try: 5 &times; (5 - 1/5). That gives 5 &times; 4.8 = 24. Uses fractions. Backtrack.<br>
+                                    Try: 5 &times; 5 - 1 &times; 5 = 25 - 5 = 20. Dead end. Backtrack to Branch C.<br><br>
+                                    <strong>Step 4 &mdash; Pursue Branch C:</strong><br>
+                                    5 &times; (5 - 1/5) = 5 &times; 24/5 = 24. <strong>Solution found: 5 &times; (5 - 1/5) = 24.</strong></p>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="comparison-tabs__panel" data-panel="tot">
-                            <div class="comparison-grid">
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Tree of Thought</span>
-                                        <span class="comparison-card__badge comparison-card__badge--success">Explores Options</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Structure:</strong><br>
-                                        Generate branches → Evaluate → Select best → Repeat<br><br>
-                                        <strong>Problem:</strong> Make 24 from [4, 5, 6, 10]
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>ToT explores multiple paths:</strong><br>
-                                        Branch A: 4 + 5 = 9... (evaluate: unlikely)<br>
-                                        Branch B: 10 - 4 = 6... (evaluate: promising)<br>
-                                        Branch C: 6 - 5 = 1... (evaluate: sure!)<br>
-                                        Continue B: 6 × 6 = 36 - 10 = <strong>24</strong>
-                                    </div>
-                                    <div class="comparison-card__analysis comparison-card__analysis--success">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                            <polyline points="22 4 12 14.01 9 11.01"/>
-                                        </svg>
-                                        <span>Evaluates and abandons poor paths</span>
-                                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Creative Writing: Coherent Story Planning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task</span>
+                                    <p>&ldquo;Write a four-paragraph short passage that begins with a sunrise and ends with a key being turned in a lock. Each paragraph should flow naturally into the next.&rdquo;</p>
                                 </div>
-                                <div class="comparison-card comparison-card--after">
-                                    <div class="comparison-card__header">
-                                        <span class="comparison-card__label">Advantages</span>
-                                        <span class="comparison-card__badge comparison-card__badge--success">Strategic</span>
-                                    </div>
-                                    <div class="comparison-card__prompt">
-                                        <strong>Can:</strong><br>
-                                        - Try multiple approaches simultaneously<br>
-                                        - Backtrack from dead ends<br>
-                                        - Compare solution quality<br>
-                                        - Find non-obvious solutions
-                                    </div>
-                                    <div class="comparison-card__response">
-                                        <strong>Works best for:</strong><br>
-                                        Puzzles, planning, creative writing, and any task where exploration and backtracking help.
-                                    </div>
-                                    <div class="comparison-card__analysis comparison-card__analysis--success">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                            <polyline points="22 4 12 14.01 9 11.01"/>
-                                        </svg>
-                                        <span>Ideal for problems requiring search and exploration</span>
-                                    </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Tree of Thought Exploration</span>
+                                    <p><strong>Plan Generation &mdash; Three paragraph-plan candidates:</strong><br>
+                                    Plan A: Sunrise over a city &rarr; commuter walking &rarr; arriving at an old building &rarr; unlocking the door<br>
+                                    Plan B: Sunrise at a beach &rarr; finding a message in a bottle &rarr; following a map &rarr; unlocking a treasure chest<br>
+                                    Plan C: Sunrise through prison bars &rarr; release paperwork &rarr; walking through gates &rarr; unlocking own apartment<br><br>
+                                    <strong>Evaluation:</strong><br>
+                                    Plan A: &ldquo;maybe&rdquo; &mdash; coherent but generic, low emotional arc<br>
+                                    Plan B: &ldquo;maybe&rdquo; &mdash; adventurous but might feel forced in four paragraphs<br>
+                                    Plan C: &ldquo;sure&rdquo; &mdash; strong emotional arc, natural progression, powerful ending<br><br>
+                                    <strong>Pursue Plan C:</strong> Write each paragraph following the emotional journey from confinement to freedom, where the final key-turn carries symbolic weight as both a literal and metaphorical unlocking of a new chapter.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Constraint Satisfaction: Crossword Puzzle</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;Fill in a 5-letter word grid where the across and down clues must both produce valid words. Across: a type of fruit. Down: a musical instrument.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Tree of Thought Exploration</span>
+                                    <p><strong>Branch &mdash; Generate across candidates:</strong><br>
+                                    A1: GRAPE / A2: MELON / A3: PEACH / A4: LEMON / A5: MANGO<br><br>
+                                    <strong>Evaluate each against down constraint:</strong><br>
+                                    A1 (GRAPE): Starting letters G-R-A-P-E &mdash; no common 5-letter instrument starts this way. &ldquo;Impossible.&rdquo;<br>
+                                    A2 (MELON): M-E-L-O-N &mdash; no instrument match. &ldquo;Impossible.&rdquo;<br>
+                                    A3 (PEACH): P-E-A-C-H &mdash; no instrument match. &ldquo;Impossible.&rdquo;<br>
+                                    A4 (LEMON): L-E-M-O-N &mdash; no instrument match. &ldquo;Impossible.&rdquo;<br>
+                                    A5 (MANGO): M-A-N-G-O &mdash; no instrument match. &ldquo;Impossible.&rdquo;<br><br>
+                                    <strong>Backtrack &mdash; Redefine approach:</strong> Instead of fixing across first, try fixing the first letter to match both constraints. &ldquo;F&rdquo; starts FLUTE (instrument) and the across word could contain F. This constraint-propagation approach &mdash; considering both directions simultaneously &mdash; narrows the search space far more efficiently.</p>
                                 </div>
                             </div>
                         </div>
@@ -389,19 +426,109 @@
                 </div>
             </div>
         </section>
-        <!-- /VISUAL COMPARISON -->
+        <!-- /EXAMPLES IN ACTION -->
 
-        <!-- === APPLICATIONS === -->
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Tree of Thought</h2>
+                <p class="section-subtitle fade-in-up">Best for problems where exploration and backtracking drive better solutions</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Mathematical and Logic Puzzles</strong>
+                                    <p>Problems like the Game of 24, Sudoku, or constraint satisfaction where the solution requires exploring multiple combinations and discarding dead ends.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Strategic Planning and Decision-Making</strong>
+                                    <p>When you need to evaluate multiple strategies, play out their consequences, and select the approach with the best projected outcome before committing resources.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative Ideation with Constraints</strong>
+                                    <p>Writing tasks with specific structural requirements &mdash; coherent stories, poems with rhyme schemes, or narratives that must connect specific start and end points.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Code Architecture and Design</strong>
+                                    <p>Exploring multiple implementation approaches for a complex feature, evaluating trade-offs in performance, readability, and maintainability before writing the final code.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Straightforward Questions</strong>
+                                    <p>When the answer follows a single clear path &mdash; factual lookups, simple summaries, or well-defined transformations where exploration adds no value.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Token-Budget Constraints</strong>
+                                    <p>ToT is inherently expensive &mdash; generating and evaluating multiple branches at each step consumes far more tokens than a single chain. Skip it when cost or latency matters more than solution quality.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Open-Ended Generation</strong>
+                                    <p>Free-form creative writing, brainstorming, or opinion-based tasks where there is no &ldquo;correct&rdquo; answer to search for and evaluation criteria are subjective.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Use Cases</span>
-                    <h2 class="section-title">When Tree of Thought Excels</h2>
-                </div>
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Tree of Thought delivers the most value</p>
 
-                <div class="use-case-grid">
-                    <div class="use-case-card use-case-card--success fade-in-up">
-                        <div class="use-case-card__icon">
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="3" y="3" width="7" height="7"/>
                                 <rect x="14" y="3" width="7" height="7"/>
@@ -409,135 +536,108 @@
                                 <rect x="3" y="14" width="7" height="7"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-card__title">Mathematical Puzzles</h3>
-                        <p class="use-case-card__desc">Game of 24, Sudoku, and problems requiring arithmetic exploration.</p>
+                        <h3 class="use-case-showcase__title">Mathematical Puzzles</h3>
+                        <p class="use-case-showcase__desc">Solve combinatorial problems like the Game of 24, magic squares, and number placement puzzles by systematically exploring arithmetic combinations and pruning impossible branches.</p>
                     </div>
-                    <div class="use-case-card use-case-card--success fade-in-up">
-                        <div class="use-case-card__icon">
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-card__title">Creative Writing</h3>
-                        <p class="use-case-card__desc">Exploring multiple plot directions and selecting the most compelling narrative.</p>
+                        <h3 class="use-case-showcase__title">Creative Writing</h3>
+                        <p class="use-case-showcase__desc">Explore multiple narrative directions, evaluate which plot lines create the strongest emotional arcs, and select the most compelling story structure before committing to prose.</p>
                     </div>
-                    <div class="use-case-card use-case-card--success fade-in-up">
-                        <div class="use-case-card__icon">
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-card__title">Strategic Planning</h3>
-                        <p class="use-case-card__desc">Evaluating multiple strategies and their likely outcomes before commitment.</p>
+                        <h3 class="use-case-showcase__title">Strategic Planning</h3>
+                        <p class="use-case-showcase__desc">Evaluate multiple business strategies, project approaches, or resource allocation plans by branching out scenarios, assessing likely outcomes, and committing to the strongest path.</p>
                     </div>
-                    <div class="use-case-card use-case-card--success fade-in-up">
-                        <div class="use-case-card__icon">
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polyline points="16 18 22 12 16 6"/>
                                 <polyline points="8 6 2 12 8 18"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-card__title">Code Generation</h3>
-                        <p class="use-case-card__desc">Exploring multiple implementation approaches and selecting the cleanest solution.</p>
+                        <h3 class="use-case-showcase__title">Code Architecture</h3>
+                        <p class="use-case-showcase__desc">Explore multiple implementation approaches for complex features, evaluate trade-offs in performance and maintainability, and select the cleanest design before writing production code.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Research Hypothesis Testing</h3>
+                        <p class="use-case-showcase__desc">Generate multiple competing hypotheses, evaluate each against available evidence, prune those that contradict known facts, and pursue the most promising explanations in depth.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Security Threat Modeling</h3>
+                        <p class="use-case-showcase__desc">Map out multiple attack vectors as a tree, evaluate the feasibility and impact of each path, and prioritize defenses for the branches that pose the greatest risk to the system.</p>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /APPLICATIONS -->
+        <!-- /USE CASES -->
 
-        <!-- === PROMPT PATTERN === -->
+        <!-- === FRAMEWORK POSITIONING === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Implementation</span>
-                    <h2 class="section-title">Simple ToT Prompt Pattern</h2>
+                <h2 class="section-title fade-in-up">Where Tree of Thought Fits</h2>
+                <p class="section-subtitle fade-in-up">ToT bridges linear reasoning and full graph-based exploration</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Single Chain</span>
+                        <span class="era-marker__desc">One linear reasoning path forward</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Tree of Thought</span>
+                        <span class="era-marker__title">Branching Search</span>
+                        <span class="era-marker__desc">Multiple paths with evaluation and backtracking</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Graph of Thought</span>
+                        <span class="era-marker__title">Network Reasoning</span>
+                        <span class="era-marker__desc">Interconnected nodes with merging paths</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Autonomous Agents</span>
+                        <span class="era-marker__title">Dynamic Search</span>
+                        <span class="era-marker__desc">Self-directed reasoning with tool use</span>
+                    </div>
                 </div>
 
-                <div class="accordion fade-in-up" id="tot-accordion">
-                    <div class="accordion-item">
-                        <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Generate Multiple Thoughts</span>
-                            <span class="accordion-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"/>
-                                </svg>
-                            </span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="technique-demo">
-                                <div class="technique-demo__content">
-                                    <div class="technique-demo__prompt">
-                                        <span class="technique-demo__tag">Prompt Pattern</span>
-                                        <p>"Given the problem [X], generate 3 different approaches we could take. For each approach, briefly explain the reasoning."</p>
-                                    </div>
-                                    <div class="technique-demo__response">
-                                        <span class="technique-demo__tag">Purpose</span>
-                                        <p>Forces the model to consider alternatives instead of committing to the first idea.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Evaluate Each Branch</span>
-                            <span class="accordion-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"/>
-                                </svg>
-                            </span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="technique-demo">
-                                <div class="technique-demo__content">
-                                    <div class="technique-demo__prompt">
-                                        <span class="technique-demo__tag">Prompt Pattern</span>
-                                        <p>"For each of these 3 approaches, rate how likely it is to succeed (certain/likely/unlikely/impossible) and explain why."</p>
-                                    </div>
-                                    <div class="technique-demo__response">
-                                        <span class="technique-demo__tag">Purpose</span>
-                                        <p>Creates an evaluation step that identifies promising directions before investing in full exploration.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Select and Continue</span>
-                            <span class="accordion-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"/>
-                                </svg>
-                            </span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="technique-demo">
-                                <div class="technique-demo__content">
-                                    <div class="technique-demo__prompt">
-                                        <span class="technique-demo__tag">Prompt Pattern</span>
-                                        <p>"Based on your evaluation, pursue the most promising approach. If it leads to a dead end, explain why and try the next best approach."</p>
-                                    </div>
-                                    <div class="technique-demo__response">
-                                        <span class="technique-demo__tag">Purpose</span>
-                                        <p>Explicitly allows backtracking, which standard prompting doesn't support.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine with Self-Consistency</div>
+                    <p>Tree of Thought and Self-Consistency are complementary multi-path techniques. Self-Consistency generates multiple complete solutions and votes on the best answer. ToT generates multiple partial solutions at each step and evaluates them incrementally. For maximum reliability on critical problems, you can use ToT to find solution candidates and then apply Self-Consistency voting across the final answers from different branches.</p>
                 </div>
             </div>
         </section>
-        <!-- /PROMPT PATTERN -->
+        <!-- /FRAMEWORK POSITIONING -->
 
         <!-- === RELATED FRAMEWORKS === -->
         <section class="section">
             <div class="container">
                 <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <p class="section-subtitle fade-in-up">Other advanced reasoning techniques</p>
+                <p class="section-subtitle fade-in-up">Explore complementary reasoning techniques</p>
 
                 <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
@@ -550,7 +650,7 @@
                     <div class="evolution-callout__content">
                         <span class="evolution-callout__label">Foundation</span>
                         <span class="evolution-callout__title">Chain-of-Thought</span>
-                        <span class="evolution-callout__desc">The linear reasoning technique that ToT extends with branching.</span>
+                        <span class="evolution-callout__desc">The linear step-by-step reasoning technique that Tree of Thought extends with branching, evaluation, and backtracking capabilities.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -559,17 +659,19 @@
                     </span>
                 </a>
 
-                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                <a href="graph-of-thought.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                            <polyline points="22 4 12 14.01 9 11.01"/>
+                            <circle cx="5" cy="6" r="3"/>
+                            <circle cx="19" cy="6" r="3"/>
+                            <circle cx="12" cy="18" r="3"/>
+                            <path d="M8 6h8M7 8l4 8M17 8l-4 8"/>
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Related</span>
-                        <span class="evolution-callout__title">Self-Consistency</span>
-                        <span class="evolution-callout__desc">Another multi-path approach that generates several answers and votes.</span>
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Graph of Thought</span>
+                        <span class="evolution-callout__desc">Extends ToT further by allowing reasoning paths to merge and form arbitrary graph structures &mdash; not just trees &mdash; enabling more complex reasoning topologies.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -578,21 +680,19 @@
                     </span>
                 </a>
 
-                <a href="least-to-most.html" class="evolution-callout fade-in-up">
+                <a href="plan-and-solve.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="8" y1="6" x2="21" y2="6"/>
-                            <line x1="8" y1="12" x2="21" y2="12"/>
-                            <line x1="8" y1="18" x2="21" y2="18"/>
-                            <line x1="3" y1="6" x2="3.01" y2="6"/>
-                            <line x1="3" y1="12" x2="3.01" y2="12"/>
-                            <line x1="3" y1="18" x2="3.01" y2="18"/>
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Decomposition</span>
-                        <span class="evolution-callout__title">Least-to-Most</span>
-                        <span class="evolution-callout__desc">Another approach to complex problems via structured decomposition.</span>
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Plan-and-Solve</span>
+                        <span class="evolution-callout__desc">Uses upfront planning to decompose problems into steps before solving &mdash; a complementary approach that can structure the initial decomposition that ToT then explores.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -604,26 +704,26 @@
         </section>
         <!-- /RELATED FRAMEWORKS -->
 
-        <!-- === CTA === -->
-        <section class="section section-alt">
+        <!-- === CTA SECTION === -->
+        <section class="section">
             <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
                     <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
                     <div class="cta-corporate__content">
                         <h2 class="cta-corporate__title">Explore Multiple Paths</h2>
-                        <p class="cta-corporate__text">Build tree-structured prompts with our interactive tools.</p>
+                        <p class="cta-corporate__text">Build tree-structured reasoning prompts with our interactive tools, or analyze your existing prompts for branching opportunities.</p>
                         <div class="cta-corporate__actions">
-                            <a href="../tools/guidance.html" class="btn btn-primary">Try Prompt Builder</a>
-                            <a href="../tools/analyzer.html" class="btn btn-secondary">Analyze a Prompt</a>
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- /CTA -->
+        <!-- /CTA SECTION -->
     </main>
 
-    <!-- Footer -->
+
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
@@ -687,7 +787,7 @@
         <span class="back-to-top-text">Back to Top</span>
     </button>
 
-<!-- Accessibility Dashboard -->
+    <!-- Accessibility Dashboard -->
     <div class="adl-dim-overlay" aria-hidden="true"></div>
     <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
