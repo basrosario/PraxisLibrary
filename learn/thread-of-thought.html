@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Thread of Thought: Systematically process long contexts by walking through them segment by segment.">
+    <meta name="description" content="Thread of Thought (ThoT): Guide AI through chaotic, lengthy contexts by walking through the information systematically before answering — taming information overload.">
     <title>Thread of Thought - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
@@ -131,7 +131,10 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -143,94 +146,574 @@
                     <span class="current">Thread of Thought</span>
                 </nav>
                 <div class="hero-badge">
-                    <span class="hero-badge__text">Long Context</span>
+                    <span class="hero-badge__text">Long Context Processing</span>
                 </div>
                 <h1 class="page-title fade-in">Thread of Thought</h1>
-                <p class="page-subtitle fade-in">Walk through long contexts systematically before answering.</p>
+                <p class="page-subtitle fade-in">When context is long and messy, don&rsquo;t just answer &mdash; walk through it first. Thread of Thought instructs the model to systematically segment and summarize the provided information before reasoning toward an answer, turning chaotic inputs into organized understanding.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> Thread of Thought (ThoT) was published in 2023 by Zhou et al. The technique addresses a specific failure mode: when models receive long, unstructured contexts &mdash; conversation histories, multi-page documents, or complex multi-turn dialogues &mdash; they tend to latch onto recent or salient information while losing track of earlier, equally important details. ThoT adds a &ldquo;walk me through this context&rdquo; instruction that forces the model to process the entire input systematically before attempting to answer.</p>
+                        <p><strong>Modern LLM Status:</strong> As context windows have grown from 4K to 128K+ tokens, the need for structured context processing has actually <strong>increased rather than decreased</strong>. Larger context windows mean more information to process, and models still exhibit &ldquo;lost in the middle&rdquo; effects where information in the center of long contexts is poorly recalled. ThoT&rsquo;s systematic walkthrough remains a practical solution for any task involving long, complex, or multi-source inputs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Sequential Processing</h2>
-                        <p class="section-intro">Thread of Thought (ThoT) handles long documents by explicitly walking through them segment by segment, summarizing and analyzing each part before synthesizing a final answer. This prevents the model from skipping or losing important details.</p>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Read Before You Reason</h2>
+                        <p class="split-section__text">When you hand a model a 10-page document and ask a question about it, the model typically jumps to answering based on whatever information it latches onto first. Critical details buried in paragraph 7 or contradicting information in the middle of the text may be overlooked. The model treats the context as a vague backdrop rather than a structured information source.</p>
+                        <p class="split-section__text"><strong>Thread of Thought inserts a processing step before reasoning.</strong> The model is instructed to &ldquo;walk me through this context, identifying the key information relevant to the question, then provide your answer.&rdquo; This forces the model to traverse the entire input systematically, pulling out and organizing relevant details before synthesizing a response.</p>
+                        <p class="split-section__text">Think of it like a lawyer who, before making an argument, first reads through all the evidence exhibits methodically &mdash; taking notes on what each one says, flagging contradictions, and building a coherent picture. Only then do they construct their case. ThoT gives the model that same disciplined pre-reasoning review step.</p>
+                    </div>
+                    <div class="split-section__visual">
                         <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Problem</span>
-                                <p>With very long contexts, models may focus on certain parts and miss others. ThoT forces systematic coverage of the entire input.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Prompt</span>
-                                <p>"Walk me through this context in manageable parts, summarizing key points from each section before answering."</p>
+                                <span class="highlight-box__title">The &ldquo;Lost in the Middle&rdquo; Problem</span>
+                                <p>Research shows that LLMs have a U-shaped attention pattern: they recall information at the <strong>beginning</strong> and <strong>end</strong> of long contexts well, but struggle with information in the <strong>middle</strong>. ThoT counteracts this by forcing a linear walkthrough of the entire context, ensuring that middle-positioned information gets the same processing attention as information at the edges. This simple intervention can recover details that would otherwise be silently dropped.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE CONCEPT -->
 
+        <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Applications</span>
-                    <h2 class="section-title">When to Use ThoT</h2>
-                </div>
+                <h2 class="section-title fade-in-up">The Thread of Thought Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from chaotic input to organized, grounded answer</p>
 
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Long Documents</h3>
-                        <p class="pillar-card__text">Research papers, legal documents, or lengthy reports that need comprehensive analysis.</p>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Receive the Long Context</h3>
+                            <p class="element-timeline__text">The model receives a large, potentially unstructured input &mdash; a lengthy conversation transcript, a multi-page document, meeting notes, or a complex scenario with many details. Along with the context comes a specific question or task that requires information from within it.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>A 3,000-word customer support conversation log with 15 back-and-forth exchanges, followed by: &ldquo;What was the root cause of the customer&rsquo;s issue and was it resolved?&rdquo;</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Multi-Source QA</h3>
-                        <p class="pillar-card__text">Questions requiring information from multiple parts of a large context.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Walk Through the Context Systematically</h3>
+                            <p class="element-timeline__text">Instead of jumping to an answer, the model processes the context segment by segment. It identifies key information, notes relevant facts, flags contradictions or updates, and builds a running understanding of the material. This walkthrough ensures nothing is skipped or lost.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Walking through the conversation: Messages 1-3 establish the customer reports their dashboard not loading. Messages 4-6 reveal the agent suggests clearing cache (doesn&rsquo;t work). Messages 7-9 show the agent escalates to engineering. Messages 10-12 reveal the root cause &mdash; an expired API token. Messages 13-15 confirm the token was refreshed and the dashboard works again.&rdquo;</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Summarization</h3>
-                        <p class="pillar-card__text">Creating thorough summaries that don't miss key sections.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Extract and Organize Relevant Information</h3>
+                            <p class="element-timeline__text">From the walkthrough, the model pulls out the specific information needed to answer the question. It organizes these extracted details into a coherent structure &mdash; grouping related facts, noting the sequence of events, and highlighting the most important findings.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Root cause:</strong> Expired API token (identified in message 11). <strong>Resolution:</strong> Token refreshed by engineering team (confirmed in message 14). <strong>Customer confirmed:</strong> Dashboard functional again (message 15).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Answer from Organized Understanding</h3>
+                            <p class="element-timeline__text">With a clear, organized picture of the context, the model now produces a well-grounded answer. Because the reasoning is based on a systematic review rather than a quick scan, the answer reflects the full scope of the input and avoids the common failure of missing buried information.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;The root cause was an expired API token that prevented the dashboard from loading data. It was resolved &mdash; the engineering team refreshed the token, and the customer confirmed the dashboard was functioning normally.&rdquo;</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /HOW IT WORKS -->
 
+        <!-- === VISUAL: THE COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="chain-of-thought.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Chain-of-Thought</h3>
-                            <p class="icon-box__content">Step-by-step reasoning.</p>
-                        </div>
-                    </a>
-                    <a href="least-to-most.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Least-to-Most</h3>
-                            <p class="icon-box__content">Progressive decomposition.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why systematic context processing beats quick scanning</p>
 
-        <section class="section">
-            <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try Thread of Thought</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Direct Prompting</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt (with long meeting notes)</span>
+                                <p>[5-page meeting transcript] What were the action items assigned to the engineering team?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>The engineering team was asked to fix the authentication bug and deploy the update by Friday.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Incomplete &mdash; missed 3 other action items buried in the middle of the transcript</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Thread of Thought</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Systematic Walkthrough</span>
+                                <p><strong>Section 1 (intro):</strong> Auth bug discussed, assigned to engineering. <strong>Section 2 (design review):</strong> Database migration task assigned, deadline next sprint. <strong>Section 3 (performance):</strong> Caching layer optimization assigned, needs benchmarks first. <strong>Section 4 (closing):</strong> Documentation update assigned, auth fix deadline confirmed as Friday.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Complete Answer</span>
+                                <p>Engineering team action items: (1) Fix authentication bug &mdash; deploy by Friday. (2) Database migration &mdash; complete by next sprint. (3) Caching layer optimization &mdash; run benchmarks first, then implement. (4) Update API documentation to reflect the new auth flow.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Complete, nothing missed &mdash; systematic walkthrough caught all action items</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Thread of Thought in Action</h2>
+                <p class="section-subtitle fade-in-up">See how systematic context processing improves long-input tasks</p>
+
+                <div class="accordion fade-in-up" id="thot-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Analyzing a Long Customer Conversation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task</span>
+                                    <p>&ldquo;Here is a 20-message customer support chat. Identify the customer&rsquo;s sentiment progression throughout the conversation.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Thread of Thought Response</span>
+                                    <p><strong>Walking through the conversation:</strong><br><br>
+                                    <strong>Messages 1-4:</strong> Customer is frustrated &mdash; reports a billing error, tone is curt. Sentiment: negative.<br>
+                                    <strong>Messages 5-8:</strong> Agent acknowledges the issue and investigates. Customer is still frustrated but responds to the agent&rsquo;s empathy. Sentiment: slightly less negative.<br>
+                                    <strong>Messages 9-13:</strong> Agent identifies the duplicate charge and initiates a refund. Customer expresses relief. Sentiment: shifting to neutral.<br>
+                                    <strong>Messages 14-17:</strong> Agent proactively offers a credit for the inconvenience. Customer thanks the agent. Sentiment: positive.<br>
+                                    <strong>Messages 18-20:</strong> Customer asks an unrelated product question, indicating they&rsquo;re now comfortable engaging. Sentiment: positive and engaged.<br><br>
+                                    <strong>Summary:</strong> Sentiment progressed from frustrated/negative to positive/engaged. The turning point was message 9 when the agent identified the root cause and took concrete action.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Summarizing a Multi-Section Report</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task</span>
+                                    <p>&ldquo;Here is a 15-page quarterly business review. What are the top three risks the company faces?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Thread of Thought Response</span>
+                                    <p><strong>Walking through each section:</strong><br><br>
+                                    <strong>Executive Summary (pp. 1-2):</strong> Revenue up 12% but margin pressure noted. Mentions supply chain concerns.<br>
+                                    <strong>Financial Results (pp. 3-5):</strong> Growth driven by new product line, but COGS increased 18%. Cash reserves declining. Risk: margin erosion.<br>
+                                    <strong>Operations (pp. 6-8):</strong> Lead times extended from 4 to 7 weeks. Two key suppliers flagged as single-source dependencies. Risk: supply chain fragility.<br>
+                                    <strong>Market Analysis (pp. 9-11):</strong> Competitor launched a lower-cost alternative. Market share stable but under pressure.<br>
+                                    <strong>People &amp; Culture (pp. 12-13):</strong> Engineering attrition at 22%, above industry average. Recruitment pipeline thin. Risk: talent retention.<br>
+                                    <strong>Outlook (pp. 14-15):</strong> Optimistic tone but conditions the outlook on resolving supply chain and staffing issues.<br><br>
+                                    <strong>Top three risks:</strong> (1) Margin erosion from rising COGS outpacing revenue growth. (2) Supply chain fragility with single-source supplier dependencies. (3) Engineering talent retention with 22% attrition threatening delivery capacity.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Extracting Details from Legal Documents</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task</span>
+                                    <p>&ldquo;Here is a 12-page service agreement. What are the termination conditions and notice periods?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Thread of Thought Response</span>
+                                    <p><strong>Walking through the agreement sections:</strong><br><br>
+                                    <strong>Sections 1-3 (Definitions &amp; Scope):</strong> No termination language. Establishes the service scope and parties.<br>
+                                    <strong>Section 4 (Term):</strong> Initial term is 24 months. Auto-renews for 12-month periods unless terminated.<br>
+                                    <strong>Section 5 (Fees):</strong> Mentions early termination fee equal to 3 months of service fees. Important &mdash; termination has a financial penalty.<br>
+                                    <strong>Sections 6-8 (SLAs &amp; Support):</strong> Section 7.4 contains a buried clause: repeated SLA failures (3+ in any quarter) give the client right to terminate without penalty.<br>
+                                    <strong>Section 9 (Termination):</strong> Standard termination requires 90 days written notice. Termination for cause requires 30 days notice plus a 15-day cure period. Material breach allows immediate termination.<br>
+                                    <strong>Sections 10-12 (Liability &amp; General):</strong> Section 11.2 adds that post-termination, the provider must return all data within 30 days.<br><br>
+                                    <strong>Complete answer:</strong> Termination conditions: (1) Standard: 90 days written notice, subject to 3-month early termination fee. (2) For cause: 30 days notice with 15-day cure period. (3) Material breach: immediate. (4) SLA failure: 3+ SLA breaches per quarter, no penalty. Notice periods range from immediate (material breach) to 90 days (standard). Data return required within 30 days post-termination.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Thread of Thought</h2>
+                <p class="section-subtitle fade-in-up">Best for long, complex, or multi-source contexts</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Long Document Analysis</strong>
+                                    <p>Reports, contracts, research papers, or transcripts where important details may be buried deep in the text &mdash; ThoT ensures nothing is missed.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Conversation Summaries</strong>
+                                    <p>Multi-turn dialogues, support chats, or meeting transcripts where the narrative evolves and key information appears throughout the exchange.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Multi-Source Synthesis</strong>
+                                    <p>When context comes from multiple sources and the model needs to reconcile and synthesize information across them.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Contradiction Detection</strong>
+                                    <p>Inputs where earlier information may be contradicted or updated later &mdash; the walkthrough catches these inconsistencies that a quick scan would miss.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Short Contexts</strong>
+                                    <p>When the input is brief enough that the model can easily process it in one pass &mdash; the walkthrough adds unnecessary overhead.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Well-Structured Inputs</strong>
+                                    <p>When the context is already cleanly organized with clear headings &mdash; the model can navigate structured inputs without needing a walkthrough.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Token-Constrained Scenarios</strong>
+                                    <p>When output token limits are tight &mdash; the walkthrough consumes significant tokens, leaving less room for the actual answer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Thread of Thought delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Document Review</h3>
+                        <p class="use-case-showcase__desc">Walk through contracts, policies, or reports section by section, ensuring every relevant clause or finding is captured before producing a summary.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Meeting Intelligence</h3>
+                        <p class="use-case-showcase__desc">Process meeting transcripts systematically to extract action items, decisions, and open questions &mdash; even from hour-long discussions.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Clinical Notes Analysis</h3>
+                        <p class="use-case-showcase__desc">Walk through patient histories chronologically to identify treatment progressions, medication changes, and relevant lab results.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Conversation Analysis</h3>
+                        <p class="use-case-showcase__desc">Track sentiment shifts, topic changes, and resolution outcomes across long multi-turn support conversations or interview transcripts.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Incident Postmortems</h3>
+                        <p class="use-case-showcase__desc">Process incident timelines, logs, and communication threads to reconstruct what happened and identify root causes.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Research Synthesis</h3>
+                        <p class="use-case-showcase__desc">Walk through multiple research papers to identify common findings, contradictions, and gaps before producing a literature review.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Thread of Thought Fits</h2>
+                <p class="section-subtitle fade-in-up">Specialized for long-context comprehension challenges</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Reasoning Steps</span>
+                        <span class="era-marker__desc">Think step-by-step about the problem</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Thread of Thought</span>
+                        <span class="era-marker__title">Context Processing</span>
+                        <span class="era-marker__desc">Walk through the input systematically</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Memory of Thought</span>
+                        <span class="era-marker__title">Knowledge Recall</span>
+                        <span class="era-marker__desc">Retrieve relevant prior knowledge</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">RAG Systems</span>
+                        <span class="era-marker__title">External Retrieval</span>
+                        <span class="era-marker__desc">Fetch and process external documents</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The Magic Prompt</div>
+                    <p>The simplest way to invoke ThoT is to add this instruction: &ldquo;Walk me through this context step by step, identifying the key information relevant to my question, then provide your answer.&rdquo; This single sentence triggers the systematic processing behavior and works across document types, conversation logs, and multi-source inputs.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Techniques for different aspects of complex reasoning</p>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">CoT focuses on reasoning steps; ThoT focuses on input processing. CoT thinks through the problem; ThoT reads through the context.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="memory-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Memory of Thought</span>
+                        <span class="evolution-callout__desc">While ThoT processes the given context, MoT recalls relevant knowledge from training &mdash; together they cover both input and background knowledge.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-ask.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Alternative</span>
+                        <span class="evolution-callout__title">Self-Ask</span>
+                        <span class="evolution-callout__desc">Self-Ask decomposes the question; ThoT processes the context. Use Self-Ask for complex questions, ThoT for complex contexts.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Tame Long Contexts</h2>
+                        <p class="cta-corporate__text">Add Thread of Thought processing to your long-context workflows or build context-aware prompts with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
     </main>
+
 
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
@@ -284,6 +767,83 @@
         </div>
     </div>
 </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
 
     <script src="../app.js" defer></script>
 </body>

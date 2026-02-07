@@ -105,6 +105,33 @@
 
 ## Session Work Logs (Archived)
 
+### Session 34 (2026-02-06)
+**Wave 4 — Advanced Reasoning: Full Redesign (7 pages)**
+- Redesigned all 7 pages from ~290 lines to 830-850 lines using 13-section template
+- analogical-reasoning.html (839 lines) — Thought Generation, 2023 by Yasunaga et al.
+- meta-reasoning.html (836 lines) — Strategy Selection, 2024 by Xu et al.
+- thread-of-thought.html (850 lines) — Long Context Processing, 2023 by Zhou et al.
+- memory-of-thought.html (847 lines) — Memory Systems, 2023 by Li et al.
+- simtom.html (849 lines) — Perspective Taking, 2023 by Wilf et al.
+- max-mutual-info.html (830 lines) — Example Selection, 2022
+- universal-self-consistency.html (846 lines) — Ensemble Methods, 2023 by Chen et al.
+- Quality checks: 0 inline styles, 0 inline scripts, 0 external resources, all 13 sections present
+
+### Session 33 (2026-02-06)
+**Critical Bug Fix: Universal URL Resolution**
+- Commit: `8fda121`
+- Created `resolveInternalUrl()` universal path resolver (app.js ~471)
+- Fixed 10 locations where dynamic URLs were broken from subdirectory pages
+
+**Search Modal Enhancements**
+- Commits: `0d758a9`, `32ec056`
+- 80% screen width modal, collapsible Quick Links, Glossary-first results
+- Modal closes on result selection, same-page hash handling
+
+**Wave 3 Comparison Panel Fix**
+- Commit: `390715f`
+- Updated 3 Wave 3 comparison panels to new structure + dark mode era-marker fix
+
 ### Session 14 (2026-02-01)
 **Resource Pages Enhancement - Phase 1**
 - Deleted pages/replit-guide.html and pages/ide-guide.html

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SimToM: Simulate Theory of Mind by explicitly modeling what different agents know in perspective-taking tasks.">
+    <meta name="description" content="SimToM: Simulate Theory of Mind by filtering context to each person's perspective — answer questions based on what specific individuals know, not everything you know.">
     <title>SimToM - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
@@ -131,7 +131,10 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -146,59 +149,264 @@
                     <span class="hero-badge__text">Perspective Taking</span>
                 </div>
                 <h1 class="page-title fade-in">SimToM</h1>
-                <p class="page-subtitle fade-in">Simulate Theory of Mind through explicit perspective modeling.</p>
+                <p class="page-subtitle fade-in">Simulating Theory of Mind means explicitly modeling what different people know and believe &mdash; filtering the context to each individual&rsquo;s perspective so the model answers perspective-dependent questions correctly, rather than reasoning from everything it knows.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
-        <section class="section section-alt">
-            <div class="container">
-                <div class="split-section">
-                    <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Modeling Mental States</h2>
-                        <p class="section-intro">SimToM (Simulating Theory of Mind) helps LLMs with tasks requiring understanding of what different people know or believe. It explicitly filters information to what each person could know, then reasons from that limited perspective.</p>
-                        <div class="highlight-box highlight-box--info">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Theory of Mind</span>
-                                <p>The ability to attribute mental states—beliefs, intents, desires, knowledge—to oneself and others. LLMs often struggle with this because they see all information at once.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Two Steps</span>
-                                <p>1) List only facts the target person knows. 2) Answer based solely on that filtered knowledge.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        <!-- === HISTORICAL CONTEXT === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Example</span>
-                    <h2 class="section-title">SimToM in Action</h2>
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> SimToM was published in 2023 by Wilf et al. The technique addresses a fundamental limitation in LLMs: they see all information simultaneously and struggle to reason from limited perspectives &mdash; a problem known as the &ldquo;curse of knowledge.&rdquo; SimToM introduces a two-step approach: first, filter the context to only what a specific person knows, then answer the question from that filtered perspective alone. By forcing the model to explicitly separate &ldquo;what I know&rdquo; from &ldquo;what this person knows,&rdquo; SimToM transforms perspective-taking from a hidden inference into a structured, auditable process.</p>
+                        <p><strong>Modern LLM Status:</strong> Theory of Mind remains challenging for LLMs. While models have improved at basic perspective-taking tasks, they still default to omniscient reasoning when faced with complex multi-agent scenarios. SimToM&rsquo;s explicit perspective-filtering <strong>consistently outperforms direct prompting</strong> on perspective-dependent questions. The technique is most valuable when scenarios involve multiple agents with different knowledge states, hidden information, or false beliefs &mdash; situations where even advanced models struggle without explicit guidance to separate what each person knows.</p>
+                    </div>
                 </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Think From Their Shoes, Not Yours</h2>
+                        <p class="split-section__text">LLMs suffer from an omniscience problem. When given a scenario describing multiple people with different knowledge, the model sees everything at once &mdash; every detail, every hidden action, every private conversation. It cannot naturally &ldquo;forget&rdquo; what it has read. This means when asked &ldquo;What does Alice think?&rdquo;, the model often answers based on what it knows rather than what Alice knows, producing confidently wrong answers to perspective-dependent questions.</p>
+                        <p class="split-section__text"><strong>SimToM forces explicit perspective separation.</strong> The process works in two deliberate steps: first, list only the facts that the target person would know based on the scenario; second, answer the question using only that filtered information. This separation prevents information leakage &mdash; the model cannot accidentally use knowledge that the target person does not have, because that knowledge has been removed from the working context entirely.</p>
+                        <p class="split-section__text">Think of it like a detective who interviews witnesses separately. Each witness only saw part of the event. To understand what Witness A believes happened, the detective does not consult Witness B&rsquo;s statement &mdash; they reconstruct the event purely from Witness A&rsquo;s vantage point. SimToM applies this same principle to language models: reconstruct the world from each person&rsquo;s limited view before reasoning about their beliefs.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Filtering Works Better Than &ldquo;Pretending&rdquo;</span>
+                                <p>Telling a model to &ldquo;pretend you don&rsquo;t know X&rdquo; rarely works reliably. The information is still in the context, and the model&rsquo;s attention mechanism will attend to it regardless of the instruction. SimToM solves this structurally: by explicitly extracting only the relevant person&rsquo;s knowledge into a separate, reduced context, the forbidden information is <strong>physically absent</strong> from the reasoning step. You cannot leak what is not there. This is why perspective filtering consistently outperforms &ldquo;imagine you are&rdquo; or &ldquo;pretend you only know&rdquo; instructions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The SimToM Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from full scenario to perspective-accurate answer</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Read the Full Context</h3>
+                            <p class="element-timeline__text">Absorb the complete scenario with all information about all parties. This includes every action taken, every statement made, and every event that occurred &mdash; regardless of who witnessed it. At this stage, you have the omniscient view of the entire situation.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Alice put a toy in the blue box. Alice left the room. Bob entered and moved the toy from the blue box to the red drawer. Bob left. Alice returned.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Filter to Target Person&rsquo;s Perspective</h3>
+                            <p class="element-timeline__text">Extract only the facts that the target person would know, creating a reduced context. Go through each event in the scenario and ask: &ldquo;Was the target person present for this? Could they have observed this?&rdquo; Include only the events they witnessed and discard everything else. This creates a filtered world model specific to that individual.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Alice&rsquo;s filtered context:</strong> &ldquo;Alice put a toy in the blue box. Alice left the room. Alice returned.&rdquo; &mdash; Alice was not present when Bob moved the toy, so that event is excluded from her perspective entirely.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Answer from Filtered Perspective</h3>
+                            <p class="element-timeline__text">Using only the filtered context, answer the question as if you only knew what that person knows. Do not reference, hint at, or incorporate any information from the full scenario that was excluded in the filtering step. The filtered context is your entire world for this answer.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Question:</strong> Where does Alice think the toy is?<br><strong>Answer from filtered context:</strong> Alice thinks the toy is in the blue box, because that is where she placed it and she has no information suggesting it was moved.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Verify Perspective Integrity</h3>
+                            <p class="element-timeline__text">Check that the answer does not leak information the target person could not know. Review the response for any details, implications, or hedging that reveals awareness of events outside the filtered context. If the answer references anything the person was not present for, the perspective filter has been violated and the answer needs revision.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Leak check:</strong> Does the answer mention the red drawer, Bob&rsquo;s actions, or that the toy was moved? If yes, the perspective filter failed. The correct answer should reference only the blue box with no awareness of any changes made in Alice&rsquo;s absence.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why explicit perspective filtering prevents omniscient reasoning errors</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Direct Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Alice put a toy in the box and left the room. Bob entered and moved the toy to the drawer. Where does Alice think the toy is?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>The toy is in the drawer, since Bob moved it there. Alice would likely check the drawer.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Omniscient answer &mdash; uses Bob&rsquo;s action that Alice never witnessed</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">SimToM</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Perspective-Filtered Reasoning</span>
+                                <p><strong>Step 1 &mdash; Filter to Alice&rsquo;s perspective:</strong> Alice put a toy in the box. Alice left the room. Alice has no information about events during her absence.<br><br><strong>Step 2 &mdash; Answer from Alice&rsquo;s filtered context:</strong> Based only on what Alice knows, the toy is in the box where she placed it.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Final Answer</span>
+                                <p>Alice thinks the toy is in the box. She placed it there before leaving and was not present when it was moved, so she has no reason to believe it is anywhere else.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Correct perspective-aware answer &mdash; no information leakage from Bob&rsquo;s actions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">SimToM in Action</h2>
+                <p class="section-subtitle fade-in-up">See how perspective filtering solves Theory of Mind challenges</p>
 
                 <div class="accordion fade-in-up" id="simtom-accordion">
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Classic False Belief Task</span>
+                            <span class="accordion-title">Classic False Belief</span>
                             <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </button>
                         <div class="accordion-content">
                             <div class="technique-demo">
                                 <div class="technique-demo__prompt">
                                     <span class="technique-demo__tag">Scenario</span>
-                                    <p>"Sally puts a ball in basket A. Sally leaves. Anne moves the ball to basket B. Where will Sally look for the ball?"</p>
+                                    <p>&ldquo;Sally places her marble in the basket and leaves the room. Anne takes the marble from the basket and puts it in her own box. Sally returns. Where will Sally look for her marble?&rdquo;</p>
                                 </div>
                                 <div class="technique-demo__response">
-                                    <span class="technique-demo__tag">SimToM Approach</span>
-                                    <p><strong>Step 1 - What Sally knows:</strong> Sally placed ball in basket A. Sally left before Anne moved it. Sally did NOT see the move.<br><br>
-                                    <strong>Step 2 - Answer from Sally's view:</strong> Sally will look in basket A (where she believes the ball still is).</p>
+                                    <span class="technique-demo__tag">SimToM Decomposition</span>
+                                    <p><strong>Step 1 &mdash; Filter to Sally&rsquo;s perspective:</strong><br>
+                                    Sally placed her marble in the basket. Sally left the room. Sally returned to the room. Sally does not know about any events that occurred while she was away.<br><br>
+                                    <strong>Step 2 &mdash; Answer from Sally&rsquo;s filtered context:</strong><br>
+                                    Sally will look for her marble in the basket. From her perspective, that is the last place she put it, and she has no information suggesting it was moved.<br><br>
+                                    <strong>Verification:</strong> The answer does not reference Anne&rsquo;s box or Anne&rsquo;s action of moving the marble. Perspective integrity is maintained.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Workplace Information Asymmetry</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Scenario</span>
+                                    <p>&ldquo;The CEO informed the VP of Operations that layoffs will happen next month. The VP has not told anyone on the team. Employee Dana asks the VP for a long-term project assignment. What does Dana believe about job security at the company?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">SimToM Decomposition</span>
+                                    <p><strong>Step 1 &mdash; Filter to Dana&rsquo;s perspective:</strong><br>
+                                    Dana works at the company. Dana is asking for a long-term project assignment. Dana has not been informed of any upcoming layoffs or organizational changes. Dana has no knowledge of private conversations between the CEO and the VP.<br><br>
+                                    <strong>Step 2 &mdash; Answer from Dana&rsquo;s filtered context:</strong><br>
+                                    Dana believes job security at the company is stable. Her request for a long-term project indicates she expects to remain employed and sees no reason for concern. She has no information about upcoming layoffs.<br><br>
+                                    <strong>Verification:</strong> The answer does not reference the CEO&rsquo;s announcement, the planned layoffs, or the VP&rsquo;s knowledge. Dana&rsquo;s perspective is preserved without information leakage.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Surprise Party Planning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Scenario</span>
+                                    <p>&ldquo;Maya is planning a surprise birthday party for Leo. She told Priya and Kai about the plan. Kai accidentally mentioned &lsquo;Saturday plans&rsquo; to Leo but did not reveal the party. Priya bought a cake and hid it at her house. Leo asked Maya what she is doing on Saturday, and Maya said she is free. What does each person know about Saturday?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">SimToM Decomposition</span>
+                                    <p><strong>Filter to Leo&rsquo;s perspective:</strong><br>
+                                    Kai mentioned &ldquo;Saturday plans&rdquo; but gave no details. Leo asked Maya about Saturday, and Maya said she is free. Leo does not know about any party, cake, or coordination among his friends.<br>
+                                    <strong>Leo believes:</strong> Saturday is an ordinary day. Maya is free. Kai has some unspecified Saturday plans.<br><br>
+                                    <strong>Filter to Maya&rsquo;s perspective:</strong><br>
+                                    Maya organized the surprise party. She told Priya and Kai. She told Leo she is free on Saturday to maintain the surprise.<br>
+                                    <strong>Maya knows:</strong> The party is happening. She successfully deflected Leo&rsquo;s question. She does not know Kai mentioned Saturday plans to Leo.<br><br>
+                                    <strong>Filter to Priya&rsquo;s perspective:</strong><br>
+                                    Maya told Priya about the party. Priya bought a cake and hid it at her house.<br>
+                                    <strong>Priya knows:</strong> The party is happening and she has the cake. She does not know about Kai&rsquo;s slip or Leo&rsquo;s conversation with Maya.<br><br>
+                                    <strong>Verification:</strong> Each person&rsquo;s knowledge is strictly limited to the events they participated in or were told about directly. No perspective leaks information from another person&rsquo;s view.</p>
                                 </div>
                             </div>
                         </div>
@@ -206,62 +414,305 @@
                 </div>
             </div>
         </section>
+        <!-- /EXAMPLES IN ACTION -->
 
+
+        <!-- === WHEN TO USE === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Applications</span>
-                    <h2 class="section-title">When SimToM Helps</h2>
-                </div>
+                <h2 class="section-title fade-in-up">When to Use SimToM</h2>
+                <p class="section-subtitle fade-in-up">Best for scenarios where who knows what matters for the correct answer</p>
 
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">False Belief Tasks</h3>
-                        <p class="pillar-card__text">Questions about what someone believes when their belief differs from reality.</p>
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Perspective-Dependent Questions</strong>
+                                    <p>Any question where the correct answer depends on what a specific person knows or believes, rather than the objective truth of the situation.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>False Belief Scenarios</strong>
+                                    <p>Classic Theory of Mind tests where one person holds an outdated or incorrect belief because they missed a critical event &mdash; the Sally-Anne test and its variants.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Multi-Agent Negotiation Modeling</strong>
+                                    <p>Simulating negotiations where each party has private information &mdash; understanding what each side knows prevents unrealistic assumptions about shared knowledge.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Privacy-Aware Reasoning</strong>
+                                    <p>Situations requiring strict information boundaries &mdash; ensuring responses do not reveal information that a specific user, role, or agent should not have access to.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Social Reasoning</h3>
-                        <p class="pillar-card__text">Predicting behavior based on limited information different people have.</p>
-                    </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Communication</h3>
-                        <p class="pillar-card__text">Understanding what to explain based on what the audience already knows.</p>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>All Parties Share the Same Information</strong>
+                                    <p>When everyone in the scenario has access to the same facts, perspective filtering adds unnecessary complexity &mdash; there is no information asymmetry to manage.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Questions Don&rsquo;t Depend on Who Knows What</strong>
+                                    <p>If the question asks for objective facts rather than someone&rsquo;s belief or expectation, perspective filtering is unnecessary &mdash; the answer is the same regardless of viewpoint.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Single-Agent Factual Questions</strong>
+                                    <p>Questions with one subject and no perspective-dependent component &mdash; &ldquo;What is the capital of France?&rdquo; has no hidden perspective to filter.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /WHEN TO USE -->
 
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where SimToM delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Social Reasoning</h3>
+                        <p class="use-case-showcase__desc">Model interpersonal dynamics by tracking what each person knows, believes, and expects &mdash; essential for understanding misunderstandings, secrets, and social conflicts in narrative analysis.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Game Theory &amp; Strategy</h3>
+                        <p class="use-case-showcase__desc">Analyze strategic interactions where each player has private information. Filter each player&rsquo;s knowledge state to predict rational decisions based on what they actually know, not the full game state.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Privacy Compliance</h3>
+                        <p class="use-case-showcase__desc">Ensure AI responses respect information boundaries by filtering context to what each user role is authorized to know &mdash; preventing accidental disclosure of restricted data in multi-user systems.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Customer Intent Modeling</h3>
+                        <p class="use-case-showcase__desc">Understand what a customer knows and does not know when they contact support. Filter context to the customer&rsquo;s visible experience to accurately interpret their questions and frustrations.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Negotiation Prep</h3>
+                        <p class="use-case-showcase__desc">Prepare for negotiations by modeling each party&rsquo;s information state separately. Understand what the other side knows, what they think you know, and where information gaps create leverage or risk.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Educational Assessment</h3>
+                        <p class="use-case-showcase__desc">Model what a student knows versus what the curriculum assumes they know. Filter to the student&rsquo;s demonstrated knowledge to identify genuine gaps rather than assuming omniscient understanding.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where SimToM Fits</h2>
+                <p class="section-subtitle fade-in-up">SimToM bridges simple role adoption and full multi-agent perspective modeling</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Role Prompting</span>
+                        <span class="era-marker__title">Persona Adoption</span>
+                        <span class="era-marker__desc">Assume a role without filtering knowledge</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">SimToM</span>
+                        <span class="era-marker__title">Perspective Filtering</span>
+                        <span class="era-marker__desc">Explicitly filter context per person</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Multi-Agent Debate</span>
+                        <span class="era-marker__title">Competing Perspectives</span>
+                        <span class="era-marker__desc">Multiple agents argue from different views</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Recursive ToM</span>
+                        <span class="era-marker__title">Nested Beliefs</span>
+                        <span class="era-marker__desc">Modeling what A thinks B thinks C knows</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine with Chain-of-Thought</div>
+                    <p>SimToM&rsquo;s perspective filtering pairs powerfully with Chain-of-Thought reasoning. After filtering context to a specific person&rsquo;s knowledge, use CoT to reason step-by-step through their decision-making process. This combination gives you both accurate knowledge boundaries and transparent reasoning within those boundaries &mdash; producing perspective-aware answers with full reasoning visibility.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
         <section class="section">
             <div class="container">
                 <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="role-prompting.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Role Prompting</h3>
-                            <p class="icon-box__content">Adopt specific personas.</p>
-                        </div>
-                    </a>
-                    <a href="s2a.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">System 2 Attention</h3>
-                            <p class="icon-box__content">Filter context for focus.</p>
-                        </div>
-                    </a>
-                </div>
+                <p class="section-subtitle fade-in-up">Explore complementary perspective and reasoning techniques</p>
+
+                <a href="role-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Role Prompting</span>
+                        <span class="evolution-callout__desc">Adopts a persona but without explicit knowledge filtering &mdash; SimToM adds the critical step of restricting information to what that persona would actually know.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">Step-by-step reasoning that pairs naturally with SimToM &mdash; use CoT within the filtered perspective to reason transparently from a specific person&rsquo;s knowledge.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Enhancement</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">Generate multiple perspective-filtered reasoning paths and select the most consistent answer &mdash; reduces variance in perspective-dependent judgments.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
             </div>
         </section>
+        <!-- /RELATED FRAMEWORKS -->
 
-        <section class="section section-alt">
+        <!-- === CTA SECTION === -->
+        <section class="section">
             <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try SimToM</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Reason From Their Perspective</h2>
+                        <p class="cta-corporate__text">Try SimToM perspective filtering on your own scenarios or build perspective-aware prompts with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /CTA SECTION -->
     </main>
+
 
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
@@ -315,6 +766,83 @@
         </div>
     </div>
 </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
 
     <script src="../app.js" defer></script>
 </body>

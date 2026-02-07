@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Meta-Reasoning Prompting: Think about how to think—select the best reasoning strategy before solving the problem.">
+    <meta name="description" content="Meta-Reasoning Prompting: Have the AI select the best reasoning strategy for each problem before solving it — matching technique to task for optimal results.">
     <title>Meta-Reasoning Prompting - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
@@ -131,7 +131,10 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -146,91 +149,557 @@
                     <span class="hero-badge__text">Strategy Selection</span>
                 </div>
                 <h1 class="page-title fade-in">Meta-Reasoning Prompting</h1>
-                <p class="page-subtitle fade-in">Think about thinking—choose the right approach first.</p>
+                <p class="page-subtitle fade-in">Before solving a problem, first decide <em>how</em> to solve it &mdash; Meta-Reasoning instructs the model to analyze the task, select the most appropriate reasoning strategy, then execute with that strategy. Thinking about thinking.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2024</span>
+                        <p><strong>Introduced:</strong> Meta-Reasoning Prompting was formalized by Xu et al. in 2024. The technique addresses a fundamental limitation of single-strategy prompting: no single reasoning approach works best for all problems. Instead of always using Chain-of-Thought or always decomposing questions, Meta-Reasoning adds a preliminary &ldquo;strategy selection&rdquo; step where the model analyzes the problem type and chooses the most appropriate reasoning method before beginning to solve it.</p>
+                        <p><strong>Modern LLM Status:</strong> Modern LLMs increasingly perform implicit strategy selection as part of their training. However, <strong>explicit meta-reasoning instructions consistently improve performance on diverse problem sets</strong> by preventing the model from defaulting to a single reasoning pattern. The technique is most valuable in production systems that handle varied question types &mdash; forcing the model to consciously match its approach to the problem structure rather than applying a one-size-fits-all strategy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Reasoning About Reasoning</h2>
-                        <p class="section-intro">Meta-Reasoning prompts the model to first analyze what type of problem it's facing and select an appropriate reasoning strategy before attempting to solve it. This ensures the right tool for the job.</p>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Think About How to Think</h2>
+                        <p class="split-section__text">Every problem has a shape, and different reasoning strategies fit different shapes. A math word problem benefits from step-by-step calculation. A multi-hop factual question benefits from decomposition. A creative challenge benefits from brainstorming. When you ask the model to solve any problem with the same approach, you get mediocre results on problems that don&rsquo;t fit that approach.</p>
+                        <p class="split-section__text"><strong>Meta-Reasoning adds a decision layer before execution.</strong> Instead of jumping straight into solving, the model first classifies the problem, considers which reasoning strategies are available, evaluates which one best fits the problem&rsquo;s structure, and only then begins solving. This mirrors how expert problem-solvers work &mdash; they spend time understanding the problem before picking up a tool.</p>
+                        <p class="split-section__text">Think of it like a doctor who, before prescribing treatment, first diagnoses the condition. The diagnosis step (meta-reasoning) determines which treatment protocol (reasoning strategy) to apply. Skipping diagnosis and always prescribing the same medicine would be medical malpractice &mdash; and always using the same prompting strategy is the reasoning equivalent.</p>
+                    </div>
+                    <div class="split-section__visual">
                         <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">Key Questions</span>
-                                <p>What kind of problem is this? What strategies would work best? What could go wrong? Then proceed with the chosen approach.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Pattern</span>
-                                <p>"Before solving, analyze: What type of problem is this? What's the best reasoning approach for this type?"</p>
+                                <span class="highlight-box__title">Why Strategy Selection Beats One-Size-Fits-All</span>
+                                <p>When the model uses Chain-of-Thought for every problem, it excels at sequential reasoning but stumbles on problems requiring exploration, decomposition, or analogy. Meta-Reasoning lets the model <strong>adapt its approach to each problem&rsquo;s structure</strong>. Research shows that models with explicit strategy selection outperform models locked into any single technique &mdash; because the right tool for the job changes with every job.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE CONCEPT -->
 
+        <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Analysis</span>
-                    <h2 class="section-title">Strategy Selection</h2>
-                </div>
+                <h2 class="section-title fade-in-up">The Meta-Reasoning Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from problem analysis to strategy-matched execution</p>
 
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Problem Type</h3>
-                        <p class="pillar-card__text">Is this math, logic, creative, factual, or multi-step? Different types need different approaches.</p>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Analyze the Problem</h3>
+                            <p class="element-timeline__text">Before any solving, the model examines the problem to understand its type, structure, and requirements. Is this a factual question, a reasoning chain, a creative task, a comparison, or something else? What does the problem demand &mdash; precision, exploration, decomposition, or synthesis?</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;What are the trade-offs between microservices and monolithic architecture for a startup with 5 engineers?&rdquo; &mdash; <strong>Analysis:</strong> This is a multi-factor comparison requiring contextual weighing, not a factual lookup or sequential calculation.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Complexity</h3>
-                        <p class="pillar-card__text">How complex is the problem? Simple questions don't need elaborate reasoning chains.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Survey Available Strategies</h3>
+                            <p class="element-timeline__text">The model considers which reasoning approaches could apply: Chain-of-Thought for sequential logic, decomposition for multi-part questions, analogy for novel problems, pros-and-cons analysis for comparisons, step-back abstraction for principle-based questions, or direct answering for simple lookups.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Candidates considered:</strong> (1) Chain-of-Thought &mdash; linear reasoning. (2) Pros/Cons analysis &mdash; structured comparison. (3) Analogical reasoning &mdash; draw from similar decisions. (4) Step-Back &mdash; identify general principles first.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Risk Areas</h3>
-                        <p class="pillar-card__text">Where might reasoning go wrong? Identify pitfalls before starting.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Select the Best Strategy</h3>
+                            <p class="element-timeline__text">Based on the problem analysis, the model selects the strategy that best matches the task structure. It explains why this strategy fits and what it expects to gain from using it. This explicit justification prevents arbitrary strategy selection and creates an auditable decision trail.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Selected:</strong> Pros/Cons analysis with context-weighting. <strong>Reasoning:</strong> The question asks for trade-offs (inherently comparative) and specifies a constraint (5-engineer team) that should weight certain factors more heavily. A structured comparison will organize the analysis clearly while the constraint provides a natural evaluation lens.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Execute with the Chosen Strategy</h3>
+                            <p class="element-timeline__text">The model applies the selected reasoning approach to solve the problem. Because the strategy was consciously chosen to match the problem type, the execution is more focused and effective than a generic approach. The output reflects the structure of the chosen strategy.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Execution:</strong> A structured comparison weighing development speed, operational complexity, team cognitive load, deployment friction, and scaling needs &mdash; each factor evaluated through the lens of a 5-person team where every additional complexity cost is amplified.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /HOW IT WORKS -->
 
+        <!-- === VISUAL: THE COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="plan-and-solve.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Plan-and-Solve</h3>
-                            <p class="icon-box__content">Planning before execution.</p>
-                        </div>
-                    </a>
-                    <a href="step-back.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Step-Back</h3>
-                            <p class="icon-box__content">Principles before specifics.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why choosing the right strategy produces better answers</p>
 
-        <section class="section">
-            <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try Meta-Reasoning</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Fixed Strategy</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt (always CoT)</span>
+                                <p>Think step by step: Should our e-commerce platform add same-day delivery?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Step 1: Same-day delivery is popular. Step 2: Customers want fast shipping. Step 3: It could increase sales. Step 4: Therefore, yes, you should add it.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Wrong strategy &mdash; CoT linearizes a decision that needs multi-factor analysis</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Meta-Reasoning</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Strategy Selection</span>
+                                <p><strong>Analysis:</strong> This is a business decision with multiple stakeholders, costs, and constraints. <strong>Strategy:</strong> Multi-factor decision matrix &mdash; evaluate logistics cost, customer willingness to pay, competitive pressure, operational complexity, and margin impact separately, then synthesize.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Executed Answer</span>
+                                <p>Same-day delivery makes sense only if your average order value exceeds the fulfillment cost premium. For orders under $50, the logistics cost likely exceeds margin. Recommendation: offer same-day as a paid upgrade ($9.99) to test demand before committing to free same-day at scale.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Right strategy chosen, nuanced multi-factor analysis, actionable conclusion</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Meta-Reasoning in Action</h2>
+                <p class="section-subtitle fade-in-up">See how strategy selection adapts to different problem types</p>
+
+                <div class="accordion fade-in-up" id="meta-reasoning-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Math Problem &rarr; Selects Step-by-Step Calculation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;A train leaves Station A at 60 mph. Another leaves Station B (300 miles away) at 40 mph heading toward A. When and where do they meet?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Meta-Reasoning Response</span>
+                                    <p><strong>Problem type:</strong> Quantitative &mdash; two-variable distance/rate/time problem with a definite numerical answer.<br><br>
+                                    <strong>Strategy selected:</strong> Chain-of-Thought (step-by-step arithmetic). This problem has one correct answer reachable through sequential calculation. No decomposition, analogy, or exploration needed.<br><br>
+                                    <strong>Execution:</strong> Combined speed: 60 + 40 = 100 mph. Time to meet: 300 &divide; 100 = 3 hours. Distance from A: 60 &times; 3 = 180 miles. They meet 180 miles from Station A after 3 hours.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Multi-Hop Question &rarr; Selects Decomposition</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;Is the country where the Eiffel Tower is located a member of the organization that was founded after World War II to maintain international peace?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Meta-Reasoning Response</span>
+                                    <p><strong>Problem type:</strong> Multi-hop factual &mdash; requires connecting several facts in sequence. No single lookup answers this.<br><br>
+                                    <strong>Strategy selected:</strong> Self-Ask decomposition. The question chains multiple facts together. Breaking it into sub-questions ensures each link in the chain is verified.<br><br>
+                                    <strong>Execution:</strong> Sub-Q1: Where is the Eiffel Tower? &rarr; Paris, France. Sub-Q2: What organization was founded after WWII to maintain peace? &rarr; The United Nations (1945). Sub-Q3: Is France a UN member? &rarr; Yes, France is a founding member and permanent Security Council member. <strong>Final answer:</strong> Yes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Novel Design Challenge &rarr; Selects Analogical Reasoning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;How should we design a notification system that informs users without causing alert fatigue?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Meta-Reasoning Response</span>
+                                    <p><strong>Problem type:</strong> Design challenge &mdash; open-ended, benefits from cross-domain inspiration. No single correct answer; creativity and proven patterns both matter.<br><br>
+                                    <strong>Strategy selected:</strong> Analogical reasoning. This problem has been solved in other domains. Drawing on those solutions will produce a more creative, grounded design than reasoning from first principles.<br><br>
+                                    <strong>Execution:</strong> Analogy from hospital alarm systems &mdash; hospitals found that too many alarms caused nurses to ignore critical ones. Solution: tiered severity with escalation. Apply to notifications: Level 1 (passive badge), Level 2 (banner), Level 3 (modal interrupt). Only escalate when the user hasn&rsquo;t acknowledged within a time window. This mirrors the hospital &ldquo;alarm fatigue&rdquo; research that reduced false alarm response from 95% ignored to under 20% ignored.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Meta-Reasoning</h2>
+                <p class="section-subtitle fade-in-up">Best for systems handling diverse problem types</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Mixed-Type Workloads</strong>
+                                    <p>Systems that receive diverse question types &mdash; factual, analytical, creative, comparative &mdash; and need to handle each optimally without manual strategy selection.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Ambiguous Tasks</strong>
+                                    <p>When the best approach isn&rsquo;t obvious &mdash; meta-reasoning forces explicit analysis of what the problem actually requires before committing to a solution path.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>AI Agent Pipelines</strong>
+                                    <p>Automated systems where a routing layer needs to decide which reasoning approach to apply to each incoming request without human intervention.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Quality Assurance</strong>
+                                    <p>When you need to audit why the model chose a particular approach &mdash; the explicit strategy selection creates a reviewable decision trail.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Uniform Problem Types</strong>
+                                    <p>When all incoming tasks are the same type (all math, all Q&amp;A) &mdash; you already know the best strategy, so selection overhead adds no value.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Latency-Sensitive Applications</strong>
+                                    <p>When response speed is critical &mdash; the strategy selection step adds latency. For chatbots needing sub-second responses, this overhead may not be justified.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Direct Questions</strong>
+                                    <p>Factual lookups like &ldquo;What&rsquo;s the capital of France?&rdquo; don&rsquo;t benefit from strategy deliberation &mdash; the model should just answer directly.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where meta-reasoning delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Enterprise Assistants</h3>
+                        <p class="use-case-showcase__desc">Handle everything from HR policy questions to financial analysis to creative brief generation &mdash; each routed to the optimal reasoning approach automatically.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Educational Tutoring</h3>
+                        <p class="use-case-showcase__desc">Adapt teaching strategy based on the question type &mdash; use worked examples for math, Socratic dialogue for concepts, and analogies for abstract topics.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Diagnostic Systems</h3>
+                        <p class="use-case-showcase__desc">Route technical support queries to the appropriate diagnostic approach &mdash; elimination for hardware, log analysis for software, configuration review for networking.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Research Assistants</h3>
+                        <p class="use-case-showcase__desc">Choose between literature synthesis, hypothesis generation, methodology critique, or data interpretation based on what the researcher actually needs.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Prompt Routing</h3>
+                        <p class="use-case-showcase__desc">Build intelligent prompt routers that classify incoming requests and apply the appropriate framework &mdash; CoT, decomposition, analogy, or direct answer &mdash; automatically.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Decision Support</h3>
+                        <p class="use-case-showcase__desc">Match decision complexity to analysis depth &mdash; simple yes/no for clear-cut cases, multi-factor analysis for ambiguous ones, scenario modeling for high-stakes choices.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Meta-Reasoning Fits</h2>
+                <p class="section-subtitle fade-in-up">The orchestration layer above individual reasoning techniques</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Single Strategy</span>
+                        <span class="era-marker__desc">Always reason step-by-step</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Ask</span>
+                        <span class="era-marker__title">Single Strategy</span>
+                        <span class="era-marker__desc">Always decompose into sub-questions</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Meta-Reasoning</span>
+                        <span class="era-marker__title">Strategy Selection</span>
+                        <span class="era-marker__desc">Choose the best approach per problem</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">AI Agents</span>
+                        <span class="era-marker__title">Autonomous Routing</span>
+                        <span class="era-marker__desc">Multi-step tool and strategy orchestration</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Meta-Reasoning as a System Prompt</div>
+                    <p>In production, Meta-Reasoning works well as a system prompt instruction: &ldquo;Before answering any question, first classify the problem type (factual, analytical, creative, comparative, or procedural), then select and name the reasoning strategy you will use, then execute.&rdquo; This single instruction creates an adaptive system that handles diverse inputs without per-query prompt engineering.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Techniques that meta-reasoning orchestrates</p>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Strategy Option</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">One of the strategies Meta-Reasoning can select &mdash; sequential step-by-step reasoning, ideal for math and logic problems.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-ask.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Strategy Option</span>
+                        <span class="evolution-callout__title">Self-Ask</span>
+                        <span class="evolution-callout__desc">Another strategy in the meta-reasoning toolkit &mdash; question decomposition for multi-hop factual queries.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="analogical-reasoning.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Strategy Option</span>
+                        <span class="evolution-callout__title">Analogical Reasoning</span>
+                        <span class="evolution-callout__desc">Cross-domain analogy selection &mdash; the strategy Meta-Reasoning chooses for novel problems requiring creative, grounded solutions.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Think About How You Think</h2>
+                        <p class="cta-corporate__text">Add a meta-reasoning layer to your prompts or build strategy-adaptive systems with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
     </main>
+
 
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
@@ -284,6 +753,83 @@
         </div>
     </div>
 </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
 
     <script src="../app.js" defer></script>
 </body>

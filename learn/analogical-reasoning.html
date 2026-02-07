@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Analogical Reasoning Prompting: Use analogies and similar examples to help AI understand and solve novel problems.">
+    <meta name="description" content="Analogical Reasoning: Have the AI self-generate relevant examples and analogies from its training to solve novel problems — no manual demonstrations needed.">
     <title>Analogical Reasoning - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
@@ -131,7 +131,10 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -146,91 +149,560 @@
                     <span class="hero-badge__text">Thought Generation</span>
                 </div>
                 <h1 class="page-title fade-in">Analogical Reasoning</h1>
-                <p class="page-subtitle fade-in">Solve new problems by drawing parallels to familiar ones.</p>
+                <p class="page-subtitle fade-in">Solve new problems by drawing parallels to familiar ones &mdash; the model generates its own relevant examples from training data, finding structural similarities across domains without needing manually crafted demonstrations.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> Analogical Reasoning was introduced by Yasunaga et al. in 2023. The technique enables the model to self-generate relevant problems and solutions as analogies before solving new problems. Instead of manually providing few-shot examples, the model recalls similar problems from its training data &mdash; identifying structural parallels, extracting shared patterns, and transferring proven solution strategies to the novel challenge at hand.</p>
+                        <p><strong>Modern LLM Status:</strong> Self-generated reasoning is increasingly <strong>built into modern LLMs</strong> as part of their default reasoning capabilities. However, the explicit &ldquo;recall similar problems first&rdquo; instruction remains valuable for complex novel problems where you want the model to <strong>ground its approach in proven analogies from related domains</strong>. When facing genuinely unfamiliar territory, prompting the model to deliberately draw on analogous cases produces more creative, better-grounded solutions than generic reasoning alone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Learning from Similarity</h2>
-                        <p class="section-intro">Analogical reasoning prompts the model to recall relevant examples from its training and apply similar solutions to new problems. By asking "What similar problems have been solved before?", the model can transfer strategies across domains.</p>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Let the Model Find Its Own Examples</h2>
+                        <p class="split-section__text">Analogical reasoning transforms the model into an expert who recalls similar cases before tackling a new one. Rather than you providing examples manually, the model draws on the vast library of problems and solutions encoded in its training data &mdash; finding structural matches that a human might never think to look for. A networking problem might find its best analogy in fluid dynamics; a management challenge might mirror an ecosystem&rsquo;s balance.</p>
+                        <p class="split-section__text"><strong>The model becomes its own example curator.</strong> When presented with a novel problem, it searches its knowledge for structurally similar situations &mdash; problems that share the same underlying dynamics even if the surface details differ completely. It then extracts the patterns that made those analogous solutions work and maps them onto the current challenge, producing answers that are both creative and grounded in proven approaches.</p>
+                        <p class="split-section__text">Think of it like a seasoned consultant who, when faced with a client&rsquo;s unique problem, draws on decades of experience across industries to say &ldquo;I&rsquo;ve seen something like this before&rdquo; &mdash; then adapts what worked in that analogous context to fit the new situation precisely.</p>
+                    </div>
+                    <div class="split-section__visual">
                         <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Power of Analogies</span>
-                                <p>Just as humans learn by connecting new concepts to familiar ones, language models can leverage pattern matching across their training data to approach novel problems more effectively.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Prompt Pattern</span>
-                                <p>"Think of similar problems you've seen before. What approaches worked for those? Apply a similar strategy here."</p>
+                                <span class="highlight-box__title">Why Self-Generated Analogies Outperform Generic Reasoning</span>
+                                <p>When a model reasons from scratch about a novel problem, it has no anchor &mdash; no proven strategy to build upon. Analogical reasoning provides that anchor by having the model first recall cases where similar dynamics played out. The model doesn&rsquo;t just theorize; it <strong>draws on what actually worked</strong> in comparable situations. This grounds creative problem-solving in empirical precedent, reducing hallucination risk and producing solutions that inherit the battle-tested logic of their analogues.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE CONCEPT -->
 
+        <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Application</span>
-                    <h2 class="section-title">When to Use Analogical Reasoning</h2>
-                </div>
+                <h2 class="section-title fade-in-up">The Analogical Reasoning Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from novel problem to analogy-grounded solution</p>
 
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Novel Problems</h3>
-                        <p class="pillar-card__text">When facing an unusual problem, prompt the model to find structural similarities to known problems.</p>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Problem Presentation</h3>
+                            <p class="element-timeline__text">Present the novel problem clearly, including its constraints, goals, and context. The richer the problem description, the better the model can identify meaningful analogies. This stage frames the challenge and gives the model the raw material it needs to search for structural parallels.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;We need to design an onboarding flow for a complex B2B SaaS product with 50+ features. Users currently abandon during setup because they&rsquo;re overwhelmed by options.&rdquo;</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Cross-Domain Transfer</h3>
-                        <p class="pillar-card__text">Apply solutions from one field to another by highlighting parallels.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Analogy Recall</h3>
+                            <p class="element-timeline__text">The model generates similar problems it has encountered across different domains. It looks for structural matches &mdash; situations that share the same underlying dynamics (complexity management, progressive disclosure, user guidance) even if the surface context is entirely different. The model may draw from gaming tutorials, museum exhibit design, or apprenticeship models.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;This is similar to how video games handle tutorial design &mdash; introducing mechanics gradually through guided levels. It also parallels how IKEA stores guide customers through a predetermined path, exposing them to categories progressively rather than all at once.&rdquo;</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Creative Solutions</h3>
-                        <p class="pillar-card__text">Generate innovative approaches by combining strategies from analogous situations.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Pattern Extraction</h3>
+                            <p class="element-timeline__text">Identify the shared structural patterns between the analogies and the current problem. Strip away the surface details to reveal the underlying principles that made the analogous solutions effective. These extracted patterns become transferable strategies that can be adapted to the new context.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Shared patterns identified:</strong> (1) Progressive complexity &mdash; start with one core action, add layers only after mastery. (2) Guided pathways &mdash; reduce decision paralysis by offering a curated default route. (3) Achievement feedback &mdash; reward completion of each stage to motivate continuation. (4) Just-in-time disclosure &mdash; show features only when contextually relevant.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Solution Transfer</h3>
+                            <p class="element-timeline__text">Apply the extracted patterns to solve the original problem. Map each principle from the analogies onto the specific context of the current challenge. The solution inherits the proven logic of the analogues while being adapted to fit the unique constraints and goals of the new situation.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Transferred solution:</strong> Design the onboarding as a 5-stage &ldquo;quest&rdquo; &mdash; Stage 1 sets up the core workflow (like a game&rsquo;s first level), each stage unlocks the next feature group with a progress bar, contextual tooltips introduce advanced features only when the user reaches the relevant screen, and a &ldquo;setup score&rdquo; provides achievement feedback.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /HOW IT WORKS -->
 
+        <!-- === VISUAL: THE COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="chain-of-thought.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Chain-of-Thought</h3>
-                            <p class="icon-box__content">Step-by-step reasoning.</p>
-                        </div>
-                    </a>
-                    <a href="few-shot-learning.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Few-Shot Learning</h3>
-                            <p class="icon-box__content">Learning from explicit examples.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why analogy-grounded reasoning produces richer solutions</p>
 
-        <section class="section">
-            <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try Analogical Reasoning</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Direct Prompting</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>How should we reduce employee burnout in our fast-growing startup?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Offer flexible hours, provide wellness programs, hire more staff to distribute workload, and encourage regular breaks. Set clear boundaries between work and personal time.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Generic advice, no structural insight, could apply to any company</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Analogical Reasoning</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Analogy-Grounded Reasoning</span>
+                                <p><strong>Analogy 1:</strong> Athletic overtraining syndrome &mdash; athletes who train without recovery cycles experience declining performance despite increased effort. Solution: periodized training with structured rest.<br><strong>Analogy 2:</strong> Crop rotation in agriculture &mdash; planting the same crop repeatedly depletes soil. Solution: rotate crops and let fields lie fallow.<br><strong>Pattern:</strong> Systems that extract continuously without replenishment degrade. Recovery must be structural, not optional.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Transferred Solution</span>
+                                <p>Implement &ldquo;sprint rotation&rdquo; &mdash; teams cycle between high-intensity delivery sprints and recovery sprints (internal tooling, learning, experimentation). Like athletic periodization, this builds recovery into the system rather than treating it as an individual responsibility. Track team velocity across cycles to calibrate the rhythm.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Creative, structurally grounded, transfers proven patterns from other domains</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Analogical Reasoning in Action</h2>
+                <p class="section-subtitle fade-in-up">See how cross-domain analogies unlock creative, grounded solutions</p>
+
+                <div class="accordion fade-in-up" id="analogical-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Product Strategy &mdash; Pricing a New Feature</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;We&rsquo;re launching an AI-powered analytics feature. Should we bundle it free to drive adoption, or charge a premium to signal value?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Analogical Reasoning</span>
+                                    <p><strong>Analogy recalled:</strong> Razor-and-blade model (Gillette) &mdash; give away the razor, profit from blades. Also: Spotify&rsquo;s freemium model &mdash; free tier drives adoption, premium tier captures willingness to pay once value is demonstrated.<br><br>
+                                    <strong>Counter-analogy:</strong> Tesla Autopilot &mdash; premium pricing from day one signals advanced capability and funds continued R&amp;D. Early adopters pay a premium that subsidizes future improvements.<br><br>
+                                    <strong>Pattern extracted:</strong> The decision depends on whether the feature is the &ldquo;razor&rdquo; (drives adoption of something else) or the &ldquo;blade&rdquo; (the revenue engine itself). If analytics makes your core product stickier, bundle it. If analytics is the product, price it to signal value.<br><br>
+                                    <strong>Transferred solution:</strong> Launch with a free basic tier (the razor) that demonstrates value through limited insights, with a premium tier (the blade) unlocking real-time dashboards and predictive features. This mirrors the Spotify model and lets users self-select based on demonstrated value rather than promised value.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Engineering &mdash; Scaling a Microservices Architecture</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;Our microservices communicate through a tangled web of direct API calls. Adding a new service requires updating dozens of others. How do we decouple this?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Analogical Reasoning</span>
+                                    <p><strong>Analogy recalled:</strong> Postal system vs. telephone &mdash; telephones require direct connections (like API calls), but the postal system uses a central routing hub. A letter doesn&rsquo;t need to know the recipient&rsquo;s phone number; it just needs an address and the system routes it.<br><br>
+                                    <strong>Second analogy:</strong> Airport hub-and-spoke model &mdash; instead of direct flights between every city pair (exponential connections), airlines route through hubs. Adding a new city requires only one new route to the hub, not routes to every other city.<br><br>
+                                    <strong>Pattern extracted:</strong> Point-to-point connections scale quadratically. Hub-mediated routing scales linearly. Introduce an intermediary that handles routing so participants only need to know the hub, not each other.<br><br>
+                                    <strong>Transferred solution:</strong> Introduce an event bus (the postal system / airport hub) where services publish events without knowing who consumes them. New services subscribe to relevant events through the bus. This reduces coupling from O(n&sup2;) direct connections to O(n) bus connections, and adding a new service requires zero changes to existing ones.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Education &mdash; Teaching Abstract Mathematics</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;My students struggle with the concept of mathematical limits. They can compute them mechanically but don&rsquo;t understand what a limit actually means intuitively.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Analogical Reasoning</span>
+                                    <p><strong>Analogy recalled:</strong> Walking toward a wall &mdash; with each step you cover half the remaining distance. You never touch the wall, but you get arbitrarily close. The wall is the limit.<br><br>
+                                    <strong>Second analogy:</strong> Tuning a radio dial &mdash; as you turn the dial, you get closer and closer to the target frequency. Static decreases continuously. The &ldquo;limit&rdquo; is the perfect frequency where static disappears, even if mechanical precision means you never hit it exactly.<br><br>
+                                    <strong>Pattern extracted:</strong> A limit describes the value a process approaches as you refine the input, even if you never arrive exactly. The key insight is the convergence behavior, not the destination itself.<br><br>
+                                    <strong>Transferred solution:</strong> Teach limits through the radio-tuning analogy &mdash; have students physically adjust a slider toward a target value on screen, watching outputs converge. Then connect this experience to the formal notation: &ldquo;as x approaches a&rdquo; means &ldquo;as you tune closer to the target frequency.&rdquo; The mechanical computation becomes meaningful because students have felt the convergence before formalizing it.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Analogical Reasoning</h2>
+                <p class="section-subtitle fade-in-up">Best for novel problems that benefit from cross-domain insight</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Novel Problems</strong>
+                                    <p>Challenges with no obvious direct precedent &mdash; analogical reasoning finds structural parallels in unexpected places that generic reasoning would miss.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Cross-Domain Innovation</strong>
+                                    <p>When a fresh perspective from an unrelated field could unlock a breakthrough &mdash; biomimicry, design thinking, and interdisciplinary solutions.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Teaching Complex Concepts</strong>
+                                    <p>Explaining abstract or technical ideas by mapping them to familiar, tangible experiences that the audience already understands.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Strategic Planning</strong>
+                                    <p>Learning from how other industries, organizations, or systems solved structurally similar challenges &mdash; avoiding reinventing the wheel.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Well-Documented Problems</strong>
+                                    <p>When direct solutions already exist in the same domain &mdash; no need for cross-domain analogies when best practices are already established.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Precision-Critical Tasks</strong>
+                                    <p>When exact, verifiable answers are needed &mdash; analogies provide directional insight, not precise calculations or deterministic outputs.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Factual Questions</strong>
+                                    <p>Straightforward lookups or computations that have one correct answer &mdash; analogies add unnecessary complexity to questions with direct solutions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where analogical reasoning delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Product Design</h3>
+                        <p class="use-case-showcase__desc">Solve UX challenges by drawing on analogies from physical spaces, games, or other digital products that solved similar user experience problems.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Business Strategy</h3>
+                        <p class="use-case-showcase__desc">Identify market strategies by finding analogies in other industries &mdash; how did streaming disrupt video rental, and what does that mean for your industry?</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Scientific Research</h3>
+                        <p class="use-case-showcase__desc">Generate hypotheses by finding parallels between your research domain and established findings in related fields &mdash; biomimicry, cross-pollination of methods.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Technical Communication</h3>
+                        <p class="use-case-showcase__desc">Explain complex technical concepts to non-technical audiences by mapping them to everyday experiences they already understand.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Risk Assessment</h3>
+                        <p class="use-case-showcase__desc">Anticipate failure modes by studying how similar systems failed in other contexts &mdash; structural engineering lessons applied to software architecture.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Problem Reframing</h3>
+                        <p class="use-case-showcase__desc">When a team is stuck on a problem, analogical reasoning reframes it through a different lens &mdash; turning &ldquo;how do we reduce churn?&rdquo; into &ldquo;how do ecosystems maintain biodiversity?&rdquo;</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Analogical Reasoning Fits</h2>
+                <p class="section-subtitle fade-in-up">From manual examples to self-generated analogies</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Few-Shot Learning</span>
+                        <span class="era-marker__title">Manual Examples</span>
+                        <span class="era-marker__desc">You provide the examples</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Analogical Reasoning</span>
+                        <span class="era-marker__title">Self-Generated</span>
+                        <span class="era-marker__desc">Model recalls its own analogies</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Step-Back</span>
+                        <span class="era-marker__title">Abstraction First</span>
+                        <span class="era-marker__desc">Derive principles before solving</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Graph of Thought</span>
+                        <span class="era-marker__title">Non-Linear Paths</span>
+                        <span class="era-marker__desc">Interconnected reasoning nodes</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine with Few-Shot</div>
+                    <p>Analogical reasoning works even better when you provide one or two domain-specific examples alongside the instruction to generate more. Your examples prime the model&rsquo;s search direction, while the model&rsquo;s self-generated analogies expand the search to domains you might not have considered. This hybrid approach gives you the best of both manual curation and automated discovery.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary reasoning techniques</p>
+
+                <a href="few-shot-learning.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Few-Shot Learning</span>
+                        <span class="evolution-callout__desc">The manual example-providing technique that Analogical Reasoning automates &mdash; letting the model generate its own relevant examples instead.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="step-back.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Step-Back Prompting</span>
+                        <span class="evolution-callout__desc">Where Analogical Reasoning looks sideways at parallel cases, Step-Back looks upward to abstract principles &mdash; two complementary angles on the same problem.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Alternative</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">Linear step-by-step reasoning without cross-domain recall &mdash; use when the problem has a clear sequential path rather than needing creative analogies.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Reason by Analogy</h2>
+                        <p class="cta-corporate__text">Try analogical reasoning on your own challenges or build analogy-enhanced prompts with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
     </main>
+
 
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
@@ -284,6 +756,83 @@
         </div>
     </div>
 </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
 
     <script src="../app.js" defer></script>
 </body>

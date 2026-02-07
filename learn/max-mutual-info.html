@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Max Mutual Information: Select prompts and examples that maximize information shared between input and output.">
+    <meta name="description" content="Max Mutual Information: Select few-shot examples that maximize the information connection between demonstrations and the desired output — choosing examples by predictive power, not surface similarity.">
     <title>Max Mutual Information - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
@@ -131,7 +131,10 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -143,94 +146,554 @@
                     <span class="current">Max Mutual Information</span>
                 </nav>
                 <div class="hero-badge">
-                    <span class="hero-badge__text">Information Theory</span>
+                    <span class="hero-badge__text">Example Selection</span>
                 </div>
                 <h1 class="page-title fade-in">Max Mutual Information</h1>
-                <p class="page-subtitle fade-in">Select examples that maximize shared information.</p>
+                <p class="page-subtitle fade-in">Not all few-shot examples are created equal. Max Mutual Information selects demonstrations that maximize the information connection between your examples and the desired output &mdash; choosing examples by their predictive power, not just surface similarity to the input.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2022</span>
+                        <p><strong>Introduced:</strong> Max Mutual Information (MMI) for prompt selection was formalized in 2022, building on information-theoretic principles applied to in-context learning. The technique addresses a critical problem: few-shot examples chosen by surface similarity (nearest-neighbor in embedding space) often underperform examples chosen by their ability to make the correct output predictable. MMI flips the selection criterion &mdash; instead of asking &ldquo;which examples look like this input?&rdquo;, it asks &ldquo;which examples make the model most likely to produce the correct output?&rdquo;</p>
+                        <p><strong>Modern LLM Status:</strong> Example selection remains a <strong>high-impact lever for few-shot performance</strong>. Even with modern models like Claude and GPT-4, the choice of demonstrations significantly affects output quality. The MMI principle has been absorbed into automated prompt optimization tools and example selection pipelines. For practitioners, the key insight remains actionable: <strong>test multiple example sets and measure which ones produce the best outputs</strong>, rather than assuming the most similar-looking examples are the most helpful.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Information-Theoretic Selection</h2>
-                        <p class="section-intro">Max Mutual Information (MMI) selects few-shot examples that maximize the mutual information between the prompt and the desired output. Examples are chosen based on how much they help the model predict the correct answer, not just surface similarity.</p>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">The Best Examples Predict the Answer, Not Just Match the Question</h2>
+                        <p class="split-section__text">When building few-shot prompts, most people instinctively pick examples that look similar to the current input. Classifying a movie review? Choose other movie reviews. Answering a science question? Pick other science questions. This seems logical, but it often leads to suboptimal results because surface similarity doesn&rsquo;t guarantee that the examples actually help the model produce the right answer.</p>
+                        <p class="split-section__text"><strong>Max Mutual Information reframes example selection as an optimization problem.</strong> Instead of selecting examples by input similarity, MMI selects examples that maximize the mutual information between the demonstration set and the correct output. In practical terms: given a candidate set of examples, choose the combination that makes the model assign the highest probability to the correct answer. The examples that best &ldquo;inform&rdquo; the output are the ones to use.</p>
+                        <p class="split-section__text">Think of it like choosing study materials for an exam. You could study topics that look like what you expect on the test (similarity-based), or you could study the materials that, based on past experience, most improve your test scores (information-based). MMI takes the second approach &mdash; measuring actual predictive impact rather than assumed relevance.</p>
+                    </div>
+                    <div class="split-section__visual">
                         <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Idea</span>
-                                <p>Good demonstrations are those that make the correct output most predictable given the prompt—maximizing the information connection.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Practical Form</span>
-                                <p>Often approximated by selecting examples where the model assigns highest probability to the correct answer.</p>
+                                <span class="highlight-box__title">Why Similarity Isn&rsquo;t Enough</span>
+                                <p>Two examples can be equally similar to your input but have vastly different effects on the output. An example that shares the same structure and reasoning pattern as your problem is more informative than one that shares the same topic but uses different logic. MMI captures this distinction by measuring <strong>how much the examples reduce uncertainty about the output</strong>, not how much they resemble the input.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE CONCEPT -->
 
+        <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Comparison</span>
-                    <h2 class="section-title">MMI vs Other Selection</h2>
-                </div>
+                <h2 class="section-title fade-in-up">The MMI Selection Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from example pool to optimally informative demonstrations</p>
 
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Random</h3>
-                        <p class="pillar-card__text">No optimization—examples picked arbitrarily from the pool.</p>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Build a Candidate Example Pool</h3>
+                            <p class="element-timeline__text">Assemble a library of potential few-shot examples, each consisting of an input-output pair. This pool should be diverse enough to cover the range of patterns the model might encounter. The pool can come from training data, manually crafted examples, or previously successful prompt-response pairs.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>For a sentiment classification task, gather 50 labeled reviews spanning positive, negative, and neutral sentiments across different product categories, writing styles, and review lengths.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Similarity</h3>
-                        <p class="pillar-card__text">KNN-style—examples most similar to input in embedding space.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Score Examples by Output Probability</h3>
+                            <p class="element-timeline__text">For each candidate example (or combination of examples), measure how much it increases the model&rsquo;s probability of generating the correct output for your target problem. This is the mutual information signal: examples that make the correct answer more likely carry more information about the output distribution.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Test each candidate demonstration with your target input and measure the model&rsquo;s confidence in the correct label. Example A (a sarcastic review correctly labeled negative) might push confidence to 92%, while Example B (a straightforward positive review) only reaches 78%.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">MMI</h3>
-                        <p class="pillar-card__text">Examples that most increase probability of correct output.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Select the Top-K Informative Examples</h3>
+                            <p class="element-timeline__text">Rank all candidates by their information score and select the top-k examples that jointly maximize mutual information. This step considers not just individual example quality but also diversity &mdash; two nearly identical high-scoring examples may provide less total information than two different high-scoring examples that cover distinct patterns.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>From the 50-example pool, MMI selects 3 demonstrations: a sarcastic negative review, a mixed-sentiment review correctly labeled neutral, and a short positive review. Together, these three examples maximize the model&rsquo;s ability to classify the target review correctly.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Construct the Optimized Prompt</h3>
+                            <p class="element-timeline__text">Arrange the selected examples in the prompt, considering order effects (example ordering can impact performance). The final prompt contains demonstrations that are maximally informative for the specific task at hand, rather than generically similar to the input.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The final prompt places the three selected examples in order of increasing difficulty, followed by the target review. The model now classifies the target with the highest possible confidence, guided by the most informative demonstrations available.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /HOW IT WORKS -->
 
+        <!-- === VISUAL: THE COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="example-selection.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Example Selection</h3>
-                            <p class="icon-box__content">Choosing effective demonstrations.</p>
-                        </div>
-                    </a>
-                    <a href="knn-prompting.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">KNN Prompting</h3>
-                            <p class="icon-box__content">Similarity-based selection.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why information-optimized examples outperform similarity-based selection</p>
 
-        <section class="section">
-            <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try MMI Selection</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Similarity-Based Selection</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Examples Chosen by Topic Match</span>
+                                <p><strong>Target:</strong> Classify this email as spam or not-spam.<br><br><strong>Selected examples</strong> (most similar emails by embedding):<br>1. Newsletter about cooking &rarr; not-spam<br>2. Newsletter about gardening &rarr; not-spam<br>3. Newsletter about fitness &rarr; not-spam<br><br><strong>Input:</strong> &ldquo;URGENT: Your account has been compromised! Click here to verify your identity immediately.&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>This appears to be a legitimate security notification. Classification: not-spam.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>All examples were not-spam newsletters &mdash; model learned the wrong pattern from homogeneous demonstrations</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">MMI Selection</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Examples Chosen by Predictive Power</span>
+                                <p><strong>Selected examples</strong> (maximizing output probability):<br>1. &ldquo;Your package is delayed&rdquo; &rarr; not-spam (legitimate urgency)<br>2. &ldquo;CLICK NOW to claim your prize!!!&rdquo; &rarr; spam (urgency + manipulation)<br>3. &ldquo;Verify your account at this link&rdquo; &rarr; spam (phishing pattern)<br><br><strong>Input:</strong> &ldquo;URGENT: Your account has been compromised! Click here to verify your identity immediately.&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>This matches phishing patterns: urgent language, account threat, and a verification link. Classification: spam.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>MMI selected examples that distinguish spam patterns &mdash; model learned the decision boundary, not just one category</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">MMI Selection in Action</h2>
+                <p class="section-subtitle fade-in-up">See how information-optimized examples improve task performance</p>
+
+                <div class="accordion fade-in-up" id="mmi-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Sentiment Analysis with Sarcasm</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Selection Process</span>
+                                    <p><strong>Target input:</strong> &ldquo;Oh great, another software update that breaks everything. Exactly what I needed today.&rdquo;<br><br><strong>Similarity-based would choose:</strong> Other software reviews (all straightforwardly negative &rarr; model learns &ldquo;software complaints = negative&rdquo;, which is correct but misses the WHY)<br><br><strong>MMI selects:</strong><br>1. &ldquo;This is just wonderful. My flight got cancelled again.&rdquo; &rarr; Negative (sarcasm pattern)<br>2. &ldquo;Best purchase I&rsquo;ve ever made, truly life-changing!&rdquo; &rarr; Positive (genuine enthusiasm)<br>3. &ldquo;Sure, because who doesn&rsquo;t love waiting 3 hours?&rdquo; &rarr; Negative (sarcastic rhetorical question)</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why MMI Works Better Here</span>
+                                    <p>The target uses sarcasm (&ldquo;Oh great&rdquo;, &ldquo;Exactly what I needed&rdquo;). MMI-selected examples teach the model to recognize sarcastic patterns specifically, not just negative language. The genuine positive example provides a contrast that sharpens the model&rsquo;s ability to distinguish sarcasm from sincere enthusiasm. Result: the model correctly identifies the review as negative with high confidence, understanding the sarcastic register rather than just pattern-matching keywords.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Legal Contract Classification</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Selection Process</span>
+                                    <p><strong>Target:</strong> Classify this contract clause as &ldquo;termination&rdquo;, &ldquo;liability&rdquo;, or &ldquo;indemnification&rdquo;.<br><br><strong>Input clause:</strong> &ldquo;Party B shall hold harmless and defend Party A against any claims arising from Party B&rsquo;s negligence, provided notice is given within 30 days.&rdquo;<br><br><strong>MMI selects examples at the decision boundary:</strong><br>1. Pure indemnification clause (clear case) &rarr; indemnification<br>2. Liability limitation with indemnity language (borderline) &rarr; liability<br>3. Indemnification with termination trigger (borderline) &rarr; indemnification</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Result</span>
+                                    <p>MMI selected examples that highlight the distinctions between categories, not just clear examples of each. The borderline cases teach the model WHERE the boundary is between liability and indemnification clauses. The model correctly classifies the target as &ldquo;indemnification&rdquo; based on the &ldquo;hold harmless and defend&rdquo; language, despite the &ldquo;negligence&rdquo; and &ldquo;notice&rdquo; language that could suggest liability.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Code Bug Classification</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Selection Process</span>
+                                    <p><strong>Target:</strong> Classify this bug report as &ldquo;performance&rdquo;, &ldquo;logic error&rdquo;, or &ldquo;UI/UX&rdquo;.<br><br><strong>Input:</strong> &ldquo;The search results page takes 8 seconds to load when there are more than 100 results. Users see a blank screen during this time.&rdquo;<br><br><strong>Similarity-based:</strong> Other slow-loading bug reports &rarr; all classified as performance<br><br><strong>MMI selects:</strong><br>1. &ldquo;API timeout after 10s on large queries&rdquo; &rarr; performance (pure backend)<br>2. &ldquo;Loading spinner not shown during data fetch&rdquo; &rarr; UI/UX (user sees nothing)<br>3. &ldquo;Page freezes during sort of 1000+ items&rdquo; &rarr; performance (client-side)</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Result</span>
+                                    <p>The target bug has BOTH a performance component (8-second load) AND a UI/UX component (blank screen). MMI-selected examples help the model recognize this dual nature. The model correctly identifies the primary issue as &ldquo;performance&rdquo; but notes the blank screen is a separate UI/UX concern &mdash; a nuanced classification that similarity-based selection would miss by only showing pure performance bugs.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use MMI Selection</h2>
+                <p class="section-subtitle fade-in-up">Best for classification and structured tasks where example choice directly impacts accuracy</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Stakes Classification</strong>
+                                    <p>When classification accuracy directly impacts business decisions &mdash; medical triage, fraud detection, content moderation &mdash; where a 5% accuracy gain from better examples is worth the selection effort.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Ambiguous Categories</strong>
+                                    <p>Tasks with overlapping or confusable classes &mdash; where the decision boundary between categories is subtle and examples near that boundary are most informative.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Large Example Pools</strong>
+                                    <p>When you have many candidate examples to choose from &mdash; the larger the pool, the more opportunity to find truly informative demonstrations rather than settling for merely adequate ones.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Production Pipelines</strong>
+                                    <p>Automated systems processing thousands of inputs daily &mdash; the upfront cost of example optimization is amortized across many inference calls.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Small Example Pools</strong>
+                                    <p>If you only have 5-10 candidate examples, there&rsquo;s limited room for optimization. The selection effort may not yield meaningful improvement over random or manual selection.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Open-Ended Generation</strong>
+                                    <p>For creative writing, brainstorming, or tasks without a single correct answer, mutual information is hard to define and optimize &mdash; there&rsquo;s no clear &ldquo;correct output&rdquo; to maximize probability for.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>One-Off Ad-Hoc Tasks</strong>
+                                    <p>If you&rsquo;re only running a prompt once, the overhead of scoring and selecting optimal examples isn&rsquo;t justified. Just pick examples that cover the main patterns.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where MMI selection delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Fraud Detection</h3>
+                        <p class="use-case-showcase__desc">Select demonstration transactions that highlight the subtle boundary between legitimate and fraudulent patterns, teaching the model to spot borderline cases rather than obvious ones.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Triage</h3>
+                        <p class="use-case-showcase__desc">Choose case examples that distinguish between conditions with similar presentations &mdash; maximizing the model&rsquo;s ability to differentiate diagnoses that share overlapping symptoms.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Intent Classification</h3>
+                        <p class="use-case-showcase__desc">For chatbots and virtual assistants, select examples that disambiguate easily confused intents &mdash; &ldquo;cancel my order&rdquo; vs. &ldquo;change my order&rdquo; vs. &ldquo;track my order.&rdquo;</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Document Routing</h3>
+                        <p class="use-case-showcase__desc">Route documents to the correct department by selecting examples that distinguish between overlapping categories &mdash; legal vs. compliance, technical vs. product, HR vs. management.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Moderation</h3>
+                        <p class="use-case-showcase__desc">Select examples that teach the nuanced boundary between acceptable and policy-violating content &mdash; where context, intent, and tone determine the classification.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Data Quality Assessment</h3>
+                        <p class="use-case-showcase__desc">Classify data records as clean, suspicious, or corrupted by selecting examples that demonstrate the subtle differences between legitimate anomalies and actual data quality issues.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where MMI Fits</h2>
+                <p class="section-subtitle fade-in-up">MMI bridges naive selection and fully automated prompt optimization</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Random Selection</span>
+                        <span class="era-marker__title">No Optimization</span>
+                        <span class="era-marker__desc">Arbitrary examples from the pool</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Similarity-Based</span>
+                        <span class="era-marker__title">Input Matching</span>
+                        <span class="era-marker__desc">Nearest-neighbor in embedding space</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Max Mutual Info</span>
+                        <span class="era-marker__title">Output Optimization</span>
+                        <span class="era-marker__desc">Maximize predictive power for correct output</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Auto-Prompt</span>
+                        <span class="era-marker__title">Full Optimization</span>
+                        <span class="era-marker__desc">Automated example + instruction tuning</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Practical Approximation</div>
+                    <p>Computing exact mutual information is expensive. In practice, approximate MMI by testing each candidate example against a validation set and measuring accuracy. The examples that produce the highest validation accuracy are your MMI-optimal selections. This &ldquo;try and measure&rdquo; approach captures the MMI insight without requiring probability calculations.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary example selection techniques</p>
+
+                <a href="example-selection.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Parent Topic</span>
+                        <span class="evolution-callout__title">Example Selection</span>
+                        <span class="evolution-callout__desc">The broader field of choosing effective demonstrations &mdash; MMI is one specific, information-theoretic approach within this space.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="few-shot-learning.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Few-Shot Learning</span>
+                        <span class="evolution-callout__desc">The prompting paradigm that MMI enhances &mdash; few-shot learning provides the demonstrations, and MMI optimizes which demonstrations to use.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">Combine MMI-selected examples with self-consistency voting &mdash; optimized demonstrations plus ensemble sampling for maximum accuracy.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Optimize Your Examples</h2>
+                        <p class="cta-corporate__text">Start selecting demonstrations by their predictive power and build more effective few-shot prompts with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
     </main>
+
 
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
@@ -284,6 +747,83 @@
         </div>
     </div>
 </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
 
     <script src="../app.js" defer></script>
 </body>

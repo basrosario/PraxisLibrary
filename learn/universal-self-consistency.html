@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Universal Self-Consistency: Apply self-consistency voting to free-form generation tasks, not just multiple-choice.">
+    <meta name="description" content="Universal Self-Consistency: Extend consistency-based voting beyond fixed answers to free-form generation — let the model itself judge which response best represents the consensus across multiple samples.">
     <title>Universal Self-Consistency - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
@@ -131,7 +131,10 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -146,91 +149,567 @@
                     <span class="hero-badge__text">Ensemble Methods</span>
                 </div>
                 <h1 class="page-title fade-in">Universal Self-Consistency</h1>
-                <p class="page-subtitle fade-in">Extend consistency voting to open-ended generation.</p>
+                <p class="page-subtitle fade-in">Standard self-consistency works by voting on identical answers &mdash; but what about open-ended tasks where no two responses are worded the same? Universal Self-Consistency uses the LLM itself to identify which response best represents the consensus, extending ensemble voting to any generation task.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> Universal Self-Consistency (USC) was proposed in 2023 by Chen et al. The technique solves a fundamental limitation of standard self-consistency: majority voting requires identical, discrete answers. When the model produces free-form text &mdash; summaries, explanations, code, or open-ended answers &mdash; no two responses are worded identically, making simple voting impossible. USC replaces exact-match voting with <strong>LLM-as-judge</strong>: generate multiple candidate responses, then ask the model to select the one most consistent with the group.</p>
+                        <p><strong>Modern LLM Status:</strong> USC&rsquo;s approach of using the model as its own consistency judge has become a <strong>foundational pattern in modern AI systems</strong>. LLM-as-judge evaluation is now standard practice in RLHF, automated benchmarking, and production quality assurance. The specific USC technique remains valuable when you need to <strong>boost reliability on open-ended tasks</strong> without task-specific evaluation criteria &mdash; the consensus signal itself serves as a quality filter.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Beyond Fixed Answers</h2>
-                        <p class="section-intro">Universal Self-Consistency (USC) extends self-consistency from tasks with discrete answers to free-form generation. Instead of simple voting, it uses the LLM itself to identify the most consistent response among multiple samples.</p>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Let the Model Find Its Own Consensus</h2>
+                        <p class="split-section__text">Self-consistency is one of the most powerful reliability techniques: ask the same question multiple times, then pick the most common answer. For math problems or multiple-choice questions, this works brilliantly &mdash; generate 10 answers, and if 7 say &ldquo;42&rdquo;, you can be confident in that result. But what happens when the output is a paragraph-long explanation? No two explanations will use identical words, so there is nothing to &ldquo;vote&rdquo; on.</p>
+                        <p class="split-section__text"><strong>Universal Self-Consistency solves this by replacing voting with judging.</strong> Instead of counting identical answers, USC presents all candidate responses to the model and asks: &ldquo;Which of these responses is most consistent with the majority?&rdquo; The model can recognize semantic agreement even when surface text differs &mdash; two explanations that reach the same conclusion via different wording are identified as consistent.</p>
+                        <p class="split-section__text">Think of it like a jury deliberation. Instead of requiring every juror to write the identical verdict statement (impossible), you ask them to each write their reasoning, then select the statement that best represents the majority opinion. The consensus emerges from meaning, not from matching words.</p>
+                    </div>
+                    <div class="split-section__visual">
                         <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">The Challenge</span>
-                                <p>Standard self-consistency needs identical answers to vote. USC handles cases where responses differ in wording but agree in meaning.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Process</span>
-                                <p>1) Generate multiple responses. 2) Ask LLM to identify which response is most consistent with the others. 3) Select that response.</p>
+                                <span class="highlight-box__title">Why Semantic Consensus Beats Exact Matching</span>
+                                <p>Exact-match voting discards valuable information. Two responses might agree on every factual point but use different vocabulary, sentence structure, or organization &mdash; exact matching treats them as different answers. USC captures <strong>agreement in meaning</strong>, not just agreement in text. This dramatically expands the range of tasks where consistency-based quality filtering works, from pure classification to summarization, explanation, code generation, and creative writing.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE CONCEPT -->
 
+        <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Applications</span>
-                    <h2 class="section-title">When to Use USC</h2>
-                </div>
+                <h2 class="section-title fade-in-up">The USC Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from multiple samples to consensus-selected output</p>
 
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Open QA</h3>
-                        <p class="pillar-card__text">Questions with free-form answers that can be phrased multiple ways.</p>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Generate Multiple Candidate Responses</h3>
+                            <p class="element-timeline__text">Sample the model multiple times (typically 5-15 responses) using the same prompt with temperature &gt; 0 to introduce variation. Each response represents one possible answer to the question. The diversity across samples captures the range of the model&rsquo;s &ldquo;beliefs&rdquo; about the correct answer.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Prompt: &ldquo;Explain why the sky is blue in 2-3 sentences.&rdquo; Generate 5 responses &mdash; each explains the phenomenon differently, but most converge on Rayleigh scattering as the key mechanism.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Summarization</h3>
-                        <p class="pillar-card__text">Finding the summary that best captures consensus across multiple attempts.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Present All Candidates to the Model</h3>
+                            <p class="element-timeline__text">Collect all generated responses and format them as a numbered list in a new prompt. The model receives the complete set of candidates along with the original question. This gives the model full visibility into the range of responses it produced, allowing it to assess patterns of agreement and disagreement.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;I generated 5 responses to the question. Response 1: [text]. Response 2: [text]. Response 3: [text]. Response 4: [text]. Response 5: [text].&rdquo;</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Code Generation</h3>
-                        <p class="pillar-card__text">Selecting the implementation most consistent with multiple solution attempts.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Ask the Model to Select the Most Consistent</h3>
+                            <p class="element-timeline__text">Instruct the model to analyze all candidates and identify which response is most consistent with the majority. The prompt asks specifically: &ldquo;Which response best represents the consensus across all responses?&rdquo; The model evaluates semantic agreement, identifying shared claims, common reasoning patterns, and majority positions.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Based on the responses above, select the one that is most consistent with the majority. Explain briefly why.&rdquo; &rarr; Model selects Response 3 because 4 out of 5 responses mention Rayleigh scattering and shorter wavelengths, and Response 3 captures both points most clearly.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Return the Consensus Response</h3>
+                            <p class="element-timeline__text">The selected response becomes the final output. Because it was chosen for its consistency with the majority, it is more likely to be accurate and well-reasoned than any single sample. Outlier responses &mdash; those with factual errors, unusual reasoning, or minority positions &mdash; are naturally filtered out by the consensus selection process.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Final output: Response 3 &mdash; &ldquo;The sky appears blue because of Rayleigh scattering. Sunlight entering the atmosphere is scattered by gas molecules, and shorter blue wavelengths scatter more than longer red wavelengths, making the sky appear blue to observers on the ground.&rdquo;</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /HOW IT WORKS -->
 
+        <!-- === VISUAL: THE COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="self-consistency.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Self-Consistency</h3>
-                            <p class="icon-box__content">Original voting method.</p>
-                        </div>
-                    </a>
-                    <a href="diverse-prompting.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">DiVeRSe</h3>
-                            <p class="icon-box__content">Diverse + verified selection.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why semantic consensus selection outperforms single-sample generation</p>
 
-        <section class="section">
-            <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try Universal Self-Consistency</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Single Sample</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Summarize the key factors that led to the dot-com bubble bursting in 2000.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>The dot-com bubble burst primarily because of the Federal Reserve raising interest rates in 1999-2000. Higher borrowing costs made it impossible for unprofitable tech companies to continue operating, triggering a cascade of failures.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Focuses on only one factor &mdash; a single sample can fixate on a partial explanation</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Universal Self-Consistency</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Process</span>
+                                <p>Generated 7 candidate summaries. Model selected the response most consistent with the majority, which covered: speculative overvaluation, lack of profitable business models, interest rate increases, and market sentiment shift. 5 of 7 responses mentioned all four factors.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Consensus Response</span>
+                                <p>The dot-com bubble burst due to several converging factors: massive speculation drove valuations far beyond fundamentals, most internet companies lacked viable business models or revenue, the Fed raised interest rates which tightened capital, and a shift in market sentiment turned optimism into panic selling. The combination of overvaluation meeting financial reality triggered the collapse.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Consensus selection naturally surfaces the complete, multi-factor explanation that most responses agreed on</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">USC in Action</h2>
+                <p class="section-subtitle fade-in-up">See how consensus selection improves free-form generation quality</p>
+
+                <div class="accordion fade-in-up" id="usc-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Technical Explanation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Question</span>
+                                    <p>&ldquo;Explain how HTTPS protects web traffic.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">USC Process</span>
+                                    <p><strong>Generated 5 responses:</strong><br>
+                                    Response 1: Focuses on TLS handshake and certificate verification<br>
+                                    Response 2: Emphasizes encryption of data in transit<br>
+                                    Response 3: Covers TLS handshake, encryption, AND certificate authentication<br>
+                                    Response 4: Mentions encryption but incorrectly states it prevents all attacks<br>
+                                    Response 5: Covers encryption and authentication, similar to Response 3<br><br>
+                                    <strong>Model&rsquo;s judgment:</strong> Response 3 is most consistent with the majority &mdash; 4 of 5 mention encryption, 3 mention the TLS handshake, and 3 mention certificate verification. Response 3 covers all three. Response 4 is an outlier with its incorrect overclaim.<br><br>
+                                    <strong>Selected output:</strong> Response 3, which provides a complete, accurate explanation of HTTPS covering all three key mechanisms the majority agreed on.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Code Generation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task</span>
+                                    <p>&ldquo;Write a function to check if a string is a valid palindrome, ignoring case and non-alphanumeric characters.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">USC Process</span>
+                                    <p><strong>Generated 5 implementations:</strong><br>
+                                    Responses 1, 3, 5: Clean the string (lowercase + remove non-alphanumeric), then compare to its reverse<br>
+                                    Response 2: Two-pointer approach from both ends, skipping non-alphanumeric characters<br>
+                                    Response 4: Uses regex to clean string, but has an off-by-one error in the comparison<br><br>
+                                    <strong>Model&rsquo;s judgment:</strong> Responses 1, 3, and 5 share the same approach and all produce correct results. Response 2 works but uses a different algorithm. Response 4 has a bug. The consensus approach is clean-and-reverse, with Response 3 having the clearest variable naming.<br><br>
+                                    <strong>Selected output:</strong> Response 3 &mdash; the clean-and-reverse approach with clear naming, representing the majority consensus and free from the bug in Response 4.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Business Strategy Summary</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task</span>
+                                    <p>&ldquo;Based on this quarterly earnings report [attached], summarize the three most important strategic takeaways for investors.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">USC Process</span>
+                                    <p><strong>Generated 7 summaries with different emphasis:</strong><br>
+                                    5 of 7 identified: (1) Revenue growth in cloud services, (2) Declining margins in hardware, (3) Aggressive R&amp;D spending signaling AI pivot<br>
+                                    2 outliers mentioned: supply chain risks and regulatory concerns (valid but minority focus)<br><br>
+                                    <strong>Model&rsquo;s judgment:</strong> The three takeaways that appear most consistently across all responses are cloud revenue growth, hardware margin pressure, and the AI investment signal. The supply chain and regulatory points appear in only 2 responses each.<br><br>
+                                    <strong>Selected output:</strong> The summary that most clearly articulated all three consensus takeaways, filtered from the noise of less-agreed-upon points.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use USC</h2>
+                <p class="section-subtitle fade-in-up">Best for open-ended tasks where you want reliability without sacrificing expressiveness</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Open-Ended Question Answering</strong>
+                                    <p>When answers are paragraph-length explanations rather than single values &mdash; USC finds the explanation that best represents what the model consistently believes.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Summarization Tasks</strong>
+                                    <p>Different summaries of the same document emphasize different points &mdash; USC selects the summary that captures the information most summaries agree is important.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Code Generation</strong>
+                                    <p>Multiple implementation attempts may use different approaches but converge on the same logic &mdash; USC selects the implementation most consistent with the majority approach.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Stakes Content</strong>
+                                    <p>When the output will be published, submitted, or used for decisions &mdash; USC provides an extra quality filter that catches outlier errors a single generation might include.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Discrete-Answer Tasks</strong>
+                                    <p>For multiple-choice, yes/no, or numerical answers, standard self-consistency with majority voting is simpler and equally effective &mdash; no need for LLM-as-judge.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Cost-Sensitive Applications</strong>
+                                    <p>USC requires N+1 API calls (N samples plus the selection judgment). If budget is tight, the 5-15x cost increase may not justify the quality improvement.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative Diversity Tasks</strong>
+                                    <p>When you actually want diverse, novel outputs rather than consensus &mdash; brainstorming, creative writing prompts, or generating options for human review benefit from variety, not convergence.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Universal Self-Consistency delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Report Generation</h3>
+                        <p class="use-case-showcase__desc">Generate multiple draft reports from the same data, then select the version that best captures the consensus findings &mdash; filtering out one-off misinterpretations or emphasis errors.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Summaries</h3>
+                        <p class="use-case-showcase__desc">Summarize patient records or research papers multiple times, then select the summary that most consistently captures the key clinical findings across all attempts.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Security Advisory Writing</h3>
+                        <p class="use-case-showcase__desc">Draft vulnerability descriptions multiple times and select the version that most consistently describes the risk, impact, and mitigation &mdash; ensuring accuracy in critical communications.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Customer Response Templates</h3>
+                        <p class="use-case-showcase__desc">Generate multiple response options for sensitive customer situations, then select the version that best represents the consensus tone, accuracy, and completeness.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Educational Content</h3>
+                        <p class="use-case-showcase__desc">Create explanations of complex topics multiple times, then select the version that most consistently represents the correct understanding &mdash; filtering out occasional misconceptions.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Data Analysis Narratives</h3>
+                        <p class="use-case-showcase__desc">Interpret charts and datasets multiple times, selecting the interpretation that most consistently identifies the key trends &mdash; reducing the chance of spurious pattern detection.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where USC Fits</h2>
+                <p class="section-subtitle fade-in-up">USC extends consistency voting into the realm of free-form generation</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Single Sample</span>
+                        <span class="era-marker__title">No Filtering</span>
+                        <span class="era-marker__desc">One generation, take it or leave it</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Consistency</span>
+                        <span class="era-marker__title">Exact Voting</span>
+                        <span class="era-marker__desc">Majority vote on identical answers</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">USC</span>
+                        <span class="era-marker__title">Semantic Consensus</span>
+                        <span class="era-marker__desc">LLM judges consistency across free-form responses</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">LLM-as-Judge</span>
+                        <span class="era-marker__title">Criteria-Based</span>
+                        <span class="era-marker__desc">Evaluating quality on explicit rubrics</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine with Chain-of-Thought</div>
+                    <p>For best results, generate candidate responses using Chain-of-Thought reasoning (with temperature &gt; 0). This produces diverse reasoning paths that converge on correct answers through different routes. When USC then selects the most consistent response, it&rsquo;s choosing from a pool of well-reasoned candidates rather than shallow guesses &mdash; the combination of CoT diversity and USC consensus is more powerful than either alone.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary consistency and ensemble techniques</p>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">The original majority-voting technique for discrete answers that USC generalizes to free-form generation through semantic consensus.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">Use CoT to generate diverse reasoning paths, then USC to select the most consistent result &mdash; combining reasoning depth with consensus reliability.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-refine.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Alternative</span>
+                        <span class="evolution-callout__title">Self-Refine</span>
+                        <span class="evolution-callout__desc">While USC selects among parallel samples, Self-Refine iteratively improves a single response &mdash; two different strategies for quality improvement.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Find Your Consensus</h2>
+                        <p class="cta-corporate__text">Apply consensus-based quality filtering to your open-ended AI outputs and build more reliable generation pipelines.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
     </main>
+
 
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
@@ -284,6 +763,83 @@
         </div>
     </div>
 </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
 
     <script src="../app.js" defer></script>
 </body>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Memory of Thought: Store and retrieve past reasoning chains to inform current problem-solving.">
+    <meta name="description" content="Memory of Thought: Store the model's own successful reasoning chains and retrieve them as demonstrations for new problems — turning past performance into future guidance.">
     <title>Memory of Thought - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
@@ -131,7 +131,10 @@
         </div>
     </header>
 
+
+
     <main id="main-content">
+        <!-- === HERO SECTION === -->
         <section class="page-hero">
             <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
             <div class="container">
@@ -146,91 +149,568 @@
                     <span class="hero-badge__text">Memory Systems</span>
                 </div>
                 <h1 class="page-title fade-in">Memory of Thought</h1>
-                <p class="page-subtitle fade-in">Learn from past reasoning to solve new problems.</p>
+                <p class="page-subtitle fade-in">Instead of starting every problem from zero, Memory of Thought stores the model&rsquo;s own successful reasoning chains and retrieves the most relevant ones as demonstrations for new problems &mdash; turning past performance into self-improving guidance.</p>
             </div>
         </section>
+        <!-- /HERO SECTION -->
 
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> Memory of Thought (MoT) was proposed in 2023 by Li et al. The technique addresses a fundamental limitation of few-shot prompting: hand-crafted demonstrations are static and may not match the structure of the current problem. MoT introduces a self-improving cycle &mdash; the model first solves problems using chain-of-thought reasoning, stores successful reasoning chains in a memory bank, and then retrieves the most similar chains as dynamic demonstrations for new problems. This creates an experience-driven loop where the model&rsquo;s own past successes guide its future reasoning.</p>
+                        <p><strong>Modern LLM Status:</strong> The core insight of MoT &mdash; using the model&rsquo;s own successful reasoning as future demonstrations &mdash; has influenced the design of <strong>retrieval-augmented reasoning systems</strong>. Modern agents and multi-turn systems often maintain memory of past interactions. However, the explicit store-retrieve-apply pipeline remains valuable in production systems where you want to <strong>build a growing library of verified reasoning patterns</strong> that improve performance over time without retraining. MoT is most relevant for batch processing, automated pipelines, and domain-specific applications where a curated reasoning memory can accumulate.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
         <section class="section section-alt">
             <div class="container">
-                <div class="split-section">
+                <div class="split-section split-section--center fade-in-up">
                     <div class="split-section__content">
-                        <span class="section-eyebrow">The Concept</span>
-                        <h2 class="section-title">Persistent Reasoning Memory</h2>
-                        <p class="section-intro">Memory of Thought (MoT) stores successful reasoning chains from past problems and retrieves relevant ones when facing new problems. This allows the model to build on previous experience rather than starting fresh each time.</p>
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Your Best Teacher Is Your Own Past Success</h2>
+                        <p class="split-section__text">Standard few-shot prompting relies on hand-picked examples that may not resemble the current problem. You carefully craft three demonstrations for math problems, but then face a logistics optimization question where those examples are structurally irrelevant. The demonstrations are static &mdash; frozen in time regardless of what the model has already proven it can solve.</p>
+                        <p class="split-section__text"><strong>Memory of Thought turns the model into its own example curator.</strong> After successfully solving a problem with chain-of-thought reasoning, MoT stores that complete reasoning chain &mdash; problem, steps, and answer &mdash; in a searchable memory bank. When a new problem arrives, MoT retrieves the most structurally similar past chains and uses them as few-shot demonstrations. The examples are always relevant because they come from problems the model has already solved correctly.</p>
+                        <p class="split-section__text">Think of it like a doctor who keeps a case journal. Each successfully diagnosed patient becomes a reference for future cases. When a new patient arrives with similar symptoms, the doctor reviews their own past cases to guide the current diagnosis &mdash; not a textbook&rsquo;s generic examples, but their own proven reasoning.</p>
+                    </div>
+                    <div class="split-section__visual">
                         <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">Key Idea</span>
-                                <p>Past reasoning chains serve as a dynamic example bank, with retrieval based on similarity to the current problem.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="split-section__media">
-                        <div class="highlight-box highlight-box--tip">
-                            <div class="highlight-box__content">
-                                <span class="highlight-box__title">Components</span>
-                                <p>1) Memory store of past chains. 2) Retrieval mechanism. 3) Integration with current reasoning.</p>
+                                <span class="highlight-box__title">Why Self-Generated Examples Beat Hand-Crafted Ones</span>
+                                <p>Hand-crafted demonstrations are limited by the prompt engineer&rsquo;s ability to anticipate problem structures. Self-generated memories are automatically diverse and structurally matched to the problems the model actually encounters. As the memory bank grows, the quality of retrieved demonstrations improves &mdash; creating a <strong>positive feedback loop</strong> where success breeds better future reasoning.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE CONCEPT -->
 
+        <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-eyebrow">Process</span>
-                    <h2 class="section-title">MoT Pipeline</h2>
-                </div>
+                <h2 class="section-title fade-in-up">The Memory of Thought Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from problem to growing reasoning memory</p>
 
-                <div class="pillar-grid pillar-grid--3 fade-in-up">
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Store</h3>
-                        <p class="pillar-card__text">Save reasoning chains from successfully solved problems to the memory bank.</p>
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Pre-Think: Solve with Chain-of-Thought</h3>
+                            <p class="element-timeline__text">Given a problem, the model first solves it using standard chain-of-thought reasoning. This produces a complete reasoning chain: the original question, each intermediate step, and the final answer. The model reasons through the problem as it normally would, generating a full trace of its thought process.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Problem: &ldquo;A store has 240 items. If 15% are returned, and half the returns are reshelved, how many items remain in stock?&rdquo; &rarr; Chain: 240 &times; 0.15 = 36 returned &rarr; 36 / 2 = 18 reshelved &rarr; 240 - 36 + 18 = 222 items.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Retrieve</h3>
-                        <p class="pillar-card__text">Find similar past problems and their reasoning chains for the current query.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Store: Save Successful Chains to Memory</h3>
+                            <p class="element-timeline__text">When a reasoning chain produces a verified correct answer, the complete chain is stored in the memory bank. Each entry includes the original problem, the full reasoning trace, and the final answer. The memory is indexed for retrieval &mdash; typically using embedding-based similarity so that structurally similar problems can be found quickly.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Memory entry stored: {problem: &ldquo;store inventory with returns and reshelving&rdquo;, chain: [percentage calculation &rarr; fraction operation &rarr; net adjustment], answer: 222, tags: [arithmetic, multi-step, inventory]}.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pillar-card pillar-card--interactive">
-                        <h3 class="pillar-card__title">Apply</h3>
-                        <p class="pillar-card__text">Use retrieved chains as context or inspiration for solving the new problem.</p>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Retrieve: Find Similar Past Reasoning</h3>
+                            <p class="element-timeline__text">When a new problem arrives, MoT searches the memory bank for the most similar past problems. Similarity is measured by structural resemblance &mdash; not just surface keywords, but the type of reasoning required. The top-k most relevant chains are retrieved and formatted as few-shot demonstrations.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>New problem: &ldquo;A factory produces 500 units. 20% fail inspection, and a third of failures are reworked successfully. How many units ship?&rdquo; &rarr; Retrieved: the inventory problem above (same structure: percentage &rarr; fraction &rarr; net calculation).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Apply: Solve with Retrieved Demonstrations</h3>
+                            <p class="element-timeline__text">The retrieved reasoning chains are placed in the prompt as few-shot demonstrations, and the model solves the new problem guided by these structurally similar examples. The demonstrations show the model exactly how it successfully reasoned through similar problems before, priming it to follow the same logical structure for the current problem.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Prompt includes the inventory chain as a demonstration, then presents the factory problem. The model follows the same pattern: 500 &times; 0.20 = 100 failures &rarr; 100 / 3 &asymp; 33 reworked &rarr; 500 - 100 + 33 = 433 units ship.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /HOW IT WORKS -->
 
+        <!-- === VISUAL: THE COMPARISON === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <div class="icon-boxes icon-boxes--four fade-in-up">
-                    <a href="reflexion.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">Reflexion</h3>
-                            <p class="icon-box__content">Learning from failures.</p>
-                        </div>
-                    </a>
-                    <a href="knn-prompting.html" class="icon-box icon-box--clickable">
-                        <div class="icon-box__body">
-                            <h3 class="icon-box__title">KNN Prompting</h3>
-                            <p class="icon-box__content">Similarity-based retrieval.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why dynamic self-generated demonstrations outperform static examples</p>
 
-        <section class="section">
-            <div class="container">
-                <div class="cta-corporate cta-corporate--dark">
-                    <h2 class="cta-corporate__title">Try Memory of Thought</h2>
-                    <div class="cta-corporate__actions">
-                        <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Static Few-Shot</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Here are some examples of solving math problems:<br>[Example 1: Basic addition]<br>[Example 2: Simple multiplication]<br><br>Now solve: &ldquo;A shipping company charges $12/kg for the first 50kg and $8/kg after. An order weighs 120kg but gets a 15% bulk discount on the overage rate. What&rsquo;s the total cost?&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>The total cost is $12 &times; 120 = $1,440. With 15% discount: $1,440 &times; 0.85 = $1,224.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Generic examples don&rsquo;t match the tiered-pricing structure &mdash; model misapplies the discount</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Memory of Thought</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Retrieved Demonstration</span>
+                                <p><strong>Past problem (from memory):</strong> &ldquo;A utility charges $0.10/kWh for the first 500kWh, then $0.15/kWh. A customer uses 800kWh with a 10% efficiency credit on the higher tier.&rdquo;<br><strong>Past chain:</strong> First 500 &times; $0.10 = $50 &rarr; Overage: 300 &times; $0.15 = $45 &rarr; Discount on overage: $45 &times; 0.90 = $40.50 &rarr; Total: $50 + $40.50 = $90.50</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">New Problem Answer</span>
+                                <p>First 50kg &times; $12 = $600 &rarr; Overage: 70kg &times; $8 = $560 &rarr; Bulk discount on overage: $560 &times; 0.85 = $476 &rarr; Total: $600 + $476 = $1,076.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Retrieved chain matches the tiered-pricing structure &mdash; model correctly separates tiers and applies discount only to overage</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Memory of Thought in Action</h2>
+                <p class="section-subtitle fade-in-up">See how retrieved reasoning chains improve performance on new problems</p>
+
+                <div class="accordion fade-in-up" id="mot-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Multi-Step Word Problem</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">New Problem</span>
+                                    <p>&ldquo;A bakery makes 300 loaves daily. 10% are samples, and 25% of the remaining are sold at a premium. Premium loaves cost $6 and regular loaves cost $4. What is the daily revenue?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Retrieved Memory + Solution</span>
+                                    <p><strong>Retrieved chain (from memory):</strong> A factory produces 400 units. 5% are quality samples. 30% of remaining sell at premium ($15), rest at standard ($10). &rarr; Samples: 400 &times; 0.05 = 20 &rarr; Sellable: 380 &rarr; Premium: 380 &times; 0.30 = 114 at $15 = $1,710 &rarr; Standard: 266 at $10 = $2,660 &rarr; Total: $4,370.<br><br>
+                                    <strong>New solution (guided by memory):</strong><br>
+                                    Samples: 300 &times; 0.10 = 30 loaves (not sold)<br>
+                                    Sellable: 300 - 30 = 270 loaves<br>
+                                    Premium: 270 &times; 0.25 = 67.5 &asymp; 68 loaves at $6 = $408<br>
+                                    Regular: 270 - 68 = 202 loaves at $4 = $808<br>
+                                    <strong>Daily revenue: $408 + $808 = $1,216</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Logical Reasoning with Constraints</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">New Problem</span>
+                                    <p>&ldquo;Five people (A-E) sit in a row. A must be next to B. C cannot be next to D. E must be at one end. How many valid arrangements exist?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Retrieved Memory + Solution</span>
+                                    <p><strong>Retrieved chain (from memory):</strong> Four people (W-Z) in a row. W next to X. Y not next to Z. &rarr; Strategy: treat W-X as a block &rarr; arrange the block + remaining &rarr; subtract invalid (Y next to Z). Found: 8 valid arrangements.<br><br>
+                                    <strong>New solution (guided by memory):</strong><br>
+                                    Step 1: Fix E at one end (position 1 or 5) &rarr; 2 choices<br>
+                                    Step 2: Treat A-B as a block &rarr; arrange block + C + D in remaining 4 spots &rarr; block has 2 internal orders (AB, BA) &rarr; 3! = 6 arrangements per E position &times; 2 = 12 per end<br>
+                                    Step 3: Subtract cases where C is next to D<br>
+                                    Step 4: For each E position, enumerate and count C-adjacent-to-D cases, subtract<br>
+                                    <strong>Result: 24 total - invalid C-D adjacencies = valid count</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Domain Transfer: Medical to Legal Reasoning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">New Problem</span>
+                                    <p>&ldquo;A contract clause states: if Party A delivers late AND Party B has not waived the deadline, then Party B may terminate. Party A delivered 3 days late. Party B emailed saying &lsquo;no rush, take your time&rsquo; before the deadline. Can Party B terminate?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Retrieved Memory + Solution</span>
+                                    <p><strong>Retrieved chain (from memory):</strong> Medical: &ldquo;If patient has symptom X AND no contraindication Y, prescribe treatment Z. Patient has symptom X. Records show previous allergic reaction to Z.&rdquo; &rarr; Check condition 1: symptom X present (yes) &rarr; Check condition 2: no contraindication Y &rarr; allergic reaction IS a contraindication &rarr; condition 2 fails &rarr; cannot prescribe Z.<br><br>
+                                    <strong>New solution (guided by memory pattern):</strong><br>
+                                    Structure: IF condition1 AND condition2, THEN consequence<br>
+                                    Check condition 1: Party A delivered late &rarr; Yes (3 days late)<br>
+                                    Check condition 2: Party B has NOT waived the deadline &rarr; &ldquo;No rush, take your time&rdquo; likely constitutes a waiver of the deadline &rarr; condition 2 fails<br>
+                                    <strong>Conclusion: Party B likely cannot terminate, because the email may constitute a waiver of the deadline requirement.</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Memory of Thought</h2>
+                <p class="section-subtitle fade-in-up">Best for repetitive problem domains where past reasoning accumulates value</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Batch Processing Pipelines</strong>
+                                    <p>When you process hundreds of similar problems &mdash; each solved problem&rsquo;s reasoning chain becomes a resource for the next, improving accuracy over the batch.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Domain-Specific Reasoning</strong>
+                                    <p>Medical diagnosis, legal analysis, financial modeling &mdash; domains where past cases create a valuable library of proven reasoning patterns.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Progressive Skill Building</strong>
+                                    <p>When problems increase in complexity over time &mdash; earlier solutions provide scaffolding for harder problems, creating a natural curriculum.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Reducing Prompt Engineering Effort</strong>
+                                    <p>Instead of hand-crafting demonstrations for every problem type, let the system build its own example library from verified successes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>One-Off Questions</strong>
+                                    <p>If you&rsquo;re solving a single unique problem, there&rsquo;s no memory to build from and no future problems to benefit &mdash; standard prompting works fine.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Completely Novel Domains</strong>
+                                    <p>When the problem type has never been encountered before and no structurally similar chains exist in memory &mdash; MoT needs a bootstrap phase before it adds value.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Latency-Critical Applications</strong>
+                                    <p>Memory retrieval adds overhead &mdash; searching the memory bank and formatting retrieved chains takes time. For real-time chat, the retrieval step may be too slow.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Memory of Thought delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Diagnosis Pipelines</h3>
+                        <p class="use-case-showcase__desc">Store successful diagnostic reasoning chains from confirmed cases, then retrieve similar symptom-pattern chains when new patients present &mdash; building an ever-growing clinical reasoning library.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Automated Grading Systems</h3>
+                        <p class="use-case-showcase__desc">Grade student work by retrieving past grading chains for similar submissions &mdash; ensuring consistent rubric application and reasoning across hundreds of papers.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Security Incident Classification</h3>
+                        <p class="use-case-showcase__desc">Store reasoning chains from analyzed security incidents, then retrieve similar patterns when new alerts arrive &mdash; accelerating triage with proven classification logic.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Research Literature Review</h3>
+                        <p class="use-case-showcase__desc">Build a memory of how you analyzed past papers &mdash; methodology assessment, finding extraction, quality scoring &mdash; and apply those patterns consistently across new papers.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Report Analysis</h3>
+                        <p class="use-case-showcase__desc">Store reasoning chains from quarterly earnings analyses, then retrieve them when analyzing new reports from similar companies or sectors &mdash; maintaining analytical consistency.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Customer Ticket Resolution</h3>
+                        <p class="use-case-showcase__desc">Store successful resolution chains from closed tickets, then retrieve similar troubleshooting logic for new tickets &mdash; creating an AI-powered knowledge base that grows with every resolved case.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Memory of Thought Fits</h2>
+                <p class="section-subtitle fade-in-up">MoT bridges static demonstrations and adaptive reasoning systems</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Few-Shot Learning</span>
+                        <span class="era-marker__title">Static Examples</span>
+                        <span class="era-marker__desc">Hand-crafted demonstrations</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Memory of Thought</span>
+                        <span class="era-marker__title">Dynamic Retrieval</span>
+                        <span class="era-marker__desc">Self-generated reasoning memories</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Reflexion</span>
+                        <span class="era-marker__title">Learning from Failure</span>
+                        <span class="era-marker__desc">Iterating on unsuccessful attempts</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Agent Memory</span>
+                        <span class="era-marker__title">Persistent Systems</span>
+                        <span class="era-marker__desc">Long-lived agents with experience</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Memory Quality Matters</div>
+                    <p>The value of MoT depends entirely on the quality of stored chains. Verify answers before storing them in memory &mdash; one incorrect chain stored as a &ldquo;success&rdquo; can propagate errors to every future problem that retrieves it. Consider pairing MoT with Self-Verification or Chain-of-Verification to validate chains before they enter the memory bank.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary memory and retrieval techniques</p>
+
+                <a href="few-shot-learning.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Few-Shot Learning</span>
+                        <span class="evolution-callout__desc">The static demonstration approach that MoT transforms into a dynamic, self-improving system by auto-generating and retrieving examples.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="reflexion.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Reflexion</span>
+                        <span class="evolution-callout__desc">While MoT stores successes, Reflexion learns from failures &mdash; combining both creates a system that builds on what works and avoids what doesn&rsquo;t.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="example-selection.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Example Selection</span>
+                        <span class="evolution-callout__desc">The broader field of choosing optimal demonstrations &mdash; MoT automates this by generating and selecting from its own reasoning history.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Build Your Reasoning Memory</h2>
+                        <p class="cta-corporate__text">Start storing successful reasoning chains and let your AI system learn from its own experience with our prompt building tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
     </main>
+
 
     <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
@@ -284,6 +764,83 @@
         </div>
     </div>
 </footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
 
     <script src="../app.js" defer></script>
 </body>
