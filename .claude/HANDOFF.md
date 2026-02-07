@@ -1,32 +1,24 @@
 # Praxis Project Handoff Document
 
-**Last Updated:** 2026-02-07 (Session 42)
-**Last Commit:** `a8f8df0` — feat: Link homepage category cards + mega-menu headers to category pages
-**Current Phase:** Discover Hub — Phases 1-4 COMPLETE, Phase 5 remaining
+**Last Updated:** 2026-02-07 (Session 43)
+**Last Commit:** `b1c922d` — feat: Phase 5 — add category pages to search index, rename Learn to Discover
+**Current Phase:** Discover Hub — ALL 5 PHASES COMPLETE
 
 ---
 
-## SESSION 42 SUMMARY
+## SESSION 43 SUMMARY
 
-Session 42 implemented Phases 1-4 of the Discover Hub plan. Six commits:
+Session 43 completed Phase 5 (final phase) of the Discover Hub plan:
 
-1. **Phase 1** (`32d7351`) — Batch renamed "Advanced Techniques" → "Prompting Strategies" in mega-menu headers (101 files), renamed "Learn" → "Discover" in nav links (102 files), breadcrumbs (68 files), and footer headings (101 files). Updated homepage card + app.js search index.
-2. **Phase 2** (`4d296ba`) — Redesigned learn/index.html from 11-card "Learn" page to full Discover hub (1,093 lines) with 63 framework cards across 8 categories, sticky filter row, comparison table, and CTA. Added ~120 lines of CSS for discover components.
-3. **Phase 3** (`0eb604e`) — Created 7 category landing pages: structured-frameworks, reasoning-cot, decomposition, self-correction, in-context-learning, ensemble-methods, prompting-strategies. Each has hero, overview, framework grid, comparison table, related categories, and CTA. Added `.category-overview` CSS.
-4. **Bugfix** (`a697128`) — Fixed broken relative paths in 3 code modality pages (learn/modality/code/) that had 2-level prefixes instead of 3-level.
-5. **Phase 4** (`a8f8df0`) — Updated 6 homepage category card links to point to category landing pages. Made all 7 mega-menu `<h4>` category headers clickable links across 108 pages with correct relative paths per directory depth. Added `.mega-menu-section h4 a` CSS to preserve header styling.
+1. **Phase 5** (`b1c922d`) — Added 8 new entries to `data/search-index.json` (Discover hub + 7 category landing pages). Renamed all 30 `"category": "Learn"` to `"category": "Discover"`. Updated app.js category order, icon mapping, quick link label, and command palette entry to use "Discover". Total search index: 2,226 entries.
+
+**Discover Hub is now fully complete (Phases 1-5).**
 
 ---
 
-## NEXT TASK: Discover Hub Phase 5
+## NEXT TASK
 
-**Plan file:** `.claude/plans/discover-hub-category-pages.md`
-
-### Phase 5 — Search Index + Metadata
-- Add 7 category landing pages to `data/search-index.json`
-- Add 7 category landing pages to app.js search index
-- Verify all cross-references use correct category labels
-- Update learn/index.html title in search results from "Learn" to "Discover"
+No pending tasks from the Discover Hub plan. All phases complete and pushed.
 
 ---
 
@@ -38,7 +30,7 @@ Session 42 implemented Phases 1-4 of the Discover Hub plan. Six commits:
 | `.claude/HANDOFF.md` | Current state (this file) | — |
 | `.claude/COMPLETED.md` | Archived completed work | — |
 | `.claude/plans/FrameworkOverhaul.md` | Master plan — Phases 1-5 + session log | 1,707 |
-| `.claude/plans/discover-hub-category-pages.md` | **ACTIVE** — Discover Hub + Category Pages plan | 291 |
+| `.claude/plans/discover-hub-category-pages.md` | Discover Hub plan (COMPLETE) | 291 |
 | `learn/self-ask.html` | Canonical 13-section template | 895 |
 
 **SiteFrameworks.md** covers: lazy loading rationale, search-to-glossary flow (step-by-step), URL resolution (`resolveInternalUrl()`), anchor offset pattern, design token system, component library, 13-section template, navigation architecture, neural network canvas, accessibility dashboard, performance patterns, and all critical rules.
@@ -80,7 +72,7 @@ function resolveInternalUrl(targetPath) {
 - CSS `scroll-margin-top: 160px` on `[id^="term-"]` for sticky header + nav offset
 
 ### Python Batch Script Pattern (Session 38)
-Session 38 used `update_nav.py` to batch-update all 100 HTML files (header, footer, head cleanup). Same approach recommended for Phase 1 renames. Script reads each file, applies replacements, writes back.
+Session 38 used `update_nav.py` to batch-update all 100 HTML files (header, footer, head cleanup). Same approach recommended for future batch renames.
 
 ---
 
@@ -90,8 +82,8 @@ Session 38 used `update_nav.py` to batch-update all 100 HTML files (header, foot
 - **NO inline styles** — Never use `style=""` attributes
 - **NO inline scripts** — Never use `onclick=""`, `onload=""`, or inline `<script>`
 - **NO external resources** — No CDNs, Google Fonts, external APIs
-- **All styles → styles.css** (single file, 27,562 lines)
-- **All scripts → app.js** (single file with `defer`, 10,899 lines)
+- **All styles -> styles.css** (single file, 27,562 lines)
+- **All scripts -> app.js** (single file with `defer`, 10,899 lines)
 
 ### 2. Content Rules
 - **NO citations on framework pages** (per user request, Session 25)
@@ -136,7 +128,7 @@ _public_html/
 │   └── modality/code/      # Code frameworks (3 pages)
 ├── data/
 │   ├── glossary.json       # 2,141 AI terms (lazy loaded, ~818 KB)
-│   └── search-index.json   # 2,218 searchable entries (~350 KB)
+│   └── search-index.json   # 2,226 searchable entries (~350 KB)
 ├── pages/                  # 12 content pages
 ├── tools/                  # 12 AI readiness tools
 ├── neurodivergence/        # 6 ND pages
@@ -148,7 +140,7 @@ _public_html/
     ├── SiteFrameworks.md    # Architecture bible (1,041 lines)
     └── plans/
         ├── FrameworkOverhaul.md          # Master plan (Phases 1-5)
-        └── discover-hub-category-pages.md # Discover Hub plan (ACTIVE)
+        └── discover-hub-category-pages.md # Discover Hub plan (COMPLETE)
 ```
 
 ---

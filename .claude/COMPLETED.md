@@ -52,6 +52,17 @@
   - Added `.mega-menu-section h4 a` CSS to inherit h4 styling (color, text-transform, letter-spacing)
   - 110 files changed
 
+## Session 43 (2026-02-07)
+**Discover Hub — Phase 5 Completion**
+
+- [x] **Phase 5 — Search Index + Metadata Updates** (commit `b1c922d`)
+  - Added 8 new entries to `data/search-index.json`: Discover hub page + 7 category landing pages (structured-frameworks, reasoning-cot, decomposition, self-correction, in-context-learning, ensemble-methods, prompting-strategies)
+  - Renamed all 30 `"category": "Learn"` entries to `"category": "Discover"` in search-index.json
+  - Updated app.js: category order array, CATEGORY_ICONS key, search modal quick link label, command palette entry title, and section comment — all from "Learn" to "Discover"
+  - Verified: 0 remaining "Learn" category references in search-index.json or app.js
+  - Total search index: 2,226 entries (was 2,218)
+  - 2 files changed (app.js, data/search-index.json)
+
 ---
 
 ## Session 41 (2026-02-07)
