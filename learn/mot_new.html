@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Memory of Thought: Store and retrieve successful reasoning chains from past problems to inform new ones &mdash; building a dynamic library of proven approaches.">
+    <title>Memory of Thought - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav">
+                <a href="../foundations/index.html" class="nav-link">AI Foundations</a>
+                <div class="nav-item has-dropdown">
+                    <a href="index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                    <div class="mega-menu mega-menu--multi-column">
+                        <div class="mega-menu-section">
+                            <h4>Getting Started</h4>
+                            <a href="prompt-basics.html">Prompt Basics</a>
+                            <a href="facts-fictions.html">Facts & Fictions</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>Frameworks</h4>
+                            <a href="crisp.html">CRISP</a>
+                            <a href="crispe.html">CRISPE</a>
+                            <a href="costar.html">COSTAR</a>
+                            <a href="react.html">ReAct</a>
+                            <a href="flipped-interaction.html">Flipped Interaction</a>
+                            <a href="chain-of-thought.html">Chain-of-Thought</a>
+                            <a href="few-shot-learning.html">Few-Shot Learning</a>
+                            <a href="one-shot.html">One-Shot</a>
+                            <a href="role-prompting.html">Role Prompting</a>
+                            <a href="constrained-output.html">Constrained Output</a>
+                            <a href="self-consistency.html">Self-Consistency</a>
+                            <a href="prompt-chaining.html">Prompt Chaining</a>
+                            <a href="shot-prompting.html">Shot Prompting</a>
+                            <a href="zero-shot-cot.html">Zero-Shot CoT</a>
+                            <a href="emotion-prompting.html">Emotion Prompting</a>
+                            <a href="style-prompting.html">Style Prompting</a>
+                            <a href="rar.html">RAR</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>Advanced</h4>
+                            <a href="example-selection.html">Example Selection</a>
+                            <a href="least-to-most.html">Least-to-Most</a>
+                            <a href="plan-and-solve.html">Plan-and-Solve</a>
+                            <a href="tree-of-thought.html">Tree of Thought</a>
+                            <a href="self-refine.html">Self-Refine</a>
+                            <a href="self-verification.html">Self-Verification</a>
+                            <a href="self-ask.html">Self-Ask</a>
+                            <a href="analogical-reasoning.html">Analogical Reasoning</a>
+                            <a href="step-back.html">Step-Back</a>
+                            <a href="decomp.html">Decomposed Prompting</a>
+                            <a href="graph-of-thought.html">Graph of Thought</a>
+                            <a href="program-of-thought.html">Program of Thought</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>Self-Correction</h4>
+                            <a href="chain-of-verification.html">Chain-of-Verification</a>
+                            <a href="critic.html">CRITIC</a>
+                            <a href="reflexion.html">Reflexion</a>
+                            <a href="self-calibration.html">Self-Calibration</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>Code</h4>
+                            <a href="modality/code/code-prompting.html">Code Prompting</a>
+                            <a href="modality/code/self-debugging.html">Self-Debugging</a>
+                            <a href="modality/code/structured-output.html">Structured Output</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">AI Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Framework Matcher</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--multi-column">
+                        <div class="mega-menu-section">
+                            <h4>Guides</h4>
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>Principles</h4>
+                            <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
+                            <a href="../pages/universal-design.html">Universal Design</a>
+                            <a href="../pages/ai-assisted-building.html">AI Assisted</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../pages/performance.html">Performance</a>
+                        </div>
+                        <div class="mega-menu-section mega-menu-section--featured">
+                            <h4>AI & ND</h4>
+                            <a href="../neurodivergence/index.html">ND Hub</a>
+                            <a href="../neurodivergence/adhd.html">AI for ADHD</a>
+                            <a href="../neurodivergence/autism.html">AI for Autism</a>
+                            <a href="../neurodivergence/dyslexia.html">AI for Dyslexia</a>
+                            <a href="../neurodivergence/tools.html">AI Tools</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>About</h4>
+                            <a href="../pages/about.html">About Praxis</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Memory of Thought</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Memory Systems</span>
+                </div>
+                <h1 class="page-title fade-in">Memory of Thought</h1>
+                <p class="page-subtitle fade-in">Every problem you solve teaches you something about the next one. Memory of Thought captures successful reasoning chains and retrieves them when facing similar challenges &mdash; building a personal library of proven approaches that grows smarter with every use.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> Memory of Thought was published in 2023 by Li et al. The technique introduces a two-phase process: during a <strong>pre-thinking phase</strong>, the model solves problems and stores its unlabeled reasoning chains in a memory bank. During the <strong>test phase</strong>, the system retrieves the most relevant stored reasoning chains as demonstrations for new problems. Unlike static few-shot prompting that uses the same examples every time, MoT builds a dynamic memory bank that grows over time &mdash; each successfully solved problem enriches the library of available reasoning patterns.</p>
+                        <p><strong>Modern LLM Status:</strong> Persistent memory is increasingly built into AI systems. MoT&rsquo;s key insight &mdash; that <strong>past reasoning chains (not just answers) are valuable</strong> &mdash; has influenced how modern systems leverage conversation history. Claude&rsquo;s Projects, GPT&rsquo;s memory features, and custom instruction systems all reflect the principle that accumulated context improves future performance. The technique remains most relevant for production pipelines where reasoning quality compounds over time.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Your Past Reasoning Is Your Best Teacher</h2>
+                        <p class="split-section__text">Think of a student reviewing worked solutions before an exam. They don&rsquo;t just memorize answers &mdash; they study the <em>reasoning process</em> that led to each solution. Memory of Thought applies this same principle to AI: the model builds a library of successful reasoning approaches, indexed by problem type, that it can draw upon when facing new challenges.</p>
+                        <p class="split-section__text"><strong>The power is in the chains, not the answers.</strong> A stored answer tells you &ldquo;42.&rdquo; A stored reasoning chain tells you <em>how</em> to arrive at 42 &mdash; the decomposition strategy, the intermediate steps, the verification logic. When retrieved for a similar problem, that chain serves as a worked example that guides the model through an analogous reasoning path.</p>
+                        <p class="split-section__text">Over time, the memory bank becomes a curated collection of domain-specific reasoning strategies &mdash; an ever-growing playbook that makes the system more capable with every problem it solves.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Chains Matter More Than Answers</span>
+                                <p>Storing just the final answer to a past problem gives you one data point. Storing the full reasoning chain gives you a <strong>reusable template</strong> &mdash; the decomposition strategy, intermediate calculations, verification steps, and logical structure that can transfer to entirely new problems. When the model retrieves a chain for a similar problem, it gains not just what to think, but <strong>how to think</strong> about that class of problem.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Memory of Thought Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from solving problems to building reusable reasoning memory</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Solve and Store</h3>
+                            <p class="element-timeline__text">The model solves problems and saves the full reasoning chain &mdash; not just the final answer &mdash; to a persistent memory bank. Each entry captures the complete thought process: how the problem was decomposed, what intermediate steps were taken, and how the final answer was derived.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Solving &ldquo;Calculate compound interest on $5,000 at 4% for 3 years&rdquo; &mdash; the full chain (formula identification, substitution, step-by-step calculation, verification) is stored alongside the problem description.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Index and Organize</h3>
+                            <p class="element-timeline__text">Stored chains are categorized by problem type, domain, and reasoning strategy. This indexing enables efficient retrieval later &mdash; the system can quickly find relevant past reasoning based on structural similarity rather than surface-level keyword matching.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The compound interest chain is tagged as &ldquo;financial calculation / exponential growth / multi-step arithmetic&rdquo; &mdash; making it retrievable for any problem with similar mathematical structure.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Retrieve</h3>
+                            <p class="element-timeline__text">When a new problem arrives, the system searches the memory bank for the most similar past reasoning chains. Similarity is measured not just by topic but by problem structure &mdash; a depreciation calculation might retrieve the compound interest chain because both involve exponential formulas applied over time periods.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>New problem: &ldquo;Calculate equipment depreciation of $12,000 at 15% over 5 years.&rdquo; The system retrieves the compound interest chain as a structurally similar worked example.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Apply and Augment</h3>
+                            <p class="element-timeline__text">The retrieved chains serve as demonstrations that guide the model through the new problem. After solving it, the new reasoning chain is added to the memory bank &mdash; growing the library and making the system more capable for future problems. The memory bank continuously improves.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Using the compound interest chain as a template, the model adapts the approach for depreciation &mdash; then stores this new depreciation chain, enriching the memory for future financial calculations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why dynamic memory outperforms static examples</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Static Few-Shot</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Use the same 3 hand-picked examples for every problem, regardless of domain or complexity. The examples never change and were selected once during prompt design.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>Examples may be irrelevant to the current problem. No learning from past successes. No adaptation to new domains. Performance plateaus after initial setup.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Same examples every time, no learning, no adaptation</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Memory of Thought</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Dynamically retrieve the most relevant past reasoning chains for each new problem. The example bank grows with every solved problem, automatically specializing to your domain.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>Every problem gets the most structurally relevant demonstrations. The system learns from its own successes. Performance improves over time as the memory bank deepens.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Dynamic example bank that grows, adapts, and specializes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->

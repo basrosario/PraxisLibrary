@@ -399,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Format',
         'Constraints',
         'Boundaries',
-        // Advanced Techniques
+        // Prompting Strategies
         'Chain of Thought',
         'Zero-shot',
         'Multi-shot',
@@ -7768,7 +7768,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: 'COSTAR Method', desc: 'Context, Objective, Style, Tone, Audience, Response - perfect for professional content', url: 'learn/costar.html', category: 'Methods', keywords: ['costar', 'professional', 'content', 'audience', 'tone', 'style', 'marketing', 'communication'] },
         { title: 'ReAct Method', desc: 'Reasoning + Acting for complex problem-solving with transparent, verifiable thinking', url: 'learn/react.html', category: 'Methods', keywords: ['react', 'reasoning', 'acting', 'complex', 'problem-solving', 'verification', 'advanced', 'chain-of-thought'] },
         { title: 'Flipped Interaction', desc: 'Let AI ask questions first to better understand your needs', url: 'learn/flipped-interaction.html', category: 'Methods', keywords: ['flipped', 'interaction', 'questions', 'clarification', 'uncertainty', 'exploration'] },
-        { title: 'Advanced Techniques', desc: 'Chain-of-thought, few-shot learning, and other advanced prompting strategies', url: 'learn/advanced.html', category: 'Methods', keywords: ['advanced', 'chain-of-thought', 'few-shot', 'zero-shot', 'techniques', 'strategies'] },
+        { title: 'Prompting Strategies', desc: 'ReAct, role prompting, emotion prompting, and other versatile prompting strategies', url: 'learn/prompting-strategies.html', category: 'Methods', keywords: ['advanced', 'chain-of-thought', 'few-shot', 'zero-shot', 'techniques', 'strategies'] },
 
         // PROMPT THEORY Category
         { title: 'Prompt Basics', desc: 'Fundamental concepts of AI prompting and how to communicate effectively with AI', url: 'learn/prompt-basics.html', category: 'Prompt Theory', keywords: ['basics', 'fundamentals', 'introduction', 'beginner', 'prompting', 'communication'] },

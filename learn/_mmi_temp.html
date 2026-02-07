@@ -3,113 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Example Selection: Learn how choosing the right few-shot demonstrations can improve AI performance by 20-30% over random selection through similarity-based, diversity-based, and task-specific strategies.">
-    <title>Example Selection - Praxis</title>
+    <meta name="description" content="Max Mutual Information: Select few-shot examples that maximize the information connection between prompt and correct output &mdash; an information-theoretic approach to demonstration selection.">
+    <title>Max Mutual Information - Praxis</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-        <header class="header" id="header">
+    <header class="header" id="header">
         <div class="header-container">
             <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
             <nav class="nav" id="nav">
                 <a href="../foundations/index.html" class="nav-link">AI Foundations</a>
                 <div class="nav-item has-dropdown">
-                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                    <a href="index.html" class="nav-link active" aria-expanded="false">Discover</a>
                     <div class="mega-menu mega-menu--multi-column">
                         <div class="mega-menu-section">
                             <h4>Getting Started</h4>
-                            <a href="../learn/prompt-basics.html">Prompt Basics</a>
-                            <a href="../learn/facts-fictions.html">Facts & Fictions</a>
+                            <a href="prompt-basics.html">Prompt Basics</a>
+                            <a href="facts-fictions.html">Facts & Fictions</a>
                         </div>
                         <div class="mega-menu-section">
-                            <h4>Structured Frameworks</h4>
-                            <a href="../learn/crisp.html">CRISP</a>
-                            <a href="../learn/crispe.html">CRISPE</a>
-                            <a href="../learn/costar.html">COSTAR</a>
-                            <a href="../learn/context-structure.html">Context & Structure</a>
-                            <a href="../learn/constrained-output.html">Constrained Output</a>
+                            <h4>Frameworks</h4>
+                            <a href="crisp.html">CRISP</a>
+                            <a href="crispe.html">CRISPE</a>
+                            <a href="costar.html">COSTAR</a>
+                            <a href="react.html">ReAct</a>
+                            <a href="flipped-interaction.html">Flipped Interaction</a>
+                            <a href="chain-of-thought.html">Chain-of-Thought</a>
+                            <a href="few-shot-learning.html">Few-Shot Learning</a>
+                            <a href="one-shot.html">One-Shot</a>
+                            <a href="role-prompting.html">Role Prompting</a>
+                            <a href="constrained-output.html">Constrained Output</a>
+                            <a href="self-consistency.html">Self-Consistency</a>
+                            <a href="prompt-chaining.html">Prompt Chaining</a>
+                            <a href="shot-prompting.html">Shot Prompting</a>
+                            <a href="zero-shot-cot.html">Zero-Shot CoT</a>
+                            <a href="emotion-prompting.html">Emotion Prompting</a>
+                            <a href="style-prompting.html">Style Prompting</a>
+                            <a href="rar.html">RAR</a>
                         </div>
                         <div class="mega-menu-section">
-                            <h4>In-Context Learning</h4>
-                            <a href="../learn/zero-shot.html">Zero-Shot</a>
-                            <a href="../learn/one-shot.html">One-Shot</a>
-                            <a href="../learn/few-shot-learning.html">Few-Shot Learning</a>
-                            <a href="../learn/shot-prompting.html">Shot Prompting</a>
-                            <a href="../learn/example-selection.html">Example Selection</a>
-                            <a href="../learn/knn-prompting.html">KNN Prompting</a>
-                            <a href="../learn/vote-k.html">Vote-k</a>
-                            <a href="../learn/demo-ensembling.html">Demo Ensembling</a>
-                            <a href="../learn/prompt-mining.html">Prompt Mining</a>
-                        </div>
-                        <div class="mega-menu-section">
-                            <h4>Reasoning & CoT</h4>
-                            <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
-                            <a href="../learn/zero-shot-cot.html">Zero-Shot CoT</a>
-                            <a href="../learn/auto-cot.html">Auto-CoT</a>
-                            <a href="../learn/contrastive-cot.html">Contrastive CoT</a>
-                            <a href="../learn/structured-cot.html">Structured CoT</a>
-                            <a href="../learn/faithful-cot.html">Faithful CoT</a>
-                            <a href="../learn/tab-cot.html">Tab-CoT</a>
-                            <a href="../learn/complexity-prompting.html">Complexity-Based</a>
-                            <a href="../learn/analogical-reasoning.html">Analogical Reasoning</a>
-                            <a href="../learn/step-back.html">Step-Back</a>
-                            <a href="../learn/thread-of-thought.html">Thread of Thought</a>
-                            <a href="../learn/memory-of-thought.html">Memory of Thought</a>
-                            <a href="../learn/active-prompting.html">Active Prompting</a>
-                            <a href="../learn/reversing-cot.html">Reversing CoT</a>
-                        </div>
-                        <div class="mega-menu-section">
-                            <h4>Decomposition</h4>
-                            <a href="../learn/least-to-most.html">Least-to-Most</a>
-                            <a href="../learn/plan-and-solve.html">Plan-and-Solve</a>
-                            <a href="../learn/tree-of-thought.html">Tree of Thought</a>
-                            <a href="../learn/graph-of-thought.html">Graph of Thought</a>
-                            <a href="../learn/decomp.html">DECOMP</a>
-                            <a href="../learn/recursion-of-thought.html">Recursion of Thought</a>
-                            <a href="../learn/program-of-thought.html">Program of Thought</a>
+                            <h4>Advanced</h4>
+                            <a href="example-selection.html">Example Selection</a>
+                            <a href="least-to-most.html">Least-to-Most</a>
+                            <a href="plan-and-solve.html">Plan-and-Solve</a>
+                            <a href="tree-of-thought.html">Tree of Thought</a>
+                            <a href="self-refine.html">Self-Refine</a>
+                            <a href="self-verification.html">Self-Verification</a>
+                            <a href="self-ask.html">Self-Ask</a>
+                            <a href="analogical-reasoning.html">Analogical Reasoning</a>
+                            <a href="step-back.html">Step-Back</a>
+                            <a href="decomp.html">Decomposed Prompting</a>
+                            <a href="graph-of-thought.html">Graph of Thought</a>
+                            <a href="program-of-thought.html">Program of Thought</a>
                         </div>
                         <div class="mega-menu-section">
                             <h4>Self-Correction</h4>
-                            <a href="../learn/self-refine.html">Self-Refine</a>
-                            <a href="../learn/self-verification.html">Self-Verification</a>
-                            <a href="../learn/chain-of-verification.html">Chain-of-Verification</a>
-                            <a href="../learn/critic.html">CRITIC</a>
-                            <a href="../learn/reflexion.html">Reflexion</a>
-                            <a href="../learn/self-calibration.html">Self-Calibration</a>
-                            <a href="../learn/cumulative-reasoning.html">Cumulative Reasoning</a>
-                        </div>
-                        <div class="mega-menu-section">
-                            <h4>Ensemble Methods</h4>
-                            <a href="../learn/self-consistency.html">Self-Consistency</a>
-                            <a href="../learn/cosp.html">COSP</a>
-                            <a href="../learn/diverse-prompting.html">DiVeRSe</a>
-                            <a href="../learn/dense-prompting.html">DENSE</a>
-                            <a href="../learn/max-mutual-info.html">Max Mutual Info</a>
-                            <a href="../learn/universal-self-consistency.html">Universal Self-Consistency</a>
-                            <a href="../learn/meta-reasoning.html">Meta-Reasoning</a>
-                        </div>
-                        <div class="mega-menu-section">
-                            <h4>Prompting Strategies</h4>
-                            <a href="../learn/react.html">ReAct</a>
-                            <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
-                            <a href="../learn/self-ask.html">Self-Ask</a>
-                            <a href="../learn/prompt-chaining.html">Prompt Chaining</a>
-                            <a href="../learn/role-prompting.html">Role Prompting</a>
-                            <a href="../learn/emotion-prompting.html">Emotion Prompting</a>
-                            <a href="../learn/style-prompting.html">Style Prompting</a>
-                            <a href="../learn/s2a.html">S2A</a>
-                            <a href="../learn/simtom.html">SimToM</a>
-                            <a href="../learn/rar.html">RaR</a>
-                            <a href="../learn/re2.html">RE2</a>
+                            <a href="chain-of-verification.html">Chain-of-Verification</a>
+                            <a href="critic.html">CRITIC</a>
+                            <a href="reflexion.html">Reflexion</a>
+                            <a href="self-calibration.html">Self-Calibration</a>
                         </div>
                         <div class="mega-menu-section">
                             <h4>Code</h4>
-                            <a href="../learn/modality/code/code-prompting.html">Code Prompting</a>
-                            <a href="../learn/modality/code/self-debugging.html">Self-Debugging</a>
-                            <a href="../learn/modality/code/structured-output.html">Structured Output</a>
+                            <a href="modality/code/code-prompting.html">Code Prompting</a>
+                            <a href="modality/code/self-debugging.html">Self-Debugging</a>
+                            <a href="modality/code/structured-output.html">Structured Output</a>
                         </div>
                     </div>
                 </div>
@@ -182,13 +143,13 @@
                     <span class="separator">/</span>
                     <a href="index.html">Discover</a>
                     <span class="separator">/</span>
-                    <span class="current">Example Selection</span>
+                    <span class="current">Max Mutual Information</span>
                 </nav>
                 <div class="hero-badge">
-                    <span class="hero-badge__text">Few-Shot Optimization</span>
+                    <span class="hero-badge__text">Ensemble Methods</span>
                 </div>
-                <h1 class="page-title fade-in">Example Selection</h1>
-                <p class="page-subtitle fade-in">The examples you choose for few-shot prompting matter more than the number you provide. Strategic selection &mdash; matching examples by similarity, diversity, and task relevance &mdash; can improve performance by 20&ndash;30% over random choices.</p>
+                <h1 class="page-title fade-in">Max Mutual Information</h1>
+                <p class="page-subtitle fade-in">Selecting demonstrations that create the strongest information bridge between question and correct answer &mdash; optimizing examples through information theory to maximize what the model learns from each one.</p>
             </div>
         </section>
         <!-- /HERO SECTION -->
@@ -198,9 +159,9 @@
             <div class="container">
                 <div class="highlight-box highlight-box--warning fade-in-up">
                     <div class="highlight-box__content">
-                        <span class="highlight-box__title">Framework Context: 2021</span>
-                        <p><strong>Introduced:</strong> Example Selection was formalized by Liu et al. in 2021, who demonstrated that the choice of in-context examples can swing few-shot accuracy by more than 20 percentage points &mdash; often mattering more than the number of examples provided. Their work showed that retrieving semantically similar examples using nearest-neighbor methods dramatically outperformed random selection, establishing a new paradigm for how practitioners approach few-shot learning.</p>
-                        <p><strong>Modern LLM Status:</strong> The core principles of Example Selection remain <strong>highly relevant and actively practiced</strong> in modern prompting workflows. While Claude, GPT-4, and Gemini are more robust to example quality than earlier models, strategic selection still yields measurable gains on classification, extraction, and reasoning tasks. The technique has evolved into embedding-based retrieval pipelines and forms the foundation for more advanced methods like KNN Prompting and Vote-k selection. For production systems processing thousands of queries, automated example selection is now considered standard practice.</p>
+                        <span class="highlight-box__title">Framework Context: 2022</span>
+                        <p><strong>Introduced:</strong> Published by Sorensen et al., Max Mutual Information uses information theory to select which few-shot examples maximize the model&rsquo;s ability to predict correct outputs. Instead of picking examples by surface similarity, MMI chooses examples that make the correct answer most probable. The approach treats demonstration selection as an optimization problem &mdash; measuring the mutual information between the prompt (with candidate examples) and the target output, then selecting the combination that scores highest.</p>
+                        <p><strong>Modern LLM Status:</strong> While modern LLMs are less sensitive to example selection, the principle remains valuable in automated pipelines. The information-theoretic perspective has influenced how prompt optimization tools evaluate demonstration quality. In production systems that process thousands of queries, even small gains from better example selection compound into meaningful accuracy improvements. MMI&rsquo;s core insight &mdash; that the best examples are those that make correct outputs most predictable &mdash; continues to guide research in automated prompt engineering.</p>
                     </div>
                 </div>
             </div>
@@ -214,15 +175,15 @@
                     <div class="split-section__content">
                         <span class="split-section__badge">The Core Insight</span>
                         <h2 class="split-section__title">Not All Examples Are Created Equal</h2>
-                        <p class="split-section__text">When you provide examples in a few-shot prompt, the model doesn&rsquo;t just learn the task format &mdash; it learns the <strong>distribution</strong> of your examples. If your examples are semantically similar to the test input, the model receives a stronger signal about what kind of output is expected. If they are from a completely different domain, the model must bridge a wider gap, and accuracy suffers.</p>
-                        <p class="split-section__text"><strong>Example Selection turns this insight into a method.</strong> Rather than grabbing random demonstrations from a pool, you deliberately choose examples that maximize relevance to the specific query at hand. This can mean selecting by semantic similarity (choosing examples closest in meaning to the input), by diversity (covering different aspects of the task space), or by task-specific criteria (matching complexity, format, or domain).</p>
-                        <p class="split-section__text">Think of it like choosing study materials for an exam. Reviewing practice problems that closely resemble the actual test questions is far more effective than studying random exercises from unrelated chapters &mdash; even if you study the same total number of problems.</p>
+                        <p class="split-section__text">When building a few-shot prompt, the instinct is to grab examples that look similar to the input query. But surface similarity is a crude proxy for what actually matters: how much does this example help the model produce the correct output? Two examples might look equally relevant by keyword overlap, yet one dramatically improves accuracy while the other adds noise or confusion.</p>
+                        <p class="split-section__text"><strong>MMI finds the examples that create the strongest information bridge.</strong> Rather than asking &ldquo;which examples resemble the input?&rdquo; it asks &ldquo;which examples make the correct answer most predictable?&rdquo; This reframes demonstration selection from a retrieval problem into an optimization problem &mdash; scoring each candidate by its measurable impact on output probability.</p>
+                        <p class="split-section__text">Think of it like choosing study materials for an exam: instead of reading everything related to the topic, you focus on the specific practice problems that most clarify the patterns you need to recognize on test day.</p>
                     </div>
                     <div class="split-section__visual">
                         <div class="highlight-box highlight-box--info">
                             <div class="highlight-box__content">
-                                <span class="highlight-box__title">Why Selection Beats Quantity</span>
-                                <p>Liu et al.&rsquo;s landmark finding was striking: three well-chosen examples consistently outperformed ten randomly selected ones across multiple benchmarks. The model extracts more useful patterns from a small set of highly relevant demonstrations than from a large set of loosely related ones. This means <strong>smarter selection can actually reduce token costs</strong> while improving accuracy &mdash; a rare win-win in prompt engineering.</p>
+                                <span class="highlight-box__title">Mutual Information, Intuitively</span>
+                                <p>Mutual information measures how much knowing one thing tells you about another. In MMI, we measure how much seeing a particular example tells the model about what the correct output should be. High mutual information means the example makes the right answer highly predictable. Low mutual information means the example is noise &mdash; it does not help the model distinguish the correct output from incorrect alternatives.</p>
                             </div>
                         </div>
                     </div>
@@ -234,8 +195,8 @@
         <!-- === HOW IT WORKS === -->
         <section class="section">
             <div class="container">
-                <h2 class="section-title fade-in-up">The Example Selection Process</h2>
-                <p class="section-subtitle fade-in-up">Three stages from candidate pool to optimized demonstration set</p>
+                <h2 class="section-title fade-in-up">The MMI Selection Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from candidate pool to optimized prompt</p>
 
                 <div class="element-timeline fade-in-up">
                     <div class="element-timeline__item">
@@ -243,11 +204,11 @@
                             <span class="element-timeline__number">1</span>
                         </div>
                         <div class="element-timeline__content">
-                            <h3 class="element-timeline__title">Build a Candidate Pool</h3>
-                            <p class="element-timeline__text">Assemble a diverse collection of labeled input-output pairs that represent your task. This pool should cover different categories, edge cases, complexity levels, and domains. The richer and more varied your candidate pool, the better your selection algorithms can find optimal matches for any given query.</p>
+                            <h3 class="element-timeline__title">Candidate Pool</h3>
+                            <p class="element-timeline__text">Assemble potential few-shot examples from available data. This pool might come from a training set, a curated knowledge base, or historical query-response pairs. The larger and more diverse the pool, the more room MMI has to find high-value demonstrations.</p>
                             <div class="element-timeline__example">
                                 <span class="element-timeline__example-label">Example</span>
-                                <p>For a sentiment classification task, collect 50&ndash;100 labeled reviews spanning positive, negative, neutral, and mixed sentiments across product categories like electronics, food, clothing, and services.</p>
+                                <p>For a sentiment classification task, gather 500 labeled product reviews spanning positive, negative, and neutral categories across multiple product types.</p>
                             </div>
                         </div>
                     </div>
@@ -257,11 +218,11 @@
                             <span class="element-timeline__number">2</span>
                         </div>
                         <div class="element-timeline__content">
-                            <h3 class="element-timeline__title">Score and Rank Candidates</h3>
-                            <p class="element-timeline__text">For each incoming query, evaluate every candidate example against a selection criterion. The most common approach is semantic similarity &mdash; compute embedding vectors for both the query and each candidate, then rank by cosine similarity. Alternatively, you can score by diversity (maximize coverage of the label space), complexity matching (align example difficulty with query difficulty), or a hybrid of multiple criteria.</p>
+                            <h3 class="element-timeline__title">Score Each Candidate</h3>
+                            <p class="element-timeline__text">Measure how much each candidate example increases the probability of the correct output. For each potential demonstration, construct a prompt that includes it, then evaluate how confident the model becomes about the right answer. The score reflects the information gain &mdash; how much uncertainty about the correct output is reduced by including this example.</p>
                             <div class="element-timeline__example">
                                 <span class="element-timeline__example-label">Example</span>
-                                <p>Given a query about a &ldquo;wireless headphone battery issue,&rdquo; embed the query and compare it against all candidates. The top matches might be reviews about Bluetooth earbuds, wireless speakers, and laptop battery problems &mdash; all semantically close to the input.</p>
+                                <p>Review A increases P(positive) for a positive test case from 0.6 to 0.92. Review B only increases it from 0.6 to 0.68. Review A scores much higher under MMI.</p>
                             </div>
                         </div>
                     </div>
@@ -271,11 +232,25 @@
                             <span class="element-timeline__number">3</span>
                         </div>
                         <div class="element-timeline__content">
-                            <h3 class="element-timeline__title">Assemble and Order the Prompt</h3>
-                            <p class="element-timeline__text">Select the top-k candidates and arrange them in your prompt. Research shows that example ordering matters &mdash; models exhibit recency bias, giving more weight to examples closer to the query. Place your most representative or most similar example last, immediately before the test input. Ensure the final set balances similarity with enough diversity to avoid biasing the model toward a single output pattern.</p>
+                            <h3 class="element-timeline__title">Greedy Selection</h3>
+                            <p class="element-timeline__text">Pick the highest-scoring examples iteratively. Start with the single best example, then find the next example that provides the most additional information gain when combined with the first. Repeat until you reach the desired number of demonstrations. This greedy approach avoids redundancy &mdash; each new example is selected for what it adds beyond what is already included.</p>
                             <div class="element-timeline__example">
                                 <span class="element-timeline__example-label">Example</span>
-                                <p>Select 3 examples: one covering a different product category (diversity), one with mixed sentiment (boundary case), and one highly similar to the query (placed last for recency). Insert them in this order before the query in your few-shot prompt.</p>
+                                <p>After selecting a strongly positive electronics review, the algorithm next picks a subtly negative restaurant review &mdash; it adds the most new information about the classification boundary.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Prompt Assembly</h3>
+                            <p class="element-timeline__text">Combine the selected examples into the final optimized prompt. The order and formatting of demonstrations matter &mdash; arrange them to build a clear pattern the model can follow. The result is a prompt where every example earns its place through measurable contribution to output quality.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The final 5-shot prompt contains examples specifically chosen to cover the classification boundary, handle edge cases, and maximize the model&rsquo;s confidence on the target query.</p>
                             </div>
                         </div>
                     </div>
@@ -288,7 +263,7 @@
         <section class="section section-alt">
             <div class="container">
                 <h2 class="section-title fade-in-up">See the Difference</h2>
-                <p class="section-subtitle fade-in-up">Why strategically selected examples outperform random ones</p>
+                <p class="section-subtitle fade-in-up">Why information-theoretic selection outperforms naive approaches</p>
 
                 <div class="comparison-panel fade-in-up">
                     <div class="comparison-panel__side comparison-panel__side--before">
@@ -299,16 +274,16 @@
                                     <path d="M12 8v4M12 16h.01"/>
                                 </svg>
                             </span>
-                            <h3 class="comparison-panel__title">Random Examples</h3>
+                            <h3 class="comparison-panel__title">Random/Similarity Selection</h3>
                         </div>
                         <div class="comparison-panel__content">
                             <div class="comparison-panel__prompt">
-                                <span class="comparison-panel__label">Prompt</span>
-                                <p><strong>Task:</strong> Classify this tech support ticket.<br><br><strong>Examples:</strong><br>&ldquo;Great pizza!&rdquo; &rarr; POSITIVE<br>&ldquo;The movie was boring&rdquo; &rarr; NEGATIVE<br>&ldquo;Nice weather today&rdquo; &rarr; POSITIVE<br><br><strong>Query:</strong> &ldquo;My laptop won&rsquo;t connect to WiFi after the update&rdquo;</p>
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Pick examples randomly from the available pool or select the most surface-similar examples using keyword overlap or embedding distance. No measurement of actual impact on model output.</p>
                             </div>
                             <div class="comparison-panel__result">
-                                <span class="comparison-panel__label">Response</span>
-                                <p>NEGATIVE<br><em>Model applied sentiment labels instead of support categories &mdash; examples from the wrong domain taught the wrong task entirely.</em></p>
+                                <span class="comparison-panel__label">Result</span>
+                                <p>Hit-or-miss quality. Some examples may help, others add noise or even mislead the model. Redundant examples waste prompt space. No guarantee that selected demonstrations improve accuracy on the target task.</p>
                             </div>
                         </div>
                         <div class="comparison-panel__verdict comparison-panel__verdict--weak">
@@ -316,7 +291,7 @@
                                 <circle cx="12" cy="12" r="10"/>
                                 <path d="M8 12h8"/>
                             </svg>
-                            <span>Wrong domain, wrong label space, misleading signal</span>
+                            <span>Unoptimized, inconsistent, no feedback on example quality</span>
                         </div>
                     </div>
 
@@ -331,16 +306,16 @@
                                     <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                                 </svg>
                             </span>
-                            <h3 class="comparison-panel__title">Strategically Selected</h3>
+                            <h3 class="comparison-panel__title">MMI Selection</h3>
                         </div>
                         <div class="comparison-panel__content">
                             <div class="comparison-panel__prompt">
-                                <span class="comparison-panel__label">Curated Examples</span>
-                                <p><strong>Task:</strong> Classify this tech support ticket.<br><br><strong>Examples:</strong><br>&ldquo;Bluetooth stopped working after restart&rdquo; &rarr; CONNECTIVITY<br>&ldquo;App crashes when I open settings&rdquo; &rarr; SOFTWARE_BUG<br>&ldquo;Can&rsquo;t print to network printer&rdquo; &rarr; CONNECTIVITY<br><br><strong>Query:</strong> &ldquo;My laptop won&rsquo;t connect to WiFi after the update&rdquo;</p>
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Score each candidate example by how much it increases the model&rsquo;s probability of producing the correct output. Select examples greedily to maximize cumulative information gain. Every demonstration is chosen for measurable impact.</p>
                             </div>
                             <div class="comparison-panel__result">
-                                <span class="comparison-panel__label">Response</span>
-                                <p>CONNECTIVITY<br><em>Semantically similar examples from the same domain taught the correct label space and category boundaries.</em></p>
+                                <span class="comparison-panel__label">Result</span>
+                                <p>Systematic optimization. Each example earns its place in the prompt through quantified contribution. Redundancy is minimized because the greedy process favors examples that add new information. Accuracy improvements are consistent and measurable.</p>
                             </div>
                         </div>
                         <div class="comparison-panel__verdict comparison-panel__verdict--strong">
@@ -348,7 +323,7 @@
                                 <circle cx="12" cy="12" r="10"/>
                                 <path d="M8 12l3 3 5-5"/>
                             </svg>
-                            <span>Same domain, correct labels, strong pattern match</span>
+                            <span>Optimized, consistent, every example justified by output probability</span>
                         </div>
                     </div>
                 </div>
@@ -359,29 +334,31 @@
         <!-- === EXAMPLES IN ACTION === -->
         <section class="section">
             <div class="container">
-                <h2 class="section-title fade-in-up">Example Selection in Action</h2>
-                <p class="section-subtitle fade-in-up">Three strategies for choosing optimal demonstrations</p>
+                <h2 class="section-title fade-in-up">Self-Ask in Action</h2>
+                <p class="section-subtitle fade-in-up">See how explicit sub-questions improve multi-hop reasoning</p>
 
-                <div class="accordion fade-in-up" id="example-selection-accordion">
+                <div class="accordion fade-in-up" id="self-ask-accordion">
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Similarity-Based Selection</span>
+                            <span class="accordion-title">Multi-Hop Geography Question</span>
                             <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </button>
                         <div class="accordion-content">
                             <div class="technique-demo">
                                 <div class="technique-demo__prompt">
-                                    <span class="technique-demo__tag">Strategy</span>
-                                    <p>Choose examples whose inputs are most semantically similar to the test query. Compute embeddings for all candidates and the query, then select the nearest neighbors by cosine similarity.</p>
+                                    <span class="technique-demo__tag">Original Question</span>
+                                    <p>&ldquo;Was the iPhone invented in the same state where President Gerald Ford was born?&rdquo;</p>
                                 </div>
                                 <div class="technique-demo__response">
-                                    <span class="technique-demo__tag">Application</span>
-                                    <p><strong>Query:</strong> &ldquo;The battery drains too fast on my new tablet&rdquo;<br><br>
-                                    <strong>Selected examples (by similarity):</strong><br>
-                                    1. &ldquo;My phone battery dies within 3 hours of full charge&rdquo; &rarr; HARDWARE &mdash; BATTERY<br>
-                                    2. &ldquo;Laptop shuts down at 30% battery remaining&rdquo; &rarr; HARDWARE &mdash; BATTERY<br>
-                                    3. &ldquo;Wireless earbuds won&rsquo;t hold charge after update&rdquo; &rarr; HARDWARE &mdash; BATTERY<br><br>
-                                    <strong>Result:</strong> The model correctly classifies the query as HARDWARE &mdash; BATTERY with high confidence. Each example shares semantic features with the query: portable devices, battery complaints, and the same category label.</p>
+                                    <span class="technique-demo__tag">Self-Ask Decomposition</span>
+                                    <p><strong>Are follow-up questions needed here?</strong> Yes.<br><br>
+                                    <strong>Follow-up:</strong> Where was the iPhone invented?<br>
+                                    <strong>Intermediate answer:</strong> The iPhone was developed by Apple Inc. in Cupertino, California.<br><br>
+                                    <strong>Follow-up:</strong> Where was President Gerald Ford born?<br>
+                                    <strong>Intermediate answer:</strong> Gerald Ford was born in Omaha, Nebraska.<br><br>
+                                    <strong>Follow-up:</strong> Are California and Nebraska the same state?<br>
+                                    <strong>Intermediate answer:</strong> No, California and Nebraska are different states.<br><br>
+                                    <strong>So the final answer is:</strong> No. The iPhone was invented in California, while Gerald Ford was born in Nebraska.</p>
                                 </div>
                             </div>
                         </div>
@@ -389,23 +366,27 @@
 
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Diversity-Based Selection</span>
+                            <span class="accordion-title">Historical Causation Chain</span>
                             <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </button>
                         <div class="accordion-content">
                             <div class="technique-demo">
                                 <div class="technique-demo__prompt">
-                                    <span class="technique-demo__tag">Strategy</span>
-                                    <p>Choose examples that cover different categories, formats, and edge cases to show the model the full output space. Ensure at least one example per expected label to prevent the model from being biased toward any single category.</p>
+                                    <span class="technique-demo__tag">Original Question</span>
+                                    <p>&ldquo;Did the treaty that ended World War I contribute to the conditions that started World War II?&rdquo;</p>
                                 </div>
                                 <div class="technique-demo__response">
-                                    <span class="technique-demo__tag">Application</span>
-                                    <p><strong>Query:</strong> &ldquo;Where is my package? I ordered it two weeks ago&rdquo;<br><br>
-                                    <strong>Selected examples (by diversity):</strong><br>
-                                    1. &ldquo;I want my money back for this defective item&rdquo; &rarr; REFUND<br>
-                                    2. &ldquo;How do I reset my account password?&rdquo; &rarr; ACCOUNT<br>
-                                    3. &ldquo;When will my order ship?&rdquo; &rarr; TRACKING<br><br>
-                                    <strong>Result:</strong> The model correctly classifies as TRACKING. By seeing one example from each category, it understands the full label space and can distinguish between REFUND, ACCOUNT, and TRACKING intents rather than defaulting to the most-represented category.</p>
+                                    <span class="technique-demo__tag">Self-Ask Decomposition</span>
+                                    <p><strong>Are follow-up questions needed here?</strong> Yes.<br><br>
+                                    <strong>Follow-up:</strong> What treaty ended World War I?<br>
+                                    <strong>Intermediate answer:</strong> The Treaty of Versailles, signed in 1919.<br><br>
+                                    <strong>Follow-up:</strong> What were the key provisions of the Treaty of Versailles?<br>
+                                    <strong>Intermediate answer:</strong> It imposed heavy reparations on Germany, required territorial concessions, limited Germany&rsquo;s military, and assigned war guilt to Germany (Article 231).<br><br>
+                                    <strong>Follow-up:</strong> How did these provisions affect Germany in the 1920s and 1930s?<br>
+                                    <strong>Intermediate answer:</strong> The reparations contributed to economic instability, hyperinflation, and widespread resentment. These conditions fueled nationalist movements, including the rise of the Nazi Party.<br><br>
+                                    <strong>Follow-up:</strong> Did these conditions contribute to the start of World War II?<br>
+                                    <strong>Intermediate answer:</strong> Yes. Historians broadly agree that the punitive terms of Versailles created political and economic conditions that Adolf Hitler exploited to gain power and pursue aggressive expansion.<br><br>
+                                    <strong>So the final answer is:</strong> Yes. The Treaty of Versailles imposed conditions on Germany that contributed to the economic hardship and political instability from which World War II emerged, though it was one of several contributing factors rather than the sole cause.</p>
                                 </div>
                             </div>
                         </div>
@@ -413,22 +394,27 @@
 
                     <div class="accordion-item">
                         <button class="accordion-header" aria-expanded="false">
-                            <span class="accordion-title">Task-Specific Selection</span>
+                            <span class="accordion-title">Scientific Reasoning Chain</span>
                             <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </button>
                         <div class="accordion-content">
                             <div class="technique-demo">
                                 <div class="technique-demo__prompt">
-                                    <span class="technique-demo__tag">Strategy</span>
-                                    <p>Choose examples that match the specific characteristics of the task &mdash; complexity level, output format, reasoning depth, or domain conventions. For a complex legal analysis, use complex legal examples; for a simple label task, use concise, clear-cut demonstrations.</p>
+                                    <span class="technique-demo__tag">Original Question</span>
+                                    <p>&ldquo;Was the element gallium discovered before or after the scientist who predicted its existence died?&rdquo;</p>
                                 </div>
                                 <div class="technique-demo__response">
-                                    <span class="technique-demo__tag">Application</span>
-                                    <p><strong>Query:</strong> &ldquo;Notwithstanding the foregoing, in the event of force majeure as defined in Section 12.1, neither party shall be held liable for delays in performance&rdquo;<br><br>
-                                    <strong>Selected examples (by task match):</strong><br>
-                                    1. &ldquo;Subject to Section 4.2(b), the indemnifying party shall hold harmless...&rdquo; &rarr; INDEMNIFICATION with CONDITIONS &mdash; References external section, establishes conditional obligation<br>
-                                    2. &ldquo;Except as otherwise provided herein, all warranties express or implied are disclaimed...&rdquo; &rarr; WARRANTY DISCLAIMER with EXCEPTION &mdash; Broad exclusion with carve-out language<br><br>
-                                    <strong>Result:</strong> EXCEPTION CLAUSE with LIABILITY LIMITATION &mdash; The model produces a nuanced analysis matching the complexity of the input because the examples demonstrated the expected depth of legal reasoning.</p>
+                                    <span class="technique-demo__tag">Self-Ask Decomposition</span>
+                                    <p><strong>Are follow-up questions needed here?</strong> Yes.<br><br>
+                                    <strong>Follow-up:</strong> Who predicted the existence of gallium?<br>
+                                    <strong>Intermediate answer:</strong> Dmitri Mendeleev predicted gallium&rsquo;s existence in 1871, calling it &ldquo;eka-aluminium&rdquo; based on gaps in his periodic table.<br><br>
+                                    <strong>Follow-up:</strong> When was gallium actually discovered?<br>
+                                    <strong>Intermediate answer:</strong> Gallium was discovered in 1875 by Paul Emile Lecoq de Boisbaudran.<br><br>
+                                    <strong>Follow-up:</strong> When did Dmitri Mendeleev die?<br>
+                                    <strong>Intermediate answer:</strong> Mendeleev died on February 2, 1907.<br><br>
+                                    <strong>Follow-up:</strong> Was 1875 before 1907?<br>
+                                    <strong>Intermediate answer:</strong> Yes, 1875 is 32 years before 1907.<br><br>
+                                    <strong>So the final answer is:</strong> Gallium was discovered before Mendeleev died. He predicted it in 1871, it was found in 1875, and he lived until 1907 &mdash; meaning he witnessed the confirmation of his prediction during his lifetime.</p>
                                 </div>
                             </div>
                         </div>
@@ -438,11 +424,12 @@
         </section>
         <!-- /EXAMPLES IN ACTION -->
 
+
         <!-- === WHEN TO USE === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">When to Use Example Selection</h2>
-                <p class="section-subtitle fade-in-up">Best when few-shot performance depends on demonstration quality</p>
+                <h2 class="section-title fade-in-up">When to Use Self-Ask</h2>
+                <p class="section-subtitle fade-in-up">Best for multi-hop questions that demand transparent reasoning</p>
 
                 <div class="split-section fade-in-up">
                     <div class="split-section__content">
@@ -454,8 +441,8 @@
                                     <polyline points="22 4 12 14.01 9 11.01"/>
                                 </svg>
                                 <div>
-                                    <strong>Classification at Scale</strong>
-                                    <p>When processing thousands of inputs through a few-shot pipeline, automated example retrieval ensures every query gets the most relevant demonstrations rather than a static, one-size-fits-all set.</p>
+                                    <strong>Multi-Hop Questions</strong>
+                                    <p>Questions that chain multiple facts together &mdash; &ldquo;Who was the president when the company founded by the inventor of the telephone went public?&rdquo;</p>
                                 </div>
                             </div>
                             <div class="feature-list__item feature-list__item--positive">
@@ -464,8 +451,8 @@
                                     <polyline points="22 4 12 14.01 9 11.01"/>
                                 </svg>
                                 <div>
-                                    <strong>Domain-Specific Tasks</strong>
-                                    <p>Legal, medical, financial, or technical tasks where generic examples fail &mdash; similarity-based selection ensures demonstrations share the vocabulary, structure, and conventions of the target domain.</p>
+                                    <strong>Reasoning Audits</strong>
+                                    <p>When you need to verify every step of the model&rsquo;s logic &mdash; each sub-question and answer creates a checkable evidence trail.</p>
                                 </div>
                             </div>
                             <div class="feature-list__item feature-list__item--positive">
@@ -474,8 +461,8 @@
                                     <polyline points="22 4 12 14.01 9 11.01"/>
                                 </svg>
                                 <div>
-                                    <strong>Multi-Label or Many-Class Problems</strong>
-                                    <p>When the output space has dozens of possible labels, diversity-based selection ensures the model sees the full category landscape instead of a biased subset.</p>
+                                    <strong>Educational Contexts</strong>
+                                    <p>Teaching students how complex questions decompose &mdash; Self-Ask makes the hidden reasoning structure visible and instructive.</p>
                                 </div>
                             </div>
                             <div class="feature-list__item feature-list__item--positive">
@@ -484,8 +471,8 @@
                                     <polyline points="22 4 12 14.01 9 11.01"/>
                                 </svg>
                                 <div>
-                                    <strong>Token-Constrained Environments</strong>
-                                    <p>When context window limits force you to use fewer examples, strategic selection maximizes the signal from each demonstration &mdash; three curated examples can outperform ten random ones.</p>
+                                    <strong>Fact-Checking Pipelines</strong>
+                                    <p>Breaking claims into verifiable sub-claims &mdash; each intermediate answer can be independently confirmed against trusted sources.</p>
                                 </div>
                             </div>
                         </div>
@@ -499,8 +486,8 @@
                                     <line x1="8" y1="12" x2="16" y2="12"/>
                                 </svg>
                                 <div>
-                                    <strong>Zero-Shot Tasks</strong>
-                                    <p>If the model performs well without any examples, adding a selection pipeline introduces unnecessary complexity. Test zero-shot performance first before investing in example curation.</p>
+                                    <strong>Single-Hop Questions</strong>
+                                    <p>Questions answerable with a single fact lookup &mdash; &ldquo;What is the capital of France?&rdquo; needs no decomposition.</p>
                                 </div>
                             </div>
                             <div class="feature-list__item feature-list__item--neutral">
@@ -509,8 +496,8 @@
                                     <line x1="8" y1="12" x2="16" y2="12"/>
                                 </svg>
                                 <div>
-                                    <strong>Homogeneous Input Streams</strong>
-                                    <p>When all your queries are nearly identical in structure and domain, a single static set of well-chosen examples works just as well as dynamic retrieval &mdash; the overhead of per-query selection is not justified.</p>
+                                    <strong>Speed-Critical Applications</strong>
+                                    <p>When latency matters more than transparency &mdash; Self-Ask adds tokens and processing time for each sub-question and answer pair.</p>
                                 </div>
                             </div>
                             <div class="feature-list__item feature-list__item--neutral">
@@ -519,8 +506,8 @@
                                     <line x1="8" y1="12" x2="16" y2="12"/>
                                 </svg>
                                 <div>
-                                    <strong>Creative or Open-Ended Generation</strong>
-                                    <p>For brainstorming, creative writing, or exploratory tasks where there is no single correct output format, rigid example selection can constrain the model rather than help it.</p>
+                                    <strong>Creative or Open-Ended Tasks</strong>
+                                    <p>Writing, brainstorming, or opinion-based questions where there is no factual chain to decompose &mdash; Self-Ask is designed for factual multi-hop reasoning.</p>
                                 </div>
                             </div>
                         </div>
@@ -534,17 +521,18 @@
         <section class="section">
             <div class="container">
                 <h2 class="section-title fade-in-up">Use Cases</h2>
-                <p class="section-subtitle fade-in-up">Where strategic example selection delivers measurable impact</p>
+                <p class="section-subtitle fade-in-up">Where Self-Ask delivers the most value</p>
 
                 <div class="use-case-showcase fade-in-up">
                     <div class="use-case-showcase__item">
                         <div class="use-case-showcase__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-showcase__title">Customer Intent Classification</h3>
-                        <p class="use-case-showcase__desc">Route support tickets to the correct department by selecting examples from similar product lines, complaint types, and language patterns for each incoming query.</p>
+                        <h3 class="use-case-showcase__title">Research Analysis</h3>
+                        <p class="use-case-showcase__desc">Decompose complex research questions into verifiable sub-inquiries, ensuring each factual claim is independently supported before drawing conclusions.</p>
                     </div>
 
                     <div class="use-case-showcase__item">
@@ -556,8 +544,8 @@
                                 <line x1="16" y1="17" x2="8" y2="17"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-showcase__title">Document Extraction</h3>
-                        <p class="use-case-showcase__desc">Extract structured data from invoices, contracts, or forms by selecting template examples that match the document layout, field structure, and formatting conventions of each input.</p>
+                        <h3 class="use-case-showcase__title">Legal Due Diligence</h3>
+                        <p class="use-case-showcase__desc">Break regulatory compliance questions into jurisdiction-specific sub-questions, tracing each requirement back to its statutory source.</p>
                     </div>
 
                     <div class="use-case-showcase__item">
@@ -566,8 +554,18 @@
                                 <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-showcase__title">Medical Coding</h3>
-                        <p class="use-case-showcase__desc">Assign diagnosis or procedure codes to clinical notes by retrieving examples with similar symptoms, specialties, and coding patterns from a curated pool of annotated records.</p>
+                        <h3 class="use-case-showcase__title">Medical Reasoning</h3>
+                        <p class="use-case-showcase__desc">Decompose differential diagnosis questions into symptom-by-symptom analysis, making each diagnostic inference explicit and reviewable by clinicians.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Customer Support Escalation</h3>
+                        <p class="use-case-showcase__desc">When a support issue spans multiple systems or policies, decompose the customer&rsquo;s problem into sub-questions that each map to a specific knowledge base article.</p>
                     </div>
 
                     <div class="use-case-showcase__item">
@@ -576,19 +574,8 @@
                                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-showcase__title">Security Log Triage</h3>
-                        <p class="use-case-showcase__desc">Classify security alerts by severity and type by matching each new event against examples from similar attack vectors, network segments, and historical incident patterns.</p>
-                    </div>
-
-                    <div class="use-case-showcase__item">
-                        <div class="use-case-showcase__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                            </svg>
-                        </div>
-                        <h3 class="use-case-showcase__title">Content Moderation</h3>
-                        <p class="use-case-showcase__desc">Detect policy violations in user-generated content by selecting boundary-case examples that teach the model to distinguish between acceptable and prohibited content in context-specific scenarios.</p>
+                        <h3 class="use-case-showcase__title">Security Incident Analysis</h3>
+                        <p class="use-case-showcase__desc">Trace attack vectors through explicit sub-questions: what vulnerability was exploited, what systems were affected, what data was accessed, and what was the blast radius.</p>
                     </div>
 
                     <div class="use-case-showcase__item">
@@ -599,8 +586,8 @@
                                 <path d="M6 20v-6"/>
                             </svg>
                         </div>
-                        <h3 class="use-case-showcase__title">Financial Sentiment</h3>
-                        <p class="use-case-showcase__desc">Analyze earnings calls, analyst reports, and market commentary by selecting examples from the same sector, time period, and financial instrument type to capture domain-specific language nuances.</p>
+                        <h3 class="use-case-showcase__title">Financial Analysis</h3>
+                        <p class="use-case-showcase__desc">Break investment thesis questions into sub-analyses: market conditions, company fundamentals, competitive positioning, and risk factors &mdash; each answered and sourced independently.</p>
                     </div>
                 </div>
             </div>
@@ -610,35 +597,35 @@
         <!-- === FRAMEWORK POSITIONING === -->
         <section class="section section-alt">
             <div class="container">
-                <h2 class="section-title fade-in-up">Where Example Selection Fits</h2>
-                <p class="section-subtitle fade-in-up">From random demonstrations to intelligent retrieval-augmented selection</p>
+                <h2 class="section-title fade-in-up">Where Self-Ask Fits</h2>
+                <p class="section-subtitle fade-in-up">Self-Ask bridges implicit reasoning and structured decomposition</p>
 
                 <div class="evolution-timeline fade-in-up">
                     <div class="era-marker">
-                        <span class="era-marker__year">Few-Shot Learning</span>
-                        <span class="era-marker__title">Random Examples</span>
-                        <span class="era-marker__desc">Static demonstrations chosen by hand</span>
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Implicit Steps</span>
+                        <span class="era-marker__desc">Reasoning as continuous prose</span>
                     </div>
                     <div class="era-marker era-marker--active">
-                        <span class="era-marker__year">Example Selection</span>
-                        <span class="era-marker__title">Strategic Retrieval</span>
-                        <span class="era-marker__desc">Similarity and diversity-based curation</span>
+                        <span class="era-marker__year">Self-Ask</span>
+                        <span class="era-marker__title">Explicit Questions</span>
+                        <span class="era-marker__desc">Structured sub-question protocol</span>
                     </div>
                     <div class="era-marker">
-                        <span class="era-marker__year">KNN Prompting</span>
-                        <span class="era-marker__title">Nearest-Neighbor Lookup</span>
-                        <span class="era-marker__desc">Embedding-based retrieval at inference</span>
+                        <span class="era-marker__year">Decomposed Prompting</span>
+                        <span class="era-marker__title">Modular Sub-Tasks</span>
+                        <span class="era-marker__desc">Dedicated handlers per sub-problem</span>
                     </div>
                     <div class="era-marker">
-                        <span class="era-marker__year">Vote-k Selection</span>
-                        <span class="era-marker__title">Consensus Filtering</span>
-                        <span class="era-marker__desc">Model-guided example quality scoring</span>
+                        <span class="era-marker__year">Graph of Thought</span>
+                        <span class="era-marker__title">Non-Linear Paths</span>
+                        <span class="era-marker__desc">Interconnected reasoning nodes</span>
                     </div>
                 </div>
 
                 <div class="callout tip fade-in-up">
-                    <div class="callout-title">Combine Similarity with Diversity</div>
-                    <p>The most effective selection strategies blend both approaches. Start by retrieving a larger set of similar candidates (for example, the top 10 by embedding distance), then apply a diversity filter to ensure the final set of 3&ndash;5 examples covers different labels, formats, or edge cases. This hybrid approach captures the benefits of semantic relevance while avoiding the tunnel vision that pure similarity selection can create.</p>
+                    <div class="callout-title">Combine with Search</div>
+                    <p>Self-Ask was originally designed to pair each sub-question with a search engine lookup &mdash; making it a precursor to modern retrieval-augmented generation (RAG). In production systems, you can route each &ldquo;Follow-up question&rdquo; to a knowledge base or API, then feed the retrieved answer back as the &ldquo;Intermediate answer&rdquo; for maximum factual grounding.</p>
                 </div>
             </div>
         </section>
@@ -648,21 +635,21 @@
         <section class="section">
             <div class="container">
                 <h2 class="section-title fade-in-up">Related Frameworks</h2>
-                <p class="section-subtitle fade-in-up">Explore the techniques that Example Selection builds on and enables</p>
+                <p class="section-subtitle fade-in-up">Explore complementary decomposition techniques</p>
 
-                <a href="few-shot-learning.html" class="evolution-callout fade-in-up">
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="7" height="7"/>
-                            <rect x="14" y="3" width="7" height="7"/>
-                            <rect x="14" y="14" width="7" height="7"/>
-                            <rect x="3" y="14" width="7" height="7"/>
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
                         <span class="evolution-callout__label">Foundation</span>
-                        <span class="evolution-callout__title">Few-Shot Learning</span>
-                        <span class="evolution-callout__desc">The core technique that Example Selection optimizes &mdash; providing demonstrations in the prompt to teach the model a task through examples rather than instructions alone.</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">The implicit step-by-step reasoning technique that Self-Ask makes explicit through structured sub-questions.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -671,16 +658,16 @@
                     </span>
                 </a>
 
-                <a href="shot-prompting.html" class="evolution-callout fade-in-up">
+                <a href="decomp.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Complement</span>
-                        <span class="evolution-callout__title">KNN Prompting</span>
-                        <span class="evolution-callout__desc">Takes Example Selection further by using k-nearest-neighbor retrieval at inference time to dynamically assemble the most relevant demonstrations for every query.</span>
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Decomposed Prompting</span>
+                        <span class="evolution-callout__desc">Takes decomposition further by routing each sub-task to specialized handlers &mdash; a modular extension of Self-Ask&rsquo;s question-splitting approach.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -689,7 +676,7 @@
                     </span>
                 </a>
 
-                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                <a href="step-back.html" class="evolution-callout fade-in-up">
                     <span class="evolution-callout__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M17 2l4 4-4 4"/>
@@ -699,9 +686,9 @@
                         </svg>
                     </span>
                     <div class="evolution-callout__content">
-                        <span class="evolution-callout__label">Evolution</span>
-                        <span class="evolution-callout__title">Active Example Selection</span>
-                        <span class="evolution-callout__desc">Extends selection with model feedback &mdash; using the LLM&rsquo;s own confidence scores to iteratively refine which examples produce the most reliable outputs.</span>
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Step-Back Prompting</span>
+                        <span class="evolution-callout__desc">Instead of decomposing forward into sub-questions, Step-Back abstracts upward to broader principles before answering &mdash; a complementary reasoning direction.</span>
                     </div>
                     <span class="evolution-callout__arrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -719,8 +706,8 @@
                 <div class="cta-corporate cta-corporate--dark fade-in-up">
                     <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
                     <div class="cta-corporate__content">
-                        <h2 class="cta-corporate__title">Optimize Your Examples</h2>
-                        <p class="cta-corporate__text">Apply example selection strategies to your few-shot prompts or explore our tools for building better demonstrations.</p>
+                        <h2 class="cta-corporate__title">Decompose Your Questions</h2>
+                        <p class="cta-corporate__text">Try Self-Ask decomposition on your own complex questions or build reasoning-enhanced prompts with our tools.</p>
                         <div class="cta-corporate__actions">
                             <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
                             <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
@@ -733,7 +720,7 @@
     </main>
 
 
-        <footer class="footer">
+    <footer class="footer">
     <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
     <div class="container">
         <div class="footer-grid">
@@ -744,13 +731,13 @@
 
             <div class="footer-links">
                 <h4>Discover</h4>
-                <a href="../learn/prompt-basics.html">Prompt Basics</a>
-                <a href="../learn/crisp.html">CRISP Framework</a>
-                <a href="../learn/crispe.html">CRISPE Framework</a>
-                <a href="../learn/costar.html">COSTAR Framework</a>
-                <a href="../learn/react.html">ReAct Framework</a>
-                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
-                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+                <a href="prompt-basics.html">Prompt Basics</a>
+                <a href="crisp.html">CRISP Framework</a>
+                <a href="crispe.html">CRISPE Framework</a>
+                <a href="costar.html">COSTAR Framework</a>
+                <a href="react.html">ReAct Framework</a>
+                <a href="flipped-interaction.html">Flipped Interaction</a>
+                <a href="chain-of-thought.html">Chain-of-Thought</a>
             </div>
 
             <div class="footer-links">
