@@ -7731,14 +7731,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // After terms are loaded, scroll to hash target if present
         // This handles links from search results like glossary.html#term-xxx
-        const hash = window.location.hash;
-        if (hash && hash.startsWith('#term-')) {
-            const target = document.getElementById(hash.substring(1));
-            if (target) {
-                requestAnimationFrame(() => {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                });
-            }
+        // Uses delayed scroll to ensure browser has completed layout of all 2,141 terms
+        var glossaryHash = window.location.hash;
+        if (glossaryHash && (glossaryHash.startsWith('#term-') || glossaryHash.startsWith('#letter-'))) {
+            var scrollToGlossaryTarget = function() {
+                var targetEl = document.getElementById(glossaryHash.substring(1));
+                if (targetEl) {
+                    window.scrollTo(0, 0);
+                    setTimeout(function() {
+                        requestAnimationFrame(function() {
+                            requestAnimationFrame(function() {
+                                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            });
+                        });
+                    }, 150);
+                }
+            };
+            scrollToGlossaryTarget();
         }
     });
 
