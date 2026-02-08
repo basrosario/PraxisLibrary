@@ -6135,17 +6135,20 @@ body.menu-open {
 .mega-menu-quick-links a {
     display: block;
     padding: var(--space-xs) var(--space-sm);
-    font-size: 0.8125rem;
-    font-weight: 500;
+    font-size: 0.875rem;
     color: var(--text-secondary);
     text-decoration: none;
     border-radius: var(--radius-sm);
-    transition: color var(--transition-fast), background var(--transition-fast);
+    transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.mega-menu-quick-links a .nav-accent {
+    color: var(--primary);
 }
 
 .mega-menu-quick-links a:hover {
+    background: rgba(220, 53, 69, 0.1);
     color: var(--primary);
-    background: rgba(220, 53, 69, 0.05);
 }
 
 /* Tab buttons container */
@@ -6204,8 +6207,12 @@ body.menu-open {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--text-muted);
+    color: var(--text-primary);
     padding: var(--space-xs) var(--space-md) 0;
+}
+
+.mega-menu-tab-label .nav-accent {
+    color: var(--primary);
 }
 
 /* Right column: content panels (sections are direct flex children) */
@@ -6271,7 +6278,7 @@ body.menu-open {
         border-radius: 0;
     }
 
-    /* Quick links: visible on mobile as styled nav links (2x2 grid) */
+    /* Quick links: visible on mobile as styled CTA buttons (2x2 grid) */
     .mega-menu--tabbed .mega-menu-quick-links {
         display: flex;
         flex-direction: row;
@@ -6289,14 +6296,19 @@ body.menu-open {
         padding: var(--space-xs) var(--space-sm);
         font-size: 0.82rem;
         font-weight: 600;
-        color: var(--text-primary);
-        background: rgba(220, 53, 69, 0.1);
-        border-radius: var(--radius-sm);
+        color: white;
+        background: linear-gradient(180deg, rgba(220, 53, 69, 1) 0%, rgba(190, 40, 55, 0.95) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: var(--radius-md);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 3px rgba(0, 0, 0, 0.12);
+    }
+
+    .mega-menu--tabbed .mega-menu-quick-links a:nth-child(even) {
+        background: linear-gradient(180deg, rgba(30, 35, 42, 0.92) 0%, rgba(13, 17, 23, 0.95) 100%);
     }
 
     .mega-menu--tabbed .mega-menu-quick-links a:hover {
-        background: rgba(220, 53, 69, 0.2);
-        color: var(--text-primary);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 2px 6px rgba(0, 0, 0, 0.18);
     }
 
     /* Sections are blocks, not display:contents */
@@ -6468,12 +6480,16 @@ body.menu-open {
 .mega-menu-section h4 {
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--primary);
+    color: var(--text-primary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: var(--space-sm);
     padding-bottom: var(--space-xs);
     border-bottom: 1px solid var(--border-color);
+}
+
+.mega-menu-section h4 .nav-accent {
+    color: var(--primary);
 }
 
 .mega-menu-section h4 a {
@@ -6516,7 +6532,7 @@ body.menu-open {
 }
 
 .header.scrolled .mega-menu-section h4 {
-    color: var(--primary);
+    color: var(--text-primary);
     border-bottom-color: rgba(0, 0, 0, 0.1);
 }
 

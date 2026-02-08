@@ -128,6 +128,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 section.classList.toggle('is-expanded');
             });
         });
+    } else {
+        // Desktop: apply split-color to mega-menu section headers
+        document.querySelectorAll('.mega-menu-section h4').forEach(function(h4) {
+            var link = h4.querySelector('a');
+            var target = link || h4;
+            if (target.querySelector('.nav-accent')) return;
+            splitNavAccent(target);
+        });
+        // Desktop: apply split-color to sidebar quick links
+        document.querySelectorAll('.mega-menu-quick-links a').forEach(function(a) {
+            if (a.querySelector('.nav-accent')) return;
+            splitNavAccent(a);
+        });
     }
 
     // ==========================================
@@ -322,6 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     var techLabel = document.createElement('span');
                     techLabel.className = 'mega-menu-tab-label';
                     techLabel.textContent = 'Techniques';
+                    splitNavAccent(techLabel);
                     tablist.appendChild(techLabel);
                 }
 
@@ -334,6 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     var groupLabel = document.createElement('span');
                     groupLabel.className = 'mega-menu-tab-label';
                     groupLabel.textContent = 'Modality';
+                    splitNavAccent(groupLabel);
                     tablist.appendChild(groupLabel);
                 }
 
