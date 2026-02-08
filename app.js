@@ -8497,8 +8497,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Recommends best prompting method based on task
     // ==========================================
 
-    // Method characteristics for matching
+    // Method characteristics for matching — 15 representative frameworks across 13 categories
     const METHOD_PROFILES = {
+        // --- Structured Frameworks ---
         CRISP: {
             name: 'CRISP',
             fullName: 'Context, Role, Instructions, Specifics, Parameters',
@@ -8511,33 +8512,124 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'CRISPE',
             fullName: 'Context, Role, Instructions, Specifics, Parameters, Example',
             url: 'learn/crispe.html',
-            keywords: ['creative', 'example', 'style', 'format', 'template', 'consistent', 'story', 'art', 'design', 'copy', 'brand', 'voice'],
+            keywords: ['creative', 'style', 'format', 'template', 'consistent', 'story', 'copy', 'brand', 'voice'],
             characteristics: ['creative work', 'specific style needed', 'consistency important', 'examples help'],
-            bestFor: 'Creative tasks, style matching, consistent outputs, few-shot learning'
+            bestFor: 'Creative tasks, style matching, consistent outputs'
         },
         COSTAR: {
             name: 'COSTAR',
             fullName: 'Context, Objective, Style, Tone, Audience, Response',
             url: 'learn/costar.html',
-            keywords: ['professional', 'audience', 'communication', 'marketing', 'email', 'report', 'presentation', 'client', 'customer', 'business', 'formal', 'tone'],
+            keywords: ['professional', 'audience', 'communication', 'marketing', 'report', 'presentation', 'client', 'customer', 'business', 'formal', 'tone'],
             characteristics: ['audience-focused', 'professional communication', 'tone matters', 'stakeholder content'],
             bestFor: 'Professional content, audience-specific communication, business writing'
         },
+        // --- Reasoning & CoT ---
+        CHAIN_OF_THOUGHT: {
+            name: 'Chain-of-Thought',
+            fullName: 'Chain-of-Thought Prompting',
+            url: 'learn/chain-of-thought.html',
+            keywords: ['math', 'calculation', 'proof', 'step by step', 'show work', 'think through', 'logical', 'deduce', 'arithmetic', 'equation', 'derive'],
+            characteristics: ['mathematical problems', 'logical reasoning', 'step-by-step thinking', 'show reasoning'],
+            bestFor: 'Math problems, logical deductions, tasks requiring transparent reasoning'
+        },
+        // --- Decomposition ---
+        TREE_OF_THOUGHT: {
+            name: 'Tree of Thought',
+            fullName: 'Tree of Thought Prompting',
+            url: 'learn/tree-of-thought.html',
+            keywords: ['brainstorm', 'multiple paths', 'evaluate', 'strategic', 'planning', 'compare', 'pros cons', 'trade-off', 'scenario', 'decision', 'alternative'],
+            characteristics: ['multiple solution paths', 'evaluation needed', 'strategic planning', 'comparison'],
+            bestFor: 'Strategic decisions, brainstorming, comparing multiple approaches'
+        },
+        // --- Self-Correction ---
+        SELF_REFINE: {
+            name: 'Self-Refine',
+            fullName: 'Self-Refine Prompting',
+            url: 'learn/self-refine.html',
+            keywords: ['improve', 'iterate', 'refine', 'feedback', 'revise', 'polish', 'better', 'quality', 'enhance', 'perfect', 'draft', 'rewrite'],
+            characteristics: ['iterative improvement', 'quality refinement', 'feedback loops', 'polishing output'],
+            bestFor: 'Iteratively improving outputs, refining drafts, quality-focused tasks'
+        },
+        // --- Ensemble Methods ---
+        SELF_CONSISTENCY: {
+            name: 'Self-Consistency',
+            fullName: 'Self-Consistency Prompting',
+            url: 'learn/self-consistency.html',
+            keywords: ['reliable', 'accurate', 'consensus', 'multiple answers', 'vote', 'ensemble', 'confident', 'certain', 'trustworthy', 'validate'],
+            characteristics: ['high reliability needed', 'consensus answers', 'accuracy critical', 'validation'],
+            bestFor: 'When accuracy is critical, getting reliable answers through consensus'
+        },
+        // --- In-Context Learning ---
+        FEW_SHOT: {
+            name: 'Few-Shot Learning',
+            fullName: 'Few-Shot In-Context Learning',
+            url: 'learn/few-shot-learning.html',
+            keywords: ['examples', 'samples', 'demonstrate', 'pattern', 'teach', 'show me', 'like this', 'similar to', 'following format', 'classification', 'categorize'],
+            characteristics: ['learning from examples', 'pattern matching', 'format replication', 'classification tasks'],
+            bestFor: 'When you have examples to guide AI, classification, pattern-following tasks'
+        },
+        // --- Prompting Strategies ---
         REACT: {
             name: 'ReAct',
             fullName: 'Reasoning and Acting',
             url: 'learn/react.html',
-            keywords: ['complex', 'problem', 'analyze', 'debug', 'research', 'reasoning', 'steps', 'verify', 'investigate', 'solution', 'technical', 'logic'],
+            keywords: ['complex', 'problem', 'analyze', 'research', 'reasoning', 'verify', 'investigate', 'solution', 'technical', 'logic', 'troubleshoot'],
             characteristics: ['complex problems', 'multi-step reasoning', 'verification needed', 'technical analysis'],
-            bestFor: 'Complex problem-solving, debugging, research, multi-step analysis'
+            bestFor: 'Complex problem-solving, research, multi-step analysis'
         },
         FLIPPED: {
             name: 'Flipped Interaction',
             fullName: 'Flipped Interaction Pattern',
             url: 'learn/flipped-interaction.html',
-            keywords: ['unsure', 'help', 'guidance', 'explore', 'discover', 'clarify', 'questions', 'advice', 'recommendation', 'option', 'decision'],
+            keywords: ['unsure', 'guidance', 'explore', 'discover', 'clarify', 'questions', 'advice', 'recommendation', 'option'],
             characteristics: ['unclear requirements', 'need guidance', 'exploration', 'decision support'],
             bestFor: 'When you\'re unsure what you need, want AI to ask clarifying questions first'
+        },
+        // --- Code ---
+        CODE_PROMPTING: {
+            name: 'Code Prompting',
+            fullName: 'Code and Programming Frameworks',
+            url: 'learn/modality/code/code-prompting.html',
+            keywords: ['code', 'program', 'function', 'algorithm', 'software', 'develop', 'python', 'javascript', 'api', 'database', 'sql', 'test', 'bug', 'script', 'automate', 'debug'],
+            characteristics: ['programming tasks', 'code generation', 'software development', 'automation'],
+            bestFor: 'Writing code, debugging, programming tasks, software development'
+        },
+        // --- Image ---
+        IMAGE_PROMPTING: {
+            name: 'Image Prompting',
+            fullName: 'Image and Visual Frameworks',
+            url: 'learn/modality/image/image-prompting.html',
+            keywords: ['image', 'picture', 'photo', 'visual', 'see', 'look', 'draw', 'paint', 'illustration', 'graphic', 'logo', 'artwork', 'generate image', 'dall-e', 'midjourney'],
+            characteristics: ['visual analysis', 'image generation', 'visual design', 'image understanding'],
+            bestFor: 'Image generation, visual analysis, graphic design, image understanding'
+        },
+        // --- Audio ---
+        AUDIO_PROMPTING: {
+            name: 'Audio Prompting',
+            fullName: 'Audio and Speech Frameworks',
+            url: 'learn/modality/audio/audio-prompting.html',
+            keywords: ['audio', 'sound', 'music', 'voice', 'speech', 'listen', 'recording', 'podcast', 'transcribe', 'narrate', 'singing', 'accent', 'pronunciation'],
+            characteristics: ['audio processing', 'speech tasks', 'music creation', 'voice work'],
+            bestFor: 'Speech-to-text, text-to-speech, music generation, audio analysis'
+        },
+        // --- Video ---
+        VIDEO_PROMPTING: {
+            name: 'Video Prompting',
+            fullName: 'Video and Motion Frameworks',
+            url: 'learn/modality/video/video-prompting.html',
+            keywords: ['video', 'clip', 'footage', 'film', 'animate', 'motion', 'scene', 'movie', 'youtube', 'edit video', 'caption', 'subtitle', 'animation'],
+            characteristics: ['video analysis', 'video generation', 'temporal reasoning', 'video editing'],
+            bestFor: 'Video generation, video analysis, temporal reasoning, video editing'
+        },
+        // --- 3D ---
+        THREE_D_PROMPTING: {
+            name: '3D Prompting',
+            fullName: '3D and Spatial Frameworks',
+            url: 'learn/modality/3d/3d-prompting.html',
+            keywords: ['3d', 'spatial', 'mesh', 'point cloud', 'render', 'volume', 'pose', 'depth', 'object detection', 'cad', 'architecture', 'sculpt', 'voxel'],
+            characteristics: ['3D modeling', 'spatial reasoning', 'scene understanding', 'pose estimation'],
+            bestFor: '3D model generation, spatial reasoning, scene understanding, point cloud analysis'
         }
     };
 
@@ -8568,13 +8660,50 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (methodKey === 'COSTAR') score += 25;
                 }
                 if (normalizedTask.includes('example') || normalizedTask.includes('like this') || normalizedTask.includes('similar to')) {
-                    if (methodKey === 'CRISPE') score += 25;
+                    if (methodKey === 'CRISPE' || methodKey === 'FEW_SHOT') score += 25;
                 }
-                if (normalizedTask.includes('step') || normalizedTask.includes('analyze') || normalizedTask.includes('debug') || normalizedTask.includes('why')) {
+                if (normalizedTask.includes('step') || normalizedTask.includes('analyze') || normalizedTask.includes('why')) {
                     if (methodKey === 'REACT') score += 25;
                 }
-                if (normalizedTask.includes('not sure') || normalizedTask.includes('help me figure') || normalizedTask.includes('what should i') || normalizedTask.includes('options')) {
+                if (normalizedTask.includes('not sure') || normalizedTask.includes('help me figure') || normalizedTask.includes('what should i')) {
                     if (methodKey === 'FLIPPED') score += 25;
+                }
+
+                // Reasoning & CoT patterns
+                if (normalizedTask.includes('math') || normalizedTask.includes('calculation') || normalizedTask.includes('step by step') || normalizedTask.includes('show work')) {
+                    if (methodKey === 'CHAIN_OF_THOUGHT') score += 25;
+                }
+
+                // Decomposition patterns
+                if (normalizedTask.includes('brainstorm') || normalizedTask.includes('multiple options') || normalizedTask.includes('compare') || normalizedTask.includes('pros and cons')) {
+                    if (methodKey === 'TREE_OF_THOUGHT') score += 25;
+                }
+
+                // Self-Correction patterns
+                if (normalizedTask.includes('improve') || normalizedTask.includes('refine') || normalizedTask.includes('iterate') || normalizedTask.includes('polish') || normalizedTask.includes('make better')) {
+                    if (methodKey === 'SELF_REFINE') score += 25;
+                }
+
+                // Ensemble patterns
+                if (normalizedTask.includes('accurate') || normalizedTask.includes('reliable') || normalizedTask.includes('consensus') || normalizedTask.includes('certain')) {
+                    if (methodKey === 'SELF_CONSISTENCY') score += 25;
+                }
+
+                // Modality detection
+                if (normalizedTask.includes('code') || normalizedTask.includes('program') || normalizedTask.includes('function') || normalizedTask.includes('script') || normalizedTask.includes('debug')) {
+                    if (methodKey === 'CODE_PROMPTING') score += 25;
+                }
+                if (normalizedTask.includes('image') || normalizedTask.includes('picture') || normalizedTask.includes('photo') || normalizedTask.includes('visual')) {
+                    if (methodKey === 'IMAGE_PROMPTING') score += 25;
+                }
+                if (normalizedTask.includes('audio') || normalizedTask.includes('sound') || normalizedTask.includes('music') || normalizedTask.includes('voice') || normalizedTask.includes('speech')) {
+                    if (methodKey === 'AUDIO_PROMPTING') score += 25;
+                }
+                if (normalizedTask.includes('video') || normalizedTask.includes('clip') || normalizedTask.includes('footage') || normalizedTask.includes('film')) {
+                    if (methodKey === 'VIDEO_PROMPTING') score += 25;
+                }
+                if (normalizedTask.includes('3d') || normalizedTask.includes('spatial') || normalizedTask.includes('mesh') || normalizedTask.includes('point cloud')) {
+                    if (methodKey === 'THREE_D_PROMPTING') score += 25;
                 }
 
                 // Length and complexity indicators
@@ -8626,6 +8755,33 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (task.includes('?') || task.includes('unsure') || task.includes('help')) {
                 reasons.push('Clarification might improve results');
+            }
+            if (task.includes('code') || task.includes('program') || task.includes('function') || task.includes('script')) {
+                reasons.push('Your task involves programming or code');
+            }
+            if (task.includes('image') || task.includes('picture') || task.includes('visual') || task.includes('photo')) {
+                reasons.push('Your task involves visual or image content');
+            }
+            if (task.includes('audio') || task.includes('sound') || task.includes('music') || task.includes('voice')) {
+                reasons.push('Your task involves audio or speech processing');
+            }
+            if (task.includes('video') || task.includes('clip') || task.includes('film')) {
+                reasons.push('Your task involves video content');
+            }
+            if (task.includes('3d') || task.includes('spatial') || task.includes('mesh')) {
+                reasons.push('Your task involves 3D or spatial content');
+            }
+            if (task.includes('math') || task.includes('calculate') || task.includes('step by step')) {
+                reasons.push('This requires step-by-step mathematical reasoning');
+            }
+            if (task.includes('brainstorm') || task.includes('compare') || task.includes('options')) {
+                reasons.push('Exploring multiple approaches would help');
+            }
+            if (task.includes('improve') || task.includes('refine') || task.includes('better')) {
+                reasons.push('Iterative refinement could improve the result');
+            }
+            if (task.includes('accurate') || task.includes('reliable') || task.includes('verify')) {
+                reasons.push('High accuracy is important for this task');
             }
 
             if (reasons.length === 0) {
