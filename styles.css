@@ -279,11 +279,11 @@ p {
 body.menu-open .header {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
-    background: rgba(13, 17, 23, 0.98);
+    background: rgba(255, 255, 255, 0.98);
 }
 
 body.menu-open .header .nav-link {
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-primary);
 }
 
 /* Mobile nav accent (JS-injected, matches logo pattern) */
@@ -292,22 +292,22 @@ body.menu-open .header .nav-accent {
 }
 
 body.menu-open .header .logo {
-    color: white;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    color: var(--text-primary);
+    text-shadow: none;
 }
 
 body.menu-open .header .menu-toggle {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.05);
 }
 
 body.menu-open .header .menu-toggle span {
-    background: white;
+    background: var(--text-primary);
 }
 
 body.menu-open .header .search-trigger {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.15);
-    color: rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: var(--text-primary);
 }
 
 .header-inner {
@@ -5864,7 +5864,7 @@ textarea:focus-visible {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(13, 17, 23, 0.98);
+    background: rgba(255, 255, 255, 0.98);
     padding: var(--space-xl);
     padding-bottom: calc(var(--space-xl) + var(--safe-area-inset-bottom));
     padding-left: calc(var(--space-xl) + var(--safe-area-inset-left));
@@ -5891,17 +5891,18 @@ textarea:focus-visible {
 .nav.active .nav-link {
     font-size: 1.125rem;
     padding: var(--space-md) var(--space-sm);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     min-height: 48px;
     display: flex;
     align-items: center;
     border-radius: var(--radius-md);
+    color: var(--text-primary);
     /* No transitions - instant response */
     transition: none;
 }
 
 .nav.active .nav-link:active {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.05);
 }
 
 /* Prevent body scroll when menu is open */
@@ -6276,7 +6277,7 @@ body.menu-open {
         flex-wrap: wrap;
         gap: var(--space-xs);
         padding: var(--space-xs) var(--space-sm);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         margin-bottom: var(--space-xs);
     }
 
@@ -6287,14 +6288,14 @@ body.menu-open {
         padding: var(--space-xs) var(--space-sm);
         font-size: 0.82rem;
         font-weight: 600;
-        color: #fff;
-        background: rgba(220, 53, 69, 0.15);
+        color: var(--text-primary);
+        background: rgba(220, 53, 69, 0.1);
         border-radius: var(--radius-sm);
     }
 
     .mega-menu--tabbed .mega-menu-quick-links a:hover {
-        background: rgba(220, 53, 69, 0.3);
-        color: #fff;
+        background: rgba(220, 53, 69, 0.2);
+        color: var(--text-primary);
     }
 
     /* Sections are blocks, not display:contents */
@@ -6319,7 +6320,7 @@ body.menu-open {
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.3px;
-        color: #fff;
+        color: var(--text-primary);
         user-select: none;
     }
 
@@ -6328,9 +6329,9 @@ body.menu-open {
         color: var(--primary);
     }
 
-    /* Clickable headers (h4 containing a link) — white base, red accent */
+    /* Clickable headers (h4 containing a link) — dark base, red accent */
     .mega-menu--tabbed .mega-menu-section[data-tab] h4 a {
-        color: #fff !important;
+        color: var(--text-primary) !important;
         text-decoration: none;
     }
 
@@ -6343,7 +6344,7 @@ body.menu-open {
         content: '+';
         font-size: 1rem;
         font-weight: 400;
-        color: rgba(255, 255, 255, 0.5);
+        color: rgba(0, 0, 0, 0.35);
         transition: transform 0.2s ease;
         margin-left: var(--space-sm);
     }
@@ -6353,11 +6354,11 @@ body.menu-open {
     }
 
     .mega-menu--tabbed .mega-menu-section[data-tab].is-expanded h4 {
-        color: #fff;
+        color: var(--text-primary);
     }
 
     .mega-menu--tabbed .mega-menu-section[data-tab].is-expanded h4 a {
-        color: #fff !important;
+        color: var(--text-primary) !important;
     }
 
     /* Hide sub-links by default, show when expanded (h4 a stays visible) */
@@ -6370,7 +6371,7 @@ body.menu-open {
         padding: var(--space-xs) var(--space-sm);
         padding-left: var(--space-md);
         font-size: 0.92rem;
-        color: #fff !important;
+        color: var(--text-primary) !important;
         background: transparent !important;
     }
 
@@ -6380,10 +6381,10 @@ body.menu-open {
         width: 100%;
         padding: var(--space-xs) var(--space-sm);
         margin-bottom: var(--space-xs);
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: var(--radius-sm);
-        color: rgba(255, 255, 255, 0.7);
+        color: rgba(0, 0, 0, 0.5);
         font-size: 0.75rem;
         font-weight: 600;
         text-transform: uppercase;
@@ -6394,8 +6395,8 @@ body.menu-open {
 
     .mega-menu-toggle-all:hover,
     .mega-menu-toggle-all:focus-visible {
-        background: rgba(255, 255, 255, 0.15);
-        color: #fff;
+        background: rgba(0, 0, 0, 0.08);
+        color: var(--text-primary);
     }
 
     /* Override desktop hover/active transform for tabbed */
@@ -6410,11 +6411,11 @@ body.menu-open {
     }
 
     .header.scrolled .mega-menu--tabbed .mega-menu-section[data-tab] h4 {
-        color: #fff;
+        color: var(--text-primary);
     }
 
     .header.scrolled .mega-menu--tabbed .mega-menu-section[data-tab] h4 a {
-        color: #fff;
+        color: var(--text-primary);
     }
 }
 
@@ -6520,9 +6521,15 @@ body.menu-open {
         display: none;
     }
 
+    /* Hide Discover parent link on mobile (redundant with quick link) */
+    .nav-item.has-dropdown:has(.mega-menu--tabbed) > .nav-link {
+        display: none;
+    }
+
     /* Nav item with dropdown - simple block layout */
     .nav-item.has-dropdown {
         display: block;
+        position: static;
     }
 
     /* Parent link styling - full width, no animation */
@@ -6572,7 +6579,7 @@ body.menu-open {
         padding: var(--space-xs) var(--space-sm);
         font-size: 0.92rem;
         border-bottom: none;
-        color: #fff !important;
+        color: var(--text-primary) !important;
         background: transparent !important;
         border-radius: var(--radius-sm);
         transition: none;
@@ -6583,7 +6590,7 @@ body.menu-open {
     .mega-menu-section a:hover,
     .mega-menu-section a:focus {
         background: transparent !important;
-        color: #fff !important;
+        color: var(--text-primary) !important;
     }
 
     /* Hide underline animation on mobile nav links */
@@ -6613,40 +6620,88 @@ body.menu-open {
         right: auto;
     }
 
+    /* Override multi-column hover/active transforms on mobile */
+    .nav-item.has-dropdown:hover .mega-menu.mega-menu--multi-column,
+    .nav-item.has-dropdown.is-active .mega-menu.mega-menu--multi-column,
+    .nav-item.has-dropdown:last-child:hover .mega-menu.mega-menu--multi-column,
+    .nav-item.has-dropdown:last-child.is-active .mega-menu.mega-menu--multi-column {
+        transform: none;
+    }
+
     .mega-menu-links {
         display: contents;
     }
 
-    /* Featured section on mobile - reset to match normal sections */
-    .mega-menu-section--featured {
+    /* Non-tabbed mega-menus: accordion on mobile ---- */
+    .mega-menu:not(.mega-menu--tabbed) {
         display: block;
-        grid-column: 1 / -1;
+        grid-template-columns: none;
+    }
+
+    .mega-menu:not(.mega-menu--tabbed) .mega-menu-section,
+    .mega-menu:not(.mega-menu--tabbed) .mega-menu-section--featured {
+        display: block;
+        grid-column: auto;
         background: none;
         margin: 0;
         padding: 0;
         border-radius: 0;
     }
 
-    .mega-menu-section--featured h4 {
-        display: block;
-        color: inherit;
-        margin-bottom: var(--space-xs);
-        font-size: 0.6rem;
+    .mega-menu:not(.mega-menu--tabbed) .mega-menu-section h4 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--space-xs) var(--space-sm);
+        margin: 0;
+        cursor: pointer;
+        font-size: 0.86rem;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.3px;
-        white-space: nowrap;
+        color: var(--text-primary);
+        user-select: none;
     }
 
-    .mega-menu-section--featured a {
+    .mega-menu:not(.mega-menu--tabbed) .mega-menu-section h4 a {
+        color: var(--text-primary) !important;
+        text-decoration: none;
+    }
+
+    .mega-menu:not(.mega-menu--tabbed) .mega-menu-section h4 .nav-accent {
+        color: var(--primary) !important;
+    }
+
+    .mega-menu:not(.mega-menu--tabbed) .mega-menu-section h4::after {
+        content: '+';
+        font-size: 1rem;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.35);
+        margin-left: var(--space-sm);
+    }
+
+    .mega-menu:not(.mega-menu--tabbed) .mega-menu-section.is-expanded h4::after {
+        content: '\2212';
+    }
+
+    .mega-menu:not(.mega-menu--tabbed) .mega-menu-section > a {
+        display: none;
+    }
+
+    .mega-menu:not(.mega-menu--tabbed) .mega-menu-section.is-expanded > a {
         display: block;
-        padding-left: var(--space-sm);
+        padding: var(--space-xs) var(--space-sm);
+        padding-left: var(--space-md);
+        font-size: 0.92rem;
+        color: var(--text-primary) !important;
+        background: transparent !important;
     }
 
     .mega-menu-divider {
         display: none;
     }
 
-    /* Override scrolled header styles — mobile menu is always dark */
+    /* Override scrolled header styles — mobile menu is always light */
     .header.scrolled .mega-menu {
         background: transparent;
         border-color: transparent;
@@ -6654,17 +6709,17 @@ body.menu-open {
     }
 
     .header.scrolled .mega-menu-section h4 {
-        color: rgba(255, 255, 255, 0.6);
+        color: var(--text-primary);
         border-bottom-color: transparent;
     }
 
     .header.scrolled .mega-menu-section a {
-        color: #fff;
+        color: var(--text-primary);
     }
 
     .header.scrolled .mega-menu-section a:hover {
         background: transparent;
-        color: #fff;
+        color: var(--text-primary);
     }
 
     .header.scrolled .mega-menu-sidebar {
@@ -6673,12 +6728,12 @@ body.menu-open {
     }
 
     .header.scrolled .mega-menu-quick-links a {
-        color: #fff;
-        background: rgba(220, 53, 69, 0.15);
+        color: var(--text-primary);
+        background: rgba(220, 53, 69, 0.1);
     }
 
     .header.scrolled .mega-menu-section--featured h4 {
-        color: rgba(255, 255, 255, 0.6);
+        color: var(--text-primary);
     }
 }
 

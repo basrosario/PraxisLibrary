@@ -100,6 +100,34 @@ document.addEventListener('DOMContentLoaded', () => {
             var link = h4.querySelector('a');
             splitNavAccent(link || h4);
         });
+
+        // Split non-tabbed mega-menu section headers + accordion behavior
+        document.querySelectorAll('.mega-menu:not(.mega-menu--tabbed) .mega-menu-section').forEach(function(section) {
+            var h4 = section.querySelector('h4');
+            if (!h4) return;
+            // Custom split for "AI & ND": "AI " white, "& ND" red
+            var text = h4.textContent.trim();
+            if (text === 'AI & ND') {
+                h4.textContent = '';
+                var wrapper = document.createElement('span');
+                wrapper.className = 'nav-accent-wrap';
+                wrapper.appendChild(document.createTextNode('AI '));
+                var accent = document.createElement('span');
+                accent.className = 'nav-accent';
+                accent.textContent = '& ND';
+                wrapper.appendChild(accent);
+                h4.appendChild(wrapper);
+            } else {
+                splitNavAccent(h4);
+            }
+            // Start expanded on mobile
+            section.classList.add('is-expanded');
+            // Accordion toggle on h4 click
+            h4.addEventListener('click', function(e) {
+                e.preventDefault();
+                section.classList.toggle('is-expanded');
+            });
+        });
     }
 
     // ==========================================
@@ -375,12 +403,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Mobile: start collapsed, add Expand/Collapse All button
+            // Mobile: start expanded, add Expand/Collapse All button
             if (this.isMobile()) {
-                sections.forEach(s => s.classList.remove('is-expanded'));
+                sections.forEach(s => s.classList.add('is-expanded'));
                 var toggleBtn = document.createElement('button');
                 toggleBtn.className = 'mega-menu-toggle-all';
-                toggleBtn.textContent = 'Expand All';
+                toggleBtn.textContent = 'Collapse All';
                 toggleBtn.setAttribute('type', 'button');
                 toggleBtn.addEventListener('click', function() {
                     var allExpanded = Array.from(sections).every(function(s) {
