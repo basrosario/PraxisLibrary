@@ -134,13 +134,13 @@ html {
     scroll-margin-top: 100px;
 }
 
-/* Glossary page anchors - extra offset for sticky A-Z nav */
+/* Glossary page anchors - offset for header + sticky search + sticky A-Z nav */
 [id^="letter-"] {
-    scroll-margin-top: 160px; /* Header (70px) + sticky nav (~56px) + breathing room */
+    scroll-margin-top: 220px; /* Header (70px) + search bar (~58px) + A-Z nav (~56px) + breathing room */
 }
 
 [id^="term-"] {
-    scroll-margin-top: 160px; /* Same as letter sections for consistency */
+    scroll-margin-top: 220px; /* Same as letter sections for consistency */
 }
 
 body {
@@ -6034,6 +6034,199 @@ body.menu-open {
     transform: translateX(-50%) translateY(0);
 }
 
+/* === TABBED MEGA MENU === */
+
+/* Nav items with tabbed menus position relative to header, not self */
+.nav-item.has-dropdown:has(.mega-menu--tabbed) {
+    position: static;
+}
+
+/* Container: fixed width, side-by-side tab + panel layout */
+.mega-menu--tabbed {
+    display: flex;
+    width: 680px;
+    max-width: calc(100vw - 2rem);
+    padding: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    transform: translateY(10px);
+}
+
+.nav-item.has-dropdown:hover .mega-menu.mega-menu--tabbed,
+.nav-item.has-dropdown.is-active .mega-menu.mega-menu--tabbed {
+    transform: translateY(0);
+}
+
+/* Left column: tab buttons */
+.mega-menu-tabs {
+    flex: 0 0 190px;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-sm) 0;
+    border-right: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+[data-theme="dark"] .mega-menu-tabs {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Individual tab button */
+.mega-menu-tab {
+    display: block;
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+    transition: color var(--transition-fast), background var(--transition-fast),
+                border-color var(--transition-fast);
+    white-space: nowrap;
+    font-family: inherit;
+    line-height: 1.4;
+}
+
+.mega-menu-tab:hover {
+    color: var(--primary);
+    background: rgba(220, 53, 69, 0.05);
+}
+
+.mega-menu-tab.is-active {
+    color: var(--primary);
+    font-weight: 600;
+    border-left-color: var(--primary);
+    background: rgba(220, 53, 69, 0.08);
+}
+
+/* Right column: content panels (sections are direct flex children) */
+.mega-menu--tabbed .mega-menu-section[data-tab] {
+    flex: 1;
+    min-width: 0;
+    display: none;
+    padding: var(--space-md);
+    columns: 2;
+    column-gap: var(--space-md);
+}
+
+.mega-menu--tabbed .mega-menu-section[data-tab].is-active {
+    display: block;
+}
+
+/* Panel heading spans both columns */
+.mega-menu--tabbed .mega-menu-section[data-tab] h4 {
+    display: block;
+    column-span: all;
+}
+
+/* Prevent links from splitting across columns */
+.mega-menu--tabbed .mega-menu-section[data-tab] a {
+    break-inside: avoid;
+}
+
+/* Scrolled header: tabbed menu adjustments */
+.header.scrolled .mega-menu-tabs {
+    background: rgba(0, 0, 0, 0.02);
+    border-right-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Tabbed mega-menu mobile accordion ---- */
+@media (max-width: 767px) {
+    /* Override generic mobile grid: tabbed menu is a vertical accordion */
+    .mega-menu--tabbed {
+        display: block;
+        width: auto;
+        max-width: none;
+        padding: 0;
+    }
+
+    /* Hide desktop tab buttons on mobile */
+    .mega-menu--tabbed .mega-menu-tabs {
+        display: none;
+    }
+
+    /* Sections are blocks, not display:contents */
+    .mega-menu--tabbed .mega-menu-section[data-tab] {
+        display: block;
+        padding: 0;
+        max-height: none;
+        overflow: visible;
+    }
+
+    /* Show h4 as tappable accordion header */
+    .mega-menu--tabbed .mega-menu-section[data-tab] h4 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--space-xs) var(--space-sm);
+        margin: 0;
+        cursor: pointer;
+        font-size: 0.86rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        color: var(--primary);
+        user-select: none;
+    }
+
+    /* Clickable headers (h4 containing a link) — white */
+    .mega-menu--tabbed .mega-menu-section[data-tab] h4 a {
+        color: #fff !important;
+        text-decoration: none;
+    }
+
+    /* Chevron indicator */
+    .mega-menu--tabbed .mega-menu-section[data-tab] h4::after {
+        content: '+';
+        font-size: 1rem;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.5);
+        transition: transform 0.2s ease;
+        margin-left: var(--space-sm);
+    }
+
+    .mega-menu--tabbed .mega-menu-section[data-tab].is-expanded h4::after {
+        content: '\2212';
+    }
+
+    .mega-menu--tabbed .mega-menu-section[data-tab].is-expanded h4 {
+        color: var(--primary);
+    }
+
+    .mega-menu--tabbed .mega-menu-section[data-tab].is-expanded h4 a {
+        color: #fff !important;
+    }
+
+    /* Hide links by default, show when expanded */
+    .mega-menu--tabbed .mega-menu-section[data-tab] a {
+        display: none;
+    }
+
+    .mega-menu--tabbed .mega-menu-section[data-tab].is-expanded a {
+        display: block;
+        padding: var(--space-xs) var(--space-sm);
+        padding-left: var(--space-md);
+        font-size: 0.92rem;
+        color: #fff !important;
+        background: transparent !important;
+    }
+
+    /* Override desktop hover/active transform for tabbed */
+    .nav-item.has-dropdown:hover .mega-menu.mega-menu--tabbed,
+    .nav-item.has-dropdown.is-active .mega-menu.mega-menu--tabbed {
+        transform: none;
+    }
+}
+
+/* /TABBED MEGA MENU */
+
 /* Links wrapper within a section */
 .mega-menu-links {
     display: block;
@@ -6184,9 +6377,9 @@ body.menu-open {
     .mega-menu-section a {
         display: block;
         padding: var(--space-xs) var(--space-sm);
-        font-size: 0.8rem;
+        font-size: 0.92rem;
         border-bottom: none;
-        color: rgba(255, 255, 255, 0.7) !important;
+        color: #fff !important;
         background: transparent !important;
         border-radius: var(--radius-sm);
         transition: none;
@@ -6197,7 +6390,7 @@ body.menu-open {
     .mega-menu-section a:hover,
     .mega-menu-section a:focus {
         background: transparent !important;
-        color: rgba(255, 255, 255, 0.7) !important;
+        color: #fff !important;
     }
 
     /* Hide underline animation on mobile nav links */
@@ -10566,6 +10759,188 @@ body.menu-open {
         padding: 6px 12px;
         font-size: 0.8rem;
     }
+}
+
+/* Glossary Inline Search
+   Purpose: Glossary-only search bar above A-Z nav
+   Searches term names and definitions within glossary.json only
+   -------------------------------------------- */
+.glossary-search-container {
+    position: sticky;
+    top: 128px; /* Below header (70px) + sticky A-Z nav (~58px) */
+    z-index: 500;
+    margin-bottom: 0;
+    background: var(--bg-secondary);
+    padding: var(--space-sm) 0 var(--space-sm) 0;
+}
+
+.glossary-search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.glossary-search-icon {
+    position: absolute;
+    left: 16px;
+    width: 20px;
+    height: 20px;
+    color: var(--text-muted);
+    pointer-events: none;
+    flex-shrink: 0;
+}
+
+.glossary-search-input {
+    width: 100%;
+    padding: 14px 48px 14px 48px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: var(--font-sans);
+    outline: none;
+    transition: var(--transition-fast);
+}
+
+.glossary-search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.glossary-search-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+}
+
+.glossary-search-clear {
+    position: absolute;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.glossary-search-clear svg {
+    width: 14px;
+    height: 14px;
+}
+
+.glossary-search-clear:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.glossary-search-clear.hidden {
+    display: none;
+}
+
+.glossary-search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    max-height: 400px;
+    overflow-y: auto;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    z-index: 9000;
+}
+
+.glossary-search-results.hidden {
+    display: none;
+}
+
+.glossary-search-result {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-light);
+    transition: var(--transition-fast);
+}
+
+.glossary-search-result:last-child {
+    border-bottom: none;
+}
+
+.glossary-search-result:hover,
+.glossary-search-result.active {
+    background: rgba(220, 53, 69, 0.06);
+}
+
+.glossary-search-result-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.glossary-search-result-name mark {
+    background: rgba(220, 53, 69, 0.15);
+    color: var(--primary);
+    border-radius: 2px;
+    padding: 0 2px;
+}
+
+.glossary-search-result-excerpt {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.glossary-search-result-excerpt mark {
+    background: rgba(220, 53, 69, 0.1);
+    color: var(--text-secondary);
+    border-radius: 2px;
+    padding: 0 1px;
+}
+
+.glossary-search-result-match {
+    font-size: 0.75rem;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.glossary-search-no-results {
+    padding: 20px 16px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.glossary-search-count {
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-light);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* Glossary term highlight animation after search selection */
+.glossary-term--highlighted {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2), var(--shadow-md) !important;
+    animation: glossary-highlight-pulse 2s ease-out;
+}
+
+@keyframes glossary-highlight-pulse {
+    0% { box-shadow: 0 0 0 6px rgba(220, 53, 69, 0.3), var(--shadow-md); }
+    100% { box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2), var(--shadow-md); }
 }
 
 /* Glossary Navigation - Sticky A-Z Menu

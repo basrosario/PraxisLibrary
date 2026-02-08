@@ -4,6 +4,112 @@
 
 ---
 
+## Session 48 (2026-02-07)
+**Mega-Menu Tabbed Categories Redesign COMPLETE (Steps 2-6)**
+
+- [x] **Mobile CSS overrides** — Added tabbed-specific mobile accordion styles in `styles.css`:
+  - `.mega-menu--tabbed` overrides generic mobile grid to block layout
+  - Hides desktop tab column, shows h4 as tappable accordion headers with +/- indicators
+  - Links hidden by default, shown on `.is-expanded`
+  - Single-expand accordion mode
+
+- [x] **TabbedMenu JS object** — Added after `AccordionNav.init()` in `app.js`:
+  - Generates tab `<button>` elements at runtime from each `[data-tab]` section's `<h4>` text
+  - Desktop: `mouseenter` switches active panel, click fallback
+  - Mobile: h4 click toggles accordion (single-expand)
+  - Keyboard: Arrow keys (roving tabindex), Home/End, full ARIA tab pattern
+
+- [x] **index.html manual conversion** — Converted Discover mega-menu to tabbed format for testing
+
+- [x] **Batch conversion script** — `update_nav_tabbed.py`:
+  - Converts first `mega-menu--multi-column` to `mega-menu--tabbed` in each file
+  - Inserts empty tablist div, adds `data-tab="slug" role="tabpanel"` to sections
+  - Handles both `&amp;` and `&` variants for Reasoning & CoT
+  - Resources menu left unchanged
+
+- [x] **Batch execution** — 127 files converted across depths 0/1/2/3, 0 errors
+  - Fixed `Reasoning & CoT` unescaped ampersand issue (120 files patched)
+  - All 124 production files verified with exactly 10 data-tab sections
+
+- [x] **Documentation updated** — SiteFrameworks.md navigation architecture rewritten for tabbed system
+
+---
+
+## Session 47 (2026-02-07)
+**Glossary Inline Search COMPLETE + Mega-Menu Redesign Started**
+
+- [x] **Glossary Inline Search** — Full implementation:
+  - HTML search container added to `pages/glossary.html` (below A-Z sticky nav)
+  - ~150 lines CSS in `styles.css`: sticky search bar (top: 128px, z-index: 500), results dropdown (z-index: 9000), highlight pulse animation
+  - ~250 lines JS in `app.js`: `initGlossarySearch()` with 8-tier scoring algorithm (exact name, acronym, normalized match, starts-with, word boundary, substring, definition match), `extractAcronym()` for parenthetical acronyms, `normalizeForMatch()` for hyphen/space normalization
+  - Scroll fix: Temporarily forces all 26 glossary sections to `contentVisibility = 'visible'` before measuring position (solves `content-visibility: auto` placeholder height issue), double-rAF for layout reflow, restores after 1.5s
+  - Keyboard navigation: ArrowUp/Down through results, Enter to select, Escape to close
+  - Dynamic placeholder updates count after glossary loads
+  - CSP compliant: zero inline styles, zero inline scripts
+  - Documented in `SiteFrameworks.md`
+
+- [x] **Mega-Menu Redesign Plan** — Designed tabbed categories approach:
+  - Plan file: `.claude/plans/valiant-foraging-balloon.md`
+  - User chose Option B (Tabbed Categories / Progressive Disclosure) over Option A (Hub-First)
+  - Desktop: 680px panel with left tabs (190px) + right content panel
+  - Mobile: accordion with collapsible category headers
+
+- [x] **Mega-Menu CSS (Step 1/6)** — Added to `styles.css`:
+  - `.mega-menu--tabbed` container, `.mega-menu-tabs` column, `.mega-menu-tab` buttons
+  - Desktop: flex layout, active left-border indicator, hover/active states
+  - Mobile: accordion with chevron `::after` indicators, `.is-expanded` show/hide
+  - Dark mode + scrolled header variants
+  - CSS is inert — no HTML elements use the class yet
+
+**Quality Checks Passed:** 0 inline styles, 0 inline scripts, glossary search tested on desktop + mobile.
+
+---
+
+## Session 46 (2026-02-07)
+**Phase 3A Image Prompting COMPLETE (12/12) + Modality Hub + Full Integration**
+
+- [x] **Session 45 Committed & Pushed** (`4bc69f5`):
+  - All Phase 2 work (52/52 text frameworks) committed and pushed to remote
+
+- [x] **12 Image Prompting Pages Created** (parallel background agents, 867-892 lines each):
+  - `learn/modality/image/image-prompting.html` (883 lines) — Image Prompting Basics, 2023
+  - `learn/modality/image/multimodal-cot.html` (878 lines) — Multimodal CoT, 2023 by Zhang et al.
+  - `learn/modality/image/visual-cot.html` (884 lines) — Visual Chain of Thought, 2023
+  - `learn/modality/image/image-as-text.html` (875 lines) — Image-as-Text Prompting, 2023
+  - `learn/modality/image/vqa.html` (867 lines) — Visual Question Answering, 2015/2023
+  - `learn/modality/image/image-gen-prompting.html` (879 lines) — Image Generation Prompting, 2022
+  - `learn/modality/image/negative-prompting.html` (892 lines) — Negative Prompting, 2022
+  - `learn/modality/image/controlnet-prompting.html` (892 lines) — ControlNet Prompting, 2023
+  - `learn/modality/image/inpainting-prompting.html` (881 lines) — Inpainting Prompting, 2022
+  - `learn/modality/image/style-transfer.html` (878 lines) — Style Transfer Prompting, 2015/2022
+  - `learn/modality/image/image-to-image.html` (880 lines) — Image-to-Image Prompting, 2022
+  - `learn/modality/image/composition-prompting.html` (881 lines) — Composition Prompting, 2023
+  - All 13 sections, zero inline styles/scripts, historical context notices on all pages
+
+- [x] **Modality Hub Page Created** (`learn/modality/index.html`):
+  - Image Prompting section (12 cards), Code section (3 cards), Coming Soon (Audio, Video, 3D)
+  - Full nav, footer, back-to-top, CTA
+
+- [x] **Mega-Menu Navigation Updated** (127 HTML files via `update_nav_s46.py`):
+  - New "Image" section with 12 links added after "Code" section
+  - All 4 depth levels verified (root, one-deep, two-deep, three-deep)
+
+- [x] **Search Index Updated** — 13 new entries added to `data/search-index.json` (12 image + 1 hub)
+
+- [x] **Discover Hub Updated** (`learn/index.html`):
+  - 12 new Image Prompting framework cards added in new section
+  - Filter bar: +Image (12) button
+  - Meta description: 62+ -> 79+
+
+- [x] **Homepage Updated** (`index.html`):
+  - Counter: 67+ -> 79+ frameworks
+  - CTA text: "View All 79+ Frameworks"
+  - Subtitle: "79+ proven prompting methodologies"
+
+**Quality Checks Passed:** 0 inline styles, 0 inline scripts, 0 external resources, historical context on all 12 pages, 867-892 lines per page.
+
+---
+
 ## Session 45 (2026-02-07)
 **Phase 2 Text Frameworks COMPLETE (52/52) — Final 5 pages + full site integration**
 

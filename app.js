@@ -177,6 +177,157 @@ document.addEventListener('DOMContentLoaded', () => {
     AccordionNav.init();
 
     // ==========================================
+    // TABBED MEGA MENU
+    // ==========================================
+    /**
+     * TabbedMenu — progressive disclosure for mega-menus.
+     * Desktop: left tab column (mouseenter switches panels), keyboard arrow-key nav.
+     * Mobile: accordion with collapsible category headers (single-expand).
+     * Tab buttons are generated at runtime from each [data-tab] section's <h4> text.
+     */
+    const TabbedMenu = {
+        /** @type {Function} */
+        isMobile: () => window.matchMedia('(max-width: 767px)').matches,
+
+        init() {
+            const tabbedMenus = document.querySelectorAll('.mega-menu--tabbed');
+            tabbedMenus.forEach(menu => this.setup(menu));
+        },
+
+        /**
+         * Set up a single tabbed mega-menu instance
+         * @param {HTMLElement} menu - The .mega-menu--tabbed element
+         */
+        setup(menu) {
+            const tablist = menu.querySelector('.mega-menu-tabs');
+            const sections = menu.querySelectorAll('.mega-menu-section[data-tab]');
+            if (!tablist || sections.length === 0) return;
+
+            // Generate tab buttons from h4 text
+            sections.forEach((section, i) => {
+                const h4 = section.querySelector('h4');
+                if (!h4) return;
+                const label = h4.textContent.trim();
+                const slug = section.getAttribute('data-tab');
+
+                const btn = document.createElement('button');
+                btn.className = 'mega-menu-tab';
+                btn.setAttribute('role', 'tab');
+                btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+                btn.setAttribute('aria-controls', 'tabpanel-' + slug);
+                btn.setAttribute('id', 'tab-' + slug);
+                btn.setAttribute('tabindex', i === 0 ? '0' : '-1');
+                btn.textContent = label;
+                tablist.appendChild(btn);
+
+                // Set ARIA attributes on the panel
+                section.setAttribute('id', 'tabpanel-' + slug);
+                section.setAttribute('aria-labelledby', 'tab-' + slug);
+
+                // First tab active by default (desktop)
+                if (i === 0) {
+                    btn.classList.add('is-active');
+                    section.classList.add('is-active');
+                }
+
+                // Desktop: mouseenter switches tabs
+                btn.addEventListener('mouseenter', () => {
+                    if (!this.isMobile()) this.activateTab(menu, btn, section);
+                });
+
+                // Click also activates (keyboard + touch fallback)
+                btn.addEventListener('click', () => {
+                    if (!this.isMobile()) this.activateTab(menu, btn, section);
+                });
+            });
+
+            // Mobile accordion: h4 click toggles section
+            sections.forEach(section => {
+                const h4 = section.querySelector('h4');
+                if (!h4) return;
+                h4.addEventListener('click', (e) => {
+                    if (this.isMobile()) {
+                        e.preventDefault();
+                        this.toggleAccordion(menu, section);
+                    }
+                });
+            });
+
+            // Keyboard navigation (roving tabindex on tab buttons)
+            tablist.addEventListener('keydown', (e) => {
+                const tabs = Array.from(tablist.querySelectorAll('.mega-menu-tab'));
+                const current = tabs.indexOf(document.activeElement);
+                if (current === -1) return;
+
+                let next;
+                if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    next = (current + 1) % tabs.length;
+                } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    next = (current - 1 + tabs.length) % tabs.length;
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    next = 0;
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    next = tabs.length - 1;
+                }
+
+                if (next !== undefined) {
+                    const slug = sections[next].getAttribute('data-tab');
+                    const targetSection = sections[next];
+                    tabs[next].focus();
+                    this.activateTab(menu, tabs[next], targetSection);
+                }
+            });
+        },
+
+        /**
+         * Activate a tab and its associated panel (desktop)
+         * @param {HTMLElement} menu - The .mega-menu--tabbed container
+         * @param {HTMLElement} btn - The tab button to activate
+         * @param {HTMLElement} section - The panel section to show
+         */
+        activateTab(menu, btn, section) {
+            // Deactivate all tabs
+            menu.querySelectorAll('.mega-menu-tab').forEach(t => {
+                t.classList.remove('is-active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            // Deactivate all panels
+            menu.querySelectorAll('.mega-menu-section[data-tab]').forEach(s => {
+                s.classList.remove('is-active');
+            });
+            // Activate selected
+            btn.classList.add('is-active');
+            btn.setAttribute('aria-selected', 'true');
+            btn.setAttribute('tabindex', '0');
+            section.classList.add('is-active');
+        },
+
+        /**
+         * Toggle a section in mobile accordion mode (single-expand)
+         * @param {HTMLElement} menu - The .mega-menu--tabbed container
+         * @param {HTMLElement} section - The section to toggle
+         */
+        toggleAccordion(menu, section) {
+            const wasExpanded = section.classList.contains('is-expanded');
+            // Close all sections
+            menu.querySelectorAll('.mega-menu-section[data-tab]').forEach(s => {
+                s.classList.remove('is-expanded');
+            });
+            // Open if it wasn't already open
+            if (!wasExpanded) {
+                section.classList.add('is-expanded');
+            }
+        }
+    };
+
+    TabbedMenu.init();
+
+    // ==========================================
     // MOBILE ACCESSIBILITY ACCORDION
     // ==========================================
     const accordionToggles = document.querySelectorAll('.nav-accordion-toggle');
@@ -7562,6 +7713,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 subtitle.textContent = subtitle.textContent.replace(/\d+\+?\s*terms/, `${allTerms.length}+ terms`);
             }
 
+            // Update glossary search placeholder with actual count
+            const searchInput = document.getElementById('glossary-search-input');
+            if (searchInput && allTerms.length > 0) {
+                searchInput.placeholder = 'Search ' + allTerms.length + '+ glossary terms...';
+            }
+
         } catch (error) {
             console.warn('[Glossary] Could not load glossary JSON:', error);
         }
@@ -7570,6 +7727,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load JSON terms, then initialize filters, then scroll to hash target
     loadGlossaryFromJSON().then(() => {
         initGlossaryFilters();
+        initGlossarySearch();
 
         // After terms are loaded, scroll to hash target if present
         // This handles links from search results like glossary.html#term-xxx
@@ -7754,6 +7912,412 @@ document.addEventListener('DOMContentLoaded', () => {
             countDisplay.textContent = glossaryTerms.length;
         }
     }
+
+    // ==========================================
+    // GLOSSARY INLINE SEARCH
+    // Glossary-only search bar on the glossary page
+    // Searches term names and definitions within glossary data only
+    // ==========================================
+
+    /**
+     * Initialize the glossary inline search
+     * Searches against rendered glossary terms (name + definition)
+     * Results link to exact term positions on the page
+     */
+    function initGlossarySearch() {
+        var searchInput = document.getElementById('glossary-search-input');
+        if (!searchInput) return;
+
+        var clearBtn = document.getElementById('glossary-search-clear');
+        var resultsContainer = document.getElementById('glossary-search-results');
+        var debounceTimer = null;
+        var activeIndex = -1;
+
+        /**
+         * Extract acronym or parenthetical from a term name
+         * e.g. "Large Language Model (LLM)" -> "llm"
+         * e.g. "LLM-as-Judge" -> "llm-as-judge"
+         * @param {string} name - The term display name
+         * @returns {string} Lowercase acronym or empty string
+         */
+        function extractAcronym(name) {
+            var parenMatch = name.match(/\(([^)]+)\)/);
+            if (parenMatch) return parenMatch[1].toLowerCase();
+            return '';
+        }
+
+        /**
+         * Normalize a string for matching: lowercase, collapse hyphens/spaces
+         * @param {string} str - Input string
+         * @returns {string} Normalized string
+         */
+        function normalizeForMatch(str) {
+            return str.toLowerCase().replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
+        }
+
+        /**
+         * Search glossary terms by name and definition
+         * Scoring priority:
+         *   200 - Exact full name match (case-insensitive)
+         *   190 - Exact acronym match ("LLM" matches "Large Language Model (LLM)")
+         *   170 - Normalized exact match (hyphens/spaces collapsed)
+         *   150 - Name starts with query
+         *   120 - Acronym starts with query
+         *   100 - Name contains query as a whole word
+         *    80 - Name contains query as substring
+         *    30 - Definition contains query
+         * @param {string} query - The search string
+         * @returns {Array} Scored and sorted results
+         */
+        function searchGlossaryTerms(query) {
+            var trimmedQuery = query.trim();
+            if (!trimmedQuery) return [];
+            var lowerQuery = trimmedQuery.toLowerCase();
+            var normalizedQuery = normalizeForMatch(trimmedQuery);
+
+            // Word boundary regex for whole-word matching in names
+            var wordBoundaryRegex;
+            try {
+                wordBoundaryRegex = new RegExp('\\b' + lowerQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i');
+            } catch (e) {
+                wordBoundaryRegex = null;
+            }
+
+            var allTerms = document.querySelectorAll('.glossary-term');
+            var results = [];
+
+            allTerms.forEach(function(termEl) {
+                var h3 = termEl.querySelector('h3');
+                var p = termEl.querySelector('p');
+                if (!h3) return;
+
+                var termName = h3.textContent || '';
+                var definition = p ? (p.textContent || '') : '';
+                var lowerName = termName.toLowerCase();
+                var normalizedName = normalizeForMatch(termName);
+                var acronym = extractAcronym(termName);
+                var lowerDef = definition.toLowerCase();
+                var score = 0;
+                var matchType = '';
+
+                // 1. Exact full name match
+                if (lowerName === lowerQuery || normalizedName === normalizedQuery) {
+                    score = 200;
+                    matchType = 'Exact match';
+                }
+                // 2. Exact acronym match: "LLM" matches "Large Language Model (LLM)"
+                else if (acronym && acronym === lowerQuery) {
+                    score = 190;
+                    matchType = 'Exact match';
+                }
+                // 3. Normalized match with hyphens/spaces collapsed
+                //    "llm as judge" matches "LLM-as-Judge"
+                else if (normalizedName === normalizedQuery) {
+                    score = 170;
+                    matchType = 'Exact match';
+                }
+                // 4. Name starts with query
+                else if (lowerName.startsWith(lowerQuery) || normalizedName.startsWith(normalizedQuery)) {
+                    score = 150;
+                    matchType = 'Name match';
+                }
+                // 5. Acronym starts with query
+                else if (acronym && acronym.startsWith(lowerQuery)) {
+                    score = 120;
+                    matchType = 'Name match';
+                }
+                // 6. Name contains query as a whole word
+                else if (wordBoundaryRegex && wordBoundaryRegex.test(termName)) {
+                    score = 100;
+                    matchType = 'Name match';
+                }
+                // 7. Name contains query as substring
+                else if (lowerName.indexOf(lowerQuery) !== -1 || normalizedName.indexOf(normalizedQuery) !== -1) {
+                    score = 80;
+                    matchType = 'Name match';
+                }
+                // 8. Definition contains query
+                else if (lowerDef.indexOf(lowerQuery) !== -1) {
+                    score = 30;
+                    matchType = 'Found in definition';
+                }
+
+                if (score > 0) {
+                    results.push({
+                        id: termEl.id,
+                        name: termName,
+                        definition: definition,
+                        score: score,
+                        matchType: matchType
+                    });
+                }
+            });
+
+            // Sort by score descending, then by name length (shorter = more relevant), then alphabetically
+            results.sort(function(a, b) {
+                if (b.score !== a.score) return b.score - a.score;
+                if (a.name.length !== b.name.length) return a.name.length - b.name.length;
+                return a.name.localeCompare(b.name);
+            });
+
+            return results.slice(0, 15);
+        }
+
+        /**
+         * Highlight matching text with <mark> tags
+         * @param {string} text - Original text
+         * @param {string} query - Search query to highlight
+         * @returns {string} Text with <mark> tags around matches
+         */
+        function highlightMatch(text, query) {
+            if (!query) return escapeHtml(text);
+            var escaped = escapeHtml(text);
+            var escapedQuery = escapeHtml(query);
+            var regex = new RegExp('(' + escapedQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+            return escaped.replace(regex, '<mark>$1</mark>');
+        }
+
+        /**
+         * Render search results into the dropdown
+         * @param {Array} results - Scored search results
+         * @param {string} query - Original query for highlighting
+         */
+        function renderResults(results, query) {
+            if (!resultsContainer) return;
+
+            if (results.length === 0) {
+                resultsContainer.innerHTML = '';
+                var noRes = document.createElement('div');
+                noRes.className = 'glossary-search-no-results';
+                noRes.textContent = 'No glossary terms match "' + query + '"';
+                resultsContainer.appendChild(noRes);
+                resultsContainer.classList.remove('hidden');
+                activeIndex = -1;
+                return;
+            }
+
+            resultsContainer.innerHTML = '';
+
+            // Count header
+            var countHeader = document.createElement('div');
+            countHeader.className = 'glossary-search-count';
+            countHeader.textContent = results.length + ' glossary term' + (results.length !== 1 ? 's' : '') + ' found';
+            resultsContainer.appendChild(countHeader);
+
+            results.forEach(function(result, index) {
+                var item = document.createElement('div');
+                item.className = 'glossary-search-result';
+                item.setAttribute('role', 'option');
+                item.setAttribute('data-index', index);
+                item.setAttribute('data-term-id', result.id);
+
+                var nameEl = document.createElement('div');
+                nameEl.className = 'glossary-search-result-name';
+                nameEl.innerHTML = highlightMatch(result.name, query);
+                item.appendChild(nameEl);
+
+                // Truncated definition with match highlight
+                var excerptEl = document.createElement('div');
+                excerptEl.className = 'glossary-search-result-excerpt';
+                var defSnippet = result.definition.length > 120
+                    ? result.definition.substring(0, 120) + '...'
+                    : result.definition;
+                excerptEl.innerHTML = highlightMatch(defSnippet, query);
+                item.appendChild(excerptEl);
+
+                // Match type indicator for definition matches
+                if (result.matchType === 'Found in definition') {
+                    var matchEl = document.createElement('div');
+                    matchEl.className = 'glossary-search-result-match';
+                    matchEl.textContent = 'Found in definition';
+                    item.appendChild(matchEl);
+                }
+
+                item.addEventListener('click', function() {
+                    selectResult(result.id);
+                });
+
+                resultsContainer.appendChild(item);
+            });
+
+            resultsContainer.classList.remove('hidden');
+            activeIndex = -1;
+        }
+
+        /**
+         * Select a result: close dropdown and scroll to term
+         * Disables content-visibility on ALL glossary sections before measuring,
+         * because placeholder heights (500px) on unrendered sections between
+         * the viewport and the target cause getBoundingClientRect to be wrong.
+         * @param {string} termId - The id attribute of the glossary term element
+         */
+        function selectResult(termId) {
+            // Close the search dropdown
+            if (resultsContainer) {
+                resultsContainer.classList.add('hidden');
+                resultsContainer.innerHTML = '';
+            }
+
+            // Clear the search input
+            searchInput.value = '';
+            if (clearBtn) clearBtn.classList.add('hidden');
+
+            // Find the target term
+            var target = document.getElementById(termId);
+            if (!target) return;
+
+            // Ensure the term is not filtered/hidden
+            target.classList.remove('hidden');
+            var parentSection = target.closest('.glossary-section');
+            if (parentSection) {
+                parentSection.classList.remove('hidden');
+            }
+
+            // Disable content-visibility on ALL glossary sections so the browser
+            // computes real heights for every section, giving accurate positions
+            var allSections = document.querySelectorAll('.glossary-section');
+            allSections.forEach(function(section) {
+                section.style.contentVisibility = 'visible';
+            });
+
+            // Update the URL hash
+            history.pushState(null, '', '#' + termId);
+
+            // Double-rAF: first frame triggers layout reflow with real heights,
+            // second frame ensures paint is complete before measuring
+            requestAnimationFrame(function() {
+                requestAnimationFrame(function() {
+                    var rect = target.getBoundingClientRect();
+                    var scrollOffset = 220; // header (70) + search (58) + A-Z nav (56) + breathing
+                    var targetY = window.pageYOffset + rect.top - scrollOffset;
+
+                    window.scrollTo({
+                        top: Math.max(0, targetY),
+                        behavior: 'smooth'
+                    });
+
+                    // Restore content-visibility after scroll animation finishes
+                    setTimeout(function() {
+                        allSections.forEach(function(section) {
+                            section.style.contentVisibility = '';
+                        });
+                    }, 1500);
+
+                    // Highlight the term
+                    target.classList.add('glossary-term--highlighted');
+                    setTimeout(function() {
+                        target.classList.remove('glossary-term--highlighted');
+                    }, 2500);
+                });
+            });
+        }
+
+        /**
+         * Update active (keyboard-highlighted) result
+         * @param {number} newIndex - New active index
+         */
+        function updateActiveResult(newIndex) {
+            var items = resultsContainer.querySelectorAll('.glossary-search-result');
+            if (items.length === 0) return;
+
+            // Remove previous active
+            items.forEach(function(item) {
+                item.classList.remove('active');
+            });
+
+            // Clamp index
+            if (newIndex < 0) newIndex = items.length - 1;
+            if (newIndex >= items.length) newIndex = 0;
+
+            activeIndex = newIndex;
+            items[activeIndex].classList.add('active');
+            items[activeIndex].scrollIntoView({ block: 'nearest' });
+        }
+
+        // --- Event: Input with debounce ---
+        searchInput.addEventListener('input', function() {
+            var query = searchInput.value.trim();
+
+            // Show/hide clear button
+            if (clearBtn) {
+                if (query.length > 0) {
+                    clearBtn.classList.remove('hidden');
+                } else {
+                    clearBtn.classList.add('hidden');
+                }
+            }
+
+            if (debounceTimer) clearTimeout(debounceTimer);
+
+            if (query.length < 2) {
+                if (resultsContainer) {
+                    resultsContainer.classList.add('hidden');
+                    resultsContainer.innerHTML = '';
+                }
+                return;
+            }
+
+            debounceTimer = setTimeout(function() {
+                var results = searchGlossaryTerms(query);
+                renderResults(results, query);
+            }, 150);
+        });
+
+        // --- Event: Keyboard navigation ---
+        searchInput.addEventListener('keydown', function(e) {
+            var items = resultsContainer ? resultsContainer.querySelectorAll('.glossary-search-result') : [];
+
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (items.length > 0) {
+                    updateActiveResult(activeIndex + 1);
+                }
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (items.length > 0) {
+                    updateActiveResult(activeIndex - 1);
+                }
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (activeIndex >= 0 && items[activeIndex]) {
+                    var termId = items[activeIndex].getAttribute('data-term-id');
+                    if (termId) selectResult(termId);
+                }
+            } else if (e.key === 'Escape') {
+                if (resultsContainer) {
+                    resultsContainer.classList.add('hidden');
+                    resultsContainer.innerHTML = '';
+                }
+                searchInput.blur();
+            }
+        });
+
+        // --- Event: Clear button ---
+        if (clearBtn) {
+            clearBtn.addEventListener('click', function() {
+                searchInput.value = '';
+                clearBtn.classList.add('hidden');
+                if (resultsContainer) {
+                    resultsContainer.classList.add('hidden');
+                    resultsContainer.innerHTML = '';
+                }
+                searchInput.focus();
+            });
+        }
+
+        // --- Event: Click outside to close ---
+        document.addEventListener('click', function(e) {
+            var container = document.querySelector('.glossary-search-container');
+            if (container && !container.contains(e.target)) {
+                if (resultsContainer) {
+                    resultsContainer.classList.add('hidden');
+                }
+            }
+        });
+    }
+
+    // Initialize glossary search after terms are loaded
+    // (called from the loadGlossaryFromJSON().then() chain)
 
     // ==========================================
     // CONTENT LIBRARY SEARCH

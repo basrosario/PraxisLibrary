@@ -299,6 +299,136 @@ After terms load, the system checks `window.location.hash`. If the URL is `gloss
 
 ---
 
+## The Glossary Inline Search
+
+### Purpose
+
+A dedicated search bar embedded on the glossary page that searches ONLY glossary terms. This is separate from the site-wide Cmd+K search modal. It lives between the filter bar and the sticky A-Z navigation, and it floats with the user as they scroll (sticky positioning).
+
+### Architecture Overview
+
+```
+User types in glossary search input
+        |  150ms debounce
+searchGlossaryTerms(query)
+        |  queries all .glossary-term DOM elements
+Score each term (name + acronym + definition)
+        |  sort by score, then name length, then alpha
+Render top 15 results in dropdown
+        |  user clicks a result
+selectResult(termId)
+        |  disable content-visibility on all sections
+        |  double-rAF for layout reflow
+        |  getBoundingClientRect() for accurate position
+        |  window.scrollTo with 220px offset
+Term scrolls into view with highlight pulse
+```
+
+### Data Source
+
+The search operates entirely against the rendered DOM, not the JSON file. After `loadGlossaryFromJSON()` creates all 2,141+ term elements, the search queries `document.querySelectorAll('.glossary-term')` and reads each element's `h3` (term name) and `p` (definition) via `textContent`. This means:
+
+- No duplicate data fetching
+- Search automatically reflects whatever terms are in the DOM
+- Works with any future glossary expansions without code changes
+
+### Scoring Algorithm (app.js: `searchGlossaryTerms`)
+
+The scoring system uses 8 tiers with two helper functions:
+
+**`extractAcronym(name)`** -- Extracts parenthetical text: "Large Language Model (LLM)" returns "llm"
+
+**`normalizeForMatch(str)`** -- Collapses hyphens, underscores, and spaces: "LLM-as-Judge" becomes "llm as judge"
+
+| Priority | Score | Match Type | Example |
+|----------|-------|------------|---------|
+| 1 | 200 | Exact full name match | "Temperature" matches "Temperature" |
+| 2 | 190 | Exact acronym match | "LLM" matches "Large Language Model (LLM)" |
+| 3 | 170 | Normalized exact match | "LLM As Judge" matches "LLM-as-Judge" |
+| 4 | 150 | Name starts with query | "Chain" matches "Chain-of-Thought" |
+| 5 | 120 | Acronym starts with query | "LL" matches "Large Language Model (LLM)" |
+| 6 | 100 | Name contains query (whole word) | "Shot" matches "Zero-Shot Learning" |
+| 7 | 80 | Name contains query (substring) | "trans" matches "Transformers" |
+| 8 | 30 | Definition contains query | "multimodal" found in a term's definition text |
+
+**Tiebreaker sort:** Score descending, then name length ascending (shorter = more precise match), then alphabetical.
+
+Results are capped at 15 entries.
+
+### The content-visibility Scroll Problem
+
+**The problem:** Glossary sections use `content-visibility: auto` with `contain-intrinsic-size: auto 500px` for performance. When the browser hasn't rendered a section, it uses the 500px placeholder height instead of the real height (which varies per section). If the target term is in a distant section, all the unrendered sections between the viewport and the target have wrong heights, causing `getBoundingClientRect()` to return an inaccurate position.
+
+**The solution (`selectResult`):**
+
+1. Set `contentVisibility = 'visible'` on ALL 26 glossary sections (forces full layout)
+2. Double `requestAnimationFrame` (first triggers reflow, second waits for paint)
+3. Read `getBoundingClientRect()` -- now accurate because all sections have real heights
+4. Calculate scroll position: `window.pageYOffset + rect.top - 220` (220px = header + search + A-Z nav)
+5. `window.scrollTo({ top: targetY, behavior: 'smooth' })`
+6. After 1.5s (scroll animation complete), restore `contentVisibility = ''` on all sections
+7. Add `glossary-term--highlighted` class for 2.5s visual pulse
+
+**Why not `scrollIntoView()`?** It delegates positioning to the browser, which still uses the placeholder heights internally. Manual calculation after forcing real layout is the only reliable approach with `content-visibility: auto`.
+
+### Sticky Positioning
+
+Both the search bar and A-Z nav use `position: sticky`:
+
+| Element | `top` value | `z-index` | Purpose |
+|---------|-------------|-----------|---------|
+| `.glossary-nav` | `70px` | `100` | Below header, above search bar |
+| `.glossary-search-container` | `128px` | `500` | Below header + A-Z nav |
+| `.glossary-search-results` (dropdown) | auto (absolute) | `9000` | Above everything including header |
+
+Both have `background: var(--bg-secondary)` so content doesn't show through when sticky.
+
+### Scroll Offset
+
+With three stacked sticky elements, glossary anchors use `scroll-margin-top: 220px`:
+
+```
+Header:     70px
+A-Z nav:    ~58px
+Search bar: ~56px
+Breathing:  ~36px
+Total:      220px
+```
+
+### HTML Structure (glossary.html)
+
+```html
+<!-- Between filter bar and A-Z nav -->
+<div class="glossary-search-container fade-in-up">
+    <div class="glossary-search-wrapper">
+        <svg class="glossary-search-icon">...</svg>
+        <input type="text" class="glossary-search-input" id="glossary-search-input"
+               placeholder="Search 2145+ glossary terms..." autocomplete="off">
+        <button class="glossary-search-clear hidden" id="glossary-search-clear">...</button>
+    </div>
+    <div class="glossary-search-results hidden" id="glossary-search-results" role="listbox">
+    </div>
+</div>
+```
+
+### Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| Arrow Down | Move to next result |
+| Arrow Up | Move to previous result |
+| Enter | Select highlighted result (scroll to term) |
+| Escape | Close dropdown, blur input |
+
+### CSP Compliance
+
+- All styles in `styles.css` (no inline)
+- All event listeners attached via `addEventListener` in `app.js` (no inline handlers)
+- Search results use `escapeHtml()` before `<mark>` tag insertion (XSS-safe)
+- The temporary `element.style.contentVisibility` in JS is a runtime property, not an HTML attribute -- CSP `style-src` only blocks `style=""` in markup
+
+---
+
 ## The Search System
 
 ### Architecture Overview
@@ -744,37 +874,81 @@ Every framework page follows the same structure. This is not optional — it ens
 Every page has the same header navigation with three mega-menu dropdowns:
 
 1. **AI Foundations** — Single link (no dropdown)
-2. **Learn** (soon: "Discover") — Mega-menu with 9 category sections, 65 links
+2. **Discover** — Tabbed mega-menu with 10 category tabs, 79+ links (progressive disclosure)
 3. **AI Readiness** — Mega-menu with 8 tool links
 4. **Resources** — Multi-column mega-menu (Guides + AI & ND sections)
 
-### Mega-Menu CSS Grid (Multi-Column Auto-Split)
+### Discover Menu: Tabbed Progressive Disclosure (Session 48)
 
+The Discover mega-menu uses `mega-menu--tabbed` class with a left tab column + right content panel layout. Tab buttons are generated at runtime by `TabbedMenu` JS from each section's `<h4>` text.
+
+**HTML structure:**
+```html
+<div class="mega-menu mega-menu--tabbed">
+    <div class="mega-menu-tabs" role="tablist" aria-label="Framework categories"></div>
+    <div class="mega-menu-section" data-tab="getting-started" role="tabpanel">
+        <h4>Getting Started</h4>
+        <a href="learn/prompt-basics.html">Prompt Basics</a>
+        ...
+    </div>
+    <!-- 9 more sections with data-tab slugs -->
+</div>
+```
+
+**Tab slug mapping:**
+
+| Category | Slug |
+|----------|------|
+| Getting Started | `getting-started` |
+| Structured Frameworks | `structured-frameworks` |
+| In-Context Learning | `in-context-learning` |
+| Reasoning & CoT | `reasoning-cot` |
+| Decomposition | `decomposition` |
+| Self-Correction | `self-correction` |
+| Ensemble Methods | `ensemble-methods` |
+| Prompting Strategies | `prompting-strategies` |
+| Code | `code` |
+| Image | `image` |
+
+**CSS layout (desktop):**
 ```css
-.mega-menu--multi-column .mega-menu-section {
-    display: grid;
-    grid-template-rows: repeat(11, auto);  /* h4 heading + 10 links */
-    grid-template-columns: auto auto;       /* 2 columns */
-    grid-auto-flow: column;                 /* Fill down first, then right */
-    gap: 0 var(--space-md);
+.mega-menu--tabbed {
+    display: flex;
+    width: 680px;
 }
-
-.mega-menu--multi-column .mega-menu-section h4 {
-    grid-column: 1 / -1;  /* Heading spans both columns */
+.mega-menu-tabs {
+    flex: 0 0 190px;         /* Left: tab buttons */
+    border-right: 1px solid var(--border-color);
 }
-
-.mega-menu-section a {
-    white-space: nowrap;  /* No line wrapping in menu links */
+.mega-menu--tabbed .mega-menu-section[data-tab] {
+    flex: 1;
+    display: none;           /* Hidden by default */
+}
+.mega-menu--tabbed .mega-menu-section[data-tab].is-active {
+    display: block;          /* Only active panel shown */
 }
 ```
 
-**Why this grid?** With categories like "Reasoning & CoT" having 14 links, a single column would be too tall. The grid auto-flows: first 10 links fill column 1, overflow goes to column 2.
+**JS (`TabbedMenu` object in app.js):**
+- Reads `<h4>` text from each `[data-tab]` section to generate tab `<button>` elements
+- Desktop: `mouseenter` on tabs switches active panel
+- Mobile: h4 click toggles `.is-expanded` class (single-expand accordion)
+- Keyboard: Arrow keys between tabs (roving tabindex pattern)
+
+### Resources Menu: Multi-Column (Unchanged)
+
+The Resources mega-menu retains `mega-menu--multi-column` with auto-split grid.
 
 ### Mobile Navigation
 
-Mobile uses a hamburger toggle. When open, ALL mega-menu content is visible (no accordion collapse). Links are displayed in a 2-column CSS grid with `display: contents` on the section wrappers so links flow directly into the grid.
+**Discover menu (tabbed):** Accordion layout. Tab column hidden; each category h4 is a tappable accordion header with +/- indicator. Links hidden until section is expanded. Single-expand mode (opening one closes others).
 
-**Why no mobile accordion?** Simpler UX. Users can scroll through all categories at once instead of tap-open-tap-close interactions. Mobile menus close when any link is tapped.
+**Resources menu (multi-column):** 2-column CSS grid with `display: contents` on section wrappers. All links visible (no accordion).
+
+### Batch Conversion Scripts
+
+- `update_nav_tabbed.py` — Converts all HTML files from multi-column to tabbed (Discover menu only)
+- `update_nav_s46.py` — Reference for adding new sections to mega-menu
 
 ### Active State
 
