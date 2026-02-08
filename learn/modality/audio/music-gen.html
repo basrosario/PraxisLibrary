@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Music Generation Prompting: Learn techniques for crafting effective prompts that guide AI models to generate original music, from specifying genre and tempo to defining mood and instrumentation.">
+    <title>Music Generation Prompting - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+    <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../../../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav">
+                <a href="../../../foundations/index.html" class="nav-link">AI Foundations</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../../index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                    <div class="mega-menu mega-menu--tabbed">
+                        <div class="mega-menu-tabs" role="tablist" aria-label="Framework categories"></div>
+                        <div class="mega-menu-section" data-tab="getting-started" role="tabpanel">
+                            <h4>Getting Started</h4>
+                            <a href="../../prompt-basics.html">Prompt Basics</a>
+                            <a href="../../facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="structured-frameworks" role="tabpanel">
+                            <h4><a href="../../structured-frameworks.html">Structured Frameworks</a></h4>
+                            <a href="../../crisp.html">CRISP</a>
+                            <a href="../../crispe.html">CRISPE</a>
+                            <a href="../../costar.html">COSTAR</a>
+                            <a href="../../context-structure.html">Context &amp; Structure</a>
+                            <a href="../../constrained-output.html">Constrained Output</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="in-context-learning" role="tabpanel">
+                            <h4><a href="../../in-context-learning.html">In-Context Learning</a></h4>
+                            <a href="../../zero-shot.html">Zero-Shot</a>
+                            <a href="../../one-shot.html">One-Shot</a>
+                            <a href="../../few-shot-learning.html">Few-Shot Learning</a>
+                            <a href="../../shot-prompting.html">Shot Prompting</a>
+                            <a href="../../example-selection.html">Example Selection</a>
+                            <a href="../../knn-prompting.html">KNN Prompting</a>
+                            <a href="../../vote-k.html">Vote-k</a>
+                            <a href="../../demo-ensembling.html">Demo Ensembling</a>
+                            <a href="../../prompt-mining.html">Prompt Mining</a>
+                            <a href="../../many-shot.html">Many-Shot</a>
+                            <a href="../../example-ordering.html">Example Ordering</a>
+                            <a href="../../self-generated-icl.html">Self-Generated ICL</a>
+                            <a href="../../active-example.html">Active Example</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="reasoning-cot" role="tabpanel">
+                            <h4><a href="../../reasoning-cot.html">Reasoning &amp; CoT</a></h4>
+                            <a href="../../chain-of-thought.html">Chain-of-Thought</a>
+                            <a href="../../zero-shot-cot.html">Zero-Shot CoT</a>
+                            <a href="../../auto-cot.html">Auto-CoT</a>
+                            <a href="../../contrastive-cot.html">Contrastive CoT</a>
+                            <a href="../../structured-cot.html">Structured CoT</a>
+                            <a href="../../faithful-cot.html">Faithful CoT</a>
+                            <a href="../../tab-cot.html">Tab-CoT</a>
+                            <a href="../../complexity-prompting.html">Complexity-Based</a>
+                            <a href="../../analogical-reasoning.html">Analogical Reasoning</a>
+                            <a href="../../step-back.html">Step-Back</a>
+                            <a href="../../thread-of-thought.html">Thread of Thought</a>
+                            <a href="../../memory-of-thought.html">Memory of Thought</a>
+                            <a href="../../active-prompting.html">Active Prompting</a>
+                            <a href="../../reversing-cot.html">Reversing CoT</a>
+                            <a href="../../uncertainty-cot.html">Uncertainty-Routed CoT</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="decomposition" role="tabpanel">
+                            <h4><a href="../../decomposition.html">Decomposition</a></h4>
+                            <a href="../../least-to-most.html">Least-to-Most</a>
+                            <a href="../../plan-and-solve.html">Plan-and-Solve</a>
+                            <a href="../../tree-of-thought.html">Tree of Thought</a>
+                            <a href="../../graph-of-thought.html">Graph of Thought</a>
+                            <a href="../../decomp.html">DECOMP</a>
+                            <a href="../../recursion-of-thought.html">Recursion of Thought</a>
+                            <a href="../../program-of-thought.html">Program of Thought</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="self-correction" role="tabpanel">
+                            <h4><a href="../../self-correction.html">Self-Correction</a></h4>
+                            <a href="../../self-refine.html">Self-Refine</a>
+                            <a href="../../self-verification.html">Self-Verification</a>
+                            <a href="../../chain-of-verification.html">Chain-of-Verification</a>
+                            <a href="../../critic.html">CRITIC</a>
+                            <a href="../../reflexion.html">Reflexion</a>
+                            <a href="../../self-calibration.html">Self-Calibration</a>
+                            <a href="../../cumulative-reasoning.html">Cumulative Reasoning</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="ensemble-methods" role="tabpanel">
+                            <h4><a href="../../ensemble-methods.html">Ensemble Methods</a></h4>
+                            <a href="../../self-consistency.html">Self-Consistency</a>
+                            <a href="../../cosp.html">COSP</a>
+                            <a href="../../diverse-prompting.html">DiVeRSe</a>
+                            <a href="../../dense-prompting.html">DENSE</a>
+                            <a href="../../max-mutual-info.html">Max Mutual Info</a>
+                            <a href="../../universal-self-consistency.html">Universal Self-Consistency</a>
+                            <a href="../../meta-reasoning.html">Meta-Reasoning</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="prompting-strategies" role="tabpanel">
+                            <h4><a href="../../prompting-strategies.html">Prompting Strategies</a></h4>
+                            <a href="../../react.html">ReAct</a>
+                            <a href="../../flipped-interaction.html">Flipped Interaction</a>
+                            <a href="../../self-ask.html">Self-Ask</a>
+                            <a href="../../prompt-chaining.html">Prompt Chaining</a>
+                            <a href="../../role-prompting.html">Role Prompting</a>
+                            <a href="../../emotion-prompting.html">Emotion Prompting</a>
+                            <a href="../../style-prompting.html">Style Prompting</a>
+                            <a href="../../s2a.html">S2A</a>
+                            <a href="../../simtom.html">SimToM</a>
+                            <a href="../../rar.html">RaR</a>
+                            <a href="../../re2.html">RE2</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="code" role="tabpanel">
+                            <h4>Code</h4>
+                            <a href="../code/code-prompting.html">Code Prompting</a>
+                            <a href="../code/self-debugging.html">Self-Debugging</a>
+                            <a href="../code/structured-output.html">Structured Output</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="image" role="tabpanel">
+                            <h4>Image</h4>
+                            <a href="../image/image-prompting.html">Image Prompting</a>
+                            <a href="../image/multimodal-cot.html">Multimodal CoT</a>
+                            <a href="../image/visual-cot.html">Visual CoT</a>
+                            <a href="../image/image-as-text.html">Image-as-Text</a>
+                            <a href="../image/vqa.html">Visual QA</a>
+                            <a href="../image/image-gen-prompting.html">Image Generation</a>
+                            <a href="../image/negative-prompting.html">Negative Prompting</a>
+                            <a href="../image/controlnet-prompting.html">ControlNet</a>
+                            <a href="../image/inpainting-prompting.html">Inpainting</a>
+                            <a href="../image/style-transfer.html">Style Transfer</a>
+                            <a href="../image/image-to-image.html">Image-to-Image</a>
+                            <a href="../image/composition-prompting.html">Composition</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="audio" role="tabpanel">
+                            <h4>Audio</h4>
+                            <a href="../audio/audio-prompting.html">Audio Prompting</a>
+                            <a href="../audio/stt-prompting.html">Speech-to-Text</a>
+                            <a href="../audio/tts-prompting.html">Text-to-Speech</a>
+                            <a href="../audio/audio-classification.html">Audio Classification</a>
+                            <a href="../audio/music-gen.html">Music Generation</a>
+                            <a href="../audio/voice-cloning.html">Voice Cloning</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../../../tools/index.html" class="nav-link" aria-expanded="false">AI Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../../../quiz/index.html">Readiness Quiz</a>
+                            <a href="../../../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../../../tools/guidance.html">Prompt Builder</a>
+                            <a href="../../../tools/matcher.html">Framework Matcher</a>
+                            <a href="../../../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../../../tools/persona.html">Persona Architect</a>
+                            <a href="../../../patterns/index.html">Patterns Library</a>
+                            <a href="../../../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../../../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--multi-column">
+                        <div class="mega-menu-section">
+                            <h4>Guides</h4>
+                            <a href="../../../pages/glossary.html">Glossary</a>
+                            <a href="../../../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                            <a href="../../../pages/faq.html">FAQ</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>Principles</h4>
+                            <a href="../../../pages/ai-for-everybody.html">AI for Everybody</a>
+                            <a href="../../../pages/universal-design.html">Universal Design</a>
+                            <a href="../../../pages/ai-assisted-building.html">AI Assisted</a>
+                            <a href="../../../pages/security.html">Security</a>
+                            <a href="../../../pages/performance.html">Performance</a>
+                        </div>
+                        <div class="mega-menu-section mega-menu-section--featured">
+                            <h4>AI &amp; ND</h4>
+                            <a href="../../../neurodivergence/index.html">ND Hub</a>
+                            <a href="../../../neurodivergence/adhd.html">AI for ADHD</a>
+                            <a href="../../../neurodivergence/autism.html">AI for Autism</a>
+                            <a href="../../../neurodivergence/dyslexia.html">AI for Dyslexia</a>
+                            <a href="../../../neurodivergence/tools.html">AI Tools</a>
+                            <a href="../../../neurodivergence/resources.html">ND Resources</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>About</h4>
+                            <a href="../../../pages/about.html">About Praxis</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in">
+                    <a href="../../../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="../../index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Music Generation Prompting</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Audio Frameworks</span>
+                </div>
+                <h1 class="page-title fade-in">Music Generation Prompting</h1>
+                <p class="page-subtitle fade-in">Techniques for crafting natural language prompts that guide AI models to generate original music &mdash; from defining genre, tempo, and instrumentation to capturing mood, structure, and production quality through carefully composed text descriptions.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> AI music generation evolved from algorithmic composition &mdash; beginning with the Illiac Suite in 1957, the first computer-generated musical score &mdash; through MIDI-based neural networks in the 2010s to modern text-to-music models. In 2023, three landmark systems transformed the field: Google&rsquo;s MusicLM demonstrated high-fidelity music generation from text descriptions, Meta&rsquo;s MusicGen introduced an open-source single-stage transformer architecture for controllable music generation, and Suno launched consumer-accessible AI music creation with vocal synthesis. These systems accept natural language descriptions of desired music and generate complete audio tracks matching the specification, making music creation accessible to anyone who can describe what they want to hear.</p>
+                        <p><strong>Modern LLM Status:</strong> Text-to-music generation is <strong>rapidly maturing but still evolving</strong>. Current models excel at producing coherent short-form compositions (30 seconds to 3 minutes) across popular genres but face challenges with extended structures, precise harmonic progressions, and complex arrangements. The core prompting techniques &mdash; specifying genre, tempo, instrumentation, mood, and structural elements &mdash; remain essential because models interpret musical intent through language and produce dramatically different outputs based on prompt specificity. Without structured prompts, models default to generic, middle-of-the-road compositions that lack distinctive character. The principles covered here form the foundation for directing any text-to-music system toward your creative vision.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Translate Musical Intent into Language</h2>
+                        <p class="split-section__text">Music generation prompting translates musical intent into natural language that AI models interpret to create audio. Unlike traditional music production, which requires instruments, recording equipment, and technical expertise in digital audio workstations, text-to-music prompting asks you to <strong>describe</strong> what you want to hear rather than physically create it. The model bridges the gap between your musical imagination and a finished audio output.</p>
+                        <p class="split-section__text"><strong>The core insight is that effective music prompts combine musical vocabulary with emotional and contextual descriptions.</strong> Technical parameters like tempo (measured in BPM), key signature, and instrumentation give the model concrete targets. But emotional descriptors &mdash; &ldquo;melancholic,&rdquo; &ldquo;triumphant,&rdquo; &ldquo;laid-back&rdquo; &mdash; and contextual framing &mdash; &ldquo;suitable for a nature documentary,&rdquo; &ldquo;coffee shop atmosphere&rdquo; &mdash; shape the overall character of the output in ways that technical specs alone cannot capture.</p>
+                        <p class="split-section__text">Think of it like giving direction to a session musician. Saying &ldquo;play something&rdquo; produces a random noodle. Saying &ldquo;play a mellow jazz ballad in B-flat, brushes on the snare, walking bass line, around 80 BPM, something you would hear in a late-night lounge&rdquo; produces a focused, evocative performance. Music generation prompting is how you become that informed director for an AI composer.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Musical Vocabulary Elevates Output Quality</span>
+                                <p>When a model receives a vague music prompt, it defaults to the statistical center of its training data &mdash; producing bland, forgettable compositions that sound like generic stock music. Structured music prompts redirect this behavior by activating specific musical knowledge within the model: genre conventions inform arrangement patterns, tempo values control energy and pacing, instrumentation choices define timbre and texture, and mood descriptors shape dynamics and harmonic complexity. The difference between a forgettable background loop and a composition with genuine musical character often comes down entirely to how precisely you describe what you want.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Music Generation Process</h2>
+                <p class="section-subtitle fade-in-up">Four steps from musical intent to generated audio</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define Musical Intent</h3>
+                            <p class="element-timeline__text">Start by clarifying the purpose and context of the music you need. Are you scoring a video, creating a podcast intro, building a game soundtrack, or composing ambient background music? The intended use case shapes every subsequent decision &mdash; a corporate explainer video demands a different musical approach than a horror game sequence. Defining intent first prevents wasted iterations on compositions that sound good in isolation but fail in context.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>I need a 60-second background track for a technology product launch video. The music should convey innovation and forward momentum without overpowering the voiceover narration.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Specify Technical Parameters</h3>
+                            <p class="element-timeline__text">Provide concrete musical specifications that anchor the generation. Genre establishes the overall sonic palette and arrangement conventions. Tempo (BPM) controls energy and pacing &mdash; 70 BPM feels relaxed while 140 BPM drives intensity. Instrumentation defines which sounds appear in the mix. Key and mode (major versus minor) influence emotional tone. Duration sets the length constraint. The more technical parameters you specify, the more control you exert over the output.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Genre: electronic ambient with light synthwave influences. Tempo: 110 BPM. Instruments: analog synthesizer pads, soft arpeggiated sequences, subtle electronic percussion, and a deep sub-bass. Duration: 60 seconds with a natural fade-out.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Describe Mood and Context</h3>
+                            <p class="element-timeline__text">Layer emotional and atmospheric descriptors onto the technical foundation. Mood words activate nuanced patterns in the model&rsquo;s understanding of music &mdash; &ldquo;hopeful&rdquo; suggests rising melodic phrases and major progressions, while &ldquo;tense&rdquo; implies dissonance and rhythmic urgency. Context descriptors like &ldquo;late-night city driving&rdquo; or &ldquo;sunrise over mountains&rdquo; provide rich associative cues that shape dynamics, arrangement density, and tonal color in ways that purely technical descriptions cannot achieve.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Mood: optimistic, forward-looking, and clean. The feeling of stepping into a bright, modern workspace. Not aggressive or hype-driven &mdash; more confident and purposeful. Think of the sonic equivalent of crisp morning light through floor-to-ceiling windows.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Iterate and Refine</h3>
+                            <p class="element-timeline__text">Listen critically to the generated output and adjust your prompt based on what works and what does not. If the tempo feels too fast, lower the BPM. If the instrumentation is too dense, remove elements or specify a sparser arrangement. If the mood misses the mark, replace emotional descriptors with more precise alternatives. Iteration is essential because music generation involves subjective judgment &mdash; what sounds &ldquo;hopeful&rdquo; to the model may differ from your personal interpretation, and successive refinements close that gap.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The first generation was too busy &mdash; the arpeggiated sequences competed with the pad textures. Revised prompt: reduce the arpeggio to a minimal two-note pattern, push it further back in the mix, and let the pads carry the harmonic movement. Keep everything else the same.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why structured music prompts produce dramatically better compositions</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Vague Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Make some music.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>A generic 30-second loop with no clear genre identity. Default piano and light percussion at a medium tempo. No discernible structure, mood, or progression. Sounds like royalty-free elevator music with no distinguishing character &mdash; impossible to match to any specific creative use case.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Generic, directionless, no musical identity or practical utility</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Structured Music Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Create a lo-fi hip hop track at 85 BPM. Instruments: mellow Rhodes piano chords, vinyl crackle texture, soft boom-bap drum pattern with side-chained kick, warm sub-bass, and a jazzy saxophone sample. Structure: 4-bar intro, 16-bar verse loop, 4-bar outro with fade. Mood: relaxed late-night study session. Duration: 90 seconds.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p><strong>Genre:</strong> Lo-fi hip hop with clear jazz influences and vintage character.<br><strong>Rhythm:</strong> Steady 85 BPM boom-bap groove with deliberate swing and side-chain pumping.<br><strong>Texture:</strong> Warm Rhodes chords layered with vinyl noise, saxphone melody floating above the mix.<br><strong>Structure:</strong> Clean intro builds into a looping verse section with natural outro fade.<br><strong>Mood:</strong> Immediately evokes a calm, focused atmosphere suitable for study playlists or background ambience.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Specific genre, defined structure, clear mood, and immediately usable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Music Generation in Action</h2>
+                <p class="section-subtitle fade-in-up">See how structured prompts produce targeted musical compositions</p>
+
+                <div class="accordion fade-in-up" id="music-gen-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Background Music for Video</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt</span>
+                                    <p>&ldquo;Generate a 2-minute cinematic orchestral piece at 100 BPM for a nature documentary segment about alpine ecosystems. Instruments: sweeping string section, French horn melody, gentle harp arpeggios, and light timpani accents. Structure: quiet intro with solo cello (8 bars), gradual build adding strings and horn (16 bars), full orchestral swell at the midpoint, then a gentle decrescendo back to solo cello for the outro. Mood: awe-inspiring, vast, and reverent. The music should leave space for narration during quieter passages.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>This prompt succeeds because it addresses every dimension a video background track requires. The specific instrumentation (strings, French horn, harp, timpani) defines the sonic palette. The detailed structure with bar counts gives the model a compositional roadmap that creates a natural arc matching visual storytelling. The tempo anchors the pacing. The explicit instruction to &ldquo;leave space for narration&rdquo; prevents the common problem of AI-generated music being too dense for voiceover work. Without this level of detail, the model would produce a continuous, flat orchestral texture with no dynamic shape.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Podcast Intro Music</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt</span>
+                                    <p>&ldquo;Create a 15-second podcast intro jingle for a technology news show. Genre: upbeat electronic pop. Tempo: 120 BPM. Instruments: punchy synth bass, crisp clap-snare pattern, bright lead synth with a catchy 4-note hook, and a shimmering pad underneath. Structure: start with the hook immediately (no slow build), maintain high energy for 12 seconds, then cut to a clean 3-second tail that fades under where the host starts talking. Mood: energetic, modern, and professional. Think of a tech startup launch event, not a nightclub.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>Podcast intros have unique constraints that this prompt addresses directly. The 15-second duration forces brevity. The instruction to &ldquo;start with the hook immediately&rdquo; prevents wasted seconds on a slow build &mdash; critical for listener retention. The structural detail about a &ldquo;clean 3-second tail that fades under where the host starts talking&rdquo; solves the practical mixing challenge of transitioning from music to speech. The mood clarification (&ldquo;tech startup launch event, not a nightclub&rdquo;) uses contrast to prevent the model from interpreting &ldquo;upbeat electronic&rdquo; as aggressive dance music. Every sentence serves a functional purpose.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Ambient Soundscape</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt</span>
+                                    <p>&ldquo;Generate a 3-minute ambient soundscape for a meditation app session focused on deep relaxation. No percussion or rhythmic elements. Instruments: slowly evolving drone synthesizer in D minor, granular texture pads with long attack and release, distant reverb-drenched piano notes appearing every 15-20 seconds, and subtle low-frequency oscillation creating a breathing-like pulse. Tempo: free-time (no fixed beat). Structure: begin with near-silence, introduce the drone gradually over the first 30 seconds, layer in textures over the next minute, hold the full arrangement for 60 seconds, then slowly dissolve each element until only the drone remains. Mood: deeply calming, spacious, and introspective. The listener should feel like floating in a warm, dark, weightless environment.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>Ambient music generation requires a fundamentally different prompting approach than rhythmic genres. This prompt explicitly removes percussion and fixed tempo, which prevents the model from imposing a beat structure. The timing cues (&ldquo;every 15-20 seconds,&rdquo; &ldquo;first 30 seconds,&rdquo; &ldquo;next minute&rdquo;) provide structural guidance without rhythmic constraints. Specifying &ldquo;long attack and release&rdquo; on the pads communicates sound design intent. The physical metaphor (&ldquo;floating in a warm, dark, weightless environment&rdquo;) gives the model a rich sensory reference that abstract musical terms alone cannot convey. This level of descriptive layering is essential for ambient work, where the absence of rhythm means every textural detail carries more weight.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Music Generation Prompting</h2>
+                <p class="section-subtitle fade-in-up">Best for rapid creation of purpose-driven musical content</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Content Creator Backgrounds</strong>
+                                    <p>Generating unique, royalty-free background music for YouTube videos, social media content, presentations, and online courses without licensing fees or music production expertise.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Game Development Audio</strong>
+                                    <p>Rapidly prototyping game soundtracks, level themes, menu music, and ambient loops during development when hiring a composer is premature or budget-constrained.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Prototype Film Scoring</strong>
+                                    <p>Creating temporary score tracks for rough cuts and pitch presentations, allowing filmmakers to demonstrate their sonic vision before engaging a professional composer.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Ambient and Functional Music</strong>
+                                    <p>Producing meditation tracks, focus music, sleep soundscapes, and wellness audio where the goal is atmosphere and functionality rather than artistic statement.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Professional Studio Production</strong>
+                                    <p>When the final product demands radio-quality mixing, mastering, and the nuanced performance that only skilled musicians and audio engineers can deliver.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Live Performance Material</strong>
+                                    <p>When you need music that real musicians will perform live, where human interpretation, improvisation, and real-time audience interaction are essential to the experience.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Orchestral Arrangements</strong>
+                                    <p>When the composition requires intricate counterpoint, extended multi-movement structures, or precise orchestration across dozens of individual parts and sections.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Precise Harmonic Control</strong>
+                                    <p>When you need exact chord voicings, specific voice leading, or note-level precision that text prompts cannot reliably communicate to current generation models.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where music generation prompting delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="23 7 16 12 23 17 23 7"/>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Video Background Music</h3>
+                        <p class="use-case-showcase__desc">Creating custom soundtracks for YouTube content, corporate videos, product demos, and social media clips &mdash; tailored to the exact mood, pacing, and duration of each visual project without navigating stock music libraries.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 3v12"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <path d="M6 3l6 2v8"/>
+                                <circle cx="12" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Game Audio</h3>
+                        <p class="use-case-showcase__desc">Generating adaptive game music &mdash; battle themes, exploration ambience, menu screens, victory fanfares, and environmental soundscapes &mdash; enabling indie developers to prototype full audio direction before final production.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                <line x1="12" y1="19" x2="12" y2="23"/>
+                                <line x1="8" y1="23" x2="16" y2="23"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Podcast Production</h3>
+                        <p class="use-case-showcase__desc">Producing branded intro and outro jingles, segment transition stingers, and background beds for podcast episodes &mdash; creating a consistent sonic identity across all episodes without recurring licensing costs.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Advertising Jingles</h3>
+                        <p class="use-case-showcase__desc">Rapidly iterating on short-form musical branding for advertisements, product launches, and marketing campaigns &mdash; testing multiple moods, tempos, and styles before committing to a final creative direction.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Meditation Soundscapes</h3>
+                        <p class="use-case-showcase__desc">Generating calming, non-rhythmic ambient audio for meditation apps, yoga studios, sleep aids, and therapeutic environments &mdash; producing hours of unique content tailored to specific relaxation and mindfulness objectives.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 11a9 9 0 0 1 9 9"/>
+                                <path d="M4 4a16 16 0 0 1 16 16"/>
+                                <circle cx="5" cy="19" r="1"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Prototype Film Scoring</h3>
+                        <p class="use-case-showcase__desc">Building temporary score tracks for film rough cuts, pitch decks, and pre-production animatics &mdash; allowing directors to communicate musical vision to composers and stakeholders using AI-generated reference tracks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Music Generation Fits</h2>
+                <p class="section-subtitle fade-in-up">Music generation sits at the creative core of the audio prompting stack</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Audio Classification</span>
+                        <span class="era-marker__title">Sound Recognition</span>
+                        <span class="era-marker__desc">Identifying and categorizing audio content</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Music Generation</span>
+                        <span class="era-marker__title">Creative Composition</span>
+                        <span class="era-marker__desc">Text-to-music creation from natural language</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Voice Cloning</span>
+                        <span class="era-marker__title">Voice Replication</span>
+                        <span class="era-marker__desc">Reproducing specific vocal characteristics</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Text-to-Speech</span>
+                        <span class="era-marker__title">Speech Synthesis</span>
+                        <span class="era-marker__desc">Converting written text into spoken audio</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine Audio Techniques</div>
+                    <p>Music generation works best when combined with other audio prompting disciplines. Use audio classification to analyze reference tracks and extract the parameters you want to replicate. Apply text-to-speech techniques to add narration over generated music beds. Leverage voice cloning approaches when your composition needs specific vocal character. Each audio framework addresses a different dimension of the sonic experience, and layering them produces more complete, professional-sounding output than any single technique in isolation.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary audio techniques</p>
+
+                <a href="audio-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Audio Prompting Basics</span>
+                        <span class="evolution-callout__desc">The foundational techniques for working with audio in AI models &mdash; covering general principles of audio input, processing, and output that underpin all specialized audio frameworks including music generation.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="voice-cloning.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Voice Cloning Prompting</span>
+                        <span class="evolution-callout__desc">Techniques for replicating specific vocal characteristics in AI-generated audio &mdash; a natural companion to music generation when your compositions need vocals with a particular tonal quality or singing style.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="audio-classification.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Parallel</span>
+                        <span class="evolution-callout__title">Audio Classification</span>
+                        <span class="evolution-callout__desc">The analytical counterpart to music generation &mdash; identifying genres, instruments, moods, and structural elements in existing audio. Understanding classification sharpens your vocabulary for writing more precise generation prompts.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Explore Music Generation Prompting</h2>
+                        <p class="cta-corporate__text">Apply structured music generation techniques to your own creative projects or build audio prompts with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../../../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../../../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+    <!-- === FOOTER === -->
+    <footer class="footer">
+        <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../../../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                    <p>Master the Art of AI Communication theory through proven frameworks.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Discover</h4>
+                    <a href="../../prompt-basics.html">Prompt Basics</a>
+                    <a href="../../crisp.html">CRISP Framework</a>
+                    <a href="../../crispe.html">CRISPE Framework</a>
+                    <a href="../../costar.html">COSTAR Framework</a>
+                    <a href="../../react.html">ReAct Framework</a>
+                    <a href="../../flipped-interaction.html">Flipped Interaction</a>
+                    <a href="../../chain-of-thought.html">Chain-of-Thought</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>AI Readiness</h4>
+                    <a href="../../../tools/analyzer.html">Prompt Analyzer</a>
+                    <a href="../../../tools/guidance.html">Prompt Builder</a>
+                    <a href="../../../tools/matcher.html">Framework Matcher</a>
+                    <a href="../../../tools/checklist.html">Preflight Checklist</a>
+                    <a href="../../../tools/hallucination.html">Hallucination Spotter</a>
+                    <a href="../../../quiz/index.html">Readiness Quiz</a>
+                    <a href="../../../patterns/index.html">Patterns Library</a>
+                    <a href="../../../pages/ai-safety.html">AI Safety</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="../../../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                    <a href="../../../pages/faq.html">FAQ</a>
+                    <a href="../../../pages/glossary.html">Glossary</a>
+                    <a href="../../../pages/security.html">Security</a>
+                    <a href="../../../pages/performance.html">Performance</a>
+                    <a href="../../../pages/ai-for-everybody.html">AI for Everybody</a>
+                    <a href="../../../pages/universal-design.html">Universal Design</a>
+                    <a href="../../../pages/ai-assisted-building.html">AI Assisted</a>
+                    <a href="../../../pages/about.html">About</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>AI for Everybody</p>
+                <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Bas</span></p>
+            </div>
+        </div>
+    </footer>
+    <!-- /FOOTER -->
+
+    <!-- === BACK TO TOP === -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+    <!-- /BACK TO TOP -->
+
+    <!-- === ACCESSIBILITY DASHBOARD === -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+    <!-- /ACCESSIBILITY DASHBOARD -->
+
+    <script src="../../../app.js" defer></script>
+</body>
+</html>

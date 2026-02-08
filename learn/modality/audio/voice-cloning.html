@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Voice Cloning Prompting: Learn techniques for guiding AI models to replicate specific vocal characteristics from reference audio, enabling high-fidelity voice reproduction for localization, accessibility, and content creation.">
+    <title>Voice Cloning Prompting - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+    <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../../../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav">
+                <a href="../../../foundations/index.html" class="nav-link">AI Foundations</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../../index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                    <div class="mega-menu mega-menu--tabbed">
+                        <div class="mega-menu-tabs" role="tablist" aria-label="Framework categories"></div>
+                        <div class="mega-menu-section" data-tab="getting-started" role="tabpanel">
+                            <h4>Getting Started</h4>
+                            <a href="../../prompt-basics.html">Prompt Basics</a>
+                            <a href="../../facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="structured-frameworks" role="tabpanel">
+                            <h4><a href="../../structured-frameworks.html">Structured Frameworks</a></h4>
+                            <a href="../../crisp.html">CRISP</a>
+                            <a href="../../crispe.html">CRISPE</a>
+                            <a href="../../costar.html">COSTAR</a>
+                            <a href="../../context-structure.html">Context &amp; Structure</a>
+                            <a href="../../constrained-output.html">Constrained Output</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="in-context-learning" role="tabpanel">
+                            <h4><a href="../../in-context-learning.html">In-Context Learning</a></h4>
+                            <a href="../../zero-shot.html">Zero-Shot</a>
+                            <a href="../../one-shot.html">One-Shot</a>
+                            <a href="../../few-shot-learning.html">Few-Shot Learning</a>
+                            <a href="../../shot-prompting.html">Shot Prompting</a>
+                            <a href="../../example-selection.html">Example Selection</a>
+                            <a href="../../knn-prompting.html">KNN Prompting</a>
+                            <a href="../../vote-k.html">Vote-k</a>
+                            <a href="../../demo-ensembling.html">Demo Ensembling</a>
+                            <a href="../../prompt-mining.html">Prompt Mining</a>
+                            <a href="../../many-shot.html">Many-Shot</a>
+                            <a href="../../example-ordering.html">Example Ordering</a>
+                            <a href="../../self-generated-icl.html">Self-Generated ICL</a>
+                            <a href="../../active-example.html">Active Example</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="reasoning-cot" role="tabpanel">
+                            <h4><a href="../../reasoning-cot.html">Reasoning &amp; CoT</a></h4>
+                            <a href="../../chain-of-thought.html">Chain-of-Thought</a>
+                            <a href="../../zero-shot-cot.html">Zero-Shot CoT</a>
+                            <a href="../../auto-cot.html">Auto-CoT</a>
+                            <a href="../../contrastive-cot.html">Contrastive CoT</a>
+                            <a href="../../structured-cot.html">Structured CoT</a>
+                            <a href="../../faithful-cot.html">Faithful CoT</a>
+                            <a href="../../tab-cot.html">Tab-CoT</a>
+                            <a href="../../complexity-prompting.html">Complexity-Based</a>
+                            <a href="../../analogical-reasoning.html">Analogical Reasoning</a>
+                            <a href="../../step-back.html">Step-Back</a>
+                            <a href="../../thread-of-thought.html">Thread of Thought</a>
+                            <a href="../../memory-of-thought.html">Memory of Thought</a>
+                            <a href="../../active-prompting.html">Active Prompting</a>
+                            <a href="../../reversing-cot.html">Reversing CoT</a>
+                            <a href="../../uncertainty-cot.html">Uncertainty-Routed CoT</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="decomposition" role="tabpanel">
+                            <h4><a href="../../decomposition.html">Decomposition</a></h4>
+                            <a href="../../least-to-most.html">Least-to-Most</a>
+                            <a href="../../plan-and-solve.html">Plan-and-Solve</a>
+                            <a href="../../tree-of-thought.html">Tree of Thought</a>
+                            <a href="../../graph-of-thought.html">Graph of Thought</a>
+                            <a href="../../decomp.html">DECOMP</a>
+                            <a href="../../recursion-of-thought.html">Recursion of Thought</a>
+                            <a href="../../program-of-thought.html">Program of Thought</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="self-correction" role="tabpanel">
+                            <h4><a href="../../self-correction.html">Self-Correction</a></h4>
+                            <a href="../../self-refine.html">Self-Refine</a>
+                            <a href="../../self-verification.html">Self-Verification</a>
+                            <a href="../../chain-of-verification.html">Chain-of-Verification</a>
+                            <a href="../../critic.html">CRITIC</a>
+                            <a href="../../reflexion.html">Reflexion</a>
+                            <a href="../../self-calibration.html">Self-Calibration</a>
+                            <a href="../../cumulative-reasoning.html">Cumulative Reasoning</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="ensemble-methods" role="tabpanel">
+                            <h4><a href="../../ensemble-methods.html">Ensemble Methods</a></h4>
+                            <a href="../../self-consistency.html">Self-Consistency</a>
+                            <a href="../../cosp.html">COSP</a>
+                            <a href="../../diverse-prompting.html">DiVeRSe</a>
+                            <a href="../../dense-prompting.html">DENSE</a>
+                            <a href="../../max-mutual-info.html">Max Mutual Info</a>
+                            <a href="../../universal-self-consistency.html">Universal Self-Consistency</a>
+                            <a href="../../meta-reasoning.html">Meta-Reasoning</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="prompting-strategies" role="tabpanel">
+                            <h4><a href="../../prompting-strategies.html">Prompting Strategies</a></h4>
+                            <a href="../../react.html">ReAct</a>
+                            <a href="../../flipped-interaction.html">Flipped Interaction</a>
+                            <a href="../../self-ask.html">Self-Ask</a>
+                            <a href="../../prompt-chaining.html">Prompt Chaining</a>
+                            <a href="../../role-prompting.html">Role Prompting</a>
+                            <a href="../../emotion-prompting.html">Emotion Prompting</a>
+                            <a href="../../style-prompting.html">Style Prompting</a>
+                            <a href="../../s2a.html">S2A</a>
+                            <a href="../../simtom.html">SimToM</a>
+                            <a href="../../rar.html">RaR</a>
+                            <a href="../../re2.html">RE2</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="code" role="tabpanel">
+                            <h4>Code</h4>
+                            <a href="../code/code-prompting.html">Code Prompting</a>
+                            <a href="../code/self-debugging.html">Self-Debugging</a>
+                            <a href="../code/structured-output.html">Structured Output</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="image" role="tabpanel">
+                            <h4>Image</h4>
+                            <a href="../image/image-prompting.html">Image Prompting</a>
+                            <a href="../image/multimodal-cot.html">Multimodal CoT</a>
+                            <a href="../image/visual-cot.html">Visual CoT</a>
+                            <a href="../image/image-as-text.html">Image-as-Text</a>
+                            <a href="../image/vqa.html">Visual QA</a>
+                            <a href="../image/image-gen-prompting.html">Image Generation</a>
+                            <a href="../image/negative-prompting.html">Negative Prompting</a>
+                            <a href="../image/controlnet-prompting.html">ControlNet</a>
+                            <a href="../image/inpainting-prompting.html">Inpainting</a>
+                            <a href="../image/style-transfer.html">Style Transfer</a>
+                            <a href="../image/image-to-image.html">Image-to-Image</a>
+                            <a href="../image/composition-prompting.html">Composition</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="audio" role="tabpanel">
+                            <h4>Audio</h4>
+                            <a href="../audio/audio-prompting.html">Audio Prompting</a>
+                            <a href="../audio/stt-prompting.html">Speech-to-Text</a>
+                            <a href="../audio/tts-prompting.html">Text-to-Speech</a>
+                            <a href="../audio/audio-classification.html">Audio Classification</a>
+                            <a href="../audio/music-gen.html">Music Generation</a>
+                            <a href="../audio/voice-cloning.html">Voice Cloning</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../../../tools/index.html" class="nav-link" aria-expanded="false">AI Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../../../quiz/index.html">Readiness Quiz</a>
+                            <a href="../../../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../../../tools/guidance.html">Prompt Builder</a>
+                            <a href="../../../tools/matcher.html">Framework Matcher</a>
+                            <a href="../../../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../../../tools/persona.html">Persona Architect</a>
+                            <a href="../../../patterns/index.html">Patterns Library</a>
+                            <a href="../../../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../../../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--multi-column">
+                        <div class="mega-menu-section">
+                            <h4>Guides</h4>
+                            <a href="../../../pages/glossary.html">Glossary</a>
+                            <a href="../../../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                            <a href="../../../pages/faq.html">FAQ</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>Principles</h4>
+                            <a href="../../../pages/ai-for-everybody.html">AI for Everybody</a>
+                            <a href="../../../pages/universal-design.html">Universal Design</a>
+                            <a href="../../../pages/ai-assisted-building.html">AI Assisted</a>
+                            <a href="../../../pages/security.html">Security</a>
+                            <a href="../../../pages/performance.html">Performance</a>
+                        </div>
+                        <div class="mega-menu-section mega-menu-section--featured">
+                            <h4>AI &amp; ND</h4>
+                            <a href="../../../neurodivergence/index.html">ND Hub</a>
+                            <a href="../../../neurodivergence/adhd.html">AI for ADHD</a>
+                            <a href="../../../neurodivergence/autism.html">AI for Autism</a>
+                            <a href="../../../neurodivergence/dyslexia.html">AI for Dyslexia</a>
+                            <a href="../../../neurodivergence/tools.html">AI Tools</a>
+                            <a href="../../../neurodivergence/resources.html">ND Resources</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>About</h4>
+                            <a href="../../../pages/about.html">About Praxis</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in">
+                    <a href="../../../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="../../index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Voice Cloning Prompting</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Audio Frameworks</span>
+                </div>
+                <h1 class="page-title fade-in">Voice Cloning Prompting</h1>
+                <p class="page-subtitle fade-in">Techniques for guiding AI models to replicate specific vocal characteristics from reference audio samples &mdash; combining voice profiles with text instructions to produce natural, high-fidelity speech that preserves a speaker&rsquo;s unique timbre, accent, and cadence.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> Voice cloning evolved from speaker-dependent synthesis systems in the 1990s, which required hours of recorded speech from a single speaker to build usable models. The 2010s brought speaker adaptation techniques that reduced data requirements through transfer learning, allowing existing TTS models to fine-tune on new voices with less audio. The breakthrough to modern voice cloning came in 2023 with zero-shot and few-shot approaches: Microsoft&rsquo;s VALL-E demonstrated cloning from just three seconds of audio using neural codec language modeling, Suno&rsquo;s Bark offered open-source multi-speaker generation, and ElevenLabs commercialized high-fidelity voice cloning accessible through simple API prompts. These systems can now clone a voice from seconds of reference audio and generate entirely new speech in that voice style.</p>
+                        <p><strong>Modern LLM Status:</strong> Voice cloning is now <strong>commercially available across multiple platforms</strong> and continues to advance rapidly. The core prompting discipline involves providing clean reference audio alongside explicit instructions about which vocal characteristics to preserve and which to adapt. Without structured voice cloning prompts, systems tend to produce flat reproductions that capture surface-level timbre but lose the nuanced prosody, emotional range, and speaking rhythm that make a voice recognizable. The techniques covered here form the foundation for consistent, high-quality voice reproduction across applications from content localization to accessibility voice banking.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Beyond Simple Mimicry</h2>
+                        <p class="split-section__text">Voice cloning prompting combines reference audio samples with text instructions to reproduce a specific voice&rsquo;s characteristics in new speech. Unlike basic text-to-speech where the system selects from preset voices, voice cloning requires the model to analyze a reference sample, extract the defining vocal features, and apply them to entirely new content &mdash; bridging two inputs (audio reference and text instruction) into a single coherent output.</p>
+                        <p class="split-section__text"><strong>The core insight is that effective voice cloning requires not just a clean audio sample but explicit guidance on which vocal characteristics to preserve (timbre, accent, pace) and which to adapt (emotion, emphasis, energy).</strong> A raw audio upload with a generic &ldquo;clone this voice&rdquo; instruction produces a shallow reproduction that captures the basic pitch and tone but loses the subtle qualities that make a voice distinctive &mdash; the way someone pauses before key points, the slight rasp at the end of sentences, the rhythmic patterns unique to their speech.</p>
+                        <p class="split-section__text">Think of it like asking a vocal impressionist to perform. An amateur copies the obvious features &mdash; the pitch, maybe a catchphrase. A skilled impressionist captures the breathing patterns, the cadence shifts between casual and serious speech, and the micro-expressions that listeners recognize unconsciously. Voice cloning prompting is how you guide the AI to perform like the skilled impressionist rather than the amateur.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Vocal Guidance Transforms Cloning Quality</span>
+                                <p>When a voice cloning model receives only a reference audio clip without structured instructions, it defaults to replicating the most statistically prominent features &mdash; fundamental frequency, average speaking rate, and general tonal quality. Structured voice cloning prompts redirect this behavior by defining a <strong>voice profile</strong> that specifies preservation priorities: which characteristics are essential to the speaker&rsquo;s identity (their unique timbre, regional accent, characteristic pacing) and which should be adapted for the new context (emotional tone, emphasis patterns, energy level). The difference between a robotic reproduction and a natural-sounding clone often comes down entirely to the quality of the accompanying prompt instructions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Voice Cloning Process</h2>
+                <p class="section-subtitle fade-in-up">Four steps from reference audio to high-fidelity voice reproduction</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Provide Reference Audio</h3>
+                            <p class="element-timeline__text">Supply a clean audio sample of the target voice. Quality matters significantly &mdash; recordings should be free of background noise, music, or overlapping speakers. Ideal samples feature the speaker in a natural conversational or narrative tone, with enough duration (typically 10&ndash;30 seconds minimum) to capture their vocal range. Multiple samples across different emotional registers and speaking contexts improve reproduction fidelity by giving the model a richer understanding of the voice&rsquo;s full characteristics.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Upload a 30-second WAV recording of the speaker reading a varied passage in a quiet environment, ensuring the audio captures both declarative and questioning intonation patterns.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Specify Voice Characteristics</h3>
+                            <p class="element-timeline__text">Define the vocal attributes that should be preserved from the reference sample. Create a voice profile that identifies the speaker&rsquo;s age range, gender presentation, accent or dialect, natural speaking pace, pitch range, and distinctive qualities such as breathiness, nasality, or vocal fry. Explicitly state which features are defining characteristics of this voice versus incidental qualities of the recording session that should not be reproduced.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Voice profile: Female speaker, mid-30s, mild British Received Pronunciation accent. Preserve the warm mid-range timbre, deliberate pacing with natural pauses between clauses, and the slight rising intonation on list items. Do not reproduce the room reverb present in the sample.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define New Content</h3>
+                            <p class="element-timeline__text">Provide the text the cloned voice should speak, along with performance directions that guide how the content should be delivered. Specify the emotional tone, emphasis on key words or phrases, pacing variations for different sections, and any contextual adjustments needed. Include SSML-style annotations or natural-language performance notes to ensure the output sounds natural rather than monotonously reading text in the cloned voice.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Deliver the following product introduction with an enthusiastic but professional tone. Slow the pace slightly on the product name for emphasis. Maintain the speaker&rsquo;s characteristic warmth while adding energy appropriate for a launch announcement.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Quality Assessment</h3>
+                            <p class="element-timeline__text">Evaluate the generated output against the reference audio on multiple dimensions: timbre accuracy, prosody naturalness, pronunciation correctness, and emotional alignment with the requested delivery. Listen for artifacts such as unnatural pitch transitions, robotic phrasing, or inconsistent accent application. Use A/B comparison with the original speaker&rsquo;s audio to identify gaps, then refine the prompt with more specific guidance on the characteristics that need adjustment.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;The timbre matches well but the pacing feels rushed compared to the reference. Reduce speaking rate by approximately 10 percent and add a 200-millisecond pause after each sentence. The accent slips on words ending in &lsquo;-tion&rsquo; &mdash; reinforce the British pronunciation pattern for those suffixes.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why structured voice cloning prompts produce dramatically better reproductions</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Basic Clone Request</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Clone this voice and say the following text.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>Output captures the basic pitch and gender of the speaker but sounds flat and mechanical. The accent drifts between regions, pacing is uniform throughout with no natural variation, and the emotional tone is neutral regardless of content. Listeners can tell it is attempting to sound like the reference speaker but would not mistake it for the actual person.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Shallow reproduction, flat delivery, inconsistent accent, no personality</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Structured Voice Clone Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Voice profile: Male, late 40s, moderate Southern US accent with soft consonants. Preserve the warm baritone timbre, characteristic slow-to-medium pace, and tendency to elongate vowels on emphasized words. Adapt emotional tone to friendly and reassuring. Deliver the text with natural pauses at commas and longer breaks between paragraphs.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p><strong>Timbre:</strong> Warm baritone preserved with consistent depth throughout.<br><strong>Accent:</strong> Southern US characteristics maintained naturally with soft consonant patterns intact.<br><strong>Pacing:</strong> Deliberate pace with elongated vowels on key terms, natural variation between sentences.<br><strong>Emotion:</strong> Friendly and reassuring tone woven through delivery without breaking character.<br><strong>Naturalness:</strong> Breathing pauses, micro-hesitations, and intonation shifts make output indistinguishable from natural speech at casual listening distance.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Detailed voice profile, consistent accent, natural delivery, emotionally aligned</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Voice Cloning in Action</h2>
+                <p class="section-subtitle fade-in-up">See how structured prompts unlock professional-quality voice reproduction</p>
+
+                <div class="accordion fade-in-up" id="voice-cloning-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Content Localization</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt</span>
+                                    <p>&ldquo;Using the provided reference audio of the English-speaking narrator, generate a Spanish-language version of the following script. Preserve the narrator&rsquo;s timbre, warm mid-range tone, and deliberate pacing style. Adapt pronunciation to neutral Latin American Spanish. Maintain the speaker&rsquo;s characteristic pattern of slowing slightly before key terms and adding emphasis through pitch variation rather than volume. Target delivery length should match the English version within five percent for video synchronization.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>Cross-language voice cloning is one of the most demanding applications because the model must separate language-specific features (phonemes, rhythm patterns) from speaker-specific features (timbre, personality). This prompt succeeds by explicitly listing which qualities belong to the speaker&rsquo;s identity (warm tone, deliberate pacing, pitch-based emphasis) versus which should adapt to the new language (pronunciation patterns). The timing constraint ensures the output works in production contexts where audio must align with existing video content.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Accessibility Voice Banking</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt</span>
+                                    <p>&ldquo;This reference audio is from a patient who will lose the ability to speak due to a progressive neurological condition. Create a voice model that prioritizes identity preservation above all else. Capture the following defining characteristics: the slightly breathy quality on initial syllables, the distinctive laugh-adjacent warmth in affirmative responses, the natural speaking rate of approximately 140 words per minute, and the mild regional accent from the Pacific Northwest. The cloned voice will be used for an AAC (augmentative and alternative communication) device for daily conversation, so it must sound natural across casual, formal, and emotional speech contexts.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>Voice banking for accessibility requires the highest fidelity of any cloning application because the output becomes the patient&rsquo;s literal voice for all future communication. This prompt succeeds by identifying the most personal vocal markers &mdash; the breathy initials, the warmth in affirmatives, the specific regional accent &mdash; and prioritizing them explicitly. By specifying the AAC use case, the prompt also signals that the model needs to produce versatile output that works across many emotional and social contexts, not just a single delivery style.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Brand Voice Consistency</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt</span>
+                                    <p>&ldquo;Reference audio contains our brand spokesperson delivering three approved commercial spots. Clone this voice for a new product line announcement. Maintain the authoritative yet approachable tone, the measured pace of approximately 155 words per minute, and the clear Standard American English pronunciation. For this announcement, increase energy level by approximately 15 percent compared to the reference recordings to convey excitement about the new product. Preserve the spokesperson&rsquo;s signature technique of lowering pitch slightly on the brand name and pausing for 300 milliseconds after it.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>Brand voice consistency requires reproducing not just a person&rsquo;s voice but a specific performance style that has been refined across multiple recordings. This prompt references existing approved content as the baseline, specifies exact numerical targets for pacing and energy adjustment, and identifies the signature delivery technique (pitch drop and pause on the brand name) that makes the brand voice recognizable. The quantified energy increase gives the model a concrete target rather than the vague instruction to &ldquo;sound more excited,&rdquo; which produces more predictable and controllable results.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Voice Cloning</h2>
+                <p class="section-subtitle fade-in-up">Best for reproducing specific vocal identities across new content</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Content Localization</strong>
+                                    <p>Translating video narration, podcasts, and audio content into other languages while preserving the original speaker&rsquo;s vocal identity and personality across all language versions.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Accessibility and Voice Banking</strong>
+                                    <p>Preserving voices for individuals facing speech loss due to medical conditions, creating personalized AAC device voices that maintain the person&rsquo;s identity.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Consistent Brand Voices</strong>
+                                    <p>Maintaining a unified brand spokesperson voice across campaigns, product lines, and platforms without requiring the original speaker for every recording session.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Audiobook Production</strong>
+                                    <p>Scaling narrator output for long-form content, maintaining consistent vocal performance across chapters or volumes while adapting delivery for different scenes and characters.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Unauthorized Impersonation</strong>
+                                    <p>Using someone&rsquo;s voice without their explicit consent is both unethical and increasingly illegal. Voice cloning should never be used to deceive, defraud, or impersonate without permission.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Real-Time Conversation Cloning</strong>
+                                    <p>Current voice cloning technology introduces latency that makes it unsuitable for real-time conversational applications. Use purpose-built real-time TTS systems instead.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Voices Without Consent</strong>
+                                    <p>Cloning the voice of a public figure, colleague, or any individual who has not given informed, documented consent violates ethical standards and may carry legal liability.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Generic TTS Needs</strong>
+                                    <p>When you do not need a specific person&rsquo;s voice and a standard high-quality TTS voice would serve equally well, voice cloning adds unnecessary complexity and ethical considerations.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where voice cloning prompting delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Accessibility Voice Banking</h3>
+                        <p class="use-case-showcase__desc">Preserving a patient&rsquo;s unique voice before speech loss from ALS, laryngeal cancer, or other conditions &mdash; creating personalized synthetic voices for augmentative and alternative communication devices that sound like the actual person.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Localization</h3>
+                        <p class="use-case-showcase__desc">Dubbing educational courses, marketing videos, and corporate training materials into multiple languages while maintaining the original presenter&rsquo;s vocal identity, ensuring brand and personality consistency across all markets.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Audiobook Narration</h3>
+                        <p class="use-case-showcase__desc">Scaling audiobook production by allowing a narrator&rsquo;s cloned voice to handle additional chapters, revisions, or supplementary content without requiring new recording sessions &mdash; maintaining consistent performance across hundreds of hours of material.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                <line x1="12" y1="19" x2="12" y2="23"/>
+                                <line x1="8" y1="23" x2="16" y2="23"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Personal Voice Assistants</h3>
+                        <p class="use-case-showcase__desc">Creating custom voice assistant personalities that use a specific person&rsquo;s voice (with their consent) for smart home devices, customer service systems, or personal productivity tools with a familiar, trusted vocal presence.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Legacy Preservation</h3>
+                        <p class="use-case-showcase__desc">Archiving and preserving the voices of historical figures, family members, or cultural leaders from existing recordings &mdash; enabling future generations to hear educational content or personal messages in authentic voices.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Brand Voice Systems</h3>
+                        <p class="use-case-showcase__desc">Building scalable brand audio identities where a single approved spokesperson voice can be deployed across thousands of product descriptions, IVR systems, in-app guidance, and advertising materials without per-session recording costs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Voice Cloning Fits</h2>
+                <p class="section-subtitle fade-in-up">Voice cloning occupies the identity-reproduction layer of the audio AI stack</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Text-to-Speech</span>
+                        <span class="era-marker__title">Generic Voices</span>
+                        <span class="era-marker__desc">Preset voices reading provided text</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Voice Cloning</span>
+                        <span class="era-marker__title">Identity Reproduction</span>
+                        <span class="era-marker__desc">Replicating specific voices from samples</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Music Generation</span>
+                        <span class="era-marker__title">Creative Audio</span>
+                        <span class="era-marker__desc">Composing and producing musical content</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Audio Classification</span>
+                        <span class="era-marker__title">Sound Analysis</span>
+                        <span class="era-marker__desc">Identifying and categorizing audio events</span>
+                    </div>
+                </div>
+
+                <div class="callout warning fade-in-up">
+                    <div class="callout-title">Ethical Considerations</div>
+                    <p>Voice cloning technology carries significant ethical responsibilities. Always obtain explicit, informed consent from the voice owner before creating a clone. Be aware of deepfake risks &mdash; cloned voices can be misused for fraud, misinformation, or unauthorized impersonation. Responsible use requires clear documentation of consent, transparent disclosure when audiences are hearing a cloned voice, and adherence to emerging legal frameworks governing synthetic media. Organizations should establish internal policies for voice cloning that include consent verification, usage auditing, and clear boundaries on how cloned voices may and may not be deployed.</p>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine with Complementary Techniques</div>
+                    <p>Voice cloning produces the best results when combined with structured text-to-speech prompting for delivery control and audio classification for quality validation. Use TTS prompting techniques to specify prosody, emotion, and pacing in the cloned voice. Apply audio classification to automatically verify that the output maintains the target voice&rsquo;s characteristics within acceptable thresholds. For multilingual deployments, pair voice cloning with speech-to-text transcription to create end-to-end pipelines that translate, clone, and validate across languages.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary audio techniques</p>
+
+                <a href="tts-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Text-to-Speech Prompting</span>
+                        <span class="evolution-callout__desc">The baseline discipline for controlling synthetic speech output &mdash; mastering TTS prompting provides the delivery-control skills that make voice cloning output sound natural and expressive rather than flat.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="audio-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Audio Prompting Basics</span>
+                        <span class="evolution-callout__desc">Foundational techniques for working with audio inputs in AI models &mdash; understanding audio prompting principles strengthens your ability to prepare reference samples and evaluate cloned output quality.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="music-gen.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Parallel</span>
+                        <span class="evolution-callout__title">Music Generation Prompting</span>
+                        <span class="evolution-callout__desc">The creative counterpart to voice cloning &mdash; while voice cloning reproduces human speech, music generation creates instrumental and vocal compositions, sharing underlying audio synthesis techniques.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Explore Voice Cloning Prompting</h2>
+                        <p class="cta-corporate__text">Apply structured voice cloning techniques to your own audio projects or build voice reproduction prompts with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../../../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../../../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+    <!-- === FOOTER === -->
+    <footer class="footer">
+        <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../../../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                    <p>Master the Art of AI Communication theory through proven frameworks.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Discover</h4>
+                    <a href="../../prompt-basics.html">Prompt Basics</a>
+                    <a href="../../crisp.html">CRISP Framework</a>
+                    <a href="../../crispe.html">CRISPE Framework</a>
+                    <a href="../../costar.html">COSTAR Framework</a>
+                    <a href="../../react.html">ReAct Framework</a>
+                    <a href="../../flipped-interaction.html">Flipped Interaction</a>
+                    <a href="../../chain-of-thought.html">Chain-of-Thought</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>AI Readiness</h4>
+                    <a href="../../../tools/analyzer.html">Prompt Analyzer</a>
+                    <a href="../../../tools/guidance.html">Prompt Builder</a>
+                    <a href="../../../tools/matcher.html">Framework Matcher</a>
+                    <a href="../../../tools/checklist.html">Preflight Checklist</a>
+                    <a href="../../../tools/hallucination.html">Hallucination Spotter</a>
+                    <a href="../../../quiz/index.html">Readiness Quiz</a>
+                    <a href="../../../patterns/index.html">Patterns Library</a>
+                    <a href="../../../pages/ai-safety.html">AI Safety</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="../../../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                    <a href="../../../pages/faq.html">FAQ</a>
+                    <a href="../../../pages/glossary.html">Glossary</a>
+                    <a href="../../../pages/security.html">Security</a>
+                    <a href="../../../pages/performance.html">Performance</a>
+                    <a href="../../../pages/ai-for-everybody.html">AI for Everybody</a>
+                    <a href="../../../pages/universal-design.html">Universal Design</a>
+                    <a href="../../../pages/ai-assisted-building.html">AI Assisted</a>
+                    <a href="../../../pages/about.html">About</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>AI for Everybody</p>
+                <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Bas</span></p>
+            </div>
+        </div>
+    </footer>
+    <!-- /FOOTER -->
+
+    <!-- === BACK TO TOP === -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+    <!-- /BACK TO TOP -->
+
+    <!-- === ACCESSIBILITY DASHBOARD === -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+    <!-- /ACCESSIBILITY DASHBOARD -->
+
+    <script src="../../../app.js" defer></script>
+</body>
+</html>

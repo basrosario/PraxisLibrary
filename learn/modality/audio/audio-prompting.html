@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Audio Prompting Basics: Learn foundational techniques for prompting AI models to transcribe, analyze, classify, and reason about audio inputs in multimodal contexts.">
+    <title>Audio Prompting Basics - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+    <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../../../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav">
+                <a href="../../../foundations/index.html" class="nav-link">AI Foundations</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../../index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                    <div class="mega-menu mega-menu--tabbed">
+                        <div class="mega-menu-tabs" role="tablist" aria-label="Framework categories"></div>
+                        <div class="mega-menu-section" data-tab="getting-started" role="tabpanel">
+                            <h4>Getting Started</h4>
+                            <a href="../../prompt-basics.html">Prompt Basics</a>
+                            <a href="../../facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="structured-frameworks" role="tabpanel">
+                            <h4><a href="../../structured-frameworks.html">Structured Frameworks</a></h4>
+                            <a href="../../crisp.html">CRISP</a>
+                            <a href="../../crispe.html">CRISPE</a>
+                            <a href="../../costar.html">COSTAR</a>
+                            <a href="../../context-structure.html">Context &amp; Structure</a>
+                            <a href="../../constrained-output.html">Constrained Output</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="in-context-learning" role="tabpanel">
+                            <h4><a href="../../in-context-learning.html">In-Context Learning</a></h4>
+                            <a href="../../zero-shot.html">Zero-Shot</a>
+                            <a href="../../one-shot.html">One-Shot</a>
+                            <a href="../../few-shot-learning.html">Few-Shot Learning</a>
+                            <a href="../../shot-prompting.html">Shot Prompting</a>
+                            <a href="../../example-selection.html">Example Selection</a>
+                            <a href="../../knn-prompting.html">KNN Prompting</a>
+                            <a href="../../vote-k.html">Vote-k</a>
+                            <a href="../../demo-ensembling.html">Demo Ensembling</a>
+                            <a href="../../prompt-mining.html">Prompt Mining</a>
+                            <a href="../../many-shot.html">Many-Shot</a>
+                            <a href="../../example-ordering.html">Example Ordering</a>
+                            <a href="../../self-generated-icl.html">Self-Generated ICL</a>
+                            <a href="../../active-example.html">Active Example</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="reasoning-cot" role="tabpanel">
+                            <h4><a href="../../reasoning-cot.html">Reasoning &amp; CoT</a></h4>
+                            <a href="../../chain-of-thought.html">Chain-of-Thought</a>
+                            <a href="../../zero-shot-cot.html">Zero-Shot CoT</a>
+                            <a href="../../auto-cot.html">Auto-CoT</a>
+                            <a href="../../contrastive-cot.html">Contrastive CoT</a>
+                            <a href="../../structured-cot.html">Structured CoT</a>
+                            <a href="../../faithful-cot.html">Faithful CoT</a>
+                            <a href="../../tab-cot.html">Tab-CoT</a>
+                            <a href="../../complexity-prompting.html">Complexity-Based</a>
+                            <a href="../../analogical-reasoning.html">Analogical Reasoning</a>
+                            <a href="../../step-back.html">Step-Back</a>
+                            <a href="../../thread-of-thought.html">Thread of Thought</a>
+                            <a href="../../memory-of-thought.html">Memory of Thought</a>
+                            <a href="../../active-prompting.html">Active Prompting</a>
+                            <a href="../../reversing-cot.html">Reversing CoT</a>
+                            <a href="../../uncertainty-cot.html">Uncertainty-Routed CoT</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="decomposition" role="tabpanel">
+                            <h4><a href="../../decomposition.html">Decomposition</a></h4>
+                            <a href="../../least-to-most.html">Least-to-Most</a>
+                            <a href="../../plan-and-solve.html">Plan-and-Solve</a>
+                            <a href="../../tree-of-thought.html">Tree of Thought</a>
+                            <a href="../../graph-of-thought.html">Graph of Thought</a>
+                            <a href="../../decomp.html">DECOMP</a>
+                            <a href="../../recursion-of-thought.html">Recursion of Thought</a>
+                            <a href="../../program-of-thought.html">Program of Thought</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="self-correction" role="tabpanel">
+                            <h4><a href="../../self-correction.html">Self-Correction</a></h4>
+                            <a href="../../self-refine.html">Self-Refine</a>
+                            <a href="../../self-verification.html">Self-Verification</a>
+                            <a href="../../chain-of-verification.html">Chain-of-Verification</a>
+                            <a href="../../critic.html">CRITIC</a>
+                            <a href="../../reflexion.html">Reflexion</a>
+                            <a href="../../self-calibration.html">Self-Calibration</a>
+                            <a href="../../cumulative-reasoning.html">Cumulative Reasoning</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="ensemble-methods" role="tabpanel">
+                            <h4><a href="../../ensemble-methods.html">Ensemble Methods</a></h4>
+                            <a href="../../self-consistency.html">Self-Consistency</a>
+                            <a href="../../cosp.html">COSP</a>
+                            <a href="../../diverse-prompting.html">DiVeRSe</a>
+                            <a href="../../dense-prompting.html">DENSE</a>
+                            <a href="../../max-mutual-info.html">Max Mutual Info</a>
+                            <a href="../../universal-self-consistency.html">Universal Self-Consistency</a>
+                            <a href="../../meta-reasoning.html">Meta-Reasoning</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="prompting-strategies" role="tabpanel">
+                            <h4><a href="../../prompting-strategies.html">Prompting Strategies</a></h4>
+                            <a href="../../react.html">ReAct</a>
+                            <a href="../../flipped-interaction.html">Flipped Interaction</a>
+                            <a href="../../self-ask.html">Self-Ask</a>
+                            <a href="../../prompt-chaining.html">Prompt Chaining</a>
+                            <a href="../../role-prompting.html">Role Prompting</a>
+                            <a href="../../emotion-prompting.html">Emotion Prompting</a>
+                            <a href="../../style-prompting.html">Style Prompting</a>
+                            <a href="../../s2a.html">S2A</a>
+                            <a href="../../simtom.html">SimToM</a>
+                            <a href="../../rar.html">RaR</a>
+                            <a href="../../re2.html">RE2</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="code" role="tabpanel">
+                            <h4>Code</h4>
+                            <a href="../code/code-prompting.html">Code Prompting</a>
+                            <a href="../code/self-debugging.html">Self-Debugging</a>
+                            <a href="../code/structured-output.html">Structured Output</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="image" role="tabpanel">
+                            <h4>Image</h4>
+                            <a href="../image/image-prompting.html">Image Prompting</a>
+                            <a href="../image/multimodal-cot.html">Multimodal CoT</a>
+                            <a href="../image/visual-cot.html">Visual CoT</a>
+                            <a href="../image/image-as-text.html">Image-as-Text</a>
+                            <a href="../image/vqa.html">Visual QA</a>
+                            <a href="../image/image-gen-prompting.html">Image Generation</a>
+                            <a href="../image/negative-prompting.html">Negative Prompting</a>
+                            <a href="../image/controlnet-prompting.html">ControlNet</a>
+                            <a href="../image/inpainting-prompting.html">Inpainting</a>
+                            <a href="../image/style-transfer.html">Style Transfer</a>
+                            <a href="../image/image-to-image.html">Image-to-Image</a>
+                            <a href="../image/composition-prompting.html">Composition</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="audio" role="tabpanel">
+                            <h4>Audio</h4>
+                            <a href="../audio/audio-prompting.html">Audio Prompting</a>
+                            <a href="../audio/stt-prompting.html">Speech-to-Text</a>
+                            <a href="../audio/tts-prompting.html">Text-to-Speech</a>
+                            <a href="../audio/audio-classification.html">Audio Classification</a>
+                            <a href="../audio/music-gen.html">Music Generation</a>
+                            <a href="../audio/voice-cloning.html">Voice Cloning</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../../../tools/index.html" class="nav-link" aria-expanded="false">AI Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../../../quiz/index.html">Readiness Quiz</a>
+                            <a href="../../../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../../../tools/guidance.html">Prompt Builder</a>
+                            <a href="../../../tools/matcher.html">Framework Matcher</a>
+                            <a href="../../../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../../../tools/persona.html">Persona Architect</a>
+                            <a href="../../../patterns/index.html">Patterns Library</a>
+                            <a href="../../../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../../../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--multi-column">
+                        <div class="mega-menu-section">
+                            <h4>Guides</h4>
+                            <a href="../../../pages/glossary.html">Glossary</a>
+                            <a href="../../../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                            <a href="../../../pages/faq.html">FAQ</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>Principles</h4>
+                            <a href="../../../pages/ai-for-everybody.html">AI for Everybody</a>
+                            <a href="../../../pages/universal-design.html">Universal Design</a>
+                            <a href="../../../pages/ai-assisted-building.html">AI Assisted</a>
+                            <a href="../../../pages/security.html">Security</a>
+                            <a href="../../../pages/performance.html">Performance</a>
+                        </div>
+                        <div class="mega-menu-section mega-menu-section--featured">
+                            <h4>AI &amp; ND</h4>
+                            <a href="../../../neurodivergence/index.html">ND Hub</a>
+                            <a href="../../../neurodivergence/adhd.html">AI for ADHD</a>
+                            <a href="../../../neurodivergence/autism.html">AI for Autism</a>
+                            <a href="../../../neurodivergence/dyslexia.html">AI for Dyslexia</a>
+                            <a href="../../../neurodivergence/tools.html">AI Tools</a>
+                            <a href="../../../neurodivergence/resources.html">ND Resources</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>About</h4>
+                            <a href="../../../pages/about.html">About Praxis</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in">
+                    <a href="../../../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="../../index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Audio Prompting Basics</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Audio Frameworks</span>
+                </div>
+                <h1 class="page-title fade-in">Audio Prompting Basics</h1>
+                <p class="page-subtitle fade-in">Foundational techniques for guiding AI models to transcribe, analyze, classify, and reason about audio &mdash; turning sound inputs into structured, actionable insights through carefully crafted multimodal prompts.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023&ndash;2024</span>
+                        <p><strong>Introduced:</strong> Audio understanding in AI models emerged as a practical discipline during 2023&ndash;2024, as frontier models like Gemini and GPT-4o gained native audio processing capabilities alongside text and image understanding. The groundwork was laid by OpenAI&rsquo;s Whisper (2022), which pioneered broadly accessible automatic speech recognition through a large-scale, open-source model trained on 680,000 hours of multilingual audio. Audio prompting as a distinct technique &mdash; where users combine text instructions with audio inputs to guide model behavior &mdash; is notably newer than image prompting and is evolving rapidly as models gain richer audio comprehension.</p>
+                        <p><strong>Modern LLM Status:</strong> Audio understanding is <strong>emerging in frontier models</strong> but is not yet as universally supported as image input. GPT-4o accepts audio natively, Gemini processes audio alongside text and images, and specialized models like Whisper continue to anchor speech-to-text pipelines. The core techniques &mdash; specifying what to listen for, defining output structure, and layering analytical constraints &mdash; remain essential because models without explicit audio guidance tend to produce shallow transcriptions rather than structured analysis. The principles covered here form the foundation for more advanced audio techniques like speech-to-text prompting, audio classification, and voice synthesis control.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Guide the Model&rsquo;s Ear</h2>
+                        <p class="split-section__text">Audio prompting combines text instructions with audio inputs to enable AI models to transcribe, analyze, classify, and reason about sound. Unlike text-only prompting where the model works from written words alone, audio prompting requires you to bridge two information channels &mdash; telling the model not just what to do, but what to <strong>listen for</strong> and how to <strong>structure its analysis</strong> of what it hears.</p>
+                        <p class="split-section__text"><strong>The core insight is that effective audio prompting requires explicitly specifying WHAT to listen for and HOW to structure the analysis.</strong> A bare audio upload with a vague question produces a flat, surface-level transcription. But when you specify the analytical lens &mdash; speaker identification, emotional tone, topic segmentation, background noise classification &mdash; the model shifts from passive transcription to active listening and interpretation.</p>
+                        <p class="split-section__text">Think of it like handing a recording to a court reporter versus a music producer versus a therapist. The court reporter captures every word verbatim. The music producer identifies instruments, tempo, and production quality. The therapist notices hesitations, vocal stress patterns, and emotional shifts. Audio prompting is how you tell the model which kind of listener to become.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Specificity Transforms Audio Analysis</span>
+                                <p>When a model receives audio without clear instructions, it defaults to basic transcription &mdash; converting speech to text with minimal structure or interpretation. Structured audio prompts redirect this behavior by defining the <strong>analytical framework</strong> the model should apply: what domain knowledge to activate, which audio features matter, what format the output should take, and what level of granularity is expected. The difference between a raw transcript and a structured meeting summary with speaker labels, action items, and sentiment markers often comes down entirely to the quality of the accompanying text prompt.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Audio Prompting Process</h2>
+                <p class="section-subtitle fade-in-up">Four steps from audio input to structured analysis</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Provide the Audio</h3>
+                            <p class="element-timeline__text">Upload or reference the audio input you want the model to analyze. This can be a recorded meeting, podcast episode, phone call, voice memo, music track, environmental recording, or any other audio format the model supports. Audio quality matters significantly &mdash; clear recordings with minimal background noise yield more accurate transcription and analysis, while compressed or noisy audio introduces errors that compound throughout the analytical chain.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Upload a high-quality recording of a team meeting, ensuring all participants are audible and the recording captures the full session without clipping or distortion.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Frame the Task</h3>
+                            <p class="element-timeline__text">Specify exactly what type of analysis you need from the audio. Are you asking the model to transcribe verbatim, identify speakers, extract key topics, detect emotional tone, classify sounds, or summarize content? The task framing activates different analytical capabilities within the model. A transcription task and a sentiment analysis task applied to the same audio will produce fundamentally different outputs, even though they draw from the same source material.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Transcribe this meeting recording. Identify each speaker by voice and label them consistently throughout. Note the main topics discussed, decisions made, and any action items assigned.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Add Constraints</h3>
+                            <p class="element-timeline__text">Define the output format, focus areas, and level of detail you expect. Constraints prevent the model from producing an undifferentiated wall of text when you need targeted information. Specify whether you want timestamps or continuous prose, speaker labels or anonymous attribution, technical jargon preserved or translated into plain language, and whether to include non-speech audio events like laughter, pauses, or background sounds.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Structure your response as: (1) Speaker-labeled transcript with timestamps every 30 seconds, (2) Topic summary organized by discussion thread, (3) Action items listed with assigned owner and deadline if mentioned, (4) Overall meeting tone and engagement assessment.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Iterate on Results</h3>
+                            <p class="element-timeline__text">Refine based on the initial output. Zoom in on specific segments or aspects that need deeper analysis. Ask follow-up questions that build on what the model already identified. Iterative prompting is especially powerful with audio because each round can direct the model&rsquo;s attention to specific time ranges, individual speakers, or particular audio events that were glossed over in the initial broad-pass analysis.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;You noted a disagreement between Speaker 2 and Speaker 4 around the 12-minute mark. Go back to that segment and provide a detailed analysis of each person&rsquo;s position, the specific objections raised, and whether a resolution was reached before the topic changed.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why structured audio prompts produce dramatically better analysis</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Vague Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>What&rsquo;s in this audio?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>This is a recording of a meeting. Several people are talking about a project. They discuss deadlines and some technical issues. The meeting lasts about 30 minutes.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Vague, no speaker labels, no timestamps, no actionable detail</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Structured Audio Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Transcribe this meeting recording with speaker identification, timestamps, and emotional tone markers. Extract action items and decisions separately.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p><strong>[00:00&ndash;02:15] Speaker 1 (Project Lead):</strong> Opens with sprint review. Tone: confident, brisk.<br><strong>[02:15&ndash;08:40] Speaker 2 (Engineering):</strong> Reports API integration is 80% complete; blockers on authentication flow. Tone: measured, factual.<br><strong>[08:40&ndash;12:30] Speaker 3 (Design):</strong> Raises concern about timeline impact on user testing. Tone: cautious, slightly frustrated.<br><strong>Decisions:</strong> Push authentication fix to next sprint; proceed with partial testing.<br><strong>Action items:</strong> Speaker 2 to document auth blockers by Friday; Speaker 3 to schedule abbreviated user tests for Monday.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Structured, speaker-labeled, timestamped, and actionable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Audio Prompting in Action</h2>
+                <p class="section-subtitle fade-in-up">See how structured prompts unlock deeper audio analysis</p>
+
+                <div class="accordion fade-in-up" id="audio-prompting-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Meeting Transcription</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt</span>
+                                    <p>&ldquo;Transcribe this 45-minute team meeting. Identify each unique speaker and assign them consistent labels (Speaker 1, Speaker 2, etc.). Include timestamps at each speaker change. After the transcript, provide a separate section listing: (a) all decisions made, (b) all action items with the responsible person, and (c) any unresolved questions or topics tabled for later discussion.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>The prompt goes far beyond &ldquo;transcribe this meeting&rdquo; by specifying speaker labeling conventions, timestamp placement rules, and three distinct post-transcript analysis sections. This transforms a raw transcription task into a structured meeting minutes generator. Without these constraints, the model would likely produce a continuous block of text with no speaker differentiation, making it nearly impossible to scan for key outcomes or assign follow-up responsibilities.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Audio Content Analysis</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt</span>
+                                    <p>&ldquo;Analyze this podcast episode. Identify the host and guest(s) by role. Break the episode into topical segments with start and end timestamps. For each segment, summarize the key argument or information presented, note any claims that would benefit from fact-checking, and rate the conversational dynamic (collaborative, adversarial, educational, casual). Conclude with three key takeaways a listener should remember.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>This prompt layers multiple analytical dimensions onto a single audio source: structural segmentation, content summarization, credibility flagging, and social dynamics assessment. Each dimension would produce a useful output on its own, but combining them creates a comprehensive content analysis that serves multiple audiences &mdash; from listeners seeking a quick summary to researchers evaluating information quality. The fact-checking flag is particularly valuable because it surfaces claims without making unsupported corrections.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Sound Environment Description</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt</span>
+                                    <p>&ldquo;Describe the acoustic environment captured in this recording. Identify all distinct sound sources you can detect &mdash; speech, music, mechanical sounds, nature sounds, ambient noise. For each source, estimate its relative volume (foreground, midground, background), consistency (constant, intermittent, one-time), and approximate direction or spatial position if discernible. Provide an overall assessment of the recording environment and suggest what type of location this was likely recorded in.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>This prompt moves beyond speech-focused analysis into environmental audio interpretation, a capability that many users overlook. By requesting volume estimation, temporal patterns, and spatial positioning, the prompt activates the model&rsquo;s ability to decompose a complex soundscape into individual components. The location inference at the end encourages the model to synthesize all its observations into a holistic assessment, demonstrating that audio prompting extends well beyond transcription into acoustic scene understanding.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Audio Prompting</h2>
+                <p class="section-subtitle fade-in-up">Best for structured analysis of audio content across domains</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Transcription and Meeting Minutes</strong>
+                                    <p>Converting spoken audio into structured, speaker-labeled transcripts with timestamps, action items, decisions, and key discussion points extracted automatically.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Audio Question Answering</strong>
+                                    <p>Asking targeted questions about audio content &mdash; identifying what was said at a specific time, who made a particular claim, or what conclusions were reached during a discussion.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Content Moderation</strong>
+                                    <p>Screening audio content for policy violations, inappropriate language, sensitive topics, or compliance issues in customer service calls, broadcasts, and user-generated content.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Accessibility</strong>
+                                    <p>Generating captions, audio descriptions, and text alternatives for audio content, making spoken material accessible to deaf and hard-of-hearing users.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Real-Time Processing</strong>
+                                    <p>If you need live audio processing with sub-second latency &mdash; such as real-time captioning during a live broadcast &mdash; dedicated streaming ASR systems outperform prompt-based approaches.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Music Composition</strong>
+                                    <p>When the goal is to compose, arrange, or produce music, audio prompting analyzes existing audio but does not generate musical output. Use dedicated music generation models instead.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Hardware-Level Audio Engineering</strong>
+                                    <p>For tasks requiring signal processing, equalization, noise reduction at the waveform level, or hardware configuration, use specialized digital audio workstation tools and DSP software.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Text-Only Tasks</strong>
+                                    <p>If your task involves no audio component, adding audio input adds unnecessary complexity and latency. Standard text prompting techniques are more efficient and effective.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where audio prompting delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Meeting Minutes</h3>
+                        <p class="use-case-showcase__desc">Transforming recorded meetings into structured minutes with speaker attribution, timestamped discussion points, decisions captured, and action items assigned &mdash; eliminating manual note-taking entirely.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                <line x1="12" y1="19" x2="12" y2="23"/>
+                                <line x1="8" y1="23" x2="16" y2="23"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Podcast Summarization</h3>
+                        <p class="use-case-showcase__desc">Analyzing podcast episodes to extract topic segments, key arguments, guest positions, and listener takeaways &mdash; producing structured show notes that would take hours to write manually.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Customer Call Analysis</h3>
+                        <p class="use-case-showcase__desc">Reviewing customer service calls to assess agent performance, identify customer pain points, detect escalation patterns, and extract feedback themes &mdash; turning call recordings into actionable quality data.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Language Learning</h3>
+                        <p class="use-case-showcase__desc">Analyzing spoken language recordings to evaluate pronunciation accuracy, identify grammatical errors in speech, assess fluency and pacing, and provide targeted feedback for language learners at any proficiency level.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <circle cx="12" cy="10" r="3"/>
+                                <path d="M12 13v6M9 17l3 3 3-3"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Audio Accessibility</h3>
+                        <p class="use-case-showcase__desc">Generating accurate captions, transcripts, and audio descriptions for multimedia content &mdash; making podcasts, lectures, videos, and voice messages accessible to deaf and hard-of-hearing audiences.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Moderation</h3>
+                        <p class="use-case-showcase__desc">Screening audio uploads and voice communications for policy violations, hate speech, threats, or sensitive content &mdash; providing automated first-pass moderation with flagged segments and severity ratings.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Audio Prompting Fits</h2>
+                <p class="section-subtitle fade-in-up">Audio prompting bridges text-based techniques and specialized audio AI tasks</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Text Prompting</span>
+                        <span class="era-marker__title">Language Only</span>
+                        <span class="era-marker__desc">Pure text input and output</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Audio Prompting</span>
+                        <span class="era-marker__title">Sound Understanding</span>
+                        <span class="era-marker__desc">Text plus audio input for analysis</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Speech-to-Text</span>
+                        <span class="era-marker__title">Transcription Mastery</span>
+                        <span class="era-marker__desc">Specialized speech recognition control</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Audio Classification</span>
+                        <span class="era-marker__title">Sound Categorization</span>
+                        <span class="era-marker__desc">Classifying and tagging audio events</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Layer Your Techniques</div>
+                    <p>Audio prompting works best when combined with text-based prompting strategies you already know. Apply structured frameworks like CRISP or COSTAR to define the context, role, and output format &mdash; then add the audio as an additional input channel. Chain-of-thought reasoning, few-shot examples, and self-consistency checks all transfer to audio contexts. The key difference is specifying audio-specific constraints: speaker labeling, timestamp format, handling of non-speech sounds, and output granularity for spoken content.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary audio techniques</p>
+
+                <a href="stt-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Speech-to-Text Prompting</span>
+                        <span class="evolution-callout__desc">Extends audio prompting with specialized control over transcription accuracy, language detection, domain vocabulary, and formatting &mdash; turning raw speech recognition into precisely structured text output.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="tts-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Text-to-Speech Prompting</span>
+                        <span class="evolution-callout__desc">The inverse discipline &mdash; crafting prompts that control how AI converts text into spoken audio, including voice selection, pacing, emphasis, and emotional delivery for natural-sounding speech synthesis.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="audio-classification.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Parallel</span>
+                        <span class="evolution-callout__title">Audio Classification</span>
+                        <span class="evolution-callout__desc">Focuses on categorizing and tagging audio events &mdash; identifying sound types, classifying speaker emotions, detecting specific audio patterns, and building structured taxonomies of acoustic content.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Explore Audio Prompting</h2>
+                        <p class="cta-corporate__text">Apply structured audio analysis techniques to your own recordings or build multimodal prompts with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../../../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../../../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+    <!-- === FOOTER === -->
+    <footer class="footer">
+        <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../../../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                    <p>Master the Art of AI Communication theory through proven frameworks.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Discover</h4>
+                    <a href="../../prompt-basics.html">Prompt Basics</a>
+                    <a href="../../crisp.html">CRISP Framework</a>
+                    <a href="../../crispe.html">CRISPE Framework</a>
+                    <a href="../../costar.html">COSTAR Framework</a>
+                    <a href="../../react.html">ReAct Framework</a>
+                    <a href="../../flipped-interaction.html">Flipped Interaction</a>
+                    <a href="../../chain-of-thought.html">Chain-of-Thought</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>AI Readiness</h4>
+                    <a href="../../../tools/analyzer.html">Prompt Analyzer</a>
+                    <a href="../../../tools/guidance.html">Prompt Builder</a>
+                    <a href="../../../tools/matcher.html">Framework Matcher</a>
+                    <a href="../../../tools/checklist.html">Preflight Checklist</a>
+                    <a href="../../../tools/hallucination.html">Hallucination Spotter</a>
+                    <a href="../../../quiz/index.html">Readiness Quiz</a>
+                    <a href="../../../patterns/index.html">Patterns Library</a>
+                    <a href="../../../pages/ai-safety.html">AI Safety</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="../../../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                    <a href="../../../pages/faq.html">FAQ</a>
+                    <a href="../../../pages/glossary.html">Glossary</a>
+                    <a href="../../../pages/security.html">Security</a>
+                    <a href="../../../pages/performance.html">Performance</a>
+                    <a href="../../../pages/ai-for-everybody.html">AI for Everybody</a>
+                    <a href="../../../pages/universal-design.html">Universal Design</a>
+                    <a href="../../../pages/ai-assisted-building.html">AI Assisted</a>
+                    <a href="../../../pages/about.html">About</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>AI for Everybody</p>
+                <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Bas</span></p>
+            </div>
+        </div>
+    </footer>
+    <!-- /FOOTER -->
+
+    <!-- === BACK TO TOP === -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+    <!-- /BACK TO TOP -->
+
+    <!-- === ACCESSIBILITY DASHBOARD === -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+    <!-- /ACCESSIBILITY DASHBOARD -->
+
+    <script src="../../../app.js" defer></script>
+</body>
+</html>

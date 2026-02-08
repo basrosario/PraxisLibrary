@@ -5,7 +5,25 @@
 ---
 
 ## Session 48 (2026-02-07)
-**Mega-Menu Tabbed Categories Redesign COMPLETE (Steps 2-6)**
+**Mega-Menu Tabbed Redesign + Phase 3B Audio/Speech COMPLETE**
+
+### Phase 3B — Audio/Speech (6 pages)
+
+- [x] **6 Audio framework pages created** (parallel background agents, 896-906 lines each):
+  - `learn/modality/audio/audio-prompting.html` — Audio Prompting Basics
+  - `learn/modality/audio/stt-prompting.html` — Speech-to-Text Prompting
+  - `learn/modality/audio/tts-prompting.html` — Text-to-Speech Prompting
+  - `learn/modality/audio/audio-classification.html` — Audio Classification
+  - `learn/modality/audio/music-gen.html` — Music Generation Prompting
+  - `learn/modality/audio/voice-cloning.html` — Voice Cloning Prompting
+
+- [x] **Mega-menu nav updated** — `update_nav_audio.py` added Audio section (data-tab="audio") to 133 files
+- [x] **Search index updated** — 6 audio entries added to `data/search-index.json`
+- [x] **Discover hub updated** — Audio filter button + 6 cards in `learn/index.html`
+- [x] **Modality hub updated** — Audio section in `learn/modality/index.html`
+- [x] **Homepage counter** — 79+ to 85+ frameworks
+
+### Mega-Menu Tabbed Categories Redesign COMPLETE (Steps 2-6)
 
 - [x] **Mobile CSS overrides** — Added tabbed-specific mobile accordion styles in `styles.css`:
   - `.mega-menu--tabbed` overrides generic mobile grid to block layout

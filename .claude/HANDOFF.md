@@ -1,8 +1,8 @@
 # Praxis Project Handoff Document
 
 **Last Updated:** 2026-02-07 (Session 48)
-**Last Commit:** `2b4cec0` — Phase 3A Image Prompting complete
-**Current Phase:** Mega-Menu Redesign COMPLETE, Phase 3B Audio/Speech NEXT
+**Last Commit:** `d5cca2a` — Tabbed mega-menu redesign
+**Current Phase:** Phase 3C Video NEXT (3A Image + 3B Audio COMPLETE)
 
 ---
 
@@ -10,9 +10,9 @@
 
 - **Phase 1: Glossary** — COMPLETE (2,141 terms)
 - **Phase 2: Text Frameworks** — COMPLETE (52/52 pages, all 13-section template)
-- **Phase 3: Modality Frameworks** — IN PROGRESS (12/37 pages)
+- **Phase 3: Modality Frameworks** — IN PROGRESS (24/37 pages)
   - 3A Image Prompting: COMPLETE (12/12) — Session 46
-  - 3B Audio/Speech: NOT STARTED (0/6)
+  - 3B Audio/Speech: COMPLETE (6/6) — Session 48
   - 3C Video: NOT STARTED (0/6)
   - 3D Code/Structured: NOT STARTED (0/5 new, 3 existing pages)
   - 3E 3D/Spatial: NOT STARTED (0/5)
@@ -20,85 +20,14 @@
 - **Phase 5: Navigation UX** — COMPLETE
 - **Discover Hub** — COMPLETE (5/5 phases)
 - **Glossary Inline Search** — COMPLETE (Session 47)
-- **Mega-Menu Redesign** — COMPLETE (Session 48, all 127 files converted to tabbed)
-- **Site totals:** 79+ frameworks, 2,141+ glossary terms, 127+ HTML files with current nav
+- **Mega-Menu Redesign** — COMPLETE (Session 48, tabbed progressive disclosure, 133+ files)
+- **Site totals:** 85+ frameworks, 2,141+ glossary terms, 133+ HTML files with current nav
 
 ---
 
-## COMPLETED: Mega-Menu Tabbed Categories Redesign (Session 48)
+## NEXT TASKS
 
-All 6 steps DONE. Discover mega-menu converted from flat multi-column to tabbed progressive disclosure across 127 files.
-
-| Step | Task | Status |
-|------|------|--------|
-| 1 | CSS for `.mega-menu--tabbed` in `styles.css` (desktop + mobile accordion) | DONE |
-| 2 | `TabbedMenu` JS object in `app.js` (tab switching, keyboard nav, mobile accordion) | DONE |
-| 3 | Test on `index.html` — manual HTML conversion | DONE |
-| 4 | Python batch script `update_nav_tabbed.py` created | DONE |
-| 5 | Batch script run, all 4 depth levels verified (127 files, 0 errors) | DONE |
-| 6 | SiteFrameworks.md and HANDOFF.md updated | DONE |
-
----
-
-## ACTIVE TASK: Phase 3B — Audio/Speech (6 pages)
-
-### HTML Changes Per File (minimal):
-1. Change `mega-menu--multi-column` → `mega-menu--tabbed` (first occurrence = Discover menu only)
-2. Insert empty `<div class="mega-menu-tabs" role="tablist" aria-label="Framework categories"></div>` after opening tag
-3. Add `data-tab="slug" role="tabpanel"` to each `mega-menu-section`
-4. **NO panels wrapper needed** — CSS flex handles layout directly
-5. Link `href` paths are NOT modified
-
-### Tab Slug Mapping:
-| Category | Slug |
-|----------|------|
-| Getting Started | `getting-started` |
-| Structured Frameworks | `structured-frameworks` |
-| In-Context Learning | `in-context-learning` |
-| Reasoning & CoT | `reasoning-cot` |
-| Decomposition | `decomposition` |
-| Self-Correction | `self-correction` |
-| Ensemble Methods | `ensemble-methods` |
-| Prompting Strategies | `prompting-strategies` |
-| Code | `code` |
-| Image | `image` |
-
-### JS Architecture (for Step 2):
-- New `TabbedMenu` object goes after `AccordionNav.init()` (app.js line 177)
-- Reads `<h4>` text from each `[data-tab]` section to generate tab `<button>` elements at runtime
-- Desktop: `mouseenter` on tabs switches active panel
-- Mobile: h4 click toggles accordion `.is-expanded` class (single-expand mode)
-- Keyboard: Arrow keys between tabs, roving tabindex pattern
-- AccordionNav (dropdown open/close) and TabbedMenu (internal tab switching) are orthogonal — no AccordionNav changes needed
-
-### Resources Menu:
-The Resources mega-menu keeps `mega-menu--multi-column` — only the Discover menu is converted.
-
----
-
-## NEXT TASKS (after mega-menu redesign)
-
-### Priority 1: Phase 3B — Audio/Speech (6 pages)
-
-**Directory:** `learn/modality/audio/`
-
-| Framework | File | Priority |
-|-----------|------|----------|
-| Audio Prompting Basics | audio-prompting.html | MEDIUM |
-| Speech-to-Text Prompting | stt-prompting.html | MEDIUM |
-| Text-to-Speech Prompting | tts-prompting.html | MEDIUM |
-| Audio Classification | audio-classification.html | LOW |
-| Music Generation Prompting | music-gen.html | LOW |
-| Voice Cloning Prompting | voice-cloning.html | LOW |
-
-**Approach:**
-- Same 13-section template as all framework pages (`learn/self-ask.html` is canonical)
-- Use depth-3 path prefixes (`../../../` for root) — same as `learn/modality/image/*.html`
-- Parallel background agents (all 6 in one batch)
-- After pages built: update mega-menu nav (Python batch script), search index, discover hub, modality hub, homepage counter (79+ -> 85+)
-- **NOTE:** When adding Audio section to mega-menu, use `data-tab="audio" role="tabpanel"` attributes (tabbed format)
-
-### Priority 2: Phase 3C — Video (6 pages)
+### Priority 1: Phase 3C — Video (6 pages)
 
 **Directory:** `learn/modality/video/`
 
@@ -111,7 +40,15 @@ The Resources mega-menu keeps `mega-menu--multi-column` — only the Discover me
 | Video Captioning | video-captioning.html | LOW |
 | Video Editing Prompting | video-editing.html | LOW |
 
-### Priority 3: Phase 3D — Code/Structured (5 new pages)
+**Approach:**
+- Same 13-section template as all framework pages (`learn/self-ask.html` is canonical)
+- Use depth-3 path prefixes (`../../../` for root) — same as `learn/modality/image/*.html`
+- Parallel background agents (all 6 in one batch)
+- After pages built: run post-page-creation checklist below
+- **NOTE:** When adding Video section to mega-menu, use `data-tab="video" role="tabpanel"` attributes (tabbed format)
+- **Nav script pattern:** Clone `update_nav_audio.py`, change "audio" to "video", find last section (currently Audio `data-tab="audio"`) and insert after it
+
+### Priority 2: Phase 3D — Code/Structured (5 new pages)
 
 **Directory:** `learn/modality/code/` (3 pages already exist)
 
@@ -123,7 +60,7 @@ The Resources mega-menu keeps `mega-menu--multi-column` — only the Discover me
 | Test Generation | test-generation.html | MEDIUM |
 | SQL Generation | sql-generation.html | MEDIUM |
 
-### Priority 4: Phase 3E — 3D/Spatial (5 pages)
+### Priority 3: Phase 3E — 3D/Spatial (5 pages)
 
 **Directory:** `learn/modality/3d/`
 
@@ -135,7 +72,7 @@ The Resources mega-menu keeps `mega-menu--multi-column` — only the Discover me
 | Pose Estimation Prompting | pose-estimation.html | LOW |
 | Point Cloud Prompting | point-cloud.html | LOW |
 
-### Priority 5: Phase 4D — Framework Matcher Updates
+### Priority 4: Phase 4D — Framework Matcher Updates
 
 ---
 
@@ -143,7 +80,7 @@ The Resources mega-menu keeps `mega-menu--multi-column` — only the Discover me
 
 After creating pages in a new modality sub-phase:
 
-1. **Mega-Menu Navigation** — Python batch script to add new section after last modality section in all HTML files (4 depth levels: 0, 1, 2, 3). **Include `data-tab="slug" role="tabpanel"` on the new section** (tabbed menu format).
+1. **Mega-Menu Navigation** — Python batch script to add new section after last modality section in all HTML files (4 depth levels: 0, 1, 2, 3). **Include `data-tab="slug" role="tabpanel"` on the new section** (tabbed menu format). Currently the last modality section is Audio (`data-tab="audio"`).
 2. **Search Index** — Add entries to `data/search-index.json` (category: "Discover", subcategory: modality name)
 3. **Discover Hub** — Add cards + filter button to `learn/index.html`
 4. **Modality Hub** — Add card section to `learn/modality/index.html` (replace "Coming Soon" placeholder)
@@ -154,54 +91,55 @@ After creating pages in a new modality sub-phase:
 
 ## PYTHON BATCH SCRIPT PATTERN
 
-Sessions 38/45/46 used Python scripts to batch-update navigation across all HTML files.
+Sessions 38/45/46/48 used Python scripts to batch-update navigation across all HTML files.
 
 **Pattern for adding a new modality section to mega-menu:**
-1. Find the last modality `<div class="mega-menu-section"` (currently Image)
+1. Find the last modality `<div class="mega-menu-section"` (currently Audio: `data-tab="audio"`)
 2. Insert new section after its closing `</div>`
 3. 4 depth variants needed (depths 0, 1, 2, 3 with appropriate relative paths)
 4. Skip files that already contain the new section
-5. See `update_nav_s46.py` for reference implementation
-6. See `update_nav_tabbed.py` for tabbed-menu conversion script (when created)
+5. See `update_nav_audio.py` for reference implementation (adds Audio after Image)
+6. See `update_nav_tabbed.py` for tabbed-menu conversion script
 
 ---
 
-## MEGA-MENU CSS ARCHITECTURE (Session 47 — Tabbed)
+## MEGA-MENU TABBED ARCHITECTURE (Session 48)
 
-**Previous (Session 44):** Flat multi-column `display: flex` with all categories visible
-
-**Current (Session 47):** Tabbed progressive disclosure
+**Layout:** Tabbed progressive disclosure (replaced flat multi-column)
 
 ```css
-/* Tabbed container: 680px, flex layout */
-.mega-menu--tabbed {
-    display: flex;
-    width: 680px;
-    max-width: calc(100vw - 2rem);
-}
-
-/* Left: tab buttons (190px, generated by JS) */
-.mega-menu-tabs {
-    flex: 0 0 190px;
-    border-right: 1px solid var(--border-color);
-}
-
-/* Right: panels (only .is-active shown) */
-.mega-menu--tabbed .mega-menu-section[data-tab] {
-    flex: 1;
-    display: none;
-}
-.mega-menu--tabbed .mega-menu-section[data-tab].is-active {
-    display: block;
-}
+/* Desktop: 680px, left tabs + right content panels with 2-column flow */
+.mega-menu--tabbed { display: flex; width: 680px; }
+.mega-menu-tabs { flex: 0 0 190px; }
+.mega-menu--tabbed .mega-menu-section[data-tab] { flex: 1; display: none; columns: 2; }
+.mega-menu--tabbed .mega-menu-section[data-tab].is-active { display: block; }
 
 /* Mobile: accordion with collapsible headers */
 @media (max-width: 767px) {
     .mega-menu-tabs { display: none; }
-    .mega-menu--tabbed .mega-menu-section h4 { /* tappable accordion header */ }
+    .mega-menu--tabbed .mega-menu-section[data-tab] h4 { /* tappable accordion header */ }
     .mega-menu--tabbed .mega-menu-section.is-expanded a { display: block; }
 }
 ```
+
+**Mobile styling:** Headers 0.86rem, links 0.92rem. Non-clickable headers: `var(--primary)` (red). Clickable headers/links: `#fff`.
+
+**Tab Slug Mapping (11 categories):**
+| Category | Slug |
+|----------|------|
+| Getting Started | `getting-started` |
+| Structured Frameworks | `structured-frameworks` |
+| In-Context Learning | `in-context-learning` |
+| Reasoning & CoT | `reasoning-cot` |
+| Decomposition | `decomposition` |
+| Self-Correction | `self-correction` |
+| Ensemble Methods | `ensemble-methods` |
+| Prompting Strategies | `prompting-strategies` |
+| Code | `code` |
+| Image | `image` |
+| Audio | `audio` |
+
+**JS:** `TabbedMenu` object in `app.js` — runtime tab button generation from `[data-tab]` section h4 text, mouseenter switching (desktop), h4 click accordion (mobile), roving tabindex keyboard nav.
 
 **Resources menu** still uses `mega-menu--multi-column` (unchanged).
 
@@ -215,10 +153,10 @@ Sessions 38/45/46 used Python scripts to batch-update navigation across all HTML
 | `.claude/HANDOFF.md` | Current state (this file) | -- |
 | `.claude/COMPLETED.md` | Archived completed work | -- |
 | `.claude/plans/FrameworkOverhaul.md` | Master plan -- Phases 1-5 + session log | ~1,800 |
-| `.claude/plans/valiant-foraging-balloon.md` | Mega-menu redesign plan (6 steps) | -- |
 | `learn/self-ask.html` | Canonical 13-section template (depth 1) | 899 |
 | `learn/modality/image/image-prompting.html` | Reference for depth 3 modality pages | 883 |
-| `update_nav_s46.py` | Reference for mega-menu batch update scripts | 168 |
+| `update_nav_audio.py` | Reference for mega-menu batch update scripts (modality) | 143 |
+| `update_nav_tabbed.py` | Reference for tabbed-menu conversion script | 157 |
 
 ---
 
@@ -288,25 +226,25 @@ JS:    // === SECTION === ... /** JSDoc comments */
 
 ```
 _public_html/
-+-- index.html              # Home page (79+ frameworks counter)
++-- index.html              # Home page (85+ frameworks counter)
 +-- styles.css              # ALL CSS (~27,700 lines)
 +-- app.js                  # ALL JavaScript (~10,900 lines)
 +-- foundations/
 |   +-- index.html          # AI Foundations timeline
-+-- learn/                  # Framework pages (79+) + category pages (7)
-|   +-- index.html          # Discover hub (79 framework cards, 10 categories)
++-- learn/                  # Framework pages (85+) + category pages (7)
+|   +-- index.html          # Discover hub (85 framework cards, 11 categories)
 |   +-- [7 category pages]  # structured-frameworks, reasoning-cot, etc.
 |   +-- [67 text framework pages]
 |   +-- modality/
 |       +-- index.html      # Modality hub page
 |       +-- code/           # Code frameworks (3 pages)
 |       +-- image/          # Image frameworks (12 pages)
-|       +-- audio/          # Audio frameworks (0 pages) -- NEXT
-|       +-- video/          # Video frameworks (0 pages)
+|       +-- audio/          # Audio frameworks (6 pages)
+|       +-- video/          # Video frameworks (0 pages) -- NEXT
 |       +-- 3d/             # 3D frameworks (0 pages)
 +-- data/
 |   +-- glossary.json       # 2,141 AI terms
-|   +-- search-index.json   # Search entries (79 frameworks + glossary + pages)
+|   +-- search-index.json   # Search entries (85 frameworks + glossary + pages)
 +-- pages/                  # 12 content pages (incl. glossary with inline search)
 +-- tools/                  # 12 AI readiness tools
 +-- neurodivergence/        # 6 ND pages
@@ -319,12 +257,11 @@ _public_html/
     +-- plans/
         +-- FrameworkOverhaul.md          # Master plan (Phases 1-5)
         +-- discover-hub-category-pages.md # Discover Hub plan (COMPLETE)
-        +-- valiant-foraging-balloon.md   # Mega-menu redesign plan
 ```
 
 ---
 
-## 10 FRAMEWORK CATEGORIES (79 frameworks)
+## 11 FRAMEWORK CATEGORIES (85 frameworks)
 
 | Category | Count | Category Page | Status |
 |----------|-------|---------------|--------|
@@ -338,6 +275,7 @@ _public_html/
 | Prompting Strategies | 11 | `learn/prompting-strategies.html` | DONE |
 | Code | 3 | -- | Uses `learn/modality/code/` hub |
 | Image | 12 | -- | Uses `learn/modality/image/` via modality hub |
+| Audio | 6 | -- | Uses `learn/modality/audio/` via modality hub |
 
 ---
 

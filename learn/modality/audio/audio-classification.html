@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Audio Classification Prompting: Learn techniques for guiding AI models to categorize sounds by genre, emotion, speaker identity, environment, and event detection through structured text-guided prompts.">
+    <title>Audio Classification Prompting - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+    <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../../../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav">
+                <a href="../../../foundations/index.html" class="nav-link">AI Foundations</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../../index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                    <div class="mega-menu mega-menu--tabbed">
+                        <div class="mega-menu-tabs" role="tablist" aria-label="Framework categories"></div>
+                        <div class="mega-menu-section" data-tab="getting-started" role="tabpanel">
+                            <h4>Getting Started</h4>
+                            <a href="../../prompt-basics.html">Prompt Basics</a>
+                            <a href="../../facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="structured-frameworks" role="tabpanel">
+                            <h4><a href="../../structured-frameworks.html">Structured Frameworks</a></h4>
+                            <a href="../../crisp.html">CRISP</a>
+                            <a href="../../crispe.html">CRISPE</a>
+                            <a href="../../costar.html">COSTAR</a>
+                            <a href="../../context-structure.html">Context &amp; Structure</a>
+                            <a href="../../constrained-output.html">Constrained Output</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="in-context-learning" role="tabpanel">
+                            <h4><a href="../../in-context-learning.html">In-Context Learning</a></h4>
+                            <a href="../../zero-shot.html">Zero-Shot</a>
+                            <a href="../../one-shot.html">One-Shot</a>
+                            <a href="../../few-shot-learning.html">Few-Shot Learning</a>
+                            <a href="../../shot-prompting.html">Shot Prompting</a>
+                            <a href="../../example-selection.html">Example Selection</a>
+                            <a href="../../knn-prompting.html">KNN Prompting</a>
+                            <a href="../../vote-k.html">Vote-k</a>
+                            <a href="../../demo-ensembling.html">Demo Ensembling</a>
+                            <a href="../../prompt-mining.html">Prompt Mining</a>
+                            <a href="../../many-shot.html">Many-Shot</a>
+                            <a href="../../example-ordering.html">Example Ordering</a>
+                            <a href="../../self-generated-icl.html">Self-Generated ICL</a>
+                            <a href="../../active-example.html">Active Example</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="reasoning-cot" role="tabpanel">
+                            <h4><a href="../../reasoning-cot.html">Reasoning &amp; CoT</a></h4>
+                            <a href="../../chain-of-thought.html">Chain-of-Thought</a>
+                            <a href="../../zero-shot-cot.html">Zero-Shot CoT</a>
+                            <a href="../../auto-cot.html">Auto-CoT</a>
+                            <a href="../../contrastive-cot.html">Contrastive CoT</a>
+                            <a href="../../structured-cot.html">Structured CoT</a>
+                            <a href="../../faithful-cot.html">Faithful CoT</a>
+                            <a href="../../tab-cot.html">Tab-CoT</a>
+                            <a href="../../complexity-prompting.html">Complexity-Based</a>
+                            <a href="../../analogical-reasoning.html">Analogical Reasoning</a>
+                            <a href="../../step-back.html">Step-Back</a>
+                            <a href="../../thread-of-thought.html">Thread of Thought</a>
+                            <a href="../../memory-of-thought.html">Memory of Thought</a>
+                            <a href="../../active-prompting.html">Active Prompting</a>
+                            <a href="../../reversing-cot.html">Reversing CoT</a>
+                            <a href="../../uncertainty-cot.html">Uncertainty-Routed CoT</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="decomposition" role="tabpanel">
+                            <h4><a href="../../decomposition.html">Decomposition</a></h4>
+                            <a href="../../least-to-most.html">Least-to-Most</a>
+                            <a href="../../plan-and-solve.html">Plan-and-Solve</a>
+                            <a href="../../tree-of-thought.html">Tree of Thought</a>
+                            <a href="../../graph-of-thought.html">Graph of Thought</a>
+                            <a href="../../decomp.html">DECOMP</a>
+                            <a href="../../recursion-of-thought.html">Recursion of Thought</a>
+                            <a href="../../program-of-thought.html">Program of Thought</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="self-correction" role="tabpanel">
+                            <h4><a href="../../self-correction.html">Self-Correction</a></h4>
+                            <a href="../../self-refine.html">Self-Refine</a>
+                            <a href="../../self-verification.html">Self-Verification</a>
+                            <a href="../../chain-of-verification.html">Chain-of-Verification</a>
+                            <a href="../../critic.html">CRITIC</a>
+                            <a href="../../reflexion.html">Reflexion</a>
+                            <a href="../../self-calibration.html">Self-Calibration</a>
+                            <a href="../../cumulative-reasoning.html">Cumulative Reasoning</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="ensemble-methods" role="tabpanel">
+                            <h4><a href="../../ensemble-methods.html">Ensemble Methods</a></h4>
+                            <a href="../../self-consistency.html">Self-Consistency</a>
+                            <a href="../../cosp.html">COSP</a>
+                            <a href="../../diverse-prompting.html">DiVeRSe</a>
+                            <a href="../../dense-prompting.html">DENSE</a>
+                            <a href="../../max-mutual-info.html">Max Mutual Info</a>
+                            <a href="../../universal-self-consistency.html">Universal Self-Consistency</a>
+                            <a href="../../meta-reasoning.html">Meta-Reasoning</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="prompting-strategies" role="tabpanel">
+                            <h4><a href="../../prompting-strategies.html">Prompting Strategies</a></h4>
+                            <a href="../../react.html">ReAct</a>
+                            <a href="../../flipped-interaction.html">Flipped Interaction</a>
+                            <a href="../../self-ask.html">Self-Ask</a>
+                            <a href="../../prompt-chaining.html">Prompt Chaining</a>
+                            <a href="../../role-prompting.html">Role Prompting</a>
+                            <a href="../../emotion-prompting.html">Emotion Prompting</a>
+                            <a href="../../style-prompting.html">Style Prompting</a>
+                            <a href="../../s2a.html">S2A</a>
+                            <a href="../../simtom.html">SimToM</a>
+                            <a href="../../rar.html">RaR</a>
+                            <a href="../../re2.html">RE2</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="code" role="tabpanel">
+                            <h4>Code</h4>
+                            <a href="../code/code-prompting.html">Code Prompting</a>
+                            <a href="../code/self-debugging.html">Self-Debugging</a>
+                            <a href="../code/structured-output.html">Structured Output</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="image" role="tabpanel">
+                            <h4>Image</h4>
+                            <a href="../image/image-prompting.html">Image Prompting</a>
+                            <a href="../image/multimodal-cot.html">Multimodal CoT</a>
+                            <a href="../image/visual-cot.html">Visual CoT</a>
+                            <a href="../image/image-as-text.html">Image-as-Text</a>
+                            <a href="../image/vqa.html">Visual QA</a>
+                            <a href="../image/image-gen-prompting.html">Image Generation</a>
+                            <a href="../image/negative-prompting.html">Negative Prompting</a>
+                            <a href="../image/controlnet-prompting.html">ControlNet</a>
+                            <a href="../image/inpainting-prompting.html">Inpainting</a>
+                            <a href="../image/style-transfer.html">Style Transfer</a>
+                            <a href="../image/image-to-image.html">Image-to-Image</a>
+                            <a href="../image/composition-prompting.html">Composition</a>
+                        </div>
+                        <div class="mega-menu-section" data-tab="audio" role="tabpanel">
+                            <h4>Audio</h4>
+                            <a href="../audio/audio-prompting.html">Audio Prompting</a>
+                            <a href="../audio/stt-prompting.html">Speech-to-Text</a>
+                            <a href="../audio/tts-prompting.html">Text-to-Speech</a>
+                            <a href="../audio/audio-classification.html">Audio Classification</a>
+                            <a href="../audio/music-gen.html">Music Generation</a>
+                            <a href="../audio/voice-cloning.html">Voice Cloning</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../../../tools/index.html" class="nav-link" aria-expanded="false">AI Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../../../quiz/index.html">Readiness Quiz</a>
+                            <a href="../../../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../../../tools/guidance.html">Prompt Builder</a>
+                            <a href="../../../tools/matcher.html">Framework Matcher</a>
+                            <a href="../../../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../../../tools/persona.html">Persona Architect</a>
+                            <a href="../../../patterns/index.html">Patterns Library</a>
+                            <a href="../../../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../../../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--multi-column">
+                        <div class="mega-menu-section">
+                            <h4>Guides</h4>
+                            <a href="../../../pages/glossary.html">Glossary</a>
+                            <a href="../../../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                            <a href="../../../pages/faq.html">FAQ</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>Principles</h4>
+                            <a href="../../../pages/ai-for-everybody.html">AI for Everybody</a>
+                            <a href="../../../pages/universal-design.html">Universal Design</a>
+                            <a href="../../../pages/ai-assisted-building.html">AI Assisted</a>
+                            <a href="../../../pages/security.html">Security</a>
+                            <a href="../../../pages/performance.html">Performance</a>
+                        </div>
+                        <div class="mega-menu-section mega-menu-section--featured">
+                            <h4>AI &amp; ND</h4>
+                            <a href="../../../neurodivergence/index.html">ND Hub</a>
+                            <a href="../../../neurodivergence/adhd.html">AI for ADHD</a>
+                            <a href="../../../neurodivergence/autism.html">AI for Autism</a>
+                            <a href="../../../neurodivergence/dyslexia.html">AI for Dyslexia</a>
+                            <a href="../../../neurodivergence/tools.html">AI Tools</a>
+                            <a href="../../../neurodivergence/resources.html">ND Resources</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>About</h4>
+                            <a href="../../../pages/about.html">About Praxis</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in">
+                    <a href="../../../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="../../index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Audio Classification</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Audio Frameworks</span>
+                </div>
+                <h1 class="page-title fade-in">Audio Classification Prompting</h1>
+                <p class="page-subtitle fade-in">Techniques for guiding AI models to categorize and label audio content &mdash; from environmental sounds and music genres to speech emotions and acoustic events &mdash; using structured, natural-language prompts that replace rigid classification pipelines.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: Signal Processing to Prompt-Based Classification</span>
+                        <p><strong>Origins:</strong> Audio classification traces its roots to signal processing research in the 1950s, when engineers first developed mathematical techniques to decompose sound into analyzable frequency components. Through the 1990s and 2000s, the field matured around Mel-Frequency Cepstral Coefficients (MFCCs) as the dominant feature representation, paired with Gaussian Mixture Models (GMMs) and later Support Vector Machines for classification decisions. The release of AudioSet by Google in 2017 &mdash; a large-scale dataset of over two million human-labeled audio clips spanning 632 sound categories &mdash; accelerated deep learning approaches and established benchmarks that drove rapid progress in neural audio classification.</p>
+                        <p><strong>Modern LLM Status:</strong> Modern multimodal models have fundamentally changed how audio classification is performed. Rather than requiring specialized training pipelines, feature engineering, and domain-specific model architectures, today&rsquo;s frontier models can classify audio by genre, emotion, speaker identity, environmental context, and acoustic event type through <strong>text-guided prompting</strong>. The prompt defines the taxonomy, the decision criteria, and the output structure &mdash; replacing months of pipeline development with natural language instructions. This approach is especially powerful for rapid prototyping, flexible categorization schemes, and applications where the classification taxonomy needs to evolve without retraining.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Replace Rigid Taxonomies with Flexible Language</h2>
+                        <p class="split-section__text">Audio classification prompting guides AI models to categorize sounds into predefined or emergent categories using natural language instructions rather than hard-coded classification logic. Instead of training a specialized model for each new sound taxonomy, you describe the categories you care about, define what distinguishes them, and let the model apply its learned understanding of acoustic patterns to make classification decisions.</p>
+                        <p class="split-section__text"><strong>The core insight is that prompt-based classification replaces rigid taxonomies with flexible, context-aware categorization controlled entirely by natural language instructions.</strong> A traditional audio classifier requires labeled training data, feature engineering, and retraining whenever categories change. A prompt-based approach lets you redefine the entire classification scheme in seconds by simply rewriting the prompt &mdash; adding new categories, adjusting decision boundaries, or shifting from coarse-grained to fine-grained labels without touching any model weights.</p>
+                        <p class="split-section__text">Think of it like the difference between a vending machine and a knowledgeable librarian. The vending machine has fixed slots &mdash; if your item does not match a slot, the system fails. The librarian understands context, nuance, and can create new organizational schemes on the fly. Audio classification prompting turns the model into that librarian, capable of adapting its categorization logic to whatever organizational framework you describe.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Natural Language Taxonomies Matter</span>
+                                <p>Traditional audio classifiers are locked to the categories they were trained on. If you trained a model to distinguish between &ldquo;dog bark&rdquo; and &ldquo;car horn,&rdquo; it cannot suddenly recognize &ldquo;construction noise&rdquo; without retraining. Prompt-based classification removes this limitation entirely. By describing categories in natural language &mdash; including edge cases, overlapping boundaries, and contextual modifiers &mdash; you gain a classification system that is as flexible as human language itself. The model draws on its broad understanding of acoustic concepts to apply your taxonomy, even for categories it has never been explicitly trained to distinguish.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Audio Classification Process</h2>
+                <p class="section-subtitle fade-in-up">Four steps from raw audio to structured classification output</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Provide Audio Sample</h3>
+                            <p class="element-timeline__text">Supply the audio input you want classified. This can be a full recording, an extracted segment, or a pre-processed clip. Audio quality directly impacts classification accuracy &mdash; clean recordings with minimal background noise produce the most reliable results, though modern models handle moderate noise levels well. Consider whether the sample length captures enough acoustic information for the classification task at hand.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Upload a 30-second audio clip captured from a city intersection, ensuring the recording captures the full ambient soundscape including traffic, pedestrian activity, and background environmental noise.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define Classification Taxonomy</h3>
+                            <p class="element-timeline__text">Specify the categories the model should classify the audio into. This is where prompt-based classification diverges most sharply from traditional approaches. You can define hierarchical categories (broad types with subcategories), flat label sets, multi-label schemes (where multiple categories can apply simultaneously), or open-ended classification where the model proposes its own categories based on what it hears.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Classify this audio into one or more of the following categories: Vehicle Traffic (subdivided into cars, trucks, motorcycles, emergency vehicles), Human Activity (speech, footsteps, crowd noise), Nature Sounds (wind, rain, birds), and Mechanical/Industrial (construction, machinery, HVAC systems).&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Specify Decision Criteria</h3>
+                            <p class="element-timeline__text">Tell the model how to make classification decisions. Should it prioritize the dominant sound or catalog every audible component? Should it consider temporal patterns (a sound that appears briefly versus continuously)? Define how the model should handle ambiguous cases, overlapping categories, and sounds that do not fit any defined category. Decision criteria transform a simple labeling task into a nuanced analytical exercise.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;For each detected sound category, indicate whether it is a primary sound (dominant, continuous) or secondary sound (intermittent, background). If a sound could belong to multiple categories, assign it to the most specific applicable category. Flag any sounds that do not fit the defined taxonomy as Uncategorized with a brief description.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Evaluate Confidence</h3>
+                            <p class="element-timeline__text">Request confidence assessments for each classification decision. Confidence scoring helps downstream systems decide whether to trust automated labels, route ambiguous cases for human review, or adjust classification thresholds. Ask the model to explain its reasoning for borderline cases, identify acoustic features that support or contradict each classification, and flag any classifications where confidence falls below an acceptable threshold.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;For each classification, provide a confidence level (High, Medium, Low) and a one-sentence justification. If confidence is Low for any category, explain what additional audio context or information would help resolve the ambiguity. List classifications in descending order of confidence.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why structured classification prompts produce dramatically better results</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Generic Classification</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>What type of audio is this?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>This sounds like an outdoor recording. There are some traffic noises and what might be people talking. It seems like a busy area, possibly a city street or intersection.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Vague, no structured categories, no confidence scoring, no actionable output</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Structured Classification</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Classify this audio into the following taxonomy: Vehicle Traffic, Human Activity, Nature Sounds, Mechanical/Industrial. For each detected category, indicate primary or secondary presence, assign a confidence level, and provide a one-sentence justification. Support multi-label output.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p><strong>Vehicle Traffic (Primary) &mdash; High confidence:</strong> Continuous motor vehicle sounds with identifiable car engines and a brief motorcycle pass at approximately 0:18.<br><strong>Human Activity (Secondary) &mdash; Medium confidence:</strong> Intermittent speech fragments detected between 0:05&ndash;0:12 consistent with pedestrian conversation, partially masked by traffic noise.<br><strong>Nature Sounds (Secondary) &mdash; Low confidence:</strong> Possible bird calls at 0:22&ndash;0:24, though the acoustic signature overlaps with brake squeal frequencies.<br><strong>Mechanical/Industrial:</strong> Not detected in this sample.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Structured taxonomy, confidence scoring, temporal detail, multi-label support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Audio Classification in Action</h2>
+                <p class="section-subtitle fade-in-up">See how structured prompts unlock precise audio categorization</p>
+
+                <div class="accordion fade-in-up" id="audio-classification-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Environmental Sound Detection</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt</span>
+                                    <p>&ldquo;Analyze this outdoor audio recording and classify all detectable environmental sounds. Use the following hierarchy: Weather (rain, wind, thunder, hail), Wildlife (birds, insects, mammals), Water (flowing, dripping, waves), and Vegetation (rustling leaves, branches). For each sound, estimate its temporal coverage as a percentage of the total recording duration. Identify the dominant environmental signature and assess whether the recording location is likely urban, suburban, rural, or wilderness.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>The prompt provides a complete hierarchical taxonomy with specific subcategories, which prevents the model from defaulting to vague descriptions like &ldquo;nature sounds.&rdquo; By requesting temporal coverage percentages, the prompt forces quantitative analysis rather than qualitative impressions. The location inference task leverages the model&rsquo;s ability to reason about acoustic context &mdash; the combination of detected sounds tells a story about the environment that no single sound reveals alone. This structured approach produces output suitable for ecological monitoring, urban planning studies, and ambient soundscape documentation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Music Genre Classification</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt</span>
+                                    <p>&ldquo;Classify this music track by genre, subgenre, and stylistic influences. Primary genres to consider: Rock, Electronic, Jazz, Classical, Hip-Hop, Folk, R&amp;B, and Metal. For each applicable genre label, identify the specific musical elements that justify the classification &mdash; instrumentation, rhythmic patterns, harmonic structures, production techniques, and vocal style. If the track blends multiple genres, assign percentage weights reflecting each genre&rsquo;s contribution to the overall sound. Suggest three similar artists or tracks for reference.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>Music genre classification is inherently subjective and multi-dimensional. This prompt addresses that complexity by requiring evidence-based justification for each genre label, preventing shallow categorization. The percentage-weight system acknowledges that most modern music defies single-genre classification, producing nuanced output that reflects how music actually works. Requesting specific musical elements (instrumentation, rhythm, harmony, production, vocals) ensures the model examines the full acoustic picture rather than relying on superficial pattern matching. The similar-artist suggestions provide practical context that raw labels cannot convey.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Emotion Detection in Speech</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt</span>
+                                    <p>&ldquo;Analyze the emotional content of this speech recording. Classify the speaker&rsquo;s emotional state using Ekman&rsquo;s six basic emotions (anger, disgust, fear, happiness, sadness, surprise) plus neutral. Also assess secondary emotional dimensions: arousal level (calm to excited), valence (negative to positive), and dominance (submissive to authoritative). Identify specific vocal cues that inform each classification &mdash; pitch variation, speech rate, volume dynamics, voice quality (breathy, tense, modal), and pause patterns. Note any emotional transitions that occur during the recording.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>This prompt combines two complementary emotion classification systems &mdash; categorical (Ekman&rsquo;s discrete emotions) and dimensional (arousal-valence-dominance) &mdash; producing a rich emotional profile rather than a single label. Requiring specific vocal cues forces the model to ground its classifications in observable acoustic features, making the output verifiable and interpretable. The instruction to track emotional transitions acknowledges that speech is dynamic; a speaker rarely maintains one emotional state throughout an entire recording. This multi-layered approach produces output suitable for customer service quality analysis, clinical speech assessment, and media content analysis.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Audio Classification</h2>
+                <p class="section-subtitle fade-in-up">Best for flexible, prompt-driven categorization of audio content</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Content Tagging and Metadata</strong>
+                                    <p>Automatically labeling audio files with genre, mood, instrumentation, and content tags for media libraries, podcast archives, and streaming platforms that need rich, searchable metadata.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Security and Monitoring</strong>
+                                    <p>Detecting specific acoustic events &mdash; glass breaking, alarms, gunshots, distress calls &mdash; in surveillance audio streams where rapid, accurate classification triggers appropriate responses.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Quality Assurance</strong>
+                                    <p>Evaluating audio recordings for production quality, identifying unwanted noise artifacts, classifying recording conditions, and flagging technical issues before content reaches audiences.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Media Organization</strong>
+                                    <p>Sorting large audio collections by content type, speaker identity, language, emotional tone, or thematic content when manual cataloging is impractical at scale.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Real-Time Embedded Systems</strong>
+                                    <p>When classification must run on resource-constrained hardware (microcontrollers, edge devices) with strict memory and compute budgets, lightweight specialized models outperform prompt-based approaches.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Sub-Millisecond Latency</strong>
+                                    <p>When classification decisions must happen in under a millisecond &mdash; such as active noise cancellation or real-time audio routing &mdash; the overhead of LLM inference makes prompt-based classification impractical.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Highly Specialized Acoustic Analysis</strong>
+                                    <p>When you need precise acoustic measurements &mdash; exact frequency identification, decibel-level analysis, or spectral decomposition &mdash; dedicated digital signal processing tools provide the numerical precision that language models cannot match.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Continuous Stream Processing</strong>
+                                    <p>For always-on classification of continuous audio streams (24/7 monitoring), purpose-built streaming classifiers with fixed compute costs are more efficient than per-segment LLM inference calls.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where audio classification prompting delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Moderation</h3>
+                        <p class="use-case-showcase__desc">Screening audio uploads for prohibited content &mdash; hate speech indicators, explicit material, copyright-infringing music, or harmful audio patterns &mdash; enabling platforms to enforce community guidelines at scale before content reaches audiences.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                <polyline points="9 22 9 12 15 12 15 22"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Smart Home Events</h3>
+                        <p class="use-case-showcase__desc">Recognizing household acoustic events &mdash; doorbells, smoke alarms, appliance alerts, pet sounds, glass breakage, and water running &mdash; to trigger automated responses or send notifications to homeowners and accessibility systems.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Music Library Organization</h3>
+                        <p class="use-case-showcase__desc">Automatically tagging music collections with genre, subgenre, mood, tempo, instrumentation, and era classifications &mdash; creating rich metadata that powers recommendation engines, playlist generators, and discovery features.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Speech Emotion Analysis</h3>
+                        <p class="use-case-showcase__desc">Classifying emotional states in customer service calls, therapy sessions, and interview recordings &mdash; detecting frustration, satisfaction, anxiety, or engagement levels to improve service quality and inform clinical assessments.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Industrial Monitoring</h3>
+                        <p class="use-case-showcase__desc">Detecting anomalous sounds in manufacturing environments &mdash; bearing failures, unusual vibrations, pressure leaks, and equipment malfunctions &mdash; enabling predictive maintenance by classifying machine sounds as normal, degraded, or critical.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Wildlife Audio Surveys</h3>
+                        <p class="use-case-showcase__desc">Classifying species vocalizations in field recordings &mdash; identifying bird calls, amphibian choruses, insect activity, and mammal sounds for biodiversity monitoring, conservation research, and ecological impact assessments.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Audio Classification Fits</h2>
+                <p class="section-subtitle fade-in-up">Audio classification occupies a key position in the audio prompting stack</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Audio Prompting</span>
+                        <span class="era-marker__title">Foundation</span>
+                        <span class="era-marker__desc">Core techniques for audio input and analysis</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Audio Classification</span>
+                        <span class="era-marker__title">Categorization</span>
+                        <span class="era-marker__desc">Structured labeling and taxonomy assignment</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Speech-to-Text</span>
+                        <span class="era-marker__title">Transcription</span>
+                        <span class="era-marker__desc">Converting spoken audio to written text</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Music Generation</span>
+                        <span class="era-marker__title">Creation</span>
+                        <span class="era-marker__desc">Producing original audio from text prompts</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine Classification with Other Audio Techniques</div>
+                    <p>Audio classification works best as part of a broader audio analysis pipeline. Use it alongside speech-to-text to not only transcribe spoken content but also classify the speaker&rsquo;s emotional state and the acoustic environment. Pair it with audio prompting fundamentals to first understand what you are hearing, then systematically categorize it. Classification output feeds naturally into downstream tasks like content recommendation, automated routing, and quality scoring.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary audio techniques</p>
+
+                <a href="audio-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Audio Prompting Basics</span>
+                        <span class="evolution-callout__desc">The foundational techniques for guiding AI models to process and analyze audio inputs &mdash; covering core principles of audio understanding that underpin all specialized audio tasks including classification.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="music-gen.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18V5l12-2v13"/>
+                            <circle cx="6" cy="18" r="3"/>
+                            <circle cx="18" cy="16" r="3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Parallel</span>
+                        <span class="evolution-callout__title">Music Generation Prompting</span>
+                        <span class="evolution-callout__desc">The creative counterpart to classification &mdash; crafting prompts that produce music rather than categorize it. Understanding both directions deepens your command of how AI models process musical and acoustic information.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="stt-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Speech-to-Text Prompting</span>
+                        <span class="evolution-callout__desc">Converts spoken audio to written text &mdash; a natural companion to audio classification that focuses on content extraction rather than categorization, often used together in audio analysis pipelines.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Explore Audio Classification</h2>
+                        <p class="cta-corporate__text">Apply structured audio classification techniques to your own audio content or build classification prompts with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../../../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../../../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+    <!-- === FOOTER === -->
+    <footer class="footer">
+        <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../../../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                    <p>Master the Art of AI Communication theory through proven frameworks.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Discover</h4>
+                    <a href="../../prompt-basics.html">Prompt Basics</a>
+                    <a href="../../crisp.html">CRISP Framework</a>
+                    <a href="../../crispe.html">CRISPE Framework</a>
+                    <a href="../../costar.html">COSTAR Framework</a>
+                    <a href="../../react.html">ReAct Framework</a>
+                    <a href="../../flipped-interaction.html">Flipped Interaction</a>
+                    <a href="../../chain-of-thought.html">Chain-of-Thought</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>AI Readiness</h4>
+                    <a href="../../../tools/analyzer.html">Prompt Analyzer</a>
+                    <a href="../../../tools/guidance.html">Prompt Builder</a>
+                    <a href="../../../tools/matcher.html">Framework Matcher</a>
+                    <a href="../../../tools/checklist.html">Preflight Checklist</a>
+                    <a href="../../../tools/hallucination.html">Hallucination Spotter</a>
+                    <a href="../../../quiz/index.html">Readiness Quiz</a>
+                    <a href="../../../patterns/index.html">Patterns Library</a>
+                    <a href="../../../pages/ai-safety.html">AI Safety</a>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="../../../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                    <a href="../../../pages/faq.html">FAQ</a>
+                    <a href="../../../pages/glossary.html">Glossary</a>
+                    <a href="../../../pages/security.html">Security</a>
+                    <a href="../../../pages/performance.html">Performance</a>
+                    <a href="../../../pages/ai-for-everybody.html">AI for Everybody</a>
+                    <a href="../../../pages/universal-design.html">Universal Design</a>
+                    <a href="../../../pages/ai-assisted-building.html">AI Assisted</a>
+                    <a href="../../../pages/about.html">About</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>AI for Everybody</p>
+                <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Bas</span></p>
+            </div>
+        </div>
+    </footer>
+    <!-- /FOOTER -->
+
+    <!-- === BACK TO TOP === -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+    <!-- /BACK TO TOP -->
+
+    <!-- === ACCESSIBILITY DASHBOARD === -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+    <!-- /ACCESSIBILITY DASHBOARD -->
+
+    <script src="../../../app.js" defer></script>
+</body>
+</html>
