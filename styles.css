@@ -6117,7 +6117,7 @@ body.menu-open {
     background: rgba(255, 255, 255, 0.03);
 }
 
-/* Quick links: Getting Started pinned at top of sidebar */
+/* Quick links: Glossary, AI Foundations, Prompt Basics, Facts & Fictions pinned at top of sidebar */
 .mega-menu-quick-links {
     display: flex;
     flex-direction: column;
@@ -6239,10 +6239,11 @@ body.menu-open {
         border-radius: 0;
     }
 
-    /* Quick links: visible on mobile as styled nav links */
+    /* Quick links: visible on mobile as styled nav links (2x2 grid) */
     .mega-menu--tabbed .mega-menu-quick-links {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         gap: var(--space-xs);
         padding: var(--space-xs) var(--space-sm);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -6250,7 +6251,8 @@ body.menu-open {
     }
 
     .mega-menu--tabbed .mega-menu-quick-links a {
-        flex: 1;
+        flex: 1 1 calc(50% - var(--space-xs));
+        min-width: calc(50% - var(--space-xs));
         text-align: center;
         padding: var(--space-xs) var(--space-sm);
         font-size: 0.82rem;
