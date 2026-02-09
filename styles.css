@@ -28554,26 +28554,39 @@ h3 + .nav-cards--compact {
     padding-bottom: 0;
 }
 
-.history-event__marker {
+/* Timeline dot */
+.history-event::before {
+    content: '';
     position: absolute;
-    left: calc(-1 * var(--space-xl) - 8px);
-    top: 0;
+    left: calc(-1 * var(--space-xl) + 1px);
+    top: 14px;
+    width: 10px;
+    height: 10px;
+    background: var(--bg-primary);
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
     z-index: 2;
 }
 
+/* File marker header bar */
+.history-event__marker {
+    position: relative;
+    z-index: 2;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding: var(--space-sm) var(--space-lg);
+    transition: transform var(--transition-normal);
+}
+
 .history-event__year {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    min-width: 90px;
-    height: 30px;
-    background: var(--bg-primary);
-    border: 2px solid var(--border-color);
-    border-radius: var(--radius-full);
     font-size: 0.8125rem;
     font-weight: 700;
     color: var(--text-muted);
-    padding: 0 var(--space-md);
+    letter-spacing: 0.02em;
 }
 
 .history-event__content {
@@ -28581,15 +28594,20 @@ h3 + .nav-cards--compact {
     z-index: 1;
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
+    border-top: none;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     padding: var(--space-lg);
     box-shadow: var(--shadow-sm);
     transition: box-shadow var(--transition-normal), transform var(--transition-normal);
 }
 
-.history-event__content:hover {
-    box-shadow: var(--shadow-md);
+.history-event:hover .history-event__marker,
+.history-event:hover .history-event__content {
     transform: translateX(4px);
+}
+
+.history-event:hover .history-event__content {
+    box-shadow: var(--shadow-md);
 }
 
 .history-event__label {
@@ -28791,11 +28809,18 @@ h3 + .nav-cards--compact {
 /* History Event Modifiers ---- */
 
 /* Landmark events - prominent styling */
-.history-event--landmark .history-event__year {
+.history-event--landmark .history-event__marker {
     background: var(--primary);
     border-color: var(--primary);
+}
+
+.history-event--landmark .history-event__year {
     color: white;
-    min-width: 100px;
+}
+
+.history-event--landmark::before {
+    background: var(--primary);
+    border-color: var(--primary);
 }
 
 .history-event--landmark .history-event__content {
@@ -28804,10 +28829,18 @@ h3 + .nav-cards--compact {
 }
 
 /* Framework events - research papers */
+.history-event--framework .history-event__marker {
+    background: rgba(59, 130, 246, 0.08);
+    border-color: #3b82f6;
+}
+
 .history-event--framework .history-event__year {
+    color: #3b82f6;
+}
+
+.history-event--framework::before {
     background: rgba(59, 130, 246, 0.1);
     border-color: #3b82f6;
-    color: #3b82f6;
 }
 
 .history-event--framework .history-event__label {
@@ -28815,21 +28848,39 @@ h3 + .nav-cards--compact {
 }
 
 /* Period events - spans of time */
-.history-event--period .history-event__year {
+.history-event--period .history-event__marker {
     background: var(--bg-secondary);
+    border-style: dashed;
+    border-bottom: none;
+}
+
+.history-event--period .history-event__year {
+    color: var(--text-muted);
+}
+
+.history-event--period::before {
     border-style: dashed;
 }
 
 .history-event--period .history-event__content {
     background: var(--bg-secondary);
     border-style: dashed;
+    border-top: none;
 }
 
 /* Current era */
-.history-event--current .history-event__year {
+.history-event--current .history-event__marker {
     background: linear-gradient(135deg, var(--primary) 0%, #ff6b7a 100%);
     border-color: var(--primary);
+}
+
+.history-event--current .history-event__year {
     color: white;
+}
+
+.history-event--current::before {
+    background: var(--primary);
+    border-color: var(--primary);
     animation: pulse-glow 2s ease-in-out infinite;
 }
 
@@ -29206,15 +29257,16 @@ h3 + .nav-cards--compact {
         left: 4px;
     }
 
+    .history-event::before {
+        left: calc(-1 * var(--space-lg) - 1px);
+    }
+
     .history-event__marker {
-        left: calc(-1 * var(--space-lg) - 6px);
+        padding: var(--space-xs) var(--space-md);
     }
 
     .history-event__year {
-        min-width: 70px;
-        height: 26px;
         font-size: 0.75rem;
-        padding: 0 var(--space-sm);
     }
 
     .history-event__content {

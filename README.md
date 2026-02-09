@@ -4,7 +4,7 @@
 
 **Your Curiosity - Unlocks The Potential - That Builds Tomorrow**
 
-*A comprehensive, living library of 2,000+ terms, logic frameworks, and cognitive tools.
+*A comprehensive, living library of 5,300+ terms, 117 learning techniques, and 7 interactive AI tools.
 Designed to standardize how the world understands and interacts with Artificial Intelligence.*
 
 ![AI for Everybody](https://img.shields.io/badge/AI_for-Everybody-DC3545?style=for-the-badge&labelColor=ffffff&logoColor=1f2937)
@@ -201,7 +201,7 @@ Used for complex debugging, auditing, and multi-step investigations:
 ```
 
 **Used for:**
-- Security audit across 26+ pages
+- Security audit across 149 pages
 - Framework consistency verification
 - Performance optimization analysis
 - Accessibility compliance review
@@ -255,13 +255,15 @@ This site achieves **A+ 100% security rating** through multiple layers of protec
 
 ### Zero External Dependencies
 
+All 149 HTML pages verified clean with 0 inline style violations and 0 inline script violations.
+
 | What We Avoided | Why It Matters |
 |-----------------|----------------|
 | CDN-hosted JavaScript | No supply chain attacks |
 | External fonts (Google Fonts) | No tracking, no external requests |
 | Third-party analytics | No data leakage |
 | External APIs | No dependency on third-party uptime |
-| Inline scripts/styles | CSP 'self' enforcement |
+| Inline scripts/styles | CSP 'self' enforcement across 41,930 lines of code |
 
 ### Security Headers Implementation
 
@@ -305,47 +307,66 @@ Header set Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyro
 
 ## Technical Specifications
 
+### Site at a Glance
+
+| Metric | Value |
+|--------|-------|
+| **Total HTML pages** | **149** |
+| Learning technique pages | 117 |
+| Interactive AI tools | 7 |
+| Policy & info pages | 15 |
+| Neurodivergence pages | 6 |
+| Foundations timeline | 1 (1950-2026) |
+| **Glossary terms** | **5,324** across 27 shards |
+| **styles.css** | 29,299 lines (640 KB) |
+| **app.js** | 12,631 lines (596 KB) |
+| Combined codebase | 41,930 lines |
+| Python utility scripts | 23 |
+| External dependencies | **0** |
+| Inline style violations | **0** |
+| Inline script violations | **0** |
+| Security grade | **A+ 100%** |
+| Audit score | **10.0 / 10** (automated 10-category audit) |
+
 ### Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         PROJECT STRUCTURE                               │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│  praxis-library/                                                        │
-│  ├── index.html                    # Homepage                           │
-│  ├── styles.css                    # Single stylesheet (4000+ lines)    │
-│  ├── app.js                        # Single script (2000+ lines)        │
-│  ├── .htaccess                     # Server security config             │
-│  │                                                                      │
-│  ├── learn/                        # Educational content                │
-│  │   ├── index.html                # Learning hub                       │
-│  │   ├── prompt-basics.html        # Fundamentals                       │
-│  │   ├── crisp.html                # CRISP methodology                  │
-│  │   ├── crispe.html               # CRISPE methodology                 │
-│  │   ├── costar.html               # COSTAR methodology                 │
-│  │   ├── react.html                # ReAct methodology                  │
-│  │   └── advanced.html             # Advanced techniques                │
-│  │                                                                      │
-│  ├── tools/                        # Interactive tools                  │
-│  │   ├── index.html                # Tools hub                          │
-│  │   ├── scorer.html               # Prompt Scorer                      │
-│  │   ├── checklist.html            # Preflight Checklist                │
-│  │   └── hallucination.html        # Hallucination Spotter              │
-│  │                                                                      │
-│  ├── patterns/                     # Prompt patterns library            │
-│  ├── quiz/                         # AI Readiness Quiz                  │
-│  ├── education/                    # Education industry                 │
-│  ├── business/                     # Business industry                  │
-│  ├── services/                     # Services industry                  │
-│  ├── pages/                        # Static pages                       │
-│  │                                                                      │
-│  └── assets/                       # Static resources                   │
-│      ├── fonts/                    # Self-hosted (Inter, JetBrains)     │
-│      ├── icons/SVG/                # 50+ vector icons                   │
-│      └── images/                   # Optimized images                   │
-│                                                                         │
-└─────────────────────────────────────────────────────────────────────────┘
+praxis-library/
+├── index.html                         # Homepage
+├── styles.css                         # Single stylesheet (29,299 lines)
+├── app.js                             # Single script (12,631 lines)
+├── .htaccess                          # Server security config
+│
+├── learn/                             # 117 technique & concept pages
+│   ├── index.html                     # Learning hub
+│   ├── prompt-basics.html             # Fundamentals
+│   ├── crisp.html                     # CRISP methodology
+│   ├── chain-of-thought.html          # Chain-of-Thought
+│   ├── tree-of-thought.html           # Tree of Thought
+│   └── ... (117 pages total)
+│
+├── tools/                             # 7 interactive AI tools
+│   ├── index.html                     # Tools hub
+│   ├── scorer.html                    # Prompt Analyzer
+│   ├── framework-finder.html          # Framework Finder
+│   ├── checklist.html                 # Preflight Checklist
+│   ├── prompt-builder.html            # Prompt Builder
+│   ├── persona-architect.html         # Persona Architect
+│   └── hallucination.html             # Hallucination Spotter
+│
+├── quiz/                              # AI Readiness Quiz
+├── foundations/                        # AI history timeline (1950-2026)
+├── neurodivergence/                   # 6 ND-specific learning pages
+├── pages/                             # 15 policy & info pages
+│
+├── data/                              # Glossary data layer
+│   └── glossary/                      # 27 JSON shards (A-Z + other)
+│       ├── manifest.json              # Shard registry
+│       └── search-compact.json        # Fast search index
+│
+└── assets/                            # Static resources
+    ├── fonts/                         # Self-hosted (Inter, JetBrains)
+    └── images/                        # Optimized images
 ```
 
 ### Performance Metrics
@@ -636,7 +657,7 @@ your-project/
 
 ### Consistency Verification
 
-Used **ReAct framework** to systematically audit all 26+ pages:
+Used **ReAct framework** to systematically audit all 149 pages:
 
 1. **Thought**: Framework definitions must be consistent
 2. **Action**: Grep search for all CRISP/CRISPE/COSTAR references
@@ -724,14 +745,30 @@ The human-AI loop:
 
 ## Resources
 
-### Frameworks Taught on This Site
+### Frameworks & Techniques Taught on This Site
 
-| Framework | Best For | Learn More |
-|-----------|----------|------------|
-| CRISP | Quick tasks | [/learn/crisp.html](learn/crisp.html) |
-| CRISPE | Complex with examples | [/learn/crispe.html](learn/crispe.html) |
-| COSTAR | Content creation | [/learn/costar.html](learn/costar.html) |
-| ReAct | Problem-solving | [/learn/react.html](learn/react.html) |
+The library covers **117 learning pages** across categories including:
+
+| Category | Examples |
+|----------|----------|
+| Core Frameworks | CRISP, CRISPE, COSTAR, ReAct, Chain-of-Thought |
+| Reasoning Techniques | Tree of Thought, Graph of Thought, Skeleton of Thought |
+| Ensemble Methods | Self-Consistency, DiVeRSe, DENSE, Meta-Reasoning |
+| Prompting Strategies | Few-Shot, Zero-Shot, Least-to-Most, Step-Back |
+| Advanced Methods | Constitutional AI, RLHF, Thread of Thought, Cumulative Reasoning |
+| AI Readiness | Prompt Basics, Facts & Fictions, Neurodivergence & AI |
+
+### Interactive AI Tools (7)
+
+| Tool | Purpose |
+|------|---------|
+| Prompt Analyzer | Score prompts against framework elements |
+| Framework Finder | Match tasks to the right framework |
+| Preflight Checklist | Pre-send prompt quality gate |
+| Prompt Builder | Guided prompt construction with 22 frameworks |
+| Persona Architect | Build custom AI personas |
+| Hallucination Spotter | Detect AI fabrication patterns |
+| Readiness Quiz | Assess AI readiness level |
 
 ### External Resources
 
