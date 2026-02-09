@@ -1,8 +1,8 @@
 # Praxis Project Handoff Document
 
 **Last Updated:** 2026-02-08 (Session 66 — Batch 005 Datasets)
-**Last Commit:** `75c5bfa` — docs: Session 65 handoff
-**Uncommitted Changes:** Batch 005 datasets (606 terms added)
+**Last Commit:** `ed93abd` — feat: Batch 005 Datasets — 606 terms added (3,678 total)
+**Uncommitted Changes:** None
 **Current Phase:** Phase 7 — World Source Archive (Glossary 15K+ Expansion)
 **Working Directory:** `C:\Users\basro\Music\PraxisLibrary`
 
@@ -31,7 +31,7 @@
 | 002 | Models | 252 | 150 | 102 | 0 | `c86cc39` |
 | 003 | History | 464 | 290 | 174 | 0 | `183fc50` |
 | 004 | Safety | 304 | 297 | 7 | 0 | `16a1da6` |
-| 005 | Datasets | 634 | 606 | 28 | 0 | *pending* |
+| 005 | Datasets | 634 | 606 | 28 | 0 | `ed93abd` |
 
 **Running total:** 2,141 → 2,357 → 2,335 (post-dedup) → 2,485 → 2,775 → 3,072 → 3,678
 
