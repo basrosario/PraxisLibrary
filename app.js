@@ -95,6 +95,16 @@ document.addEventListener('DOMContentLoaded', () => {
             splitNavAccent(link);
         });
 
+        // Mobile: apply split-color to category group labels + links
+        document.querySelectorAll('.mega-menu-group__label').forEach(function(label) {
+            if (label.querySelector('.nav-accent')) return;
+            splitNavAccent(label);
+        });
+        document.querySelectorAll('.mega-menu-group__link').forEach(function(link) {
+            if (link.querySelector('.nav-accent')) return;
+            splitNavAccent(link);
+        });
+
         // Split non-tabbed mega-menu section headers + accordion behavior
         document.querySelectorAll('.mega-menu:not(.mega-menu--categories) .mega-menu-section').forEach(function(section) {
             var h4 = section.querySelector('h4');
@@ -134,6 +144,18 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.mega-menu--categories .mega-menu-quick-links a').forEach(function(a) {
             if (a.querySelector('.nav-accent')) return;
             splitNavAccent(a);
+        });
+
+        // Desktop: apply split-color to category group labels (Techniques, Modality)
+        document.querySelectorAll('.mega-menu-group__label').forEach(function(label) {
+            if (label.querySelector('.nav-accent')) return;
+            splitNavAccent(label);
+        });
+
+        // Desktop: apply split-color to category group links (hover reveals split)
+        document.querySelectorAll('.mega-menu-group__link').forEach(function(link) {
+            if (link.querySelector('.nav-accent')) return;
+            splitNavAccent(link);
         });
     }
 
@@ -12631,3 +12653,4 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(gauge);
     });
 })();
+

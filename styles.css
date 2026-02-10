@@ -6551,15 +6551,19 @@ body.menu-open {
     border-top: 1px solid var(--border-color);
 }
 
-/* Group label */
+/* Group label — split black/red, larger than sub-links */
 .mega-menu-group__label {
     display: block;
-    font-size: 0.625rem;
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--text-muted, rgba(0, 0, 0, 0.45));
+    color: var(--text-primary, #000);
     padding: var(--space-xs) var(--space-sm) 0;
+}
+
+.mega-menu-group__label .nav-accent {
+    color: var(--primary);
 }
 
 /* Category link */
@@ -6573,8 +6577,18 @@ body.menu-open {
     transition: background var(--transition-fast), color var(--transition-fast);
 }
 
+.mega-menu-group__link .nav-accent {
+    color: inherit;
+    transition: color var(--transition-fast);
+}
+
+/* Hover: split black/red */
 .mega-menu-group__link:hover {
-    background: rgba(220, 53, 69, 0.1);
+    background: rgba(220, 53, 69, 0.06);
+    color: var(--text-primary, #000);
+}
+
+.mega-menu-group__link:hover .nav-accent {
     color: var(--primary);
 }
 
@@ -6725,7 +6739,7 @@ body.menu-open {
 
     .mega-menu-group__label {
         padding: var(--space-sm) var(--space-sm) 0;
-        font-size: 0.7rem;
+        font-size: 0.85rem;
     }
 
     .mega-menu-group__link {
@@ -11917,6 +11931,7 @@ body.menu-open {
     z-index: 9990;
     transition: background var(--transition-normal);
 }
+
 
 /* ==============================================
    SEARCH MODAL (Cmd+K / Ctrl+K)
