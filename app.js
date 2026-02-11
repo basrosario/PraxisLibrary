@@ -9085,7 +9085,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const readAloudState = {
             isPlaying: false,
             utterance: null,
-            currentElement: null
+            currentElement: null,
+            fullText: '',
+            charIndex: 0,
+            resuming: false
         };
 
         const speedRates = {
@@ -9101,10 +9104,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const readingIndicator = adlPanel.querySelector('.adl-reading-indicator');
 
         function stopReading() {
+            // Skip cleanup if we're just resuming with new volume
+            if (readAloudState.resuming) return;
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
             }
             readAloudState.isPlaying = false;
+            readAloudState.fullText = '';
+            readAloudState.charIndex = 0;
             document.body.classList.remove('adl-reading-mode');
             if (playBtn) playBtn.classList.remove('is-playing');
             if (readingIndicator) {
@@ -9167,15 +9174,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 readAloudState.currentElement.setAttribute('data-reading', 'true');
             }
 
-            readAloudState.utterance = new SpeechSynthesisUtterance(fullText);
+            // Store text for resume capability
+            readAloudState.fullText = fullText;
+            readAloudState.charIndex = 0;
+
+            speakText(fullText, startFrom);
+        }
+
+        /** Speak text from a given string, used by both readPageContent and resumeAtVolume */
+        function speakText(text, startFrom) {
+            if (!text.trim()) return;
+
+            readAloudState.utterance = new SpeechSynthesisUtterance(text);
             readAloudState.utterance.rate = speedRates[currentPrefs.readAloudSpeed] || 1.0;
             readAloudState.utterance.volume = (currentPrefs.volume != null ? currentPrefs.volume : 100) / 100;
             readAloudState.utterance.lang = 'en-US';
 
-            var indicatorPrefix = startFrom ? 'Reading from: ' + fullText.substring(0, 40).trim() + '...' : 'Reading page content...';
+            // Track reading position via boundary events
+            readAloudState.utterance.onboundary = function(e) {
+                // charIndex is relative to current utterance text; offset to absolute position
+                readAloudState.charIndex = (readAloudState.fullText.length - text.length) + e.charIndex;
+            };
+
+            var indicatorPrefix = startFrom ? 'Reading from: ' + text.substring(0, 40).trim() + '...' : 'Reading page content...';
 
             readAloudState.utterance.onstart = function() {
                 readAloudState.isPlaying = true;
+                readAloudState.resuming = false;
                 document.body.classList.add('adl-reading-mode');
                 if (playBtn) playBtn.classList.add('is-playing');
                 if (readingIndicator) {
@@ -9195,6 +9220,18 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             window.speechSynthesis.speak(readAloudState.utterance);
+        }
+
+        /** Resume reading from tracked position with current volume */
+        function resumeAtVolume() {
+            if (!readAloudState.fullText) return;
+            var remaining = readAloudState.fullText.substring(readAloudState.charIndex);
+            if (!remaining.trim()) return;
+            // Flag prevents stopReading cleanup when cancel triggers onerror async
+            readAloudState.resuming = true;
+            window.speechSynthesis.cancel();
+            // Keep flag on through async onerror, clear it once new speech starts
+            speakText(remaining, null);
         }
 
         if (playBtn) {
@@ -9287,6 +9324,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             volSlider.addEventListener('change', function() {
                 saveADLPreferences(currentPrefs);
+                // Resume from current position with new volume
+                if (readAloudState.isPlaying) {
+                    resumeAtVolume();
+                }
             });
         }
 
