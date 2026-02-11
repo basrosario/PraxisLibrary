@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DeepSeek Benchmarks: Track the DeepSeek model family from V2 to R1. Performance data across MMLU-Pro, GPQA, HumanEval, AIME, MMMU, and IFEval benchmarks.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/benchmarks/deepseek.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="DeepSeek: AI Model Benchmarks - Praxis">
+    <meta property="og:description" content="DeepSeek Benchmarks: Track the DeepSeek model family from V2 to R1. Performance data across MMLU-Pro, GPQA, HumanEval, AIME, MMMU, and IFEval benchmarks.">
+    <meta property="og:url" content="https://praxislibrary.com/benchmarks/deepseek.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DeepSeek: AI Model Benchmarks - Praxis">
+    <meta name="twitter:description" content="DeepSeek Benchmarks: Track the DeepSeek model family from V2 to R1. Performance data across MMLU-Pro, GPQA, HumanEval, AIME, MMMU, and IFEval benchmarks.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["LearningResource", "Article"],
+      "headline": "DeepSeek: AI Model Benchmarks",
+      "name": "DeepSeek: AI Model Benchmarks",
+      "description": "Track the DeepSeek model family from V2 to R1. Performance data across knowledge, reasoning, coding, math, multimodal, and instruction following benchmarks.",
+      "url": "https://praxislibrary.com/benchmarks/deepseek.html",
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
+      "publisher": { "@type": "EducationalOrganization", "name": "Praxis Library", "alternateName": "The Open Standard in AI Literacy", "url": "https://praxislibrary.com", "logo": "https://praxislibrary.com/favicon.svg" },
+      "isPartOf": { "@type": "WebSite", "name": "Praxis Library", "url": "https://praxislibrary.com" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://praxislibrary.com" },
+        { "@type": "ListItem", "position": 2, "name": "AI Benchmarks", "item": "https://praxislibrary.com/benchmarks/" },
+        { "@type": "ListItem", "position": 3, "name": "DeepSeek" }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>DeepSeek: AI Model Benchmarks - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">AI Foundations</a>
+                <div class="nav-item has-dropdown">
+                    <a href="index.html" class="nav-link" aria-expanded="false">AI Benchmarks</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>AI Benchmarks</h4>
+                            <a href="index.html">Benchmark Hub</a>
+                            <a href="anthropic.html">Anthropic</a>
+                            <a href="openai.html">OpenAI</a>
+                            <a href="google.html">Google DeepMind</a>
+                            <a href="meta.html">Meta AI</a>
+                            <a href="xai.html">xAI</a>
+                            <a href="deepseek.html">DeepSeek</a>
+                            <a href="mistral.html">Mistral AI</a>
+                            <a href="alibaba.html">Alibaba Cloud</a>
+                            <a href="cohere.html">Cohere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../learn/index.html">Discover</a>
+                            <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                            <a href="../learn/facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                        <div class="mega-menu-group">
+                            <span class="mega-menu-group__label">Techniques</span>
+                            <a href="../learn/structured-frameworks.html" class="mega-menu-group__link">Structured Frameworks</a>
+                            <a href="../learn/in-context-learning.html" class="mega-menu-group__link">In-Context Learning</a>
+                            <a href="../learn/reasoning-cot.html" class="mega-menu-group__link">Reasoning &amp; CoT</a>
+                            <a href="../learn/decomposition.html" class="mega-menu-group__link">Decomposition</a>
+                            <a href="../learn/self-correction.html" class="mega-menu-group__link">Self-Correction</a>
+                            <a href="../learn/ensemble-methods.html" class="mega-menu-group__link">Ensemble Methods</a>
+                            <a href="../learn/prompting-strategies.html" class="mega-menu-group__link">Prompting Strategies</a>
+                        </div>
+                        <div class="mega-menu-group">
+                            <span class="mega-menu-group__label">Modality</span>
+                            <a href="../learn/modality/code/" class="mega-menu-group__link">Code</a>
+                            <a href="../learn/modality/image/" class="mega-menu-group__link">Image</a>
+                            <a href="../learn/modality/audio/" class="mega-menu-group__link">Audio</a>
+                            <a href="../learn/modality/video/" class="mega-menu-group__link">Video</a>
+                            <a href="../learn/modality/3d/" class="mega-menu-group__link">3D</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">AI Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Framework Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--multi-column">
+                        <div class="mega-menu-section">
+                            <h4>Guides</h4>
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>Principles</h4>
+                            <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
+                            <a href="../pages/universal-design.html">Universal Design</a>
+                            <a href="../pages/ai-assisted-building.html">AI Assisted</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../pages/performance.html">Performance</a>
+                        </div>
+                        <div class="mega-menu-section mega-menu-section--featured">
+                            <h4>AI &amp; ND</h4>
+                            <a href="../neurodivergence/index.html">ND Hub</a>
+                            <a href="../neurodivergence/adhd.html">AI for ADHD</a>
+                            <a href="../neurodivergence/autism.html">AI for Autism</a>
+                            <a href="../neurodivergence/dyslexia.html">AI for Dyslexia</a>
+                            <a href="../neurodivergence/tools.html">AI Tools</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>About</h4>
+                            <a href="../pages/about.html">About Praxis</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- === PAGE HERO === -->
+    <section class="page-hero">
+        <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+        <div class="container">
+            <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="index.html">AI Benchmarks</a>
+                <span class="separator">/</span>
+                <span class="current">DeepSeek</span>
+            </nav>
+            <div class="hero-badge" data-aos="fade-down">
+                <span class="hero-badge__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 20V10"/>
+                        <path d="M12 20V4"/>
+                        <path d="M6 20V14"/>
+                    </svg>
+                </span>
+                <span class="hero-badge__text">Verified Performance Data</span>
+            </div>
+            <h1 class="page-title fade-in">DeepSeek</h1>
+            <p class="page-subtitle fade-in">The DeepSeek model family: From DeepSeek-V2 to R1. Open-source reasoning models challenging frontier performance. Benchmark data across knowledge, reasoning, coding, math, multimodal, and instruction following.</p>
+        </div>
+    </section>
+    <!-- /PAGE HERO -->
+
+    <div class="accent-bar accent-bar--gradient"></div>
+
+    <main id="main-content">
+        <!-- === COMPANY OVERVIEW === -->
+        <section class="benchmark-section section-alt">
+            <div class="container">
+                <div class="benchmark-stats">
+                    <div class="benchmark-stat">
+                        <div class="benchmark-stat__value provider-color--deepseek">4</div>
+                        <div class="benchmark-stat__label">Models Tracked</div>
+                    </div>
+                    <div class="benchmark-stat benchmark-stat--badge">
+                        <div class="benchmark-stat__value">2023</div>
+                        <div class="benchmark-stat__label">Founded</div>
+                    </div>
+                    <div class="benchmark-stat">
+                        <div class="benchmark-stat__value">90.8</div>
+                        <div class="benchmark-stat__label">Best Knowledge</div>
+                    </div>
+                    <div class="benchmark-stat">
+                        <div class="benchmark-stat__value">79.8</div>
+                        <div class="benchmark-stat__label">Best Math (AIME)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /COMPANY OVERVIEW -->
+
+        <!-- === ABOUT === -->
+        <section class="benchmark-section">
+            <div class="container">
+                <h2 class="benchmark-section__title">About DeepSeek</h2>
+                <p>DeepSeek is a Chinese AI research lab that has made waves with its open-source, high-performance language models. Founded in 2023, DeepSeek has rapidly produced models that compete with and sometimes exceed Western frontier labs on key benchmarks, while using novel training efficiency techniques.</p>
+                <p>DeepSeek-R1 (2025) introduced a reasoning model that rivals OpenAI&rsquo;s o1, achieving 90.8% on MMLU and 79.8% on AIME 2024. The company&rsquo;s V3 base model also demonstrated strong performance with 88.5% on MMLU.</p>
+            </div>
+        </section>
+        <!-- /ABOUT -->
+
+        <!-- === MODEL TIMELINE === -->
+        <section class="benchmark-section section-alt">
+            <div class="container">
+                <h2 class="benchmark-section__title">DeepSeek Model Timeline</h2>
+                <p class="benchmark-section__subtitle">Verified scores from <a href="https://arxiv.org/html/2501.12948v1" target="_blank" rel="noopener noreferrer" data-added="2026-02-10">DeepSeek-R1 paper</a> and <a href="https://arxiv.org/html/2412.19437v1" target="_blank" rel="noopener noreferrer" data-added="2026-02-10">V3 technical report</a>.</p>
+
+                <div class="model-timeline">
+                    <div class="model-timeline__item model-timeline__item--current">
+                        <div class="model-timeline__date">January 2025</div>
+                        <h3 class="model-timeline__title">DeepSeek-R1</h3>
+                        <p class="model-timeline__description">DeepSeek&rsquo;s reasoning model, rivaling OpenAI o1. Achieves 90.8% on MMLU, 84.0% on MMLU-Pro, 71.5% on GPQA Diamond, and 79.8% on AIME 2024. Also scores 97.3% on MATH-500.</p>
+                        <div class="model-timeline__benchmarks">
+                            <span class="model-timeline__benchmark-tag">MMLU <span>90.8</span></span>
+                            <span class="model-timeline__benchmark-tag">MMLU-Pro <span>84.0</span></span>
+                            <span class="model-timeline__benchmark-tag">GPQA <span>71.5</span></span>
+                            <span class="model-timeline__benchmark-tag">AIME <span>79.8</span></span>
+                            <span class="model-timeline__benchmark-tag">MATH-500 <span>97.3</span></span>
+                        </div>
+                    </div>
+                    <div class="model-timeline__item">
+                        <div class="model-timeline__date">December 2024</div>
+                        <h3 class="model-timeline__title">DeepSeek-V3</h3>
+                        <p class="model-timeline__description">A strong general-purpose model. Achieves 88.5% on MMLU, 75.9% on MMLU-Pro, and 59.1% on GPQA Diamond. Trained with novel efficiency techniques that significantly reduce compute costs.</p>
+                        <div class="model-timeline__benchmarks">
+                            <span class="model-timeline__benchmark-tag">MMLU <span>88.5</span></span>
+                            <span class="model-timeline__benchmark-tag">MMLU-Pro <span>75.9</span></span>
+                            <span class="model-timeline__benchmark-tag">GPQA <span>59.1</span></span>
+                        </div>
+                    </div>
+                    <div class="model-timeline__item">
+                        <div class="model-timeline__date">September 2024</div>
+                        <h3 class="model-timeline__title">DeepSeek-V2.5</h3>
+                        <p class="model-timeline__description">An incremental update to V2 with improved instruction following and coding capabilities.</p>
+                        <div class="model-timeline__benchmarks"></div>
+                    </div>
+                    <div class="model-timeline__item">
+                        <div class="model-timeline__date">May 2024</div>
+                        <h3 class="model-timeline__title">DeepSeek-V2</h3>
+                        <p class="model-timeline__description">DeepSeek&rsquo;s second-generation model, introducing mixture-of-experts architecture for efficient scaling.</p>
+                        <div class="model-timeline__benchmarks"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /MODEL TIMELINE -->
+
+        <!-- === BENCHMARK CHARTS === -->
+        <section class="benchmark-section">
+            <div class="container">
+                <h2 class="benchmark-section__title">Benchmark Performance</h2>
+                <div class="benchmark-chart-grid">
+                    <div class="benchmark-chart-card">
+                        <h3 class="benchmark-chart-card__title">DeepSeek-R1: Category Scores</h3>
+                        <canvas class="benchmark-chart-canvas" id="deepseek-bar-scores" role="img" aria-label="DeepSeek-R1 benchmark scores"></canvas>
+                    </div>
+                    <div class="benchmark-chart-card">
+                        <h3 class="benchmark-chart-card__title">DeepSeek Evolution: Knowledge (MMLU)</h3>
+                        <canvas class="benchmark-chart-canvas" id="deepseek-bar-evolution" role="img" aria-label="DeepSeek knowledge scores over time"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /BENCHMARK CHARTS -->
+
+        <!-- === DISCLAIMER === -->
+        <section class="benchmark-section section-alt">
+            <div class="container">
+                <div class="callout callout--tip">
+                    <h3>About This Data</h3>
+                    <p>Scores sourced from DeepSeek&rsquo;s peer-reviewed arxiv papers. The R1 paper also provides cross-reference scores for GPT-4o, Claude 3.5, and o1, which are used to verify those providers&rsquo; data.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /DISCLAIMER -->
+
+        <!-- === NAVIGATION === -->
+        <section class="benchmark-section benchmark-section--dark">
+            <canvas class="footer-neural-bg" aria-hidden="true"></canvas>
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="benchmark-section__title">Explore More Providers</h2>
+                    <div class="hero-actions">
+                        <a href="xai.html" class="btn btn-secondary">Previous: xAI</a>
+                        <a href="index.html" class="btn btn-primary">Back to Leaderboard</a>
+                        <a href="mistral.html" class="btn btn-secondary">Next: Mistral</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NAVIGATION -->
+    </main>
+
+    <!-- === FOOTER === -->
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Discover</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">COSTAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Framework Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
+                <a href="../pages/universal-design.html">Universal Design</a>
+                <a href="../pages/ai-assisted-building.html">AI Assisted</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+        <div class="footer-policies">
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+    <!-- /FOOTER -->
+
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg></span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- === BADGE LIGHTBOX === -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <!-- === ACCESSIBILITY DASHBOARD === -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M12 13v6M9 17l3 3 3-3"/></svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M12 13v6M9 17l3 3 3-3"/></svg> Accessibility</span>
+            <button class="adl-close" aria-label="Close accessibility panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch"><input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode"><span class="adl-switch-track"></span></label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+    <!-- /ACCESSIBILITY DASHBOARD -->
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

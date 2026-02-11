@@ -13783,3 +13783,1074 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 })();
 
+// === AI MODEL BENCHMARK SYSTEM ===
+
+/**
+ * BENCHMARK_DATA — All model scores across 6 benchmark categories.
+ * Categories: Knowledge (MMLU), Reasoning (GPQA Diamond), Coding (HumanEval),
+ *             Math (AIME 2024), Multimodal (MMMU), Instruction (IFEval)
+ * Scores are percentages (0-100). null = not available/not officially reported.
+ * VERIFIED ONLY: All scores sourced from official provider announcements,
+ * model cards, or peer-reviewed papers. See benchmark-sources.md for URLs.
+ * Note: Anthropic MMMLU scores used where MMLU unavailable (close variant).
+ * Note: GPQA scores for Claude 4+ include extended thinking (standard mode).
+ * Last updated: February 2026
+ */
+var BENCHMARK_DATA = {
+    categories: ['Knowledge', 'Reasoning', 'Coding', 'Math', 'Multimodal', 'Instruction'],
+    categoryFull: ['MMLU', 'GPQA Diamond', 'HumanEval', 'AIME', 'MMMU', 'IFEval'],
+    categoryColors: ['#000000', '#444444', '#DC3545', '#888888', '#4169E1', '#6B21A8'],
+    providers: {
+        anthropic: {
+            name: 'Anthropic',
+            color: '#D97757',
+            models: {
+                'Claude 3 Opus': { released: '2024-03', scores: [88.2, 50.4, 84.9, null, null, null] },
+                'Claude 3.5 Sonnet': { released: '2024-06', scores: [90.4, 59.4, 92.0, 16.0, null, null] },
+                'Claude 3.5 Haiku': { released: '2024-10', scores: [80.9, 41.6, 88.1, null, null, null] },
+                'Claude Sonnet 3.7': { released: '2025-02', scores: [null, null, null, null, null, null] },
+                'Claude Sonnet 4': { released: '2025-05', scores: [85.4, 72.3, null, 33.1, 72.6, null] },
+                'Claude Opus 4': { released: '2025-06', scores: [87.4, 76.9, null, 33.9, 73.7, null] },
+                'Claude Opus 4.1': { released: '2025-08', scores: [null, 80.9, null, null, null, null] },
+                'Claude Sonnet 4.5': { released: '2025-10', scores: [89.1, 83.4, null, null, null, null] },
+                'Claude Opus 4.5': { released: '2026-01', scores: [null, 91.3, null, null, null, null] },
+                'Claude Opus 4.6': { released: '2026-02', scores: [91.1, 91.3, 95.0, 100.0, 77.0, 94.0] }
+            },
+            flagship: 'Claude Opus 4.6'
+        },
+        openai: {
+            name: 'OpenAI',
+            color: '#10A37F',
+            models: {
+                'GPT-4': { released: '2023-03', scores: [86.4, null, 67.0, null, null, null] },
+                'GPT-4 Turbo': { released: '2024-04', scores: [86.5, 48.0, 87.1, null, null, null] },
+                'GPT-4o': { released: '2024-05', scores: [87.2, 49.9, 90.2, 9.3, null, null] },
+                'GPT-4o mini': { released: '2024-07', scores: [82.0, 40.2, null, null, null, null] },
+                'o1-preview': { released: '2024-09', scores: [null, 73.3, null, 44.0, null, null] },
+                'o1': { released: '2024-12', scores: [92.3, 78.0, 92.4, 83.3, null, null] },
+                'o3-mini': { released: '2025-01', scores: [null, 79.7, null, 87.3, null, null] },
+                'GPT-4.5': { released: '2025-02', scores: [null, null, null, null, null, null] },
+                'GPT-4.1': { released: '2025-04', scores: [80.1, 50.3, null, null, null, null] },
+                'o3': { released: '2025-04', scores: [null, 83.3, null, 88.9, null, null] },
+                'o4-mini': { released: '2025-04', scores: [null, 81.4, null, null, null, null] },
+                'GPT-5': { released: '2025-11', scores: [91.4, 88.4, 93.0, 94.6, 84.2, null] }
+            },
+            flagship: 'GPT-5'
+        },
+        google: {
+            name: 'Google DeepMind',
+            color: '#4285F4',
+            models: {
+                'Gemini 1.0 Pro': { released: '2023-12', scores: [null, null, null, null, null, null] },
+                'Gemini 1.0 Ultra': { released: '2024-02', scores: [83.7, null, null, null, 59.4, null] },
+                'Gemini 1.5 Pro': { released: '2024-05', scores: [85.9, 67.7, 84.1, null, null, null] },
+                'Gemini 1.5 Flash': { released: '2024-05', scores: [null, null, null, null, null, null] },
+                'Gemini 2.0 Flash': { released: '2024-12', scores: [null, 60.1, null, null, null, null] },
+                'Gemini 2.5 Pro': { released: '2025-03', scores: [89.8, 84.0, 82.0, 92.0, 84.0, null] }
+            },
+            flagship: 'Gemini 2.5 Pro'
+        },
+        meta: {
+            name: 'Meta AI',
+            color: '#0668E1',
+            models: {
+                'Llama 2 70B': { released: '2023-07', scores: [null, null, null, null, null, null] },
+                'Llama 3 70B': { released: '2024-04', scores: [84.0, null, null, null, null, null] },
+                'Llama 3.1 405B': { released: '2024-07', scores: [87.3, 50.7, 89.0, null, null, null] },
+                'Llama 3.2 90B Vision': { released: '2024-09', scores: [86.0, 46.7, null, null, null, null] },
+                'Llama 4 Scout': { released: '2025-04', scores: [null, 57.2, null, null, null, null] },
+                'Llama 4 Maverick': { released: '2025-04', scores: [85.5, 69.8, 86.4, null, 73.4, null] }
+            },
+            flagship: 'Llama 4 Maverick'
+        },
+        xai: {
+            name: 'xAI',
+            color: '#6366F1',
+            models: {
+                'Grok-1': { released: '2023-11', scores: [null, null, null, null, null, null] },
+                'Grok-1.5': { released: '2024-04', scores: [null, null, null, null, null, null] },
+                'Grok-2': { released: '2024-08', scores: [87.5, 56.0, null, null, null, null] },
+                'Grok-3': { released: '2025-02', scores: [92.7, 84.6, 94.5, 93.3, 78.0, 91.2] }
+            },
+            flagship: 'Grok-3'
+        },
+        deepseek: {
+            name: 'DeepSeek',
+            color: '#4D6BFE',
+            models: {
+                'DeepSeek-V2': { released: '2024-05', scores: [null, null, null, null, null, null] },
+                'DeepSeek-V2.5': { released: '2024-09', scores: [null, 41.3, null, null, null, null] },
+                'DeepSeek-V3': { released: '2024-12', scores: [88.5, 59.1, null, null, null, 77.6] },
+                'DeepSeek-R1': { released: '2025-01', scores: [90.8, 71.5, 89.3, 79.8, null, 83.3] }
+            },
+            flagship: 'DeepSeek-R1'
+        },
+        mistral: {
+            name: 'Mistral AI',
+            color: '#FF7000',
+            models: {
+                'Mixtral 8x7B': { released: '2023-12', scores: [71.3, null, null, null, null, null] },
+                'Mistral Large': { released: '2024-02', scores: [null, null, null, null, null, null] },
+                'Mistral Large 2': { released: '2024-07', scores: [84.0, null, 92.0, null, null, null] },
+                'Mistral Large 3': { released: '2025-12', scores: [85.5, 43.9, 92.0, null, 70.0, 89.4] }
+            },
+            flagship: 'Mistral Large 3'
+        },
+        alibaba: {
+            name: 'Alibaba Cloud',
+            color: '#FF6A00',
+            models: {
+                'Qwen 1.5 72B': { released: '2024-02', scores: [null, null, null, null, null, null] },
+                'Qwen 2 72B': { released: '2024-06', scores: [null, null, null, null, null, null] },
+                'Qwen 2.5 72B': { released: '2024-09', scores: [86.1, 49.0, 86.6, null, null, 84.1] },
+                'QwQ 32B': { released: '2025-03', scores: [null, 65.2, null, null, null, null] }
+            },
+            flagship: 'Qwen 2.5 72B'
+        },
+        cohere: {
+            name: 'Cohere',
+            color: '#39594D',
+            models: {
+                'Command R': { released: '2024-03', scores: [null, null, null, null, null, null] },
+                'Command R+': { released: '2024-04', scores: [88.2, null, null, null, null, null] },
+                'Command A': { released: '2025-03', scores: [85.5, 50.8, null, null, null, 90.9] }
+            },
+            flagship: 'Command A'
+        }
+    }
+};
+
+/**
+ * BenchmarkBarChart — Renders horizontal bar charts on a <canvas> element.
+ * Uses pure Canvas API (no external libraries).
+ * @param {HTMLCanvasElement} canvas - Target canvas element
+ * @param {Object} config - { labels, values, colors, maxValue, title }
+ */
+function BenchmarkBarChart(canvas, config) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.config = config;
+    this.animated = false;
+    this.progress = 0;
+}
+
+BenchmarkBarChart.prototype.resize = function() {
+    var rect = this.canvas.parentElement.getBoundingClientRect();
+    var dpr = window.devicePixelRatio || 1;
+    this.canvas.width = rect.width * dpr;
+    this.canvas.height = rect.height * dpr;
+    this.canvas.style.width = rect.width + 'px';
+    this.canvas.style.height = rect.height + 'px';
+    this.ctx.scale(dpr, dpr);
+    this.width = rect.width;
+    this.height = rect.height;
+};
+
+BenchmarkBarChart.prototype.draw = function(progress) {
+    var ctx = this.ctx;
+    var cfg = this.config;
+    var labels = cfg.labels;
+    var values = cfg.values;
+    var colors = cfg.colors;
+    var maxVal = cfg.maxValue || 100;
+    var count = labels.length;
+    var padding = { top: 10, right: 50, bottom: 10, left: 120 };
+    var barHeight = Math.min(28, (this.height - padding.top - padding.bottom) / count - 8);
+    var barGap = 8;
+
+    ctx.clearRect(0, 0, this.width, this.height);
+
+    var chartWidth = this.width - padding.left - padding.right;
+
+    for (var i = 0; i < count; i++) {
+        var y = padding.top + i * (barHeight + barGap);
+        var val = values[i] === null ? 0 : values[i];
+        var w = (val / maxVal) * chartWidth * progress;
+        var color = colors ? (colors[i] || '#DC3545') : '#DC3545';
+
+        // Label
+        ctx.fillStyle = '#374151';
+        ctx.font = '600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(labels[i], padding.left - 10, y + barHeight / 2);
+
+        // Track
+        ctx.fillStyle = '#f3f4f6';
+        ctx.beginPath();
+        ctx.roundRect(padding.left, y, chartWidth, barHeight, 4);
+        ctx.fill();
+
+        // Bar
+        if (w > 0) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.roundRect(padding.left, y, w, barHeight, 4);
+            ctx.fill();
+        }
+
+        // Value text
+        if (progress > 0.5) {
+            var displayVal = values[i] === null ? 'N/A' : values[i].toFixed(1);
+            ctx.fillStyle = '#111';
+            ctx.font = '700 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText(displayVal, padding.left + w + 8, y + barHeight / 2);
+        }
+    }
+};
+
+BenchmarkBarChart.prototype.animate = function() {
+    if (this.animated) return;
+    this.animated = true;
+    this.resize();
+    var self = this;
+    var start = null;
+    var duration = 800;
+
+    function step(ts) {
+        if (!start) start = ts;
+        var elapsed = ts - start;
+        self.progress = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        var t = 1 - Math.pow(1 - self.progress, 3);
+        self.draw(t);
+        if (self.progress < 1) {
+            requestAnimationFrame(step);
+        }
+    }
+    requestAnimationFrame(step);
+};
+
+/**
+ * BenchmarkRadarChart — Renders radar/spider charts on a <canvas> element.
+ * @param {HTMLCanvasElement} canvas - Target canvas element
+ * @param {Object} config - { labels, datasets: [{name, values, color}], maxValue }
+ */
+function BenchmarkRadarChart(canvas, config) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.config = config;
+    this.animated = false;
+    this.progress = 0;
+}
+
+BenchmarkRadarChart.prototype.resize = function() {
+    var rect = this.canvas.parentElement.getBoundingClientRect();
+    var dpr = window.devicePixelRatio || 1;
+    var size = Math.min(rect.width, rect.height);
+    this.canvas.width = size * dpr;
+    this.canvas.height = size * dpr;
+    this.canvas.style.width = size + 'px';
+    this.canvas.style.height = size + 'px';
+    this.ctx.scale(dpr, dpr);
+    this.size = size;
+    this.cx = size / 2;
+    this.cy = size / 2;
+    this.radius = size * 0.38;
+};
+
+BenchmarkRadarChart.prototype.draw = function(progress) {
+    var ctx = this.ctx;
+    var cfg = this.config;
+    var labels = cfg.labels;
+    var datasets = cfg.datasets;
+    var maxVal = cfg.maxValue || 100;
+    var numAxes = labels.length;
+    var angleStep = (Math.PI * 2) / numAxes;
+    var startAngle = -Math.PI / 2;
+
+    ctx.clearRect(0, 0, this.size, this.size);
+
+    // Grid rings
+    var rings = 5;
+    for (var r = 1; r <= rings; r++) {
+        var ringRadius = (r / rings) * this.radius;
+        ctx.beginPath();
+        for (var a = 0; a < numAxes; a++) {
+            var angle = startAngle + a * angleStep;
+            var x = this.cx + Math.cos(angle) * ringRadius;
+            var y = this.cy + Math.sin(angle) * ringRadius;
+            if (a === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.08)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+    }
+
+    // Axis lines and labels
+    ctx.fillStyle = '#374151';
+    ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    for (var i = 0; i < numAxes; i++) {
+        var angle = startAngle + i * angleStep;
+        var axisX = this.cx + Math.cos(angle) * this.radius;
+        var axisY = this.cy + Math.sin(angle) * this.radius;
+
+        ctx.beginPath();
+        ctx.moveTo(this.cx, this.cy);
+        ctx.lineTo(axisX, axisY);
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)';
+        ctx.stroke();
+
+        // Label
+        var labelDist = this.radius + 20;
+        var lx = this.cx + Math.cos(angle) * labelDist;
+        var ly = this.cy + Math.sin(angle) * labelDist;
+        ctx.fillText(labels[i], lx, ly);
+    }
+
+    // Data polygons
+    for (var d = 0; d < datasets.length; d++) {
+        var ds = datasets[d];
+        var color = ds.color;
+        ctx.beginPath();
+        for (var j = 0; j < numAxes; j++) {
+            var val = ds.values[j] === null ? 0 : ds.values[j];
+            var pct = (val / maxVal) * progress;
+            var angle2 = startAngle + j * angleStep;
+            var px = this.cx + Math.cos(angle2) * this.radius * pct;
+            var py = this.cy + Math.sin(angle2) * this.radius * pct;
+            if (j === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.fillStyle = color + '20';
+        ctx.fill();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Data points
+        for (var k = 0; k < numAxes; k++) {
+            var val2 = ds.values[k] === null ? 0 : ds.values[k];
+            var pct2 = (val2 / maxVal) * progress;
+            var angle3 = startAngle + k * angleStep;
+            var dotX = this.cx + Math.cos(angle3) * this.radius * pct2;
+            var dotY = this.cy + Math.sin(angle3) * this.radius * pct2;
+            ctx.beginPath();
+            ctx.arc(dotX, dotY, 4, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+    }
+};
+
+BenchmarkRadarChart.prototype.animate = function() {
+    if (this.animated) return;
+    this.animated = true;
+    this.resize();
+    var self = this;
+    var start = null;
+    var duration = 1000;
+
+    function step(ts) {
+        if (!start) start = ts;
+        var elapsed = ts - start;
+        self.progress = Math.min(elapsed / duration, 1);
+        var t = 1 - Math.pow(1 - self.progress, 3);
+        self.draw(t);
+        if (self.progress < 1) {
+            requestAnimationFrame(step);
+        }
+    }
+    requestAnimationFrame(step);
+};
+
+// === DONUT CHART ===
+/**
+ * BenchmarkDonutChart — Renders donut/ring charts on a <canvas> element.
+ * @param {HTMLCanvasElement} canvas - Target canvas element
+ * @param {Object} config - { labels, values, colors }
+ */
+function BenchmarkDonutChart(canvas, config) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.config = config;
+    this.animated = false;
+    this.progress = 0;
+}
+
+BenchmarkDonutChart.prototype.resize = function() {
+    var rect = this.canvas.parentElement.getBoundingClientRect();
+    var dpr = window.devicePixelRatio || 1;
+    var size = Math.min(rect.width, rect.height);
+    this.canvas.width = size * dpr;
+    this.canvas.height = size * dpr;
+    this.canvas.style.width = size + 'px';
+    this.canvas.style.height = size + 'px';
+    this.ctx.scale(dpr, dpr);
+    this.size = size;
+    this.cx = size / 2;
+    this.cy = size / 2;
+};
+
+BenchmarkDonutChart.prototype.draw = function(progress) {
+    var ctx = this.ctx;
+    var cfg = this.config;
+    var labels = cfg.labels;
+    var values = cfg.values;
+    var colors = cfg.colors;
+    var outerR = this.size * 0.4;
+    var innerR = this.size * 0.25;
+    var total = 0;
+
+    for (var i = 0; i < values.length; i++) {
+        total += (values[i] || 0);
+    }
+
+    ctx.clearRect(0, 0, this.size, this.size);
+
+    var currentAngle = -Math.PI / 2;
+    for (var j = 0; j < values.length; j++) {
+        var val = values[j] || 0;
+        var sliceAngle = (val / total) * Math.PI * 2 * progress;
+        ctx.beginPath();
+        ctx.arc(this.cx, this.cy, outerR, currentAngle, currentAngle + sliceAngle);
+        ctx.arc(this.cx, this.cy, innerR, currentAngle + sliceAngle, currentAngle, true);
+        ctx.closePath();
+        ctx.fillStyle = colors[j] || '#DC3545';
+        ctx.fill();
+
+        // Label line + text for larger slices
+        if (progress > 0.8 && sliceAngle > 0.25) {
+            var midAngle = currentAngle + sliceAngle / 2;
+            var labelR = outerR + 12;
+            var lx = this.cx + Math.cos(midAngle) * labelR;
+            var ly = this.cy + Math.sin(midAngle) * labelR;
+            ctx.fillStyle = '#374151';
+            ctx.font = '600 10px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+            ctx.textAlign = midAngle > Math.PI / 2 || midAngle < -Math.PI / 2 ? 'right' : 'left';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(labels[j], lx, ly);
+        }
+
+        currentAngle += sliceAngle;
+    }
+
+    // Center text
+    if (progress > 0.5) {
+        var topScore = 0;
+        var topIdx = 0;
+        for (var k = 0; k < values.length; k++) {
+            if ((values[k] || 0) > topScore) {
+                topScore = values[k];
+                topIdx = k;
+            }
+        }
+        ctx.fillStyle = '#111';
+        ctx.font = '800 22px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(topScore.toFixed(1), this.cx, this.cy - 8);
+        ctx.fillStyle = '#6b7280';
+        ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillText(labels[topIdx], this.cx, this.cy + 12);
+    }
+};
+
+BenchmarkDonutChart.prototype.animate = function() {
+    if (this.animated) return;
+    this.animated = true;
+    this.resize();
+    var self = this;
+    var start = null;
+    var duration = 1000;
+    function step(ts) {
+        if (!start) start = ts;
+        var elapsed = ts - start;
+        self.progress = Math.min(elapsed / duration, 1);
+        var t = 1 - Math.pow(1 - self.progress, 3);
+        self.draw(t);
+        if (self.progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+};
+
+// === LOLLIPOP CHART ===
+/**
+ * BenchmarkLollipopChart — Renders lollipop charts (line + dot) on a <canvas>.
+ * @param {HTMLCanvasElement} canvas
+ * @param {Object} config - { labels, values, colors, maxValue }
+ */
+function BenchmarkLollipopChart(canvas, config) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.config = config;
+    this.animated = false;
+    this.progress = 0;
+}
+
+BenchmarkLollipopChart.prototype.resize = BenchmarkBarChart.prototype.resize;
+
+BenchmarkLollipopChart.prototype.draw = function(progress) {
+    var ctx = this.ctx;
+    var cfg = this.config;
+    var labels = cfg.labels;
+    var values = cfg.values;
+    var colors = cfg.colors;
+    var maxVal = cfg.maxValue || 100;
+    var count = labels.length;
+    var padding = { top: 10, right: 50, bottom: 10, left: 120 };
+    var rowH = Math.min(28, (this.height - padding.top - padding.bottom) / count - 8);
+    var gap = 8;
+
+    ctx.clearRect(0, 0, this.width, this.height);
+    var chartW = this.width - padding.left - padding.right;
+
+    for (var i = 0; i < count; i++) {
+        var y = padding.top + i * (rowH + gap) + rowH / 2;
+        var val = values[i] === null ? 0 : values[i];
+        var w = (val / maxVal) * chartW * progress;
+        var color = colors ? (colors[i] || '#DC3545') : '#DC3545';
+
+        // Label
+        ctx.fillStyle = '#374151';
+        ctx.font = '600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(labels[i], padding.left - 10, y);
+
+        // Baseline
+        ctx.strokeStyle = '#e5e7eb';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(padding.left, y);
+        ctx.lineTo(padding.left + chartW, y);
+        ctx.stroke();
+
+        // Stem line
+        if (w > 0) {
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(padding.left, y);
+            ctx.lineTo(padding.left + w, y);
+            ctx.stroke();
+
+            // Dot
+            ctx.beginPath();
+            ctx.arc(padding.left + w, y, 7, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        // Value text
+        if (progress > 0.5) {
+            var displayVal = values[i] === null ? 'N/A' : values[i].toFixed(1);
+            ctx.fillStyle = '#111';
+            ctx.font = '700 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText(displayVal, padding.left + w + 14, y);
+        }
+    }
+};
+
+BenchmarkLollipopChart.prototype.animate = BenchmarkBarChart.prototype.animate;
+
+// === VERTICAL BAR CHART ===
+/**
+ * BenchmarkVerticalBarChart — Renders vertical bar charts on a <canvas>.
+ * @param {HTMLCanvasElement} canvas
+ * @param {Object} config - { labels, values, colors, maxValue }
+ */
+function BenchmarkVerticalBarChart(canvas, config) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.config = config;
+    this.animated = false;
+    this.progress = 0;
+}
+
+BenchmarkVerticalBarChart.prototype.resize = BenchmarkBarChart.prototype.resize;
+
+BenchmarkVerticalBarChart.prototype.draw = function(progress) {
+    var ctx = this.ctx;
+    var cfg = this.config;
+    var labels = cfg.labels;
+    var values = cfg.values;
+    var colors = cfg.colors;
+    var maxVal = cfg.maxValue || 100;
+    var count = labels.length;
+    var padding = { top: 30, right: 10, bottom: 60, left: 10 };
+    var chartH = this.height - padding.top - padding.bottom;
+    var chartW = this.width - padding.left - padding.right;
+    var barW = Math.min(40, (chartW / count) - 8);
+    var gap = (chartW - barW * count) / (count + 1);
+
+    ctx.clearRect(0, 0, this.width, this.height);
+
+    // Grid lines
+    for (var g = 0; g <= 4; g++) {
+        var gy = padding.top + (chartH / 4) * g;
+        ctx.strokeStyle = '#f3f4f6';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(padding.left, gy);
+        ctx.lineTo(this.width - padding.right, gy);
+        ctx.stroke();
+    }
+
+    for (var i = 0; i < count; i++) {
+        var x = padding.left + gap + i * (barW + gap);
+        var val = values[i] === null ? 0 : values[i];
+        var h = (val / maxVal) * chartH * progress;
+        var barY = padding.top + chartH - h;
+        var color = colors ? (colors[i] || '#DC3545') : '#DC3545';
+
+        // Bar
+        if (h > 0) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.roundRect(x, barY, barW, h, [4, 4, 0, 0]);
+            ctx.fill();
+        }
+
+        // Value on top
+        if (progress > 0.5) {
+            var displayVal = values[i] === null ? 'N/A' : values[i].toFixed(1);
+            ctx.fillStyle = '#111';
+            ctx.font = '700 10px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'bottom';
+            ctx.fillText(displayVal, x + barW / 2, barY - 4);
+        }
+
+        // Label at bottom (rotated)
+        ctx.save();
+        ctx.translate(x + barW / 2, padding.top + chartH + 8);
+        ctx.rotate(-Math.PI / 4);
+        ctx.fillStyle = '#374151';
+        ctx.font = '600 10px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'top';
+        ctx.fillText(labels[i], 0, 0);
+        ctx.restore();
+    }
+};
+
+BenchmarkVerticalBarChart.prototype.animate = BenchmarkBarChart.prototype.animate;
+
+/**
+ * initBenchmarkCharts — Sets up IntersectionObserver to trigger chart animations
+ * when they scroll into view. Called on DOMContentLoaded for benchmark pages.
+ */
+function initBenchmarkCharts() {
+    var chartCanvases = document.querySelectorAll('.benchmark-chart-canvas');
+    if (!chartCanvases.length) return;
+
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting && entry.target._benchmarkChart) {
+                entry.target._benchmarkChart.animate();
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    chartCanvases.forEach(function(canvas) {
+        observer.observe(canvas);
+    });
+}
+
+/**
+ * buildLeaderboard — Generates the leaderboard table from BENCHMARK_DATA.
+ * @param {string} category - Category index (0-5) or 'overall' for average
+ * @param {HTMLElement} container - Target container element
+ */
+function buildLeaderboard(category, container) {
+    if (!container) return;
+    var data = BENCHMARK_DATA;
+    var entries = [];
+
+    Object.keys(data.providers).forEach(function(key) {
+        var provider = data.providers[key];
+        var model = provider.models[provider.flagship];
+        if (!model) return;
+
+        var score;
+        if (category === 'overall') {
+            var validScores = model.scores.filter(function(s) { return s !== null; });
+            score = validScores.length ? validScores.reduce(function(a, b) { return a + b; }, 0) / validScores.length : 0;
+        } else {
+            score = model.scores[category];
+        }
+
+        entries.push({
+            provider: provider.name,
+            providerKey: key,
+            model: provider.flagship,
+            color: provider.color,
+            score: score
+        });
+    });
+
+    entries.sort(function(a, b) { return (b.score || 0) - (a.score || 0); });
+
+    var table = document.createElement('table');
+    table.className = 'benchmark-leaderboard';
+    table.setAttribute('role', 'table');
+
+    var thead = document.createElement('thead');
+    var headerRow = document.createElement('tr');
+    ['Rank', 'Model', 'Provider', 'Score'].forEach(function(h) {
+        var th = document.createElement('th');
+        th.setAttribute('scope', 'col');
+        th.textContent = h;
+        headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    var tbody = document.createElement('tbody');
+    entries.forEach(function(entry, idx) {
+        var tr = document.createElement('tr');
+
+        // Rank
+        var tdRank = document.createElement('td');
+        tdRank.className = 'benchmark-leaderboard__rank';
+        if (idx === 0) tdRank.className += ' benchmark-leaderboard__rank--gold';
+        else if (idx === 1) tdRank.className += ' benchmark-leaderboard__rank--silver';
+        else if (idx === 2) tdRank.className += ' benchmark-leaderboard__rank--bronze';
+        tdRank.textContent = '#' + (idx + 1);
+        tr.appendChild(tdRank);
+
+        // Model
+        var tdModel = document.createElement('td');
+        tdModel.className = 'benchmark-leaderboard__model';
+        tdModel.textContent = entry.model;
+        tr.appendChild(tdModel);
+
+        // Provider
+        var tdProvider = document.createElement('td');
+        var providerSpan = document.createElement('span');
+        providerSpan.className = 'benchmark-leaderboard__provider provider-bg--' + entry.providerKey;
+        providerSpan.textContent = entry.provider;
+        tdProvider.appendChild(providerSpan);
+        tr.appendChild(tdProvider);
+
+        // Score with bar
+        var tdScore = document.createElement('td');
+        tdScore.className = 'benchmark-leaderboard__bar';
+        var track = document.createElement('div');
+        track.className = 'benchmark-leaderboard__bar-track';
+        var fill = document.createElement('div');
+        fill.className = 'benchmark-leaderboard__bar-fill provider-bg--' + entry.providerKey;
+        fill.style.width = (entry.score || 0) + '%';
+        track.appendChild(fill);
+        var valSpan = document.createElement('span');
+        valSpan.className = 'benchmark-leaderboard__bar-value';
+        valSpan.textContent = entry.score !== null ? entry.score.toFixed(1) : 'N/A';
+        tdScore.appendChild(track);
+        tdScore.appendChild(valSpan);
+        tr.appendChild(tdScore);
+
+        tbody.appendChild(tr);
+    });
+
+    table.appendChild(tbody);
+    container.innerHTML = '';
+    var wrapper = document.createElement('div');
+    wrapper.className = 'benchmark-table-wrapper';
+    wrapper.appendChild(table);
+    container.appendChild(wrapper);
+}
+
+/**
+ * initBenchmarkHubPage — Sets up the hub page: leaderboard filters, bar charts, radar chart.
+ */
+function initBenchmarkHubPage() {
+    var data = BENCHMARK_DATA;
+    var providers = data.providers;
+
+    // --- Leaderboard filter buttons ---
+    var filterBtns = document.querySelectorAll('.benchmark-filter-btn[data-category]');
+    var leaderboardEl = document.querySelector('[data-benchmark-leaderboard]');
+
+    if (filterBtns.length && leaderboardEl) {
+        filterBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(function(b) { b.classList.remove('is-active'); });
+                btn.classList.add('is-active');
+                var cat = btn.getAttribute('data-category');
+                buildLeaderboard(cat === 'overall' ? 'overall' : parseInt(cat, 10), leaderboardEl);
+            });
+        });
+    }
+
+    // --- Bar charts for each category ---
+    function createBarChart(canvasId, categoryIndex) {
+        var canvas = document.getElementById(canvasId);
+        if (!canvas) return;
+        var labels = [];
+        var values = [];
+        var colors = [];
+        var siteColors = data.categoryColors || ['#000000', '#444444', '#DC3545', '#888888', '#4169E1', '#6B21A8'];
+        var barIdx = 0;
+        Object.keys(providers).forEach(function(key) {
+            var p = providers[key];
+            var model = p.models[p.flagship];
+            if (!model) return;
+            labels.push(p.flagship);
+            values.push(model.scores[categoryIndex]);
+            colors.push(siteColors[barIdx % siteColors.length]);
+            barIdx++;
+        });
+        // Sort by score descending
+        var indices = labels.map(function(_, i) { return i; });
+        indices.sort(function(a, b) { return (values[b] || 0) - (values[a] || 0); });
+        var sortedLabels = indices.map(function(i) { return labels[i]; });
+        var sortedValues = indices.map(function(i) { return values[i]; });
+        var sortedColors = indices.map(function(i) { return colors[i]; });
+
+        var chart = new BenchmarkBarChart(canvas, {
+            labels: sortedLabels,
+            values: sortedValues,
+            colors: sortedColors,
+            maxValue: 100
+        });
+        canvas._benchmarkChart = chart;
+    }
+
+    // --- Knowledge bar chart (horizontal) ---
+    createBarChart('benchmark-bar-knowledge', 0);
+
+    // --- Reasoning lollipop chart ---
+    (function() {
+        var canvas = document.getElementById('benchmark-lollipop-reasoning');
+        if (!canvas) return;
+        var labels = [];
+        var values = [];
+        var colors = [];
+        var siteColors = data.categoryColors || ['#000000', '#444444', '#DC3545', '#888888', '#4169E1', '#6B21A8'];
+        var barIdx = 0;
+        Object.keys(providers).forEach(function(key) {
+            var p = providers[key];
+            var model = p.models[p.flagship];
+            if (!model) return;
+            labels.push(p.flagship);
+            values.push(model.scores[1]);
+            colors.push(siteColors[barIdx % siteColors.length]);
+            barIdx++;
+        });
+        var indices = labels.map(function(_, i) { return i; });
+        indices.sort(function(a, b) { return (values[b] || 0) - (values[a] || 0); });
+        var chart = new BenchmarkLollipopChart(canvas, {
+            labels: indices.map(function(i) { return labels[i]; }),
+            values: indices.map(function(i) { return values[i]; }),
+            colors: indices.map(function(i) { return colors[i]; }),
+            maxValue: 100
+        });
+        canvas._benchmarkChart = chart;
+    })();
+
+    // --- Coding vertical bar chart ---
+    (function() {
+        var canvas = document.getElementById('benchmark-vbar-coding');
+        if (!canvas) return;
+        var labels = [];
+        var values = [];
+        var colors = [];
+        var siteColors = data.categoryColors || ['#000000', '#444444', '#DC3545', '#888888', '#4169E1', '#6B21A8'];
+        var barIdx = 0;
+        Object.keys(providers).forEach(function(key) {
+            var p = providers[key];
+            var model = p.models[p.flagship];
+            if (!model) return;
+            labels.push(p.flagship);
+            values.push(model.scores[2]);
+            colors.push(siteColors[barIdx % siteColors.length]);
+            barIdx++;
+        });
+        var indices = labels.map(function(_, i) { return i; });
+        indices.sort(function(a, b) { return (values[b] || 0) - (values[a] || 0); });
+        var chart = new BenchmarkVerticalBarChart(canvas, {
+            labels: indices.map(function(i) { return labels[i]; }),
+            values: indices.map(function(i) { return values[i]; }),
+            colors: indices.map(function(i) { return colors[i]; }),
+            maxValue: 100
+        });
+        canvas._benchmarkChart = chart;
+    })();
+
+    // --- Overall donut chart (full width) ---
+    (function() {
+        var canvas = document.getElementById('benchmark-donut-overall');
+        if (!canvas) return;
+        var labels = [];
+        var values = [];
+        var colors = [];
+        var siteColors = data.categoryColors || ['#000000', '#444444', '#DC3545', '#888888', '#4169E1', '#6B21A8'];
+        var barIdx = 0;
+        Object.keys(providers).forEach(function(key) {
+            var p = providers[key];
+            var model = p.models[p.flagship];
+            if (!model) return;
+            var validScores = model.scores.filter(function(s) { return s !== null; });
+            var avg = validScores.length ? validScores.reduce(function(a, b) { return a + b; }, 0) / validScores.length : 0;
+            labels.push(p.name);
+            values.push(parseFloat(avg.toFixed(1)));
+            colors.push(siteColors[barIdx % siteColors.length]);
+            barIdx++;
+        });
+        // Sort by score descending
+        var indices = labels.map(function(_, i) { return i; });
+        indices.sort(function(a, b) { return (values[b] || 0) - (values[a] || 0); });
+        var sortedLabels = indices.map(function(i) { return labels[i]; });
+        var sortedValues = indices.map(function(i) { return values[i]; });
+        var sortedColors = indices.map(function(i) { return colors[i]; });
+
+        var chart = new BenchmarkDonutChart(canvas, {
+            labels: sortedLabels,
+            values: sortedValues,
+            colors: sortedColors
+        });
+        canvas._benchmarkChart = chart;
+
+        // Build donut legend
+        var legendEl = document.getElementById('benchmark-donut-legend');
+        if (legendEl) {
+            sortedLabels.forEach(function(name, i) {
+                var item = document.createElement('span');
+                item.className = 'benchmark-legend__item';
+                var swatch = document.createElement('span');
+                swatch.className = 'benchmark-legend__swatch';
+                swatch.style.backgroundColor = sortedColors[i];
+                var label = document.createTextNode(name + ' — ' + sortedValues[i].toFixed(1));
+                item.appendChild(swatch);
+                item.appendChild(label);
+                legendEl.appendChild(item);
+            });
+        }
+    })();
+
+    // --- Radar chart for top 4 ---
+    var radarCanvas = document.getElementById('benchmark-radar-top4');
+    if (radarCanvas) {
+        var topProviders = ['openai', 'anthropic', 'google', 'deepseek'];
+        var radarColors = ['#000000', '#DC3545', '#4169E1', '#6B21A8'];
+        var datasets = topProviders.map(function(key, idx) {
+            var p = providers[key];
+            var model = p.models[p.flagship];
+            return {
+                name: p.flagship,
+                values: model ? model.scores : [0,0,0,0,0,0],
+                color: radarColors[idx]
+            };
+        });
+
+        var radar = new BenchmarkRadarChart(radarCanvas, {
+            labels: data.categories,
+            datasets: datasets,
+            maxValue: 100
+        });
+        radarCanvas._benchmarkChart = radar;
+
+        // Build legend
+        var legendEl = document.getElementById('benchmark-radar-legend');
+        if (legendEl) {
+            datasets.forEach(function(ds) {
+                var item = document.createElement('span');
+                item.className = 'benchmark-legend__item';
+                var swatch = document.createElement('span');
+                swatch.className = 'benchmark-legend__swatch';
+                swatch.style.backgroundColor = ds.color;
+                var label = document.createTextNode(ds.name);
+                item.appendChild(swatch);
+                item.appendChild(label);
+                legendEl.appendChild(item);
+            });
+        }
+    }
+
+    initBenchmarkCharts();
+}
+
+/**
+ * initBenchmarkCompanyPage — Sets up charts on individual company pages.
+ * Detects the provider from the page's canvas IDs (e.g., "anthropic-bar-scores").
+ */
+function initBenchmarkCompanyPage() {
+    var data = BENCHMARK_DATA;
+
+    // Detect provider from any canvas ID starting with a provider key
+    var providerKey = null;
+    var canvases = document.querySelectorAll('.benchmark-chart-canvas');
+    canvases.forEach(function(c) {
+        var id = c.id || '';
+        Object.keys(data.providers).forEach(function(key) {
+            if (id.indexOf(key) === 0) providerKey = key;
+        });
+    });
+
+    if (!providerKey || !data.providers[providerKey]) return;
+
+    var provider = data.providers[providerKey];
+    var models = provider.models;
+
+    // Flagship scores bar chart
+    var scoresCanvas = document.getElementById(providerKey + '-bar-scores');
+    if (scoresCanvas) {
+        var flagship = models[provider.flagship];
+        if (flagship) {
+            var chart = new BenchmarkBarChart(scoresCanvas, {
+                labels: data.categories,
+                values: flagship.scores,
+                colors: data.categoryColors || flagship.scores.map(function() { return provider.color; }),
+                maxValue: 100
+            });
+            scoresCanvas._benchmarkChart = chart;
+        }
+    }
+
+    // Evolution bar chart (knowledge scores over time)
+    var evoCanvas = document.getElementById(providerKey + '-bar-evolution');
+    if (evoCanvas) {
+        var modelNames = Object.keys(models);
+        var knowledgeScores = modelNames.map(function(name) { return models[name].scores[0]; });
+        var evoChart = new BenchmarkBarChart(evoCanvas, {
+            labels: modelNames,
+            values: knowledgeScores,
+            colors: modelNames.map(function() { return provider.color; }),
+            maxValue: 100
+        });
+        evoCanvas._benchmarkChart = evoChart;
+    }
+
+    initBenchmarkCharts();
+}
+
+// Auto-init benchmark system on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Hub page
+    if (document.querySelector('[data-benchmark-leaderboard]')) {
+        initBenchmarkHubPage();
+        return;
+    }
+    // Company pages with provider-specific charts
+    var canvases = document.querySelectorAll('.benchmark-chart-canvas');
+    if (canvases.length) {
+        var hasProviderChart = false;
+        canvases.forEach(function(c) {
+            Object.keys(BENCHMARK_DATA.providers).forEach(function(key) {
+                if ((c.id || '').indexOf(key) === 0) hasProviderChart = true;
+            });
+        });
+        if (hasProviderChart) {
+            initBenchmarkCompanyPage();
+        } else {
+            initBenchmarkCharts();
+        }
+    }
+});
+

@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Model Benchmarks: Compare leading AI models across knowledge, reasoning, coding, math, multimodal, and instruction following. Interactive leaderboard with data from MMLU-Pro, GPQA, HumanEval, AIME, MMMU, and IFEval.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/benchmarks/">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="AI Model Benchmarks - Praxis">
+    <meta property="og:description" content="AI Model Benchmarks: Compare leading AI models across knowledge, reasoning, coding, math, multimodal, and instruction following. Interactive leaderboard with data from MMLU-Pro, GPQA, HumanEval, AIME, MMMU, and IFEval.">
+    <meta property="og:url" content="https://praxislibrary.com/benchmarks/">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Model Benchmarks - Praxis">
+    <meta name="twitter:description" content="AI Model Benchmarks: Compare leading AI models across knowledge, reasoning, coding, math, multimodal, and instruction following. Interactive leaderboard with data from MMLU-Pro, GPQA, HumanEval, AIME, MMMU, and IFEval.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "CollectionPage",
+        "Article"
+      ],
+      "headline": "AI Model Benchmarks",
+      "name": "AI Model Benchmarks",
+      "description": "Compare leading AI models across knowledge, reasoning, coding, math, multimodal, and instruction following benchmarks. Interactive leaderboard and comparison tools.",
+      "url": "https://praxislibrary.com/benchmarks/",
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 117 prompting frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Frameworks",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI Benchmarks",
+          "item": "https://praxislibrary.com/benchmarks/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>AI Model Benchmarks - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">AI Foundations</a>
+                <div class="nav-item has-dropdown">
+                    <a href="index.html" class="nav-link" aria-expanded="false">AI Benchmarks</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>AI Benchmarks</h4>
+                            <a href="index.html">Benchmark Hub</a>
+                            <a href="anthropic.html">Anthropic</a>
+                            <a href="openai.html">OpenAI</a>
+                            <a href="google.html">Google DeepMind</a>
+                            <a href="meta.html">Meta AI</a>
+                            <a href="xai.html">xAI</a>
+                            <a href="deepseek.html">DeepSeek</a>
+                            <a href="mistral.html">Mistral AI</a>
+                            <a href="alibaba.html">Alibaba Cloud</a>
+                            <a href="cohere.html">Cohere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../learn/index.html">Discover</a>
+                            <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                            <a href="../learn/facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                        <div class="mega-menu-group">
+                            <span class="mega-menu-group__label">Techniques</span>
+                            <a href="../learn/structured-frameworks.html" class="mega-menu-group__link">Structured Frameworks</a>
+                            <a href="../learn/in-context-learning.html" class="mega-menu-group__link">In-Context Learning</a>
+                            <a href="../learn/reasoning-cot.html" class="mega-menu-group__link">Reasoning &amp; CoT</a>
+                            <a href="../learn/decomposition.html" class="mega-menu-group__link">Decomposition</a>
+                            <a href="../learn/self-correction.html" class="mega-menu-group__link">Self-Correction</a>
+                            <a href="../learn/ensemble-methods.html" class="mega-menu-group__link">Ensemble Methods</a>
+                            <a href="../learn/prompting-strategies.html" class="mega-menu-group__link">Prompting Strategies</a>
+                        </div>
+                        <div class="mega-menu-group">
+                            <span class="mega-menu-group__label">Modality</span>
+                            <a href="../learn/modality/code/" class="mega-menu-group__link">Code</a>
+                            <a href="../learn/modality/image/" class="mega-menu-group__link">Image</a>
+                            <a href="../learn/modality/audio/" class="mega-menu-group__link">Audio</a>
+                            <a href="../learn/modality/video/" class="mega-menu-group__link">Video</a>
+                            <a href="../learn/modality/3d/" class="mega-menu-group__link">3D</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">AI Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Framework Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--multi-column">
+                        <div class="mega-menu-section">
+                            <h4>Guides</h4>
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>Principles</h4>
+                            <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
+                            <a href="../pages/universal-design.html">Universal Design</a>
+                            <a href="../pages/ai-assisted-building.html">AI Assisted</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../pages/performance.html">Performance</a>
+                        </div>
+                        <div class="mega-menu-section mega-menu-section--featured">
+                            <h4>AI &amp; ND</h4>
+                            <a href="../neurodivergence/index.html">ND Hub</a>
+                            <a href="../neurodivergence/adhd.html">AI for ADHD</a>
+                            <a href="../neurodivergence/autism.html">AI for Autism</a>
+                            <a href="../neurodivergence/dyslexia.html">AI for Dyslexia</a>
+                            <a href="../neurodivergence/tools.html">AI Tools</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>About</h4>
+                            <a href="../pages/about.html">About Praxis</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- === PAGE HERO === -->
+    <section class="page-hero">
+        <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+        <div class="container">
+            <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="separator">/</span>
+                <span class="current">AI Benchmarks</span>
+            </nav>
+            <div class="hero-badge" data-aos="fade-down">
+                <span class="hero-badge__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 20V10"/>
+                        <path d="M12 20V4"/>
+                        <path d="M6 20V14"/>
+                    </svg>
+                </span>
+                <span class="hero-badge__text">Verified Performance Data</span>
+            </div>
+            <h1 class="page-title fade-in">AI Model Benchmarks</h1>
+            <p class="page-subtitle fade-in">Compare leading AI models across knowledge, reasoning, coding, math, multimodal, and instruction following. Data-driven analysis of 9 providers and their flagship models.</p>
+        </div>
+    </section>
+    <!-- /PAGE HERO -->
+
+    <!-- === ACCENT BAR === -->
+    <div class="accent-bar accent-bar--gradient"></div>
+
+    <!-- === MAIN CONTENT === -->
+    <main id="main-content">
+
+        <!-- === STATS AT A GLANCE === -->
+        <section class="benchmark-section section-alt">
+            <div class="container">
+                <div class="benchmark-stats">
+                    <div class="benchmark-stat">
+                        <div class="benchmark-stat__value provider-color--anthropic">9</div>
+                        <div class="benchmark-stat__label">AI Providers</div>
+                    </div>
+                    <div class="benchmark-stat">
+                        <div class="benchmark-stat__value">50+</div>
+                        <div class="benchmark-stat__label">Models Tracked</div>
+                    </div>
+                    <div class="benchmark-stat">
+                        <div class="benchmark-stat__value">6</div>
+                        <div class="benchmark-stat__label">Benchmark Categories</div>
+                    </div>
+                    <div class="benchmark-stat">
+                        <div class="benchmark-stat__value">2026</div>
+                        <div class="benchmark-stat__label">Data Current As Of</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /STATS AT A GLANCE -->
+
+        <!-- === WHAT ARE BENCHMARKS === -->
+        <section class="benchmark-section">
+            <div class="container">
+                <h2 class="benchmark-section__title">Understanding AI Benchmarks</h2>
+                <p class="benchmark-section__subtitle">Standardized tests that measure how well AI models perform across different cognitive domains. These benchmarks help compare models objectively.</p>
+
+                <div class="benchmark-explainer">
+                    <div class="benchmark-explainer__card">
+                        <div class="benchmark-explainer__name">Knowledge</div>
+                        <div class="benchmark-explainer__full-name">MMLU</div>
+                        <p class="benchmark-explainer__desc">Massive Multitask Language Understanding. Tests broad academic knowledge across 57 subjects including STEM, humanities, and social sciences. Variants include MMMLU (multilingual) and MMLU-Pro (harder).</p>
+                    </div>
+                    <div class="benchmark-explainer__card">
+                        <div class="benchmark-explainer__name">Reasoning</div>
+                        <div class="benchmark-explainer__full-name">GPQA Diamond</div>
+                        <p class="benchmark-explainer__desc">Graduate-Level Google-Proof Q&amp;A. Expert-level science questions designed to be unsearchable, testing genuine reasoning ability.</p>
+                    </div>
+                    <div class="benchmark-explainer__card">
+                        <div class="benchmark-explainer__name">Coding</div>
+                        <div class="benchmark-explainer__full-name">HumanEval</div>
+                        <p class="benchmark-explainer__desc">OpenAI&rsquo;s code generation benchmark. Tests the ability to write correct Python functions from docstrings and function signatures.</p>
+                    </div>
+                    <div class="benchmark-explainer__card">
+                        <div class="benchmark-explainer__name">Math</div>
+                        <div class="benchmark-explainer__full-name">AIME 2024</div>
+                        <p class="benchmark-explainer__desc">American Invitational Mathematics Examination. Competition-level math problems requiring multi-step numerical reasoning.</p>
+                    </div>
+                    <div class="benchmark-explainer__card">
+                        <div class="benchmark-explainer__name">Multimodal</div>
+                        <div class="benchmark-explainer__full-name">MMMU</div>
+                        <p class="benchmark-explainer__desc">Massive Multi-discipline Multimodal Understanding. Tests vision-language reasoning across college-level subjects with images.</p>
+                    </div>
+                    <div class="benchmark-explainer__card">
+                        <div class="benchmark-explainer__name">Instruction</div>
+                        <div class="benchmark-explainer__full-name">IFEval</div>
+                        <p class="benchmark-explainer__desc">Instruction Following Evaluation. Measures how precisely models follow specific formatting, length, and structural constraints.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHAT ARE BENCHMARKS -->
+
+        <!-- === OVERALL LEADERBOARD === -->
+        <section class="benchmark-section section-alt">
+            <div class="container">
+                <h2 class="benchmark-section__title">Overall Leaderboard</h2>
+                <p class="benchmark-section__subtitle">Flagship models from each provider, ranked by average score across all available benchmark categories.</p>
+
+                <div class="benchmark-filters" role="group" aria-label="Benchmark category filter">
+                    <button class="benchmark-filter-btn is-active" data-category="overall">Overall</button>
+                    <button class="benchmark-filter-btn" data-category="0">Knowledge</button>
+                    <button class="benchmark-filter-btn" data-category="1">Reasoning</button>
+                    <button class="benchmark-filter-btn" data-category="2">Coding</button>
+                    <button class="benchmark-filter-btn" data-category="3">Math</button>
+                    <button class="benchmark-filter-btn" data-category="4">Multimodal</button>
+                    <button class="benchmark-filter-btn" data-category="5">Instruction</button>
+                </div>
+
+                <div data-benchmark-leaderboard="overall"></div>
+            </div>
+        </section>
+        <!-- /OVERALL LEADERBOARD -->
+
+        <!-- === FLAGSHIP COMPARISON CHARTS === -->
+        <section class="benchmark-section">
+            <div class="container">
+                <h2 class="benchmark-section__title">Flagship Model Comparison</h2>
+                <p class="benchmark-section__subtitle">Visual comparison of the top flagship models across all six benchmark dimensions.</p>
+
+                <!-- Overall donut — full width -->
+                <div class="benchmark-chart-card benchmark-chart-card--full">
+                    <h3 class="benchmark-chart-card__title">Overall Average Score</h3>
+                    <p class="benchmark-chart-card__subtitle">Average performance across all six benchmark dimensions for each provider&rsquo;s flagship model.</p>
+                    <div class="benchmark-donut-row">
+                        <canvas class="benchmark-chart-canvas benchmark-chart-canvas--donut" id="benchmark-donut-overall" role="img" aria-label="Donut chart showing overall average benchmark scores for all providers"></canvas>
+                        <div class="benchmark-legend benchmark-legend--vertical" id="benchmark-donut-legend"></div>
+                    </div>
+                </div>
+
+                <!-- Row 2: Radar + Knowledge -->
+                <div class="benchmark-chart-grid">
+                    <div class="benchmark-chart-card">
+                        <h3 class="benchmark-chart-card__title">Radar Comparison: Top 4 Models</h3>
+                        <canvas class="benchmark-chart-canvas" id="benchmark-radar-top4" role="img" aria-label="Radar chart comparing top 4 flagship AI models across 6 benchmarks">
+                            <!-- Accessible fallback table generated by JS -->
+                        </canvas>
+                        <div class="benchmark-legend" id="benchmark-radar-legend"></div>
+                    </div>
+                    <div class="benchmark-chart-card">
+                        <h3 class="benchmark-chart-card__title">Knowledge Scores (MMLU)</h3>
+                        <canvas class="benchmark-chart-canvas" id="benchmark-bar-knowledge" role="img" aria-label="Bar chart showing Knowledge benchmark scores for all providers"></canvas>
+                    </div>
+                </div>
+
+                <!-- Row 3: Reasoning + Coding -->
+                <div class="benchmark-chart-grid">
+                    <div class="benchmark-chart-card">
+                        <h3 class="benchmark-chart-card__title">Reasoning Scores (GPQA)</h3>
+                        <canvas class="benchmark-chart-canvas" id="benchmark-lollipop-reasoning" role="img" aria-label="Lollipop chart showing Reasoning benchmark scores for all providers"></canvas>
+                    </div>
+                    <div class="benchmark-chart-card">
+                        <h3 class="benchmark-chart-card__title">Coding Scores (HumanEval)</h3>
+                        <canvas class="benchmark-chart-canvas" id="benchmark-vbar-coding" role="img" aria-label="Vertical bar chart showing Coding benchmark scores for all providers"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /FLAGSHIP COMPARISON CHARTS -->
+
+        <!-- === PROVIDER DIRECTORY === -->
+        <section class="benchmark-section section-alt">
+            <div class="container">
+                <h2 class="benchmark-section__title">Explore by Provider</h2>
+                <p class="benchmark-section__subtitle">Dive deep into each AI company&rsquo;s model history, evolution, and benchmark performance over time.</p>
+
+                <div class="provider-grid">
+                    <a href="anthropic.html" class="provider-card provider-border--anthropic">
+                        <div class="provider-card__name provider-color--anthropic">Anthropic</div>
+                        <div class="provider-card__model">Flagship: Claude Opus 4.6</div>
+                        <div class="provider-card__scores">
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Knowledge</span>
+                                <span class="provider-card__score-value">91.1</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Reasoning</span>
+                                <span class="provider-card__score-value">91.3</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Coding</span>
+                                <span class="provider-card__score-value">95.0</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Math</span>
+                                <span class="provider-card__score-value">100.0</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="openai.html" class="provider-card provider-border--openai">
+                        <div class="provider-card__name provider-color--openai">OpenAI</div>
+                        <div class="provider-card__model">Flagship: GPT-5</div>
+                        <div class="provider-card__scores">
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Knowledge</span>
+                                <span class="provider-card__score-value">91.4</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Reasoning</span>
+                                <span class="provider-card__score-value">88.4</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Coding</span>
+                                <span class="provider-card__score-value">93.0</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Math</span>
+                                <span class="provider-card__score-value">94.6</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="google.html" class="provider-card provider-border--google">
+                        <div class="provider-card__name provider-color--google">Google DeepMind</div>
+                        <div class="provider-card__model">Flagship: Gemini 2.5 Pro</div>
+                        <div class="provider-card__scores">
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Knowledge</span>
+                                <span class="provider-card__score-value">89.8</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Reasoning</span>
+                                <span class="provider-card__score-value">84.0</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Coding</span>
+                                <span class="provider-card__score-value">82.0</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Math</span>
+                                <span class="provider-card__score-value">92.0</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="meta.html" class="provider-card provider-border--meta">
+                        <div class="provider-card__name provider-color--meta">Meta AI</div>
+                        <div class="provider-card__model">Flagship: Llama 4 Maverick</div>
+                        <div class="provider-card__scores">
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Knowledge</span>
+                                <span class="provider-card__score-value">85.5</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Reasoning</span>
+                                <span class="provider-card__score-value">69.8</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Coding</span>
+                                <span class="provider-card__score-value">86.4</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Math</span>
+                                <span class="provider-card__score-value">N/A</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="xai.html" class="provider-card provider-border--xai">
+                        <div class="provider-card__name provider-color--xai">xAI</div>
+                        <div class="provider-card__model">Flagship: Grok-3</div>
+                        <div class="provider-card__scores">
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Knowledge</span>
+                                <span class="provider-card__score-value">92.7</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Reasoning</span>
+                                <span class="provider-card__score-value">84.6</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Coding</span>
+                                <span class="provider-card__score-value">94.5</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Math</span>
+                                <span class="provider-card__score-value">93.3</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="deepseek.html" class="provider-card provider-border--deepseek">
+                        <div class="provider-card__name provider-color--deepseek">DeepSeek</div>
+                        <div class="provider-card__model">Flagship: DeepSeek-R1</div>
+                        <div class="provider-card__scores">
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Knowledge</span>
+                                <span class="provider-card__score-value">90.8</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Reasoning</span>
+                                <span class="provider-card__score-value">71.5</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Coding</span>
+                                <span class="provider-card__score-value">89.3</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Math</span>
+                                <span class="provider-card__score-value">79.8</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="mistral.html" class="provider-card provider-border--mistral">
+                        <div class="provider-card__name provider-color--mistral">Mistral AI</div>
+                        <div class="provider-card__model">Flagship: Mistral Large 3</div>
+                        <div class="provider-card__scores">
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Knowledge</span>
+                                <span class="provider-card__score-value">85.5</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Reasoning</span>
+                                <span class="provider-card__score-value">43.9</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Coding</span>
+                                <span class="provider-card__score-value">92.0</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Math</span>
+                                <span class="provider-card__score-value">N/A</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="alibaba.html" class="provider-card provider-border--alibaba">
+                        <div class="provider-card__name provider-color--alibaba">Alibaba Cloud</div>
+                        <div class="provider-card__model">Flagship: Qwen 2.5 72B</div>
+                        <div class="provider-card__scores">
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Knowledge</span>
+                                <span class="provider-card__score-value">86.1</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Reasoning</span>
+                                <span class="provider-card__score-value">49.0</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Coding</span>
+                                <span class="provider-card__score-value">86.6</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Math</span>
+                                <span class="provider-card__score-value">N/A</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="cohere.html" class="provider-card provider-border--cohere">
+                        <div class="provider-card__name provider-color--cohere">Cohere</div>
+                        <div class="provider-card__model">Flagship: Command A</div>
+                        <div class="provider-card__scores">
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Knowledge</span>
+                                <span class="provider-card__score-value">85.5</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Reasoning</span>
+                                <span class="provider-card__score-value">50.8</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Coding</span>
+                                <span class="provider-card__score-value">N/A</span>
+                            </div>
+                            <div class="provider-card__score-item">
+                                <span class="provider-card__score-label">Math</span>
+                                <span class="provider-card__score-value">N/A</span>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Note: Command A does not publish HumanEval or AIME scores -->
+                </div>
+            </div>
+        </section>
+        <!-- /PROVIDER DIRECTORY -->
+
+        <!-- === DISCLAIMER === -->
+        <section class="benchmark-section">
+            <div class="container">
+                <div class="callout callout--tip">
+                    <h3>About This Data</h3>
+                    <p>Benchmark scores are compiled from official provider reports, technical papers, and independent evaluations. Scores may vary between evaluation runs. Some models have not been tested on all benchmarks (shown as N/A). This page is updated regularly as new models and benchmark results become available.</p>
+                    <p>Benchmark scores measure specific capabilities, not overall model quality for your use case. The best model depends on your specific needs.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /DISCLAIMER -->
+
+        <!-- === CTA === -->
+        <section class="benchmark-section benchmark-section--dark">
+            <canvas class="footer-neural-bg" aria-hidden="true"></canvas>
+            <div class="container" >
+                <div class="cta-content" >
+                    <h2 class="benchmark-section__title">Learn How to Prompt These Models</h2>
+                    <p class="benchmark-section__subtitle">Knowing benchmarks is just the start. Master the art of communicating with AI through 108+ proven prompting frameworks.</p>
+                    <div class="hero-actions">
+                        <a href="../learn/index.html" class="btn btn-primary">Explore Frameworks</a>
+                        <a href="../pages/glossary.html" class="btn btn-secondary">Browse Glossary</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA -->
+
+    </main>
+    <!-- /MAIN CONTENT -->
+
+    <!-- === FOOTER === -->
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Discover</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">COSTAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Framework Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
+                <a href="../pages/universal-design.html">Universal Design</a>
+                <a href="../pages/ai-assisted-building.html">AI Assisted</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+    <!-- /FOOTER -->
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- === BADGE LIGHTBOX === -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <!-- === ACCESSIBILITY DASHBOARD === -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+    <!-- /ACCESSIBILITY DASHBOARD -->
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

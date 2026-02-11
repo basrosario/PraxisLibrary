@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cohere Benchmarks: Track the Command model family from Command R to Command A. Performance data across MMLU, GPQA Diamond, HumanEval, AIME, MMMU, and IFEval benchmarks.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/benchmarks/cohere.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Cohere: Command Model Benchmarks - Praxis">
+    <meta property="og:description" content="Cohere Benchmarks: Track the Command model family from Command R to Command A. Performance data across MMLU, GPQA Diamond, HumanEval, AIME, MMMU, and IFEval benchmarks.">
+    <meta property="og:url" content="https://praxislibrary.com/benchmarks/cohere.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cohere: Command Model Benchmarks - Praxis">
+    <meta name="twitter:description" content="Cohere Benchmarks: Track the Command model family from Command R to Command A. Performance data across MMLU, GPQA Diamond, HumanEval, AIME, MMMU, and IFEval benchmarks.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["LearningResource", "Article"],
+      "headline": "Cohere: Command Model Benchmarks",
+      "name": "Cohere: Command Model Benchmarks",
+      "description": "Track the Command model family from Command R to Command R+. Performance data across knowledge, reasoning, coding, math, multimodal, and instruction following benchmarks.",
+      "url": "https://praxislibrary.com/benchmarks/cohere.html",
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
+      "publisher": { "@type": "EducationalOrganization", "name": "Praxis Library", "alternateName": "The Open Standard in AI Literacy", "url": "https://praxislibrary.com", "logo": "https://praxislibrary.com/favicon.svg" },
+      "isPartOf": { "@type": "WebSite", "name": "Praxis Library", "url": "https://praxislibrary.com" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://praxislibrary.com" },
+        { "@type": "ListItem", "position": 2, "name": "AI Benchmarks", "item": "https://praxislibrary.com/benchmarks/" },
+        { "@type": "ListItem", "position": 3, "name": "Cohere" }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Cohere: Command Model Benchmarks - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">AI Foundations</a>
+                <div class="nav-item has-dropdown">
+                    <a href="index.html" class="nav-link" aria-expanded="false">AI Benchmarks</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>AI Benchmarks</h4>
+                            <a href="index.html">Benchmark Hub</a>
+                            <a href="anthropic.html">Anthropic</a>
+                            <a href="openai.html">OpenAI</a>
+                            <a href="google.html">Google DeepMind</a>
+                            <a href="meta.html">Meta AI</a>
+                            <a href="xai.html">xAI</a>
+                            <a href="deepseek.html">DeepSeek</a>
+                            <a href="mistral.html">Mistral AI</a>
+                            <a href="alibaba.html">Alibaba Cloud</a>
+                            <a href="cohere.html">Cohere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../learn/index.html">Discover</a>
+                            <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                            <a href="../learn/facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                        <div class="mega-menu-group">
+                            <span class="mega-menu-group__label">Techniques</span>
+                            <a href="../learn/structured-frameworks.html" class="mega-menu-group__link">Structured Frameworks</a>
+                            <a href="../learn/in-context-learning.html" class="mega-menu-group__link">In-Context Learning</a>
+                            <a href="../learn/reasoning-cot.html" class="mega-menu-group__link">Reasoning &amp; CoT</a>
+                            <a href="../learn/decomposition.html" class="mega-menu-group__link">Decomposition</a>
+                            <a href="../learn/self-correction.html" class="mega-menu-group__link">Self-Correction</a>
+                            <a href="../learn/ensemble-methods.html" class="mega-menu-group__link">Ensemble Methods</a>
+                            <a href="../learn/prompting-strategies.html" class="mega-menu-group__link">Prompting Strategies</a>
+                        </div>
+                        <div class="mega-menu-group">
+                            <span class="mega-menu-group__label">Modality</span>
+                            <a href="../learn/modality/code/" class="mega-menu-group__link">Code</a>
+                            <a href="../learn/modality/image/" class="mega-menu-group__link">Image</a>
+                            <a href="../learn/modality/audio/" class="mega-menu-group__link">Audio</a>
+                            <a href="../learn/modality/video/" class="mega-menu-group__link">Video</a>
+                            <a href="../learn/modality/3d/" class="mega-menu-group__link">3D</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">AI Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Framework Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--multi-column">
+                        <div class="mega-menu-section">
+                            <h4>Guides</h4>
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>Principles</h4>
+                            <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
+                            <a href="../pages/universal-design.html">Universal Design</a>
+                            <a href="../pages/ai-assisted-building.html">AI Assisted</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../pages/performance.html">Performance</a>
+                        </div>
+                        <div class="mega-menu-section mega-menu-section--featured">
+                            <h4>AI &amp; ND</h4>
+                            <a href="../neurodivergence/index.html">ND Hub</a>
+                            <a href="../neurodivergence/adhd.html">AI for ADHD</a>
+                            <a href="../neurodivergence/autism.html">AI for Autism</a>
+                            <a href="../neurodivergence/dyslexia.html">AI for Dyslexia</a>
+                            <a href="../neurodivergence/tools.html">AI Tools</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>About</h4>
+                            <a href="../pages/about.html">About Praxis</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- === PAGE HERO === -->
+    <section class="page-hero">
+        <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+        <div class="container">
+            <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="index.html">AI Benchmarks</a>
+                <span class="separator">/</span>
+                <span class="current">Cohere</span>
+            </nav>
+            <div class="hero-badge" data-aos="fade-down">
+                <span class="hero-badge__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 20V10"/>
+                        <path d="M12 20V4"/>
+                        <path d="M6 20V14"/>
+                    </svg>
+                </span>
+                <span class="hero-badge__text">Verified Performance Data</span>
+            </div>
+            <h1 class="page-title fade-in">Cohere</h1>
+            <p class="page-subtitle fade-in">The Command model family: From Command R to Command A. Enterprise-focused AI with strong retrieval-augmented generation. Benchmark performance across knowledge, reasoning, coding, math, multimodal, and instruction following.</p>
+        </div>
+    </section>
+    <!-- /PAGE HERO -->
+
+    <div class="accent-bar accent-bar--gradient"></div>
+
+    <!-- === MAIN CONTENT === -->
+    <main id="main-content">
+
+        <!-- === COMPANY OVERVIEW === -->
+        <section class="benchmark-section section-alt">
+            <div class="container">
+                <div class="benchmark-stats">
+                    <div class="benchmark-stat">
+                        <div class="benchmark-stat__value provider-color--cohere">3</div>
+                        <div class="benchmark-stat__label">Models Tracked</div>
+                    </div>
+                    <div class="benchmark-stat benchmark-stat--badge">
+                        <div class="benchmark-stat__value">2019</div>
+                        <div class="benchmark-stat__label">Founded</div>
+                    </div>
+                    <div class="benchmark-stat">
+                        <div class="benchmark-stat__value">88.2</div>
+                        <div class="benchmark-stat__label">Best Knowledge</div>
+                    </div>
+                    <div class="benchmark-stat">
+                        <div class="benchmark-stat__value">90.9</div>
+                        <div class="benchmark-stat__label">Best Instruction</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /COMPANY OVERVIEW -->
+
+        <!-- === ABOUT === -->
+        <section class="benchmark-section">
+            <div class="container">
+                <h2 class="benchmark-section__title">About Cohere</h2>
+                <p>Cohere is a Canadian AI company founded in 2019 by former Google Brain researchers, including Aidan Gomez&mdash;one of the co-authors of the original &ldquo;Attention Is All You Need&rdquo; Transformer paper. Based in Toronto, Cohere focuses on enterprise AI with a strong emphasis on retrieval-augmented generation (RAG) and multilingual capabilities.</p>
+                <p>The Command model family is designed specifically for enterprise use cases: tool use, document processing, and multi-step agentic workflows. Command A (2025) represents Cohere&rsquo;s latest generation, offering GPT-4-tier performance at significantly lower computational cost with a 111B parameter MoE architecture.</p>
+            </div>
+        </section>
+        <!-- /ABOUT -->
+
+        <!-- === MODEL TIMELINE === -->
+        <section class="benchmark-section section-alt">
+            <div class="container">
+                <h2 class="benchmark-section__title">Command Model Timeline</h2>
+                <p class="benchmark-section__subtitle">The evolution of Cohere&rsquo;s Command family. Verified scores from the <a href="https://cohere.com/research/papers/command-a-technical-report.pdf" target="_blank" rel="noopener noreferrer" data-added="2026-02-10">Command A Technical Report</a>.</p>
+
+                <div class="model-timeline">
+                    <div class="model-timeline__item model-timeline__item--current">
+                        <div class="model-timeline__date">March 2025</div>
+                        <h3 class="model-timeline__title">Command A</h3>
+                        <p class="model-timeline__description">Cohere&rsquo;s most capable model. Command A achieves <a href="https://cohere.com/research/papers/command-a-technical-report.pdf" target="_blank" rel="noopener noreferrer" data-added="2026-02-10">85.5% on MMLU</a>, 50.8% on GPQA, and 90.9% on IFEval. A 111B parameter MoE architecture delivers strong performance with efficient inference, purpose-built for enterprise RAG and agentic workflows.</p>
+                        <div class="model-timeline__benchmarks">
+                            <span class="model-timeline__benchmark-tag">MMLU <span>85.5</span></span>
+                            <span class="model-timeline__benchmark-tag">GPQA <span>50.8</span></span>
+                            <span class="model-timeline__benchmark-tag">IFEval <span>90.9</span></span>
+                        </div>
+                    </div>
+
+                    <div class="model-timeline__item">
+                        <div class="model-timeline__date">April 2024</div>
+                        <h3 class="model-timeline__title">Command R+</h3>
+                        <p class="model-timeline__description">The first model to bring Cohere into frontier territory. Command R+ achieved 88.2% on MMLU and introduced advanced multi-step tool use and strong RAG grounding, establishing Cohere as a serious enterprise AI contender.</p>
+                        <div class="model-timeline__benchmarks">
+                            <span class="model-timeline__benchmark-tag">MMLU <span>88.2</span></span>
+                        </div>
+                    </div>
+
+                    <div class="model-timeline__item">
+                        <div class="model-timeline__date">March 2024</div>
+                        <h3 class="model-timeline__title">Command R</h3>
+                        <p class="model-timeline__description">An efficiency-focused model designed for production RAG workflows. Command R offered strong retrieval-augmented generation at lower latency and cost, making it popular for enterprise search and document analysis applications.</p>
+                        <div class="model-timeline__benchmarks">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /MODEL TIMELINE -->
+
+        <!-- === BENCHMARK CHARTS === -->
+        <section class="benchmark-section">
+            <div class="container">
+                <h2 class="benchmark-section__title">Benchmark Performance</h2>
+                <p class="benchmark-section__subtitle">Command A scores across verified benchmark categories.</p>
+
+                <div class="benchmark-chart-grid">
+                    <div class="benchmark-chart-card">
+                        <h3 class="benchmark-chart-card__title">Command A: Category Scores</h3>
+                        <canvas class="benchmark-chart-canvas" id="cohere-bar-scores" role="img" aria-label="Bar chart of Command A benchmark scores"></canvas>
+                    </div>
+                    <div class="benchmark-chart-card">
+                        <h3 class="benchmark-chart-card__title">Command Evolution: Knowledge (MMLU)</h3>
+                        <canvas class="benchmark-chart-canvas" id="cohere-bar-evolution" role="img" aria-label="Bar chart showing Command model knowledge scores over time"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /BENCHMARK CHARTS -->
+
+        <!-- === KEY STRENGTHS === -->
+        <section class="benchmark-section section-alt">
+            <div class="container">
+                <h2 class="benchmark-section__title">Key Strengths</h2>
+                <div class="benchmark-explainer">
+                    <div class="benchmark-explainer__card">
+                        <div class="benchmark-explainer__name">Instruction Following Leader</div>
+                        <p class="benchmark-explainer__desc">Command A achieves 90.9% on IFEval, one of the highest instruction-following scores across all providers&mdash;critical for enterprise applications where precise adherence to complex instructions matters.</p>
+                    </div>
+                    <div class="benchmark-explainer__card">
+                        <div class="benchmark-explainer__name">Enterprise RAG Focus</div>
+                        <p class="benchmark-explainer__desc">Cohere models are purpose-built for retrieval-augmented generation, with native grounding, citation generation, and multi-step tool use designed for real-world enterprise document workflows.</p>
+                    </div>
+                    <div class="benchmark-explainer__card">
+                        <div class="benchmark-explainer__name">Transformer Origins</div>
+                        <p class="benchmark-explainer__desc">Co-founded by Aidan Gomez, co-author of &ldquo;Attention Is All You Need,&rdquo; Cohere brings deep architectural expertise to model design, with a focus on practical deployment efficiency.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /KEY STRENGTHS -->
+
+        <!-- === DISCLAIMER === -->
+        <section class="benchmark-section">
+            <div class="container">
+                <div class="callout callout--tip">
+                    <h3>About This Data</h3>
+                    <p>Benchmark scores are sourced from Cohere&rsquo;s official Command A Technical Report. Command R+ MMLU score is from Cohere&rsquo;s model card. Note that Command A reports GPQA (not specifically GPQA Diamond); scores may not be directly comparable to providers that report the Diamond subset.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /DISCLAIMER -->
+
+        <!-- === NAVIGATION === -->
+        <section class="benchmark-section benchmark-section--dark">
+            <canvas class="footer-neural-bg" aria-hidden="true"></canvas>
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="benchmark-section__title">Explore More Providers</h2>
+                    <p class="benchmark-section__subtitle">Compare Cohere&rsquo;s Command models against other frontier AI systems.</p>
+                    <div class="hero-actions">
+                        <a href="alibaba.html" class="btn btn-secondary">Previous: Alibaba Cloud</a>
+                        <a href="index.html" class="btn btn-primary">Back to Leaderboard</a>
+                        <a href="anthropic.html" class="btn btn-secondary">Next: Anthropic</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NAVIGATION -->
+
+    </main>
+    <!-- /MAIN CONTENT -->
+
+    <!-- === FOOTER === -->
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Discover</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">COSTAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Framework Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/chatgpt-guide.html">ChatGPT Guide</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/ai-for-everybody.html">AI for Everybody</a>
+                <a href="../pages/universal-design.html">Universal Design</a>
+                <a href="../pages/ai-assisted-building.html">AI Assisted</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+        <div class="footer-policies">
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+    <!-- /FOOTER -->
+
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg></span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- === BADGE LIGHTBOX === -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <!-- === ACCESSIBILITY DASHBOARD === -->
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M12 13v6M9 17l3 3 3-3"/></svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M12 13v6M9 17l3 3 3-3"/></svg> Accessibility</span>
+            <button class="adl-close" aria-label="Close accessibility panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch"><input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode"><span class="adl-switch-track"></span></label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+    <!-- /ACCESSIBILITY DASHBOARD -->
+
+    <script src="../app.js" defer></script>
+</body>
+</html>
