@@ -691,14 +691,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateHeader() {
         var isScrolled = window.scrollY > 50;
-        var fnNav = document.querySelector('.foundations-nav');
 
         if (isScrolled) {
             header.classList.add('scrolled');
-            if (fnNav) fnNav.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
-            if (fnNav) fnNav.classList.remove('scrolled');
         }
 
         // Show/hide ethics ticker and cycle message on transition
@@ -3908,6 +3905,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+        /** Detect sticky state via sentinel — add frosted background when nav is stuck */
+        var sentinel = document.getElementById('era-nav-sentinel');
+        if (sentinel) {
+            var stickyObserver = new IntersectionObserver(function(entries) {
+                foundationsNav.classList.toggle('scrolled', !entries[0].isIntersecting);
+            }, { threshold: 0, rootMargin: '-71px 0px 0px 0px' });
+            stickyObserver.observe(sentinel);
+        }
     }
 
     // ==========================================
@@ -8879,20 +8884,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // HERO CTA BUTTON PULSE
-    // Purpose: Periodic attention pulse on primary CTA
+    // HERO CTA AUTO-HOVER
+    // Purpose: Periodically animate hover state on hero CTA buttons
+    // Sequence: red btn hover → 1.5s pause → grey btn hover → both clear
     // ==========================================
-    const startLearningBtn = document.getElementById('start-learning-btn');
-    if (startLearningBtn) {
-        const pulseInterval = 20000;
-        function pulseButton() {
-            startLearningBtn.classList.add('pulse-attention');
-            setTimeout(() => {
-                startLearningBtn.classList.remove('pulse-attention');
-            }, 600);
+    var heroPrimary = document.getElementById('start-learning-btn');
+    var heroSecondary = heroPrimary && heroPrimary.parentNode.querySelector('.btn-secondary');
+    if (heroPrimary && heroSecondary) {
+        function heroAutoHover() {
+            heroPrimary.classList.add('auto-hover');
+            setTimeout(function() {
+                heroSecondary.classList.add('auto-hover');
+            }, 1500);
+            setTimeout(function() {
+                heroPrimary.classList.remove('auto-hover');
+                heroSecondary.classList.remove('auto-hover');
+            }, 3500);
         }
-        setTimeout(pulseButton, 3000);
-        setInterval(pulseButton, pulseInterval);
+        setTimeout(heroAutoHover, 3000);
+        setInterval(heroAutoHover, 7000);
     }
 
     // ==========================================
