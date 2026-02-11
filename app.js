@@ -8703,7 +8703,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Connect with other AI literacy advocates',
                 'Star the repo to show your support'
             ],
-            link: 'https://github.com/basrosario/PROMPTLIBRARY',
+            link: 'https://github.com/PowerOfPraxis/PraxisLibrary',
             linkText: 'Visit GitHub Repository'
         }
     };
