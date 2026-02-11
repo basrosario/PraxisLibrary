@@ -30189,12 +30189,38 @@ h3 + .nav-cards--compact {
     margin-bottom: 2rem;
 }
 
+/* Benchmark Stat Cards — Dark Glass ---- */
 .benchmark-stat {
     text-align: center;
     padding: 1.5rem;
-    background: #fff;
+    background: linear-gradient(135deg, #1a0a0e 0%, #0d0507 60%, #000000 100%);
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(220, 53, 69, 0.15);
+    border-top: 3px solid #DC3545;
+    box-shadow:
+        0 4px 20px rgba(220, 53, 69, 0.12),
+        0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.benchmark-stat::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(220, 53, 69, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.benchmark-stat:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 8px 30px rgba(220, 53, 69, 0.2),
+        0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .benchmark-stat__value {
@@ -30202,43 +30228,38 @@ h3 + .nav-cards--compact {
     font-weight: 800;
     line-height: 1;
     margin-bottom: 0.25rem;
+    color: #fff;
+    position: relative;
 }
 
 .benchmark-stat__label {
     font-size: 0.85rem;
-    color: #6b7280;
+    color: #d1d5db;
     font-weight: 500;
+    position: relative;
 }
 
-.benchmark-section--dark .benchmark-stat {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
+/* Provider-colored top accent for company pages */
+.benchmark-stat.provider-border--anthropic { border-top-color: #D97757; }
+.benchmark-stat.provider-border--openai { border-top-color: #10A37F; }
+.benchmark-stat.provider-border--google { border-top-color: #4285F4; }
+.benchmark-stat.provider-border--meta { border-top-color: #0668E1; }
+.benchmark-stat.provider-border--xai { border-top-color: #6366F1; }
+.benchmark-stat.provider-border--deepseek { border-top-color: #4D6BFE; }
+.benchmark-stat.provider-border--mistral { border-top-color: #FF7000; }
+.benchmark-stat.provider-border--alibaba { border-top-color: #FF6A00; }
+.benchmark-stat.provider-border--cohere { border-top-color: #39594D; }
 
-.benchmark-section--dark .benchmark-stat__label {
-    color: #9ca3af;
-}
-
-/* Benchmark Stat Badge Variant ---- */
-.benchmark-stat--badge {
-    background: rgba(220, 53, 69, 0.08);
-    border: 1px solid rgba(220, 53, 69, 0.25);
-    border-radius: 50px;
-    box-shadow: 0 0 20px rgba(220, 53, 69, 0.1);
-}
-
-.benchmark-stat--badge .benchmark-stat__value {
-    color: var(--primary);
-    font-size: 1.8rem;
-}
-
-.benchmark-stat--badge .benchmark-stat__label {
-    color: var(--primary);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
+/* Provider-colored glow on hover */
+.benchmark-stat.provider-border--anthropic:hover { box-shadow: 0 8px 30px rgba(217, 119, 87, 0.25), 0 2px 8px rgba(0, 0, 0, 0.4); }
+.benchmark-stat.provider-border--openai:hover { box-shadow: 0 8px 30px rgba(16, 163, 127, 0.25), 0 2px 8px rgba(0, 0, 0, 0.4); }
+.benchmark-stat.provider-border--google:hover { box-shadow: 0 8px 30px rgba(66, 133, 244, 0.25), 0 2px 8px rgba(0, 0, 0, 0.4); }
+.benchmark-stat.provider-border--meta:hover { box-shadow: 0 8px 30px rgba(6, 104, 225, 0.25), 0 2px 8px rgba(0, 0, 0, 0.4); }
+.benchmark-stat.provider-border--xai:hover { box-shadow: 0 8px 30px rgba(99, 102, 241, 0.25), 0 2px 8px rgba(0, 0, 0, 0.4); }
+.benchmark-stat.provider-border--deepseek:hover { box-shadow: 0 8px 30px rgba(77, 107, 254, 0.25), 0 2px 8px rgba(0, 0, 0, 0.4); }
+.benchmark-stat.provider-border--mistral:hover { box-shadow: 0 8px 30px rgba(255, 112, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.4); }
+.benchmark-stat.provider-border--alibaba:hover { box-shadow: 0 8px 30px rgba(255, 106, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.4); }
+.benchmark-stat.provider-border--cohere:hover { box-shadow: 0 8px 30px rgba(57, 89, 77, 0.35), 0 2px 8px rgba(0, 0, 0, 0.4); }
 
 /* Benchmark Description Blocks ---- */
 .benchmark-explainer {
