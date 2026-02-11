@@ -3775,6 +3775,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }));
     }
 
+    // Initialize section-tip neural backgrounds (desktop only)
+    if (!isMobileForAnimations) {
+        document.querySelectorAll('.section-tip').forEach(function(tip, i) {
+            var canvas = document.createElement('canvas');
+            canvas.className = 'section-tip-neural-bg';
+            canvas.id = 'section-tip-neural-' + i;
+            tip.insertBefore(canvas, tip.firstChild);
+            neuralBackgrounds.push(new HeroNeuralBackground(canvas, {
+                parentSelector: '.section-tip',
+                maxTerms: 5,
+                maxPulses: 4,
+                nodeDensity: 45000,
+                showTerms: false
+            }));
+        });
+    }
+
+    // Initialize dark section neural backgrounds (desktop only)
+    // Applies to: family-foundation, poem, dedication, ai-ethics-banner, ethics-ticker
+    if (!isMobileForAnimations) {
+        var darkSections = [
+            '.family-foundation-section',
+            '.poem-section',
+            '.dedication-section',
+            '.ai-ethics-banner'
+        ];
+        darkSections.forEach(function(selector) {
+            document.querySelectorAll(selector).forEach(function(el, i) {
+                var canvas = document.createElement('canvas');
+                canvas.className = 'dark-section-neural-bg';
+                el.insertBefore(canvas, el.firstChild);
+                neuralBackgrounds.push(new HeroNeuralBackground(canvas, {
+                    parentSelector: selector,
+                    maxTerms: 4,
+                    maxPulses: 3,
+                    nodeDensity: 50000,
+                    showTerms: false
+                }));
+            });
+        });
+
+    }
+
     // Cleanup all instances on page hide (modern replacement for beforeunload)
     if (neuralBackgrounds.length > 0) {
         window.addEventListener('pagehide', () => {

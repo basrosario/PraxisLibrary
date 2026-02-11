@@ -284,7 +284,7 @@ p {
     left: 0;
     right: 0;
     z-index: 1001;
-    background: #1a1a2e;
+    background: linear-gradient(to right, #2a1015 0%, #150a0d 40%, #000000 100%);
     color: #fff;
     font-size: 0.75rem;
     font-weight: 600;
@@ -295,6 +295,7 @@ p {
     transition: transform 0.35s ease;
     pointer-events: none;
     border-bottom: 2px solid #DC3545;
+    overflow: hidden;
 }
 
 .ethics-ticker.ethics-ticker--visible {
@@ -328,7 +329,7 @@ p {
 }
 
 .ethics-ticker__label-ai {
-    color: #1a1a2e;
+    color: #1a0a0e;
 }
 
 .ethics-ticker__label-ethics {
@@ -367,7 +368,7 @@ p {
 }
 
 [data-theme="dark"] .ethics-ticker {
-    background: #0d1117;
+    background: linear-gradient(to right, #2a1015 0%, #150a0d 40%, #000000 100%);
     border-bottom-color: #DC3545;
 }
 
@@ -1376,34 +1377,11 @@ body.menu-open .header .search-trigger {
     transition: none;
 }
 
-/* === DARK GRADIENT ANIMATION ===
-   Subtle animated gradient for dark backgrounds
-   Creates a "living" effect without JavaScript
-   -------------------------------------------- */
-@keyframes darkGradientShift {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+/* Dark gradient animation removed — replaced by red-to-black standard with neural network canvases */
 
 /* Applied to dark elements for subtle motion */
 .dark-gradient-animated {
-    background: linear-gradient(
-        135deg,
-        #1a1a1a 0%,
-        #252525 25%,
-        #1f1f1f 50%,
-        #2a2a2a 75%,
-        #1a1a1a 100%
-    );
-    background-size: 200% 200%;
-    animation: darkGradientShift 8s ease infinite;
+    background: linear-gradient(to right, #2a1015 0%, #150a0d 50%, #0f0a0b 100%);
 }
 
 /* Note: Callout tip animations are defined in the CALLOUT section below */
@@ -1756,7 +1734,7 @@ body.menu-open .header .search-trigger {
     padding-bottom: calc(var(--space-2xl) + var(--safe-area-inset-bottom));
     padding-left: calc(var(--space-md) + var(--safe-area-inset-left));
     padding-right: calc(var(--space-md) + var(--safe-area-inset-right));
-    background: var(--bg-dark);
+    background: linear-gradient(to right, #2a1015 0%, #150a0d 40%, #000000 100%);
     color: white;
     position: relative;
     overflow: hidden;
@@ -1777,7 +1755,9 @@ body.menu-open .header .search-trigger {
     height: 100%;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.5;
+    -webkit-mask-image: linear-gradient(to right, transparent 15%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,1) 70%);
+    mask-image: linear-gradient(to right, transparent 15%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,1) 70%);
 }
 
 .footer-logo {
@@ -2586,15 +2566,7 @@ body.menu-open .header .search-trigger {
 /* Default/Base: Black background with animated gradient (3rd in pattern) */
 .callout.tip {
     border-left-color: #DC3545;
-    background: linear-gradient(
-        135deg,
-        #1a1a1a 0%,
-        #222222 40%,
-        #1e1e1e 60%,
-        #1a1a1a 100%
-    );
-    background-size: 200% 200%;
-    animation: darkGradientShift 10s ease infinite;
+    background: linear-gradient(to right, #2a1015 0%, #150a0d 50%, #0f0a0b 100%);
     color: #e5e7eb;
 }
 
@@ -2663,7 +2635,7 @@ body.menu-open .header .search-trigger {
 
 /* === SECTION TIP (Full-width divider banners between sections) === */
 .section-tip {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    background: linear-gradient(to right, #2a1015 0%, #150a0d 40%, #000000 100%);
     padding: var(--space-xl) 0;
     position: relative;
     overflow: hidden;
@@ -2680,6 +2652,20 @@ body.menu-open .header .search-trigger {
     pointer-events: none;
 }
 
+/* Neural network canvas — visible only on the right/black side (shared dark section standard) */
+.section-tip-neural-bg,
+.dark-section-neural-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+    -webkit-mask-image: linear-gradient(to right, transparent 15%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,1) 70%);
+    mask-image: linear-gradient(to right, transparent 15%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,1) 70%);
+}
+
 .section-tip__content {
     display: flex;
     align-items: flex-start;
@@ -2692,32 +2678,33 @@ body.menu-open .header .search-trigger {
     flex-shrink: 0;
     width: 65px;
     height: 65px;
-    background: rgba(220, 53, 69, 0.25);
-    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
     display: flex;
     align-items: center;
     justify-content: center;
     color: #ffffff;
     position: relative;
-    box-shadow:
-        0 0 12px rgba(220, 53, 69, 0.4),
-        0 0 30px rgba(220, 53, 69, 0.2),
-        0 0 60px rgba(220, 53, 69, 0.1);
+    filter: drop-shadow(0 0 12px rgba(220, 53, 69, 0.5)) drop-shadow(0 0 30px rgba(220, 53, 69, 0.25));
     animation: tipGlow 3s ease-in-out infinite;
+}
+
+/* Red inner fill — creates white border effect like a stop sign */
+.section-tip__icon::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: #DC3545;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    z-index: 0;
 }
 
 @keyframes tipGlow {
     0%, 100% {
-        box-shadow:
-            0 0 12px rgba(220, 53, 69, 0.4),
-            0 0 30px rgba(220, 53, 69, 0.2),
-            0 0 60px rgba(220, 53, 69, 0.1);
+        filter: drop-shadow(0 0 12px rgba(220, 53, 69, 0.5)) drop-shadow(0 0 30px rgba(220, 53, 69, 0.25));
     }
     50% {
-        box-shadow:
-            0 0 20px rgba(220, 53, 69, 0.6),
-            0 0 45px rgba(220, 53, 69, 0.3),
-            0 0 80px rgba(220, 53, 69, 0.15);
+        filter: drop-shadow(0 0 20px rgba(220, 53, 69, 0.7)) drop-shadow(0 0 45px rgba(220, 53, 69, 0.35));
     }
 }
 
@@ -6075,9 +6062,7 @@ textarea:focus-visible {
     max-width: 900px;
     margin: 0 auto;
     padding: var(--space-3xl) var(--space-2xl);
-    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 25%, #16213e 50%, #1a1a2e 75%, #0f0f1a 100%);
-    background-size: 200% 200%;
-    animation: darkGradientShift 12s ease infinite;
+    background: linear-gradient(to right, #2a1015 0%, #150a0d 40%, #000000 100%);
     border-radius: var(--radius-xl);
     position: relative;
     overflow: hidden;
@@ -6091,9 +6076,7 @@ textarea:focus-visible {
     left: 0;
     right: 0;
     bottom: 0;
-    background:
-        radial-gradient(ellipse at 30% 0%, rgba(230, 57, 70, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 70% 100%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+    background: radial-gradient(ellipse at 15% 50%, rgba(220, 53, 69, 0.12) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -6166,9 +6149,7 @@ textarea:focus-visible {
 
 /* Poem Section ---- */
 .poem-section {
-    background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 20%, #16213e 50%, #1a1a2e 80%, #0f0f1a 100%);
-    background-size: 100% 200%;
-    animation: darkGradientShift 12s ease infinite;
+    background: linear-gradient(to right, #2a1015 0%, #150a0d 40%, #000000 100%);
     border: none;
     border-radius: var(--radius-xl);
     padding: var(--space-3xl) var(--space-2xl);
@@ -6187,9 +6168,7 @@ textarea:focus-visible {
     left: 0;
     right: 0;
     bottom: 0;
-    background:
-        radial-gradient(circle at 20% 20%, rgba(230, 57, 70, 0.1) 0%, transparent 40%),
-        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
+    background: radial-gradient(ellipse at 15% 50%, rgba(220, 53, 69, 0.12) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -6273,9 +6252,7 @@ textarea:focus-visible {
     max-width: 900px;
     margin: 0 auto;
     padding: var(--space-3xl) var(--space-2xl);
-    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 25%, #16213e 50%, #1a1a2e 75%, #0f0f1a 100%);
-    background-size: 200% 200%;
-    animation: darkGradientShift 12s ease infinite;
+    background: linear-gradient(to right, #2a1015 0%, #150a0d 40%, #000000 100%);
     border-radius: var(--radius-xl);
     position: relative;
     overflow: hidden;
@@ -6289,9 +6266,7 @@ textarea:focus-visible {
     left: 0;
     right: 0;
     bottom: 0;
-    background:
-        radial-gradient(ellipse at 30% 0%, rgba(230, 57, 70, 0.1) 0%, transparent 50%),
-        radial-gradient(ellipse at 70% 100%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+    background: radial-gradient(ellipse at 15% 50%, rgba(220, 53, 69, 0.12) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -7796,9 +7771,7 @@ body.menu-open {
 
 /* CTA Card */
 .cta-card {
-    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 25%, #12121f 50%, #1a1a2e 75%, #0f0f1a 100%);
-    background-size: 200% 200%;
-    animation: darkGradientShift 10s ease infinite;
+    background: linear-gradient(to right, #2a1015 0%, #150a0d 40%, #000000 100%);
     border-radius: var(--radius-xl);
     padding: var(--space-2xl) var(--space-lg);
     text-align: center;
@@ -7814,6 +7787,8 @@ body.menu-open {
     height: 100%;
     z-index: 0;
     opacity: 0.5;
+    -webkit-mask-image: linear-gradient(to right, transparent 15%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,1) 70%);
+    mask-image: linear-gradient(to right, transparent 15%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,1) 70%);
 }
 
 .cta-title,
@@ -16525,7 +16500,7 @@ html[data-text-scale="3"] {
 /* AI Ethics Banner ---- */
 /* Full-width responsible AI section injected via JS on framework pages */
 .ai-ethics-banner {
-    background: linear-gradient(135deg, #1a1a2e 0%, #2d1b3d 50%, #1a1a2e 100%);
+    background: linear-gradient(to right, #2a1015 0%, #150a0d 40%, #000000 100%);
     border-radius: var(--radius-xl);
     padding: var(--space-3xl) var(--space-xl);
     text-align: center;
@@ -16552,6 +16527,7 @@ html[data-text-scale="3"] {
     background: #DC3545;
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     position: relative;
+    z-index: 1;
     box-shadow: 0 4px 20px rgba(220, 53, 69, 0.4);
 }
 
@@ -16559,6 +16535,7 @@ html[data-text-scale="3"] {
     position: relative;
     max-width: 700px;
     margin: 0 auto;
+    z-index: 1;
 }
 
 .ai-ethics-banner__heading {
@@ -16587,7 +16564,7 @@ html[data-text-scale="3"] {
 }
 
 [data-theme="dark"] .ai-ethics-banner {
-    background: linear-gradient(135deg, #0d1117 0%, #1a1028 50%, #0d1117 100%);
+    background: linear-gradient(to right, #2a1015 0%, #150a0d 40%, #000000 100%);
 }
 
 [data-theme="dark"] .ai-ethics-banner__heading {
@@ -18541,13 +18518,32 @@ h3 + .nav-cards--compact {
 
 /* Style 2 - Dark Background */
 .cta-corporate--dark {
-    background: var(--bg-dark);
+    background: linear-gradient(to right, #2a1015 0%, #150a0d 40%, #000000 100%);
     color: white;
+    position: relative;
+    overflow: hidden;
 }
 
 .cta-corporate--dark .cta-corporate__title,
 .cta-corporate--dark .cta-corporate__text {
     color: white;
+}
+
+.cta-corporate--dark .cta-corporate__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+    -webkit-mask-image: linear-gradient(to right, transparent 15%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,1) 70%);
+    mask-image: linear-gradient(to right, transparent 15%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,1) 70%);
+}
+
+.cta-corporate--dark .cta-corporate__content {
+    position: relative;
+    z-index: 1;
 }
 
 /* Style 3 - Bordered */
@@ -28438,7 +28434,7 @@ h3 + .nav-cards--compact {
 
 /* Dark demo box for light animations */
 .component-preview__demo--dark {
-    background: #1a1a2e;
+    background: #1a0a0e;
 }
 
 /* Light demo box for dark animations */
