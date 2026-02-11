@@ -691,11 +691,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateHeader() {
         var isScrolled = window.scrollY > 50;
+        var fnNav = document.querySelector('.foundations-nav');
 
         if (isScrolled) {
             header.classList.add('scrolled');
+            if (fnNav) fnNav.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
+            if (fnNav) fnNav.classList.remove('scrolled');
         }
 
         // Show/hide ethics ticker and cycle message on transition
