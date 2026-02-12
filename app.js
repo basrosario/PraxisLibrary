@@ -15048,33 +15048,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return Number(n).toLocaleString();
     }
 
-    // --- Run Audit Button (copies cmd command to clipboard) ---
-    var runBtn = document.getElementById('audit-run-btn');
-    if (runBtn) {
-        runBtn.addEventListener('click', function() {
-            var cmd = 'cmd /k "cd /d C:\\Users\\basro\\Music\\PraxisLibrary\\Python Scipts && run_audit.bat"';
-            navigator.clipboard.writeText(cmd).then(function() {
-                runBtn.textContent = 'Copied! Paste in Win+R or terminal';
-                setTimeout(function() {
-                    runBtn.innerHTML = '';
-                    var svgNS = 'http://www.w3.org/2000/svg';
-                    var icon = document.createElementNS(svgNS, 'svg');
-                    icon.setAttribute('class', 'audit-run-icon');
-                    icon.setAttribute('viewBox', '0 0 24 24');
-                    icon.setAttribute('fill', 'none');
-                    icon.setAttribute('stroke', 'currentColor');
-                    icon.setAttribute('stroke-width', '2');
-                    icon.setAttribute('aria-hidden', 'true');
-                    var poly = document.createElementNS(svgNS, 'polygon');
-                    poly.setAttribute('points', '5 3 19 12 5 21 5 3');
-                    icon.appendChild(poly);
-                    runBtn.appendChild(icon);
-                    runBtn.appendChild(document.createTextNode(' Run Audit'));
-                }, 3000);
-            });
-        });
-    }
-
     // --- Fetch and render ---
     var jsonUrl = resolvePath('Audit/audit-report.json') + '?v=' + Date.now();
 
