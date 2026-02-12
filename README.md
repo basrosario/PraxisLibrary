@@ -4,7 +4,7 @@
 
 **Your Curiosity - Unlocks The Potential - That Builds Tomorrow**
 
-*A comprehensive, living library of 5,300+ terms, 117 learning techniques, and 7 interactive AI tools.
+*A comprehensive, living library of 5,300+ terms, 115 learning techniques, and 7 interactive AI tools.
 Designed to standardize how the world understands and interacts with Artificial Intelligence.*
 
 [![AI for Everybody](https://img.shields.io/badge/AI_for-Everybody-DC3545?style=for-the-badge&labelColor=ffffff&logoColor=1f2937)](https://praxislibrary.com/pages/ai-for-everybody.html)
@@ -311,8 +311,8 @@ Header set Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyro
 
 | Metric | Value |
 |--------|-------|
-| **Total HTML pages** | **149** |
-| Learning technique pages | 117 |
+| **Total HTML pages** | **164** |
+| Learning technique pages | 115 |
 | Interactive AI tools | 7 |
 | Policy & info pages | 15 |
 | Neurodivergence pages | 6 |
@@ -337,13 +337,13 @@ praxis-library/
 ├── app.js                             # Single script (12,631 lines)
 ├── .htaccess                          # Server security config
 │
-├── learn/                             # 117 technique & concept pages
+├── learn/                             # 115 technique & concept pages
 │   ├── index.html                     # Learning hub
 │   ├── prompt-basics.html             # Fundamentals
 │   ├── crisp.html                     # CRISP methodology
 │   ├── chain-of-thought.html          # Chain-of-Thought
 │   ├── tree-of-thought.html           # Tree of Thought
-│   └── ... (117 pages total)
+│   └── ... (115 pages total)
 │
 ├── tools/                             # 7 interactive AI tools
 │   ├── index.html                     # Tools hub
@@ -747,7 +747,7 @@ The human-AI loop:
 
 ### Frameworks & Techniques Taught on This Site
 
-The library covers **117 learning pages** across categories including:
+The library covers **115 learning pages** across categories including:
 
 | Category | Examples |
 |----------|----------|
