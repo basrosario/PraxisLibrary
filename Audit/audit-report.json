@@ -1,0 +1,845 @@
+{
+  "metadata": {
+    "date": "2026-02-12",
+    "time": "00:09:04",
+    "timestamp": "2026-02-12T00:09:04.683843",
+    "duration": 7.5,
+    "tool_version": "PraxisLibraryAudit.py v3.0",
+    "url_checks_enabled": false
+  },
+  "site_snapshot": {
+    "total_html_files": 169,
+    "glossary_terms": 5324,
+    "active_tools": 7,
+    "deactivated_tools": 0,
+    "policy_pages": 5,
+    "fragment_files": 0,
+    "active_tool_names": [
+      "Prompt Analyzer",
+      "Technique Finder",
+      "Preflight Checklist",
+      "Prompt Builder",
+      "Persona Architect",
+      "Hallucination Spotter",
+      "Readiness Quiz"
+    ],
+    "policy_names": [
+      "responsible-ai.html",
+      "use-policy.html",
+      "site-policy.html",
+      "security-policy.html",
+      "data-retention-policy.html"
+    ]
+  },
+  "summary": {
+    "overall_score": 10.0,
+    "categories_passed": 11,
+    "categories_total": 11,
+    "total_errors": 0,
+    "total_warnings": 0,
+    "total_info": 27,
+    "unique_error_types": 0,
+    "unique_warning_types": 0,
+    "citations_verified": 22
+  },
+  "categories": [
+    {
+      "id": 1,
+      "name": "Security",
+      "slug": "security",
+      "passed": true,
+      "files_scanned": 170,
+      "checks_run": 149222,
+      "error_count": 0,
+      "warning_count": 0,
+      "info_count": 0,
+      "description": "CSP A+ compliance — ensures zero inline code, no external resource dependencies, and no dangerous JavaScript patterns.",
+      "why": "Content Security Policy (CSP) A+ rating requires strict separation of markup, styles, and scripts. Inline code enables cross-site scripting (XSS) attacks. External CDN dependencies create supply-chain risk and single points of failure. Dangerous JS patterns like `eval()` and `document.write()` bypass CSP and enable code injection. This category enforces the OWASP-recommended defense-in-depth strategy.",
+      "checks": [
+        {
+          "name": "Inline style attributes",
+          "severity": "ERROR",
+          "description": "Scans every line for `style=\"...\"` attributes (violates Content Security Policy). Skips HTML comments."
+        },
+        {
+          "name": "Inline event handlers",
+          "severity": "ERROR",
+          "description": "Detects 40+ inline JS handlers: mouse, keyboard, touch, drag, pointer, clipboard, animation/transition, and misc events. Skips HTML comments."
+        },
+        {
+          "name": "Inline script blocks",
+          "severity": "ERROR",
+          "description": "Finds `<script>` tags without a `src` attribute (inline JS execution). Exempts `type=\"application/ld+json\"` (JSON-LD structured data)."
+        },
+        {
+          "name": "External CDN references",
+          "severity": "ERROR",
+          "description": "Catches `href`/`src` pointing to googleapis, cdnjs, unpkg, jsdelivr, cloudflare, etc."
+        },
+        {
+          "name": "External link security",
+          "severity": "WARNING",
+          "description": "Flags `target=\"_blank\"` links missing `rel=\"noopener noreferrer\"`"
+        },
+        {
+          "name": "Dangerous JS patterns (app.js)",
+          "severity": "ERROR",
+          "description": "Scans app.js for `eval()`, `new Function()`, `document.write()`, and string args to `setTimeout`/`setInterval`. Skips JS comments."
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "infos": []
+    },
+    {
+      "id": 2,
+      "name": "Continuity",
+      "slug": "continuity",
+      "passed": true,
+      "files_scanned": 169,
+      "checks_run": 4564,
+      "error_count": 0,
+      "warning_count": 0,
+      "info_count": 0,
+      "description": "Template consistency — verifies every page has the required structural, SEO, navigation, breadcrumb, and ethics elements.",
+      "why": "Every page must function as a standalone entry point. Missing meta tags degrade SEO and social sharing. Missing navigation traps users. Missing accessibility infrastructure (skip links, ADL panel) violates WCAG AA. Missing ethics components (ticker, policy links) breach the site's responsible AI commitment. Missing breadcrumbs break wayfinding on interior pages. This category ensures no page ships incomplete.",
+      "checks": [
+        {
+          "name": "HTML lang attribute",
+          "severity": "ERROR",
+          "description": "Every page must have `<html lang=\"en\">`"
+        },
+        {
+          "name": "Meta charset",
+          "severity": "ERROR",
+          "description": "Every page must declare `<meta charset=\"UTF-8\">`"
+        },
+        {
+          "name": "Viewport meta tag",
+          "severity": "ERROR",
+          "description": "Every page must have a responsive viewport meta tag"
+        },
+        {
+          "name": "Meta description",
+          "severity": "WARNING",
+          "description": "Every page should have a `<meta name=\"description\">` tag"
+        },
+        {
+          "name": "Favicon link",
+          "severity": "WARNING",
+          "description": "Every page should link to the site favicon"
+        },
+        {
+          "name": "Stylesheet link",
+          "severity": "ERROR",
+          "description": "Every page must link to `styles.css`"
+        },
+        {
+          "name": "App script with defer",
+          "severity": "ERROR",
+          "description": "Every page must include `app.js` with the `defer` attribute"
+        },
+        {
+          "name": "Skip-to-content link",
+          "severity": "ERROR",
+          "description": "Accessibility requirement: skip-link for keyboard users"
+        },
+        {
+          "name": "Header element",
+          "severity": "ERROR",
+          "description": "Every page must have a `<header>` with site navigation"
+        },
+        {
+          "name": "Main content",
+          "severity": "ERROR",
+          "description": "Every page must have `<main id=\"main-content\">`"
+        },
+        {
+          "name": "Footer element",
+          "severity": "ERROR",
+          "description": "Every page must have a `<footer>` section"
+        },
+        {
+          "name": "Back-to-top button",
+          "severity": "WARNING",
+          "description": "Every page should have the back-to-top bar"
+        },
+        {
+          "name": "ADL panel",
+          "severity": "WARNING",
+          "description": "Every page should include the Accessibility Dashboard panel"
+        },
+        {
+          "name": "Badge lightbox",
+          "severity": "WARNING",
+          "description": "Every page should include the badge lightbox component"
+        },
+        {
+          "name": "SEO meta block",
+          "severity": "ERROR",
+          "description": "Every page must have `<!-- SEO Meta -->` marker (from seo_inject.py)"
+        },
+        {
+          "name": "Canonical URL",
+          "severity": "ERROR",
+          "description": "Every page must have a `<link rel=\"canonical\">` tag"
+        },
+        {
+          "name": "Open Graph tags",
+          "severity": "ERROR",
+          "description": "Every page must have og:title, og:description, og:image, and og:url"
+        },
+        {
+          "name": "JSON-LD structured data",
+          "severity": "ERROR",
+          "description": "Every page must have `application/ld+json` schema markup"
+        },
+        {
+          "name": "Twitter/X card",
+          "severity": "WARNING",
+          "description": "Every page should have a twitter:card meta tag"
+        },
+        {
+          "name": "Discover navigation menu",
+          "severity": "ERROR",
+          "description": "Every page must have the Discover category menu (mega-menu--categories)"
+        },
+        {
+          "name": "Resources/AI Readiness menu",
+          "severity": "ERROR",
+          "description": "Every page must have the multi-column menu (mega-menu--multi-column)"
+        },
+        {
+          "name": "Breadcrumb navigation",
+          "severity": "WARNING",
+          "description": "All interior pages (not root index.html) must have breadcrumb navigation for wayfinding"
+        },
+        {
+          "name": "Ethics ticker (app.js)",
+          "severity": "ERROR",
+          "description": "app.js must contain the ethics-ticker IIFE that creates the ticker DOM"
+        },
+        {
+          "name": "Ethics ticker (styles.css)",
+          "severity": "ERROR",
+          "description": "styles.css must contain .ethics-ticker style rules"
+        },
+        {
+          "name": "Policy links in footer",
+          "severity": "ERROR",
+          "description": "Footer must link to all active policy pages"
+        },
+        {
+          "name": "Tool links in footer",
+          "severity": "ERROR",
+          "description": "Footer must link to all active AI Readiness Tools"
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "infos": []
+    },
+    {
+      "id": 3,
+      "name": "Broken Links",
+      "slug": "broken-links",
+      "passed": true,
+      "files_scanned": 169,
+      "checks_run": 15512,
+      "error_count": 0,
+      "warning_count": 0,
+      "info_count": 0,
+      "description": "Link integrity — resolves every internal href/src path and verifies external `<a>` tag URLs are reachable.",
+      "why": "Broken links degrade user trust and SEO ranking. Internal dead links indicate deleted or renamed files that weren't updated site-wide. External dead links point users to unavailable resources. Google Search Console penalizes sites with excessive 404 responses. This category ensures every link on every page resolves to a real destination.",
+      "checks": [
+        {
+          "name": "Internal link resolution",
+          "severity": "ERROR",
+          "description": "Resolves each `href`/`src` relative to the file's directory depth and checks if the target file exists. Directory links resolved to index.html."
+        },
+        {
+          "name": "External URL reachability",
+          "severity": "WARNING",
+          "description": "HTTP HEAD/GET check for each unique external URL in `<a>` tags only (multi-line safe regex). Skip with `--skip-urls`."
+        },
+        {
+          "name": "Bot-blocked domain handling",
+          "severity": "INFO",
+          "description": "Known bot-blocked domains (LinkedIn, arXiv, OpenAI, etc.) get INFO instead of HTTP check — manual verification recommended."
+        },
+        {
+          "name": "Special URI skipping",
+          "severity": "INFO",
+          "description": "Skips `#`, `mailto:`, `tel:`, `javascript:`, and `data:` URIs — not checkable links."
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "infos": []
+    },
+    {
+      "id": 4,
+      "name": "Relevancy",
+      "slug": "relevancy",
+      "passed": true,
+      "files_scanned": 169,
+      "checks_run": 149222,
+      "error_count": 0,
+      "warning_count": 0,
+      "info_count": 0,
+      "description": "Content freshness — detects placeholder content and outdated dates with multi-line comment awareness.",
+      "why": "Placeholder text ('TODO', 'coming soon', 'lorem ipsum', 'WIP', 'HACK') in production signals incomplete work and damages credibility. Outdated date references outside of known historical contexts may mislead users about data currency. This category enforces content readiness standards. (Orphan file detection is handled by the Structural category to avoid duplication.)",
+      "checks": [
+        {
+          "name": "Placeholder content",
+          "severity": "WARNING",
+          "description": "Detects 'coming soon', 'TODO', 'TBD', 'FIXME', 'lorem ipsum', 'WIP', 'HACK', 'XXX', 'TEMP', and bare 'placeholder' in visible text. Skips multi-line HTML comments."
+        },
+        {
+          "name": "Outdated dates",
+          "severity": "INFO",
+          "description": "Flags years 2000–2023 in content (context-aware: exempts historical keywords, academic citations, date-safe components, and educational examples — no directory-level exemptions). Skips multi-line HTML comments."
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "infos": []
+    },
+    {
+      "id": 5,
+      "name": "Accuracy",
+      "slug": "accuracy",
+      "passed": true,
+      "files_scanned": 201,
+      "checks_run": 427,
+      "error_count": 0,
+      "warning_count": 0,
+      "info_count": 0,
+      "description": "Content and cross-reference accuracy — validates page structure, component integrity, counters, search index, and glossary synchronization across all pages.",
+      "why": "Stale counters and broken component structures undermine user trust in a site that teaches AI accuracy. Glossary desynchronization between the manifest and displayed counts creates visible contradictions. Missing template sections on framework pages break the consistent learning experience. An empty or malformed search index makes site search non-functional. This category ensures what users see matches what actually exists.",
+      "checks": [
+        {
+          "name": "HTML file count",
+          "severity": "INFO",
+          "description": "Reports total HTML files discovered in the site"
+        },
+        {
+          "name": "Glossary manifest integrity",
+          "severity": "ERROR",
+          "description": "Verifies `manifest.json` totalTerms matches the sum of all per-letter shard counts"
+        },
+        {
+          "name": "Shard count verification",
+          "severity": "ERROR",
+          "description": "Checks each letter shard's actual term count against the manifest's declared count"
+        },
+        {
+          "name": "Search index validation",
+          "severity": "ERROR/WARNING",
+          "description": "Validates `search-index.json` exists, is a non-empty JSON array, and every entry has title + url fields"
+        },
+        {
+          "name": "Homepage counter values",
+          "severity": "WARNING",
+          "description": "Validates `data-counter` attributes on index.html against actual tool count, glossary terms, AND framework page count"
+        },
+        {
+          "name": "Glossary page count sync",
+          "severity": "WARNING",
+          "description": "Verifies the glossary term count appears consistently across `pages/glossary.html` (3+ locations)"
+        },
+        {
+          "name": "Comparison panel structure",
+          "severity": "WARNING",
+          "description": "Every comparison-panel must contain a comparison-panel__divider element"
+        },
+        {
+          "name": "Deprecated component classes",
+          "severity": "WARNING",
+          "description": "Flags old feature-list--check/--cross format (skips HTML comments) — should use feature-list__item--positive/--neutral cards"
+        },
+        {
+          "name": "Framework template completeness",
+          "severity": "WARNING",
+          "description": "Learn pages must have required sections: hero, concept, how-it-works, comparison, examples, when-to-use, use-cases, related, CTA"
+        },
+        {
+          "name": "Footer tool count consistency",
+          "severity": "WARNING",
+          "description": "Footer AI Readiness section tool count must match discovered active tools on every page (div-depth-aware section parsing)"
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "infos": []
+    },
+    {
+      "id": 6,
+      "name": "Bias/Inclusivity",
+      "slug": "bias-inclusivity",
+      "passed": true,
+      "files_scanned": 169,
+      "checks_run": 55639,
+      "error_count": 0,
+      "warning_count": 0,
+      "info_count": 4,
+      "description": "Content quality — loads terms from `bias-terms.json` and scans visible text only (HTML tags stripped) for bias, profanity, and slurs.",
+      "why": "An AI education site must model the inclusive communication standards it teaches. We maintain this term list not because these words are inherently wrong, but because language shapes perception. As a site with a neurodivergent audience, Praxis has a responsibility to surface terms that major industry style guides (Google, Microsoft, Apple, APA) have identified as carrying exclusionary, gendered, or ableist connotations. Profanity and slurs have zero tolerance on an educational site. The audit flags bias terms for human review (INFO) and profanity/slurs as best-practice violations (WARNING).",
+      "checks": [
+        {
+          "name": "Exclusionary framing",
+          "severity": "INFO",
+          "description": "Detects condescending or audience-excluding phrasing"
+        },
+        {
+          "name": "Gendered language",
+          "severity": "INFO",
+          "description": "Flags gendered terms — suggests gender-neutral alternatives"
+        },
+        {
+          "name": "Tech exclusionary terms",
+          "severity": "INFO",
+          "description": "Flags legacy tech terms with exclusionary origins"
+        },
+        {
+          "name": "Ableist language",
+          "severity": "INFO",
+          "description": "Catches disability-metaphor terms — suggests neutral alternatives"
+        },
+        {
+          "name": "Profanity",
+          "severity": "WARNING",
+          "description": "Catches profanity and informal abbreviations (wtf, stfu, etc.)"
+        },
+        {
+          "name": "Slurs",
+          "severity": "WARNING",
+          "description": "Zero-tolerance detection of racial, homophobic, and ableist slurs"
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "infos": [
+        {
+          "file_path": "benchmarks/mistral.html",
+          "line_number": 259,
+          "message": "Potential bias (exclusionary-tech): Use 'built-in' or 'integrated'",
+          "suggestion": "Use 'built-in' or 'integrated'"
+        },
+        {
+          "file_path": "learn/chain-of-verification.html",
+          "line_number": 555,
+          "message": "Potential bias (gendered): Use 'humankind' or 'humanity'",
+          "suggestion": "Use 'humankind' or 'humanity'"
+        },
+        {
+          "file_path": "learn/chain-of-verification.html",
+          "line_number": 557,
+          "message": "Potential bias (gendered): Use 'humankind' or 'humanity'",
+          "suggestion": "Use 'humankind' or 'humanity'"
+        },
+        {
+          "file_path": "learn/modality/image/negative-prompting.html",
+          "line_number": 483,
+          "message": "Potential bias (gendered): Use 'artificial', 'synthetic', or 'human-made'",
+          "suggestion": "Use 'artificial', 'synthetic', or 'human-made'"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Accessibility",
+      "slug": "accessibility",
+      "passed": true,
+      "files_scanned": 169,
+      "checks_run": 15693,
+      "error_count": 0,
+      "warning_count": 0,
+      "info_count": 0,
+      "description": "WCAG AA compliance — checks language declarations, image alt text, heading hierarchy, link clarity, form labels, and tab order.",
+      "why": "Web Content Accessibility Guidelines (WCAG) 2.1 Level AA compliance is both a legal requirement (ADA, Section 508) and a core site value. Missing `lang` attributes prevent screen readers from selecting the correct speech synthesizer. Missing `alt` attributes make images invisible to blind users. Skipped heading levels break document outline navigation. Vague link text ('click here') is meaningless to screen reader users who navigate by link list. Unlabelled form inputs are unusable without sight. Positive tabindex values create unpredictable tab order. This category verifies foundational accessibility requirements.",
+      "checks": [
+        {
+          "name": "HTML lang attribute",
+          "severity": "ERROR",
+          "description": "Every page must declare a language on `<html>`"
+        },
+        {
+          "name": "Image alt attributes",
+          "severity": "ERROR",
+          "description": "Every `<img>` must have an `alt` attribute. Multi-line safe (full-text regex with re.DOTALL). Empty alt for decorative images noted as INFO."
+        },
+        {
+          "name": "Heading hierarchy",
+          "severity": "WARNING",
+          "description": "Headings must not skip levels (e.g., h1 → h3 without h2); nav/footer headings excluded from hierarchy checks"
+        },
+        {
+          "name": "h1 presence",
+          "severity": "WARNING",
+          "description": "Every page must have exactly one `<h1>` element for accessibility and SEO"
+        },
+        {
+          "name": "Vague link text",
+          "severity": "WARNING",
+          "description": "Links must have descriptive text — flags 'click here', 'read more', 'learn more', bare 'here'/'link'"
+        },
+        {
+          "name": "Form label association",
+          "severity": "WARNING",
+          "description": "Every `<input>`, `<select>`, and `<textarea>` must have an associated `<label for>`, `aria-label`/`aria-labelledby`, or be wrapped in a `<label>`. Skips hidden/submit/button/reset/image types."
+        },
+        {
+          "name": "Positive tabindex",
+          "severity": "WARNING",
+          "description": "Flags `tabindex` values > 0 — overrides natural DOM tab order and creates unpredictable navigation"
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "infos": []
+    },
+    {
+      "id": 8,
+      "name": "Citation Accuracy",
+      "slug": "citation-accuracy",
+      "passed": true,
+      "files_scanned": 169,
+      "checks_run": 352,
+      "error_count": 0,
+      "warning_count": 0,
+      "info_count": 22,
+      "description": "Source attribution and freshness — counts .gov/.edu citations, verifies sources, and enforces the 2024+ freshness policy.",
+      "why": "An AI education site must cite authoritative, current sources. The project's sourcing policy requires .gov and .edu domains only (except benchmark pages). Citations older than 2024 are ERROR-level violations because AI research evolves rapidly and outdated data misleads users. Every statistic displayed in highlight boxes or stat cards must have visible source attribution. Citation tracking (`data-added` attributes) enables ongoing freshness auditing. This category enforces the full sourcing standards defined in `.claude/sourcingstandards.md`.",
+      "checks": [
+        {
+          "name": ".gov/.edu citation status",
+          "severity": "INFO",
+          "description": "Reports per-page .gov/.edu link count with verification status (verified by default, skip with --skip-urls)"
+        },
+        {
+          "name": "Highlight box attribution",
+          "severity": "WARNING",
+          "description": "Content-page highlight boxes with specific stats (%, $, numeric billion/million) must have a `highlight-box__source` element. Skips learn/ (no-citations rule) and tools/ (example content). Skips historical-context (--warning) boxes."
+        },
+        {
+          "name": "Stat card attribution",
+          "severity": "WARNING",
+          "description": "Research stat cards must have a `research-stat-card__source` element"
+        },
+        {
+          "name": "Citation freshness (STRICT)",
+          "severity": "ERROR",
+          "description": "All external citations on content pages must be from 2024 or later. Multi-line safe (full-text regex). Detects dates in URL paths, stripped anchor text, and nearby highlight-box__source context. Skips learn/, tools/, foundations/."
+        },
+        {
+          "name": "Citation timestamp tracking",
+          "severity": "WARNING",
+          "description": "External links on citation pages must have `data-added=\"YYYY-MM-DD\"` within the `<a>` tag itself (tag-scoped, not line-scoped)."
+        },
+        {
+          "name": "Citation URL reachability",
+          "severity": "ERROR",
+          "description": "HTTP HEAD/GET check for each .gov/.edu URL. Bot-blocked .gov/.edu domains (NIST, MIT Press, CMU) get INFO instead. Skip with `--skip-urls`."
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "infos": [
+        {
+          "file_path": "foundations/index.html",
+          "line_number": 0,
+          "message": "11 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "learn/facts-fictions.html",
+          "line_number": 0,
+          "message": "10 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "neurodivergence/adhd.html",
+          "line_number": 0,
+          "message": "13 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "neurodivergence/autism.html",
+          "line_number": 0,
+          "message": "15 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "neurodivergence/dyslexia.html",
+          "line_number": 0,
+          "message": "10 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "neurodivergence/index.html",
+          "line_number": 0,
+          "message": "12 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "neurodivergence/resources.html",
+          "line_number": 0,
+          "message": "32 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "neurodivergence/tools.html",
+          "line_number": 0,
+          "message": "27 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "pages/ai-assisted-building.html",
+          "line_number": 0,
+          "message": "2 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "pages/ai-for-everybody.html",
+          "line_number": 0,
+          "message": "3 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "pages/ai-safety.html",
+          "line_number": 0,
+          "message": "2 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "pages/chatgpt-guide.html",
+          "line_number": 0,
+          "message": "2 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "pages/faq.html",
+          "line_number": 0,
+          "message": "2 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "pages/performance.html",
+          "line_number": 0,
+          "message": "2 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "pages/resources.html",
+          "line_number": 0,
+          "message": "4 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "pages/responsible-ai.html",
+          "line_number": 0,
+          "message": "2 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "pages/security.html",
+          "line_number": 0,
+          "message": "7 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "pages/universal-design.html",
+          "line_number": 0,
+          "message": "4 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "patterns/index.html",
+          "line_number": 0,
+          "message": "3 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "tools/checklist.html",
+          "line_number": 0,
+          "message": "1 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "tools/hallucination.html",
+          "line_number": 0,
+          "message": "2 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        },
+        {
+          "file_path": "tools/index.html",
+          "line_number": 0,
+          "message": "8 .gov/.edu citation(s) — not verified (--skip-urls active)",
+          "suggestion": ""
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Data Accuracy",
+      "slug": "data-accuracy",
+      "passed": true,
+      "files_scanned": 239,
+      "checks_run": 5836,
+      "error_count": 0,
+      "warning_count": 0,
+      "info_count": 0,
+      "description": "Data integrity — validates JSON files, chart values, anchor targets, glossary fields, search index entries, and count synchronization across all pages.",
+      "why": "Corrupted JSON crashes the glossary, search, and chart systems at runtime. Mismatched gauge chart values display contradictory numbers. Broken anchor targets (#id links pointing to nonexistent elements) frustrate users. Missing glossary fields cause JavaScript errors during rendering. Invalid search index entries send users to 404 pages. This category ensures all structured data is parseable, internally consistent, and correctly linked.",
+      "checks": [
+        {
+          "name": "Bar chart data-width range",
+          "severity": "WARNING",
+          "description": "Validates `data-width` values are 0–100 (valid percentage range)"
+        },
+        {
+          "name": "Gauge chart value matching",
+          "severity": "WARNING",
+          "description": "Positional: each gauge-circle's `data-value` must match the `gauge-value` text inside its own `<div>` block (multi-line safe)"
+        },
+        {
+          "name": "Glossary count synchronization",
+          "severity": "WARNING",
+          "description": "Checks glossary term count appears consistently in both `index.html` (2+) and `pages/glossary.html` (3+)"
+        },
+        {
+          "name": "JSON data file integrity",
+          "severity": "ERROR",
+          "description": "All .json files in data/ must parse without error"
+        },
+        {
+          "name": "Same-page anchor targets",
+          "severity": "WARNING",
+          "description": "Fragment-only links (href=\"#id\") must have a matching id attribute on the same page"
+        },
+        {
+          "name": "Glossary shard field validation",
+          "severity": "ERROR",
+          "description": "Each glossary term must have required fields: term, definition"
+        },
+        {
+          "name": "Search index entry validation",
+          "severity": "ERROR",
+          "description": "Each search-index.json entry must have title and url fields, and url must resolve to an existing file"
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "infos": []
+    },
+    {
+      "id": 10,
+      "name": "Structural",
+      "slug": "structural",
+      "passed": true,
+      "files_scanned": 170,
+      "checks_run": 508,
+      "error_count": 0,
+      "warning_count": 0,
+      "info_count": 0,
+      "description": "Site architecture — detects orphan files, duplicate IDs, meta description quality, deactivated tool links, sitemap coverage, and title tag quality.",
+      "why": "Orphan pages are invisible to users and waste hosting resources. Duplicate HTML IDs cause unpredictable behavior in JavaScript and assistive technology. Short meta descriptions reduce click-through rates in search results. Links to deactivated tools send users to dead pages. Missing sitemap entries prevent search engine indexing. Poor title tags hurt both SEO ranking and browser tab readability. This category validates the structural integrity of the site as a whole.",
+      "checks": [
+        {
+          "name": "Orphan file detection",
+          "severity": "WARNING",
+          "description": "Identifies HTML files not linked from any other page (resolves directory links to index.html, excludes fragments)"
+        },
+        {
+          "name": "Duplicate ID detection",
+          "severity": "WARNING",
+          "description": "Finds multiple elements with the same `id` attribute within a single page"
+        },
+        {
+          "name": "Meta description quality",
+          "severity": "WARNING",
+          "description": "Flags meta descriptions shorter than 50 characters"
+        },
+        {
+          "name": "Title tag quality",
+          "severity": "ERROR/WARNING",
+          "description": "Verifies every page has a `<title>` tag with appropriate length (30-65 chars optimal)"
+        },
+        {
+          "name": "Sitemap coverage",
+          "severity": "WARNING",
+          "description": "Verifies every non-fragment HTML page is listed in `sitemap.xml`"
+        },
+        {
+          "name": "Deactivated tool links",
+          "severity": "ERROR",
+          "description": "Ensures active pages don't link to deactivated tools"
+        },
+        {
+          "name": "Fragment file reporting",
+          "severity": "INFO",
+          "description": "Identifies files without DOCTYPE/html (partial templates, not full pages)"
+        },
+        {
+          "name": "Deactivated tool tracking",
+          "severity": "INFO",
+          "description": "Reports tool files that exist but are not linked from the footer"
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "infos": []
+    },
+    {
+      "id": 11,
+      "name": "Documentation",
+      "slug": "documentation",
+      "passed": true,
+      "files_scanned": 7,
+      "checks_run": 22,
+      "error_count": 0,
+      "warning_count": 0,
+      "info_count": 1,
+      "description": "Documentation freshness — validates .claude/ docs exist, cross-references claimed counts against filesystem, and detects stale session references.",
+      "why": "Project documentation that contradicts the actual codebase causes confusion during development. Missing critical docs (HANDOFF.md, sourcing standards) break the project's session continuity model. Stale session references indicate documents that haven't been reviewed recently, increasing the risk of acting on outdated information. This category treats documentation as auditable infrastructure, not optional artifacts.",
+      "checks": [
+        {
+          "name": "Required docs exist",
+          "severity": "ERROR",
+          "description": "Verifies critical project docs (HANDOFF.md, sourcingstandards.md, SiteFrameworks.md, FrameworkOverhaul.md) exist in .claude/"
+        },
+        {
+          "name": "HANDOFF.md count accuracy",
+          "severity": "WARNING",
+          "description": "Cross-references HTML file count, glossary terms, interactive tools, and technique counts (total/text/modality) against filesystem"
+        },
+        {
+          "name": "SiteFrameworks.md count accuracy",
+          "severity": "WARNING",
+          "description": "Cross-references CSS/JS line counts and total HTML count against actual files"
+        },
+        {
+          "name": "MASTER-INVENTORY.md count accuracy",
+          "severity": "WARNING",
+          "description": "Cross-references HTML file count and glossary term count against actual filesystem"
+        },
+        {
+          "name": "Stale session references",
+          "severity": "WARNING",
+          "description": "Flags docs whose latest session reference is more than 5 sessions behind the most recent"
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "infos": [
+        {
+          "file_path": ".claude/sourcingstandards.md",
+          "line_number": 0,
+          "message": "No session references found in document (Citation and sourcing rules)",
+          "suggestion": ""
+        }
+      ]
+    }
+  ]
+}

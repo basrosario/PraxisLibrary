@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DSPy: Programming language models instead of prompting them. Write modular Python code with typed signatures, and let DSPy compile it into optimized prompts automatically.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/dspy.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="DSPy - Praxis">
+    <meta property="og:description" content="DSPy: Programming language models instead of prompting them. Write modular Python code with typed signatures, and let DSPy compile it into optimized prompts automatically.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/dspy.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DSPy - Praxis">
+    <meta name="twitter:description" content="DSPy: Programming language models instead of prompting them. Write modular Python code with typed signatures, and let DSPy compile it into optimized prompts automatically.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "DSPy",
+      "name": "DSPy: Programming Language Models",
+      "description": "DSPy: Programming language models instead of prompting them. Write modular Python code with typed signatures, and let DSPy compile it into optimized prompts automatically.",
+      "url": "https://praxislibrary.com/learn/dspy.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 115 prompting techniques, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Techniques",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "DSPy"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>DSPy - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">AI Foundations</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../benchmarks/index.html" class="nav-link" aria-expanded="false">AI Benchmarks</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>AI Benchmarks</h4>
+                            <a href="../benchmarks/index.html">Benchmark Hub</a>
+                            <a href="../benchmarks/anthropic.html">Anthropic</a>
+                            <a href="../benchmarks/openai.html">OpenAI</a>
+                            <a href="../benchmarks/google.html">Google DeepMind</a>
+                            <a href="../benchmarks/meta.html">Meta AI</a>
+                            <a href="../benchmarks/xai.html">xAI</a>
+                            <a href="../benchmarks/deepseek.html">DeepSeek</a>
+                            <a href="../benchmarks/mistral.html">Mistral AI</a>
+                            <a href="../benchmarks/alibaba.html">Alibaba Cloud</a>
+                            <a href="../benchmarks/cohere.html">Cohere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Techniques</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Techniques</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                        <div class="mega-menu-group">
+                            <span class="mega-menu-group__label">Techniques</span>
+                            <a href="./structured-frameworks.html" class="mega-menu-group__link">Structured Techniques</a>
+                            <a href="./in-context-learning.html" class="mega-menu-group__link">In-Context Learning</a>
+                            <a href="./reasoning-cot.html" class="mega-menu-group__link">Reasoning &amp; CoT</a>
+                            <a href="./decomposition.html" class="mega-menu-group__link">Decomposition</a>
+                            <a href="./self-correction.html" class="mega-menu-group__link">Self-Correction</a>
+                            <a href="./ensemble-methods.html" class="mega-menu-group__link">Ensemble Methods</a>
+                            <a href="./prompting-strategies.html" class="mega-menu-group__link">Prompting Strategies</a>
+                        </div>
+                        <div class="mega-menu-group">
+                            <span class="mega-menu-group__label">Modality</span>
+                            <a href="modality/code/" class="mega-menu-group__link">Code</a>
+                            <a href="modality/image/" class="mega-menu-group__link">Image</a>
+                            <a href="modality/audio/" class="mega-menu-group__link">Audio</a>
+                            <a href="modality/video/" class="mega-menu-group__link">Video</a>
+                            <a href="modality/3d/" class="mega-menu-group__link">3D</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">AI Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--multi-column">
+                        <div class="mega-menu-section">
+                            <h4>Guides</h4>
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>Principles</h4>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../pages/performance.html">Performance</a>
+                        </div>
+                        <div class="mega-menu-section mega-menu-section--featured">
+                            <h4>AI & ND</h4>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>About</h4>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Techniques</a>
+                    <span class="separator">/</span>
+                    <span class="current">DSPy</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Optimization Technique</span>
+                </div>
+                <h1 class="page-title fade-in">DSPy</h1>
+                <p class="page-subtitle fade-in">Stop hand-crafting brittle prompt strings. DSPy lets you write modular Python programs with typed signatures, then automatically compiles them into optimized prompts and weights for any language model &mdash; turning prompt engineering from trial-and-error art into reproducible, testable software engineering.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2022&ndash;2025</span>
+                        <p><strong>Introduced:</strong> DSPy (Declarative Self-improving Python) emerged from Stanford NLP, led by Omar Khattab. The foundational work began with the DSP (Demonstrate-Search-Predict) paper in December 2022, which introduced the concept of composing retrieval and generation into modular programs. By October 2023, this evolved into DSPy &mdash; a full framework where developers write Python code using declarative &ldquo;signatures&rdquo; (typed input/output specifications), and a compiler automatically generates optimized prompts, selects few-shot examples, and even fine-tunes weights. The key insight: treat prompts as compiled artifacts, not hand-written strings.</p>
+                        <p><strong>Modern LLM Status:</strong> DSPy has become <strong>a production-grade standard for building LLM pipelines</strong>. With over 28,000 GitHub stars, 160,000+ monthly pip downloads, and 500+ dependent projects, it has moved well beyond research. Major organizations use DSPy for production RAG systems, multi-hop reasoning pipelines, and complex NLP workflows. The framework&rsquo;s MIPROv2 optimizer, BootstrapFewShot compiler, and support for structured outputs make it the most mature tool for systematic prompt optimization. DSPy represents a fundamental shift: from crafting individual prompts to engineering entire LM programs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Programming, Not Prompting</h2>
+                        <p class="split-section__text">Traditional prompt engineering works like this: you write a prompt string, test it, tweak the wording, test again, and repeat until it works. If you change the model, the temperature, or the task slightly, you often have to start over. The prompt is a fragile, opaque artifact that is difficult to version, test, or improve systematically.</p>
+                        <p class="split-section__text"><strong>DSPy replaces this with structured programming.</strong> Instead of writing &ldquo;You are an expert analyst. Given the following context: {context}, answer the question: {question}&rdquo;, you write a Python signature: <code>context, question &rarr; answer</code>. DSPy&rsquo;s compiler then figures out the best way to instruct the model &mdash; selecting demonstrations, generating instructions, and optimizing the prompt format &mdash; all automatically, guided by a metric you define.</p>
+                        <p class="split-section__text">Think of the difference between writing assembly code and writing Python. Assembly gives you total control but is brittle and hard to maintain. Python lets you express intent at a higher level, and the interpreter handles the low-level details. DSPy does the same for LLM interactions &mdash; you express what you want (the signature), and the compiler handles how to ask for it (the prompt).</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Signatures: The Building Blocks</span>
+                                <p>A DSPy signature defines the inputs and outputs of a language model call with typed fields. For example, <code>&ldquo;question &rarr; answer&rdquo;</code> tells the compiler this module takes a question and produces an answer. You can add field descriptions, constraints, and types. The compiler uses these declarations to automatically generate optimal prompts, select relevant few-shot examples from training data, and even fine-tune the model&rsquo;s weights &mdash; all without you ever writing a prompt string.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The DSPy Pipeline</h2>
+                <p class="section-subtitle fade-in-up">Five stages from signature to optimized program</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define Signatures</h3>
+                            <p class="element-timeline__text">Declare what each language model call should do using typed input/output specifications. Signatures are the contracts between your code and the LLM &mdash; they specify the interface without dictating the implementation.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Signature: &ldquo;context: str, question: str &rarr; answer: str&rdquo; &mdash; This tells DSPy the module receives a context paragraph and a question, and should produce a string answer. The compiler will figure out the best prompt format, instructions, and examples.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Build Modules</h3>
+                            <p class="element-timeline__text">Wrap signatures in DSPy modules like Predict, ChainOfThought, or ReAct. Each module adds a specific prompting strategy around your signature &mdash; CoT adds reasoning steps, ReAct adds tool use loops. Modules are composable: you can nest them like regular Python classes.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Use ChainOfThought(&ldquo;context, question &rarr; answer&rdquo;) to automatically add step-by-step reasoning. Or use dspy.ReAct(&ldquo;question &rarr; answer&rdquo;, tools=[SearchTool]) to create a tool-using agent &mdash; all from a one-line module definition.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Compose the Pipeline</h3>
+                            <p class="element-timeline__text">Connect multiple modules into a complete program. A multi-hop QA system might chain a retriever, a relevance filter, and a generator. Each module can use a different LLM, different prompting strategy, and different optimization target &mdash; but they compose naturally as Python code.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>A RAG pipeline: (1) Retrieve(question &rarr; passages) fetches documents, (2) Rerank(passages, question &rarr; top_passages) filters for relevance, (3) Generate(top_passages, question &rarr; answer) produces the final answer with citations. Three modules, one pipeline, all optimizable together.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Compile with an Optimizer</h3>
+                            <p class="element-timeline__text">Choose an optimizer (BootstrapFewShot, MIPROv2, or others) and provide a training set with a metric function. The optimizer runs your pipeline on training examples, collects traces of successful executions, generates candidate instructions, and searches for the combination that maximizes your metric.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Compile with MIPROv2 using 200 training examples and an F1 metric. The optimizer bootstraps 50 demonstration traces, proposes 10 candidate instructions per module, and runs Bayesian search over 100 trials to find the optimal configuration &mdash; automatically producing prompts that score 23% higher than hand-written ones.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">5</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Execute and Iterate</h3>
+                            <p class="element-timeline__text">Run the compiled program on new inputs. The optimized prompts, selected demonstrations, and tuned parameters are all saved and versioned. When the task changes, the model updates, or performance degrades, re-compile with new data &mdash; no manual prompt rewriting needed.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>After switching from GPT-4 to Claude, re-compile the same pipeline on the same training set. DSPy automatically adapts the prompt format, example selection, and instructions to the new model&rsquo;s strengths &mdash; maintaining performance without any manual prompt changes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Manual prompt engineering versus programmatic optimization</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Manual Prompt Engineering</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>You are an expert question-answering system. Given the following context, answer the question accurately. If the answer is not in the context, say &ldquo;I don&rsquo;t know.&rdquo; Context: {context} Question: {question} Answer:</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Problems</span>
+                                <p>Prompt works for GPT-4 but fails on Claude. Adding few-shot examples helps but requires manual curation. Changing the task (e.g., adding citations) means rewriting the entire prompt. No systematic way to measure or improve quality. Breaks when deployed to a different domain.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Fragile, model-specific, no systematic optimization</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">DSPy Program</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Define signature: &ldquo;context, question &rarr; answer&rdquo;. Wrap in ChainOfThought module. Provide 200 labeled examples and an exact-match metric. Compile with MIPROv2. The compiler generates instructions, selects optimal demonstrations, and formats the prompt &mdash; all automatically.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>Compiled program scores 23% higher than hand-written prompt on held-out test set. Switching models requires only re-compilation, not rewriting. Adding citations means adding a field to the signature and re-compiling. Every optimization is reproducible, versioned, and testable.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Systematic, model-agnostic, reproducible optimization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> DSPy doesn&rsquo;t replace natural language &mdash; it automates the process of finding the best natural language instructions for your specific task. The compiled prompts are still plain text that the model reads. But even with optimized prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">DSPy in Action</h2>
+                <p class="section-subtitle fade-in-up">Real-world examples of programmatic prompt optimization</p>
+
+                <div class="accordion fade-in-up" id="dspy-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Multi-Hop QA with RAG</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">DSPy Program Definition</span>
+                                    <p><strong>Task:</strong> Answer complex questions that require reasoning across multiple documents.<br><br>
+                                    <strong>Signature 1 (Retrieve):</strong> &ldquo;question &rarr; search_queries: list[str]&rdquo; &mdash; Generate multiple search queries from the original question.<br><br>
+                                    <strong>Signature 2 (Generate):</strong> &ldquo;context: list[str], question &rarr; reasoning, answer&rdquo; &mdash; Chain-of-thought module that reasons through retrieved passages to produce an answer.<br><br>
+                                    <strong>Metric:</strong> Combined score of answer correctness (exact match) and reasoning faithfulness (all claims grounded in retrieved context).<br><br>
+                                    <strong>Optimizer:</strong> MIPROv2 with 300 training examples, 50 bootstrap trials.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Compiled Execution</span>
+                                    <p><strong>Input:</strong> &ldquo;What river runs through the city where the company that created the first commercially successful smartphone was founded?&rdquo;<br><br>
+                                    <strong>Step 1 &mdash; Compiled query generator:</strong> The optimized first module generates three search queries: (1) &ldquo;first commercially successful smartphone company&rdquo;, (2) &ldquo;BlackBerry RIM founding city&rdquo;, (3) &ldquo;rivers in Waterloo Ontario.&rdquo; The compiler learned to decompose multi-hop questions into parallel retrieval paths rather than sequential ones.<br><br>
+                                    <strong>Step 2 &mdash; Retrieval:</strong> Three parallel searches return passages about Research In Motion (RIM), Waterloo Ontario, and the Grand River.<br><br>
+                                    <strong>Step 3 &mdash; Compiled reasoning:</strong> The optimized generator uses automatically-selected demonstrations of similar multi-hop reasoning. Its compiled instructions emphasize citing specific passages for each reasoning step: &ldquo;The first commercially successful smartphone was the BlackBerry, created by Research In Motion [Passage 1]. RIM was founded in Waterloo, Ontario [Passage 2]. The Grand River runs through Waterloo [Passage 3].&rdquo;<br><br>
+                                    <strong>Answer:</strong> &ldquo;The Grand River.&rdquo; Every claim is traceable to a retrieved passage &mdash; the faithfulness metric during compilation ensured grounded reasoning. <em>Always verify AI-generated answers against primary sources.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Classification with Bootstrapped Demonstrations</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">DSPy Program Definition</span>
+                                    <p><strong>Task:</strong> Classify customer support tickets into categories (billing, technical, feature request, complaint, general) with reasoning for each classification.<br><br>
+                                    <strong>Signature:</strong> &ldquo;ticket_text &rarr; reasoning, category, confidence&rdquo; &mdash; The model must explain its reasoning before classifying, and provide a confidence level.<br><br>
+                                    <strong>Module:</strong> ChainOfThought with typed output validation (category must be one of the five allowed values, confidence must be high/medium/low).<br><br>
+                                    <strong>Optimizer:</strong> BootstrapFewShot with 500 labeled tickets and weighted F1 metric.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Compiled Execution</span>
+                                    <p><strong>Input ticket:</strong> &ldquo;I&rsquo;ve been charged twice for my subscription this month. The second charge appeared on the 15th but I only have one account. I need this resolved before my next billing cycle.&rdquo;<br><br>
+                                    <strong>Compiled response:</strong> The optimizer bootstrapped 8 demonstration examples that the compiler selected for maximum diversity &mdash; covering edge cases like tickets that mention both billing and technical issues. The compiled instructions include specific guidance the optimizer discovered: &ldquo;Classify based on the primary action the customer needs, not just mentioned topics.&rdquo;<br><br>
+                                    <strong>Reasoning:</strong> &ldquo;The customer reports a duplicate charge and requests a billing correction before the next cycle. While the duplicate might have a technical cause, the customer&rsquo;s primary need is a billing resolution.&rdquo;<br><br>
+                                    <strong>Category:</strong> billing<br>
+                                    <strong>Confidence:</strong> high<br><br>
+                                    The bootstrapped system achieves 94% weighted F1 compared to 78% with a hand-written prompt on the same test set. <em>Classification decisions should be reviewed by humans, especially for edge cases.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Structured Data Extraction Pipeline</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">DSPy Program Definition</span>
+                                    <p><strong>Task:</strong> Extract structured information from unstructured research abstracts &mdash; methods used, datasets, reported metrics, and key findings.<br><br>
+                                    <strong>Signature 1 (Extract):</strong> &ldquo;abstract &rarr; methods: list[str], datasets: list[str], metrics: dict, findings: list[str]&rdquo; &mdash; Typed extraction with structured outputs.<br><br>
+                                    <strong>Signature 2 (Validate):</strong> &ldquo;abstract, extraction &rarr; corrections: list[str], validated_extraction&rdquo; &mdash; Self-verification module that checks extracted data against the source text.<br><br>
+                                    <strong>Pipeline:</strong> Extract then Validate, composed as a two-stage program.<br><br>
+                                    <strong>Optimizer:</strong> MIPROv2 with 150 expert-labeled abstracts and a custom field-level accuracy metric.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Compiled Execution</span>
+                                    <p><strong>Input abstract:</strong> A machine learning paper about using transformer architectures for protein structure prediction, reporting RMSD improvements on CASP14.<br><br>
+                                    <strong>Stage 1 &mdash; Compiled extraction:</strong> The optimized extractor uses compiler-generated instructions that emphasize distinguishing between methods the authors propose vs. methods they compare against (a distinction the optimizer learned was critical for accuracy). Extracts: methods=[&ldquo;ProteinTransformer (proposed)&rdquo;, &ldquo;AlphaFold2 (baseline)&rdquo;], datasets=[&ldquo;CASP14&rdquo;, &ldquo;PDB-2024&rdquo;], metrics={&ldquo;RMSD&rdquo;: &ldquo;0.82&Aring; vs 1.1&Aring; baseline&rdquo;}, findings=[&ldquo;23% RMSD improvement over AlphaFold2 on novel folds&rdquo;].<br><br>
+                                    <strong>Stage 2 &mdash; Compiled validation:</strong> The verifier cross-references each extracted claim against the abstract text. Catches that &ldquo;PDB-2024&rdquo; was used for pre-training, not evaluation &mdash; moves it to a separate field. Final output is corrected and verified.<br><br>
+                                    Two-stage pipeline achieves 91% field-level accuracy vs. 72% with single-stage extraction. <em>Extracted data should always be verified against source documents before use in research or production.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use DSPy</h2>
+                <p class="section-subtitle fade-in-up">Best for systematic optimization of multi-stage LLM programs</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Multi-Stage LLM Pipelines</strong>
+                                    <p>When your application chains multiple LLM calls &mdash; retrieval, reasoning, generation, validation &mdash; and each stage needs independently optimized prompts.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Production Systems Requiring Reproducibility</strong>
+                                    <p>When prompts need to be versioned, tested against benchmarks, and reliably reproduced across deployments and model updates.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Model-Agnostic Applications</strong>
+                                    <p>When you need to switch between LLM providers (OpenAI, Anthropic, open-source) without rewriting prompts &mdash; DSPy re-compiles automatically for each model.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Performance Optimization at Scale</strong>
+                                    <p>When manual prompt tuning has plateaued and you need data-driven optimization to squeeze the last 10&ndash;25% of quality from your LLM application.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Quick One-Off Prompts</strong>
+                                    <p>When you need a single prompt for a simple task &mdash; the overhead of setting up signatures, training data, and compilation is not justified.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>No Labeled Training Data</strong>
+                                    <p>When you have no examples of correct outputs to optimize against &mdash; DSPy&rsquo;s optimizers need a metric and at least a small training set to be effective.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>No-Code Environments</strong>
+                                    <p>When you or your team cannot write Python code &mdash; DSPy is a Python library and requires programming ability to use effectively.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where DSPy delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Enterprise RAG Systems</h3>
+                        <p class="use-case-showcase__desc">Optimize retrieval-augmented generation pipelines for internal knowledge bases, documentation search, and customer-facing Q&amp;A with measurable accuracy gains.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Research Automation</h3>
+                        <p class="use-case-showcase__desc">Build multi-hop reasoning systems for literature review, evidence synthesis, and systematic analysis of research papers.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Data Processing Pipelines</h3>
+                        <p class="use-case-showcase__desc">Structured extraction, classification, and transformation of unstructured data at scale with typed outputs and validation.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Multi-Agent Systems</h3>
+                        <p class="use-case-showcase__desc">Design and optimize individual agent modules that compose into complex multi-agent workflows with measurable end-to-end performance.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Generation</h3>
+                        <p class="use-case-showcase__desc">Optimized pipelines for generating, fact-checking, and formatting content with consistent quality across topics and styles.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Evaluation Frameworks</h3>
+                        <p class="use-case-showcase__desc">Build LLM-as-judge evaluation systems with optimized scoring criteria, calibrated rubrics, and consistent grading across evaluators.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === TECHNIQUE POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where DSPy Fits</h2>
+                <p class="section-subtitle fade-in-up">The evolution from manual prompting to programmatic optimization</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Manual Prompting</span>
+                        <span class="era-marker__title">Hand-Crafted Strings</span>
+                        <span class="era-marker__desc">Trial-and-error prompt writing</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Few-Shot Learning</span>
+                        <span class="era-marker__title">Example-Based</span>
+                        <span class="era-marker__desc">Manual example selection</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Structured Reasoning</span>
+                        <span class="era-marker__desc">Step-by-step reasoning chains</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">DSPy</span>
+                        <span class="era-marker__title">Compiled Programs</span>
+                        <span class="era-marker__desc">Automatic prompt optimization</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The Compiler Paradigm</div>
+                    <p>DSPy represents the same paradigm shift that compilers brought to software engineering. Just as C compilers freed programmers from writing assembly, DSPy frees AI engineers from hand-tuning prompt strings. You declare your intent through signatures and modules, and the compiler translates that into optimized instructions for whatever model you target. This makes LLM applications more maintainable, more testable, and more portable across models and providers.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /TECHNIQUE POSITIONING -->
+
+        <!-- === RELATED TECHNIQUES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore the ecosystem around programmatic prompt optimization</p>
+
+                <a href="mipro.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Extension</span>
+                        <span class="evolution-callout__title">MIPRO</span>
+                        <span class="evolution-callout__desc">DSPy&rsquo;s most powerful optimizer &mdash; MIPRO proposes grounded instructions and searches for optimal prompt configurations using Bayesian optimization across multi-stage programs.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="agentic-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Agentic Prompting</span>
+                        <span class="evolution-callout__desc">DSPy can optimize individual modules within agentic systems &mdash; ReAct agents, planning modules, and tool-use patterns all benefit from compiled optimization.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="rag.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Building Block</span>
+                        <span class="evolution-callout__title">RAG</span>
+                        <span class="evolution-callout__desc">Retrieval-Augmented Generation is one of DSPy&rsquo;s most common use cases &mdash; the framework excels at optimizing multi-stage retrieval and generation pipelines.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED TECHNIQUES -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Compile Your Prompts</h2>
+                        <p class="cta-corporate__text">Explore DSPy&rsquo;s programmatic approach or discover other optimization techniques in the Praxis Library.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="index.html" class="btn btn-secondary">All Techniques</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven techniques.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Technique</a>
+                <a href="../learn/crispe.html">CRISPE Technique</a>
+                <a href="../learn/costar.html">COSTAR Technique</a>
+                <a href="../learn/react.html">ReAct Technique</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-body" id="badge-lightbox-body"></div>
+    </div>
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

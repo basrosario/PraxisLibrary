@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MIPRO: Multi-prompt Instruction Proposal Optimizer. Automatically craft and search for optimal instructions across every stage of a multi-step LLM program using Bayesian optimization.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/mipro.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="MIPRO - Praxis">
+    <meta property="og:description" content="MIPRO: Multi-prompt Instruction Proposal Optimizer. Automatically craft and search for optimal instructions across every stage of a multi-step LLM program using Bayesian optimization.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/mipro.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MIPRO - Praxis">
+    <meta name="twitter:description" content="MIPRO: Multi-prompt Instruction Proposal Optimizer. Automatically craft and search for optimal instructions across every stage of a multi-step LLM program using Bayesian optimization.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["LearningResource", "Article"],
+      "headline": "MIPRO",
+      "name": "MIPRO: Multi-prompt Instruction Proposal Optimizer",
+      "description": "MIPRO: Automatically craft and search for optimal instructions across every stage of a multi-step LLM program using Bayesian optimization.",
+      "url": "https://praxislibrary.com/learn/mipro.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": ["AI Prompt Engineering", "AI Reasoning", "AI Ethics", "AI Communication", "AI History"],
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 115 prompting techniques, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": ["https://www.tiktok.com/@thepraxislibrary", "https://www.facebook.com/profile.php?id=61587612308104", "https://github.com/PowerOfPraxis/PraxisLibrary"],
+        "knowsAbout": ["Artificial Intelligence", "AI Literacy", "Prompt Engineering", "AI Prompting Techniques", "AI Glossary", "Large Language Models", "Chain-of-Thought Prompting", "AI Education", "Human-AI Communication", "Neurodivergence and AI", "AI Safety", "AI Ethics"]
+      },
+      "isPartOf": {"@type": "WebSite", "name": "Praxis Library", "url": "https://praxislibrary.com"},
+      "about": [{"@type": "Thing", "name": "Prompt Engineering"}, {"@type": "Thing", "name": "AI Communication"}]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://praxislibrary.com"},
+        {"@type": "ListItem", "position": 2, "name": "Techniques", "item": "https://praxislibrary.com/learn/"},
+        {"@type": "ListItem", "position": 3, "name": "MIPRO"}
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>MIPRO - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">AI Foundations</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../benchmarks/index.html" class="nav-link" aria-expanded="false">AI Benchmarks</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>AI Benchmarks</h4>
+                            <a href="../benchmarks/index.html">Benchmark Hub</a>
+                            <a href="../benchmarks/anthropic.html">Anthropic</a>
+                            <a href="../benchmarks/openai.html">OpenAI</a>
+                            <a href="../benchmarks/google.html">Google DeepMind</a>
+                            <a href="../benchmarks/meta.html">Meta AI</a>
+                            <a href="../benchmarks/xai.html">xAI</a>
+                            <a href="../benchmarks/deepseek.html">DeepSeek</a>
+                            <a href="../benchmarks/mistral.html">Mistral AI</a>
+                            <a href="../benchmarks/alibaba.html">Alibaba Cloud</a>
+                            <a href="../benchmarks/cohere.html">Cohere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Techniques</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Techniques</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                        <div class="mega-menu-group">
+                            <span class="mega-menu-group__label">Techniques</span>
+                            <a href="./structured-frameworks.html" class="mega-menu-group__link">Structured Techniques</a>
+                            <a href="./in-context-learning.html" class="mega-menu-group__link">In-Context Learning</a>
+                            <a href="./reasoning-cot.html" class="mega-menu-group__link">Reasoning &amp; CoT</a>
+                            <a href="./decomposition.html" class="mega-menu-group__link">Decomposition</a>
+                            <a href="./self-correction.html" class="mega-menu-group__link">Self-Correction</a>
+                            <a href="./ensemble-methods.html" class="mega-menu-group__link">Ensemble Methods</a>
+                            <a href="./prompting-strategies.html" class="mega-menu-group__link">Prompting Strategies</a>
+                        </div>
+                        <div class="mega-menu-group">
+                            <span class="mega-menu-group__label">Modality</span>
+                            <a href="modality/code/" class="mega-menu-group__link">Code</a>
+                            <a href="modality/image/" class="mega-menu-group__link">Image</a>
+                            <a href="modality/audio/" class="mega-menu-group__link">Audio</a>
+                            <a href="modality/video/" class="mega-menu-group__link">Video</a>
+                            <a href="modality/3d/" class="mega-menu-group__link">3D</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">AI Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--multi-column">
+                        <div class="mega-menu-section">
+                            <h4>Guides</h4>
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>Principles</h4>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../pages/performance.html">Performance</a>
+                        </div>
+                        <div class="mega-menu-section mega-menu-section--featured">
+                            <h4>AI & ND</h4>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>About</h4>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Techniques</a>
+                    <span class="separator">/</span>
+                    <span class="current">MIPRO</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Optimization Technique</span>
+                </div>
+                <h1 class="page-title fade-in">MIPRO</h1>
+                <p class="page-subtitle fade-in">Hand-written instructions plateau. MIPRO (Multi-prompt Instruction Proposal Optimizer) automatically generates, evaluates, and searches for the optimal combination of instructions and demonstrations across every stage of a multi-step LLM program &mdash; delivering +11% gains over manual optimization through Bayesian search.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2024&ndash;2025</span>
+                        <p><strong>Introduced:</strong> MIPRO was developed by Krista Opsahl-Ong, Michael Ryan, and collaborators at Stanford, published in June 2024 as &ldquo;Optimizing Instructions and Demonstrations for Multi-Stage Language Model Programs.&rdquo; It addressed a critical gap: while DSPy could optimize few-shot examples (via BootstrapFewShot), it lacked a systematic way to optimize the instruction text itself &mdash; the natural language directions that tell each module what to do. MIPRO solved this by using the LLM itself to propose candidate instructions grounded in actual execution traces, then searching for the best combination using Bayesian optimization.</p>
+                        <p><strong>Modern LLM Status:</strong> MIPROv2 is now <strong>the default advanced optimizer in DSPy</strong> and the most effective approach for optimizing multi-stage LLM programs. It has been adopted by organizations building production RAG pipelines, classification systems, and complex reasoning chains. The key innovation &mdash; using program traces to ground instruction proposals &mdash; has influenced how the broader community thinks about prompt optimization. Instead of asking &ldquo;what is the best prompt?&rdquo;, MIPRO asks &ldquo;what instructions, grounded in how this program actually runs, will maximize this metric?&rdquo;</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Instructions Should Be Data-Driven</h2>
+                        <p class="split-section__text">When humans write prompt instructions, we guess what the model needs to hear. We write &ldquo;Be concise&rdquo; or &ldquo;Think step by step&rdquo; based on intuition, then test and tweak. This approach works for simple tasks, but in multi-stage programs &mdash; where each module has its own prompt &mdash; the search space becomes enormous. There are thousands of possible instruction combinations, and the optimal instructions for one stage depend on what the other stages do.</p>
+                        <p class="split-section__text"><strong>MIPRO flips this by generating instructions from evidence.</strong> It runs your program on training data, collects traces of what actually happens at each stage (inputs, outputs, successes, failures), and uses those traces to propose grounded instructions. Instead of guessing &ldquo;summarize the key points,&rdquo; MIPRO might discover that &ldquo;extract the specific numerical claims and their sources&rdquo; works better for your particular pipeline &mdash; an instruction a human might never have tried.</p>
+                        <p class="split-section__text">Think of the difference between a coach who watches game tape and one who gives generic advice. The tape-watching coach sees your team&rsquo;s specific strengths and weaknesses, and designs plays around them. MIPRO watches your program&rsquo;s actual execution traces and designs instructions around what it observes.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Three-Stage Pipeline: Bootstrap, Propose, Search</span>
+                                <p>MIPRO operates in three phases. First, it <strong>bootstraps</strong> by running your program on training examples and collecting execution traces &mdash; the actual inputs and outputs at every module. Second, it <strong>proposes</strong> candidate instructions by showing the LLM your code structure, data patterns, and execution traces, and asking it to draft instructions that would improve performance. Third, it <strong>searches</strong> using Bayesian optimization to find the optimal combination of instructions and demonstrations across all modules simultaneously.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The MIPRO Process</h2>
+                <p class="section-subtitle fade-in-up">Five stages from raw execution to optimized instructions</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Bootstrap Execution Traces</h3>
+                            <p class="element-timeline__text">Run the unoptimized program across your training set. At each module, record the input, the prompt sent to the LLM, the output, and whether the final pipeline result was correct. These traces capture the program&rsquo;s real behavior &mdash; including failure modes and edge cases.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>A RAG pipeline is run on 200 questions. The bootstrap captures traces like: Module 1 received &ldquo;What is the GDP of France?&rdquo; and generated search query &ldquo;France GDP 2024&rdquo;. Module 2 received 5 passages and generated an answer. The final answer was correct in 142/200 cases.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Filter by Success Metric</h3>
+                            <p class="element-timeline__text">Keep only the traces from successful executions &mdash; those where the pipeline produced the correct output. These traces represent the program working at its best, and they form the evidence base for instruction proposals.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Of 200 traces, 142 scored correct. These are kept as &ldquo;gold traces.&rdquo; The 58 failures are analyzed separately to understand common failure patterns &mdash; like the retriever returning irrelevant passages for ambiguous queries.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Propose Grounded Instructions</h3>
+                            <p class="element-timeline__text">Show a proposer LLM your program&rsquo;s code structure, the gold traces, and the failure patterns. Ask it to generate candidate instructions for each module that would improve performance. Because the proposals are grounded in actual execution data, they address real problems rather than hypothetical ones.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>For the retriever module, MIPRO proposes 10 candidate instructions including: &ldquo;Generate 3 diverse search queries that cover different aspects of the question&rdquo; and &ldquo;If the question is ambiguous, generate one query for each possible interpretation.&rdquo; These were proposed because the traces showed ambiguous queries caused the most failures.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Bayesian Search for Optimal Combination</h3>
+                            <p class="element-timeline__text">With 10 candidate instructions per module and multiple demonstration options, the combinatorial space is huge. MIPRO uses Bayesian optimization (specifically, Tree-structured Parzen Estimators) to efficiently search this space, evaluating candidates on mini-batches of training data and using a surrogate model to guide the search toward the best combinations.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>With 2 modules and 10 candidates each, there are 100 instruction combinations plus demonstration choices. MIPRO evaluates 50 combinations on mini-batches of 20 examples each, using the surrogate model to focus on the most promising region of the search space. Total: 1,000 LLM calls instead of exhaustively testing all combinations.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">5</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Select and Deploy Best Configuration</h3>
+                            <p class="element-timeline__text">The search identifies the best-performing combination of instructions and demonstrations across all modules. This compiled configuration is saved and deployed. When the program needs re-optimization (new data, model change, or performance drift), the process is repeated automatically.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The winning configuration: Retriever uses instruction variant #7 with 3 bootstrapped demonstrations; Generator uses instruction variant #3 with 5 demonstrations. This combination scores 89% on the held-out test set, up from 71% with the original hand-written instructions &mdash; an 18-point improvement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Hand-written instructions versus MIPRO-optimized instructions</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Manual Instructions</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Write instructions for each module by hand. &ldquo;Given the context, answer the question accurately. Be concise and cite sources.&rdquo; Test on a few examples. Tweak wording based on gut feeling. Same generic instructions for every module in the pipeline.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Problems</span>
+                                <p>Instructions are generic &mdash; they don&rsquo;t address this pipeline&rsquo;s specific failure modes. No way to know if the retriever needs different instructions than the generator. Manual tuning plateaus at 71% accuracy with no systematic way to improve further.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Generic, not grounded in execution data, plateaus quickly</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">MIPRO-Optimized</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Bootstrap 200 traces. MIPRO discovers that retrieval failures are caused by ambiguous queries and proposes query-diversification instructions. For the generator, it proposes instructions emphasizing numerical precision &mdash; a pattern it found in the gold traces.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>Per-module optimized instructions address specific failure modes. Bayesian search finds the best combination across all modules simultaneously. Final accuracy: 89% &mdash; an 18-point gain. Every instruction is traceable to observed execution patterns.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Data-grounded, per-module optimization, +18 points</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>MIPRO doesn&rsquo;t replace natural language &mdash; it <strong>finds the best natural language</strong> for your specific task. The optimized instructions are still human-readable text that the model interprets. MIPRO just discovers instructions that a human might not have thought to write. But even with optimized instructions, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">MIPRO in Action</h2>
+                <p class="section-subtitle fade-in-up">See how automated instruction optimization transforms LLM programs</p>
+
+                <div class="accordion fade-in-up" id="mipro-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Optimizing a RAG Pipeline</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Optimization Setup</span>
+                                    <p><strong>Pipeline:</strong> A 3-module RAG system for answering technical documentation questions. Module 1: Query Generator (question &rarr; search queries). Module 2: Passage Ranker (passages, question &rarr; top passages). Module 3: Answer Generator (top passages, question &rarr; answer with citations).<br><br>
+                                    <strong>Training data:</strong> 300 question-answer pairs from real user queries against product documentation.<br><br>
+                                    <strong>Metric:</strong> Combined score: 60% answer correctness + 40% citation accuracy (does the answer cite the right documentation sections?).<br><br>
+                                    <strong>Baseline:</strong> Hand-written instructions score 68% on held-out test set.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">MIPRO Optimization Results</span>
+                                    <p><strong>Bootstrap phase:</strong> Ran pipeline on 300 training examples. 204 correct, 96 incorrect. Analysis of failures: 41 had poor retrieval (wrong docs), 33 had correct docs but wrong answer, 22 had correct answer but wrong citations.<br><br>
+                                    <strong>Instruction discovery (Query Generator):</strong> MIPRO proposed: &ldquo;Generate 3 search queries: one using the user&rsquo;s exact terminology, one using official documentation terms, and one that captures the underlying intent. This ensures retrieval works even when users use colloquial terms.&rdquo; This instruction was grounded in traces showing that user terminology often didn&rsquo;t match documentation vocabulary.<br><br>
+                                    <strong>Instruction discovery (Answer Generator):</strong> MIPRO proposed: &ldquo;When citing documentation, include the section name and paragraph number. If the answer synthesizes information from multiple sections, list all sections and explain how they connect.&rdquo; Grounded in traces where citation failures involved answers pulling from multiple sources without attribution.<br><br>
+                                    <strong>Final result:</strong> Optimized pipeline scores 84% on held-out test &mdash; a 16-point improvement. Query retrieval failures dropped from 41 to 12. <em>Always verify AI-generated citations against source documentation.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Multi-Hop Reasoning Optimization</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Optimization Setup</span>
+                                    <p><strong>Pipeline:</strong> A multi-hop QA system that answers questions requiring 2&ndash;4 reasoning steps. Module 1: Hop Planner (question &rarr; sub-questions). Module 2: Sub-Question Answerer (sub-question, accumulated context &rarr; intermediate answer). Module 3: Synthesizer (intermediate answers &rarr; final answer).<br><br>
+                                    <strong>Training data:</strong> 250 multi-hop questions from HotpotQA with ground-truth decompositions.<br><br>
+                                    <strong>Metric:</strong> Exact-match on final answer AND decomposition quality (are sub-questions logically ordered?).<br><br>
+                                    <strong>Baseline:</strong> Hand-written instructions: 52% exact match.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">MIPRO Optimization Results</span>
+                                    <p><strong>Key discovery from traces:</strong> The bootstrap revealed that the Hop Planner consistently generated good first sub-questions but failed on later hops because it didn&rsquo;t account for information already gathered. Sub-question 3 would often repeat what sub-question 1 already answered.<br><br>
+                                    <strong>MIPRO&rsquo;s proposed instruction for Hop Planner:</strong> &ldquo;Before generating the next sub-question, review what has already been established by previous intermediate answers. Each new sub-question should build on prior findings and move closer to the final answer. Never ask for information that was already answered.&rdquo;<br><br>
+                                    <strong>MIPRO&rsquo;s proposed instruction for Synthesizer:</strong> &ldquo;Combine the intermediate answers by tracing the logical chain from first hop to last. State the final answer, then show the reasoning path: [hop 1 finding] leads to [hop 2 finding] which establishes [final answer].&rdquo;<br><br>
+                                    <strong>Final result:</strong> 67% exact match &mdash; a 15-point improvement. Redundant sub-questions dropped from 34% to 8%. <em>Multi-hop reasoning should always be reviewed step-by-step for logical coherence.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Classification with Trace-Grounded Instructions</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Optimization Setup</span>
+                                    <p><strong>Pipeline:</strong> A 2-module system for classifying news articles into 8 categories with explanations. Module 1: Content Analyzer (article &rarr; key themes, entities, tone). Module 2: Classifier (themes, entities, tone &rarr; category, explanation, confidence).<br><br>
+                                    <strong>Training data:</strong> 500 expert-labeled news articles with category justifications.<br><br>
+                                    <strong>Metric:</strong> 70% weighted F1 + 30% explanation quality (does the explanation mention the right distinguishing features?).<br><br>
+                                    <strong>Baseline:</strong> Generic &ldquo;classify this article&rdquo; instruction: 76% weighted F1.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">MIPRO Optimization Results</span>
+                                    <p><strong>Trace analysis insight:</strong> MIPRO discovered that the Content Analyzer consistently missed distinguishing between &ldquo;Business&rdquo; and &ldquo;Technology&rdquo; articles when companies were involved. 80% of misclassifications were in these two categories.<br><br>
+                                    <strong>MIPRO&rsquo;s proposed instruction for Content Analyzer:</strong> &ldquo;Identify whether the primary subject is a business event (earnings, merger, market movement, executive change) or a technology development (product launch, research breakthrough, engineering achievement). When a technology company is involved, focus on whether the article discusses the business aspects or the technology itself.&rdquo;<br><br>
+                                    <strong>Bootstrapped demonstrations:</strong> MIPRO selected 4 demonstrations specifically targeting the Business/Technology confusion boundary, drawn from the gold traces where the pipeline correctly handled ambiguous cases.<br><br>
+                                    <strong>Final result:</strong> 88% weighted F1 with optimized instructions and selected demonstrations &mdash; a 12-point gain. Business/Technology confusion dropped from 80% of errors to 22%. <em>Classification systems should be regularly audited for category boundary accuracy.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use MIPRO</h2>
+                <p class="section-subtitle fade-in-up">Best for data-driven instruction optimization in multi-stage programs</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                <div>
+                                    <strong>Complex Multi-Stage Programs</strong>
+                                    <p>When your pipeline has multiple LLM calls and each stage needs independently tuned instructions that work together as a system.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                <div>
+                                    <strong>When Manual Tuning Has Plateaued</strong>
+                                    <p>When you&rsquo;ve tried many prompt variations and can&rsquo;t improve further &mdash; MIPRO&rsquo;s data-grounded search explores instructions you wouldn&rsquo;t think to write.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                <div>
+                                    <strong>Production Systems with Clear Metrics</strong>
+                                    <p>When you have a measurable quality metric (accuracy, F1, BLEU, etc.) and enough labeled data to run meaningful optimization trials.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                <div>
+                                    <strong>Diagnosing Pipeline Failures</strong>
+                                    <p>When you need to understand why your LLM program fails &mdash; MIPRO&rsquo;s trace analysis reveals specific failure modes and which module is responsible.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                                <div>
+                                    <strong>Single-Prompt Tasks</strong>
+                                    <p>When your application is a single LLM call &mdash; MIPRO&rsquo;s power comes from optimizing across multiple modules simultaneously.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                                <div>
+                                    <strong>Very Limited Training Data</strong>
+                                    <p>When you have fewer than 50 labeled examples &mdash; MIPRO needs enough data to bootstrap meaningful traces and evaluate candidates.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                                <div>
+                                    <strong>Rapid Prototyping Phase</strong>
+                                    <p>When your program&rsquo;s structure is still changing frequently &mdash; optimize after the architecture stabilizes, not during early experimentation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where MIPRO delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Enterprise Search</h3>
+                        <p class="use-case-showcase__desc">Optimize RAG pipelines for internal knowledge bases where query vocabulary differs from document terminology.</p>
+                    </div>
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Generation Pipelines</h3>
+                        <p class="use-case-showcase__desc">Optimize multi-stage content workflows: research, draft, fact-check, and format with per-stage instruction tuning.</p>
+                    </div>
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical NLP</h3>
+                        <p class="use-case-showcase__desc">Optimize clinical text processing pipelines where accuracy and grounded reasoning are critical for patient safety.</p>
+                    </div>
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Legal Document Analysis</h3>
+                        <p class="use-case-showcase__desc">Optimize extraction and reasoning pipelines for contracts, filings, and regulatory documents with high precision requirements.</p>
+                    </div>
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Customer Support</h3>
+                        <p class="use-case-showcase__desc">Optimize ticket classification, routing, and response generation pipelines for faster resolution and higher satisfaction.</p>
+                    </div>
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Analysis</h3>
+                        <p class="use-case-showcase__desc">Optimize multi-stage pipelines for earnings analysis, risk assessment, and market research with numerical precision metrics.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === TECHNIQUE POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where MIPRO Fits</h2>
+                <p class="section-subtitle fade-in-up">The evolution from manual prompting to automated instruction optimization</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Manual Prompts</span>
+                        <span class="era-marker__title">Hand-Written</span>
+                        <span class="era-marker__desc">Intuition-based instructions</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Auto-CoT</span>
+                        <span class="era-marker__title">Auto Demonstrations</span>
+                        <span class="era-marker__desc">Automated example selection</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">BootstrapFewShot</span>
+                        <span class="era-marker__title">Trace-Based Examples</span>
+                        <span class="era-marker__desc">Examples from execution traces</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">MIPRO</span>
+                        <span class="era-marker__title">Full Optimization</span>
+                        <span class="era-marker__desc">Instructions + demos via Bayesian search</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Beyond Human Intuition</div>
+                    <p>MIPRO consistently discovers instructions that humans wouldn&rsquo;t write &mdash; not because they&rsquo;re unnatural, but because they address failure modes that are invisible without trace analysis. When a human writes &ldquo;be accurate,&rdquo; MIPRO writes &ldquo;distinguish between business events and technology developments when companies are involved&rdquo; &mdash; because the traces showed that&rsquo;s where accuracy actually breaks down. This is the power of grounding instruction proposals in execution evidence rather than human intuition.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /TECHNIQUE POSITIONING -->
+
+        <!-- === RELATED TECHNIQUES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore the foundations and extensions of instruction optimization</p>
+
+                <a href="dspy.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">DSPy</span>
+                        <span class="evolution-callout__desc">MIPRO is DSPy&rsquo;s most powerful optimizer &mdash; it operates within DSPy&rsquo;s programming model of signatures, modules, and compiled pipelines.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
+                </a>
+
+                <a href="agentic-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Agentic Prompting</span>
+                        <span class="evolution-callout__desc">MIPRO can optimize instructions for each module within agentic systems &mdash; planning prompts, tool selection prompts, and reflection prompts all benefit.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
+                </a>
+
+                <a href="active-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Precursor</span>
+                        <span class="evolution-callout__title">Active Prompting</span>
+                        <span class="evolution-callout__desc">Active Prompting selects the most informative examples for annotation &mdash; a precursor to MIPRO&rsquo;s trace-based approach of using execution data to guide optimization.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED TECHNIQUES -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Optimize Your Instructions</h2>
+                        <p class="cta-corporate__text">Explore MIPRO&rsquo;s data-driven approach or discover other optimization techniques in the Praxis Library.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="index.html" class="btn btn-secondary">All Techniques</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven techniques.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Technique</a>
+                <a href="../learn/crispe.html">CRISPE Technique</a>
+                <a href="../learn/costar.html">COSTAR Technique</a>
+                <a href="../learn/react.html">ReAct Technique</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg></span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-body" id="badge-lightbox-body"></div>
+    </div>
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

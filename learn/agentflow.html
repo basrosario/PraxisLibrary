@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AgentFlow &amp; Flow-GRPO: Train agentic systems in-the-flow by optimizing the planner inside the multi-turn reasoning loop. 14.9% average accuracy gains over baselines on complex tasks.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/agentflow.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="AgentFlow &amp; Flow-GRPO - Praxis">
+    <meta property="og:description" content="AgentFlow &amp; Flow-GRPO: Train agentic systems in-the-flow by optimizing the planner inside the multi-turn reasoning loop. 14.9% average accuracy gains over baselines.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/agentflow.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AgentFlow &amp; Flow-GRPO - Praxis">
+    <meta name="twitter:description" content="AgentFlow &amp; Flow-GRPO: Train agentic systems in-the-flow by optimizing the planner inside the multi-turn reasoning loop. 14.9% average accuracy gains.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["LearningResource", "Article"],
+      "headline": "AgentFlow & Flow-GRPO",
+      "name": "AgentFlow: In-the-Flow Agentic System Optimization",
+      "description": "AgentFlow & Flow-GRPO: Train agentic systems in-the-flow by optimizing the planner inside the multi-turn reasoning loop.",
+      "url": "https://praxislibrary.com/learn/agentflow.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 115 prompting techniques, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": ["https://www.tiktok.com/@thepraxislibrary", "https://www.facebook.com/profile.php?id=61587612308104", "https://github.com/PowerOfPraxis/PraxisLibrary"],
+        "knowsAbout": ["Artificial Intelligence", "AI Literacy", "Prompt Engineering", "AI Prompting Techniques", "AI Glossary", "Large Language Models", "Chain-of-Thought Prompting", "AI Education", "Human-AI Communication", "Neurodivergence and AI", "AI Safety", "AI Ethics"]
+      },
+      "isPartOf": {"@type": "WebSite", "name": "Praxis Library", "url": "https://praxislibrary.com"},
+      "about": [{"@type": "Thing", "name": "Prompt Engineering"}, {"@type": "Thing", "name": "AI Communication"}]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://praxislibrary.com"},
+        {"@type": "ListItem", "position": 2, "name": "Techniques", "item": "https://praxislibrary.com/learn/"},
+        {"@type": "ListItem", "position": 3, "name": "AgentFlow & Flow-GRPO"}
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>AgentFlow &amp; Flow-GRPO - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">AI Foundations</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../benchmarks/index.html" class="nav-link" aria-expanded="false">AI Benchmarks</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>AI Benchmarks</h4>
+                            <a href="../benchmarks/index.html">Benchmark Hub</a>
+                            <a href="../benchmarks/anthropic.html">Anthropic</a>
+                            <a href="../benchmarks/openai.html">OpenAI</a>
+                            <a href="../benchmarks/google.html">Google DeepMind</a>
+                            <a href="../benchmarks/meta.html">Meta AI</a>
+                            <a href="../benchmarks/xai.html">xAI</a>
+                            <a href="../benchmarks/deepseek.html">DeepSeek</a>
+                            <a href="../benchmarks/mistral.html">Mistral AI</a>
+                            <a href="../benchmarks/alibaba.html">Alibaba Cloud</a>
+                            <a href="../benchmarks/cohere.html">Cohere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Techniques</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Techniques</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                        <div class="mega-menu-group">
+                            <span class="mega-menu-group__label">Techniques</span>
+                            <a href="./structured-frameworks.html" class="mega-menu-group__link">Structured Techniques</a>
+                            <a href="./in-context-learning.html" class="mega-menu-group__link">In-Context Learning</a>
+                            <a href="./reasoning-cot.html" class="mega-menu-group__link">Reasoning &amp; CoT</a>
+                            <a href="./decomposition.html" class="mega-menu-group__link">Decomposition</a>
+                            <a href="./self-correction.html" class="mega-menu-group__link">Self-Correction</a>
+                            <a href="./ensemble-methods.html" class="mega-menu-group__link">Ensemble Methods</a>
+                            <a href="./prompting-strategies.html" class="mega-menu-group__link">Prompting Strategies</a>
+                        </div>
+                        <div class="mega-menu-group">
+                            <span class="mega-menu-group__label">Modality</span>
+                            <a href="modality/code/" class="mega-menu-group__link">Code</a>
+                            <a href="modality/image/" class="mega-menu-group__link">Image</a>
+                            <a href="modality/audio/" class="mega-menu-group__link">Audio</a>
+                            <a href="modality/video/" class="mega-menu-group__link">Video</a>
+                            <a href="modality/3d/" class="mega-menu-group__link">3D</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">AI Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--multi-column">
+                        <div class="mega-menu-section">
+                            <h4>Guides</h4>
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>Principles</h4>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../pages/performance.html">Performance</a>
+                        </div>
+                        <div class="mega-menu-section mega-menu-section--featured">
+                            <h4>AI & ND</h4>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                        </div>
+                        <div class="mega-menu-section">
+                            <h4>About</h4>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Techniques</a>
+                    <span class="separator">/</span>
+                    <span class="current">AgentFlow &amp; Flow-GRPO</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Agentic Optimization Technique</span>
+                </div>
+                <h1 class="page-title fade-in">AgentFlow &amp; Flow-GRPO</h1>
+                <p class="page-subtitle fade-in">Agents fail because they can&rsquo;t learn from their own mistakes mid-task. AgentFlow solves this by training the planner directly inside the multi-turn reasoning loop using Flow-GRPO &mdash; a technique that converts sparse, end-of-trajectory rewards into turn-level learning signals. The result: a 7B-parameter agent that outperforms GPT-4o on complex tasks.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2025&ndash;2026</span>
+                        <p><strong>Introduced:</strong> AgentFlow was developed by Pan Lu and collaborators at Stanford, with the paper &ldquo;In-the-Flow Agentic System Optimization&rdquo; published in October 2025. It addressed the fundamental credit assignment problem in multi-turn agentic systems: when an agent takes 15 steps to complete a task and receives a single reward at the end, how does each individual step learn whether it contributed to success or failure? Previous approaches trained agents offline and froze them at inference time. AgentFlow introduced &ldquo;in-the-flow&rdquo; optimization &mdash; training the planner within the actual reasoning loop.</p>
+                        <p><strong>Modern LLM Status:</strong> AgentFlow was accepted at <strong>ICLR 2026</strong> and represents <strong>the cutting edge of agentic system training</strong>. Its Flow-GRPO algorithm achieved average accuracy gains of 14.9% on search tasks, 14.0% on agentic benchmarks, 14.5% on mathematical reasoning, and 4.1% on scientific tasks &mdash; with a 7B-parameter backbone outperforming larger proprietary models. The technique has been featured as HuggingFace Daily Paper #2 and accepted to the NeurIPS 2025 Efficient Reasoning Workshop. AgentFlow points toward a future where agents improve in real time during deployment, not just during offline training.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Train the Planner While It Plans</h2>
+                        <p class="split-section__text">Current agentic systems have a fundamental disconnect: the planner is trained offline on static datasets, then frozen at deployment. It cannot learn from its own successes and failures during actual task execution. When a research agent takes a wrong turn on step 3 of a 10-step task, the planner has no way to learn that step 3 was the mistake &mdash; it only knows the final outcome was wrong.</p>
+                        <p class="split-section__text"><strong>AgentFlow bridges this gap by optimizing the planner inside the reasoning loop itself.</strong> It coordinates four specialized modules &mdash; a planner, an executor, a verifier, and a generator &mdash; through evolving shared memory. The planner proposes actions, the executor carries them out, the verifier checks results, and the generator produces outputs. Crucially, Flow-GRPO trains the planner by broadcasting the final trajectory reward to every turn, using group-normalized advantages to determine which planning decisions were good and which were bad.</p>
+                        <p class="split-section__text">Think of it like a chess player who can review each move of a lost game and understand exactly which move was the turning point. Instead of just knowing &ldquo;I lost,&rdquo; the player understands &ldquo;move 7 was the critical error because it ignored the center.&rdquo; Flow-GRPO gives this per-move feedback to the planner at every turn of the agent&rsquo;s execution.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Four Modules, One Evolving Memory</span>
+                                <p>AgentFlow&rsquo;s architecture separates concerns into four modules that communicate through shared memory. The <strong>Planner</strong> decides what to do next based on the goal and current state. The <strong>Executor</strong> carries out the planned action using available tools. The <strong>Verifier</strong> checks whether the action succeeded and updates the shared memory with observations. The <strong>Generator</strong> produces the final output when the task is complete. This separation allows each module to be independently optimized &mdash; and Flow-GRPO specifically targets the planner, the most critical module for overall task success.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The AgentFlow Process</h2>
+                <p class="section-subtitle fade-in-up">Five stages from agent architecture to in-the-flow optimization</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define Agentic Modules</h3>
+                            <p class="element-timeline__text">Set up the four-module architecture: Planner, Executor, Verifier, and Generator. Define the tools available to the Executor (web search, code execution, calculators, etc.) and the evaluation criteria for the Verifier. Initialize the shared memory structure.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>For a research agent: Planner decides which sources to search, Executor runs web searches and reads documents, Verifier checks whether found information is relevant and consistent, Generator synthesizes findings into a report. Shared memory tracks: sources visited, facts gathered, contradictions found.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Execute Multi-Turn Loop</h3>
+                            <p class="element-timeline__text">The agent runs its planning-execution-verification cycle on training tasks. At each turn, the Planner proposes an action, the Executor carries it out, and the Verifier updates the shared memory. This continues until the task is complete (or a step limit is reached). All intermediate states are recorded.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Turn 1: Planner decides to search &ldquo;quantum computing applications 2025.&rdquo; Executor searches. Verifier confirms 3 relevant results. Turn 2: Planner reads the top result. Turn 3: Planner searches for a specific claim to verify. Turn 4: Verifier flags a contradiction between sources. Turn 5: Planner searches for a third source to resolve it. After 8 turns, Generator produces the final report.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Collect Trajectory Rewards</h3>
+                            <p class="element-timeline__text">After the task completes, evaluate the final output against ground truth. This produces a single trajectory-level reward: did the agent succeed? The challenge is that this one signal must somehow inform 8&ndash;15 individual planning decisions that happened during execution.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The research report is evaluated: 85% factual accuracy, all claims sourced, contradiction correctly resolved. Trajectory reward: 0.85. But which of the 8 turns contributed most to this success? Was it the initial search strategy? The verification step? The contradiction resolution? Flow-GRPO will determine this.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Flow-GRPO Credit Assignment</h3>
+                            <p class="element-timeline__text">Flow-GRPO converts the multi-turn optimization into a sequence of single-turn updates. It broadcasts the trajectory reward to every turn, but uses group-normalized advantages to differentiate: within a group of trajectories attempting the same task, turns that appear in successful trajectories get positive advantage, turns in failed ones get negative. This assigns credit without needing per-step labels.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The same task is attempted 4 times with different planning strategies. Two succeed (rewards 0.85 and 0.90), two fail (rewards 0.3 and 0.4). Flow-GRPO compares the planning decisions: in successful runs, the planner verified claims before citing them. In failed runs, it skipped verification. The &ldquo;verify before cite&rdquo; planning pattern receives a strong positive advantage signal.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">5</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Update Planner Policy</h3>
+                            <p class="element-timeline__text">The Planner&rsquo;s weights are updated using the advantage signals from Flow-GRPO. Successful planning patterns are reinforced; unsuccessful ones are suppressed. Because this happens within the flow of task execution (not offline), the planner continuously improves its decision-making for the specific types of tasks it encounters.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>After training on 500 research tasks, the Planner has learned: (1) always verify controversial claims from a second source, (2) search with specific terms before broad ones, (3) when contradictions arise, search for a third authoritative source. These patterns emerged from Flow-GRPO&rsquo;s credit assignment, not from explicit programming.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Static agents versus in-the-flow optimized agents</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Static Agent</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Agent is trained offline on static datasets. At deployment, the planner uses frozen weights. It follows the same planning strategy regardless of what it observes during execution. When a search returns poor results, it tries the same approach again.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Problems</span>
+                                <p>Cannot learn from execution feedback. Makes the same planning mistakes repeatedly. Performance degrades on tasks that differ from training distribution. No mechanism to improve the planner based on real-world outcomes.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+                            <span>Frozen planner, no in-task learning, repeated mistakes</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                            </span>
+                            <h3 class="comparison-panel__title">AgentFlow</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Four coordinated modules with shared evolving memory. Flow-GRPO trains the planner using trajectory rewards broadcast to every turn. Group-normalized advantages identify which planning decisions led to success. The planner continuously improves its strategy.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>14.9% accuracy gain on search tasks, 14.0% on agentic benchmarks. A 7B model outperforms GPT-4o on complex multi-step tasks. The planner learns task-specific strategies &mdash; like always verifying claims and adapting search queries based on initial results.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+                            <span>In-flow optimization, per-turn credit, continuous improvement</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>AgentFlow&rsquo;s planner communicates in natural language &mdash; its planning decisions are text that humans can read and audit. Flow-GRPO optimizes <strong>which natural language plans</strong> lead to the best outcomes. The agent&rsquo;s reasoning is transparent and interpretable. But even with optimized agents, <strong>verifying AI output is always a necessary step</strong> &mdash; especially for high-stakes decisions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">AgentFlow in Action</h2>
+                <p class="section-subtitle fade-in-up">See how in-the-flow optimization transforms agent performance</p>
+
+                <div class="accordion fade-in-up" id="agentflow-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Research Agent with Adaptive Planning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task Setup</span>
+                                    <p><strong>Goal:</strong> Answer the question &ldquo;What are the three most significant advances in solid-state battery technology since 2023, and which companies are leading each advance?&rdquo;<br><br>
+                                    <strong>Tools:</strong> web_search(query), read_url(url), calculate(expression), verify_claim(claim, source)<br><br>
+                                    <strong>Modules:</strong> Planner (decides search strategy), Executor (runs tools), Verifier (checks relevance and accuracy), Generator (writes final answer).<br><br>
+                                    <strong>Training context:</strong> This planner was optimized by Flow-GRPO on 500 similar research questions. It learned three key strategies from trajectory analysis.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Optimized Agent Execution</span>
+                                    <p><strong>Turn 1 &mdash; Planner (learned strategy: broad then specific):</strong> &ldquo;Start with a broad survey search to identify candidate advances, then deep-dive on each.&rdquo; Executor searches &ldquo;solid-state battery breakthroughs 2023 2024 2025.&rdquo;<br><br>
+                                    <strong>Turn 2 &mdash; Verifier:</strong> Found 6 candidate advances across 4 sources. Three appear in multiple sources: sulfide electrolyte scaling, dry electrode processing, and silicon anode integration. Memory updated with candidates.<br><br>
+                                    <strong>Turn 3 &mdash; Planner (learned strategy: verify before committing):</strong> &ldquo;Before selecting the top 3, verify each candidate with a dedicated search.&rdquo; Executor searches each candidate individually.<br><br>
+                                    <strong>Turn 4 &mdash; Verifier:</strong> Silicon anode integration appears overhyped &mdash; one source calls it &ldquo;promising but unproven.&rdquo; Flags for re-evaluation. Finds a fourth candidate: solid-state manufacturing cost reduction at Toyota.<br><br>
+                                    <strong>Turn 5 &mdash; Planner (learned strategy: resolve ambiguity with authoritative sources):</strong> Searches specifically for peer-reviewed or company-announced results for each candidate. Confirms 3 advances with company attributions.<br><br>
+                                    <strong>Turn 6 &mdash; Generator:</strong> Produces a structured answer with three advances, leading companies, and evidence trail. Each claim links to the verification step that confirmed it.<br><br>
+                                    <em>The Planner&rsquo;s three learned strategies (broad-then-specific, verify-before-commit, resolve-with-authority) emerged from Flow-GRPO training, not from explicit programming. Always verify AI research summaries against primary sources.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Code Development Agent</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task Setup</span>
+                                    <p><strong>Goal:</strong> Implement a rate limiter middleware for a Node.js Express API that supports per-user limits, sliding window algorithm, and Redis-backed storage.<br><br>
+                                    <strong>Tools:</strong> write_code(file, content), run_tests(path), execute_shell(command), read_file(path)<br><br>
+                                    <strong>Training context:</strong> Planner trained by Flow-GRPO on 300 coding tasks. Learned pattern: &ldquo;test incrementally&rdquo; outperforms &ldquo;build everything then test.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Optimized Agent Execution</span>
+                                    <p><strong>Turn 1 &mdash; Planner (learned: scaffold first):</strong> &ldquo;Create the middleware skeleton with a basic fixed-window counter before adding complexity.&rdquo; Writes basic middleware.<br><br>
+                                    <strong>Turn 2 &mdash; Planner (learned: test early):</strong> Writes 3 tests for the basic counter: normal request, at limit, over limit. Runs tests. All pass.<br><br>
+                                    <strong>Turn 3 &mdash; Planner:</strong> &ldquo;Upgrade to sliding window algorithm.&rdquo; Rewrites the counting logic. Runs existing tests &mdash; 2 pass, 1 fails (edge case at window boundary).<br><br>
+                                    <strong>Turn 4 &mdash; Verifier:</strong> Identifies the boundary bug: requests at exactly the window transition are double-counted. Planner adjusts the timestamp comparison from &lt;= to &lt;.<br><br>
+                                    <strong>Turn 5 &mdash; Planner:</strong> &ldquo;Add Redis backend.&rdquo; Replaces in-memory store with Redis. Adds 2 more tests for Redis persistence. Runs all 5 tests &mdash; all pass.<br><br>
+                                    <strong>Turn 6 &mdash; Planner (learned: add edge cases last):</strong> Adds tests for: Redis connection failure (graceful degradation), concurrent requests (race condition), per-user isolation. Finds race condition bug, fixes with Redis MULTI/EXEC.<br><br>
+                                    <strong>Final:</strong> 8 tests passing, complete middleware with sliding window, Redis backing, and graceful degradation. The &ldquo;incremental build-test&rdquo; pattern caught 2 bugs early that a &ldquo;build-everything-first&rdquo; approach would have made much harder to diagnose. <em>AI-generated code should always be reviewed for security vulnerabilities before deployment.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Multi-Tool Scientific Reasoning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task Setup</span>
+                                    <p><strong>Goal:</strong> Determine whether a proposed drug compound (provided as a SMILES string) is likely to cross the blood-brain barrier, using computational chemistry tools and literature search.<br><br>
+                                    <strong>Tools:</strong> calculate_molecular_properties(smiles), search_literature(query), predict_logP(smiles), compare_to_known_compounds(properties)<br><br>
+                                    <strong>Training context:</strong> Planner trained by Flow-GRPO on 200 drug property prediction tasks. Learned to cross-validate computational predictions against literature evidence.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Optimized Agent Execution</span>
+                                    <p><strong>Turn 1 &mdash; Planner (learned: compute then validate):</strong> &ldquo;Calculate molecular properties first to establish a quantitative baseline.&rdquo; Executor computes: molecular weight = 324 Da, hydrogen bond donors = 2, hydrogen bond acceptors = 4, polar surface area = 65 &Aring;&sup2;.<br><br>
+                                    <strong>Turn 2 &mdash; Planner:</strong> &ldquo;Predict logP for lipophilicity assessment.&rdquo; Executor: predicted logP = 2.8. Memory updated: &ldquo;All Lipinski properties within BBB-favorable range.&rdquo;<br><br>
+                                    <strong>Turn 3 &mdash; Planner (learned: compare to known compounds):</strong> &ldquo;Find structurally similar compounds with known BBB permeability.&rdquo; Executor finds 3 analogs: 2 are BBB-permeable, 1 is not.<br><br>
+                                    <strong>Turn 4 &mdash; Verifier:</strong> The non-permeable analog has a similar molecular weight but higher polar surface area (89 &Aring;&sup2;). Notes this as a distinguishing feature favorable for the query compound.<br><br>
+                                    <strong>Turn 5 &mdash; Planner (learned: search for contradicting evidence):</strong> &ldquo;Search literature for any known efflux transporter interactions with this scaffold.&rdquo; Finds one paper reporting P-glycoprotein efflux for a related scaffold &mdash; a potential concern.<br><br>
+                                    <strong>Turn 6 &mdash; Generator:</strong> Produces a structured assessment: &ldquo;Likely BBB-permeable based on physicochemical properties (MW 324, logP 2.8, PSA 65) and structural analogy to 2 known permeable compounds. Caveat: related scaffolds show P-gp efflux interaction that could reduce effective permeability. Recommend experimental PAMPA-BBB assay to confirm.&rdquo;<br><br>
+                                    <em>The learned &ldquo;search for contradicting evidence&rdquo; pattern was the key differentiator &mdash; untrained agents consistently missed the efflux concern. AI predictions in drug discovery must always be validated experimentally.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use AgentFlow</h2>
+                <p class="section-subtitle fade-in-up">Best for training agents that improve through their own execution experience</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                <div>
+                                    <strong>Long-Horizon Multi-Step Tasks</strong>
+                                    <p>When agents need 5&ndash;20 steps to complete a task and the quality of early decisions critically affects final outcomes.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                <div>
+                                    <strong>Sparse Reward Environments</strong>
+                                    <p>When meaningful feedback only comes at the end of a task (e.g., correct/incorrect answer) and you need to propagate that signal to individual steps.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                <div>
+                                    <strong>Multi-Tool Agent Systems</strong>
+                                    <p>When agents must coordinate web search, code execution, calculation, and verification tools &mdash; and learn which tool to use when.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                <div>
+                                    <strong>Smaller Models Competing with Larger Ones</strong>
+                                    <p>When you want a 7B-parameter model to match or exceed GPT-4o performance through optimized planning rather than raw scale.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                                <div>
+                                    <strong>Single-Turn Tasks</strong>
+                                    <p>When the task requires one LLM call with no planning or tool use &mdash; AgentFlow&rsquo;s multi-module architecture adds unnecessary complexity.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                                <div>
+                                    <strong>No Training Data Available</strong>
+                                    <p>When you cannot generate training trajectories with ground-truth outcomes &mdash; Flow-GRPO needs trajectory rewards to optimize the planner.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                                <div>
+                                    <strong>Simple Tool Use Patterns</strong>
+                                    <p>When the agent always follows the same tool sequence (search &rarr; read &rarr; answer) &mdash; optimization provides little benefit when planning is trivial.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where AgentFlow delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Autonomous Research</h3>
+                        <p class="use-case-showcase__desc">Agents that learn optimal search strategies, source verification patterns, and contradiction resolution through execution experience.</p>
+                    </div>
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Software Engineering Agents</h3>
+                        <p class="use-case-showcase__desc">Agents that learn to scaffold incrementally, test early, and resolve bugs through verified patterns rather than exhaustive debugging.</p>
+                    </div>
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Scientific Discovery</h3>
+                        <p class="use-case-showcase__desc">Agents that learn to cross-validate computational predictions against literature and flag potential concerns that naive agents miss.</p>
+                    </div>
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Data Pipeline Automation</h3>
+                        <p class="use-case-showcase__desc">Agents that learn optimal data cleaning strategies, anomaly detection patterns, and transformation sequences from pipeline execution outcomes.</p>
+                    </div>
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">IT Operations</h3>
+                        <p class="use-case-showcase__desc">Agents that learn diagnostic strategies from incident resolution outcomes &mdash; which logs to check first, which fixes to try, when to escalate.</p>
+                    </div>
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Complex Decision Support</h3>
+                        <p class="use-case-showcase__desc">Agents that learn to gather evidence, weigh alternatives, and present structured recommendations with confidence calibration from past decision outcomes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === TECHNIQUE POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where AgentFlow Fits</h2>
+                <p class="section-subtitle fade-in-up">The evolution from static agents to self-improving agentic systems</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Single Prompts</span>
+                        <span class="era-marker__title">Static Responses</span>
+                        <span class="era-marker__desc">One question, one answer</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">ReAct</span>
+                        <span class="era-marker__title">Tool-Augmented</span>
+                        <span class="era-marker__desc">Reasoning with external actions</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Agentic Prompting</span>
+                        <span class="era-marker__title">Autonomous Agents</span>
+                        <span class="era-marker__desc">Goal-directed multi-step execution</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">AgentFlow</span>
+                        <span class="era-marker__title">Self-Improving Agents</span>
+                        <span class="era-marker__desc">In-the-flow planner optimization</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The Future of Agent Training</div>
+                    <p>AgentFlow represents a paradigm shift from &ldquo;train offline, deploy frozen&rdquo; to &ldquo;train in the flow of execution.&rdquo; Just as humans improve their problem-solving strategies by reflecting on past successes and failures, AgentFlow agents learn which planning patterns lead to success and which lead to failure. This closes the loop between agent deployment and agent improvement &mdash; pointing toward a future where agents continuously get better at the specific tasks they encounter in production.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /TECHNIQUE POSITIONING -->
+
+        <!-- === RELATED TECHNIQUES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore the foundations and complements of in-the-flow optimization</p>
+
+                <a href="agentic-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Agentic Prompting</span>
+                        <span class="evolution-callout__desc">AgentFlow builds on the agentic paradigm &mdash; goal-directed multi-step execution with tools &mdash; and adds the ability to optimize the planning module through execution experience.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
+                </a>
+
+                <a href="reflexion.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Precursor</span>
+                        <span class="evolution-callout__title">Reflexion</span>
+                        <span class="evolution-callout__desc">Reflexion introduced self-reflection for agents &mdash; reviewing past attempts to improve future ones. AgentFlow takes this further by training the planner&rsquo;s weights, not just its context.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
+                </a>
+
+                <a href="dspy.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complementary Optimization</span>
+                        <span class="evolution-callout__title">DSPy</span>
+                        <span class="evolution-callout__desc">Where DSPy optimizes prompts and demonstrations, AgentFlow optimizes the planner&rsquo;s decision-making weights &mdash; a complementary approach that targets different levels of the agent stack.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED TECHNIQUES -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Optimize Your Agents</h2>
+                        <p class="cta-corporate__text">Explore AgentFlow&rsquo;s in-the-flow optimization or discover other agentic techniques in the Praxis Library.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="index.html" class="btn btn-secondary">All Techniques</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven techniques.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Technique</a>
+                <a href="../learn/crispe.html">CRISPE Technique</a>
+                <a href="../learn/costar.html">COSTAR Technique</a>
+                <a href="../learn/react.html">ReAct Technique</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg></span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-body" id="badge-lightbox-body"></div>
+    </div>
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

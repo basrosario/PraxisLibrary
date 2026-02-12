@@ -870,7 +870,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Observation',
         // Prompting Fundamentals
         'Prompt',
-        'Framework',
+        'Technique',
         'Methodology',
         'Clarity',
         'Precision',
@@ -4981,7 +4981,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return `
             <div class="framework-elements" id="framework-elements">
-                <h4>Detected Framework Elements</h4>
+                <h4>Detected Technique Elements</h4>
                 <div class="framework-selector">
                     <button type="button" class="framework-tab ${selectedFramework === 'CRISP' ? 'active' : ''}" data-framework="CRISP">CRISP</button>
                     <button type="button" class="framework-tab ${selectedFramework === 'COSTAR' ? 'active' : ''}" data-framework="COSTAR">COSTAR</button>
@@ -9806,7 +9806,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'algorithms': ['Algorithm', 'Mathematics', 'Loss Function', 'Activation'],
             'datasets': ['Dataset', 'Benchmark', 'Evaluation', 'Metrics'],
             'hardware': ['Hardware', 'Infrastructure', 'GPU', 'TPU', 'Compute', 'Chip', 'Performance'],
-            'prompting': ['Prompting', 'Technique', 'Reasoning', 'Framework', 'Pattern', 'Skill'],
+            'prompting': ['Prompting', 'Technique', 'Reasoning', 'Pattern', 'Skill'],
             'safety': ['Safety', 'Ethics', 'Alignment', 'Security', 'Risk', 'Trust', 'Fairness', 'Transparency', 'Policy', 'Regulation'],
             'products': ['Product', 'Company', 'LLM Provider', 'OpenAI', 'Anthropic', 'Google', 'Meta', 'Microsoft', 'Platform', 'Provider', 'Tool'],
             'history': ['Historical', 'Milestones', 'Pioneers', 'Research'],
@@ -10343,7 +10343,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // PROMPT THEORY Category
         { title: 'Prompt Basics', desc: 'Fundamental concepts of AI prompting and how to communicate effectively with AI', url: 'learn/prompt-basics.html', category: 'Prompt Theory', keywords: ['basics', 'fundamentals', 'introduction', 'beginner', 'prompting', 'communication'] },
-        { title: 'Discover Hub', desc: 'Overview of all prompting methodologies and frameworks', url: 'learn/index.html', category: 'Prompt Theory', keywords: ['discover', 'hub', 'overview', 'methodologies', 'frameworks', 'start'] },
+        { title: 'Techniques Hub', desc: 'Overview of all prompting methodologies and techniques', url: 'learn/index.html', category: 'Prompt Theory', keywords: ['techniques', 'hub', 'overview', 'methodologies', 'start'] },
 
         // PATTERNS Category
         { title: 'Patterns Library', desc: 'Common prompt patterns organized by use case and task type', url: 'patterns/index.html', category: 'Patterns', keywords: ['patterns', 'library', 'templates', 'use-case', 'task', 'collection'] },
@@ -10593,10 +10593,34 @@ document.addEventListener('DOMContentLoaded', () => {
             characteristics: ['unclear requirements', 'need guidance', 'exploration', 'decision support'],
             bestFor: 'When you\'re unsure what you need, want AI to ask clarifying questions first'
         },
+        DSPY: {
+            name: 'DSPy',
+            fullName: 'DSPy: Programming Language Models',
+            url: 'learn/dspy.html',
+            keywords: ['dspy', 'programming', 'compile', 'optimize', 'signature', 'module', 'pipeline', 'automatic', 'declarative', 'production', 'systematic'],
+            characteristics: ['multi-stage pipelines', 'production optimization', 'reproducible results', 'automatic prompt tuning'],
+            bestFor: 'Multi-stage LM pipelines, production systems, systematic prompt optimization'
+        },
+        MIPRO: {
+            name: 'MIPRO',
+            fullName: 'Multi-prompt Instruction Proposal Optimizer',
+            url: 'learn/mipro.html',
+            keywords: ['mipro', 'instruction optimization', 'bayesian', 'multi-prompt', 'trace', 'bootstrap', 'proposal', 'search', 'per-stage', 'tuning'],
+            characteristics: ['multi-stage optimization', 'instruction tuning', 'Bayesian search', 'trace-grounded proposals'],
+            bestFor: 'Optimizing instructions across multi-stage LM programs, surpassing manual tuning'
+        },
+        AGENTFLOW: {
+            name: 'AgentFlow',
+            fullName: 'AgentFlow & Flow-GRPO',
+            url: 'learn/agentflow.html',
+            keywords: ['agentflow', 'flow-grpo', 'multi-turn', 'credit assignment', 'trajectory', 'planner', 'agentic', 'reinforcement', 'policy optimization', 'in-the-flow'],
+            characteristics: ['multi-turn agent optimization', 'credit assignment', 'trajectory-level rewards', 'in-the-flow training'],
+            bestFor: 'Long-horizon agentic tasks, multi-turn optimization, sparse reward settings'
+        },
         // --- Code ---
         CODE_PROMPTING: {
             name: 'Code Prompting',
-            fullName: 'Code and Programming Frameworks',
+            fullName: 'Code and Programming Techniques',
             url: 'learn/modality/code/code-prompting.html',
             keywords: ['code', 'program', 'function', 'algorithm', 'software', 'develop', 'python', 'javascript', 'api', 'database', 'sql', 'test', 'bug', 'script', 'automate', 'debug'],
             characteristics: ['programming tasks', 'code generation', 'software development', 'automation'],
@@ -10605,7 +10629,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- Image ---
         IMAGE_PROMPTING: {
             name: 'Image Prompting',
-            fullName: 'Image and Visual Frameworks',
+            fullName: 'Image and Visual Techniques',
             url: 'learn/modality/image/image-prompting.html',
             keywords: ['image', 'picture', 'photo', 'visual', 'see', 'look', 'draw', 'paint', 'illustration', 'graphic', 'logo', 'artwork', 'generate image', 'dall-e', 'midjourney'],
             characteristics: ['visual analysis', 'image generation', 'visual design', 'image understanding'],
@@ -10614,7 +10638,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- Audio ---
         AUDIO_PROMPTING: {
             name: 'Audio Prompting',
-            fullName: 'Audio and Speech Frameworks',
+            fullName: 'Audio and Speech Techniques',
             url: 'learn/modality/audio/audio-prompting.html',
             keywords: ['audio', 'sound', 'music', 'voice', 'speech', 'listen', 'recording', 'podcast', 'transcribe', 'narrate', 'singing', 'accent', 'pronunciation'],
             characteristics: ['audio processing', 'speech tasks', 'music creation', 'voice work'],
@@ -10623,7 +10647,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- Video ---
         VIDEO_PROMPTING: {
             name: 'Video Prompting',
-            fullName: 'Video and Motion Frameworks',
+            fullName: 'Video and Motion Techniques',
             url: 'learn/modality/video/video-prompting.html',
             keywords: ['video', 'clip', 'footage', 'film', 'animate', 'motion', 'scene', 'movie', 'youtube', 'edit video', 'caption', 'subtitle', 'animation'],
             characteristics: ['video analysis', 'video generation', 'temporal reasoning', 'video editing'],
@@ -10632,7 +10656,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- 3D ---
         THREE_D_PROMPTING: {
             name: '3D Prompting',
-            fullName: '3D and Spatial Frameworks',
+            fullName: '3D and Spatial Techniques',
             url: 'learn/modality/3d/3d-prompting.html',
             keywords: ['3d', 'spatial', 'mesh', 'point cloud', 'render', 'volume', 'pose', 'depth', 'object detection', 'cad', 'architecture', 'sculpt', 'voxel'],
             characteristics: ['3D modeling', 'spatial reasoning', 'scene understanding', 'pose estimation'],
@@ -11158,7 +11182,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Group by category
         const grouped = {};
-        const categoryOrder = ['Glossary', 'Discover', 'Tools', 'Patterns', 'FAQ', 'Resources', 'Neurodivergence'];
+        const categoryOrder = ['Glossary', 'Techniques', 'Tools', 'Patterns', 'FAQ', 'Resources', 'Neurodivergence'];
 
         results.forEach(result => {
             if (!grouped[result.category]) {
@@ -11226,7 +11250,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Category icons for search results
      */
     const CATEGORY_ICONS = {
-        Discover: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>',
+        Techniques: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>',
         Tools: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
         Glossary: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
         Patterns: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
@@ -11293,7 +11317,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <a href="${getSearchLinkPath('learn/index.html')}" class="search-modal-help-item search-modal-quick-link">
                                 <span class="search-modal-help-badge">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                                    Discover
+                                    Techniques
                                 </span>
                                 <span>Methods &amp; techniques</span>
                             </a>
@@ -14979,4 +15003,658 @@ document.addEventListener('DOMContentLoaded', function() {
         initBenchmarkCharts();
     }
 });
+
+// === AUDIT REPORT PORTAL ===
+
+/**
+ * Audit Report Portal — Loads audit-report.json and renders an
+ * interactive dashboard with gauges, charts, category cards, and
+ * expandable issue accordions. Gated on the presence of
+ * #audit-overall-gauge so it only runs on the audit report page.
+ */
+(function() {
+    'use strict';
+
+    var gaugeEl = document.getElementById('audit-overall-gauge');
+    if (!gaugeEl) return;
+
+    // Local escapeHtml (safe DOM-based)
+    function esc(str) {
+        if (!str || typeof str !== 'string') return '';
+        var d = document.createElement('div');
+        d.textContent = str;
+        return d.innerHTML;
+    }
+
+    /** Resolve path relative to page depth */
+    function resolvePath(target) {
+        var segs = window.location.pathname.replace(/^\//, '').split('/');
+        var depth = Math.max(0, segs.length - 1);
+        if (depth === 0) return target;
+        return '../'.repeat(depth) + target;
+    }
+
+    /** Create element helper */
+    function el(tag, cls, text) {
+        var e = document.createElement(tag);
+        if (cls) e.className = cls;
+        if (text !== undefined) e.textContent = text;
+        return e;
+    }
+
+    /** Format large numbers with commas */
+    function fmtNum(n) {
+        if (n === null || n === undefined) return '--';
+        return Number(n).toLocaleString();
+    }
+
+    // --- Run Audit Button (copies cmd command to clipboard) ---
+    var runBtn = document.getElementById('audit-run-btn');
+    if (runBtn) {
+        runBtn.addEventListener('click', function() {
+            var cmd = 'cmd /k "cd /d C:\\Users\\basro\\Music\\PraxisLibrary\\Python Scipts && run_audit.bat"';
+            navigator.clipboard.writeText(cmd).then(function() {
+                runBtn.textContent = 'Copied! Paste in Win+R or terminal';
+                setTimeout(function() {
+                    runBtn.innerHTML = '';
+                    var svgNS = 'http://www.w3.org/2000/svg';
+                    var icon = document.createElementNS(svgNS, 'svg');
+                    icon.setAttribute('class', 'audit-run-icon');
+                    icon.setAttribute('viewBox', '0 0 24 24');
+                    icon.setAttribute('fill', 'none');
+                    icon.setAttribute('stroke', 'currentColor');
+                    icon.setAttribute('stroke-width', '2');
+                    icon.setAttribute('aria-hidden', 'true');
+                    var poly = document.createElementNS(svgNS, 'polygon');
+                    poly.setAttribute('points', '5 3 19 12 5 21 5 3');
+                    icon.appendChild(poly);
+                    runBtn.appendChild(icon);
+                    runBtn.appendChild(document.createTextNode(' Run Audit'));
+                }, 3000);
+            });
+        });
+    }
+
+    // --- Fetch and render ---
+    var jsonUrl = resolvePath('Audit/audit-report.json') + '?v=' + Date.now();
+
+    fetch(jsonUrl)
+        .then(function(res) {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.json();
+        })
+        .then(function(data) {
+            renderOverallHealth(data.summary, data.metadata);
+            renderSiteSnapshot(data.site_snapshot);
+            renderSeverityDistribution(data.summary);
+            renderCategoryGrid(data.categories);
+            renderChecksChart(data.categories);
+            renderIssueAccordion(data.categories);
+            renderReportMetadata(data.metadata, data.site_snapshot);
+            animateGaugeOnScroll();
+        })
+        .catch(function(err) {
+            showAuditError('Unable to load audit data: ' + err.message);
+        });
+
+    // --- 1. Overall Health ---
+    function renderOverallHealth(summary, metadata) {
+        var score = summary.overall_score;
+        var pct = (score / 10) * 100;
+        var circle = document.getElementById('audit-gauge-circle');
+        var valueEl = document.getElementById('audit-gauge-value');
+        var lastUpdated = document.getElementById('audit-last-updated');
+
+        // Store target for scroll animation
+        circle.setAttribute('data-target', pct);
+        valueEl.setAttribute('data-target-score', score.toFixed(1));
+
+        // Set gauge color class
+        if (score >= 9) {
+            gaugeEl.classList.add('gauge--success');
+        } else if (score >= 7) {
+            gaugeEl.classList.add('gauge--warning');
+        }
+
+        // Summary stats
+        setText('audit-categories-passed', summary.categories_passed + '/' + summary.categories_total);
+        setText('audit-total-errors', fmtNum(summary.total_errors));
+        setText('audit-total-warnings', fmtNum(summary.total_warnings));
+        setText('audit-citations-verified', fmtNum(summary.citations_verified));
+
+        // Last updated
+        if (lastUpdated && metadata.date) {
+            lastUpdated.textContent = metadata.date + ' at ' + metadata.time;
+        }
+    }
+
+    // --- 2. Site Snapshot ---
+    function renderSiteSnapshot(snap) {
+        var container = document.getElementById('audit-site-snapshot');
+        if (!container) return;
+
+        var items = [
+            { label: 'HTML Files', value: fmtNum(snap.total_html_files) },
+            { label: 'Glossary Terms', value: fmtNum(snap.glossary_terms) },
+            { label: 'Active Tools', value: fmtNum(snap.active_tools) },
+            { label: 'Policy Pages', value: fmtNum(snap.policy_pages) }
+        ];
+
+        container.innerHTML = '';
+        items.forEach(function(item) {
+            var card = el('div', 'benchmark-stat');
+            var val = el('div', 'benchmark-stat__value', item.value);
+            var lbl = el('div', 'benchmark-stat__label', item.label);
+            card.appendChild(val);
+            card.appendChild(lbl);
+            container.appendChild(card);
+        });
+    }
+
+    // --- 3. Severity Distribution ---
+    function renderSeverityDistribution(summary) {
+        setText('audit-severity-errors', fmtNum(summary.total_errors));
+        setText('audit-severity-warnings', fmtNum(summary.total_warnings));
+        setText('audit-severity-info', fmtNum(summary.total_info));
+    }
+
+    // --- 4. Category Grid ---
+    function renderCategoryGrid(categories) {
+        var grid = document.getElementById('audit-category-grid');
+        if (!grid) return;
+
+        grid.innerHTML = '';
+        categories.forEach(function(cat) {
+            var card = el('div', 'audit-category-card' + (cat.passed ? '' : ' audit-category-card--failed'));
+
+            // Header
+            var header = el('div', 'audit-category-card__header');
+            header.appendChild(el('span', 'audit-category-card__name', cat.name));
+            var badge = el('span', 'audit-category-card__badge', cat.passed ? 'PASS' : 'FAIL');
+            header.appendChild(badge);
+            card.appendChild(header);
+
+            // Counts
+            var counts = el('div', 'audit-category-card__counts');
+            var errSpan = el('span', 'audit-category-card__count audit-category-card__count--error');
+            errSpan.textContent = cat.error_count + 'E';
+            counts.appendChild(errSpan);
+            var warnSpan = el('span', 'audit-category-card__count audit-category-card__count--warning');
+            warnSpan.textContent = cat.warning_count + 'W';
+            counts.appendChild(warnSpan);
+            var infoSpan = el('span', 'audit-category-card__count audit-category-card__count--info');
+            infoSpan.textContent = cat.info_count + 'I';
+            counts.appendChild(infoSpan);
+            card.appendChild(counts);
+
+            // Meta
+            var meta = el('div', 'audit-category-card__meta');
+            meta.textContent = fmtNum(cat.files_scanned) + ' files scanned \u00B7 ' + fmtNum(cat.checks_run) + ' checks';
+            card.appendChild(meta);
+
+            grid.appendChild(card);
+        });
+    }
+
+    // --- 5. Checks Chart (Custom canvas renderer) ---
+    /** @type {string[]} Category color palette */
+    var AUDIT_CAT_COLORS = [
+        '#DC3545', '#f59e0b', '#3b82f6', '#10b981', '#8b5cf6',
+        '#ec4899', '#06b6d4', '#f97316', '#6366f1', '#14b8a6', '#e11d48'
+    ];
+
+    /**
+     * Format large numbers compactly: 149050 → "149K", 427 → "427"
+     * @param {number} n
+     * @returns {string}
+     */
+    function fmtChecks(n) {
+        if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        if (n >= 10000) return Math.round(n / 1000) + 'K';
+        if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return String(n);
+    }
+
+    /**
+     * Draw the audit checks chart — log-scale horizontal bars with glow + grid.
+     * @param {CanvasRenderingContext2D} ctx
+     * @param {Object[]} cats - category data
+     * @param {number} w - canvas logical width
+     * @param {number} h - canvas logical height
+     * @param {number} progress - animation 0→1
+     */
+    function drawAuditChart(ctx, cats, w, h, progress) {
+        var count = cats.length;
+        var pad = { top: 20, right: 70, bottom: 20, left: 140 };
+        var barH = Math.min(32, (h - pad.top - pad.bottom) / count - 10);
+        var gap = 10;
+        var chartW = w - pad.left - pad.right;
+
+        ctx.clearRect(0, 0, w, h);
+
+        // Background
+        ctx.fillStyle = 'transparent';
+        ctx.fillRect(0, 0, w, h);
+
+        // Find max for log scale
+        var maxVal = 1;
+        cats.forEach(function(c) { if (c.checks_run > maxVal) maxVal = c.checks_run; });
+        var logMax = Math.log10(maxVal + 1);
+
+        // Grid lines (log scale ticks: 10, 100, 1K, 10K, 100K)
+        var gridVals = [10, 100, 1000, 10000, 100000];
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.font = '500 10px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        gridVals.forEach(function(gv) {
+            if (gv > maxVal * 1.5) return;
+            var gx = pad.left + (Math.log10(gv + 1) / logMax) * chartW;
+            // Vertical grid line
+            ctx.strokeStyle = 'rgba(75, 85, 99, 0.4)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath();
+            ctx.moveTo(gx, pad.top - 5);
+            ctx.lineTo(gx, pad.top + count * (barH + gap) - gap + 5);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            // Grid label
+            ctx.fillStyle = '#6b7280';
+            ctx.fillText(fmtChecks(gv), gx, pad.top - 8);
+        });
+
+        // Bars
+        for (var i = 0; i < count; i++) {
+            var cat = cats[i];
+            var y = pad.top + i * (barH + gap);
+            var val = cat.checks_run || 0;
+            var logVal = val > 0 ? Math.log10(val + 1) : 0;
+            var barW = (logVal / logMax) * chartW * progress;
+            var color = cat.passed ? AUDIT_CAT_COLORS[i % AUDIT_CAT_COLORS.length] : '#DC3545';
+
+            // Category label
+            ctx.fillStyle = '#d1d5db';
+            ctx.font = '600 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(cat.name, pad.left - 12, y + barH / 2);
+
+            // Track (subtle)
+            ctx.fillStyle = 'rgba(55, 65, 81, 0.5)';
+            ctx.beginPath();
+            ctx.roundRect(pad.left, y, chartW, barH, 6);
+            ctx.fill();
+
+            // Bar with gradient
+            if (barW > 2) {
+                var grad = ctx.createLinearGradient(pad.left, 0, pad.left + barW, 0);
+                grad.addColorStop(0, color + '33');
+                grad.addColorStop(0.3, color + 'cc');
+                grad.addColorStop(1, color);
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.roundRect(pad.left, y, barW, barH, 6);
+                ctx.fill();
+
+                // Glow effect
+                ctx.shadowColor = color;
+                ctx.shadowBlur = 12;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+                ctx.fillStyle = color + '40';
+                ctx.beginPath();
+                ctx.roundRect(pad.left, y + 2, barW, barH - 4, 4);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                // Inner highlight line
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.roundRect(pad.left + 1, y + 1, barW - 2, barH / 2 - 1, [5, 5, 0, 0]);
+                ctx.stroke();
+            }
+
+            // Value label (right of bar)
+            if (progress > 0.4) {
+                var alpha = Math.min(1, (progress - 0.4) / 0.3);
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = '#f3f4f6';
+                ctx.font = '700 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(fmtChecks(val), pad.left + barW + 10, y + barH / 2);
+                ctx.globalAlpha = 1;
+            }
+
+            // Pass/fail indicator dot
+            var dotX = pad.left - 6;
+            var dotY = y + barH / 2;
+            ctx.beginPath();
+            ctx.arc(dotX, dotY, 3, 0, Math.PI * 2);
+            ctx.fillStyle = cat.passed ? '#10b981' : '#DC3545';
+            ctx.fill();
+        }
+
+        // "Log scale" label
+        ctx.fillStyle = '#4b5563';
+        ctx.font = 'italic 10px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'top';
+        ctx.fillText('logarithmic scale', w - pad.right, pad.top + count * (barH + gap) + 5);
+    }
+
+    function renderChecksChart(categories) {
+        var canvas = document.getElementById('audit-checks-chart');
+        if (!canvas) return;
+
+        var count = categories.length;
+        var rowH = 42;
+        var totalH = count * rowH + 40;
+
+        // Set canvas dimensions
+        var wrap = canvas.parentElement;
+        wrap.style.minHeight = totalH + 'px';
+        canvas.style.height = totalH + 'px';
+
+        var animated = false;
+
+        function resizeAndDraw(progress) {
+            var rect = wrap.getBoundingClientRect();
+            var dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = totalH * dpr;
+            canvas.style.width = rect.width + 'px';
+            var ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+            drawAuditChart(ctx, categories, rect.width, totalH, progress);
+        }
+
+        function animateChart() {
+            if (animated) return;
+            animated = true;
+            var start = null;
+            var duration = 1200;
+
+            function step(ts) {
+                if (!start) start = ts;
+                var elapsed = ts - start;
+                var p = Math.min(elapsed / duration, 1);
+                // Ease out expo
+                var t = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
+                resizeAndDraw(t);
+                if (p < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        // Initial draw (empty state)
+        resizeAndDraw(0);
+
+        // Animate on scroll
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    animateChart();
+                    observer.unobserve(canvas);
+                }
+            });
+        }, { threshold: 0.2 });
+        observer.observe(canvas);
+
+        // Re-draw on resize
+        window.addEventListener('resize', function() {
+            if (animated) resizeAndDraw(1);
+        });
+    }
+
+    // --- 6. Category Details Accordion ---
+    function renderIssueAccordion(categories) {
+        var accordion = document.getElementById('audit-issue-accordion');
+        if (!accordion) return;
+
+        accordion.innerHTML = '';
+
+        categories.forEach(function(cat) {
+            var totalIssues = cat.error_count + cat.warning_count + cat.info_count;
+            var item = el('div', 'audit-issue-item');
+
+            // Header (clickable)
+            var hdr = el('div', 'audit-issue-item__header');
+            hdr.setAttribute('role', 'button');
+            hdr.setAttribute('tabindex', '0');
+            hdr.setAttribute('aria-expanded', 'false');
+
+            var title = el('div', 'audit-issue-item__title');
+            title.appendChild(document.createTextNode(cat.name + ' '));
+
+            // Status badge
+            var badgeCls = 'audit-issue-item__count-badge';
+            var badgeText;
+            if (cat.error_count > 0) {
+                badgeText = cat.error_count + 'E / ' + cat.warning_count + 'W / ' + cat.info_count + 'I';
+            } else if (cat.warning_count > 0) {
+                badgeCls += ' audit-issue-item__count-badge--warning';
+                badgeText = cat.warning_count + 'W / ' + cat.info_count + 'I';
+            } else if (cat.info_count > 0) {
+                badgeCls += ' audit-issue-item__count-badge--info';
+                badgeText = cat.info_count + ' info';
+            } else {
+                badgeCls += ' audit-issue-item__count-badge--clean';
+                badgeText = 'Clean';
+            }
+            title.appendChild(el('span', badgeCls, badgeText));
+            hdr.appendChild(title);
+
+            // Chevron SVG
+            var chevronNS = 'http://www.w3.org/2000/svg';
+            var svg = document.createElementNS(chevronNS, 'svg');
+            svg.setAttribute('viewBox', '0 0 24 24');
+            svg.setAttribute('fill', 'none');
+            svg.setAttribute('stroke', 'currentColor');
+            svg.setAttribute('stroke-width', '2');
+            svg.setAttribute('class', 'audit-issue-item__chevron');
+            var path = document.createElementNS(chevronNS, 'path');
+            path.setAttribute('d', 'M6 9l6 6 6-6');
+            svg.appendChild(path);
+            hdr.appendChild(svg);
+
+            item.appendChild(hdr);
+
+            // Body
+            var body = el('div', 'audit-issue-item__body');
+            var content = el('div', 'audit-issue-item__content');
+
+            // Description block
+            if (cat.description) {
+                var descBlock = el('div', 'audit-detail-block');
+                descBlock.appendChild(el('div', 'audit-detail-block__label', 'What it checks'));
+                descBlock.appendChild(el('div', 'audit-detail-block__text', cat.description));
+                content.appendChild(descBlock);
+            }
+
+            // Why it matters
+            if (cat.why) {
+                var whyBlock = el('div', 'audit-detail-block');
+                whyBlock.appendChild(el('div', 'audit-detail-block__label', 'Why it matters'));
+                whyBlock.appendChild(el('div', 'audit-detail-block__text', cat.why));
+                content.appendChild(whyBlock);
+            }
+
+            // Checks performed list
+            if (cat.checks && cat.checks.length) {
+                var checksBlock = el('div', 'audit-detail-block');
+                checksBlock.appendChild(el('div', 'audit-detail-block__label', 'Checks performed (' + cat.checks.length + ')'));
+                var checksList = el('div', 'audit-checks-list');
+                cat.checks.forEach(function(check) {
+                    var row = el('div', 'audit-check-row');
+                    var sevCls = 'audit-check-row__severity audit-check-row__severity--' + check.severity.toLowerCase();
+                    row.appendChild(el('span', sevCls, check.severity));
+                    var details = el('div', 'audit-check-row__details');
+                    details.appendChild(el('div', 'audit-check-row__name', check.name));
+                    details.appendChild(el('div', 'audit-check-row__desc', check.description));
+                    row.appendChild(details);
+                    checksList.appendChild(row);
+                });
+                checksBlock.appendChild(checksList);
+                content.appendChild(checksBlock);
+            }
+
+            // Findings section
+            var hasFindings = (cat.error_count + cat.warning_count + cat.info_count) > 0;
+            if (hasFindings) {
+                var findingsBlock = el('div', 'audit-detail-block');
+                findingsBlock.appendChild(el('div', 'audit-detail-block__label', 'Findings'));
+
+                // Errors
+                if (cat.errors && cat.errors.length) {
+                    findingsBlock.appendChild(el('div', 'audit-findings-subhead', 'Errors (' + cat.errors.length + ')'));
+                    cat.errors.forEach(function(issue) {
+                        findingsBlock.appendChild(buildIssueRow(issue, 'error'));
+                    });
+                }
+
+                // Warnings
+                if (cat.warnings && cat.warnings.length) {
+                    findingsBlock.appendChild(el('div', 'audit-findings-subhead', 'Warnings (' + cat.warnings.length + ')'));
+                    cat.warnings.forEach(function(issue) {
+                        findingsBlock.appendChild(buildIssueRow(issue, 'warning'));
+                    });
+                }
+
+                // Info
+                if (cat.infos && cat.infos.length) {
+                    findingsBlock.appendChild(el('div', 'audit-findings-subhead', 'Info (' + cat.infos.length + ')'));
+                    cat.infos.forEach(function(issue) {
+                        findingsBlock.appendChild(buildIssueRow(issue, 'info'));
+                    });
+                }
+
+                content.appendChild(findingsBlock);
+            } else {
+                var clean = el('div', 'audit-no-issues');
+                clean.textContent = 'No issues found.';
+                content.appendChild(clean);
+            }
+
+            body.appendChild(content);
+            item.appendChild(body);
+
+            // Toggle handler
+            hdr.addEventListener('click', function() {
+                var expanded = item.classList.toggle('is-expanded');
+                hdr.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            });
+            hdr.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    hdr.click();
+                }
+            });
+
+            accordion.appendChild(item);
+        });
+    }
+
+    /** Build a single issue row */
+    function buildIssueRow(issue, severity) {
+        var cls = 'audit-issue';
+        if (severity === 'warning') cls += ' audit-issue--warning';
+        else if (severity === 'info') cls += ' audit-issue--info';
+        var row = el('div', cls);
+
+        if (issue.file_path) {
+            var file = el('div', 'audit-issue__file');
+            file.textContent = issue.file_path + (issue.line_number ? ':' + issue.line_number : '');
+            row.appendChild(file);
+        }
+
+        var msg = el('div', 'audit-issue__message');
+        msg.textContent = issue.message || '';
+        row.appendChild(msg);
+
+        if (issue.suggestion) {
+            var sug = el('div', 'audit-issue__suggestion');
+            sug.textContent = issue.suggestion;
+            row.appendChild(sug);
+        }
+
+        return row;
+    }
+
+    // --- 7. Report Metadata ---
+    function renderReportMetadata(metadata, snap) {
+        setText('audit-meta-date', metadata.date || '--');
+        setText('audit-meta-time', metadata.time || '--');
+        setText('audit-meta-duration', metadata.duration ? metadata.duration.toFixed(1) + 's' : '--');
+        setText('audit-meta-tool', metadata.tool_version || '--');
+        setText('audit-meta-urls', metadata.url_checks_enabled ? 'Enabled' : 'Disabled');
+        setText('audit-meta-files', fmtNum(snap.total_html_files));
+    }
+
+    // --- 8. Gauge Scroll Animation ---
+    function animateGaugeOnScroll() {
+        var circle = document.getElementById('audit-gauge-circle');
+        var valueEl = document.getElementById('audit-gauge-value');
+        if (!circle) return;
+
+        var target = parseFloat(circle.getAttribute('data-target') || '0');
+        var targetScore = circle.closest('.audit-gauge') ?
+            (document.getElementById('audit-gauge-value').getAttribute('data-target-score') || '0') : '0';
+
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    animateGauge(circle, valueEl, target, parseFloat(targetScore));
+                    observer.unobserve(circle);
+                }
+            });
+        }, { threshold: 0.3 });
+        observer.observe(circle);
+    }
+
+    /** Animate gauge conic-gradient and value text */
+    function animateGauge(circle, valueEl, targetPct, targetScore) {
+        var start = null;
+        var duration = 1200;
+
+        function step(ts) {
+            if (!start) start = ts;
+            var elapsed = ts - start;
+            var progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            var t = 1 - Math.pow(1 - progress, 3);
+            var currentPct = t * targetPct;
+            var currentScore = t * targetScore;
+
+            circle.style.setProperty('--gauge-value', currentPct);
+            valueEl.textContent = currentScore.toFixed(1);
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            }
+        }
+        requestAnimationFrame(step);
+    }
+
+    // --- Utility ---
+    function setText(id, text) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = text;
+    }
+
+    function showAuditError(message) {
+        var sections = document.querySelectorAll('#audit-health-section ~ section');
+        sections.forEach(function(s) { s.style.display = 'none'; });
+
+        var container = document.querySelector('#audit-health-section .container');
+        if (container) {
+            container.innerHTML = '';
+            var errDiv = document.createElement('div');
+            errDiv.className = 'audit-error';
+            errDiv.textContent = message;
+            container.appendChild(errDiv);
+        }
+    }
+})();
 

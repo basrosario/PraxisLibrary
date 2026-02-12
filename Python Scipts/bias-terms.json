@@ -1,0 +1,266 @@
+{
+    "_meta": {
+        "description": "Content quality terms for the Praxis Library site audit (Category 6: Bias/Inclusivity & Profanity)",
+        "purpose": "We maintain this list not because these words are inherently wrong, but because language shapes perception. As an AI education site with a neurodivergent audience, Praxis Library has a responsibility to model the inclusive communication it teaches. Bias terms are identified by major industry style guides as carrying exclusionary, gendered, or ableist connotations. Profanity terms ensure professional standards on an educational site. This file exists so every flagged term can be reviewed, debated, and decided upon by a human.",
+        "severity_levels": {
+            "INFO": "Advisory — bias/inclusivity terms flagged for human review, never blocks deployment",
+            "WARNING": "Best-practice violation — profanity should not appear on an educational site"
+        },
+        "last_updated": "2026-02-11",
+        "sources": "Google Developer Documentation Style Guide, Microsoft Writing Style Guide, Chromium Inclusive Code Guidelines, Apple Style Guide, APA Publication Manual 7th Edition",
+        "how_to_add": "Add a new object to the 'terms' array with 'pattern' (regex), 'category', 'suggestion', and optionally 'severity' (INFO or WARNING, defaults to INFO). Patterns use Python regex syntax with \\b for word boundaries."
+    },
+    "terms": [
+        {
+            "pattern": "\\bhe or she\\b",
+            "category": "gendered",
+            "suggestion": "Use 'they' for gender-neutral language"
+        },
+        {
+            "pattern": "\\bhis/her\\b",
+            "category": "gendered",
+            "suggestion": "Use 'their' for gender-neutral language"
+        },
+        {
+            "pattern": "\\bhis or her\\b",
+            "category": "gendered",
+            "suggestion": "Use 'their' for gender-neutral language"
+        },
+        {
+            "pattern": "\\bmankind\\b",
+            "category": "gendered",
+            "suggestion": "Use 'humankind' or 'humanity'"
+        },
+        {
+            "pattern": "\\bman-?made\\b",
+            "category": "gendered",
+            "suggestion": "Use 'artificial', 'synthetic', or 'human-made'"
+        },
+        {
+            "pattern": "\\bmanpower\\b",
+            "category": "gendered",
+            "suggestion": "Use 'workforce', 'team effort', or 'staffing'"
+        },
+        {
+            "pattern": "\\bchairman\\b",
+            "category": "gendered",
+            "suggestion": "Use 'chairperson' or 'chair'"
+        },
+        {
+            "pattern": "\\bfreshman\\b",
+            "category": "gendered",
+            "suggestion": "Use 'first-year' or 'beginner'"
+        },
+        {
+            "pattern": "\\bmasterful\\b",
+            "category": "gendered",
+            "suggestion": "Use 'skillful', 'expert', or 'proficient'"
+        },
+        {
+            "pattern": "\\bblacklist\\b",
+            "category": "exclusionary-tech",
+            "suggestion": "Use 'blocklist' or 'denylist'"
+        },
+        {
+            "pattern": "\\bwhitelist\\b",
+            "category": "exclusionary-tech",
+            "suggestion": "Use 'allowlist' or 'safelist'"
+        },
+        {
+            "pattern": "\\bmaster\\s*/?\\s*slave\\b",
+            "category": "exclusionary-tech",
+            "suggestion": "Use 'primary/replica', 'leader/follower', or 'controller/worker'"
+        },
+        {
+            "pattern": "\\bdummy\\s+(?:value|variable|data|text|content)\\b",
+            "category": "exclusionary-tech",
+            "suggestion": "Use 'placeholder', 'sample', or 'test'"
+        },
+        {
+            "pattern": "\\bnative\\s+(?:feature|function|support)\\b",
+            "category": "exclusionary-tech",
+            "suggestion": "Use 'built-in' or 'integrated'"
+        },
+        {
+            "pattern": "\\bsanity\\s+check\\b",
+            "category": "ableist",
+            "suggestion": "Use 'validation check' or 'confidence check'"
+        },
+        {
+            "pattern": "\\bgrandfathered\\b",
+            "category": "ableist",
+            "suggestion": "Use 'legacy' or 'pre-existing'"
+        },
+        {
+            "pattern": "\\bnormal\\s+users?\\b",
+            "category": "ableist",
+            "suggestion": "Rephrase — implies some users are 'abnormal'"
+        },
+        {
+            "pattern": "\\bcrippl(?:e|ed|ing)\\b",
+            "category": "ableist",
+            "suggestion": "Use 'impair', 'limit', or 'hinder'"
+        },
+        {
+            "pattern": "\\btone-?deaf\\b",
+            "category": "ableist",
+            "suggestion": "Use 'oblivious', 'insensitive', or 'out of touch'"
+        },
+        {
+            "pattern": "\\bblind(?:spot| spot)\\b",
+            "category": "ableist",
+            "suggestion": "Use 'gap', 'oversight', or 'unexamined area'"
+        },
+        {
+            "pattern": "\\bturn a blind eye\\b",
+            "category": "ableist",
+            "suggestion": "Use 'ignore' or 'overlook'"
+        },
+        {
+            "pattern": "\\bfalling on deaf ears\\b",
+            "category": "ableist",
+            "suggestion": "Use 'being ignored' or 'going unheard'"
+        },
+        {
+            "pattern": "\\bparalyz(?:e|ed|ing)\\b",
+            "category": "ableist",
+            "suggestion": "Use 'stall', 'freeze', or 'halt'"
+        },
+        {
+            "pattern": "\\bsuffering from\\b",
+            "category": "ableist",
+            "suggestion": "Use 'living with' or 'diagnosed with' (person-first language)"
+        },
+        {
+            "pattern": "\\bconfined to a wheelchair\\b",
+            "category": "ableist",
+            "suggestion": "Use 'wheelchair user' or 'uses a wheelchair'"
+        },
+        {
+            "pattern": "\\bafflicted\\b",
+            "category": "ableist",
+            "suggestion": "Use 'affected by' or 'living with'"
+        },
+        {
+            "pattern": "\\bnot just (?:for )?(?:developers|engineers|programmers|coders|techies)\\b",
+            "category": "exclusionary-framing",
+            "suggestion": "Implies non-developers are secondary audience"
+        },
+        {
+            "pattern": "\\bnot just (?:for )?(?:researchers|academics|scientists)\\b",
+            "category": "exclusionary-framing",
+            "suggestion": "Implies non-researchers are secondary audience"
+        },
+        {
+            "pattern": "\\bnot just the majority\\b",
+            "category": "exclusionary-framing",
+            "suggestion": "Exclusionary framing"
+        },
+        {
+            "pattern": "\\beven(?:\\s+a)?\\s+(?:child|kid|beginner)\\s+(?:can|could)\\b",
+            "category": "exclusionary-framing",
+            "suggestion": "Condescending — rephrase without implying simplicity is childlike"
+        },
+        {
+            "pattern": "\\bsimply\\s+put\\b",
+            "category": "exclusionary-framing",
+            "suggestion": "Can be condescending — consider rephrasing or removing"
+        },
+
+        {"_comment": "=== PROFANITY — WARNING severity (should never appear on an educational site) ==="},
+
+        {
+            "pattern": "\\bf+u+c+k\\w*\\b",
+            "category": "profanity",
+            "severity": "WARNING",
+            "suggestion": "Profanity — remove or rephrase"
+        },
+        {
+            "pattern": "\\bsh[i1]+t\\w*\\b",
+            "category": "profanity",
+            "severity": "WARNING",
+            "suggestion": "Profanity — remove or rephrase"
+        },
+        {
+            "pattern": "\\bb[i1]+tch\\w*\\b",
+            "category": "profanity",
+            "severity": "WARNING",
+            "suggestion": "Profanity — remove or rephrase"
+        },
+        {
+            "pattern": "\\bass(?:hole|hat|wipe)s?\\b",
+            "category": "profanity",
+            "severity": "WARNING",
+            "suggestion": "Profanity — remove or rephrase"
+        },
+        {
+            "pattern": "\\bdamn(?:it|ed)?\\b",
+            "category": "profanity",
+            "severity": "WARNING",
+            "suggestion": "Profanity — remove or rephrase"
+        },
+        {
+            "pattern": "\\bhell\\b(?!\\s*(?:o|enic|ium|en))",
+            "category": "profanity",
+            "severity": "WARNING",
+            "suggestion": "Profanity — remove or rephrase (exempts 'hello', 'Hellenic', etc.)"
+        },
+        {
+            "pattern": "\\bcrap(?:py)?\\b",
+            "category": "profanity",
+            "severity": "WARNING",
+            "suggestion": "Profanity — remove or rephrase"
+        },
+        {
+            "pattern": "\\bpiss(?:ed|ing)?\\b",
+            "category": "profanity",
+            "severity": "WARNING",
+            "suggestion": "Profanity — remove or rephrase"
+        },
+        {
+            "pattern": "\\bwtf\\b",
+            "category": "profanity",
+            "severity": "WARNING",
+            "suggestion": "Profanity abbreviation — remove or rephrase"
+        },
+        {
+            "pattern": "\\bstfu\\b",
+            "category": "profanity",
+            "severity": "WARNING",
+            "suggestion": "Profanity abbreviation — remove or rephrase"
+        },
+        {
+            "pattern": "\\blmf?ao\\b",
+            "category": "profanity",
+            "severity": "WARNING",
+            "suggestion": "Informal/profanity abbreviation — remove or rephrase"
+        },
+
+        {"_comment": "=== SLURS — WARNING severity (zero tolerance) ==="},
+
+        {
+            "pattern": "\\bn[i1]+gg\\w*\\b",
+            "category": "slur",
+            "severity": "WARNING",
+            "suggestion": "Racial slur — remove immediately"
+        },
+        {
+            "pattern": "\\bf+[a@]+g+(?:ot|s)?\\b",
+            "category": "slur",
+            "severity": "WARNING",
+            "suggestion": "Homophobic slur — remove immediately"
+        },
+        {
+            "pattern": "\\bretard(?:ed|s)?\\b",
+            "category": "slur",
+            "severity": "WARNING",
+            "suggestion": "Ableist slur — use 'delayed', 'hindered', or rephrase entirely"
+        },
+        {
+            "pattern": "\\bspaz(?:z|tic)?\\b",
+            "category": "slur",
+            "severity": "WARNING",
+            "suggestion": "Ableist slur — remove or rephrase"
+        }
+    ]
+}
