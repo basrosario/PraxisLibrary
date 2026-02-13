@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buffer of Thoughts (BoT): A meta-reasoning technique that maintains reusable thought-templates from past problem-solving, achieving 11-51% improvements on reasoning benchmarks.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/buffer-of-thoughts.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Buffer of Thoughts (BoT) - Praxis">
+    <meta property="og:description" content="Buffer of Thoughts (BoT): A meta-reasoning technique that maintains reusable thought-templates from past problem-solving, achieving 11-51% improvements on reasoning benchmarks.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/buffer-of-thoughts.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Buffer of Thoughts (BoT) - Praxis">
+    <meta name="twitter:description" content="Buffer of Thoughts (BoT): A meta-reasoning technique that maintains reusable thought-templates from past problem-solving, achieving 11-51% improvements on reasoning benchmarks.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Buffer of Thoughts (BoT)",
+      "name": "Buffer of Thoughts (BoT)",
+      "description": "Buffer of Thoughts (BoT): A meta-reasoning technique that maintains reusable thought-templates from past problem-solving, achieving 11-51% improvements on reasoning benchmarks.",
+      "url": "https://praxislibrary.com/learn/buffer-of-thoughts.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Buffer of Thoughts (BoT)"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Buffer of Thoughts (BoT) - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Buffer of Thoughts</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Reasoning &amp; CoT Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Buffer of Thoughts (BoT)</h1>
+                <p class="page-subtitle fade-in">What if an AI could learn from its own reasoning patterns and reuse them? Buffer of Thoughts maintains a library of distilled thought-templates &mdash; proven reasoning structures extracted from past successes &mdash; and retrieves the most relevant template when facing a new problem.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2024</span>
+                        <p><strong>Introduced:</strong> Buffer of Thoughts was introduced in 2024 and selected as a NeurIPS 2024 Spotlight paper. The technique addresses a key limitation of existing reasoning methods: each problem is solved from scratch, even when similar reasoning patterns have worked before. BoT introduces a &ldquo;meta-buffer&rdquo; &mdash; a library of high-level thought-templates distilled from successful reasoning chains. When a new problem arrives, the system retrieves the most relevant template and instantiates it for the specific problem, achieving 11-51% improvements across reasoning benchmarks.</p>
+                        <p><strong>Modern LLM Status:</strong> BoT represents the frontier of meta-reasoning approaches. While most prompting techniques treat each query independently, BoT introduces the concept of reasoning memory &mdash; the idea that good reasoning patterns should be accumulated and reused. This aligns with how expert human problem-solvers work: they recognize problem types and apply known solution patterns. In production systems, BoT&rsquo;s template library concept maps naturally to curated prompt libraries and retrieval-augmented reasoning pipelines.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Reuse Proven Reasoning Patterns</h2>
+                        <p class="split-section__text">Most prompting techniques start fresh with each problem. Chain-of-Thought generates new reasoning steps every time. Tree of Thoughts builds new trees from scratch. This is like an expert who forgets everything they&rsquo;ve learned between problems.</p>
+                        <p class="split-section__text"><strong>Buffer of Thoughts changes this by maintaining a &ldquo;meta-buffer&rdquo;</strong> &mdash; a collection of high-level thought-templates that capture proven reasoning strategies. When a new problem arrives, BoT: (1) identifies the problem type, (2) retrieves the most relevant thought-template from the buffer, (3) instantiates that template with problem-specific details, and (4) uses the instantiated template to guide reasoning.</p>
+                        <p class="split-section__text">Think of it like a master chef who doesn&rsquo;t reinvent cooking from first principles for every dish &mdash; they draw on a library of proven techniques (saut&eacute;, braise, emulsify) and apply the right technique to the right ingredients.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Thought-Templates Beat Fresh Reasoning</span>
+                                <p>Starting each reasoning chain from scratch wastes the patterns learned from previous problems. A thought-template captures the structural reasoning strategy (e.g., &ldquo;decompose into sub-problems, solve each independently, check for contradictions, merge&rdquo;) without the problem-specific details. This separation of strategy from content means the same reasoning pattern can be applied across many different problems, just as a mathematical proof technique works across many different theorems.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Buffer of Thoughts Process</h2>
+                <p class="section-subtitle fade-in-up">Five stages from buffer construction to template-guided reasoning</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Build the Meta-Buffer</h3>
+                            <p class="element-timeline__text">Accumulate thought-templates by distilling successful reasoning chains into high-level patterns. Each template captures the reasoning structure (decompose, compare, verify) without problem-specific content.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>From solving 50 combinatorics problems, distill the template: &ldquo;COMBINATORIAL_COUNTING: Identify independent choice dimensions &rarr; verify independence &rarr; apply multiplication principle &rarr; check edge cases (empty set, overcounting).&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Problem Recognition</h3>
+                            <p class="element-timeline__text">When a new problem arrives, analyze its type and characteristics. Match it against the templates in the buffer to find the most relevant reasoning pattern.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>New problem: &ldquo;How many unique sandwiches can be made with 3 breads, 4 cheeses, 2 condiments?&rdquo; &rarr; Pattern match: this is a combinatorial counting problem &rarr; retrieve COMBINATORIAL_COUNTING template.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Template Instantiation</h3>
+                            <p class="element-timeline__text">Take the retrieved template and fill it with the specific details of the current problem. The template provides the reasoning scaffold; the problem provides the content.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Instantiate COMBINATORIAL_COUNTING: Dimensions = {bread: 3, cheese: 4, condiment: 2}. Independence check: bread choice doesn&rsquo;t constrain cheese choice. Edge case: is &ldquo;no condiment&rdquo; an option?</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Guided Reasoning</h3>
+                            <p class="element-timeline__text">Execute the instantiated template, following its prescribed reasoning steps with the current problem&rsquo;s data. The template ensures a proven reasoning strategy is applied consistently.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Following template steps: (1) Dimensions identified. (2) Independence verified. (3) Apply multiplication: 3 &times; 4 &times; 2 = 24. (4) Edge case check: if &ldquo;no condiment&rdquo; is valid, then 3 &times; 4 &times; 3 = 36. Final answer depends on problem constraints.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">5</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Buffer Update</h3>
+                            <p class="element-timeline__text">After solving the problem, evaluate whether the reasoning chain revealed a new useful pattern. If so, distill it into a new template and add it to the buffer for future use.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The edge case about &ldquo;no condiment&rdquo; suggests a new template variant: COMBINATORIAL_WITH_OPTIONAL_DIMENSIONS &mdash; when some dimensions include a null/none option, add 1 to that dimension&rsquo;s count before multiplying.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why template-guided reasoning produces more reliable results</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Standard CoT</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Think step by step: If a store has 3 types of bread, 4 types of cheese, and 2 condiments, how many unique sandwiches can be made?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Step 1: Count bread options (3). Step 2: Count cheese options (4). Step 3: Count condiment options (2). Step 4: Multiply: 3 &times; 4 &times; 2 = 24 unique sandwiches.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Correct but reasoning pattern is generated fresh each time</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Buffer of Thoughts</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Template-Guided Prompt</span>
+                                <p>[Retrieved template: COMBINATORIAL_COUNTING &mdash; identify independent choice dimensions, confirm independence, apply multiplication principle, verify with edge cases] Apply this template: If a store has 3 types of bread, 4 types of cheese, and 2 condiments, how many unique sandwiches?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Template-Guided Response</span>
+                                <p><strong>Dimensions:</strong> bread (3), cheese (4), condiment (2).<br><strong>Independence check:</strong> Each choice is independent &mdash; bread doesn&rsquo;t constrain cheese or condiment selection. Confirmed.<br><strong>Multiplication principle:</strong> 3 &times; 4 &times; 2 = 24.<br><strong>Edge cases:</strong> Is &ldquo;no condiment&rdquo; a valid option? If yes, condiment dimension becomes 3 (2 + none), giving 3 &times; 4 &times; 3 = 36. The problem states &ldquo;2 condiments&rdquo; without a &ldquo;none&rdquo; option, so 24 is the answer.<br><strong>Final answer:</strong> 24 unique sandwiches.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Template ensures systematic approach including edge-case checks</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Buffer of Thoughts in Action</h2>
+                <p class="section-subtitle fade-in-up">See how thought-templates improve reasoning across domains</p>
+
+                <div class="accordion fade-in-up" id="bot-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Mathematical Reasoning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;Prove that the sum of two odd numbers is always even.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">BoT with PROOF_BY_CASES Template</span>
+                                    <p><strong>Retrieved Template:</strong> PROOF_BY_CASES &mdash; (1) Express terms using formal definitions, (2) Perform algebraic manipulation, (3) Show result matches target form, (4) State conclusion.<br><br>
+                                    <strong>Step 1 (Formal definitions):</strong> An odd number can be expressed as 2k + 1 where k is an integer. Let our two odd numbers be (2a + 1) and (2b + 1).<br><br>
+                                    <strong>Step 2 (Algebraic manipulation):</strong> Sum = (2a + 1) + (2b + 1) = 2a + 2b + 2 = 2(a + b + 1).<br><br>
+                                    <strong>Step 3 (Match target form):</strong> The result 2(a + b + 1) is of the form 2n where n = (a + b + 1), which is an integer. By definition, any number of the form 2n is even.<br><br>
+                                    <strong>Step 4 (Conclusion):</strong> The sum of two odd numbers is always even. QED.<br><br>
+                                    <strong>Template effectiveness:</strong> The PROOF_BY_CASES template ensured no steps were skipped. <em>Always verify mathematical proofs independently before relying on them.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Code Debugging</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;Our API returns 200 OK but the response body is empty for certain users. It works for most users but fails silently for accounts created before 2023.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">BoT with SYSTEMATIC_DIAGNOSIS Template</span>
+                                    <p><strong>Retrieved Template:</strong> SYSTEMATIC_DIAGNOSIS &mdash; (1) Isolate the differentiating factor, (2) Generate hypotheses ranked by likelihood, (3) Design minimal test for each, (4) Eliminate systematically, (5) Confirm root cause.<br><br>
+                                    <strong>Step 1 (Isolating factor):</strong> Works for post-2023 accounts, fails for pre-2023. The differentiating factor is account creation date, suggesting a schema or data migration issue.<br><br>
+                                    <strong>Step 2 (Hypotheses):</strong><br>
+                                    H1: Pre-2023 accounts use legacy schema missing a required field (most likely)<br>
+                                    H2: A data migration left null values that cause serialization to return empty<br>
+                                    H3: Permission/role system changed in 2023, old accounts have incompatible role format<br><br>
+                                    <strong>Step 3 (Minimal tests):</strong><br>
+                                    H1: Query a pre-2023 account directly in DB, compare schema to post-2023<br>
+                                    H2: Check for NULL vs empty string in the response-generating fields<br>
+                                    H3: Compare role/permission format between old and new accounts<br><br>
+                                    <strong>Step 4 (Elimination):</strong> H1 test reveals pre-2023 accounts lack &ldquo;display_name&rdquo; field added in the 2023 migration. The serializer returns empty body when this required field is null.<br><br>
+                                    <strong>Step 5 (Root cause confirmed):</strong> Migration script added column but didn&rsquo;t backfill existing records. Fix: backfill display_name for pre-2023 accounts. <em>Verify this diagnosis against your actual codebase and database before implementing fixes.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Research Synthesis</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;Two studies on remote work productivity reach opposite conclusions. Study A says remote workers are 13% more productive. Study B says they are 10% less productive. Analyze the discrepancy.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">BoT with COMPARE_AND_CONTRAST Template</span>
+                                    <p><strong>Retrieved Template:</strong> COMPARE_AND_CONTRAST &mdash; (1) Identify key variables in each source, (2) Find methodological differences, (3) Identify confounding factors, (4) Synthesize a unified understanding, (5) State confidence and limitations.<br><br>
+                                    <strong>Step 1 (Key variables):</strong> Study A measures output per hour. Study B measures project completion rates. Different productivity metrics yield different conclusions.<br><br>
+                                    <strong>Step 2 (Methodological differences):</strong> Study A surveyed tech workers (individual contributors). Study B surveyed cross-functional teams requiring frequent collaboration. The populations differ fundamentally.<br><br>
+                                    <strong>Step 3 (Confounding factors):</strong> Study A was conducted during pandemic lockdowns (forced remote). Study B was post-pandemic (voluntary remote). Selection effects differ dramatically.<br><br>
+                                    <strong>Step 4 (Synthesis):</strong> Both studies are likely correct for their specific contexts. Remote work increases individual output per hour (fewer interruptions) but may decrease collaborative project throughput (coordination overhead). The discrepancy reflects different aspects of &ldquo;productivity&rdquo; rather than contradictory findings.<br><br>
+                                    <strong>Step 5 (Confidence):</strong> Moderate confidence. Key limitation: neither study controls for job type and collaboration requirements simultaneously. <em>This synthesis should be validated against the actual study methodologies and peer review status.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Buffer of Thoughts</h2>
+                <p class="section-subtitle fade-in-up">Best for repeated problem types that benefit from accumulated reasoning patterns</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Repeated Problem Types Where Patterns Emerge</strong>
+                                    <p>When you solve similar problems regularly &mdash; debugging, code review, data analysis &mdash; templates capture what works and ensure consistent quality.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Production Systems with Accumulated Reasoning History</strong>
+                                    <p>Systems that process thousands of queries can distill the best reasoning patterns into templates, improving performance over time without retraining.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Problems That Benefit from Structured Approaches</strong>
+                                    <p>Multi-step reasoning tasks where skipping a step leads to errors &mdash; templates enforce completeness and consistency across every attempt.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Teams Building Shared Reasoning Libraries</strong>
+                                    <p>Organizations can codify their best problem-solving approaches as templates, making expert-level reasoning accessible to every team member.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Entirely Novel Problem Types with No Precedent</strong>
+                                    <p>If no existing template matches the problem type, BoT offers no advantage over standard reasoning &mdash; you need to solve it fresh first, then distill the pattern.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Single-Step Questions</strong>
+                                    <p>Straightforward lookups or one-step calculations don&rsquo;t benefit from template overhead &mdash; the template retrieval and instantiation adds unnecessary complexity.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Tasks Where Fresh Creative Thinking Is Preferred</strong>
+                                    <p>Creative writing, brainstorming, and open-ended exploration benefit from unconstrained thinking &mdash; templates can inadvertently limit creative output by imposing structure.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Buffer of Thoughts delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Automated QA Systems</h3>
+                        <p class="use-case-showcase__desc">Maintain templates for common test patterns &mdash; boundary testing, regression checks, integration validation &mdash; ensuring consistent, thorough quality assurance across every release.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Tutoring Platforms</h3>
+                        <p class="use-case-showcase__desc">Build subject-specific reasoning templates that guide students through problem types &mdash; algebra word problems, physics derivations, essay analysis &mdash; with consistent pedagogical approaches.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Code Review Pipelines</h3>
+                        <p class="use-case-showcase__desc">Apply review templates that check for security vulnerabilities, performance issues, code style, and architectural consistency &mdash; the same expert-level review every time.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Research Analysis</h3>
+                        <p class="use-case-showcase__desc">Use literature review templates, methodology comparison templates, and statistical analysis templates to maintain rigor across large-scale research synthesis projects.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Customer Support Escalation</h3>
+                        <p class="use-case-showcase__desc">Template common escalation patterns &mdash; billing disputes, technical issues, account recovery &mdash; so every support interaction follows proven resolution paths.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Scientific Hypothesis Testing</h3>
+                        <p class="use-case-showcase__desc">Apply hypothesis-testing templates that enforce proper experimental design, control identification, statistical test selection, and result interpretation across research programs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Buffer of Thoughts Fits</h2>
+                <p class="section-subtitle fade-in-up">BoT bridges fresh reasoning and systematic template reuse</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Fresh Reasoning</span>
+                        <span class="era-marker__desc">New reasoning chain every time</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Consistency</span>
+                        <span class="era-marker__title">Multiple Fresh Paths</span>
+                        <span class="era-marker__desc">Sample many chains, take majority</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Buffer of Thoughts</span>
+                        <span class="era-marker__title">Template-Guided</span>
+                        <span class="era-marker__desc">Reusable reasoning patterns from past successes</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Meta Prompting</span>
+                        <span class="era-marker__title">Dynamic Method Selection</span>
+                        <span class="era-marker__desc">Chooses the best technique per problem</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Start Building Your Buffer</div>
+                    <p>You don&rsquo;t need a formal BoT system to benefit from this approach. Start by saving your best reasoning chains as reusable templates. When you solve a complex problem well, distill the reasoning pattern into a template: &ldquo;First decompose, then verify each part, then check for contradictions.&rdquo; Over time, your personal thought-template library becomes a powerful reasoning toolkit.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary reasoning techniques</p>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">The foundational technique whose reasoning chains BoT distills into reusable templates.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="meta-reasoning.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Meta Reasoning</span>
+                        <span class="evolution-callout__desc">Dynamically selects reasoning strategies, similar to how BoT retrieves templates.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">Samples multiple reasoning paths; BoT instead guides all paths through a proven template.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Build Your Reasoning Library</h2>
+                        <p class="cta-corporate__text">Start creating reusable thought-templates or explore other advanced reasoning techniques.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="index.html" class="btn btn-secondary">All Techniques</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

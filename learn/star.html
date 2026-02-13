@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="STaR: Bootstrap reasoning ability by iteratively generating rationales, filtering for correct ones, and fine-tuning on successful reasoning chains.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/star.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="STaR (Self-Taught Reasoner) - Praxis">
+    <meta property="og:description" content="STaR: Bootstrap reasoning ability by iteratively generating rationales, filtering for correct ones, and fine-tuning on successful reasoning chains.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/star.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="STaR (Self-Taught Reasoner) - Praxis">
+    <meta name="twitter:description" content="STaR: Bootstrap reasoning ability by iteratively generating rationales, filtering for correct ones, and fine-tuning on successful reasoning chains.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "STaR (Self-Taught Reasoner)",
+      "name": "STaR (Self-Taught Reasoner)",
+      "description": "STaR: Bootstrap reasoning ability by iteratively generating rationales, filtering for correct ones, and fine-tuning on successful reasoning chains.",
+      "url": "https://praxislibrary.com/learn/star.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "STaR (Self-Taught Reasoner)"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>STaR (Self-Taught Reasoner) - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">STaR</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Self-Correction Technique</span>
+                </div>
+                <h1 class="page-title fade-in">STaR (Self-Taught Reasoner)</h1>
+                <p class="page-subtitle fade-in">What if a model could teach itself to reason better? STaR (Self-Taught Reasoner) creates a self-improving loop: the model generates reasoning chains, keeps only the ones that lead to correct answers, and uses those successful chains as training data to become a better reasoner &mdash; bootstrapping its own reasoning ability from scratch.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2022</span>
+                        <p><strong>Introduced:</strong> STaR was published in 2022 by Zelikman et al. It addresses a fundamental bootstrapping problem: getting high-quality reasoning demonstrations to train models requires either expensive human annotation or a model that can already reason well. STaR breaks this chicken-and-egg problem by having the model generate its own training data. It attempts problems, filters for correct answers, and fine-tunes on those successes. Through iterative rounds, reasoning quality improves exponentially &mdash; each generation of the model produces better training data for the next.</p>
+                        <p><strong>Modern LLM Status:</strong> STaR&rsquo;s self-improvement paradigm has become foundational to modern AI training. The concept of using model-generated reasoning chains as training data underlies techniques like RLHF, DPO, and constitutional AI training. While the original paper focused on fine-tuning, the prompt-level insight &mdash; having models evaluate and learn from their own successful reasoning &mdash; applies broadly to any iterative prompting workflow where you want to accumulate and reuse effective reasoning patterns.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Bootstrap Reasoning from Scratch</h2>
+                        <p class="split-section__text">Traditional training requires human-written reasoning examples. STaR eliminates this bottleneck through a clever loop: (1) Attempt many problems with reasoning chains, (2) Keep only the chains that produce correct answers, (3) Fine-tune the model on those successful chains, (4) Repeat. With each iteration, the model generates higher-quality reasoning chains, which provide better training data, which produces an even better model.</p>
+                        <p class="split-section__text"><strong>The secret weapon is hindsight rationalization.</strong> For problems the model initially gets wrong, STaR provides the correct answer and asks the model to work backward &mdash; generating a &ldquo;hindsight&rdquo; rationale explaining how to reach that answer. This teaches from mistakes rather than just discarding them, dramatically accelerating improvement.</p>
+                        <p class="split-section__text">Think of it like a student who takes a practice test, reviews only the questions they got right to understand their best reasoning patterns, then also studies the answer key for missed questions to learn how those solutions work &mdash; becoming a stronger test-taker with each round.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Self-Generated Training Data Works</span>
+                                <p>The key insight is selection pressure. By generating many reasoning attempts and keeping only the correct ones, STaR creates a curated dataset of successful reasoning patterns specific to the problem types the model encounters. This is more targeted than generic training data and scales without human annotation cost.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The STaR Process</h2>
+                <p class="section-subtitle fade-in-up">Five stages from initial attempts to bootstrapped reasoning mastery</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Generate Rationales</h3>
+                            <p class="element-timeline__text">The model attempts a large set of problems, producing a reasoning chain (rationale) and a final answer for each. At this stage, many answers will be wrong &mdash; the model is reasoning with whatever ability it currently has, not yet benefiting from the improvement loop.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Given 1,000 math problems, the model generates step-by-step solutions for each, arriving at correct answers for perhaps 400 of them.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Filter for Correctness</h3>
+                            <p class="element-timeline__text">Compare each generated answer against the known correct answer. Keep only the reasoning chains that led to correct final answers. These represent the model&rsquo;s best reasoning &mdash; the chains where its logic held together from start to finish.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The 400 correct solutions are kept as high-quality training data. The 600 incorrect ones are set aside for the rationalization step.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Rationalization</h3>
+                            <p class="element-timeline__text">For problems the model got wrong, provide the correct answer and ask the model to generate a new rationale that arrives at that answer. This &ldquo;hindsight&rdquo; rationalization creates additional training data from failures, teaching the model reasoning paths it could not initially find on its own.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>For a problem where the model answered &ldquo;42&rdquo; but the correct answer is &ldquo;56,&rdquo; the model is told the answer is 56 and asked to explain why &mdash; generating a valid reasoning chain it could not produce without the hint.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Fine-Tune</h3>
+                            <p class="element-timeline__text">Train the model on the combined dataset: the successful rationales from step 2 plus the hindsight rationales from step 3. This gives the model exposure to correct reasoning patterns for a much larger portion of the problem set than it could solve on its own.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The model is fine-tuned on 400 organic correct solutions plus 500 hindsight rationales, giving it 900 high-quality reasoning demonstrations from a set it originally could only solve 40% of.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">5</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Iterate</h3>
+                            <p class="element-timeline__text">Repeat the entire process with the improved model. Because the model is now a better reasoner, it will correctly solve more problems in step 1, providing even higher-quality training data. Each iteration compounds the improvement &mdash; a true bootstrapping effect.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Round 2: the improved model now solves 600 of 1,000 problems correctly. Round 3: 750 correct. Each generation produces better training data for the next, approaching mastery through self-improvement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">How iterative self-improvement transforms reasoning quality</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Before STaR</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Initial Reasoning Attempt</span>
+                                <p>Q: If a train travels 120 miles in 2 hours, and another train travels 90 miles in 1.5 hours, which train is faster and by how much?<br><br>A: The first train goes 120/2 = 60 mph. The second train goes 90/1.5 = 45 mph. So the first train is faster by 15 mph.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Quality</span>
+                                <p>Basic reasoning with correct arithmetic but minimal explanation. The model gets this one right but struggles on harder problems where steps are less obvious.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Shallow reasoning, no self-correction, fails on complex problems</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">After STaR Iterations</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Improved Reasoning Chain</span>
+                                <p>Q: If a train travels 120 miles in 2 hours, and another train travels 90 miles in 1.5 hours, which train is faster and by how much?<br><br>A: To compare speeds, I need to calculate each train&rsquo;s rate in the same units (mph).<br>Train 1: 120 miles / 2 hours = 60 mph.<br>Train 2: 90 miles / 1.5 hours = 60 mph.<br>Both trains travel at the same speed: 60 mph. The difference is 0 mph.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Quality</span>
+                                <p>Structured reasoning with explicit unit normalization. The STaR-trained model catches the correct calculation (90/1.5 = 60, not 45) because it learned from verified reasoning chains.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Structured, verified reasoning learned from its own successful chains</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">STaR in Action</h2>
+                <p class="section-subtitle fade-in-up">See how self-taught reasoning bootstraps quality across domains</p>
+
+                <div class="accordion fade-in-up" id="star-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Math Problem Solving</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">The STaR Loop</span>
+                                    <p><strong>Round 1:</strong> Model attempts 500 algebra problems. Solves 180 correctly with reasoning chains like: &ldquo;To find x, I subtract 3 from both sides: 2x + 3 - 3 = 11 - 3, so 2x = 8, x = 4.&rdquo;<br><br>
+                                    <strong>Filter:</strong> Keep the 180 correct chains. For the 320 failures, provide correct answers and generate hindsight rationales.<br><br>
+                                    <strong>Round 2:</strong> After fine-tuning, the model now solves 310 of the same 500 problems. Its reasoning chains are more structured and catch more edge cases.<br><br>
+                                    <strong>Round 3:</strong> 420 correct. The model has learned to check its work and handle multi-step equations it previously could not.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Result</span>
+                                    <p>From 36% accuracy to 84% through self-improvement alone &mdash; no human-written solutions required. The model bootstrapped arithmetic reasoning by iteratively learning from its own successes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Code Generation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">The STaR Loop</span>
+                                    <p><strong>Round 1:</strong> Model generates code solutions for 200 programming challenges. Only 60 pass all test cases. Those 60 include clear reasoning: &ldquo;I need to iterate through the array, track the maximum, and handle the empty array edge case.&rdquo;<br><br>
+                                    <strong>Rationalization:</strong> For the 140 failures, provide passing solutions and have the model explain why they work &mdash; generating rationales like: &ldquo;The key insight is using a hash map for O(1) lookups instead of nested loops.&rdquo;<br><br>
+                                    <strong>Fine-tune and repeat:</strong> Each round, more solutions pass tests, and the reasoning about algorithmic choices becomes more sophisticated.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Result</span>
+                                    <p>The model learns not just to write code that works, but to reason about <strong>why</strong> certain approaches are correct &mdash; choosing appropriate data structures, handling edge cases, and explaining trade-offs. Test pass rate climbs from 30% to over 75% across iterations.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Logical Deduction</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">The STaR Loop</span>
+                                    <p><strong>Problem set:</strong> 300 logical deduction puzzles (e.g., &ldquo;All A are B. Some B are C. Can we conclude that some A are C?&rdquo;).<br><br>
+                                    <strong>Round 1:</strong> Model solves 120 correctly. Correct chains show explicit premise identification and valid inference steps.<br><br>
+                                    <strong>Rationalization:</strong> For incorrect attempts, the model generates hindsight explanations: &ldquo;The error was assuming that because some B are C and all A are B, some A must be C. But the B that are C might not overlap with the B that are A.&rdquo;<br><br>
+                                    <strong>Iteration:</strong> By round 4, the model correctly identifies logical fallacies it previously committed.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Result</span>
+                                    <p>The model develops genuine logical reasoning patterns: distinguishing valid from invalid inferences, identifying common fallacies, and constructing step-by-step proofs. Accuracy improves from 40% to 80%+ through self-taught logical discipline.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use STaR</h2>
+                <p class="section-subtitle fade-in-up">Best for bootstrapping reasoning without human-labeled data</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Improving Model Reasoning on Specific Problem Types</strong>
+                                    <p>When you need a model to get better at math, logic, or code &mdash; STaR creates targeted training data from the model&rsquo;s own successful attempts.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Bootstrapping from No Labeled Data</strong>
+                                    <p>When human-annotated reasoning demonstrations are unavailable or too expensive &mdash; STaR generates its own training signal from correct/incorrect answer filtering.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Creating Domain-Specific Reasoning Training Data</strong>
+                                    <p>Generating curated reasoning datasets for specialized fields where expert annotation is scarce &mdash; medical reasoning, legal analysis, scientific problem-solving.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Research on Self-Improvement in AI Systems</strong>
+                                    <p>Studying how models can improve their own capabilities through iterative self-training &mdash; a foundational concept in AI alignment and capability research.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Using Models Through APIs</strong>
+                                    <p>If you cannot fine-tune the model (API-only access), the core STaR loop of train-and-iterate cannot be applied directly.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Tasks Not Requiring Reasoning</strong>
+                                    <p>Classification, summarization, or extraction tasks where the bottleneck is understanding, not reasoning &mdash; STaR is designed for reasoning-heavy problems.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>When High-Quality Human Annotations Are Available</strong>
+                                    <p>If you already have expert-written reasoning demonstrations, supervised fine-tuning on those will likely outperform self-generated data.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Single-Query Applications</strong>
+                                    <p>STaR requires multiple rounds of generation and training &mdash; it is a training methodology, not a single-prompt technique.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where STaR delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 20h9"/>
+                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Training Data Generation</h3>
+                        <p class="use-case-showcase__desc">Automatically create high-quality reasoning demonstrations for model training without expensive human annotation &mdash; the model generates and curates its own examples.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Domain Adaptation</h3>
+                        <p class="use-case-showcase__desc">Adapt a general-purpose model to specialized domains (medical, legal, scientific) by bootstrapping domain-specific reasoning from problem sets with known answers.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Reasoning Enhancement</h3>
+                        <p class="use-case-showcase__desc">Systematically improve a model&rsquo;s ability to reason through complex, multi-step problems by iteratively training on its own successful reasoning chains.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Educational AI</h3>
+                        <p class="use-case-showcase__desc">Build tutoring systems that improve their explanations over time by learning which reasoning approaches lead students to correct understanding.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Automated Tutoring</h3>
+                        <p class="use-case-showcase__desc">Create adaptive learning systems where the AI generates practice problems, evaluates its own solution attempts, and continuously improves its teaching ability.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Scientific Problem Solving</h3>
+                        <p class="use-case-showcase__desc">Bootstrap scientific reasoning by training on verified experimental results &mdash; each correct hypothesis-to-conclusion chain becomes training data for the next iteration.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where STaR Fits</h2>
+                <p class="section-subtitle fade-in-up">STaR bridges manual demonstrations and fully autonomous reasoning</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Manual Demonstrations</span>
+                        <span class="era-marker__desc">Human-written reasoning examples</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">STaR</span>
+                        <span class="era-marker__title">Self-Generated Demonstrations</span>
+                        <span class="era-marker__desc">Model creates its own training data</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Quiet-STaR</span>
+                        <span class="era-marker__title">Internal Reasoning</span>
+                        <span class="era-marker__desc">Thinking internalized into the model</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Reflexion</span>
+                        <span class="era-marker__title">Episodic Self-Improvement</span>
+                        <span class="era-marker__desc">Learning from memory across attempts</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Apply STaR Principles Without Fine-Tuning</div>
+                    <p>Even without fine-tuning access, you can apply STaR&rsquo;s principles: generate multiple reasoning attempts for a problem, identify the successful ones, and use those as few-shot examples for future problems of the same type. This creates a growing library of verified reasoning patterns.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary self-improvement techniques</p>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">The manual reasoning demonstration technique that STaR automates &mdash; instead of humans writing reasoning chains, the model generates and selects its own.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="reflexion.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Reflexion</span>
+                        <span class="evolution-callout__desc">Takes self-improvement further with episodic memory &mdash; the model reflects on past failures and stores lessons learned for future attempts.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">Uses multiple reasoning paths at inference time to find the most reliable answer &mdash; a complementary approach to STaR&rsquo;s training-time self-improvement.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Teach Yourself to Reason</h2>
+                        <p class="cta-corporate__text">Explore self-improvement techniques or other reasoning methods.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="index.html" class="btn btn-secondary">All Techniques</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

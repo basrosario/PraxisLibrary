@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SCOPE Framework: A self-optimizing agent prompt evolution framework enabling autonomous prompt refinement through iterative self-evaluation and optimization cycles.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/scope.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="SCOPE Framework - Praxis">
+    <meta property="og:description" content="SCOPE Framework: A self-optimizing agent prompt evolution framework enabling autonomous prompt refinement through iterative self-evaluation and optimization cycles.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/scope.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SCOPE Framework - Praxis">
+    <meta name="twitter:description" content="SCOPE Framework: A self-optimizing agent prompt evolution framework enabling autonomous prompt refinement through iterative self-evaluation and optimization cycles.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "SCOPE Framework",
+      "name": "SCOPE Framework",
+      "description": "SCOPE Framework: A self-optimizing agent prompt evolution framework enabling autonomous prompt refinement through iterative self-evaluation and optimization cycles.",
+      "url": "https://praxislibrary.com/learn/scope.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Frameworks",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "SCOPE Framework"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>SCOPE Framework - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-page-type="framework">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">SCOPE</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Community Framework</span>
+                </div>
+                <h1 class="page-title fade-in">SCOPE Framework</h1>
+                <p class="page-subtitle fade-in">An academic framework enabling agents to autonomously evolve and optimize their own prompts through iterative self-evaluation and refinement. SCOPE represents the intersection of prompt engineering and automated optimization &mdash; where prompts improve themselves.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2024</span>
+                        <p><strong>Introduced:</strong> SCOPE (Self-optimizing Continuous Prompt Evolution) emerged in 2024 from academic research into autonomous prompt optimization. The framework addresses a fundamental bottleneck in AI workflows: the manual, trial-and-error process of refining prompts. Instead of relying on human iteration, SCOPE enables agents to systematically evaluate their own prompt performance, identify weaknesses, and generate improved prompt variants through structured self-assessment cycles. The approach draws from evolutionary algorithms, reinforcement learning principles, and meta-cognitive prompting strategies.</p>
+                        <p><strong>Modern LLM Status:</strong> SCOPE represents <strong>an emerging frontier in prompt automation</strong>. As LLMs become more capable of self-reflection and evaluation, frameworks like SCOPE move from theoretical to practical. The core principle &mdash; letting an AI agent iteratively refine its own instructions &mdash; connects to production tools like DSPy&rsquo;s optimizers and OpenAI&rsquo;s automated prompt tuning. However, SCOPE&rsquo;s self-evolution loop requires careful guardrails: without human oversight of the optimization objective, the prompt can evolve toward technically correct but misaligned outputs. Always verify that self-optimized prompts still serve the original intent.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--align-start fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Prompts That Improve Themselves</h2>
+                        <p class="split-section__text">Traditional prompt engineering is a human-driven loop: write a prompt, test it, review the output, tweak the wording, and repeat. This process is slow, subjective, and does not scale. When you have dozens of prompts powering a production pipeline, manually tuning each one becomes a full-time job that never ends.</p>
+                        <p class="split-section__text"><strong>SCOPE automates the refinement cycle.</strong> The framework instructs an agent to evaluate its own output quality against defined criteria, identify specific weaknesses in the current prompt, propose targeted modifications, test the revised prompt, and compare results. Each cycle produces a measurably better prompt &mdash; or at minimum, confirms that the current version is already optimal for the given objective.</p>
+                        <p class="split-section__text">Think of it like a musician who records themselves practicing, listens back critically, identifies the measures that need work, and adjusts their technique for the next run-through &mdash; except the musician is the instrument, the conductor, and the critic simultaneously.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Self-Optimization Matters</span>
+                                <p>A prompt that was optimal yesterday may underperform today &mdash; models update, task distributions shift, and edge cases emerge. SCOPE treats prompts as living artifacts that should continuously adapt rather than static strings that degrade silently. The key insight is that the same reasoning capabilities that make LLMs useful for tasks also make them capable of evaluating and improving their own instructions &mdash; provided the evaluation criteria are clearly defined and <strong>human oversight validates the optimization direction</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The SCOPE Process</h2>
+                <p class="section-subtitle fade-in-up">Five stages of autonomous prompt evolution</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Seed &mdash; Establish the Baseline Prompt</h3>
+                            <p class="element-timeline__text">Start with an initial prompt and clearly defined evaluation criteria. The seed prompt does not need to be perfect &mdash; it needs to be functional enough to produce measurable output. The evaluation criteria define what &ldquo;better&rdquo; means: accuracy, completeness, tone adherence, format compliance, or any combination of quality dimensions.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Summarize the following research paper in under 200 words, covering methodology, key findings, and limitations.&rdquo; Evaluation criteria: accuracy of claims, inclusion of all three required sections, word count compliance.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Critique &mdash; Self-Evaluate the Output</h3>
+                            <p class="element-timeline__text">The agent generates output using the current prompt, then evaluates that output against the defined criteria. This self-critique phase is deliberate and structured &mdash; the agent does not just say &ldquo;this is good&rdquo; or &ldquo;this is bad,&rdquo; it produces specific, actionable assessments for each evaluation dimension. The critique identifies what works, what fails, and why.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;The summary accurately covers methodology and findings but omits limitations entirely. Word count is 187 &mdash; within range. The findings section over-indexes on statistical results and under-represents the practical implications the authors emphasized.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Optimize &mdash; Refine the Prompt</h3>
+                            <p class="element-timeline__text">Based on the critique, the agent proposes specific modifications to the prompt. These are not random mutations &mdash; they are targeted changes that directly address the identified weaknesses. The agent may add explicit instructions for missing elements, reorder priorities, add constraints, or rephrase ambiguous language.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Revised prompt: &ldquo;Summarize the following research paper in under 200 words. Structure the summary in three clearly labeled sections: Methodology, Key Findings (emphasizing practical implications over raw statistics), and Limitations. Each section must contain at least one sentence.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Probe &mdash; Test the Revised Prompt</h3>
+                            <p class="element-timeline__text">Run the optimized prompt against the same inputs (or a broader test set) and evaluate the new output using the same criteria. This comparison step determines whether the modification actually improved performance or introduced regressions. Multiple test cases provide statistical confidence that the change generalizes beyond a single example.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Test across 5 research papers: all summaries now include Limitations sections. Practical implications coverage improved from 2/5 to 5/5. No word count violations. One summary now slightly exceeds appropriate detail in Methodology. Overall improvement: measurable.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">5</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Evolve &mdash; Iterate or Converge</h3>
+                            <p class="element-timeline__text">If the revised prompt outperforms the original, it becomes the new baseline and the cycle repeats. If performance plateaus or degrades, the agent can revert to the previous version, try alternative modifications, or declare convergence. The evolution loop continues until the prompt meets all criteria above a defined threshold &mdash; or a human reviewer validates the final version.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>After 3 cycles: prompt now scores 4.6/5 across all criteria (up from 3.1/5 at seed). Remaining issue: occasional over-compression of complex methodologies. Decision: accept current version and flag edge case for human review.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why iterative self-optimization outperforms static prompt writing</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Static Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Analyze this customer feedback and categorize the sentiment as positive, negative, or neutral.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Sentiment: Negative. The customer expressed dissatisfaction with the product.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Shallow classification, no reasoning, misses mixed sentiment</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">SCOPE-Optimized Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">After 3 Optimization Cycles</span>
+                                <p>Analyze this customer feedback. For each distinct sentiment expressed: (1) identify the specific aspect being evaluated, (2) classify sentiment as positive, negative, mixed, or neutral, (3) quote the relevant text supporting your classification. If feedback contains multiple sentiments, list each separately. Flag any sarcasm or conditional praise for human review.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p><strong>Aspect 1: Product Quality</strong> &mdash; Negative<br>Supporting text: &ldquo;The stitching came apart after two weeks.&rdquo;<br><br><strong>Aspect 2: Customer Service</strong> &mdash; Positive<br>Supporting text: &ldquo;At least the return process was painless.&rdquo;<br><br><strong>Aspect 3: Price</strong> &mdash; Mixed<br>Supporting text: &ldquo;Not terrible for the price, but I expected more.&rdquo; [Flagged: conditional praise &mdash; verify human interpretation]</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Multi-aspect analysis, evidence-based, ambiguity flagged for review</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">SCOPE in Action</h2>
+                <p class="section-subtitle fade-in-up">See how self-optimizing prompt evolution improves real workflows</p>
+
+                <div class="accordion fade-in-up" id="scope-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Optimizing a Code Review Prompt</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">SCOPE Cycle</span>
+                                    <p><strong>Seed prompt:</strong> &ldquo;Review this code for bugs and improvements.&rdquo;<br><br>
+                                    <strong>Critique (Cycle 1):</strong> Output identifies surface-level issues (naming, formatting) but misses logic errors and security vulnerabilities. No severity ratings. Suggestions lack code examples.<br><br>
+                                    <strong>Optimized prompt:</strong> &ldquo;Review this code for: (1) logic errors, (2) security vulnerabilities, (3) performance issues, (4) maintainability concerns. For each issue: state severity (Critical/High/Medium/Low), explain the risk, and provide a corrected code snippet. Prioritize critical and high severity items first.&rdquo;<br><br>
+                                    <strong>Critique (Cycle 2):</strong> Now catches logic and security issues. Severity ratings are present. Minor issue: corrected snippets sometimes lack context. Adding &ldquo;include 3 lines of surrounding context with each fix&rdquo; to the prompt.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Final Optimized Output</span>
+                                    <p><strong>Critical &mdash; SQL Injection (Line 42)</strong><br>
+                                    Risk: User input is concatenated directly into SQL query string, allowing arbitrary database access.<br>
+                                    Fix: Use parameterized queries.<br><br>
+                                    <strong>High &mdash; Race Condition (Lines 78&ndash;85)</strong><br>
+                                    Risk: Concurrent writes to shared cache without locking could corrupt user session data.<br>
+                                    Fix: Add mutex lock around cache write operation...<br><br>
+                                    <em>Note: Always have a human developer verify all identified vulnerabilities and test corrected code before deploying to production.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Evolving a Content Generation Prompt</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">SCOPE Cycle</span>
+                                    <p><strong>Seed prompt:</strong> &ldquo;Write a product description for this item.&rdquo;<br><br>
+                                    <strong>Critique (Cycle 1):</strong> Descriptions are generic and could apply to any similar product. No brand voice consistency. Missing key specifications buyers care about. No call to action.<br><br>
+                                    <strong>Critique (Cycle 2):</strong> Now includes specs and CTA, but tone varies between descriptions. Some read as technical manuals, others as casual reviews. Need brand voice guardrails.<br><br>
+                                    <strong>Critique (Cycle 3):</strong> Brand voice is now consistent. Specs are included. One remaining issue: descriptions do not address common buyer objections (returns, durability, compatibility). Adding objection-handling requirement.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Final Optimized Output</span>
+                                    <p><strong>Evolved prompt (after 3 cycles):</strong> &ldquo;Write a product description for [item] in our brand voice: confident, conversational, technically precise but not jargon-heavy. Include: one compelling opening line, 3&ndash;5 key specifications in bullet format, one sentence addressing the most common buyer concern for this category, and a clear CTA. Under 150 words. Do not make claims that cannot be verified against the product specification sheet.&rdquo;<br><br>
+                                    <em>Note: Review all product claims against actual specifications before publishing. AI-generated descriptions should always be fact-checked by the product team.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Self-Optimizing a Data Analysis Pipeline</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">SCOPE Cycle</span>
+                                    <p><strong>Seed prompt:</strong> &ldquo;Analyze this dataset and provide insights.&rdquo;<br><br>
+                                    <strong>Critique (Cycle 1):</strong> Insights are surface-level descriptive statistics only. No trend identification, no anomaly detection, no actionable recommendations. The word &ldquo;insights&rdquo; is too vague as an objective.<br><br>
+                                    <strong>Optimized (Cycle 1):</strong> Added structure: &ldquo;Identify the top 3 trends, flag any statistical anomalies, and provide one actionable recommendation for each finding.&rdquo;<br><br>
+                                    <strong>Critique (Cycle 2):</strong> Trends are now identified but confidence levels are missing. Anomaly detection works but threshold justification is absent. Recommendations exist but lack implementation specificity.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Final Optimized Output</span>
+                                    <p><strong>Evolved prompt (after 3 cycles):</strong> &ldquo;Analyze this dataset. Produce: (1) Top 3 trends with confidence level and supporting evidence, (2) Statistical anomalies with threshold justification and potential causes, (3) For each finding: one specific, implementable recommendation with expected impact and suggested timeline. Format as a structured report with executive summary. Flag any findings where data quality may affect reliability.&rdquo;<br><br>
+                                    Improvement: 3.2/5 &rarr; 4.7/5 across evaluation criteria over 3 cycles.<br><br>
+                                    <em>Note: Validate all statistical findings against the raw data. AI-generated analysis should be reviewed by a domain expert before informing business decisions.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use SCOPE</h2>
+                <p class="section-subtitle fade-in-up">Best for systematic prompt improvement at scale</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Production Pipeline Optimization</strong>
+                                    <p>When you have prompts running at scale and need to systematically improve quality without manual iteration on every variant.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Measurable Quality Criteria</strong>
+                                    <p>Tasks where you can define clear evaluation dimensions &mdash; accuracy, completeness, format compliance, tone consistency &mdash; that the agent can assess objectively.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Prompt Library Maintenance</strong>
+                                    <p>Organizations maintaining large prompt libraries that need periodic tuning as models update, tasks evolve, or quality standards change.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Research and Experimentation</strong>
+                                    <p>Exploring how prompts degrade or improve across model versions, temperature settings, or task variations through controlled optimization experiments.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>One-Off Prompts</strong>
+                                    <p>For a single ad-hoc question, the overhead of multiple optimization cycles is not justified. Just write a clear prompt and verify the output.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Subjective or Creative Tasks</strong>
+                                    <p>When quality is inherently subjective &mdash; poetry, creative writing, brainstorming &mdash; self-evaluation lacks reliable criteria to optimize against.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Stakes Without Oversight</strong>
+                                    <p>Medical, legal, or safety-critical applications where an autonomously evolved prompt could drift in harmful directions without human validation at each cycle.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where SCOPE delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">CI/CD Prompt Testing</h3>
+                        <p class="use-case-showcase__desc">Integrate SCOPE cycles into continuous integration pipelines to automatically test and optimize prompts whenever models or data change, ensuring consistent output quality.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Quality Assurance</h3>
+                        <p class="use-case-showcase__desc">Evolve content generation prompts to maintain brand voice, factual accuracy, and engagement metrics as content requirements shift over time.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Chatbot Response Tuning</h3>
+                        <p class="use-case-showcase__desc">Continuously optimize customer-facing chatbot prompts based on user satisfaction signals, resolution rates, and escalation frequency.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Data Extraction Pipelines</h3>
+                        <p class="use-case-showcase__desc">Optimize prompts that extract structured data from unstructured sources, improving field accuracy and reducing parse errors with each evolution cycle.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Educational Content Adaptation</h3>
+                        <p class="use-case-showcase__desc">Evolve tutoring and explanation prompts based on comprehension assessment results, adapting difficulty level and teaching approach automatically.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Safety Filter Refinement</h3>
+                        <p class="use-case-showcase__desc">Iteratively improve content moderation prompts by self-evaluating against known edge cases, reducing both false positives and false negatives under human supervision.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where SCOPE Fits</h2>
+                <p class="section-subtitle fade-in-up">SCOPE bridges manual prompt tuning and fully automated optimization</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Manual Tuning</span>
+                        <span class="era-marker__title">Human Iteration</span>
+                        <span class="era-marker__desc">Write, test, tweak, repeat</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">SCOPE</span>
+                        <span class="era-marker__title">Self-Optimizing</span>
+                        <span class="era-marker__desc">Agent-driven critique and refinement</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">APE</span>
+                        <span class="era-marker__title">Automatic Generation</span>
+                        <span class="era-marker__desc">LLM generates and scores prompts from scratch</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">DSPy / OPRO</span>
+                        <span class="era-marker__title">Compiled Optimization</span>
+                        <span class="era-marker__desc">Programmatic prompt compilation and tuning</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Human-in-the-Loop Is Non-Negotiable</div>
+                    <p>SCOPE&rsquo;s self-optimization loop is powerful but not infallible. An agent optimizing its own prompts can converge on solutions that score well on defined metrics while drifting from the actual user intent &mdash; a phenomenon sometimes called &ldquo;reward hacking.&rdquo; Always validate the evolved prompt&rsquo;s output with human reviewers at regular intervals, especially before deploying to production. The goal is human-guided autonomous improvement, not unsupervised prompt drift.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques &amp; Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary approaches to prompt optimization</p>
+
+                <a href="ape.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related Technique</span>
+                        <span class="evolution-callout__title">APE (Automatic Prompt Engineer)</span>
+                        <span class="evolution-callout__desc">Where SCOPE iteratively refines an existing prompt, APE generates candidate prompts from scratch and selects the best performer &mdash; a complementary approach to automated optimization.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="opro.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="16"/>
+                            <line x1="8" y1="12" x2="16" y2="12"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Academic Counterpart</span>
+                        <span class="evolution-callout__title">OPRO (Optimization by PROmpting)</span>
+                        <span class="evolution-callout__desc">OPRO uses the LLM itself as the optimizer, generating and evaluating prompt candidates based on scored examples &mdash; sharing SCOPE&rsquo;s philosophy of using AI to improve AI instructions.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="dspy.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Production Framework</span>
+                        <span class="evolution-callout__title">DSPy</span>
+                        <span class="evolution-callout__desc">DSPy takes automated optimization further by compiling entire LM programs &mdash; not just individual prompts &mdash; into optimized pipelines with automatic few-shot selection and weight tuning.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Evolve Your Prompts</h2>
+                        <p class="cta-corporate__text">Start building self-improving prompt workflows or find the right optimization technique for your pipeline.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../tools/matcher.html" class="btn btn-secondary">Technique Finder</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

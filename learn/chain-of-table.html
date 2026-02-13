@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chain of Table: Transform and reason over tabular data through step-by-step table operations, making each data manipulation explicit and verifiable.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/chain-of-table.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Chain of Table - Praxis">
+    <meta property="og:description" content="Chain of Table: Transform and reason over tabular data through step-by-step table operations, making each data manipulation explicit and verifiable.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/chain-of-table.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Chain of Table - Praxis">
+    <meta name="twitter:description" content="Chain of Table: Transform and reason over tabular data through step-by-step table operations, making each data manipulation explicit and verifiable.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Chain of Table",
+      "name": "Chain of Table",
+      "description": "Chain of Table: Transform and reason over tabular data through step-by-step table operations, making each data manipulation explicit and verifiable.",
+      "url": "https://praxislibrary.com/learn/chain-of-table.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Chain of Table"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Chain of Table - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Chain of Table</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Decomposition Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Chain of Table</h1>
+                <p class="page-subtitle fade-in">Tables hold structured knowledge, but reasoning over them requires structured thinking. Chain of Table guides AI through explicit table operations &mdash; filtering rows, sorting columns, aggregating values &mdash; creating a visible chain of data transformations from question to answer.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2024</span>
+                        <p><strong>Introduced:</strong> Chain of Table was published at ICML 2024 by Wang et al. at Google Research, addressing a gap in table reasoning. While LLMs can read tables, they struggle to perform multi-step operations reliably. Chain of Table introduces a structured approach: at each step, the model selects a table operation (filter, sort, group by, aggregate), applies it to produce an intermediate table, and uses that result for the next step. This creates a verifiable chain of data transformations.</p>
+                        <p><strong>Modern LLM Status:</strong> Chain of Table is directly relevant to the growing use of AI for data analysis. As models are increasingly used to query databases, analyze spreadsheets, and generate business intelligence, the ability to reason over tabular data step-by-step becomes essential. The technique maps naturally to <strong>SQL-like query decomposition</strong> and pandas-style data manipulation pipelines, making it a bridge between natural language questions and structured data operations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Make Every Data Operation Visible</h2>
+                        <p class="split-section__text">Standard prompting asks a model to look at a table and produce an answer, performing all reasoning internally. Chain of Table makes each data operation explicit. Need to find the highest-revenue quarter? First filter to the relevant year, then sort by revenue, then select the top row.</p>
+                        <p class="split-section__text"><strong>Each operation produces a visible intermediate table that can be inspected.</strong> Errors in data manipulation become visible at the step where they occur. If the model miscounts rows or confuses columns, the mistake shows up in the intermediate result &mdash; not hidden inside a final number that looks plausible but is wrong.</p>
+                        <p class="split-section__text">Think of it like showing your work in a math class: instead of jumping from the problem to the answer, you write each calculation step. If the answer is wrong, your teacher (or your reviewer) can find exactly where the error crept in.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Explicit Operations Beat Mental Math on Tables</span>
+                                <p>When models reason over tables internally, they can miscount rows, confuse columns, or apply operations in the wrong order. By making each operation explicit and producing intermediate tables, Chain of Table creates checkpoints where errors are visible and correctable. This is especially important for <strong>numerical data</strong> where a single misread cell can cascade through every subsequent calculation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Chain of Table Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from table question to verified answer</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Parse the Table</h3>
+                            <p class="element-timeline__text">Understand the table structure: column names, data types, row count, and relationships between columns. This structural understanding determines what operations are possible and what sequence will answer the question.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Table: Sales data with columns [Region, Quarter, Product, Revenue, Units Sold]. 120 rows spanning Q1-Q4 across 5 regions and 6 product lines.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Plan Operations</h3>
+                            <p class="element-timeline__text">Determine what sequence of table operations (filter, sort, group by, aggregate, select) will answer the question. Each planned operation should produce a meaningful intermediate result. The plan is like a SQL query broken into individual steps.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Question: &ldquo;Which region had the highest total revenue in Q4?&rdquo; Plan: (1) Filter rows where Quarter = Q4, (2) Group by Region, (3) Sum Revenue per group, (4) Sort by total revenue descending, (5) Select top row.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Execute Step-by-Step</h3>
+                            <p class="element-timeline__text">Apply each operation (filter, sort, group, aggregate) and produce the intermediate table. Each intermediate result should be inspectable &mdash; you should be able to verify that the filter kept the right rows, that the aggregation is correct, and that sorting is in the right order.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Step 1 result:</strong> 30 rows (Q4 only). <strong>Step 2-3 result:</strong> 5 rows (one per region with summed revenue). <strong>Step 4 result:</strong> Rows sorted: West $4.2M, East $3.8M, Central $3.1M, South $2.7M, North $2.4M.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Extract Answer</h3>
+                            <p class="element-timeline__text">From the final intermediate table, extract the answer to the original question. The answer is now grounded in a visible chain of operations, not in opaque mental arithmetic over raw data.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;The West region had the highest total revenue in Q4 at $4.2M, followed by East at $3.8M. This was verified through explicit filter, group, sum, and sort operations on the source data.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why step-by-step table operations outperform mental arithmetic</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Direct Table Reading</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Looking at the table, Q3 2024 had the highest revenue of $4.2M.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Problem</span>
+                                <p>No visible operations. Was the table filtered correctly? Were all rows counted? Was the comparison across all quarters or just some? The answer could be right or wrong and there is no way to check without re-doing the work from scratch.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Opaque reasoning, no way to verify data operations</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Chain of Table</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Step-by-Step Operations</span>
+                                <p><strong>Step 1:</strong> Filter: year = 2024 (48 rows remain).<br><strong>Step 2:</strong> Group by: Quarter (4 groups).<br><strong>Step 3:</strong> Aggregate: SUM(Revenue) per quarter.<br><strong>Step 4:</strong> Sort: Revenue descending.<br><strong>Result table:</strong> Q3: $4.2M | Q4: $3.9M | Q2: $3.5M | Q1: $3.1M.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Final Answer</span>
+                                <p>Q3 2024 had the highest revenue at $4.2M (verified through explicit filter, group, sum, and sort operations across all 48 rows of 2024 data).</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Every operation visible, intermediate tables verifiable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Chain of Table in Action</h2>
+                <p class="section-subtitle fade-in-up">See how explicit table operations produce verifiable data answers</p>
+
+                <div class="accordion fade-in-up" id="cot-table-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Financial Reporting</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Question</span>
+                                    <p>&ldquo;Which department exceeded its budget by the largest percentage in fiscal year 2024?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Chain of Table Approach</span>
+                                    <p><strong>Step 1 &mdash; Filter:</strong> FiscalYear = 2024 (reduces to 12 rows: 4 quarters x 3 departments).<br><br>
+                                    <strong>Step 2 &mdash; Group by:</strong> Department. Three groups: Engineering, Marketing, Operations.<br><br>
+                                    <strong>Step 3 &mdash; Aggregate:</strong> SUM(ActualSpend) and SUM(Budget) per department.<br>Engineering: $2.4M actual / $2.1M budget.<br>Marketing: $1.8M actual / $1.5M budget.<br>Operations: $3.2M actual / $3.0M budget.<br><br>
+                                    <strong>Step 4 &mdash; Calculate:</strong> Add column: OverBudgetPct = ((Actual - Budget) / Budget) x 100.<br>Engineering: 14.3%. Marketing: 20.0%. Operations: 6.7%.<br><br>
+                                    <strong>Step 5 &mdash; Sort:</strong> OverBudgetPct descending. Select top row.<br><br>
+                                    <strong>Answer:</strong> Marketing exceeded its budget by the largest percentage (20.0%), spending $1.8M against a $1.5M budget. Always verify financial figures against actual accounting records before making business decisions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Sports Statistics</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Question</span>
+                                    <p>&ldquo;Among players who averaged more than 25 points per game, who had the best assist-to-turnover ratio?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Chain of Table Approach</span>
+                                    <p><strong>Step 1 &mdash; Filter:</strong> PointsPerGame &gt; 25.0 (reduces from 450 players to 18).<br><br>
+                                    <strong>Step 2 &mdash; Calculate:</strong> Add column: AstToRatio = AssistsPerGame / TurnoversPerGame.<br><br>
+                                    <strong>Step 3 &mdash; Sort:</strong> AstToRatio descending.<br>Top 3: Player A (3.8 ratio, 7.2 ast / 1.9 to), Player B (3.4 ratio, 10.1 ast / 3.0 to), Player C (3.1 ratio, 5.8 ast / 1.9 to).<br><br>
+                                    <strong>Answer:</strong> Among players averaging 25+ points, Player A had the best assist-to-turnover ratio at 3.8:1. Interestingly, Player B had more total assists but a lower ratio due to higher turnovers. Verify all statistics against official league records before publishing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Inventory Management</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Question</span>
+                                    <p>&ldquo;Which products need reordering based on current stock levels falling below twice the average weekly sales rate?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Chain of Table Approach</span>
+                                    <p><strong>Step 1 &mdash; Calculate:</strong> Add column: ReorderThreshold = AvgWeeklySales x 2 (two weeks of safety stock).<br><br>
+                                    <strong>Step 2 &mdash; Calculate:</strong> Add column: NeedsReorder = (CurrentStock &lt; ReorderThreshold).<br><br>
+                                    <strong>Step 3 &mdash; Filter:</strong> NeedsReorder = TRUE (reduces from 340 products to 23).<br><br>
+                                    <strong>Step 4 &mdash; Calculate:</strong> Add column: DaysUntilStockout = CurrentStock / (AvgWeeklySales / 7).<br><br>
+                                    <strong>Step 5 &mdash; Sort:</strong> DaysUntilStockout ascending (most urgent first).<br>Top 3: Widget-X7 (3.2 days), Sensor-M4 (5.1 days), Cable-C9 (6.8 days).<br><br>
+                                    <strong>Answer:</strong> 23 products need reordering. Most urgent: Widget-X7 with only 3.2 days of stock remaining. All 23 products are below the two-week safety stock threshold. Always cross-check inventory calculations against live warehouse management systems.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Chain of Table</h2>
+                <p class="section-subtitle fade-in-up">Best for multi-step queries over structured tabular data</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Table Queries Requiring Multiple Operations</strong>
+                                    <p>Questions that need filter + group + aggregate + sort sequences &mdash; too many operations for reliable mental arithmetic.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Data Analysis with Verification Needs</strong>
+                                    <p>When the accuracy of each data transformation must be checkable &mdash; financial reports, compliance data, or any high-stakes numerical analysis.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Multi-Step Aggregations and Comparisons</strong>
+                                    <p>Questions that require computing derived values (percentages, ratios, rankings) from raw tabular data across multiple dimensions.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Database Query Decomposition</strong>
+                                    <p>Breaking complex SQL-like queries into individual operations that can each be validated before combining into a final result.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Single-Column Lookups</strong>
+                                    <p>&ldquo;What is the value in row 3, column B?&rdquo; requires no multi-step operations &mdash; a direct lookup is sufficient.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Non-Tabular Data</strong>
+                                    <p>When data is unstructured text, images, or narrative &mdash; Chain of Table is specifically designed for structured row-column data.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative or Narrative Tasks</strong>
+                                    <p>Writing, brainstorming, or opinion-based questions where structured data operations are not relevant to the problem.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Chain of Table delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Business Intelligence</h3>
+                        <p class="use-case-showcase__desc">Transform raw business data into actionable insights through explicit filter, aggregate, and comparison operations that stakeholders can verify.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Analysis</h3>
+                        <p class="use-case-showcase__desc">Process financial tables through explicit operations: filter by period, calculate margins, compare year-over-year, and rank performance with auditable intermediate steps.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Scientific Data Processing</h3>
+                        <p class="use-case-showcase__desc">Analyze experimental data tables through reproducible operation chains: filter outliers, compute statistics, compare treatment groups, and report findings with clear methodology.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Inventory Management</h3>
+                        <p class="use-case-showcase__desc">Calculate reorder points, identify slow-moving stock, and optimize purchasing by chaining operations across stock-level, sales-rate, and supplier tables.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Student Grade Analysis</h3>
+                        <p class="use-case-showcase__desc">Process gradebooks through operations that calculate weighted averages, identify at-risk students, compare section performance, and generate transparent grade reports.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Census Data Queries</h3>
+                        <p class="use-case-showcase__desc">Answer complex demographic questions by chaining filter, group, and aggregate operations across census tables, with each transformation step documented and verifiable.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Chain of Table Fits</h2>
+                <p class="section-subtitle fade-in-up">Chain of Table bridges text-based reasoning and structured data operations</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Text Reasoning</span>
+                        <span class="era-marker__desc">Step-by-step in natural language</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Program of Thought</span>
+                        <span class="era-marker__title">Code Execution</span>
+                        <span class="era-marker__desc">Generate and run code for computation</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Chain of Table</span>
+                        <span class="era-marker__title">Table Operations</span>
+                        <span class="era-marker__desc">Structured data transformations</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain of Abstraction</span>
+                        <span class="era-marker__title">Placeholder-Based</span>
+                        <span class="era-marker__desc">Abstract reasoning with deferred lookup</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Name Your Intermediate Tables</div>
+                    <p>Give each intermediate table a descriptive name (e.g., &ldquo;Q4_filtered,&rdquo; &ldquo;revenue_sorted&rdquo;). This makes the chain of operations readable and debuggable, much like naming variables in code rather than writing one giant expression. When you or a reviewer returns to the analysis later, descriptive names make each step immediately understandable.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary reasoning approaches</p>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">The general step-by-step reasoning technique that Chain of Table specializes for structured tabular data operations.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="program-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Program of Thought</span>
+                        <span class="evolution-callout__desc">Uses code generation for computation &mdash; a complementary approach where Chain of Table uses table operations and Program of Thought uses executable programs.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="structured-cot.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Structured Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">Adds structured formatting to reasoning chains &mdash; pairs well with Chain of Table for data analysis that requires both computational and narrative reasoning.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Transform Your Data Reasoning</h2>
+                        <p class="cta-corporate__text">Apply table-based reasoning to your own data analysis or explore other techniques in the Praxis Library.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

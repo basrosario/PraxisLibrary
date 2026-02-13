@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Prompt Repetition: A surprisingly effective technique where repeating key instructions within a prompt leads to measurable performance improvements in non-reasoning LLM tasks.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/prompt-repetition.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Prompt Repetition - Praxis">
+    <meta property="og:description" content="Prompt Repetition: A surprisingly effective technique where repeating key instructions within a prompt leads to measurable performance improvements in non-reasoning LLM tasks.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/prompt-repetition.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Prompt Repetition - Praxis">
+    <meta name="twitter:description" content="Prompt Repetition: A surprisingly effective technique where repeating key instructions within a prompt leads to measurable performance improvements in non-reasoning LLM tasks.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Prompt Repetition",
+      "name": "Prompt Repetition",
+      "description": "Prompt Repetition: A surprisingly effective technique where repeating key instructions within a prompt leads to measurable performance improvements in non-reasoning LLM tasks.",
+      "url": "https://praxislibrary.com/learn/prompt-repetition.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Prompt Repetition"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Prompt Repetition - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Prompt Repetition</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Enhancement Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Prompt Repetition</h1>
+                <p class="page-subtitle fade-in">Sometimes the simplest techniques are the most surprising. Prompt Repetition &mdash; literally repeating key instructions or constraints within your prompt &mdash; produces measurable performance improvements. Like emphasizing a critical point in conversation by saying it twice, repetition ensures the model treats your most important requirements as priorities rather than afterthoughts.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2024</span>
+                        <p><strong>Introduced:</strong> Prompt Repetition was formally studied in 2024, building on the RE2 (Re-Reading) research that demonstrated how re-presenting the prompt or key instructions to the model improves performance on non-reasoning tasks. The technique draws a parallel to the emphasis effect in human communication &mdash; repeating important information increases the likelihood it will be prioritized. Research showed consistent improvements of 3-8% across classification, extraction, and instruction-following benchmarks when critical constraints were repeated.</p>
+                        <p><strong>Modern LLM Status:</strong> Prompt Repetition&rsquo;s core insight has been <strong>partially absorbed into modern LLMs</strong>. However, repeating critical constraints and instructions remains a practical strategy in 2026, especially for complex prompts where key requirements might otherwise be diluted by surrounding context. As prompts grow longer with expanded context windows, the attention dilution problem becomes more relevant &mdash; making strategic repetition increasingly valuable rather than less.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Say It Again &mdash; It Actually Works</h2>
+                        <p class="split-section__text">Language models process prompts through attention mechanisms that assign weight to different parts of the input. In long or complex prompts, critical instructions can receive diluted attention &mdash; buried among context, examples, and supporting details. The model &ldquo;sees&rdquo; the instruction but does not prioritize it as strongly as you intended.</p>
+                        <p class="split-section__text"><strong>Repetition is an attention amplifier.</strong> When an instruction appears twice in the prompt &mdash; once in the initial instructions and again near the end, or restated after examples &mdash; the attention mechanism assigns it higher cumulative weight. The model treats repeated content as more important, which is exactly the behavior you want for non-negotiable constraints like output format, safety requirements, or critical task parameters.</p>
+                        <p class="split-section__text">Think of it like a manager who says &ldquo;the deadline is Friday&rdquo; at the start of a meeting and again at the end. The second mention is not redundant &mdash; it signals priority. The same principle applies to LLM attention.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">The Attention Dilution Problem</span>
+                                <p>As context windows expand to 200K+ tokens, prompts can contain enormous amounts of information. But attention is not distributed equally &mdash; content at the beginning and end of prompts receives more weight (the &ldquo;primacy&rdquo; and &ldquo;recency&rdquo; effects), while instructions in the middle can be partially overlooked. Prompt Repetition counteracts this by placing critical instructions at <strong>multiple attention peaks</strong>, ensuring they are prioritized regardless of where other content pushes them in the attention distribution.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Prompt Repetition Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from single instruction to strategically reinforced prompt</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Identify Your Critical Constraints</h3>
+                            <p class="element-timeline__text">Determine which instructions in your prompt are non-negotiable. These are the requirements where failure would make the entire output useless &mdash; output format specifications, safety boundaries, factual accuracy requirements, or specific rules the model must follow regardless of context.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>For a medical content task: &ldquo;Do not provide specific medical diagnoses or treatment recommendations. Always direct users to consult a healthcare professional.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Place the Initial Instruction</h3>
+                            <p class="element-timeline__text">State the critical constraint clearly in the initial instructions, where it naturally belongs. This first mention establishes the rule in the model&rsquo;s context. At this point, the prompt looks like any well-written prompt &mdash; the repetition comes in the next steps.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;You are a health information assistant. Important: Do not provide specific medical diagnoses or treatment recommendations. Always direct users to consult a healthcare professional. Your role is to provide general health education content...&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Repeat at Strategic Positions</h3>
+                            <p class="element-timeline__text">Re-state the critical constraint after examples, before the actual task input, or at the end of the prompt. The repetition does not need to be word-for-word &mdash; slight rephrasing can actually help by activating different semantic associations. The key is that the same core requirement appears at multiple points the model&rsquo;s attention mechanism will weigh heavily.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>After several examples of good responses: &ldquo;Reminder: Never provide specific diagnoses or treatment plans. Direct all medical questions to qualified healthcare professionals. Now respond to the following user query...&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Calibrate Repetition Frequency</h3>
+                            <p class="element-timeline__text">Two to three repetitions of a critical constraint is typically optimal. Over-repetition can waste tokens and, in rare cases, cause the model to over-focus on the constraint at the expense of the actual task. Test your prompt with and without repetition to confirm it produces measurable improvement for your specific use case.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Test three versions: (A) constraint stated once at the top, (B) constraint stated at top and bottom, (C) constraint stated at top, after examples, and at the bottom. Compare compliance rates across 50+ test cases to find the optimal frequency.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">How strategic repetition prevents instruction drift in complex prompts</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Single Instruction</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>You are a content writer for a children&rsquo;s educational website. <strong>Keep all language at a 3rd-grade reading level.</strong> Write engaging articles about science topics. Use analogies and simple examples. Here are some topic areas: space, animals, weather, the human body...<br><br>[500 words of context, examples, and formatting instructions later]<br><br>Write an article about how volcanoes work.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response Pattern</span>
+                                <p>The model produces an article that starts simple but gradually drifts into more complex vocabulary and sentence structures. By the third paragraph, terms like &ldquo;tectonic plates,&rdquo; &ldquo;magma chamber,&rdquo; and &ldquo;geological formation&rdquo; appear without simplification.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Reading level drifts upward, constraint buried under 500 words of context</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Repeated Instruction</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt with Repetition</span>
+                                <p>You are a content writer for a children&rsquo;s educational website. <strong>Keep all language at a 3rd-grade reading level.</strong> Write engaging articles about science topics...<br><br>[500 words of context, examples, and formatting instructions]<br><br><strong>Remember: Every sentence must be understandable by a 3rd-grader. Use short words and simple sentences throughout the entire article.</strong><br><br>Write an article about how volcanoes work. <em>As always, verify readability of AI-generated educational content before sharing with students.</em></p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response Pattern</span>
+                                <p>The article maintains consistent 3rd-grade reading level throughout. &ldquo;Tectonic plates&rdquo; becomes &ldquo;giant puzzle pieces under the ground.&rdquo; &ldquo;Magma chamber&rdquo; becomes &ldquo;a big pool of melted rock deep underground.&rdquo; Sentence length stays short and vocabulary stays simple from start to finish.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Consistent reading level maintained, constraint reinforced at attention peaks</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Prompt Repetition in Action</h2>
+                <p class="section-subtitle fade-in-up">See how repeating critical instructions prevents constraint violations</p>
+
+                <div class="accordion fade-in-up" id="prompt-repetition-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Output Format Enforcement</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt with Repetition</span>
+                                    <p>&ldquo;Analyze the following customer feedback and return your analysis as a JSON object with these exact keys: sentiment, topics, urgency, and suggested_action. <strong>Your entire response must be valid JSON only &mdash; no explanatory text before or after.</strong><br><br>
+                                    Here is the customer feedback: &lsquo;I have been waiting three weeks for my replacement part. Every time I call, I get a different answer about when it will ship. I am about to cancel my subscription and switch to your competitor. This is my fifth year as a customer and I am extremely frustrated.&rsquo;<br><br>
+                                    <strong>Important: Respond with valid JSON only. Do not include any text outside the JSON object.</strong> Always note that AI-generated sentiment analysis should be verified before taking action on customer accounts.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Clean JSON Response</span>
+                                    <p>{<br>
+                                    &nbsp;&nbsp;&ldquo;sentiment&rdquo;: &ldquo;Negative - Frustrated&rdquo;,<br>
+                                    &nbsp;&nbsp;&ldquo;topics&rdquo;: [&ldquo;Shipping delay&rdquo;, &ldquo;Inconsistent support&rdquo;, &ldquo;Churn risk&rdquo;],<br>
+                                    &nbsp;&nbsp;&ldquo;urgency&rdquo;: &ldquo;High - Long-tenure customer threatening cancellation&rdquo;,<br>
+                                    &nbsp;&nbsp;&ldquo;suggested_action&rdquo;: &ldquo;Escalate to retention team with priority shipping authorization&rdquo;<br>
+                                    }</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Safety Constraint Reinforcement</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt with Repetition</span>
+                                    <p>&ldquo;You are a financial education assistant. <strong>You must never provide specific investment advice, recommend particular stocks or funds, or predict market movements.</strong> Your role is to explain financial concepts in plain language and encourage users to consult licensed financial advisors for personal decisions.<br><br>
+                                    When a user asks about investing, explain the general concept, describe common approaches, and list factors to consider. Provide educational context, not actionable recommendations.<br><br>
+                                    User question: &lsquo;Should I put my savings into index funds or keep it in a high-yield savings account?&rsquo;<br><br>
+                                    <strong>Reminder: Do not recommend specific investment choices. Explain concepts and direct the user to a qualified financial advisor for personalized guidance.</strong>&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Compliant Response</span>
+                                    <p>Great question &mdash; these are two different financial tools that serve different purposes, and understanding the difference can help you have a more informed conversation with a financial advisor.<br><br>
+                                    <strong>High-yield savings accounts</strong> are designed for money you might need access to soon. They offer a guaranteed interest rate (currently in the 4-5% range for many accounts) and are typically FDIC-insured up to $250,000. The trade-off is that returns are generally lower over long time horizons compared to market investments.<br><br>
+                                    <strong>Index funds</strong> are investment vehicles that track a market index. Historically, broad market index funds have provided higher average annual returns over long periods (decades), but they come with risk &mdash; your balance can decrease in the short term, and past performance does not guarantee future results.<br><br>
+                                    Key factors that matter for this decision include your time horizon, risk tolerance, emergency fund needs, and overall financial goals. A licensed financial advisor can evaluate your specific situation and help you determine the right allocation for your circumstances.<br><br>
+                                    <em>This is general financial education, not personalized advice. Please consult a qualified financial advisor for recommendations specific to your situation.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Tone and Audience Consistency</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt with Repetition</span>
+                                    <p>&ldquo;Write a technical blog post about Kubernetes container orchestration for an audience of <strong>senior DevOps engineers with 5+ years of experience</strong>. Assume they already understand containerization, networking, and CI/CD pipelines. Do not explain basic concepts &mdash; focus on advanced patterns and production insights.<br><br>
+                                    Cover these topics: (1) Custom resource definitions for multi-tenant clusters, (2) Advanced scheduling with topology spread constraints, (3) eBPF-based observability integration.<br><br>
+                                    <strong>Target audience reminder: Senior DevOps engineers. Skip all introductory explanations. Write at an expert level throughout. Every paragraph should deliver actionable production knowledge.</strong> As with all technical content, verify configuration examples in a test environment before deploying to production.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Expert-Level Response</span>
+                                    <p>The model maintains consistently advanced technical depth throughout all three sections. No &ldquo;Kubernetes is a container orchestration platform&rdquo; introductions. The CRD section dives directly into operator patterns for namespace-scoped resource quotas with admission webhook validation. The scheduling section covers <code>topologySpreadConstraints</code> with <code>whenUnsatisfiable: DoNotSchedule</code> versus <code>ScheduleAnyway</code> trade-offs in multi-zone clusters. The eBPF section discusses Cilium integration with Hubble for L7 observability without sidecar overhead.<br><br>
+                                    <em>Note: Always validate AI-generated technical configurations in staging environments before production deployment.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Prompt Repetition</h2>
+                <p class="section-subtitle fade-in-up">Best for reinforcing critical constraints in complex or lengthy prompts</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Long or Complex Prompts</strong>
+                                    <p>When your prompt is hundreds of tokens with examples, context, and instructions &mdash; critical constraints can get buried. Repetition ensures they stay prominent.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Safety-Critical Applications</strong>
+                                    <p>Medical, legal, financial, or safety contexts where violating a constraint could cause real harm &mdash; repeating boundaries reduces the risk of constraint drift.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Strict Output Format Requirements</strong>
+                                    <p>When the response must be valid JSON, specific CSV format, or exact template structure &mdash; repeating format requirements dramatically reduces formatting errors.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Audience-Specific Content</strong>
+                                    <p>When maintaining a specific reading level, technical depth, or tone is essential &mdash; the model can drift toward its default register without repeated reminders.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Short, Simple Prompts</strong>
+                                    <p>When your prompt is already concise (under 100 tokens), attention dilution is minimal and repetition wastes tokens without meaningful improvement.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Token-Constrained Scenarios</strong>
+                                    <p>When you are already near the context limit and every token counts &mdash; the few tokens spent on repetition might be better used for additional context or examples.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Open-Ended Creative Tasks</strong>
+                                    <p>When the goal is exploratory or creative and you want the model to have maximum flexibility &mdash; over-repeating constraints can make the output feel formulaic or overly cautious.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Prompt Repetition delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">System Prompt Hardening</h3>
+                        <p class="use-case-showcase__desc">Reinforce safety boundaries and behavioral constraints in system prompts for production AI applications. Repeating critical rules at multiple points reduces the likelihood of jailbreaking or constraint drift during long conversations.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">API Response Formatting</h3>
+                        <p class="use-case-showcase__desc">Ensure LLM outputs conform to strict data schemas required by downstream systems. Repeating format specifications eliminates the most common failure mode in AI-powered data pipelines: malformed output.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Regulated Industry Content</h3>
+                        <p class="use-case-showcase__desc">Generate content for healthcare, finance, or legal contexts where compliance language must appear consistently. Repeating regulatory constraints prevents the model from dropping required disclaimers mid-output.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Brand Voice Consistency</h3>
+                        <p class="use-case-showcase__desc">Maintain consistent brand tone, terminology, and style across long-form content generation. Repeating voice guidelines prevents drift toward generic AI-sounding output over extended generations.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Educational Content Leveling</h3>
+                        <p class="use-case-showcase__desc">Keep reading level, vocabulary complexity, and explanation depth consistent when generating educational materials for specific age groups or skill levels. Without repetition, the model naturally regresses toward adult reading levels.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Multi-Turn Conversation Anchoring</h3>
+                        <p class="use-case-showcase__desc">In chatbot systems, repeat key behavioral rules at the start of each turn&rsquo;s system message to prevent constraint erosion over long conversations where earlier instructions lose attention weight.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Prompt Repetition Fits</h2>
+                <p class="section-subtitle fade-in-up">Prompt Repetition is an enhancement layer that strengthens any prompting technique</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Basic Prompting</span>
+                        <span class="era-marker__title">Single Instruction</span>
+                        <span class="era-marker__desc">State the requirement once</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">RE2 (Re-Reading)</span>
+                        <span class="era-marker__title">Question Repetition</span>
+                        <span class="era-marker__desc">Re-present the question for improved comprehension</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Prompt Repetition</span>
+                        <span class="era-marker__title">Strategic Reinforcement</span>
+                        <span class="era-marker__desc">Repeat critical constraints at attention peaks</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Emphasis Prompting</span>
+                        <span class="era-marker__title">Weighted Instructions</span>
+                        <span class="era-marker__desc">Varied emphasis strategies for priority signaling</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine with Any Technique</div>
+                    <p>Prompt Repetition is not a standalone methodology &mdash; it is an enhancement layer. Add it to Chain-of-Thought, Self-Ask, Meta Prompting, or any other technique by repeating the most critical instructions at strategic points. It is especially powerful in production system prompts where reliability matters more than token efficiency. Think of it as the seatbelt of prompt engineering: a small addition that prevents the most common failures.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary instruction enhancement techniques</p>
+
+                <a href="re2.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">RE2 (Re-Reading)</span>
+                        <span class="evolution-callout__desc">The foundational research showing that re-presenting the prompt to the model improves comprehension &mdash; Prompt Repetition extends this to strategic constraint reinforcement.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-ask.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Self-Ask</span>
+                        <span class="evolution-callout__desc">Self-Ask&rsquo;s structured sub-question format naturally incorporates repetition &mdash; each follow-up question restates aspects of the original query, reinforcing the core intent throughout.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Enhancement Target</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">Chain-of-Thought prompts benefit significantly from Prompt Repetition &mdash; repeating &ldquo;think step by step&rdquo; or key constraints after examples ensures the model maintains its reasoning discipline throughout long outputs.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Reinforce Your Prompts</h2>
+                        <p class="cta-corporate__text">Try Prompt Repetition to ensure your critical constraints are followed or explore our tools to build more effective prompts.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LMQL (Language Model Query Language): SQL-like query language for structured, constrained interaction with language models. Combines natural language prompting with Python scripting and SQL-like constraints.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/lmql.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="LMQL (Language Model Query Language) - Praxis">
+    <meta property="og:description" content="LMQL (Language Model Query Language): SQL-like query language for structured, constrained interaction with language models. Combines natural language prompting with Python scripting and SQL-like constraints.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/lmql.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LMQL (Language Model Query Language) - Praxis">
+    <meta name="twitter:description" content="LMQL (Language Model Query Language): SQL-like query language for structured, constrained interaction with language models. Combines natural language prompting with Python scripting and SQL-like constraints.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "LMQL (Language Model Query Language)",
+      "name": "LMQL (Language Model Query Language)",
+      "description": "LMQL (Language Model Query Language): SQL-like query language for structured, constrained interaction with language models. Combines natural language prompting with Python scripting and SQL-like constraints.",
+      "url": "https://praxislibrary.com/learn/lmql.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "LMQL (Language Model Query Language)"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>LMQL (Language Model Query Language) - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">LMQL</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Query Language Architecture</span>
+                </div>
+                <h1 class="page-title fade-in">LMQL (Language Model Query Language)</h1>
+                <p class="page-subtitle fade-in">What if you could query a language model the way you query a database? LMQL brings SQL-like structure to LLM interaction &mdash; combining natural language prompts with Python scripting and declarative constraints to produce structured, type-safe, cost-efficient outputs.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2022</span>
+                        <p><strong>Introduced:</strong> LMQL was developed in 2022 by Beurer-Kellner, Fischer, and Vechev at ETH Zurich. The language was designed to address a fundamental limitation of natural language prompting: the lack of programmatic control over model outputs. By introducing SQL-like query syntax with Python interoperability, LMQL enabled developers to specify output constraints (type, length, format), control decoding strategies, and integrate external tool calls &mdash; all within a single query. The original implementation demonstrated inference cost reductions of up to 80% through efficient constraint-guided decoding.</p>
+                        <p><strong>Modern LLM Status:</strong> LMQL pioneered the concept of programmatic LLM interaction with constraints. While many models in 2026 natively support structured output (JSON mode, function calling), LMQL&rsquo;s approach of combining natural language with programmatic constraints influenced tools like DSPy, Outlines, and Guidance. The query language paradigm remains relevant for complex orchestration tasks where developers need fine-grained control over model behavior, multi-step pipelines with type-safe intermediate results, and cost optimization through constraint-guided decoding. The core insight &mdash; that LLM interaction benefits from the same structured query paradigms used in databases &mdash; has become a foundational idea in the LLM tooling ecosystem.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Query Languages for Language Models</h2>
+                        <p class="split-section__text">Natural language prompting is flexible but imprecise. You can ask a model to &ldquo;return a JSON object with three fields,&rdquo; but there is no guarantee it will comply. The output might include markdown formatting, extra commentary, missing fields, or malformed syntax. Every downstream system that consumes model output must handle these failures &mdash; and often does so poorly.</p>
+                        <p class="split-section__text"><strong>LMQL treats this as a query problem.</strong> Just as SQL lets you declare what data you want from a database without specifying how to retrieve it, LMQL lets you declare what output structure you need from a model without manually engineering the prompt to coerce compliance. You write constraints &mdash; type requirements, length limits, value ranges, format specifications &mdash; and the LMQL runtime handles the decoding strategy to satisfy them.</p>
+                        <p class="split-section__text">Think of it as the difference between asking a librarian to &ldquo;find me something about history&rdquo; versus submitting a structured catalog query with subject codes, date ranges, and format requirements. Both get results, but only one guarantees the shape of what comes back.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Constraints Beat Hope</span>
+                                <p>When you prompt a model with &ldquo;respond in JSON,&rdquo; you are hoping for compliance. When you use LMQL&rsquo;s constraint system, you are <strong>enforcing</strong> compliance at the decoding level. The model physically cannot produce tokens that violate your constraints. This eliminates an entire class of parsing errors, retry loops, and defensive coding that plagues natural language prompt pipelines. The result: more reliable systems with fewer failure modes and lower inference costs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The LMQL Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from query definition to constrained output</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define the Query Template</h3>
+                            <p class="element-timeline__text">Write a prompt template that combines natural language with placeholder variables. These variables represent the parts of the output you want the model to generate. The template reads like a conversation with blanks &mdash; familiar to anyone who has written SQL SELECT statements or Python f-strings.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Classify the following review: [REVIEW_TEXT]. Sentiment: [SENTIMENT]. Confidence: [CONFIDENCE].&rdquo; &mdash; The bracketed variables are what the model will fill in.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Declare Output Constraints</h3>
+                            <p class="element-timeline__text">Specify constraints on each variable using a WHERE clause. Constraints can enforce type (string, int, float), limit value ranges (SENTIMENT in [&ldquo;positive&rdquo;, &ldquo;negative&rdquo;, &ldquo;neutral&rdquo;]), restrict length (len(SUMMARY) &lt; 100), or apply custom validation functions. These constraints are not suggestions &mdash; they are enforced during token generation.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;WHERE SENTIMENT in [&lsquo;positive&rsquo;, &lsquo;negative&rsquo;, &lsquo;neutral&rsquo;] AND CONFIDENCE &gt; 0 AND CONFIDENCE &lt;= 1.0&rdquo; &mdash; The model can only produce these exact values.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Execute with Constraint-Guided Decoding</h3>
+                            <p class="element-timeline__text">The LMQL runtime compiles your query into an optimized decoding plan. Instead of generating all tokens freely and checking constraints afterward, it masks invalid tokens <strong>during</strong> generation. This means the model never wastes compute producing outputs that will be rejected, resulting in significant cost savings and guaranteed constraint satisfaction.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>When generating SENTIMENT, the decoder only allows tokens that can form &ldquo;positive,&rdquo; &ldquo;negative,&rdquo; or &ldquo;neutral&rdquo; &mdash; all other vocabulary tokens are masked to probability zero.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Receive Structured, Validated Output</h3>
+                            <p class="element-timeline__text">The query returns structured results with each variable populated according to its constraints. No post-processing parsing is needed &mdash; the output is already in the correct format, type, and range. You can pipe these results directly into downstream systems, chain them into multi-step pipelines, or use them as inputs to subsequent LMQL queries.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Returns: SENTIMENT = &ldquo;positive&rdquo;, CONFIDENCE = 0.92 &mdash; Both values are guaranteed to satisfy the declared constraints without any parsing or validation code.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why declarative constraints produce more reliable outputs than prompt engineering alone</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Natural Language Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Analyze this customer review and return a JSON object with fields: sentiment (positive, negative, or neutral), confidence (0 to 1), and summary (under 50 words). Review: &ldquo;The product arrived late but the quality exceeded my expectations.&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Here&rsquo;s my analysis:<br><br>```json<br>{&ldquo;sentiment&rdquo;: &ldquo;mixed/positive&rdquo;, &ldquo;confidence&rdquo;: &ldquo;high&rdquo;, &ldquo;summary&rdquo;: &ldquo;The customer experienced a shipping delay but was pleasantly surprised by the product quality, resulting in an overall positive impression despite the logistics issue.&rdquo;}<br>```<br><br>Note: I classified this as mixed/positive because...</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Invalid enum value, wrong confidence type, extra commentary breaks JSON parsing</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">LMQL Query</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Constrained Query</span>
+                                <p><strong>Template:</strong> Analyze this review: &ldquo;The product arrived late but the quality exceeded my expectations.&rdquo;<br><strong>Sentiment:</strong> [SENTIMENT]<br><strong>Confidence:</strong> [CONFIDENCE]<br><strong>Summary:</strong> [SUMMARY]<br><br><strong>WHERE</strong> SENTIMENT in [&ldquo;positive&rdquo;, &ldquo;negative&rdquo;, &ldquo;neutral&rdquo;] AND CONFIDENCE is float AND CONFIDENCE &gt; 0 AND CONFIDENCE &lt;= 1.0 AND len(SUMMARY) &lt; 200</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Structured Output</span>
+                                <p>SENTIMENT = &ldquo;positive&rdquo;<br>CONFIDENCE = 0.78<br>SUMMARY = &ldquo;Late delivery offset by product quality exceeding expectations.&rdquo;</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Valid enum, correct type, length-compliant, no extra text &mdash; machine-parseable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">LMQL in Action</h2>
+                <p class="section-subtitle fade-in-up">See how query-based prompting enables structured, constrained LLM interaction</p>
+
+                <div class="accordion fade-in-up" id="lmql-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Structured Data Extraction</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">LMQL Query</span>
+                                    <p>Extract structured information from this job posting:<br><br>&ldquo;We are hiring a Senior Data Engineer with 5+ years of experience in Python and Spark. Remote-friendly, based in Austin, TX. Salary range $140K-$180K.&rdquo;<br><br><strong>Title:</strong> [TITLE]<br><strong>Level:</strong> [LEVEL]<br><strong>Skills:</strong> [SKILLS]<br><strong>Location:</strong> [LOCATION]<br><strong>Remote:</strong> [REMOTE]<br><br><strong>WHERE</strong> LEVEL in [&ldquo;Junior&rdquo;, &ldquo;Mid&rdquo;, &ldquo;Senior&rdquo;, &ldquo;Lead&rdquo;, &ldquo;Principal&rdquo;] AND REMOTE in [&ldquo;Yes&rdquo;, &ldquo;No&rdquo;, &ldquo;Hybrid&rdquo;] AND len(TITLE) &lt; 100</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Constrained Output</span>
+                                    <p>TITLE = &ldquo;Senior Data Engineer&rdquo;<br>LEVEL = &ldquo;Senior&rdquo;<br>SKILLS = &ldquo;Python, Spark&rdquo;<br>LOCATION = &ldquo;Austin, TX&rdquo;<br>REMOTE = &ldquo;Yes&rdquo;<br><br><em>Always verify AI-extracted data against the original source before using it in hiring decisions or automated systems.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Multi-Step Reasoning with Constraints</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">LMQL Query</span>
+                                    <p>A patient presents with fatigue, weight gain, and cold sensitivity.<br><br><strong>Step 1 &mdash; Identify possible conditions:</strong> [CONDITIONS]<br><strong>Step 2 &mdash; Most likely diagnosis:</strong> [DIAGNOSIS]<br><strong>Step 3 &mdash; Recommended initial test:</strong> [TEST]<br><strong>Step 4 &mdash; Urgency level:</strong> [URGENCY]<br><br><strong>WHERE</strong> URGENCY in [&ldquo;Routine&rdquo;, &ldquo;Urgent&rdquo;, &ldquo;Emergency&rdquo;] AND len(CONDITIONS) &lt; 300 AND len(DIAGNOSIS) &lt; 100 AND len(TEST) &lt; 100</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Constrained Output</span>
+                                    <p>CONDITIONS = &ldquo;Hypothyroidism, iron deficiency anemia, chronic fatigue syndrome, depression, adrenal insufficiency&rdquo;<br>DIAGNOSIS = &ldquo;Hypothyroidism (underactive thyroid)&rdquo;<br>TEST = &ldquo;TSH (thyroid-stimulating hormone) blood test&rdquo;<br>URGENCY = &ldquo;Routine&rdquo;<br><br><em>This is an AI-generated analysis for educational purposes only. Never use AI output for medical diagnosis &mdash; always consult a licensed healthcare professional. Verify all suggestions independently.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Content Classification Pipeline</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">LMQL Query</span>
+                                    <p>Classify the following customer message for our support routing system:<br><br>&ldquo;I was charged twice for my subscription renewal last month and I want a refund immediately.&rdquo;<br><br><strong>Category:</strong> [CATEGORY]<br><strong>Priority:</strong> [PRIORITY]<br><strong>Sentiment:</strong> [SENTIMENT]<br><strong>Requires Human:</strong> [HUMAN_NEEDED]<br><strong>Suggested Action:</strong> [ACTION]<br><br><strong>WHERE</strong> CATEGORY in [&ldquo;Billing&rdquo;, &ldquo;Technical&rdquo;, &ldquo;Account&rdquo;, &ldquo;Feature Request&rdquo;, &ldquo;General&rdquo;] AND PRIORITY in [&ldquo;Low&rdquo;, &ldquo;Medium&rdquo;, &ldquo;High&rdquo;, &ldquo;Critical&rdquo;] AND SENTIMENT in [&ldquo;Positive&rdquo;, &ldquo;Neutral&rdquo;, &ldquo;Negative&rdquo;, &ldquo;Frustrated&rdquo;] AND HUMAN_NEEDED in [&ldquo;Yes&rdquo;, &ldquo;No&rdquo;] AND len(ACTION) &lt; 200</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Constrained Output</span>
+                                    <p>CATEGORY = &ldquo;Billing&rdquo;<br>PRIORITY = &ldquo;High&rdquo;<br>SENTIMENT = &ldquo;Frustrated&rdquo;<br>HUMAN_NEEDED = &ldquo;Yes&rdquo;<br>ACTION = &ldquo;Escalate to billing team for duplicate charge investigation and refund processing&rdquo;<br><br><em>AI classification should supplement, not replace, human judgment in customer service. Always have a human review escalated cases before taking financial actions like refunds.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use LMQL</h2>
+                <p class="section-subtitle fade-in-up">Best for structured, constrained LLM interactions in production systems</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Production Data Pipelines</strong>
+                                    <p>When model output feeds directly into databases, APIs, or downstream systems that require strict type and format guarantees.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Classification and Extraction</strong>
+                                    <p>Tasks that require outputs from a fixed set of categories, labels, or structured fields &mdash; where free-form responses create parsing headaches.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Cost Optimization</strong>
+                                    <p>High-volume inference where constraint-guided decoding eliminates wasted tokens, reducing API costs by preventing invalid generations.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Multi-Step Orchestration</strong>
+                                    <p>Complex pipelines where each step&rsquo;s output must meet specific constraints before feeding into the next step &mdash; type-safe chaining of LLM calls.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Free-Form Creative Tasks</strong>
+                                    <p>Writing, brainstorming, or conversational tasks where rigid output constraints would stifle the model&rsquo;s creative or exploratory capabilities.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple One-Shot Interactions</strong>
+                                    <p>Quick, conversational queries where the overhead of defining a query schema outweighs the benefit &mdash; just ask the model directly.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Models with Native Structured Output</strong>
+                                    <p>When using APIs that already support JSON mode, function calling, or tool use natively &mdash; the built-in constraints may be sufficient without LMQL&rsquo;s layer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where LMQL delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Document Processing</h3>
+                        <p class="use-case-showcase__desc">Extract structured fields from invoices, contracts, or forms with guaranteed output schemas that integrate directly into document management systems.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Moderation</h3>
+                        <p class="use-case-showcase__desc">Classify user-generated content into fixed policy categories with enforced confidence scores, enabling automated routing and human review workflows.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">API Response Generation</h3>
+                        <p class="use-case-showcase__desc">Generate API-compatible responses with guaranteed JSON schema compliance, eliminating the parsing failures that plague LLM-powered endpoints.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Chatbot Routing</h3>
+                        <p class="use-case-showcase__desc">Classify user intents into predefined categories with constrained confidence scores, enabling deterministic routing to specialized handlers or human agents.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Compliance Automation</h3>
+                        <p class="use-case-showcase__desc">Evaluate regulatory documents against fixed compliance criteria with structured pass/fail/review outputs that feed directly into audit trails.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Batch Data Labeling</h3>
+                        <p class="use-case-showcase__desc">Label thousands of data points with constrained taxonomies at scale, ensuring consistent category assignments across entire datasets for ML training pipelines.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where LMQL Fits</h2>
+                <p class="section-subtitle fade-in-up">LMQL bridges natural language prompting and programmatic LLM control</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Natural Language Prompts</span>
+                        <span class="era-marker__title">Unstructured Input</span>
+                        <span class="era-marker__desc">Free-form text, no output guarantees</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">LMQL</span>
+                        <span class="era-marker__title">Query Language</span>
+                        <span class="era-marker__desc">SQL-like constraints with NL templates</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">DSPy</span>
+                        <span class="era-marker__title">Compiled Pipelines</span>
+                        <span class="era-marker__desc">Optimized prompt programs with signatures</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Native Structured Output</span>
+                        <span class="era-marker__title">Built-In Constraints</span>
+                        <span class="era-marker__desc">JSON mode, function calling, tool use</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The Legacy That Matters</div>
+                    <p>Even if you never write an LMQL query directly, understanding its paradigm shift is valuable: the idea that LLM interaction can be <strong>declarative rather than imperative</strong> &mdash; specifying what you want rather than hoping the model produces it &mdash; fundamentally changed how the industry thinks about prompt engineering. Every JSON mode, function calling API, and structured output feature in modern LLMs traces its intellectual lineage back to the constraint-guided approach LMQL pioneered.</p>
+                    <p>The key takeaway for prompt engineers: <strong>think in terms of constraints, not instructions.</strong> Instead of telling the model &ldquo;please format your response as JSON,&rdquo; define what the output structure must be. Whether you use LMQL, a native JSON mode, or a structured output library, the mental model is the same &mdash; declare the shape of what you need, and let the system enforce it.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary structured output approaches</p>
+
+                <a href="modality/code/structured-output.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Structured Output</span>
+                        <span class="evolution-callout__desc">The broader category of techniques for producing formatted, parseable outputs from LLMs &mdash; LMQL is one implementation of this paradigm.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="constrained-output.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Constrained Output</span>
+                        <span class="evolution-callout__desc">Techniques that limit model output to predefined formats
+                            or value sets &mdash; LMQL&rsquo;s WHERE clause is a programmatic
+                            implementation of this concept.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="dspy.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">DSPy</span>
+                        <span class="evolution-callout__desc">Takes the programmatic LLM interaction paradigm further
+                            with compiled prompt programs, automatic optimization,
+                            and signature-based modules.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Structure Your LLM Interactions</h2>
+                        <p class="cta-corporate__text">Explore how constraint-based prompting can make your AI workflows more reliable, or build structured prompts with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

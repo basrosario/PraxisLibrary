@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Instruction Induction: Infer task instructions from input-output demonstrations, enabling models to reverse-engineer the underlying prompt from examples.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/instruction-induction.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Instruction Induction - Praxis">
+    <meta property="og:description" content="Instruction Induction: Infer task instructions from input-output demonstrations, enabling models to reverse-engineer the underlying prompt from examples.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/instruction-induction.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Instruction Induction - Praxis">
+    <meta name="twitter:description" content="Instruction Induction: Infer task instructions from input-output demonstrations, enabling models to reverse-engineer the underlying prompt from examples.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Instruction Induction",
+      "name": "Instruction Induction",
+      "description": "Instruction Induction: Infer task instructions from input-output demonstrations, enabling models to reverse-engineer the underlying prompt from examples.",
+      "url": "https://praxislibrary.com/learn/instruction-induction.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Instruction Induction"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Instruction Induction - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Instruction Induction</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Meta-learning Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Instruction Induction</h1>
+                <p class="page-subtitle fade-in">Instead of writing instructions for a model, show it examples and let it figure out the instructions itself. Instruction Induction reverses the typical prompt engineering flow &mdash; given input-output pairs, the model generates the natural language instruction that would produce those outputs from those inputs.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2023</span>
+                        <p><strong>Introduced:</strong> Instruction Induction was formalized in 2023 by Honovich et al. as a systematic study of whether language models can infer task descriptions from a small number of demonstrations. The researchers showed that given as few as 5 input-output pairs, large language models could generate accurate natural language instructions describing the underlying task. This represented a paradigm shift: instead of humans writing prompts for models, models could write prompts for themselves by observing examples of the desired behavior.</p>
+                        <p><strong>Modern LLM Status:</strong> Instruction Induction&rsquo;s core insight &mdash; that models can reverse-engineer instructions from examples &mdash; laid the groundwork for automated prompt optimization. In 2026, tools like <strong>DSPy and MIPRO</strong> have industrialized this concept, automatically generating and optimizing prompts at scale. The manual technique remains useful for understanding what instructions a model infers from your examples, which helps <strong>debug unexpected behavior</strong> and verify that your demonstrations communicate what you intend.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Let Examples Speak for Themselves</h2>
+                        <p class="split-section__text">Traditional prompt engineering works top-down: you write an instruction, then verify the model follows it. But what if you have examples of desired behavior and cannot articulate the rule? A teacher grading essays might struggle to write explicit rubric criteria but can easily show examples of A-grade versus C-grade work. Instruction Induction captures this &ldquo;I know it when I see it&rdquo; knowledge.</p>
+                        <p class="split-section__text"><strong>Instruction Induction flips the direction.</strong> You provide a handful of input-output pairs &mdash; demonstrations of the task you want performed &mdash; and ask the model: &ldquo;What instruction would produce these outputs from these inputs?&rdquo; The model generates a hypothesis about the underlying task, expressed as a natural language instruction. That induced instruction can then be used as a prompt for new inputs.</p>
+                        <p class="split-section__text">Think of it like reverse engineering a recipe from tasting several dishes. Instead of starting with the recipe (the instruction), you start with the results (the examples) and work backward to discover the recipe the chef must have followed.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Induction Reveals Hidden Assumptions</span>
+                                <p>When you write a prompt manually, your own assumptions are invisible to you. You may think your instruction is clear, but the model interprets it differently. Instruction Induction provides a mirror: by asking the model what instruction it would infer from your examples, you discover how the model <strong>actually</strong> understands the task. If the induced instruction does not match your intent, your examples are communicating something different from what you assumed &mdash; and you can fix that before deploying the prompt.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Instruction Induction Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from examples to induced instructions</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Collect Input-Output Demonstrations</h3>
+                            <p class="element-timeline__text">Gather a small set of representative examples showing the task you want performed. Each example pairs an input with its correct output. Quality matters more than quantity &mdash; 5 to 10 diverse examples that cover edge cases and typical cases are usually sufficient for the model to identify the underlying pattern.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Input: &ldquo;The food was amazing but the service was terrible&rdquo; &rarr; Output: &ldquo;Mixed&rdquo;<br>Input: &ldquo;Everything was perfect from start to finish&rdquo; &rarr; Output: &ldquo;Positive&rdquo;<br>Input: &ldquo;Worst experience I have ever had&rdquo; &rarr; Output: &ldquo;Negative&rdquo;<br>Input: &ldquo;The decor was nice, nothing else was&rdquo; &rarr; Output: &ldquo;Negative&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Present Examples to the Model</h3>
+                            <p class="element-timeline__text">Format the input-output pairs and present them to the model with a meta-prompt asking it to infer the underlying instruction. The meta-prompt frames the task explicitly: &ldquo;Given these examples of inputs and outputs, what instruction would produce these outputs?&rdquo; This primes the model to reason about the task abstractly rather than simply continuing the pattern.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;I am going to show you several examples of inputs and their corresponding outputs. Based on these examples, write the instruction that was given to produce these outputs from these inputs.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Model Generates the Induced Instruction</h3>
+                            <p class="element-timeline__text">The model analyzes the patterns across all examples and generates a natural language instruction that describes the task. It identifies the transformation from input to output, including any classification labels, formatting rules, or reasoning patterns implicit in the demonstrations. The induced instruction is the model&rsquo;s best hypothesis about what task the examples represent.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Induced instruction:</strong> &ldquo;Classify the sentiment of the given review as Positive, Negative, or Mixed. If the review contains both positive and negative elements, classify it as Mixed. If it is predominantly negative even with minor positive mentions, classify it as Negative.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Validate and Apply the Instruction</h3>
+                            <p class="element-timeline__text">Test the induced instruction on new inputs to verify it produces the expected outputs. If the instruction works well, use it as your prompt. If it does not, the gap between the induced instruction and your intent reveals exactly where your examples were ambiguous or misleading. Refine the examples and repeat the induction. Always verify the induced instruction against your ground truth before deploying it.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Test input: &ldquo;Average meal, great atmosphere&rdquo; &rarr; Using induced instruction, model outputs: &ldquo;Mixed&rdquo; &mdash; This matches expectations, confirming the instruction captures the intended nuance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why inducing instructions from examples beats guessing at the right prompt</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Manual Instruction Writing</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Human writes: &ldquo;Classify the sentiment of this text.&rdquo; Then iterates through trial-and-error when the model misclassifies edge cases, adding ad hoc rules like &ldquo;if mixed, say Mixed&rdquo; after each failure.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>Multiple rounds of prompt editing. The instruction grows increasingly complex with patched-in rules. Edge cases are discovered only when they fail in production.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Slow iteration, human assumptions baked into instruction, edge cases missed</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Instruction Induction</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Human provides 8 labeled examples covering positive, negative, and mixed sentiments. Model induces: &ldquo;Classify sentiment as Positive, Negative, or Mixed. Reviews with both positive and negative elements are Mixed unless one sentiment clearly dominates.&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>The induced instruction captures the nuance of the &ldquo;Mixed&rdquo; category directly from the examples. Edge case handling is built into the instruction from the start because the examples demonstrated it.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Examples encode nuance directly, model surfaces rules humans might miss</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Instruction Induction in Action</h2>
+                <p class="section-subtitle fade-in-up">See how models reverse-engineer instructions from demonstrations</p>
+
+                <div class="accordion fade-in-up" id="instruction-induction-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Email Classification Task</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Input-Output Examples</span>
+                                    <p><strong>Example 1:</strong> &ldquo;Hi, attached is the Q3 report for review&rdquo; &rarr; &ldquo;Internal-Routine&rdquo;<br>
+                                    <strong>Example 2:</strong> &ldquo;URGENT: Server down, all hands needed&rdquo; &rarr; &ldquo;Internal-Critical&rdquo;<br>
+                                    <strong>Example 3:</strong> &ldquo;Dear valued customer, thank you for your purchase&rdquo; &rarr; &ldquo;External-Marketing&rdquo;<br>
+                                    <strong>Example 4:</strong> &ldquo;Congratulations on your promotion!&rdquo; &rarr; &ldquo;Internal-Social&rdquo;<br>
+                                    <strong>Example 5:</strong> &ldquo;Please find the signed contract attached&rdquo; &rarr; &ldquo;External-Legal&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Induced Instruction</span>
+                                    <p><strong>Model generates:</strong> &ldquo;Classify the email into one of these categories based on two dimensions: audience (Internal or External) and purpose (Routine, Critical, Marketing, Social, or Legal). Internal emails are between colleagues; External emails involve customers or outside parties. Choose the category that best fits the primary intent.&rdquo;<br><br>
+                                    <strong>Why this matters:</strong> The model discovered the two-dimensional classification scheme (audience + purpose) entirely from the examples. A human might have written a simpler instruction like &ldquo;classify this email&rdquo; without specifying the taxonomy. Always verify the induced instruction matches your intent before using it at scale.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Data Transformation Pattern</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Input-Output Examples</span>
+                                    <p><strong>Example 1:</strong> &ldquo;john smith, 42, new york&rdquo; &rarr; &ldquo;Smith, John (42) - New York, NY&rdquo;<br>
+                                    <strong>Example 2:</strong> &ldquo;jane doe, 35, los angeles&rdquo; &rarr; &ldquo;Doe, Jane (35) - Los Angeles, CA&rdquo;<br>
+                                    <strong>Example 3:</strong> &ldquo;bob johnson, 28, chicago&rdquo; &rarr; &ldquo;Johnson, Bob (28) - Chicago, IL&rdquo;<br>
+                                    <strong>Example 4:</strong> &ldquo;alice williams, 51, houston&rdquo; &rarr; &ldquo;Williams, Alice (51) - Houston, TX&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Induced Instruction</span>
+                                    <p><strong>Model generates:</strong> &ldquo;Reformat the comma-separated record into a standardized format: Last name (capitalized), First name (capitalized) followed by age in parentheses, then a dash and the city name (capitalized) with its two-letter US state abbreviation. The format is: LastName, FirstName (Age) - City, ST.&rdquo;<br><br>
+                                    <strong>Why this matters:</strong> The model identified multiple transformation rules: name reversal, capitalization, state abbreviation addition, and specific punctuation formatting. It even inferred that the city names should be mapped to state codes &mdash; a rule that was implicit in the examples but never stated. Verify the induced instruction handles edge cases (non-US cities, hyphenated names) before production use.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Summarization Style Discovery</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Input-Output Examples</span>
+                                    <p><strong>Example 1:</strong> [Long technical blog post about React hooks] &rarr; &ldquo;TL;DR: React hooks replace class components for state management. useState for simple state, useEffect for side effects. Migration path: refactor one component at a time.&rdquo;<br>
+                                    <strong>Example 2:</strong> [Long article about database indexing] &rarr; &ldquo;TL;DR: Database indexes trade write speed for read speed. B-tree for range queries, hash for exact match. Rule of thumb: index columns in WHERE clauses first.&rdquo;<br>
+                                    <strong>Example 3:</strong> [Long post about CI/CD pipelines] &rarr; &ldquo;TL;DR: CI/CD automates build-test-deploy. Start with CI (automated tests on push), add CD later. Key metric: deployment frequency.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Induced Instruction</span>
+                                    <p><strong>Model generates:</strong> &ldquo;Summarize the technical article in TL;DR format using exactly 3 sentences: (1) a one-sentence definition or core concept, (2) the key technical distinction or choice to understand, and (3) a practical takeaway or rule of thumb. Use informal but precise technical language. Begin with &lsquo;TL;DR:&rsquo; prefix.&rdquo;<br><br>
+                                    <strong>Why this matters:</strong> The model discovered a consistent three-sentence structure across the examples that the human might not have consciously designed. By surfacing this implicit pattern, Instruction Induction helps you understand and replicate your own summarization style consistently. Always verify the AI-generated summary against the source material for accuracy.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Instruction Induction</h2>
+                <p class="section-subtitle fade-in-up">Best for discovering implicit rules and debugging prompt-example mismatches</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Tacit Knowledge Extraction</strong>
+                                    <p>When you know what good output looks like but struggle to articulate the rules &mdash; let the model discover the instruction from your examples.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Prompt Debugging</strong>
+                                    <p>When few-shot examples produce inconsistent results, use induction to see what instruction the model actually infers &mdash; the gap reveals the problem.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Automated Prompt Generation</strong>
+                                    <p>When building prompt pipelines where human-written instructions are a bottleneck &mdash; let the model generate candidate instructions from training examples.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Style and Format Discovery</strong>
+                                    <p>When you need to replicate a writing style, data format, or classification scheme that exists in examples but has never been formally documented.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Clear, Well-Defined Tasks</strong>
+                                    <p>When you can already articulate the instruction precisely &mdash; induction adds unnecessary complexity for tasks with obvious rules.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Insufficient Examples</strong>
+                                    <p>With fewer than 3-5 examples, the model may induce overly specific or incorrect instructions &mdash; you need enough variety for reliable pattern detection.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative or Subjective Tasks</strong>
+                                    <p>When outputs are inherently subjective or creative, the model may induce an instruction that is too narrow, missing the intended flexibility of the task.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Instruction Induction delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Quality Assurance Rubrics</h3>
+                        <p class="use-case-showcase__desc">Given examples of pass/fail quality decisions, induce the rubric criteria that reviewers are implicitly applying, then use it to train new reviewers or automate screening.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Data Labeling Pipelines</h3>
+                        <p class="use-case-showcase__desc">Induce labeling instructions from expert-annotated examples, creating clear documentation for annotation teams and automated classifiers alike.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Prompt Optimization</h3>
+                        <p class="use-case-showcase__desc">Use induction as the first step in a prompt optimization pipeline &mdash; generate candidate instructions from examples, then test and refine them systematically.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Knowledge Transfer</h3>
+                        <p class="use-case-showcase__desc">When an expert leaves a team, use their past work (input-output examples) to induce the decision rules they followed &mdash; preserving institutional knowledge as explicit instructions.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Compliance Rule Discovery</h3>
+                        <p class="use-case-showcase__desc">From examples of approved/rejected decisions, induce the implicit compliance criteria being applied &mdash; useful for auditing consistency and identifying undocumented rules.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Few-Shot Prompt Auditing</h3>
+                        <p class="use-case-showcase__desc">Audit existing few-shot prompts by inducing what instruction the model actually infers &mdash; compare it against your intended instruction to find alignment gaps.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Instruction Induction Fits</h2>
+                <p class="section-subtitle fade-in-up">Instruction Induction bridges manual prompting and automated prompt optimization</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Few-Shot Prompting</span>
+                        <span class="era-marker__title">Examples as Context</span>
+                        <span class="era-marker__desc">Provide examples to guide model behavior</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Instruction Induction</span>
+                        <span class="era-marker__title">Examples to Instructions</span>
+                        <span class="era-marker__desc">Model infers the rule from examples</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">APE</span>
+                        <span class="era-marker__title">Automated Search</span>
+                        <span class="era-marker__desc">LLM generates and selects best instructions</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">DSPy / MIPRO</span>
+                        <span class="era-marker__title">Production Optimization</span>
+                        <span class="era-marker__desc">Industrial-scale prompt engineering pipelines</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine with APE for Iterative Optimization</div>
+                    <p>Instruction Induction generates a single hypothesis about the underlying task. APE (Automatic Prompt Engineer) takes this further by generating <strong>multiple</strong> candidate instructions and evaluating them systematically. Use Instruction Induction to get your initial instruction, then feed it into an APE-style evaluation loop to refine and optimize it for maximum accuracy on your target task.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary meta-learning and optimization techniques</p>
+
+                <a href="ape.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">APE (Automatic Prompt Engineer)</span>
+                        <span class="evolution-callout__desc">Extends induction by generating multiple candidate instructions and selecting the best through systematic evaluation &mdash; automated prompt optimization at scale.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="prompt-mining.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Prompt Mining</span>
+                        <span class="evolution-callout__desc">Discovers effective prompt templates by mining training data patterns &mdash; where Induction works from examples, Mining works from corpus statistics.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="meta-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Meta Prompting</span>
+                        <span class="evolution-callout__desc">The broader category of using prompts to generate or improve other prompts &mdash; Instruction Induction is one specific meta-prompting strategy.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Discover Your Hidden Instructions</h2>
+                        <p class="cta-corporate__text">Try Instruction Induction on your own examples or explore our tools for building and optimizing prompts.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

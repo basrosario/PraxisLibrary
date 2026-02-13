@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Batch Prompting: Process multiple task instances in a single prompt for efficiency, reducing API costs and latency while maintaining comparable accuracy.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/batch-prompting.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Batch Prompting - Praxis">
+    <meta property="og:description" content="Batch Prompting: Process multiple task instances in a single prompt for efficiency, reducing API costs and latency while maintaining comparable accuracy.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/batch-prompting.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Batch Prompting - Praxis">
+    <meta name="twitter:description" content="Batch Prompting: Process multiple task instances in a single prompt for efficiency, reducing API costs and latency while maintaining comparable accuracy.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Batch Prompting",
+      "name": "Batch Prompting",
+      "description": "Batch Prompting: Process multiple task instances in a single prompt for efficiency, reducing API costs and latency while maintaining comparable accuracy.",
+      "url": "https://praxislibrary.com/learn/batch-prompting.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Batch Prompting"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Batch Prompting - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Batch Prompting</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Efficiency Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Batch Prompting</h1>
+                <p class="page-subtitle fade-in">Why send ten separate prompts when one can do the work of all ten? Batch Prompting groups multiple task instances into a single prompt &mdash; reducing API costs, cutting latency, and maintaining comparable accuracy by processing everything in one efficient pass.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2023</span>
+                        <p><strong>Introduced:</strong> Batch Prompting was formalized in 2023 by Cheng et al. as a practical efficiency optimization for LLM workloads. The core idea is simple but powerful: instead of making separate API calls for each task instance, group multiple inputs into a single prompt and instruct the model to generate answers for all of them at once. The research showed this approach reduces token costs proportionally to batch size while maintaining accuracy within 1-2% of individual prompting across most tasks.</p>
+                        <p><strong>Modern LLM Status:</strong> Batch Prompting remains <strong>highly practical in 2026</strong>. With context windows expanding to 200K+ tokens, batching multiple tasks is a standard cost-optimization strategy for production systems. Most major API providers now support native batching endpoints that build on this technique&rsquo;s principles. The approach has become essential infrastructure for anyone running LLM workloads at scale, from data labeling pipelines to content generation workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">One Prompt, Many Answers</h2>
+                        <p class="split-section__text">Every API call to a language model carries overhead: network latency, prompt parsing, system prompt processing, and per-request costs. When you have dozens or hundreds of similar tasks &mdash; classifying emails, translating sentences, extracting data from records &mdash; sending each one individually is like mailing letters one at a time when you could put them all in one envelope.</p>
+                        <p class="split-section__text"><strong>Batch Prompting eliminates this redundancy.</strong> You provide a single set of instructions followed by all your inputs, numbered or labeled, and ask the model to process each one. The instructions are parsed once, the model maintains consistent interpretation across all items, and you get all results back in a single response. The cost savings scale linearly with batch size.</p>
+                        <p class="split-section__text">Think of it like a teacher grading papers. Reading the rubric once and grading 30 essays in sequence is far more efficient than re-reading the rubric before each individual essay.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Batching Maintains Accuracy</span>
+                                <p>A common concern is that processing multiple items at once might reduce quality. In practice, the opposite often happens: the model benefits from seeing related examples together, which creates implicit few-shot context. Processing &ldquo;classify these 10 emails&rdquo; gives the model a richer understanding of the classification space than processing each email in isolation. The key constraint is context window size &mdash; you must ensure all items plus the instructions fit within the model&rsquo;s token limit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Batch Prompting Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from individual tasks to efficient batch processing</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define the Task Instructions Once</h3>
+                            <p class="element-timeline__text">Write clear, complete instructions for the task type. These instructions will be shared across all items in the batch, so they need to be general enough to cover every input but specific enough to produce consistent results. Include output format requirements so responses are easy to parse programmatically.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Classify each of the following customer support messages into one of these categories: Billing, Technical, Account, Shipping, or General. For each message, respond with only the message number and category.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Group and Number Your Inputs</h3>
+                            <p class="element-timeline__text">Collect all task instances and present them with clear numbering or labeling. Consistent formatting helps the model track which response corresponds to which input. For best results, keep items within a batch at similar complexity levels &mdash; mixing trivial and complex items can cause the model to rush through some or over-analyze others.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>1.</strong> &ldquo;I was charged twice for my last order&rdquo;<br><strong>2.</strong> &ldquo;The app crashes when I try to upload photos&rdquo;<br><strong>3.</strong> &ldquo;How do I change my password?&rdquo;<br><strong>4.</strong> &ldquo;My package hasn&rsquo;t arrived in 2 weeks&rdquo;<br><strong>5.</strong> &ldquo;Do you have a student discount?&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Model Processes All Items in One Pass</h3>
+                            <p class="element-timeline__text">The model reads the instructions once and applies them to every numbered item sequentially. Each response inherits the same interpretation of the instructions, ensuring consistency across the batch. The model effectively amortizes the instruction-understanding cost across all items rather than re-interpreting instructions for each call.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>1.</strong> Billing<br><strong>2.</strong> Technical<br><strong>3.</strong> Account<br><strong>4.</strong> Shipping<br><strong>5.</strong> General</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Parse and Distribute Results</h3>
+                            <p class="element-timeline__text">Extract individual results from the batched response and map them back to original inputs. Well-defined output formats (numbered lists, JSON, CSV) make parsing straightforward. Always include validation to catch cases where the model might skip an item or merge two responses &mdash; batch processing rarely fails completely, but individual items can occasionally be mishandled.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Parse the numbered results into a dictionary: {1: &ldquo;Billing&rdquo;, 2: &ldquo;Technical&rdquo;, 3: &ldquo;Account&rdquo;, 4: &ldquo;Shipping&rdquo;, 5: &ldquo;General&rdquo;}. Verify count matches input count. Route each ticket to the appropriate support queue.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why batching delivers the same results at a fraction of the cost</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Individual Prompting</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">5 Separate API Calls</span>
+                                <p><strong>Call 1:</strong> &ldquo;Summarize this article in one sentence: [Article A]&rdquo;<br><strong>Call 2:</strong> &ldquo;Summarize this article in one sentence: [Article B]&rdquo;<br><strong>Call 3:</strong> &ldquo;Summarize this article in one sentence: [Article C]&rdquo;<br><strong>Call 4:</strong> &ldquo;Summarize this article in one sentence: [Article D]&rdquo;<br><strong>Call 5:</strong> &ldquo;Summarize this article in one sentence: [Article E]&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Cost Breakdown</span>
+                                <p>5 API calls. Instructions parsed 5 times. 5x network roundtrips. Each call pays full per-request overhead. Total latency is cumulative if sequential, or requires parallel infrastructure.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>5x the cost, 5x the latency, same quality per item</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Batch Prompting</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">1 API Call</span>
+                                <p><strong>Instructions:</strong> &ldquo;Summarize each of the following 5 articles in one sentence each. Number your responses to match the article numbers. <em>Note: Always verify AI-generated summaries against the original articles for accuracy.</em>&rdquo;<br><br><strong>1.</strong> [Article A]<br><strong>2.</strong> [Article B]<br><strong>3.</strong> [Article C]<br><strong>4.</strong> [Article D]<br><strong>5.</strong> [Article E]</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Cost Breakdown</span>
+                                <p>1 API call. Instructions parsed once. 1 network roundtrip. Minimal per-request overhead. All 5 summaries returned in a single response with consistent formatting.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>~80% cost reduction, single roundtrip, comparable accuracy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Batch Prompting in Action</h2>
+                <p class="section-subtitle fade-in-up">See how batching scales efficiency across different task types</p>
+
+                <div class="accordion fade-in-up" id="batch-prompting-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Sentiment Analysis Batch</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Batched Prompt</span>
+                                    <p>&ldquo;Analyze the sentiment of each customer review below. For each, provide: the review number, sentiment (Positive/Negative/Mixed), and a one-phrase reason. Always remember that AI sentiment analysis should be verified by humans before taking action on individual customer cases.<br><br>
+                                    <strong>1.</strong> &lsquo;The product arrived fast and works perfectly. Love it!&rsquo;<br>
+                                    <strong>2.</strong> &lsquo;Terrible quality. Broke after one week of normal use.&rsquo;<br>
+                                    <strong>3.</strong> &lsquo;Good features but the battery life is disappointing.&rsquo;<br>
+                                    <strong>4.</strong> &lsquo;Customer service was amazing when I had an issue.&rsquo;<br>
+                                    <strong>5.</strong> &lsquo;Not worth the price. Cheaper alternatives do the same thing.&rsquo;<br>
+                                    <strong>6.</strong> &lsquo;Been using it daily for 6 months with zero problems.&rsquo;&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Batched Response</span>
+                                    <p><strong>1.</strong> Positive &mdash; Satisfied with speed and functionality<br>
+                                    <strong>2.</strong> Negative &mdash; Product durability failure<br>
+                                    <strong>3.</strong> Mixed &mdash; Feature praise tempered by battery complaint<br>
+                                    <strong>4.</strong> Positive &mdash; Service recovery appreciated<br>
+                                    <strong>5.</strong> Negative &mdash; Poor perceived value versus alternatives<br>
+                                    <strong>6.</strong> Positive &mdash; Long-term reliability confirmed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Data Extraction Batch</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Batched Prompt</span>
+                                    <p>&ldquo;Extract the company name, funding amount, and funding round from each news snippet below. Return results as numbered entries. If any field is unclear, mark it as &lsquo;Not specified.&rsquo; Verify all extracted data against original sources before using in reports.<br><br>
+                                    <strong>1.</strong> &lsquo;Acme Robotics announced today it has raised $45 million in its Series B round led by Venture Partners.&rsquo;<br>
+                                    <strong>2.</strong> &lsquo;The AI startup NeuralPath secured seed funding of $8M to expand its research team.&rsquo;<br>
+                                    <strong>3.</strong> &lsquo;CloudScale Technologies closed a $120M growth round, bringing total funding to over $200M.&rsquo;<br>
+                                    <strong>4.</strong> &lsquo;HealthBridge received an undisclosed investment from major healthcare investors to accelerate clinical trials.&rsquo;&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Batched Response</span>
+                                    <p><strong>1.</strong> Company: Acme Robotics | Amount: $45M | Round: Series B<br>
+                                    <strong>2.</strong> Company: NeuralPath | Amount: $8M | Round: Seed<br>
+                                    <strong>3.</strong> Company: CloudScale Technologies | Amount: $120M | Round: Growth<br>
+                                    <strong>4.</strong> Company: HealthBridge | Amount: Not specified | Round: Not specified</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Translation Batch</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Batched Prompt</span>
+                                    <p>&ldquo;Translate each of the following English phrases into Spanish and French. Number your responses to match. Note: AI translations should be reviewed by a native speaker before use in official communications.<br><br>
+                                    <strong>1.</strong> &lsquo;Your order has been shipped and will arrive within 3-5 business days.&rsquo;<br>
+                                    <strong>2.</strong> &lsquo;We apologize for the inconvenience. A full refund has been processed.&rsquo;<br>
+                                    <strong>3.</strong> &lsquo;Thank you for your feedback. We are working to improve this feature.&rsquo;<br>
+                                    <strong>4.</strong> &lsquo;Your subscription will renew automatically on the first of next month.&rsquo;&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Batched Response</span>
+                                    <p><strong>1.</strong><br>
+                                    Spanish: Su pedido ha sido enviado y llegar&aacute; en un plazo de 3 a 5 d&iacute;as h&aacute;biles.<br>
+                                    French: Votre commande a &eacute;t&eacute; exp&eacute;di&eacute;e et arrivera dans un d&eacute;lai de 3 &agrave; 5 jours ouvrables.<br><br>
+                                    <strong>2.</strong><br>
+                                    Spanish: Lamentamos las molestias. Se ha procesado un reembolso completo.<br>
+                                    French: Nous nous excusons pour le d&eacute;sagr&eacute;ment. Un remboursement int&eacute;gral a &eacute;t&eacute; effectu&eacute;.<br><br>
+                                    <strong>3.</strong><br>
+                                    Spanish: Gracias por sus comentarios. Estamos trabajando para mejorar esta funci&oacute;n.<br>
+                                    French: Merci pour vos commentaires. Nous travaillons &agrave; am&eacute;liorer cette fonctionnalit&eacute;.<br><br>
+                                    <strong>4.</strong><br>
+                                    Spanish: Su suscripci&oacute;n se renovar&aacute; autom&aacute;ticamente el primer d&iacute;a del pr&oacute;ximo mes.<br>
+                                    French: Votre abonnement sera renouvel&eacute; automatiquement le premier du mois prochain.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Batch Prompting</h2>
+                <p class="section-subtitle fade-in-up">Best for processing multiple similar tasks efficiently at scale</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Volume Classification</strong>
+                                    <p>Classifying hundreds of support tickets, categorizing products, or labeling data points &mdash; batch the items and get all labels in one call.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Data Extraction Pipelines</strong>
+                                    <p>Pulling structured information from unstructured text at scale &mdash; names, dates, amounts, categories from documents, emails, or records.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Bulk Content Generation</strong>
+                                    <p>Generating product descriptions, meta tags, social media posts, or email subject lines &mdash; define the template once, generate for all items in a batch.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Cost-Sensitive Production Systems</strong>
+                                    <p>Any scenario where LLM API costs are a significant line item &mdash; batching can reduce costs by 60-80% depending on batch size and task complexity.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Tasks Requiring Deep Individual Attention</strong>
+                                    <p>Complex analysis, long-form writing, or tasks where each item needs its own tailored approach &mdash; batching these risks shallow treatment of each item.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Context Window Limitations</strong>
+                                    <p>When total input size (instructions + all items) exceeds the model&rsquo;s context window &mdash; split into smaller batches rather than forcing everything into one call.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Real-Time Interactive Systems</strong>
+                                    <p>When each user query needs an immediate response &mdash; batching introduces wait time while accumulating items. Better for async processing pipelines than live chat.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Batch Prompting delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">E-Commerce Catalogs</h3>
+                        <p class="use-case-showcase__desc">Generate product descriptions, extract attributes, or classify items across entire catalogs. Batch 50-100 products per prompt to generate consistent, formatted descriptions in minutes instead of hours.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Document Processing</h3>
+                        <p class="use-case-showcase__desc">Extract key fields from invoices, contracts, or forms. Batch multiple documents in a single prompt to build structured data from unstructured sources at scale.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Moderation</h3>
+                        <p class="use-case-showcase__desc">Screen user-generated content for policy violations at volume. Batch flagged items for review, classify severity levels, and generate moderation notes &mdash; all in a single prompt call.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Localization Pipelines</h3>
+                        <p class="use-case-showcase__desc">Translate UI strings, marketing copy, or documentation across multiple languages simultaneously. Batch all strings in one prompt per target language for consistent terminology.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Security Log Analysis</h3>
+                        <p class="use-case-showcase__desc">Classify batches of security alerts, extract indicators of compromise from log entries, and triage incidents by severity &mdash; processing hundreds of entries in a single prompt.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Survey Analysis</h3>
+                        <p class="use-case-showcase__desc">Process open-ended survey responses at scale: extract themes, classify sentiment, and identify key quotes. Batch 20-50 responses per prompt for efficient qualitative analysis.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Batch Prompting Fits</h2>
+                <p class="section-subtitle fade-in-up">Batch Prompting optimizes throughput in the efficiency dimension</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Single Prompting</span>
+                        <span class="era-marker__title">One Task Per Call</span>
+                        <span class="era-marker__desc">Standard individual requests</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Batch Prompting</span>
+                        <span class="era-marker__title">Many Tasks Per Call</span>
+                        <span class="era-marker__desc">Grouped processing for efficiency</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Dense Prompting</span>
+                        <span class="era-marker__title">Compressed Instructions</span>
+                        <span class="era-marker__desc">Maximum information density per token</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Native Batch APIs</span>
+                        <span class="era-marker__title">Platform-Level Batching</span>
+                        <span class="era-marker__desc">Provider-optimized batch processing</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Optimize Your Batch Size</div>
+                    <p>The ideal batch size depends on task complexity and model context limits. For simple classification tasks, batches of 50-100 items work well. For tasks requiring more nuanced output (summaries, translations), 10-20 items per batch maintains quality. Start with small batches, compare accuracy against individual prompting, and scale up once you have confirmed comparable quality. Always validate a sample of batch results against individually-processed items.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary efficiency techniques</p>
+
+                <a href="dense-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Dense Prompting</span>
+                        <span class="evolution-callout__desc">Maximizes information density per token &mdash; combine with Batch Prompting to pack more items into each batch while staying within context limits.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="chain-of-density.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Chain of Density</span>
+                        <span class="evolution-callout__desc">Iteratively compresses content into denser summaries &mdash; useful for pre-processing inputs before batching to fit more items per batch call.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Scale Your AI Workflows</h2>
+                        <p class="cta-corporate__text">Try Batch Prompting to process multiple tasks efficiently or explore our tools to optimize your prompt engineering workflow.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

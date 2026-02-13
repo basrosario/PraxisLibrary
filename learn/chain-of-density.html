@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chain of Density (CoD): Iteratively refine summaries to be progressively more entity-dense without increasing length, producing human-preferred summarization results.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/chain-of-density.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Chain of Density (CoD) - Praxis">
+    <meta property="og:description" content="Chain of Density (CoD): Iteratively refine summaries to be progressively more entity-dense without increasing length, producing human-preferred summarization results.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/chain-of-density.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Chain of Density (CoD) - Praxis">
+    <meta name="twitter:description" content="Chain of Density (CoD): Iteratively refine summaries to be progressively more entity-dense without increasing length, producing human-preferred summarization results.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Chain of Density (CoD)",
+      "name": "Chain of Density (CoD)",
+      "description": "Chain of Density (CoD): Iteratively refine summaries to be progressively more entity-dense without increasing length, producing human-preferred summarization results.",
+      "url": "https://praxislibrary.com/learn/chain-of-density.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Chain of Density (CoD)"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Chain of Density (CoD) - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Chain of Density</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Summarization Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Chain of Density (CoD)</h1>
+                <p class="page-subtitle fade-in">A single-pass summary captures the gist but misses the details. Chain of Density fixes this through iterative refinement &mdash; each pass packs more entities and key information into the same word count, producing summaries that are progressively denser, more informative, and consistently preferred by human evaluators.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2023</span>
+                        <p><strong>Introduced:</strong> Chain of Density was published in 2023 by Adams et al. from Salesforce Research and MIT. The technique addresses a persistent problem in AI-generated summaries: they tend to be either too verbose (lots of filler, few facts) or too compressed (missing crucial context). CoD introduces a structured iterative process where the model generates an initial summary, then refines it across multiple rounds &mdash; each time adding 1&ndash;3 new salient entities while keeping the word count constant. The result is a summary that becomes progressively more information-dense with each iteration.</p>
+                        <p><strong>Modern LLM Status:</strong> Chain of Density remains one of the most practical summarization techniques in 2026. The iterative densification approach produces consistently better summaries than single-pass methods. It is widely used in content management systems, news aggregation platforms, and automated report generation where information density matters. Many enterprise summarization tools have adopted CoD&rsquo;s iterative approach as a default pattern, and the technique generalizes well across Claude, GPT-4, and Gemini models.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Density Is the Missing Dimension</h2>
+                        <p class="split-section__text">Most summarization techniques focus on two dimensions: what to include and how long the summary should be. But there is a third dimension that matters just as much: <strong>information density</strong> &mdash; how much meaning is packed into each sentence. A 100-word summary with three key facts is fundamentally less useful than a 100-word summary with twelve key facts, even though they are the same length.</p>
+                        <p class="split-section__text"><strong>Chain of Density treats density as a tunable parameter.</strong> Instead of asking for one summary and hoping for the best, CoD generates a sequence of summaries at increasing density levels. The first summary is deliberately loose and readable. Each subsequent version replaces generic phrasing with specific entities, swaps vague descriptions for precise facts, and fuses redundant sentences &mdash; all while maintaining the same word count. The model effectively learns to compress more signal into the same space.</p>
+                        <p class="split-section__text">Think of it like packing a suitcase: the first attempt leaves gaps and wasted space. With each repack, you rearrange and compress items more efficiently until every cubic inch serves a purpose &mdash; without making the suitcase any bigger.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Iterative Beats Single-Pass</span>
+                                <p>Single-pass summarization forces the model to make all inclusion decisions simultaneously &mdash; it must decide what matters before it has seen its own output. CoD breaks this into stages: first capture the broad narrative, then progressively inject the specific entities and facts that a reader would need. This iterative approach mirrors how human editors refine summaries: rough draft first, then tighten, then tighten again. Research shows human evaluators consistently prefer CoD summaries (typically around iteration 3&ndash;4) over single-pass alternatives for <strong>informativeness without sacrificing readability</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Chain of Density Process</h2>
+                <p class="section-subtitle fade-in-up">Five stages from source text to optimally dense summary</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Generate the Initial Summary</h3>
+                            <p class="element-timeline__text">Start with the source text and produce a first-pass summary at a fixed word count (typically 80&ndash;100 words). This initial summary is deliberately entity-sparse &mdash; it captures the broad narrative and main topic but uses general language rather than specific facts. Think of it as the &ldquo;skeleton&rdquo; summary that establishes the structure subsequent iterations will densify.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Source:</strong> A 2,000-word article about a new renewable energy initiative.<br><strong>Summary 1:</strong> &ldquo;A major energy company has launched a new renewable energy project. The initiative involves building facilities in several locations and aims to reduce carbon emissions. Industry experts say this represents a significant step forward for clean energy adoption.&rdquo; (Entity count: ~3)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Identify Missing Entities</h3>
+                            <p class="element-timeline__text">The model reviews the source text against its current summary and identifies 1&ndash;3 salient entities (names, dates, figures, locations, organizations) that are present in the source but missing from the summary. These must be genuinely informative &mdash; not trivial details, but facts that would meaningfully enhance a reader&rsquo;s understanding of the topic.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Missing entities identified:</strong> (1) Company name: &ldquo;Meridian Power Corp.&rdquo; (2) Investment amount: &ldquo;$4.2 billion&rdquo; (3) Target capacity: &ldquo;12 gigawatts by 2030&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Rewrite with Increased Density</h3>
+                            <p class="element-timeline__text">Incorporate the missing entities into the summary while maintaining the same word count. This requires the model to perform fusion (combining sentences), compression (replacing verbose phrases with concise ones), and substitution (swapping generic references for specific names and figures). The key constraint is that the summary must not grow longer &mdash; density increases, length stays constant.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Summary 2:</strong> &ldquo;Meridian Power Corp. has launched a $4.2 billion renewable energy initiative targeting 12 gigawatts of capacity by 2030. The project involves solar and wind installations across Texas, Nevada, and Arizona. Analysts describe it as the largest private clean energy commitment in U.S. history.&rdquo; (Entity count: ~8, same word count)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Iterate 3&ndash;5 Times</h3>
+                            <p class="element-timeline__text">Repeat the identify-and-rewrite cycle 3&ndash;5 times. Each iteration adds more entities and compresses further. Research shows that summaries typically reach optimal density around iteration 3&ndash;4 &mdash; dense enough to be highly informative, but not so compressed that readability suffers. Beyond iteration 5, summaries often become telegraphic and hard to parse, a point of diminishing returns.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Summary 4 (final):</strong> &ldquo;Meridian Power Corp.&rsquo;s $4.2B initiative &mdash; 12GW solar/wind capacity across TX, NV, AZ by 2030 &mdash; marks the largest private U.S. clean energy commitment. CEO Maria Chen projects 15,000 construction jobs, 3,200 permanent positions, and a 40% reduction in Meridian&rsquo;s carbon footprint. The DOE has approved $800M in tax credits for the project.&rdquo; (Entity count: ~15, same word count)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">5</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Select the Optimal Density Level</h3>
+                            <p class="element-timeline__text">Choose the summary iteration that best balances density and readability for your use case. For general audiences, iteration 2&ndash;3 is typically ideal. For expert readers who want maximum information density, iteration 4&ndash;5 may be preferred. The beauty of CoD is that it produces a <strong>spectrum of summaries</strong> rather than a single output, giving you the power to choose the right density level for each context.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>For a newsletter: use Summary 2 (readable, well-paced). For an executive brief: use Summary 4 (maximum information density). For a tweet-length teaser: use Summary 1 as a starting point. Each serves a different communication need from the same source material.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why iterative densification outperforms single-pass summarization</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Single-Pass Summary</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Summarize this research paper on climate change adaptation strategies in 80 words.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>This paper examines how communities can adapt to climate change. The researchers studied several approaches to dealing with rising temperatures and changing weather patterns. They found that some strategies are more effective than others. The paper recommends that policymakers take action to help communities prepare for future climate impacts. Overall, adaptation is becoming increasingly important as climate change accelerates.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Vague, no specific entities, could describe almost any paper on this topic</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Chain of Density (Iteration 4)</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Densified Summary</span>
+                                <p>After 4 iterations of entity injection and compression at a fixed 80-word count:</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Final Summary</span>
+                                <p>A meta-analysis of 147 climate adaptation programs across 23 countries (2018&ndash;2024) found that nature-based solutions (wetland restoration, urban canopy expansion) reduced heat-related mortality by 34% versus engineered alternatives. Coastal communities using managed retreat showed 60% lower flood damage than those relying on seawalls alone. The study, led by Dr. Sarah Chen at Stanford, recommends integrating indigenous land management practices, citing 89% success rates in Australian bushfire-adapted communities.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Specific, entity-rich, every sentence carries concrete information</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Chain of Density in Action</h2>
+                <p class="section-subtitle fade-in-up">See how iterative densification transforms summaries across domains</p>
+
+                <div class="accordion fade-in-up" id="cod-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Business Earnings Report</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Source Material</span>
+                                    <p>A 15-page quarterly earnings report from a technology company, covering revenue, product launches, headcount changes, and forward guidance.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">CoD Iteration Progression</span>
+                                    <p><strong>Iteration 1 (entity-sparse):</strong> &ldquo;The company reported strong quarterly results, with revenue exceeding expectations. Several new products were launched, and the company provided positive guidance for the next quarter. Hiring continued across multiple departments.&rdquo;<br><br>
+                                    <strong>Iteration 3 (mid-density):</strong> &ldquo;Q3 revenue of $48.2B (+14% YoY) beat consensus by $1.8B, driven by cloud services (+31%) and AI infrastructure (+67%). Three new products launched: an enterprise AI assistant, a custom chip for inference workloads, and an upgraded developer platform. Headcount grew 8% to 142,000.&rdquo;<br><br>
+                                    <strong>Iteration 5 (maximum density):</strong> &ldquo;Q3: $48.2B revenue (+14% YoY, $1.8B beat), cloud $21.4B (+31%), AI infra $8.7B (+67%). Launched: Enterprise AI Copilot (200K waitlist), Tensor-4 inference chip (3x perf/watt vs. prior gen), DevPlatform 3.0. Headcount 142K (+8%), 60% AI-focused roles. Q4 guide: $50&ndash;52B, 23% margin expansion. Buyback: $15B authorized.&rdquo;<br><br>
+                                    <em>Note: Always verify financial figures in AI-generated summaries against the original source documents. CoD produces denser summaries, but density does not guarantee accuracy &mdash; cross-reference all numbers before using in decisions or reports.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Scientific Research Paper</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Source Material</span>
+                                    <p>A 12-page neuroscience paper on the effects of sleep deprivation on cognitive performance, including methodology, results, and clinical implications.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">CoD Iteration Progression</span>
+                                    <p><strong>Iteration 1 (entity-sparse):</strong> &ldquo;Researchers studied how lack of sleep affects thinking ability. They tested participants under different sleep conditions and found significant impacts on several measures of cognitive function. The findings suggest that sleep is important for maintaining mental performance.&rdquo;<br><br>
+                                    <strong>Iteration 3 (mid-density):</strong> &ldquo;A controlled study of 240 adults (ages 22&ndash;45) found that 36 hours of sleep deprivation reduced working memory accuracy by 38% and reaction time by 27%. Executive function tasks showed 42% more errors. fMRI scans revealed decreased prefrontal cortex activation correlating with performance decline.&rdquo;<br><br>
+                                    <strong>Iteration 5 (maximum density):</strong> &ldquo;240 adults (22&ndash;45, M=31.4), 36hr sleep deprivation: working memory &minus;38%, reaction time &minus;27%, executive function errors +42%. fMRI: prefrontal cortex activation &minus;31%, compensatory parietal increase +18%. Recovery: 2 nights sufficient for reaction time, 4 nights for executive function. Clinical: shift workers (n=89 subset) showed 2.3x baseline impairment. Authors recommend max 16hr wake periods for safety-critical roles.&rdquo;<br><br>
+                                    <em>Note: When using AI to summarize scientific research, always verify statistical claims, sample sizes, and effect sizes against the original paper. AI-generated summaries may conflate findings from different sections or misrepresent confidence intervals.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">News Article for Content Curation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Source Material</span>
+                                    <p>A 1,500-word news article about a new international trade agreement involving multiple countries, with economic projections and political context.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">CoD Iteration Progression</span>
+                                    <p><strong>Iteration 1 (entity-sparse):</strong> &ldquo;Several countries have signed a new trade agreement that is expected to boost economic growth. The deal covers various sectors and includes provisions for reducing tariffs. Leaders expressed optimism about the agreement&rsquo;s potential impact.&rdquo;<br><br>
+                                    <strong>Iteration 3 (mid-density):</strong> &ldquo;The Pacific Rim Digital Trade Accord, signed by 15 nations including Japan, Australia, and South Korea, eliminates tariffs on digital services and sets cross-border data flow standards. Economists project $340B in new trade volume by 2028. The U.S. and China are notably absent from the agreement.&rdquo;<br><br>
+                                    <strong>Iteration 5 (maximum density):</strong> &ldquo;Pacific Rim Digital Trade Accord: 15 nations (Japan, Australia, South Korea, Singapore + 11 ASEAN partners), zero tariffs on digital services, unified data-flow/privacy standards. Projected $340B new trade by 2028, 2.1M tech jobs. U.S./China absent; EU observer status. Ratification: 12/15 needed, expected Q2 2026. Key dispute: India&rsquo;s data localization carve-out for financial services.&rdquo;<br><br>
+                                    <em>Note: AI-generated news summaries should always be verified against the original source. Entity-dense summaries pack many claims into compact space &mdash; if even one entity is wrong, the entire summary may mislead. Always fact-check before sharing or publishing.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Chain of Density</h2>
+                <p class="section-subtitle fade-in-up">Best for summarization tasks where information density matters</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Executive Briefings</strong>
+                                    <p>When decision-makers need maximum information in minimum reading time &mdash; CoD packs every sentence with actionable facts, figures, and names.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Content Aggregation</strong>
+                                    <p>News digests, research roundups, and newsletter curation where readers expect high-density summaries that capture the essential facts from lengthy source materials.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Document Processing Pipelines</strong>
+                                    <p>Automated systems that process hundreds of documents and need consistent, entity-rich summaries &mdash; CoD produces reliably dense output across diverse input types.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Multi-Audience Output</strong>
+                                    <p>When the same source needs summaries at different density levels &mdash; CoD naturally produces a spectrum from casual overview to expert-dense briefing in a single pipeline.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Short Source Texts</strong>
+                                    <p>Texts under 500 words rarely benefit from iterative densification &mdash; there are not enough entities to justify multiple refinement passes.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Narrative or Emotional Content</strong>
+                                    <p>Stories, opinion pieces, or persuasive writing where tone and flow matter more than entity density &mdash; CoD optimizes for information, not emotional impact.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Real-Time or Latency-Sensitive Contexts</strong>
+                                    <p>When summaries are needed instantly &mdash; CoD requires multiple sequential LLM calls (one per iteration), making it slower than single-pass approaches.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Chain of Density delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Research Literature Review</h3>
+                        <p class="use-case-showcase__desc">Summarize dozens of academic papers into entity-dense abstracts that capture key findings, methodologies, sample sizes, and statistical results in consistent format.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Legal Document Summarization</h3>
+                        <p class="use-case-showcase__desc">Compress lengthy contracts, rulings, and regulatory filings into dense summaries that preserve all parties, dates, obligations, and key clauses without loss of critical detail.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Record Synthesis</h3>
+                        <p class="use-case-showcase__desc">Create dense patient summaries from extensive medical records, ensuring diagnoses, medications, dosages, lab values, and treatment timelines are all captured in compact format.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Report Digests</h3>
+                        <p class="use-case-showcase__desc">Transform quarterly earnings reports, SEC filings, and market analyses into information-packed briefs with all key metrics, projections, and risk factors preserved.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Meeting Minutes Compression</h3>
+                        <p class="use-case-showcase__desc">Convert lengthy meeting transcripts into dense action-oriented summaries that capture all decisions, owners, deadlines, and key discussion points in minimal space.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">News Aggregation Platforms</h3>
+                        <p class="use-case-showcase__desc">Generate consistent, fact-packed summaries for hundreds of daily articles, giving readers the essential who/what/when/where/why in a standardized, scannable format.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Chain of Density Fits</h2>
+                <p class="section-subtitle fade-in-up">CoD bridges basic summarization and structured iterative refinement</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Basic Summarization</span>
+                        <span class="era-marker__title">Single-Pass</span>
+                        <span class="era-marker__desc">One prompt, one summary, variable quality</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Chain of Density</span>
+                        <span class="era-marker__title">Iterative Densification</span>
+                        <span class="era-marker__desc">Fixed length, increasing entity density</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Refine</span>
+                        <span class="era-marker__title">General Iterative Improvement</span>
+                        <span class="era-marker__desc">Broader self-critique and refinement loop</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Iterative Refinement</span>
+                        <span class="era-marker__title">Multi-Criteria Optimization</span>
+                        <span class="era-marker__desc">Optimize across multiple quality dimensions</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The Density Sweet Spot</div>
+                    <p>Research on Chain of Density consistently finds that human evaluators prefer summaries from iterations 3&ndash;4 over both the sparse initial summary and the maximally dense final iteration. This suggests a &ldquo;Goldilocks zone&rdquo; of density where summaries are packed with useful information but still flow naturally as readable prose. When implementing CoD in production, consider defaulting to iteration 3 for general audiences and offering iteration 4&ndash;5 as an &ldquo;expert mode&rdquo; for domain specialists who prioritize information extraction over readability.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary summarization and refinement techniques</p>
+
+                <a href="self-refine.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Self-Refine</span>
+                        <span class="evolution-callout__desc">A broader iterative refinement technique where the model critiques and improves its own output across any quality dimension, not just density.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="dense-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Dense Prompting</span>
+                        <span class="evolution-callout__desc">Focuses on crafting information-dense prompts as input, while Chain of Density focuses on producing information-dense summaries as output.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-refine.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Iterative Refinement</span>
+                        <span class="evolution-callout__desc">The general principle of improving output through multiple passes. Chain of Density applies this specifically to summarization with a density-focused optimization target.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Densify Your Summaries</h2>
+                        <p class="cta-corporate__text">Try Chain of Density on your own documents or explore summarization techniques with our interactive tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RISEN Framework: Structure prompts with Role, Instructions, Steps, End Goal, and Narrowing for focused, well-scoped AI responses.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/risen.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="RISEN Framework - Praxis">
+    <meta property="og:description" content="RISEN Framework: Structure prompts with Role, Instructions, Steps, End Goal, and Narrowing for focused, well-scoped AI responses.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/risen.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RISEN Framework - Praxis">
+    <meta name="twitter:description" content="RISEN Framework: Structure prompts with Role, Instructions, Steps, End Goal, and Narrowing for focused, well-scoped AI responses.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "RISEN Framework",
+      "name": "RISEN Framework",
+      "description": "RISEN Framework: Structure prompts with Role, Instructions, Steps, End Goal, and Narrowing for focused, well-scoped AI responses.",
+      "url": "https://praxislibrary.com/learn/risen.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Frameworks",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "RISEN Framework"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>RISEN Framework - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">RISEN</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Community Framework</span>
+                </div>
+                <h1 class="page-title fade-in">RISEN Framework</h1>
+                <p class="page-subtitle fade-in">Five components that give AI a complete mission brief. RISEN goes beyond role and task to include explicit step sequencing, success criteria, and scope constraints &mdash; ensuring focused, well-bounded responses every time.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Origin:</strong> RISEN was developed by Kyle Balmer in 2023 as a community framework for structured prompting. The acronym stands for Role, Instructions, Steps, End Goal, and Narrowing. Its distinguishing feature is the &ldquo;Narrowing&rdquo; element &mdash; explicit scope constraints that prevent the AI from going off-topic. This addresses a common pain point where AI responses become too broad or unfocused, wandering into tangential territory instead of staying within the boundaries of the task.</p>
+                        <p><strong>Modern LLM Status:</strong> RISEN remains <strong>highly practical for complex, multi-step tasks</strong> where scope control is essential. While simpler frameworks like RACE cover the basics, RISEN&rsquo;s Steps and Narrowing components address two problems that persist even with modern LLMs: tasks that require a specific sequence of operations, and outputs that need explicit boundaries. The framework is especially effective for project planning, process documentation, and any scenario where &ldquo;do not include&rdquo; is as important as &ldquo;do include.&rdquo;</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Tell the AI What Not to Do</h2>
+                        <p class="split-section__text">Most prompting frameworks focus on what you want. RISEN adds an equally important dimension: what you do not want. The &ldquo;Narrowing&rdquo; component explicitly defines boundaries, exclusions, and constraints &mdash; turning an open-ended task into a precisely scoped assignment.</p>
+                        <p class="split-section__text">Consider asking an AI to &ldquo;write a marketing strategy.&rdquo; Without narrowing, you might get a 3,000-word document covering social media, email, paid ads, partnerships, events, and influencer campaigns. With RISEN&rsquo;s narrowing &mdash; &ldquo;Focus only on organic social media. Exclude paid advertising, email marketing, and offline channels&rdquo; &mdash; you get exactly the focused strategy you need.</p>
+                        <p class="split-section__text">The five components work as a complete mission brief: who you are (<strong>Role</strong>), what to do (<strong>Instructions</strong>), in what order (<strong>Steps</strong>), what success looks like (<strong>End Goal</strong>), and what to stay away from (<strong>Narrowing</strong>). Together, they create a prompt that is both directive and defensive.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">The Power of Constraints</span>
+                                <p>Paradoxically, constraining the AI&rsquo;s scope often produces <strong>better and more creative results</strong>. When the model knows what is off-limits, it invests its full capacity into the defined territory rather than spreading thin across every possible angle. Narrowing is not about limiting the AI &mdash; it is about focusing it. The best outputs come from prompts that are simultaneously ambitious in what they ask for and precise in what they exclude.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The RISEN Process</h2>
+                <p class="section-subtitle fade-in-up">Five components that create a complete, bounded mission brief</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">R</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Role</h3>
+                            <p class="element-timeline__text">Establish the AI&rsquo;s identity and expertise domain. The role determines vocabulary, depth, perspective, and professional judgment. A &ldquo;startup growth advisor&rdquo; thinks differently than a &ldquo;Fortune 500 CFO&rdquo; even when addressing the same business question.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;You are a senior DevOps engineer with expertise in cloud infrastructure and CI/CD pipeline optimization.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">I</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Instructions</h3>
+                            <p class="element-timeline__text">Define the core task with a clear, specific directive. This is the &ldquo;what&rdquo; &mdash; the primary action the AI should perform. Use precise verbs: &ldquo;audit,&rdquo; &ldquo;redesign,&rdquo; &ldquo;diagnose,&rdquo; &ldquo;create a migration plan.&rdquo; Vague instructions like &ldquo;help with&rdquo; or &ldquo;look into&rdquo; produce vague outputs.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Audit our current deployment pipeline and identify bottlenecks that are causing our release cycle to exceed 48 hours.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">S</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Steps</h3>
+                            <p class="element-timeline__text">Specify the sequence of actions or phases the AI should follow. This is what separates RISEN from simpler frameworks &mdash; instead of leaving the process to the AI&rsquo;s discretion, you define the order of operations. This is critical for tasks where sequence matters or where you need to control the analytical approach.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Step 1: Map the current pipeline stages from commit to production. Step 2: Identify the three longest-running stages. Step 3: For each bottleneck, analyze root cause. Step 4: Propose specific optimizations with estimated time savings.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">E</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">End Goal</h3>
+                            <p class="element-timeline__text">Define what success looks like. The End Goal is not the format of the output &mdash; it is the measurable outcome or decision the output should enable. This gives the AI a north star: every recommendation, analysis point, or content element should contribute to achieving this stated objective.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;The end goal is a prioritized action plan that our team can implement within two sprints to reduce our release cycle from 48 hours to under 12 hours.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">N</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Narrowing</h3>
+                            <p class="element-timeline__text">Set explicit boundaries and exclusions. Narrowing tells the AI what to leave out, what topics to avoid, what assumptions not to make, and what constraints to respect. This is RISEN&rsquo;s signature component &mdash; the guardrail that keeps responses focused and prevents scope creep.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Do not suggest changing our cloud provider (we are committed to AWS). Exclude recommendations requiring additional headcount. Focus only on tooling and process changes achievable with our current team of four engineers.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">How narrowing transforms unfocused outputs into actionable plans</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Without Narrowing</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>You are a marketing strategist. Create a marketing plan for our new SaaS product launch.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>A sprawling 2,500-word plan covering social media, email, paid search, display ads, content marketing, influencer partnerships, PR, events, webinars, referral programs, and affiliate marketing &mdash; most of which is irrelevant to the actual budget and team capacity.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Too broad, no priorities, impossible to action with real constraints</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">RISEN Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Structured with RISEN</span>
+                                <p><strong>Role:</strong> B2B SaaS marketing strategist.<br><strong>Instructions:</strong> Create a 90-day launch plan.<br><strong>Steps:</strong> 1) Define target personas, 2) Select channels, 3) Create content calendar, 4) Set KPIs.<br><strong>End Goal:</strong> Generate 500 qualified leads in the first quarter.<br><strong>Narrowing:</strong> Budget is $5K/month. No paid advertising. No events. Team is one marketer plus a freelance writer. Focus on content marketing and LinkedIn organic only.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>A tightly scoped 90-day plan focused exclusively on content marketing and LinkedIn organic, with realistic timelines for a two-person team, budget-aligned tactics, and measurable KPIs tied to the 500-lead goal. Always verify market assumptions and projected conversion rates before committing to a strategy.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Focused, actionable, respects real-world constraints</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">RISEN in Action</h2>
+                <p class="section-subtitle fade-in-up">See how five components create precisely scoped, actionable outputs</p>
+
+                <div class="accordion fade-in-up" id="risen-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Product Feature Specification</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">RISEN Prompt</span>
+                                    <p><strong>Role:</strong> You are a senior product manager at a fintech startup.<br><br>
+                                    <strong>Instructions:</strong> Write a feature specification for adding two-factor authentication to our mobile banking app.<br><br>
+                                    <strong>Steps:</strong> 1) Describe the user problem and security need. 2) Define the feature requirements (functional and non-functional). 3) Outline the user flow from enrollment to daily use. 4) List acceptance criteria for QA. 5) Identify dependencies and risks.<br><br>
+                                    <strong>End Goal:</strong> A spec document clear enough for our engineering team to begin implementation in the next sprint without additional clarification meetings.<br><br>
+                                    <strong>Narrowing:</strong> Support only TOTP-based authentication (no SMS or email codes). Do not cover biometric authentication &mdash; that is a separate feature. Assume the user already has an account. Do not include cost estimates or timeline projections.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>The <strong>Steps</strong> define exactly what sections the spec must include &mdash; preventing the AI from producing an incomplete document. The <strong>End Goal</strong> sets a quality bar: the output must be detailed enough to eliminate clarification meetings. The <strong>Narrowing</strong> prevents scope creep by excluding SMS, biometrics, cost, and timeline &mdash; keeping the spec laser-focused on TOTP implementation. Always have your engineering team review AI-generated specifications for technical accuracy before committing to development.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Incident Post-Mortem</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">RISEN Prompt</span>
+                                    <p><strong>Role:</strong> You are a site reliability engineer leading an incident review.<br><br>
+                                    <strong>Instructions:</strong> Write a blameless post-mortem for a 4-hour production outage caused by a database connection pool exhaustion.<br><br>
+                                    <strong>Steps:</strong> 1) Summarize the incident timeline with timestamps. 2) Identify the root cause and contributing factors. 3) Detail the resolution steps taken. 4) Assess customer impact. 5) Propose preventive action items with owners and deadlines.<br><br>
+                                    <strong>End Goal:</strong> A post-mortem that our VP of Engineering can share with stakeholders and that produces actionable follow-up tasks assigned to specific teams.<br><br>
+                                    <strong>Narrowing:</strong> Maintain blameless tone throughout &mdash; no individual names or finger-pointing. Do not speculate about unconfirmed contributing factors. Exclude pricing or financial impact calculations. Focus on technical root cause and process improvements only.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>The <strong>Narrowing</strong> enforces blameless culture &mdash; a critical organizational value that AI might violate without explicit instruction. The <strong>Steps</strong> ensure the post-mortem follows the standard format stakeholders expect. The <strong>End Goal</strong> ensures the output is executive-appropriate and action-oriented, not just a technical dump. Always verify incident details, timestamps, and technical root causes with your team before publishing a post-mortem.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Onboarding Curriculum Design</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">RISEN Prompt</span>
+                                    <p><strong>Role:</strong> You are an instructional designer specializing in corporate onboarding programs.<br><br>
+                                    <strong>Instructions:</strong> Design a two-week onboarding curriculum for new software engineers joining our platform team.<br><br>
+                                    <strong>Steps:</strong> 1) Define learning objectives for each day. 2) Structure content into morning theory sessions and afternoon hands-on labs. 3) Include mentor check-in points. 4) Design an end-of-week assessment for each week. 5) Create a &ldquo;30-day confidence checklist&rdquo; for post-onboarding self-assessment.<br><br>
+                                    <strong>End Goal:</strong> New engineers should be able to independently deploy a feature to our staging environment by the end of week two.<br><br>
+                                    <strong>Narrowing:</strong> Assume engineers have 2+ years of experience (not entry-level). Do not cover HR policies, benefits enrollment, or company culture sessions. Focus exclusively on technical onboarding. Our stack is Python, Django, PostgreSQL, and Kubernetes &mdash; do not include content for other technologies.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>Every RISEN component contributes to a tightly scoped output. The <strong>Steps</strong> define the curriculum structure (theory + labs + check-ins + assessments). The <strong>End Goal</strong> provides a measurable competency target. The <strong>Narrowing</strong> eliminates everything non-technical and locks the content to the actual tech stack &mdash; preventing generic onboarding content that wastes experienced engineers&rsquo; time. Always review AI-designed curricula with your technical leads to ensure accuracy and alignment with your actual codebase and processes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use RISEN</h2>
+                <p class="section-subtitle fade-in-up">Best for complex tasks requiring explicit scope control and step sequencing</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Multi-Step Processes</strong>
+                                    <p>Tasks that require a specific sequence of operations &mdash; project plans, audit procedures, workflow designs, and any task where order matters.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Scope-Sensitive Deliverables</strong>
+                                    <p>When you need the AI to stay within explicit boundaries &mdash; budget constraints, technology limitations, team size restrictions, or topic exclusions.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Professional Documentation</strong>
+                                    <p>Specifications, post-mortems, proposals, and reports where completeness and focus are both critical &mdash; every section must be present and nothing extraneous should intrude.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Goal-Oriented Analysis</strong>
+                                    <p>When every element of the output should contribute to a specific, measurable outcome &mdash; the End Goal component keeps the analysis purposeful rather than exploratory.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple, Single-Action Tasks</strong>
+                                    <p>Writing a quick email or summarizing an article does not need five components &mdash; RACE or even a plain prompt is faster and equally effective.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Open-Ended Exploration</strong>
+                                    <p>Brainstorming, ideation, and creative exploration benefit from fewer constraints. RISEN&rsquo;s narrowing can be counterproductive when you want the AI to range freely.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Audience-Calibrated Content</strong>
+                                    <p>RISEN lacks explicit tone and audience dimensions. When the emotional register and reader profile matter most, CO-STAR is the better choice.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where RISEN delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Project Planning</h3>
+                        <p class="use-case-showcase__desc">Create scoped project plans with defined phases, success criteria, and explicit resource constraints that prevent unrealistic recommendations.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Technical Specifications</h3>
+                        <p class="use-case-showcase__desc">Write feature specs, architecture documents, and system designs with clear steps, measurable acceptance criteria, and technology constraints.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Compliance Audits</h3>
+                        <p class="use-case-showcase__desc">Structure audit procedures with defined scope, step-by-step assessment criteria, compliance targets, and explicit exclusions for out-of-scope areas.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Process Improvement</h3>
+                        <p class="use-case-showcase__desc">Diagnose workflow bottlenecks with structured analysis steps, targeted improvement goals, and narrowing that respects unchangeable system constraints.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="12,2 2,7 12,12 22,7 12,2"/>
+                                <polyline points="2,17 12,22 22,17"/>
+                                <polyline points="2,12 12,17 22,12"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Training Programs</h3>
+                        <p class="use-case-showcase__desc">Design curricula with sequenced learning objectives, competency milestones, and scope boundaries that match the audience&rsquo;s actual skill level.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Incident Response</h3>
+                        <p class="use-case-showcase__desc">Create structured post-mortems and incident reports with defined investigation steps, resolution timelines, and blameless scope constraints.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where RISEN Fits</h2>
+                <p class="section-subtitle fade-in-up">RISEN bridges basic role-based prompting and full workflow orchestration</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">RACE</span>
+                        <span class="era-marker__title">Essential Structure</span>
+                        <span class="era-marker__desc">Four components, no sequence control</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">CO-STAR</span>
+                        <span class="era-marker__title">Audience Centered</span>
+                        <span class="era-marker__desc">Six dimensions with tone and audience</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">RISEN</span>
+                        <span class="era-marker__title">Scoped &amp; Sequenced</span>
+                        <span class="era-marker__desc">Five components with step sequencing and narrowing</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">AgentFlow</span>
+                        <span class="era-marker__title">Full Orchestration</span>
+                        <span class="era-marker__desc">Multi-agent workflow with decision gates</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The Narrowing Advantage</div>
+                    <p>RISEN&rsquo;s &ldquo;Narrowing&rdquo; component is its secret weapon. Most prompting frameworks tell the AI what to do. RISEN also tells it what not to do. In practice, this is often more valuable: a prompt that says &ldquo;do not discuss pricing, competitors, or implementation timelines&rdquo; produces a fundamentally different output than one that simply lists what to include. If your AI outputs keep going off-track or including unwanted content, adding narrowing constraints is often the fastest fix &mdash; even outside the RISEN framework.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques &amp; Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary structured prompting approaches</p>
+
+                <a href="costar.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Audience Focused</span>
+                        <span class="evolution-callout__title">CO-STAR Framework</span>
+                        <span class="evolution-callout__desc">When tone and audience calibration matter more than step sequencing &mdash; CO-STAR excels at communication-focused tasks where RISEN excels at process-focused tasks.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="race.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="16"/>
+                            <line x1="8" y1="12" x2="16" y2="12"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Simpler Alternative</span>
+                        <span class="evolution-callout__title">RACE Framework</span>
+                        <span class="evolution-callout__desc">When you need quick structure without step sequencing or narrowing &mdash; RACE covers the essentials with four components for everyday tasks.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="roses.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Scenario Based</span>
+                        <span class="evolution-callout__title">ROSES Framework</span>
+                        <span class="evolution-callout__desc">Another five-component community framework that emphasizes scenario context and expected solutions &mdash; a complementary approach to structured prompting.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Build Your RISEN Prompt</h2>
+                        <p class="cta-corporate__text">Structure your next prompt with all five RISEN components or find the right framework for your specific task.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../tools/matcher.html" class="btn btn-secondary">Technique Finder</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

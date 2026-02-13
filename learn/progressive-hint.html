@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Progressive-Hint Prompting: Iteratively provide the model with its own previous answers as hints, refining toward the correct solution through progressive self-guided improvement.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/progressive-hint.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Progressive-Hint Prompting (PHP) - Praxis">
+    <meta property="og:description" content="Progressive-Hint Prompting: Iteratively provide the model with its own previous answers as hints, refining toward the correct solution through progressive self-guided improvement.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/progressive-hint.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Progressive-Hint Prompting (PHP) - Praxis">
+    <meta name="twitter:description" content="Progressive-Hint Prompting: Iteratively provide the model with its own previous answers as hints, refining toward the correct solution through progressive self-guided improvement.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Progressive-Hint Prompting (PHP)",
+      "name": "Progressive-Hint Prompting (PHP)",
+      "description": "Progressive-Hint Prompting: Iteratively provide the model with its own previous answers as hints, refining toward the correct solution through progressive self-guided improvement.",
+      "url": "https://praxislibrary.com/learn/progressive-hint.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Progressive-Hint Prompting (PHP)"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Progressive-Hint Prompting (PHP) - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Progressive-Hint Prompting</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Self-Correction Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Progressive-Hint Prompting (PHP)</h1>
+                <p class="page-subtitle fade-in">When a student gets a math problem wrong, a good teacher doesn&rsquo;t just say &ldquo;try again&rdquo; &mdash; they give a hint based on the attempt. Progressive-Hint Prompting applies this teaching strategy: the model&rsquo;s previous answer becomes a hint for its next attempt, progressively guiding it toward the correct solution through iterative refinement.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2023</span>
+                        <p><strong>Introduced:</strong> Progressive-Hint Prompting (PHP) was introduced in 2023 by Zheng et al., addressing the observation that models often &ldquo;almost&rdquo; get the right answer on their first attempt. Rather than starting from scratch, PHP feeds the model&rsquo;s previous answer back as a hint: &ldquo;Your previous attempt yielded X. Use this as a hint to try again.&rdquo; This leverages the partial correctness of initial attempts, progressively refining toward the right answer through iterative rounds.</p>
+                        <p><strong>Modern LLM Status:</strong> PHP&rsquo;s iterative refinement pattern has become a <strong>staple in production AI systems</strong>. Modern reasoning workflows often use multiple rounds of generation and refinement. PHP&rsquo;s specific contribution &mdash; using the model&rsquo;s own output as a guiding hint &mdash; is particularly effective for mathematical reasoning, where initial attempts often identify the right approach but make calculation errors. The technique complements self-consistency by providing a refinement path rather than just voting among independent attempts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Wrong Answers Contain Useful Information</h2>
+                        <p class="split-section__text">Most self-correction techniques ask the model to start fresh or identify errors. PHP takes a different approach: it uses the previous answer as a positive signal &mdash; a hint that contains useful information even when incorrect. The model is told &ldquo;The answer might be X&rdquo; and asked to solve the problem with that hint in mind. If X is correct, the model confirms it. If X is partially wrong, the hint still narrows the search space.</p>
+                        <p class="split-section__text"><strong>Through successive rounds, the hints converge toward the correct answer.</strong> Each iteration builds on the previous one rather than discarding it. The model doesn&rsquo;t need to identify what was wrong &mdash; it just needs to solve the problem again with a useful starting point.</p>
+                        <p class="split-section__text">Think of it like a game of &ldquo;warmer/colder&rdquo; &mdash; each attempt gets the model closer, and the previous answer serves as an anchor that prevents it from wandering in completely wrong directions.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Hints Beat Fresh Starts</span>
+                                <p>A wrong answer often contains useful information: the right approach with a calculation error, or the right formula with the wrong substitution. By feeding this back as a hint rather than discarding it, PHP preserves the partial progress and gives the model a narrower search space for its next attempt.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Progressive-Hint Process</h2>
+                <p class="section-subtitle fade-in-up">Five stages from initial attempt to converged answer</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Initial Attempt</h3>
+                            <p class="element-timeline__text">The model solves the problem with standard Chain-of-Thought prompting, producing an initial answer A&#8321;. This first attempt uses no hints &mdash; it&rsquo;s the model&rsquo;s best cold-start answer, which may be correct, partially correct, or wrong.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;A store sells apples at $1.50 each and oranges at $2.00 each. Maria buys 3 apples and some oranges for $10.50. How many oranges did she buy?&rdquo; Model&rsquo;s first attempt: &ldquo;3 &times; $1.50 = $4.50. $10.50 - $4.50 = $6.00. $6.00 &divide; $2.00 = 3 oranges.&rdquo; A&#8321; = 3.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Hint Construction</h3>
+                            <p class="element-timeline__text">Frame A&#8321; as a hint for the next attempt. The hint is presented as suggestive rather than definitive: &ldquo;The answer might be A&#8321;.&rdquo; This primes the model to consider this value without blindly accepting it, creating a biased-but-not-locked starting point for re-evaluation.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;The answer might be 3. Use this hint and try to solve the problem again: A store sells apples at $1.50 each and oranges at $2.00 each. Maria buys 3 apples and some oranges for $10.50. How many oranges did she buy?&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Refined Attempt</h3>
+                            <p class="element-timeline__text">The model re-solves the problem with the hint in mind, producing answer A&#8322;. If the hint is correct, the model typically confirms it through independent verification. If the hint is wrong, the model may arrive at a different answer &mdash; potentially closer to the correct one because the hint narrowed its reasoning space.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Let me verify: 3 apples &times; $1.50 = $4.50. If oranges = 3, then 3 &times; $2.00 = $6.00. Total = $4.50 + $6.00 = $10.50. This matches the total given.&rdquo; A&#8322; = 3.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Convergence Check</h3>
+                            <p class="element-timeline__text">Compare A&#8322; with A&#8321;. If they match, the answer has converged &mdash; the model independently confirmed its previous answer. If they differ, A&#8322; becomes the new hint and the process repeats. Convergence typically occurs within 2-3 rounds, and stable agreement strongly correlates with correctness.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>A&#8321; = 3, A&#8322; = 3. The answers match &mdash; convergence achieved. If A&#8322; had been 4, we would repeat with hint &ldquo;The answer might be 4&rdquo; and solve again to produce A&#8323;.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">5</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Final Answer</h3>
+                            <p class="element-timeline__text">Output the converged answer after two consecutive rounds of agreement. The final answer carries higher confidence than any single attempt because it has been independently confirmed through the hint-guided refinement process.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;After progressive hint refinement (2 rounds, converged), the answer is: Maria bought 3 oranges. Verification: 3 &times; $1.50 + 3 &times; $2.00 = $4.50 + $6.00 = $10.50.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why hint-guided refinement outperforms fresh restarts</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Retry from Scratch</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Multiple Attempts</span>
+                                <p><strong>Attempt 1:</strong> A train travels 120km in 1.5 hours, then 80km in 1 hour. Average speed = (120+80)/(1.5+1) = 200/2.5 = 80 km/h.<br><strong>Attempt 2:</strong> Total distance = 200km. Total time = 2.5h. Average = 200/2.5 = 80 km/h.<br><strong>Attempt 3:</strong> Same approach, same answer: 80 km/h.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Final Answer</span>
+                                <p>Average speed: 80 km/h. (All three independent attempts agree.)</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Same method repeated &mdash; independent attempts don&rsquo;t explore alternative approaches</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Progressive-Hint</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Hint-Guided Refinement</span>
+                                <p><strong>Attempt 1:</strong> Average speed = 200/2.5 = 80 km/h. A&#8321; = 80.<br><strong>Hint:</strong> &ldquo;The answer might be 80 km/h.&rdquo;<br><strong>Attempt 2:</strong> Let me verify. Segment 1: 120/1.5 = 80 km/h. Segment 2: 80/1 = 80 km/h. Total: 200/2.5 = 80 km/h. The hint checks out with both segment and total calculations. A&#8322; = 80.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Final Answer</span>
+                                <p>Average speed: 80 km/h (converged after 2 rounds with verification through multiple calculation methods).</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Hint prompts deeper verification &mdash; model checks via multiple methods rather than repeating one</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Progressive-Hint in Action</h2>
+                <p class="section-subtitle fade-in-up">See how iterative hints guide the model toward correct solutions</p>
+
+                <div class="accordion fade-in-up" id="progressive-hint-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Complex Arithmetic</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;A factory produces 1,247 units per day. Due to maintenance, it operates only 22 days per month. Monthly overhead is $45,000 and each unit costs $3.75 to produce. What is the total monthly production cost?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Progressive-Hint Refinement</span>
+                                    <p><strong>Attempt 1:</strong> Units/month = 1,247 &times; 22 = 27,434. Production cost = 27,434 &times; $3.75 = $102,877.50. Total = $102,877.50 + $45,000 = $147,877.50. A&#8321; = $147,877.50.<br><br>
+                                    <strong>Hint:</strong> &ldquo;The answer might be $147,877.50.&rdquo;<br><br>
+                                    <strong>Attempt 2:</strong> Let me verify each step. 1,247 &times; 22: 1,247 &times; 20 = 24,940; 1,247 &times; 2 = 2,494; total = 27,434 units. Correct. 27,434 &times; $3.75: 27,434 &times; 3 = 82,302; 27,434 &times; 0.75 = 20,575.50; total = $102,877.50. Correct. Plus overhead: $102,877.50 + $45,000 = $147,877.50. A&#8322; = $147,877.50.<br><br>
+                                    <strong>Converged:</strong> A&#8321; = A&#8322; = $147,877.50. Total monthly production cost is $147,877.50.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Physics Word Problem</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;A ball is thrown upward from a 20-meter building at 15 m/s. Using g = 10 m/s&sup2;, what is the maximum height reached above ground?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Progressive-Hint Refinement</span>
+                                    <p><strong>Attempt 1:</strong> Using v&sup2; = u&sup2; - 2gh at max height (v=0): 0 = 15&sup2; - 2(10)h. 0 = 225 - 20h. h = 11.25m above launch point. Total height = 20 + 11.25 = 31.25m. A&#8321; = 31.25m.<br><br>
+                                    <strong>Hint:</strong> &ldquo;The answer might be 31.25m.&rdquo;<br><br>
+                                    <strong>Attempt 2:</strong> Verifying with energy approach: KE at launch = &frac12;mv&sup2; = &frac12;m(225). PE gained = mgh. Setting equal: &frac12;(225) = 10h, so h = 11.25m above launch. Total = 20 + 11.25 = 31.25m. Alternative check: time to max height = v/g = 15/10 = 1.5s. Height gained = ut - &frac12;gt&sup2; = 15(1.5) - &frac12;(10)(2.25) = 22.5 - 11.25 = 11.25m. Total = 31.25m. A&#8322; = 31.25m.<br><br>
+                                    <strong>Converged:</strong> A&#8321; = A&#8322; = 31.25m. Maximum height above ground is 31.25 meters.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Logic Puzzle</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;Five friends &mdash; Alex, Beth, Carlos, Diana, and Ethan &mdash; each like a different color: red, blue, green, yellow, purple. Alex doesn&rsquo;t like red or blue. Beth likes yellow. Carlos doesn&rsquo;t like green. Diana likes either red or purple. Ethan doesn&rsquo;t like purple. What color does each person like?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Progressive-Hint Refinement</span>
+                                    <p><strong>Attempt 1:</strong> Beth = yellow (given). Alex not red/blue, so green/purple. Diana = red or purple. If Diana = red, then Alex = green or purple. Carlos not green, so Carlos = blue or purple. Ethan not purple. Let&rsquo;s try: Diana = red, Alex = purple, Carlos = blue, Ethan = green. A&#8321; = Alex:purple, Beth:yellow, Carlos:blue, Diana:red, Ethan:green.<br><br>
+                                    <strong>Hint:</strong> &ldquo;The answer might be Alex:purple, Beth:yellow, Carlos:blue, Diana:red, Ethan:green.&rdquo;<br><br>
+                                    <strong>Attempt 2:</strong> Verifying each constraint: Alex not red (purple &mdash; ok) not blue (purple &mdash; ok). Beth = yellow (matches). Carlos not green (blue &mdash; ok). Diana = red or purple (red &mdash; ok). Ethan not purple (green &mdash; ok). All five colors used exactly once. All constraints satisfied. A&#8322; = same assignment.<br><br>
+                                    <strong>Converged:</strong> Alex:purple, Beth:yellow, Carlos:blue, Diana:red, Ethan:green.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Progressive-Hint</h2>
+                <p class="section-subtitle fade-in-up">Best for problems where initial attempts are &ldquo;close&rdquo; and refinement beats restarting</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Mathematical Reasoning with Calculation Errors</strong>
+                                    <p>When the model identifies the right formula or approach but makes arithmetic mistakes &mdash; the hint preserves the method while the re-attempt corrects the computation.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Problems Where Initial Attempts Are &ldquo;Close&rdquo;</strong>
+                                    <p>When the first answer is in the right ballpark but not quite right &mdash; the hint anchors the model near the correct answer rather than letting it wander.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Iterative Refinement Workflows</strong>
+                                    <p>When your pipeline already supports multiple generation rounds &mdash; PHP provides a principled way to use each round&rsquo;s output to improve the next.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Tasks Where Convergence Indicates Correctness</strong>
+                                    <p>When stable agreement across iterations is a reliable signal &mdash; if the model keeps arriving at the same answer from different angles, it&rsquo;s likely correct.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Problems with No Partial Correctness Signal</strong>
+                                    <p>When wrong answers are completely off-base rather than &ldquo;close&rdquo; &mdash; a wildly wrong hint can mislead rather than guide the next attempt.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Tasks Where Wrong Answers Provide No Useful Hints</strong>
+                                    <p>Open-ended creative tasks, opinion questions, or problems where the answer space is too large for a single data point to narrow meaningfully.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Single-Shot Applications</strong>
+                                    <p>When latency or cost constraints prevent multiple rounds of generation &mdash; PHP requires at least 2 iterations to provide any benefit over standard prompting.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Problems Where the First Attempt Is Entirely Off-Base</strong>
+                                    <p>If the initial approach is fundamentally wrong (wrong formula, wrong domain), the hint will anchor the model to the wrong solution space rather than helping it find the right one.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Progressive-Hint delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Math Tutoring Systems</h3>
+                        <p class="use-case-showcase__desc">Guide students through multi-step math problems by using their previous attempts as progressive hints, reinforcing correct reasoning while gently correcting errors.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Exam Preparation</h3>
+                        <p class="use-case-showcase__desc">Use progressive hints to help learners work through practice problems, building understanding through guided iteration rather than immediate answer reveal.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Engineering Calculations</h3>
+                        <p class="use-case-showcase__desc">Refine complex engineering calculations through progressive iterations, where each round catches arithmetic or unit conversion errors while preserving the correct methodology.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Statistical Analysis</h3>
+                        <p class="use-case-showcase__desc">Iterate through statistical computations where initial attempts identify the right test or distribution but may miscalculate degrees of freedom or critical values.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Budget Forecasting</h3>
+                        <p class="use-case-showcase__desc">Refine budget projections through progressive hint iterations, where each round corrects estimation errors while maintaining the overall financial model structure.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 11l3 3L22 4"/>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Scientific Computations</h3>
+                        <p class="use-case-showcase__desc">Apply progressive hints to complex scientific calculations where the correct formula is identified but numerical execution contains errors that compound through multi-step derivations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Progressive-Hint Fits</h2>
+                <p class="section-subtitle fade-in-up">Progressive-Hint bridges single attempts and iterative critique</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Single Attempt</span>
+                        <span class="era-marker__desc">One-shot reasoning chain</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Consistency</span>
+                        <span class="era-marker__title">Multiple Independent Attempts</span>
+                        <span class="era-marker__desc">Vote among parallel solutions</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Progressive-Hint</span>
+                        <span class="era-marker__title">Guided Iterative Refinement</span>
+                        <span class="era-marker__desc">Previous answers as hints</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Refine</span>
+                        <span class="era-marker__title">Critique-Based Improvement</span>
+                        <span class="era-marker__desc">Explicit feedback and revision</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Watch for False Convergence</div>
+                    <p>Convergence (the answer stabilizing) usually indicates correctness, but not always. The model can converge on a confidently wrong answer. Use PHP with a verification step: once the answer converges, check it against constraints or test cases before accepting. Convergence is a strong signal, not a guarantee.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary correction techniques</p>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">Generates multiple independent attempts and votes on the most common answer &mdash; where PHP uses sequential refinement, Self-Consistency uses parallel sampling.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-refine.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Self-Refine</span>
+                        <span class="evolution-callout__desc">Uses explicit self-critique to identify and fix errors &mdash; where PHP uses implicit hints, Self-Refine uses structured feedback for targeted corrections.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-correction.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Self-Correction</span>
+                        <span class="evolution-callout__desc">Broader category of techniques where the model corrects its own output &mdash; PHP is one specific implementation using previous answers as progressive hints.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Refine Through Hints</h2>
+                        <p class="cta-corporate__text">Apply progressive hint refinement or explore other correction techniques.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

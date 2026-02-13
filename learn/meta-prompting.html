@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meta Prompting: High-level structural templates that teach AI HOW to approach tasks rather than providing specific content, achieving superior results with fewer tokens.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/meta-prompting.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Meta Prompting - Praxis">
+    <meta property="og:description" content="Meta Prompting: High-level structural templates that teach AI HOW to approach tasks rather than providing specific content, achieving superior results with fewer tokens.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/meta-prompting.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Meta Prompting - Praxis">
+    <meta name="twitter:description" content="Meta Prompting: High-level structural templates that teach AI HOW to approach tasks rather than providing specific content, achieving superior results with fewer tokens.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Meta Prompting",
+      "name": "Meta Prompting",
+      "description": "Meta Prompting: High-level structural templates that teach AI HOW to approach tasks rather than providing specific content, achieving superior results with fewer tokens.",
+      "url": "https://praxislibrary.com/learn/meta-prompting.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Meta Prompting"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Meta Prompting - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Meta Prompting</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Meta-level Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Meta Prompting</h1>
+                <p class="page-subtitle fade-in">What if, instead of telling the AI what to do, you taught it HOW to think about any task? Meta Prompting provides high-level structural templates that guide reasoning patterns &mdash; producing stronger results with fewer tokens by shaping the approach itself rather than micromanaging each step.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2023</span>
+                        <p><strong>Introduced:</strong> Meta Prompting emerged in 2023 as researchers recognized that providing models with structural templates &mdash; meta-level instructions about HOW to approach problems &mdash; outperformed task-specific prompting in many domains. Rather than writing detailed instructions for each task, Meta Prompting teaches the model a reasoning pattern it can apply flexibly across different contexts. The technique achieved 46.3% on the MATH benchmark compared to GPT-4&rsquo;s 42.5%, while using fewer tokens overall.</p>
+                        <p><strong>Modern LLM Status:</strong> Meta Prompting&rsquo;s insight &mdash; teaching models HOW to think about tasks &mdash; has become <strong>foundational to modern prompt engineering</strong>. The core pattern of providing structural templates rather than specific content is now standard practice in professional prompting. In 2026, the meta-prompting philosophy underlies many advanced frameworks and has influenced how practitioners approach system prompts, agent architectures, and multi-step workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Teach the Pattern, Not the Answer</h2>
+                        <p class="split-section__text">Most prompting techniques tell the model what to produce: &ldquo;Write a summary,&rdquo; &ldquo;Analyze this data,&rdquo; &ldquo;Solve this problem.&rdquo; Meta Prompting operates one level higher. Instead of prescribing content, it prescribes a reasoning framework &mdash; a structural template the model can fill in with whatever task it encounters.</p>
+                        <p class="split-section__text"><strong>The shift is from content to structure.</strong> A meta-prompt might say: &ldquo;For any problem you encounter, first identify the type of problem, then recall the general principles that apply, then work through the specific case, then verify your answer against those principles.&rdquo; This template works for math, writing, analysis, debugging &mdash; anything. The model learns the shape of good reasoning rather than being hand-held through each instance.</p>
+                        <p class="split-section__text">Think of it as the difference between giving someone a fish recipe versus teaching them the principles of cooking. The recipe works once; the principles work everywhere.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Meta-Level Thinking Outperforms Direct Instructions</span>
+                                <p>When you give task-specific instructions, the model follows them rigidly &mdash; even when the task has nuances the instructions don&rsquo;t cover. Meta Prompting gives the model a flexible reasoning scaffold instead. This means the model can adapt its approach to edge cases, unusual inputs, and novel variations without you having to anticipate every scenario. The result: better generalization, fewer edge-case failures, and prompts that <strong>transfer across tasks</strong> without rewriting.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Meta Prompting Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from structural template to task execution</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define the Reasoning Template</h3>
+                            <p class="element-timeline__text">Create a high-level structural template that describes HOW to approach a category of tasks. This template should be abstract enough to apply across many specific instances but structured enough to guide the model&rsquo;s reasoning pattern consistently.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;For any analytical question: (1) Identify the domain and key variables, (2) State what would need to be true for each possible answer, (3) Evaluate evidence for each, (4) Synthesize into a justified conclusion.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Present the Specific Task</h3>
+                            <p class="element-timeline__text">After establishing the meta-level template, present the concrete task or question you want addressed. The model now has both the structural scaffold and the specific content to work with &mdash; like a builder who has both blueprints and materials.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Now apply this framework to answer: Should a mid-size SaaS company prioritize reducing churn or increasing new customer acquisition?&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Model Applies the Template</h3>
+                            <p class="element-timeline__text">The model fills in the structural template with task-specific content. Each step of the reasoning framework gets populated with relevant analysis, creating a response that is both well-structured and deeply engaged with the specific question. The template ensures nothing important gets skipped.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The model identifies the domain (SaaS unit economics), states what would need to be true for each option (churn reduction: high existing revenue base; acquisition: large addressable market), evaluates evidence, and synthesizes a conclusion.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Reuse the Template</h3>
+                            <p class="element-timeline__text">The same meta-level template works for entirely different tasks within the same category. A reasoning template designed for analytical questions can handle business strategy, scientific evaluation, policy analysis, and more &mdash; all without rewriting the prompt structure. This reusability is Meta Prompting&rsquo;s key efficiency advantage.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The same analytical template is reused: &ldquo;Should a hospital system invest in telemedicine infrastructure or expand physical facilities?&rdquo; &mdash; different domain, same reasoning scaffold, equally rigorous result.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why structural templates outperform task-specific instructions</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Task-Specific Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Write a comparative analysis of renewable energy vs. nuclear power for a developing nation. Cover cost, scalability, environmental impact, and timeline. Be balanced and cite trade-offs.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response Pattern</span>
+                                <p>The model produces a decent analysis but structures it as a simple list of pros and cons. It misses important analytical dimensions like implementation risk, workforce requirements, and political feasibility because the prompt didn&rsquo;t mention them.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Rigid, only covers what was explicitly asked, misses emergent dimensions</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Meta Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Structural Template</span>
+                                <p><strong>Template:</strong> For any comparative policy analysis: (1) Identify all stakeholder groups affected, (2) Map each option against short-term and long-term impacts, (3) Identify hidden trade-offs not immediately obvious, (4) Consider second-order effects, (5) Recommend with explicit uncertainty acknowledgment.<br><br><strong>Task:</strong> Apply this to renewable energy vs. nuclear power for a developing nation. <em>Remember: always verify AI-generated policy analysis against authoritative sources before using it in decision-making.</em></p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response Pattern</span>
+                                <p>The model identifies stakeholders (government, citizens, industry, environment), maps impacts across time horizons, surfaces hidden trade-offs (workforce transition, grid stability), considers second-order effects (geopolitical dependencies, technology lock-in), and provides a nuanced recommendation with confidence levels.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Comprehensive, surfaces hidden dimensions, reusable for any policy comparison</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Meta Prompting in Action</h2>
+                <p class="section-subtitle fade-in-up">See how structural templates produce more thorough and transferable results</p>
+
+                <div class="accordion fade-in-up" id="meta-prompting-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Problem-Solving Template</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Meta-Level Template</span>
+                                    <p>&ldquo;When solving any problem, follow this structure: (1) Restate the problem in your own words to confirm understanding, (2) Identify what type of problem this is and what general principles apply, (3) Work through the specific case using those principles, (4) Check your answer by testing edge cases or reversing the logic, (5) State your confidence level and what could change your answer. Apply this to: A startup has $500K in runway and is choosing between hiring 3 engineers or spending on marketing. Which should they prioritize?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Structured Response</span>
+                                    <p><strong>(1) Problem restatement:</strong> A cash-constrained startup must allocate limited capital between product development (engineering hires) and growth (marketing spend).<br><br>
+                                    <strong>(2) Problem type:</strong> Resource allocation under uncertainty. Key principles: stage-appropriate spending, product-market fit sequencing, burn rate management.<br><br>
+                                    <strong>(3) Specific analysis:</strong> If the product has achieved product-market fit (strong retention, organic growth signals), marketing spend accelerates existing momentum. If product-market fit is unproven, engineering hires improve the product before scaling distribution. $500K covers roughly 6 months of either option but not both simultaneously.<br><br>
+                                    <strong>(4) Edge case check:</strong> Exception: if the market window is closing (competitor launching soon), marketing may be urgent regardless of fit. Reverse test: a company that marketed an unfinished product would burn cash faster with higher churn.<br><br>
+                                    <strong>(5) Confidence:</strong> Medium-high that product-market fit should come first. This changes if the startup is in a winner-take-all market with time pressure.<br><br>
+                                    <em>Note: This is AI-generated strategic analysis. Verify assumptions against your actual metrics and consult advisors before making capital allocation decisions.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Writing Quality Template</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Meta-Level Template</span>
+                                    <p>&ldquo;For any writing task, follow this meta-structure: (1) Identify the audience and what they already know, (2) Determine the single most important takeaway, (3) Choose an organizational pattern that serves the takeaway (chronological, compare/contrast, problem/solution), (4) Write with the principle that every sentence must earn its place, (5) End by connecting back to why the reader should care. Apply this to: Write a 200-word explanation of why data privacy matters for small business owners.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Template-Guided Output</span>
+                                    <p><strong>(1) Audience:</strong> Small business owners; likely know data privacy exists but may see it as a &ldquo;big company problem.&rdquo;<br><br>
+                                    <strong>(2) Core takeaway:</strong> Data privacy is a business survival issue, not just a compliance checkbox.<br><br>
+                                    <strong>(3) Pattern:</strong> Problem/solution &mdash; show the risk, then the path forward.<br><br>
+                                    <strong>(4) Draft:</strong> Your customers trust you with their email addresses, payment details, and purchase history. A single data breach costs small businesses an average of $108,000 &mdash; enough to close many of them permanently. But data privacy is not just about preventing breaches. It is about demonstrating to customers that their information is handled responsibly. When 79% of consumers say they would stop doing business with a company that mishandled their data, privacy becomes a competitive advantage. Start with three fundamentals: encrypt stored customer data, limit employee access to what each role actually needs, and have a written plan for what happens if something goes wrong. These steps cost very little but signal to customers that you take their trust seriously.<br><br>
+                                    <strong>(5) Connection:</strong> Protecting customer data is not a technical burden &mdash; it is how small businesses earn and keep the trust that larger competitors cannot replicate.<br><br>
+                                    <em>AI disclosure: Always verify statistics and legal requirements cited in AI-generated content against current authoritative sources before publishing.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Debugging Template</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Meta-Level Template</span>
+                                    <p>&ldquo;For any debugging task, follow this approach: (1) Reproduce the exact symptoms &mdash; what was expected vs. what happened, (2) Identify the most recent change that could have caused this, (3) Form three hypotheses ranked by likelihood, (4) For each hypothesis, describe the minimal test to confirm or eliminate it, (5) Recommend the investigation order based on effort-to-insight ratio. Apply this to: After deploying a new user authentication update, some users report being logged out randomly every 15-30 minutes.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Systematic Debug Plan</span>
+                                    <p><strong>(1) Symptoms:</strong> Expected: users stay logged in for the configured session duration. Actual: random logouts at 15-30 minute intervals, affecting &ldquo;some&rdquo; (not all) users post-deployment.<br><br>
+                                    <strong>(2) Recent change:</strong> New authentication update &mdash; likely modified session handling, token generation, or cookie configuration.<br><br>
+                                    <strong>(3) Hypotheses:</strong><br>
+                                    H1 (High likelihood): Session token expiry was set incorrectly in the new code &mdash; perhaps a timeout value in seconds was interpreted as minutes or vice versa.<br>
+                                    H2 (Medium likelihood): The deployment created a mixed-version state where some servers run old auth code and some run new, causing token format mismatches on load-balanced requests.<br>
+                                    H3 (Lower likelihood): A new cookie attribute (SameSite, Secure, or Domain) is incompatible with certain browsers or proxy configurations.<br><br>
+                                    <strong>(4) Minimal tests:</strong><br>
+                                    H1: Check the session timeout configuration value and its units. Compare with pre-deployment config.<br>
+                                    H2: Log which server handles each request for an affected user. Look for alternating server IDs.<br>
+                                    H3: Check affected vs. unaffected users&rsquo; browser types and whether they access through VPN or proxy.<br><br>
+                                    <strong>(5) Investigation order:</strong> H1 first (5-minute config check), then H2 (15-minute log analysis), then H3 (requires user data correlation).<br><br>
+                                    <em>Reminder: Always test debugging hypotheses in a staging environment before applying fixes to production systems.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Meta Prompting</h2>
+                <p class="section-subtitle fade-in-up">Best for building reusable reasoning scaffolds across task categories</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Repeatable Task Categories</strong>
+                                    <p>When you regularly handle similar types of tasks (analysis, debugging, writing reviews) &mdash; one meta-template replaces dozens of task-specific prompts.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>System Prompt Design</strong>
+                                    <p>Meta-templates are ideal for system prompts in AI applications &mdash; they define how the model should reason about any user input rather than anticipating every possible query.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Multi-Dimensional Analysis</strong>
+                                    <p>Tasks where important dimensions might be overlooked &mdash; the meta-template ensures the model considers all relevant angles systematically rather than focusing only on the obvious ones.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Team Standardization</strong>
+                                    <p>When multiple people need consistent quality from AI &mdash; sharing a meta-template ensures everyone gets the same reasoning depth regardless of how they phrase their specific task.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>One-Off Simple Tasks</strong>
+                                    <p>If you only need a quick answer to a straightforward question, building a meta-template adds unnecessary overhead. Just ask directly.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Highly Domain-Specific Work</strong>
+                                    <p>When the task requires deep domain knowledge more than structural reasoning &mdash; a meta-template cannot substitute for the specific context a domain expert would provide.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative Free-Form Tasks</strong>
+                                    <p>When you want unconstrained creativity &mdash; poetry, brainstorming, or exploratory writing &mdash; imposing a structural template can limit the model&rsquo;s creative range.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Meta Prompting delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">System Prompt Architecture</h3>
+                        <p class="use-case-showcase__desc">Design system prompts for AI products that define reasoning patterns rather than hard-coding responses to anticipated inputs. The model handles novel queries gracefully because it has a thinking framework, not just a script.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Prompt Libraries</h3>
+                        <p class="use-case-showcase__desc">Build reusable prompt templates that teams share across projects. A single meta-template for &ldquo;analytical reasoning&rdquo; replaces separate prompts for market analysis, risk assessment, competitive review, and more.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Educational Scaffolding</h3>
+                        <p class="use-case-showcase__desc">Teach students reasoning patterns they can apply across subjects. A meta-template for &ldquo;evaluating claims&rdquo; works in science, history, and literature &mdash; building transferable critical thinking skills.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Quality Assurance Workflows</h3>
+                        <p class="use-case-showcase__desc">Define how the AI should evaluate any piece of work: identify criteria, assess against each criterion, note gaps, and recommend improvements. Works for code reviews, document reviews, and design critiques alike.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Decision Frameworks</h3>
+                        <p class="use-case-showcase__desc">Create meta-templates for recurring decision types: hire/no-hire, invest/pass, ship/delay. The template ensures consistent evaluation criteria while allowing each specific decision to be assessed on its own merits.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Agent Orchestration</h3>
+                        <p class="use-case-showcase__desc">In multi-agent AI systems, meta-prompts define each agent&rsquo;s reasoning role: the planner agent gets a planning meta-template, the critic agent gets an evaluation meta-template, creating structured collaboration.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Meta Prompting Fits</h2>
+                <p class="section-subtitle fade-in-up">Meta Prompting operates at the structural level above task-specific techniques</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Direct Prompting</span>
+                        <span class="era-marker__title">Task Instructions</span>
+                        <span class="era-marker__desc">Tell the model what to produce</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Step-by-Step</span>
+                        <span class="era-marker__desc">Show the model how to reason through one task</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Meta Prompting</span>
+                        <span class="era-marker__title">Structural Templates</span>
+                        <span class="era-marker__desc">Teach the model how to approach any task in a category</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Meta-Reasoning</span>
+                        <span class="era-marker__title">Adaptive Selection</span>
+                        <span class="era-marker__desc">Model chooses its own reasoning strategy</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Stack with Other Techniques</div>
+                    <p>Meta Prompting works exceptionally well as a wrapper around other techniques. A meta-template can instruct the model: &ldquo;For factual questions, use Self-Ask decomposition. For analytical questions, use this evaluation framework. For creative tasks, use divergent-then-convergent thinking.&rdquo; This creates a meta-layer that intelligently routes to the best reasoning approach per task type.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary approaches to structured reasoning</p>
+
+                <a href="meta-reasoning.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Meta-Reasoning Prompting</span>
+                        <span class="evolution-callout__desc">Takes Meta Prompting further by letting the model dynamically select and adapt its reasoning strategy rather than following a fixed template.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">The foundational step-by-step reasoning technique that Meta Prompting elevates from task-specific demonstrations to reusable structural patterns.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="tree-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Tree of Thought</span>
+                        <span class="evolution-callout__desc">While Meta Prompting provides linear structural templates, Tree of Thought explores branching paths &mdash; a complementary approach for problems requiring exploration of multiple solution paths.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Build Your Reasoning Templates</h2>
+                        <p class="cta-corporate__text">Try Meta Prompting to create reusable structural templates or explore our tools to build more effective prompts.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

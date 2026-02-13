@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Debate Prompting: Have AI agents argue opposing positions on a question, then judge the debate to extract the most well-supported answer through adversarial reasoning.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/debate-prompting.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Debate Prompting - Praxis">
+    <meta property="og:description" content="Debate Prompting: Have AI agents argue opposing positions on a question, then judge the debate to extract the most well-supported answer through adversarial reasoning.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/debate-prompting.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Debate Prompting - Praxis">
+    <meta name="twitter:description" content="Debate Prompting: Have AI agents argue opposing positions on a question, then judge the debate to extract the most well-supported answer through adversarial reasoning.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Debate Prompting",
+      "name": "Debate Prompting",
+      "description": "Debate Prompting: Have AI agents argue opposing positions on a question, then judge the debate to extract the most well-supported answer through adversarial reasoning.",
+      "url": "https://praxislibrary.com/learn/debate-prompting.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Debate Prompting"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Debate Prompting - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Debate Prompting</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Ensemble Methods Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Debate Prompting</h1>
+                <p class="page-subtitle fade-in">The best way to test an argument is to face a strong counterargument. Debate Prompting sets up adversarial reasoning &mdash; two or more positions argue their cases, challenge each other&rsquo;s evidence, and expose weaknesses &mdash; with a judge synthesizing the strongest arguments into a well-tested conclusion.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2023</span>
+                        <p><strong>Introduced:</strong> Debate Prompting was introduced in 2023, inspired by AI safety research on debate as a scalable alignment technique (Irving et al., 2018). The technique structures reasoning as a formal debate: one side argues for a position, another argues against it, and a judge evaluates the arguments. This adversarial structure forces each side to present their strongest evidence and directly address counterarguments, producing more thoroughly examined conclusions.</p>
+                        <p><strong>Modern LLM Status:</strong> Debate Prompting has gained importance as AI is used for increasingly consequential decisions. The adversarial structure helps surface risks, counterarguments, and edge cases that single-perspective reasoning misses. Modern applications include AI-assisted policy analysis, investment thesis testing, and legal argument preparation. The technique is especially valuable when <strong>the cost of missing a counterargument is high</strong> and when decisions require considering multiple legitimate perspectives.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Test Arguments Through Opposition</h2>
+                        <p class="split-section__text">Single-perspective reasoning suffers from confirmation bias &mdash; the model finds evidence for whatever position it initially adopts. Debate Prompting eliminates this by forcing explicit argumentation on both sides. The &ldquo;pro&rdquo; side must make the strongest possible case. The &ldquo;con&rdquo; side must find the strongest counterarguments. Neither side can ignore inconvenient evidence.</p>
+                        <p class="split-section__text"><strong>A judge evaluates both cases,</strong> weighing argument quality rather than just choosing one side. The final synthesis draws from the strongest elements of each position, producing a conclusion that has been stress-tested against its own counterarguments.</p>
+                        <p class="split-section__text">Think of it like a courtroom trial: the prosecution and defense each present their best cases, cross-examine the other side&rsquo;s evidence, and the judge weighs both arguments to reach a verdict &mdash; a verdict far more reliable than one reached by hearing only one side.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Adversarial Reasoning Finds Truth</span>
+                                <p>In a debate, weaknesses in an argument are actively exploited by the opposing side. This creates selection pressure for robust arguments. Claims that survive strong counterarguments are more likely to be correct than claims that were never challenged. The adversarial process <strong>eliminates weak reasoning by design</strong> &mdash; if a point can be effectively rebutted, it loses weight in the final synthesis.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Debate Process</h2>
+                <p class="section-subtitle fade-in-up">Five stages from proposition to well-tested conclusion</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Frame the Debate</h3>
+                            <p class="element-timeline__text">State the proposition clearly and assign pro and con positions. The proposition should be specific enough to argue but complex enough that both sides have legitimate ground to stand on. Framing the question well is critical &mdash; vague propositions produce vague debates.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Proposition: Our company should migrate from a monolithic architecture to microservices within the next 12 months. Debater A will argue in favor. Debater B will argue against.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Opening Arguments</h3>
+                            <p class="element-timeline__text">Each side presents their case with evidence and reasoning. The pro side makes the strongest possible argument for the proposition. The con side makes the strongest possible argument against it. Both sides should present specific evidence, concrete examples, and logical reasoning rather than vague assertions.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Pro:</strong> &ldquo;Microservices will enable independent scaling of our highest-traffic services, reduce deployment risk through isolated releases, and allow teams to choose optimal technology stacks per service.&rdquo;<br><strong>Con:</strong> &ldquo;The migration will introduce distributed systems complexity, require new infrastructure and monitoring, and our team lacks microservices experience &mdash; creating a 6-12 month productivity dip.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Rebuttals</h3>
+                            <p class="element-timeline__text">Each side responds to the other&rsquo;s arguments, challenging weak points and defending their position against criticism. This is where the adversarial value of debate emerges &mdash; arguments that seemed strong in isolation may crumble under direct challenge, while others prove remarkably resilient.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Pro rebuttal:</strong> &ldquo;The productivity dip argument assumes a big-bang migration. A strangler fig pattern lets us migrate incrementally, maintaining velocity while converting one service at a time.&rdquo;<br><strong>Con rebuttal:</strong> &ldquo;Independent scaling sounds appealing, but our traffic analysis shows only 2 of 14 modules actually need independent scaling &mdash; the other 12 would gain complexity without benefit.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Closing Statements</h3>
+                            <p class="element-timeline__text">Each side summarizes their strongest points, incorporating what survived the rebuttal round. Closing statements should acknowledge conceded points and emphasize the arguments that proved most resilient under challenge.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Pro closing:</strong> &ldquo;The incremental migration approach addresses timing concerns while still achieving the core benefits of independent deployment and technology flexibility.&rdquo;<br><strong>Con closing:</strong> &ldquo;Even incrementally, we&rsquo;re adding operational complexity for a benefit that only applies to a small fraction of our codebase. A modular monolith achieves most benefits at lower cost.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">5</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Judge&rsquo;s Decision</h3>
+                            <p class="element-timeline__text">Evaluate both sides and synthesize the best-supported conclusion. The judge doesn&rsquo;t simply pick a winner &mdash; they weigh the quality of evidence and reasoning from each side, identify points of agreement, and produce a nuanced recommendation that incorporates the strongest elements from both positions.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Judge&rsquo;s synthesis:</strong> &ldquo;Extract the 2 high-traffic modules into microservices using a strangler fig approach. Keep the remaining 12 modules as a modular monolith with clear internal boundaries. This captures the scaling benefits where they matter while avoiding unnecessary distributed systems complexity.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why adversarial argumentation produces stronger conclusions</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Single Analysis</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Should we adopt a remote-first work policy for our 200-person engineering team?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Yes, remote-first policies increase flexibility, reduce overhead costs, and expand the talent pool. Many companies have successfully transitioned to remote work since 2020.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>One-sided, ignores counterarguments and risks entirely</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Debate Prompting</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Adversarial Reasoning</span>
+                                <p><strong>Pro:</strong> Remote-first expands hiring beyond our metro area, reduces $2.4M annual office costs, and our developer satisfaction surveys show 78% prefer remote work.<br><strong>Con:</strong> Our onboarding completion rate dropped 34% since going hybrid. Junior engineers report feeling isolated, and cross-team collaboration metrics have declined in 3 of 4 quarters.<br><strong>Rebuttal (Pro):</strong> Structured mentorship programs can address onboarding gaps without requiring co-location for all 200 engineers.<br><strong>Rebuttal (Con):</strong> Mentorship programs add overhead and still can&rsquo;t replicate the spontaneous knowledge transfer that happens in person.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Judge&rsquo;s Synthesis</span>
+                                <p>Adopt remote-first for senior engineers while requiring in-office time for the first 6 months for new hires. Invest savings from reduced office space into structured mentorship and quarterly team gatherings. Re-evaluate onboarding metrics after two quarters.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Both sides tested, nuanced synthesis that addresses real trade-offs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Debate Prompting in Action</h2>
+                <p class="section-subtitle fade-in-up">See how adversarial argumentation stress-tests decisions</p>
+
+                <div class="accordion fade-in-up" id="debate-prompting-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Investment Thesis</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Debate Setup</span>
+                                    <p>&ldquo;Debate whether Company X is a strong investment at its current valuation. Bull side argues for buying. Bear side argues against. Judge evaluates the quality of evidence on both sides.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Adversarial Exchange</span>
+                                    <p><strong>Bull:</strong> Revenue grew 42% YoY with expanding margins. The company&rsquo;s enterprise pipeline has tripled, and their new product line addresses a $50B TAM with no dominant incumbent.<br><br>
+                                    <strong>Bear:</strong> Revenue growth is decelerating quarter-over-quarter (52% &rarr; 48% &rarr; 42%). The $50B TAM estimate comes from the company&rsquo;s own pitch deck, not independent analysis. Customer concentration risk is high &mdash; top 3 clients represent 45% of revenue.<br><br>
+                                    <strong>Bull rebuttal:</strong> Decelerating growth from 52% to 42% still far exceeds industry averages. New enterprise contracts are diversifying the customer base &mdash; top 3 concentration was 60% two years ago.<br><br>
+                                    <strong>Bear rebuttal:</strong> At 18x revenue multiple, the current valuation already prices in sustained 40%+ growth. Any further deceleration triggers a significant re-rating downward.<br><br>
+                                    <strong>Judge:</strong> The bull case for the business is strong, but the bear case on valuation is compelling. The business fundamentals support investment, but the current multiple leaves little margin of safety. Recommendation: Add to watchlist with a target entry at 12-14x revenue, which would provide adequate margin for growth deceleration risk.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Policy Proposal</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Debate Setup</span>
+                                    <p>&ldquo;Debate whether our school district should require AI literacy as a core curriculum component starting in 6th grade. Proponents argue for adoption. Critics argue against. Judge synthesizes a recommendation.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Adversarial Exchange</span>
+                                    <p><strong>Proponents:</strong> AI tools are already embedded in students&rsquo; daily lives. Teaching AI literacy &mdash; how these systems work, their limitations, and responsible use &mdash; prepares students for a workforce where AI fluency is increasingly expected. Waiting until high school or college puts students at a disadvantage.<br><br>
+                                    <strong>Critics:</strong> Teacher preparedness is the bottleneck. Only 12% of our middle school teachers report confidence in teaching AI concepts. Mandating curriculum without adequate training creates superficial instruction that may do more harm than good. Additionally, AI technology evolves so rapidly that curriculum becomes outdated within a school year.<br><br>
+                                    <strong>Proponents rebuttal:</strong> Teacher training programs can be developed in parallel. The core concepts &mdash; critical evaluation of AI output, understanding bias, responsible use &mdash; are stable principles that don&rsquo;t change with each model release.<br><br>
+                                    <strong>Critics rebuttal:</strong> &ldquo;In parallel&rdquo; development historically means undertrained teachers delivering watered-down content. Our district&rsquo;s previous technology mandates (coding in 2018) resulted in 60% of classes teaching copy-paste exercises rather than computational thinking.<br><br>
+                                    <strong>Judge:</strong> Both sides present valid concerns. Recommendation: Pilot AI literacy in 3 volunteer schools with properly trained teachers for one year. Use measurable outcomes from the pilot (student competency assessments, teacher confidence surveys) to inform district-wide rollout timeline. This addresses the proponents&rsquo; urgency while respecting the critics&rsquo; legitimate concerns about implementation quality.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Technology Adoption</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Debate Setup</span>
+                                    <p>&ldquo;Debate whether our hospital system should deploy AI-assisted diagnostic imaging for radiology. Advocates argue for adoption. Skeptics argue for caution. Judge evaluates both positions and recommends a path forward.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Adversarial Exchange</span>
+                                    <p><strong>Advocates:</strong> Studies show AI-assisted imaging catches findings that radiologists miss in 5-8% of cases, particularly small nodules and subtle fractures. With our radiologist shortage (3 unfilled positions), AI assistance could reduce burnout and improve patient outcomes by shortening report turnaround times.<br><br>
+                                    <strong>Skeptics:</strong> Those accuracy studies were conducted under controlled conditions with curated datasets. Real-world performance degrades with our diverse patient population and older imaging equipment. False positives from AI create downstream costs: unnecessary biopsies, patient anxiety, and follow-up imaging that strains an already overloaded system.<br><br>
+                                    <strong>Advocates rebuttal:</strong> False positive rates are manageable &mdash; the AI serves as a second reader, not a replacement. Radiologists still make final decisions. The 5-8% catch rate represents real patients whose conditions would otherwise go undetected.<br><br>
+                                    <strong>Skeptics rebuttal:</strong> &ldquo;Second reader&rdquo; implies the radiologist independently reviews every case. In practice, alert fatigue from false positives leads to dismissing alerts altogether, potentially including true positives. This is well-documented in clinical alert systems.<br><br>
+                                    <strong>Judge:</strong> Deploy AI-assisted imaging as a &ldquo;silent second reader&rdquo; for a 6-month trial &mdash; AI flags are logged but not shown in real-time to radiologists. Compare AI findings against radiologist reports retrospectively to establish real-world accuracy with our equipment and population. If the false positive rate is acceptable and the catch rate confirms value, transition to real-time alerts with a tuned confidence threshold. Always verify AI-generated results against clinical judgment before acting on them.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Debate Prompting</h2>
+                <p class="section-subtitle fade-in-up">Best for decisions with legitimate opposing viewpoints</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Decisions With Opposing Viewpoints</strong>
+                                    <p>Questions where reasonable people disagree &mdash; policy decisions, strategic directions, trade-offs between competing values or priorities.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Risk Assessment and Due Diligence</strong>
+                                    <p>When you need to actively search for risks and counterarguments rather than hoping the model mentions them unprompted.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Testing the Strength of an Argument</strong>
+                                    <p>When you have a position and want to see how well it holds up against the strongest possible counterarguments before committing to it.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Policy Analysis and Recommendation</strong>
+                                    <p>Evaluating proposed policies, regulations, or organizational changes where understanding both support and opposition is essential to sound decision-making.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Questions With Clear Factual Answers</strong>
+                                    <p>Questions with objectively correct answers don&rsquo;t benefit from debate &mdash; &ldquo;What is 2+2?&rdquo; needs no adversarial process.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Consensus Topics With No Genuine Debate</strong>
+                                    <p>Forcing debate on settled questions creates false equivalence and wastes tokens generating arguments that don&rsquo;t have legitimate support.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Time-Critical Decisions</strong>
+                                    <p>Debate Prompting generates substantially more tokens than single-pass analysis &mdash; skip it when you need a fast answer and the decision is low-stakes.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Trivial Choices</strong>
+                                    <p>Not every decision warrants adversarial analysis. Reserve debate for decisions where the cost of being wrong is significant.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Debate Prompting delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Policy Analysis</h3>
+                        <p class="use-case-showcase__desc">Evaluate proposed policies by having proponents and critics formally argue their cases, ensuring decision-makers see the strongest arguments on both sides before committing to a direction.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Investment Research</h3>
+                        <p class="use-case-showcase__desc">Structure bull vs. bear cases for investment theses, forcing explicit engagement with risks, downside scenarios, and valuation concerns that optimistic analysis might overlook.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Legal Strategy</h3>
+                        <p class="use-case-showcase__desc">Prepare for litigation or negotiation by arguing both sides of a legal question, identifying vulnerabilities in your position and anticipating opposing counsel&rsquo;s strongest arguments.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Technology Evaluation</h3>
+                        <p class="use-case-showcase__desc">Assess technology adoption decisions by having advocates and skeptics present evidence-based arguments, revealing hidden costs, integration risks, and realistic benefit timelines.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Ethical Review</h3>
+                        <p class="use-case-showcase__desc">Examine ethical dimensions of decisions by structuring arguments for and against a course of action, ensuring moral considerations and stakeholder impacts are fully explored.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Strategic Planning</h3>
+                        <p class="use-case-showcase__desc">Test strategic initiatives by debating their merits before committing resources, surfacing execution risks and opportunity costs that enthusiastic planning teams may underweight.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Debate Prompting Fits</h2>
+                <p class="section-subtitle fade-in-up">Debate Prompting adds adversarial rigor to ensemble reasoning</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Consistency</span>
+                        <span class="era-marker__title">Independent Sampling</span>
+                        <span class="era-marker__desc">Multiple paths, majority vote</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Multi-Expert</span>
+                        <span class="era-marker__title">Panel Discussion</span>
+                        <span class="era-marker__desc">Diverse perspectives, synthesis</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Debate Prompting</span>
+                        <span class="era-marker__title">Adversarial Arguments</span>
+                        <span class="era-marker__desc">Opposition tests every claim</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Constitutional AI</span>
+                        <span class="era-marker__title">Value-Aligned Debate</span>
+                        <span class="era-marker__desc">Principles-based adjudication</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Judge Quality of Reasoning, Not Volume</div>
+                    <p>In AI debates, the side that generates more text isn&rsquo;t necessarily right. Instruct the judge to evaluate argument quality: strength of evidence, logical validity, direct engagement with counterarguments, and acknowledgment of limitations. A concise argument backed by strong evidence should outweigh a verbose argument built on weak premises. Always verify the judge&rsquo;s synthesis against the actual arguments presented.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary ensemble techniques</p>
+
+                <a href="ensemble-methods.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Ensemble Methods</span>
+                        <span class="evolution-callout__desc">The family of multi-perspective techniques that Debate Prompting extends with adversarial structure and formal argumentation.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">Runs multiple independent reasoning paths and votes on the answer &mdash; Debate Prompting adds direct confrontation between those perspectives.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="role-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Role Prompting</span>
+                        <span class="evolution-callout__desc">Assigning distinct roles to each debater strengthens the adversarial dynamic &mdash; a domain expert vs. a skeptical reviewer produces sharper argumentation.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Test Through Debate</h2>
+                        <p class="cta-corporate__text">Apply adversarial reasoning to your next decision or explore other ensemble techniques.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

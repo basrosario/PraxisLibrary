@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ROSES Framework: Structure prompts with Role, Objective, Scenario, Expected Solution, and Steps for scenario-grounded, step-by-step AI guidance.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/roses.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="ROSES Framework - Praxis">
+    <meta property="og:description" content="ROSES Framework: Structure prompts with Role, Objective, Scenario, Expected Solution, and Steps for scenario-grounded, step-by-step AI guidance.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/roses.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ROSES Framework - Praxis">
+    <meta name="twitter:description" content="ROSES Framework: Structure prompts with Role, Objective, Scenario, Expected Solution, and Steps for scenario-grounded, step-by-step AI guidance.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "ROSES Framework",
+      "name": "ROSES Framework",
+      "description": "ROSES Framework: Structure prompts with Role, Objective, Scenario, Expected Solution, and Steps for scenario-grounded, step-by-step AI guidance.",
+      "url": "https://praxislibrary.com/learn/roses.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Frameworks",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "ROSES Framework"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>ROSES Framework - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-page-type="framework">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">ROSES</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Community Framework</span>
+                </div>
+                <h1 class="page-title fade-in">ROSES Framework</h1>
+                <p class="page-subtitle fade-in">Five components that ground every prompt in a concrete situation. ROSES combines Role, Objective, Scenario, Expected Solution, and Steps to ensure AI responses are anchored in reality &mdash; not generic advice, but guidance tailored to your specific circumstances.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2024</span>
+                        <p><strong>Origin:</strong> The ROSES framework emerged in 2024 as a practical prompting structure designed to solve a common problem: AI responses that are technically correct but generically unhelpful. While most frameworks define <em>what</em> you want the AI to do, ROSES uniquely emphasizes <em>where</em> you are doing it through its Scenario component. By embedding a specific, concrete situation into the prompt, ROSES forces the AI to generate contextually grounded responses rather than one-size-fits-all advice. The Steps component further ensures outputs include actionable process guidance, not just declarative answers.</p>
+                        <p><strong>Modern LLM Status:</strong> ROSES is <strong>particularly effective for operational, procedural, and consulting-style tasks</strong>. Modern LLMs like Claude, GPT-4, and Gemini produce significantly better outputs when given a concrete scenario rather than an abstract goal. The Scenario component addresses the &ldquo;helpful but vague&rdquo; problem &mdash; the tendency of AI to generate generic best practices instead of situation-specific recommendations. ROSES is especially valuable in professional contexts where the right answer depends heavily on the specific circumstances: industry, company size, team maturity, technical constraints, and time horizons.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Ground the AI in Your Reality</h2>
+                        <p class="split-section__text">When you ask AI &ldquo;how should I handle a difficult employee conversation?&rdquo;, you get a generic playbook. When you describe the specific scenario &mdash; a senior engineer who has missed three deadlines since returning from parental leave, on a team that is already understaffed &mdash; you get a nuanced, contextually appropriate response. The difference is not the AI&rsquo;s capability; it is the specificity of the situation you provide.</p>
+                        <p class="split-section__text"><strong>ROSES makes scenario specificity a first-class component of the prompt.</strong> The Role sets the expert perspective. The Objective defines the goal. The Scenario paints the concrete situation with its unique variables. The Expected Solution describes the type of output needed. The Steps request actionable process guidance. Together, these five components ensure the AI is not just answering a question &mdash; it is solving <em>your</em> problem in <em>your</em> context.</p>
+                        <p class="split-section__text">Think of ROSES like briefing a consultant: you would not just tell them the problem &mdash; you would describe the specific situation, the constraints, the stakeholders, and the kind of deliverable you need. ROSES structures that same briefing for AI.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Scenarios Beat Abstractions</span>
+                                <p>Abstract prompts get abstract answers. &ldquo;Help me improve team communication&rdquo; produces a list of tips you could find in any management book. A ROSES Scenario like &ldquo;my 8-person remote team across 3 time zones has a 6-hour overlap window, and async updates in Slack are being missed because channels are too noisy&rdquo; produces <strong>specific, implementable recommendations</strong> tailored to that exact situation. The scenario is the difference between advice and a solution.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The ROSES Process</h2>
+                <p class="section-subtitle fade-in-up">Five components that build a scenario-grounded prompt</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Role &mdash; Assign the Expert Perspective</h3>
+                            <p class="element-timeline__text">Define the professional identity or expert lens the AI should adopt. The Role shapes how the AI interprets the scenario and frames its recommendations. A DevOps engineer and a CTO will analyze the same infrastructure problem from very different angles &mdash; the Role determines which perspective you need.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Act as a senior DevOps engineer with 8 years of experience managing cloud infrastructure for mid-size SaaS companies. You specialize in incident response and have led post-mortems for P1 outages.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Objective &mdash; Define the Goal</h3>
+                            <p class="element-timeline__text">State what you want to achieve. The Objective anchors the AI on the specific outcome, preventing it from wandering into tangential recommendations. Be clear about whether you need analysis, a plan, a document, or a decision framework.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Create an incident response runbook for database failover scenarios, including escalation procedures, rollback criteria, and communication templates for stakeholders.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Scenario &mdash; Describe the Specific Situation</h3>
+                            <p class="element-timeline__text">Paint the concrete, real-world situation with its unique variables, constraints, and stakeholders. The Scenario is the signature component of ROSES &mdash; it transforms a generic request into a situation-specific one. Include the who, what, when, where, and the specific constraints that make this situation unique.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;We run a PostgreSQL primary with two read replicas on AWS RDS. Our platform serves 15,000 concurrent users during peak hours (9am&ndash;5pm EST). Last month, a failover took 12 minutes and caused partial data inconsistency that required 3 hours of manual reconciliation. Our on-call rotation has 4 engineers, two of whom are relatively new to the system.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Expected Solution &mdash; Specify the Output Type</h3>
+                            <p class="element-timeline__text">Describe the format and nature of the response you need. Expected Solution tells the AI whether you want a document, a checklist, a decision tree, a script, or a strategic recommendation. It also sets scope boundaries &mdash; whether you need a comprehensive plan or a focused recommendation.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;A step-by-step runbook formatted as a decision tree. Each branch should include: trigger conditions, specific commands to run, verification checks, and escalation criteria. Include a separate communication template section for status updates to engineering, product, and customer success teams.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">5</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Steps &mdash; Request Process Guidance</h3>
+                            <p class="element-timeline__text">Ask for the specific sequence of actions, decisions, or phases that should be followed. Steps ensures the AI does not just describe what to do but explains the order and logic of <em>how</em> to do it. This component is what transforms a recommendation into an executable plan.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Break the runbook into phases: Detection (how we know there is a problem), Assessment (how we determine severity), Action (what we do), Verification (how we confirm resolution), and Retrospective (what we document afterward). Each phase should have numbered steps that even a junior on-call engineer can follow. All commands and procedures should be verified in a staging environment before production use.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why scenario-grounded prompts produce more actionable guidance</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Abstract Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>How should I handle a difficult conversation with an underperforming employee?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Prepare for the conversation by documenting specific examples. Choose a private setting. Start with positive feedback before addressing concerns. Use &ldquo;I&rdquo; statements. Listen actively. Set clear expectations and a follow-up timeline. Document the conversation.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Generic management advice, not tailored to any specific situation</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">ROSES Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Structured Prompt</span>
+                                <p><strong>R:</strong> Engineering manager with 3 years of experience leading a team of 6.<br><strong>O:</strong> Have a supportive but honest conversation about missed deadlines.<br><strong>S:</strong> Senior engineer, top performer for 2 years, has missed 3 sprint commitments since returning from 4 months of parental leave. Team is understaffed and cannot absorb the slack. No prior performance issues.<br><strong>E:</strong> A conversation script with specific talking points and likely responses.<br><strong>Steps:</strong> Opening, acknowledging context, addressing the pattern, collaborative problem-solving, agreeing on next steps.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p><strong>Opening (2 min):</strong> &ldquo;I wanted to check in on how things are going since your return. I know the transition back has been significant, and I want to make sure we are setting you up for success, not just piling on work.&rdquo;<br><br><strong>Acknowledging Context (3 min):</strong> &ldquo;Before we get into the specifics, I want to say clearly: your contributions over the past two years have been exceptional. This conversation is not about your capability &mdash; it is about making sure the current workload and pace are sustainable for you...&rdquo;</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Situation-specific, empathetic, with exact language to use</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">ROSES in Action</h2>
+                <p class="section-subtitle fade-in-up">See how scenario-grounded prompts produce situation-specific guidance</p>
+
+                <div class="accordion fade-in-up" id="roses-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Cloud Migration Risk Assessment</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">ROSES Prompt</span>
+                                    <p><strong>Role:</strong> Act as a cloud solutions architect with experience migrating legacy on-premise systems to AWS for regulated industries.<br><br>
+                                    <strong>Objective:</strong> Create a risk assessment for migrating our core billing system from on-premise servers to AWS, with mitigation strategies for each identified risk.<br><br>
+                                    <strong>Scenario:</strong> We are a healthcare billing company processing $2.3B in claims annually. Our current system runs on physical servers in a co-located data center with 99.95% uptime over the past 3 years. We must maintain HIPAA compliance throughout the migration. Our engineering team of 12 has limited AWS experience (2 certified). The migration must be completed within 6 months due to a data center lease expiration. We cannot afford more than 4 hours of total downtime during the transition.<br><br>
+                                    <strong>Expected Solution:</strong> A risk matrix with severity ratings (Critical/High/Medium/Low), probability assessments, specific mitigation strategies for each risk, and a prioritized action list.<br><br>
+                                    <strong>Steps:</strong> Organize the assessment into phases: Pre-Migration risks, Migration-Day risks, Post-Migration risks, and Ongoing Compliance risks. Each risk should include a mitigation plan with owner, timeline, and verification criteria. All compliance recommendations should be reviewed with your legal and compliance team before implementation.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AI Output</span>
+                                    <p><strong>Risk Assessment: Billing System Cloud Migration</strong><br><br>
+                                    <strong>Phase 1: Pre-Migration Risks</strong><br><br>
+                                    <strong>CRITICAL &mdash; HIPAA Compliance Gap During Transition</strong><br>
+                                    Probability: High | Impact: Critical<br>
+                                    Description: Current data handling procedures are designed for on-premise infrastructure. AWS requires different encryption, access control, and audit logging configurations to maintain HIPAA compliance.<br>
+                                    Mitigation: Engage a HIPAA-specialized AWS consulting partner (weeks 1&ndash;4). Complete a pre-migration compliance audit. Implement AWS HIPAA-eligible services only (RDS with encryption, S3 with server-side encryption, CloudTrail for audit logs).<br>
+                                    Owner: CISO + AWS Partner | Timeline: Weeks 1&ndash;6 | Verification: Third-party compliance audit before go-live.<br><br>
+                                    <strong>HIGH &mdash; Team Skill Gap</strong><br>
+                                    Probability: High | Impact: High<br>
+                                    Description: 10 of 12 engineers lack AWS certification. Risk of misconfiguration during migration...<br>
+                                    Mitigation: Accelerated AWS training program (weeks 1&ndash;8). Pair each migration task with a certified engineer as lead...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">New Teacher Classroom Management Plan</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">ROSES Prompt</span>
+                                    <p><strong>Role:</strong> Act as a veteran middle school teacher and instructional coach with 15 years of experience supporting new teachers in urban school settings.<br><br>
+                                    <strong>Objective:</strong> Create a practical classroom management plan for my first year of teaching, focusing on building rapport and establishing routines rather than punitive discipline.<br><br>
+                                    <strong>Scenario:</strong> I am a first-year 7th grade English teacher in a Title I school with 28 students per class, 5 classes per day. About 40% of my students are English language learners. The school has a positive behavior intervention system (PBIS) but enforcement is inconsistent across classrooms. I have 15 minutes between classes and no teaching assistant. Several students have IEPs with behavioral goals.<br><br>
+                                    <strong>Expected Solution:</strong> A week-by-week plan for the first month, with specific routines, scripts for common situations, and strategies adapted for ELL students and students with IEPs.<br><br>
+                                    <strong>Steps:</strong> Cover these phases: First Day procedures, Week 1 routines, Weeks 2&ndash;3 refinement, and Week 4 assessment. Include specific language I can use, not just strategies. All approaches should be reviewed with your school administration and special education coordinator before implementation.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AI Output</span>
+                                    <p><strong>First-Year Classroom Management Plan: Month 1</strong><br><br>
+                                    <strong>First Day Procedures</strong><br><br>
+                                    <strong>Greeting Routine (practice this &mdash; it sets everything):</strong><br>
+                                    Stand at the door. Make eye contact. Say each student&rsquo;s name (practice pronunciation beforehand &mdash; for your ELL students, this is not optional, it is the first act of respect). Script: &ldquo;Welcome to Room 214. I am Ms./Mr. [Name]. Find the seat with your name card &mdash; there is something on your desk to start.&rdquo;<br><br>
+                                    <strong>Desk Activity (while you greet the rest):</strong><br>
+                                    A low-stakes, visual activity that requires no reading comprehension barrier: &ldquo;Draw or write 3 things you want me to know about you.&rdquo; Provide sentence starters in English and Spanish: &ldquo;I like... / Me gusta...&rdquo;, &ldquo;I am good at... / Soy bueno/a en...&rdquo;...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Product Launch Communication Strategy</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">ROSES Prompt</span>
+                                    <p><strong>Role:</strong> Act as a Head of Product Marketing for a B2B SaaS company, experienced in launching features to enterprise clients with complex buying committees.<br><br>
+                                    <strong>Objective:</strong> Develop a launch communication strategy for a new AI-powered analytics feature that targets both existing customers (upsell) and new prospects.<br><br>
+                                    <strong>Scenario:</strong> We are launching an AI analytics dashboard as an add-on to our project management platform. Pricing is $15/user/month on top of the base plan. Beta testers reported 40% time savings on weekly reporting. However, two enterprise beta clients raised concerns about data privacy (their data being used to train AI models). Our competitor launched a similar feature last month at $10/user/month but with fewer capabilities. We have 4 weeks until launch and a marketing budget of $50,000.<br><br>
+                                    <strong>Expected Solution:</strong> A multi-channel launch plan with specific messaging for each audience segment, addressing the pricing objection and privacy concern proactively.<br><br>
+                                    <strong>Steps:</strong> Organize into: Pre-Launch (weeks 1&ndash;2), Launch Week, and Post-Launch (weeks 1&ndash;2). Each phase should include specific channels, messaging, and success metrics. All pricing claims and competitive comparisons should be verified for accuracy before publication.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AI Output</span>
+                                    <p><strong>AI Analytics Launch Plan: 4-Week Strategy</strong><br><br>
+                                    <strong>Pre-Launch: Weeks 1&ndash;2</strong><br><br>
+                                    <strong>Priority 1: Neutralize the Privacy Concern</strong><br>
+                                    Channel: Dedicated landing page + email to all enterprise accounts<br>
+                                    Message: &ldquo;Your data stays yours. Our AI analytics processes your data in isolated environments and never uses customer data for model training. Here is exactly how it works.&rdquo;<br>
+                                    Action: Publish a technical whitepaper on data architecture (have engineering co-author for credibility). Include a third-party security audit badge if available.<br>
+                                    Success Metric: Page views &gt;2,000, enterprise support ticket volume on privacy &lt;10.<br><br>
+                                    <strong>Priority 2: Competitive Positioning</strong><br>
+                                    Message Strategy: Do not compete on price. Compete on value. &ldquo;Our analytics saves teams 40% of their reporting time. That is [X] hours per month per user. At $15/user, the ROI pays for itself in week one.&rdquo;...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use ROSES</h2>
+                <p class="section-subtitle fade-in-up">Best for situation-specific problems that need actionable process guidance</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Consulting and Advisory Tasks</strong>
+                                    <p>Situations where the right answer depends entirely on the specific context &mdash; company size, industry, constraints, and stakeholder dynamics. ROSES ensures the AI consults on <em>your</em> problem, not a generic one.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Operational Procedures and Runbooks</strong>
+                                    <p>Creating step-by-step procedures for specific environments &mdash; incident response, deployment processes, or compliance workflows tailored to your exact tech stack and team.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Training and Coaching Scenarios</strong>
+                                    <p>Developing lesson plans, coaching scripts, or training materials that must account for the specific learner population, institutional constraints, and available resources.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Strategic Planning with Constraints</strong>
+                                    <p>Go-to-market plans, hiring strategies, or product roadmaps where budget, timeline, team size, and competitive dynamics shape the recommended approach.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>General Knowledge Queries</strong>
+                                    <p>Questions with universal answers &mdash; &ldquo;What is Agile methodology?&rdquo; &mdash; do not benefit from scenario specificity. Use simpler prompts or direct questions.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative and Open-Ended Generation</strong>
+                                    <p>Brainstorming, creative writing, or ideation tasks where over-specifying the scenario constrains the creative output. Use BAB for narrative or free-form prompts for exploration.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Quick Audience-Focused Communication</strong>
+                                    <p>When the primary need is calibrating tone, style, and audience rather than grounding in a scenario. Use CO-STAR for pure communication tasks.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where ROSES delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Incident Response</h3>
+                        <p class="use-case-showcase__desc">Build runbooks and response plans tailored to your specific infrastructure, team structure, SLAs, and regulatory requirements &mdash; not generic incident response templates.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Curriculum Development</h3>
+                        <p class="use-case-showcase__desc">Design lesson plans and learning paths that account for specific student populations, institutional resources, time constraints, and learning objectives.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Implementation Guides</h3>
+                        <p class="use-case-showcase__desc">Create step-by-step implementation plans for new tools, processes, or systems that reflect your team&rsquo;s actual skill levels, existing tech stack, and timeline.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Management Coaching</h3>
+                        <p class="use-case-showcase__desc">Get specific guidance for difficult management situations &mdash; performance conversations, team conflicts, or organizational changes &mdash; grounded in the actual people and dynamics involved.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Clinical Decision Support</h3>
+                        <p class="use-case-showcase__desc">Generate differential diagnosis frameworks or treatment plan outlines grounded in specific patient presentations, comorbidities, and institutional protocols &mdash; always for review by qualified clinicians.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Market Entry Strategy</h3>
+                        <p class="use-case-showcase__desc">Develop go-to-market plans grounded in your specific competitive landscape, budget constraints, team capabilities, and target market characteristics.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where ROSES Fits</h2>
+                <p class="section-subtitle fade-in-up">ROSES bridges generic role-based prompting and full scenario-driven consulting</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Role Prompting</span>
+                        <span class="era-marker__title">Expert Perspective</span>
+                        <span class="era-marker__desc">Assign a persona, no structure</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">RISEN</span>
+                        <span class="era-marker__title">Role + Context</span>
+                        <span class="era-marker__desc">Role, instructions, steps, end goal, narrowing</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">ROSES</span>
+                        <span class="era-marker__title">Scenario Grounded</span>
+                        <span class="era-marker__desc">Concrete situation with process guidance</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">CO-STAR</span>
+                        <span class="era-marker__title">Audience Centered</span>
+                        <span class="era-marker__desc">Full communication brief with six dimensions</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The Power of Specific Scenarios</div>
+                    <p>The more specific your Scenario component, the more valuable the AI&rsquo;s output becomes. Instead of &ldquo;a growing startup,&rdquo; say &ldquo;a 45-person Series B startup with $12M ARR and a 3-month runway concern.&rdquo; Instead of &ldquo;a difficult employee,&rdquo; describe the actual performance pattern, tenure, and team dynamics. Specificity is not extra work &mdash; it is the investment that transforms generic advice into a usable solution. When sharing scenarios with AI, ensure you do not include confidential or personally identifiable information without appropriate safeguards.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques &amp; Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary approaches to structured prompting</p>
+
+                <a href="risen.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related Structure</span>
+                        <span class="evolution-callout__title">RISEN Framework</span>
+                        <span class="evolution-callout__desc">A five-component framework that shares ROSES&rsquo; emphasis on role and step-by-step guidance but focuses on narrowing scope rather than grounding in a specific scenario.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="costar.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="16"/>
+                            <line x1="8" y1="12" x2="16" y2="12"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Audience Focused</span>
+                        <span class="evolution-callout__title">CO-STAR Framework</span>
+                        <span class="evolution-callout__desc">When the primary challenge is calibrating communication for a specific audience rather than grounding the AI in a specific scenario &mdash; CO-STAR and ROSES complement each other well.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="race.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Action Focused</span>
+                        <span class="evolution-callout__title">RACE Framework</span>
+                        <span class="evolution-callout__desc">A leaner structure that emphasizes the specific action to perform &mdash; useful when you need quick, role-based outputs without the full scenario-grounding that ROSES provides.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Build Your ROSES Prompt</h2>
+                        <p class="cta-corporate__text">Ground your next prompt in a concrete scenario or find the right framework for your specific task.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../tools/matcher.html" class="btn btn-secondary">Technique Finder</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

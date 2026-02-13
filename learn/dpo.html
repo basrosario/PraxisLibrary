@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DPO (Direct Preference Optimization): A simpler alternative to RLHF that directly optimizes model policy from preference data without needing a separate reward model.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/dpo.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="DPO (Direct Preference Optimization) - Praxis">
+    <meta property="og:description" content="DPO (Direct Preference Optimization): A simpler alternative to RLHF that directly optimizes model policy from preference data without needing a separate reward model.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/dpo.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DPO (Direct Preference Optimization) - Praxis">
+    <meta name="twitter:description" content="DPO (Direct Preference Optimization): A simpler alternative to RLHF that directly optimizes model policy from preference data without needing a separate reward model.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "DPO (Direct Preference Optimization)",
+      "name": "DPO (Direct Preference Optimization)",
+      "description": "DPO (Direct Preference Optimization): A simpler alternative to RLHF that directly optimizes model policy from preference data without needing a separate reward model.",
+      "url": "https://praxislibrary.com/learn/dpo.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "DPO (Direct Preference Optimization)"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>DPO (Direct Preference Optimization) - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">DPO</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Alignment Method</span>
+                </div>
+                <h1 class="page-title fade-in">DPO (Direct Preference Optimization)</h1>
+                <p class="page-subtitle fade-in">A simpler alternative to RLHF that directly optimizes model policy from preference data &mdash; eliminating the need for a separate reward model while remaining mathematically equivalent, more stable to train, and computationally lighter.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2023</span>
+                        <p><strong>Introduced:</strong> DPO was published in 2023 by Rafailov et al. at Stanford University. The technique emerged as a response to the complexity of Reinforcement Learning from Human Feedback (RLHF), which requires training a separate reward model and then using reinforcement learning to optimize the language model against it. DPO showed that you can mathematically reparameterize the RLHF objective to directly optimize the policy model using simple pairwise preference data &mdash; preferred vs. rejected responses &mdash; without ever fitting a reward model. This dramatically simplified the alignment pipeline.</p>
+                        <p><strong>Modern LLM Status:</strong> DPO has become one of the most widely used alignment techniques in 2026. Its simplicity compared to RLHF &mdash; no separate reward model needed &mdash; made it the default choice for fine-tuning labs and open-source model trainers. Variants like IPO (Identity Preference Optimization), KTO (Kahneman-Tversky Optimization), and ORPO (Odds Ratio Preference Optimization) have extended DPO&rsquo;s core principle, but the original formulation remains dominant. Nearly every major open-weight model release in 2025&ndash;2026 includes a DPO or DPO-variant stage in its training pipeline.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Skip the Reward Model</h2>
+                        <p class="split-section__text">Traditional RLHF alignment works in two stages: first, train a reward model on human preference data (which response is better?), then use reinforcement learning (typically PPO) to optimize the language model to maximize that reward. This pipeline is effective but complex &mdash; the reward model can overfit, the RL training is unstable, and the computational cost is significant.</p>
+                        <p class="split-section__text"><strong>DPO collapses this into a single step.</strong> By showing that the optimal policy under the RLHF objective has a closed-form solution, DPO derives a loss function that operates directly on preference pairs. Given a prompt and two responses (one preferred, one rejected), DPO increases the probability of the preferred response while decreasing the probability of the rejected one &mdash; all through standard supervised learning with no RL loop required.</p>
+                        <p class="split-section__text">Think of it like learning to cook. RLHF is like first training a food critic (reward model), then having a chef practice dishes while the critic scores them (RL loop). DPO skips the critic entirely &mdash; the chef directly learns from tasting both dishes and knowing which one the diner preferred.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Simplicity Matters for Alignment</span>
+                                <p>Every additional component in an alignment pipeline is a potential failure point. RLHF&rsquo;s reward model can develop blind spots, its RL training can mode-collapse, and hyperparameter tuning is notoriously finicky. DPO eliminates these failure modes by reducing the problem to a classification-like loss on preference pairs. Fewer moving parts means more reproducible results, faster iteration cycles, and alignment work that is accessible to teams without deep RL expertise &mdash; which has been critical for democratizing model alignment.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The DPO Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from preference data to aligned model</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Collect Preference Data</h3>
+                            <p class="element-timeline__text">Gather pairs of model responses to the same prompt, where human annotators (or an AI judge) have indicated which response is preferred. Each data point is a triplet: the prompt, the preferred (chosen) response, and the rejected response. The quality and diversity of this preference data directly determines how well the model aligns.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Prompt: &ldquo;Explain quantum entanglement simply.&rdquo; &mdash; Response A (preferred): clear, accurate analogy. Response B (rejected): technically correct but confusing jargon.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Compute Log-Probability Ratios</h3>
+                            <p class="element-timeline__text">For each preference pair, DPO computes the log-probabilities of both the chosen and rejected responses under the current policy model and a frozen reference model (typically the supervised fine-tuned checkpoint). The ratio between these probabilities is the signal that drives learning &mdash; it measures how much the policy has diverged from the reference for each response.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>If the policy assigns higher probability to the preferred response relative to the reference model, the loss is already low. If it favors the rejected response, the loss is high and gradients push the model to correct.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Optimize with the DPO Loss</h3>
+                            <p class="element-timeline__text">The DPO loss function is a binary cross-entropy style objective on the implicit reward margin between chosen and rejected responses. It increases the relative likelihood of preferred responses while penalizing rejected ones, all while staying close to the reference model through a KL-divergence constraint controlled by a temperature parameter (beta). This is pure supervised learning &mdash; standard gradient descent, no RL.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>With beta=0.1 (a common setting), the model learns strong preferences but stays close to its base capabilities. Higher beta values enforce tighter adherence to the reference model; lower values allow more aggressive preference learning.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Evaluate and Iterate</h3>
+                            <p class="element-timeline__text">After training, evaluate the aligned model on held-out preference data, safety benchmarks, and real-world usage scenarios. DPO models should show improved preference win rates while maintaining coherence and capability. If specific failure modes persist, collect targeted preference data for those cases and run additional DPO rounds. Always verify alignment improvements with independent evaluation.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Run the DPO-aligned model through safety evaluations and human preference tests. If it excels at helpfulness but still struggles with refusal calibration, collect preference pairs specifically targeting those edge cases for a follow-up DPO pass.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why DPO simplifies alignment without sacrificing quality</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Traditional RLHF</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Pipeline</span>
+                                <p><strong>Step 1:</strong> Collect preference data from human annotators.<br><strong>Step 2:</strong> Train a separate reward model on that preference data.<br><strong>Step 3:</strong> Use PPO (reinforcement learning) to optimize the language model against the reward model.<br><strong>Step 4:</strong> Tune RL hyperparameters to prevent reward hacking and mode collapse.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Challenges</span>
+                                <p>Three separate models in memory (policy, reference, reward). Unstable RL training. Reward model can be exploited. Requires deep RL expertise to tune correctly.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Complex pipeline, multiple failure points, high compute cost</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">DPO</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Pipeline</span>
+                                <p><strong>Step 1:</strong> Collect the same preference data.<br><strong>Step 2:</strong> Directly optimize the language model using a simple classification-like loss on preference pairs.<br><strong>No reward model. No RL loop.</strong> Just standard supervised training with the DPO objective.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Advantages</span>
+                                <p>Two models in memory (policy + frozen reference). Stable gradient descent training. No reward hacking possible. Accessible to any ML team familiar with fine-tuning. Mathematically equivalent to RLHF under the Bradley-Terry preference model.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Simpler pipeline, stable training, equivalent results, lower compute</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">DPO in Action</h2>
+                <p class="section-subtitle fade-in-up">See how preference optimization shapes model behavior (always verify AI-generated outputs independently)</p>
+
+                <div class="accordion fade-in-up" id="dpo-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Safety Alignment: Refusing Harmful Requests</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Preference Pair</span>
+                                    <p><strong>Prompt:</strong> &ldquo;How do I pick a lock?&rdquo;<br><br>
+                                    <strong>Preferred response:</strong> &ldquo;I can explain how locks work mechanically for educational purposes. Pin tumbler locks use spring-loaded pins of varying heights. If you&rsquo;re locked out, I&rsquo;d recommend contacting a licensed locksmith. If you&rsquo;re interested in lock mechanisms for security research, consider looking into locksport communities that practice ethically and legally.&rdquo;<br><br>
+                                    <strong>Rejected response:</strong> &ldquo;Sure, here are step-by-step instructions for picking a standard pin tumbler lock...&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">What DPO Learns</span>
+                                    <p>From this preference pair, DPO teaches the model to acknowledge the user&rsquo;s curiosity while redirecting to safe, constructive alternatives. The preferred response is helpful (explains the mechanism) without being harmful (no actionable exploit instructions). Over thousands of such pairs, the model learns nuanced refusal calibration &mdash; not a blanket &ldquo;I can&rsquo;t help with that&rdquo; but a thoughtful, context-appropriate response. <strong>Note:</strong> Always verify that aligned models handle edge cases correctly through independent safety evaluation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Helpfulness: Improving Explanation Quality</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Preference Pair</span>
+                                    <p><strong>Prompt:</strong> &ldquo;Explain machine learning to a 10-year-old.&rdquo;<br><br>
+                                    <strong>Preferred response:</strong> &ldquo;Imagine you&rsquo;re teaching a robot to sort your toys. At first, the robot doesn&rsquo;t know which bin each toy goes in. But every time it puts a toy in the wrong bin, you say &lsquo;try again!&rsquo; and every time it gets it right, you say &lsquo;nice job!&rsquo; After sorting hundreds of toys, the robot gets really good at it &mdash; even with toys it&rsquo;s never seen before. That&rsquo;s machine learning: a computer getting better at a task by practicing with lots of examples.&rdquo;<br><br>
+                                    <strong>Rejected response:</strong> &ldquo;Machine learning is a subset of artificial intelligence that uses statistical methods to enable computer systems to learn from data and improve their performance on tasks without being explicitly programmed using gradient descent optimization...&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">What DPO Learns</span>
+                                    <p>DPO teaches the model to match its language to the audience. The preferred response uses concrete analogies a child can visualize, while the rejected response &mdash; though technically accurate &mdash; fails to meet the user where they are. Through many such pairs, the model learns that helpfulness means adapting complexity, not maximizing information density. <strong>Remember:</strong> Even well-aligned models can misjudge audience level, so review AI explanations before sharing them with others.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Honesty: Acknowledging Uncertainty</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Preference Pair</span>
+                                    <p><strong>Prompt:</strong> &ldquo;What will the stock market do next quarter?&rdquo;<br><br>
+                                    <strong>Preferred response:</strong> &ldquo;I can&rsquo;t predict future stock market performance &mdash; no one can with reliability. What I can do is help you understand factors that analysts typically consider: current economic indicators, Federal Reserve policy signals, corporate earnings trends, and geopolitical risks. If you share your specific investment context, I can help you think through a framework for evaluating these factors. For actual investment decisions, always consult a qualified financial advisor.&rdquo;<br><br>
+                                    <strong>Rejected response:</strong> &ldquo;Based on current trends, the market is likely to rise 8-12% next quarter due to strong employment numbers and expected Fed rate cuts.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">What DPO Learns</span>
+                                    <p>DPO trains the model to be honest about the limits of its knowledge rather than generating confident-sounding but unreliable predictions. The preferred response is transparent about uncertainty while still being maximally helpful within those bounds. This preference pattern teaches the model that honesty and helpfulness are not in conflict &mdash; you can acknowledge what you do not know while still providing genuine value. <strong>Critical:</strong> Always cross-check financial information from AI with qualified professionals and authoritative sources.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When DPO Applies</h2>
+                <p class="section-subtitle fade-in-up">Best for model alignment with preference data at scale</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Post-SFT Alignment</strong>
+                                    <p>After supervised fine-tuning, use DPO to align the model with human preferences for helpfulness, safety, and honesty &mdash; the standard alignment stage in modern training pipelines.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Open-Source Model Training</strong>
+                                    <p>Teams without deep RL expertise can implement DPO using standard training frameworks. Libraries like TRL and Axolotl have first-class DPO support.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Style and Tone Calibration</strong>
+                                    <p>When you want the model to adopt a specific communication style &mdash; more concise, more formal, more empathetic &mdash; DPO can encode these preferences directly from comparison data.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Safety Fine-Tuning</strong>
+                                    <p>Teaching models nuanced refusal behavior &mdash; when to decline, when to redirect, and when to help with appropriate caveats &mdash; through carefully curated preference pairs.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>No Preference Data Available</strong>
+                                    <p>DPO requires paired preference data. If you only have single demonstrations (not comparisons), use supervised fine-tuning or consider generating synthetic preference pairs first.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Runtime Prompt Engineering</strong>
+                                    <p>DPO is a training-time technique that modifies model weights. If you need alignment at inference time without retraining, use system prompting, Constitutional AI, or other prompt-based approaches instead.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Reward Landscapes</strong>
+                                    <p>When preferences depend on multiple interacting factors that are hard to capture in pairwise comparisons &mdash; online RLHF with a learned reward model may capture these nuances better.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where DPO delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Safety Alignment</h3>
+                        <p class="use-case-showcase__desc">Train models to refuse harmful requests while remaining helpful for legitimate queries, using preference pairs that demonstrate nuanced boundary-setting rather than blanket refusals.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Conversational Quality</h3>
+                        <p class="use-case-showcase__desc">Improve chat models to be more engaging, empathetic, and appropriately detailed by aligning on preference data from real user interactions and quality assessments.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Code Generation</h3>
+                        <p class="use-case-showcase__desc">Align coding assistants to prefer clean, well-documented, secure code over clever but unreadable solutions, using preference pairs judged by experienced developers.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Domain-Specific Expertise</h3>
+                        <p class="use-case-showcase__desc">Fine-tune models for specialized fields like medicine, law, or finance where expert-annotated preference data can teach domain-appropriate communication patterns and accuracy standards.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Honesty Calibration</h3>
+                        <p class="use-case-showcase__desc">Teach models to express appropriate uncertainty, avoid hallucination, and decline to speculate when they lack sufficient knowledge &mdash; critical for trustworthy AI systems.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Open-Weight Model Release</h3>
+                        <p class="use-case-showcase__desc">Enable open-source teams to produce well-aligned models without requiring expensive RL infrastructure &mdash; DPO&rsquo;s simplicity has made quality alignment accessible to the broader community.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where DPO Fits</h2>
+                <p class="section-subtitle fade-in-up">DPO bridges human preferences and model behavior through elegant simplification</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">RLHF</span>
+                        <span class="era-marker__title">Reward Model + RL</span>
+                        <span class="era-marker__desc">Full pipeline with PPO optimization</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">DPO</span>
+                        <span class="era-marker__title">Direct Optimization</span>
+                        <span class="era-marker__desc">Same objective, no reward model</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">IPO / KTO</span>
+                        <span class="era-marker__title">Robust Variants</span>
+                        <span class="era-marker__desc">Addressing DPO&rsquo;s edge cases</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">ORPO</span>
+                        <span class="era-marker__title">Combined SFT + Preference</span>
+                        <span class="era-marker__desc">Single-stage alignment training</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The Alignment Revolution</div>
+                    <p>DPO did not just simplify RLHF &mdash; it fundamentally changed who could participate in alignment research. Before DPO, aligning a model required deep reinforcement learning expertise and significant compute for PPO training. After DPO, any team comfortable with supervised fine-tuning could align a model. This democratization has been one of the most impactful shifts in AI development, driving the rapid improvement of open-weight models from 2023 to 2026.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary alignment approaches</p>
+
+                <a href="constitutional-ai.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Constitutional AI</span>
+                        <span class="evolution-callout__desc">Uses a set of principles to generate AI-written critiques and revisions, creating synthetic preference data that can then be used with DPO or RLHF for scalable alignment.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="star.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">STaR (Self-Taught Reasoner)</span>
+                        <span class="evolution-callout__desc">Improves reasoning through self-generated rationales &mdash; where DPO aligns on preferences, STaR bootstraps from the model&rsquo;s own successful reasoning traces.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="instruction-hierarchy.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Instruction Hierarchy</span>
+                        <span class="evolution-callout__desc">Defines priority levels for conflicting instructions &mdash; DPO can be used to train models to respect instruction hierarchy through carefully constructed preference pairs.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Understand Model Alignment</h2>
+                        <p class="cta-corporate__text">Explore how DPO and related techniques shape the AI models you use every day, or build better prompts with our interactive tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

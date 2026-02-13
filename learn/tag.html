@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TAG Framework: A goal-oriented three-element prompting framework using Task, Action, and Goal to ensure every AI prompt is tied to a clear, measurable objective.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/tag.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="TAG Framework - Praxis">
+    <meta property="og:description" content="TAG Framework: A goal-oriented three-element prompting framework using Task, Action, and Goal to ensure every AI prompt is tied to a clear, measurable objective.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/tag.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TAG Framework - Praxis">
+    <meta name="twitter:description" content="TAG Framework: A goal-oriented three-element prompting framework using Task, Action, and Goal to ensure every AI prompt is tied to a clear, measurable objective.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "TAG Framework",
+      "name": "TAG Framework",
+      "description": "TAG Framework: A goal-oriented three-element prompting framework using Task, Action, and Goal to ensure every AI prompt is tied to a clear, measurable objective.",
+      "url": "https://praxislibrary.com/learn/tag.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Frameworks",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "TAG Framework"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>TAG Framework - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="framework">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">TAG</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Community Framework</span>
+                </div>
+                <h1 class="page-title fade-in">TAG Framework</h1>
+                <p class="page-subtitle fade-in">Every prompt should answer three questions: what needs doing, how to do it, and why it matters. TAG &mdash; Task, Action, Goal &mdash; ensures every AI interaction is anchored to a measurable objective.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2024</span>
+                        <p><strong>Origin:</strong> TAG is a community framework from 2024 that emerged from the observation that most prompts tell AI what to do but not why. This missing &ldquo;why&rdquo; leads to technically correct outputs that miss the actual point. TAG addresses this by making the Goal an explicit, required element alongside the Task and Action. The framework gained popularity in business and productivity communities where AI outputs need to serve specific, measurable objectives &mdash; not just produce generic content.</p>
+                        <p><strong>Modern LLM Status:</strong> TAG remains <strong>highly effective for outcome-driven prompting</strong>. Modern LLMs like Claude, GPT-4, and Gemini produce significantly more targeted results when they understand the purpose behind a request. The Goal element forces the user to think about what success actually looks like before prompting &mdash; a discipline that prevents the common trap of generating content that technically fulfills the task but does not advance the underlying objective. TAG is especially valuable in professional contexts where every AI interaction should connect to a business outcome.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Prompts Without Goals Produce Noise</h2>
+                        <p class="split-section__text">Consider the difference between &ldquo;Write a product description&rdquo; and &ldquo;Write a product description that convinces skeptical enterprise buyers to request a demo.&rdquo; The task is the same, but the goal transforms the output from generic marketing copy into a persuasion instrument aimed at a specific conversion event.</p>
+                        <p class="split-section__text"><strong>TAG makes the destination explicit.</strong> Task defines what needs doing. Action specifies the concrete steps or approach. Goal declares the measurable outcome the output should achieve. By including all three, you give the AI a complete picture: the job, the method, and the success criteria.</p>
+                        <p class="split-section__text">Think of TAG like giving directions. The Task is the destination (&ldquo;get to the airport&rdquo;), the Action is the route (&ldquo;take the highway, avoid toll roads&rdquo;), and the Goal is the reason (&ldquo;arrive by 3 PM to catch the flight&rdquo;). Without the goal, someone might take a scenic detour. With it, every decision optimizes for what actually matters.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <!-- === PROMPT INFOGRAPHIC === -->
+                        <div class="prompt-infographic">
+                            <div class="prompt-infographic__header">
+                                <div class="prompt-infographic__letters">
+                                    <span>T</span>
+                                    <span>A</span>
+                                    <span>G</span>
+                                </div>
+                                <span class="prompt-infographic__title">Goal-Oriented Prompt Template</span>
+                            </div>
+                            <div class="prompt-infographic__rows">
+                                <div class="prompt-infographic__row">
+                                    <div class="prompt-infographic__letter">T</div>
+                                    <div class="prompt-infographic__field">
+                                        <span class="prompt-infographic__label">Task</span>
+                                        <p class="prompt-infographic__text">The specific work to be done &mdash; what the AI needs to produce or accomplish.</p>
+                                    </div>
+                                </div>
+                                <div class="prompt-infographic__row">
+                                    <div class="prompt-infographic__letter">A</div>
+                                    <div class="prompt-infographic__field">
+                                        <span class="prompt-infographic__label">Action</span>
+                                        <p class="prompt-infographic__text">The steps, approach, or method the AI should follow to complete the task.</p>
+                                    </div>
+                                </div>
+                                <div class="prompt-infographic__row">
+                                    <div class="prompt-infographic__letter">G</div>
+                                    <div class="prompt-infographic__field">
+                                        <span class="prompt-infographic__label">Goal</span>
+                                        <p class="prompt-infographic__text">The desired outcome or measurable objective &mdash; why this task matters.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /PROMPT INFOGRAPHIC -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The TAG Process</h2>
+                <p class="section-subtitle fade-in-up">Three steps from vague intent to goal-aligned output</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Task &mdash; Define What Needs Doing</h3>
+                            <p class="element-timeline__text">Start with a clear declaration of the work product. The Task should be specific enough that you could evaluate whether it was completed: &ldquo;write a competitive analysis&rdquo; is better than &ldquo;help me with competitors,&rdquo; and &ldquo;write a competitive analysis of our three closest SaaS competitors&rdquo; is better still. Clarity here prevents scope creep in the AI&rsquo;s response.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Create a quarterly business review presentation for our engineering team&rsquo;s performance over Q4 2025.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Action &mdash; Specify the Approach</h3>
+                            <p class="element-timeline__text">Tell the AI how to accomplish the task. Actions constrain the method: should it compare, analyze, summarize, or persuade? Should it use data points, anecdotes, or frameworks? The Action element prevents the AI from choosing an approach that is technically valid but wrong for your context. Multiple actions can be chained in sequence.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Analyze sprint velocity trends, highlight the top three achievements with quantified impact, identify two areas for improvement with specific recommendations, and compare Q4 metrics against Q3 baselines.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Goal &mdash; Declare the Outcome</h3>
+                            <p class="element-timeline__text">State what success looks like. The Goal is the north star that shapes every choice the AI makes &mdash; word selection, emphasis, structure, and depth all shift when the AI understands the intended outcome. A good goal is specific, measurable where possible, and tied to a real-world result the output needs to achieve.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;The goal is to secure VP approval for hiring two additional senior engineers by demonstrating that current team capacity is the bottleneck preventing us from hitting our Q1 product roadmap targets.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">How adding a goal transforms output from generic to strategic</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Task-Only Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Write a summary of our customer support metrics from last month.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Last month, your support team handled 2,340 tickets with an average resolution time of 4.2 hours. First-response time was 23 minutes. Customer satisfaction scored 4.1 out of 5. The busiest day was Tuesday with 412 tickets.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Accurate data summary, but no direction, analysis, or actionable insight</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">TAG Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Goal-Oriented Approach</span>
+                                <p><strong>Task:</strong> Summarize our customer support metrics from last month.<br><strong>Action:</strong> Compare against industry benchmarks, identify the single biggest bottleneck, and propose one process change that could reduce resolution time by 20%.<br><strong>Goal:</strong> Convince the COO to approve budget for a new ticketing automation tool at next week&rsquo;s leadership meeting.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Your 4.2-hour resolution time is 35% above the SaaS industry median of 3.1 hours. The bottleneck: 62% of tickets require manual routing to specialized agents, adding 1.8 hours of dead time. Implementing automated ticket classification and routing &mdash; which your current ticketing system supports but has not been configured &mdash; could eliminate that routing delay entirely. Projected impact: resolution time drops to under 3 hours, saving 780 agent-hours per month. ROI on an automation tool: breakeven in 6 weeks at current ticket volume.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Benchmarked, bottleneck-focused, ROI-quantified, ready for executive presentation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">TAG in Action</h2>
+                <p class="section-subtitle fade-in-up">See how goal-oriented prompting produces strategically aligned results</p>
+
+                <div class="accordion fade-in-up" id="tag-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Sales Outreach Strategy</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">TAG Prompt</span>
+                                    <p><strong>Task:</strong> Draft a cold outreach email sequence for our cybersecurity SaaS product targeting mid-market financial services companies (500-2,000 employees).<br><br>
+                                    <strong>Action:</strong> Create a 3-email sequence spaced 4 days apart. Email 1 should lead with a recent industry-specific threat statistic. Email 2 should reference the recipient&rsquo;s likely compliance obligations (SOC 2, PCI DSS). Email 3 should offer a free vulnerability assessment with a 48-hour response window.<br><br>
+                                    <strong>Goal:</strong> Achieve a 15% open rate and 3% reply rate by making each email feel like it was written by someone who understands financial services security challenges, not a generic sales automation.<br><br>
+                                    <em>Note: Verify all cited statistics and compliance requirements against current industry data before deploying. AI-generated outreach should be reviewed for accuracy and compliance with your organization&rsquo;s communication policies.</em></p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AI Response</span>
+                                    <p>A 3-email sequence with subject lines optimized for financial services inboxes. Email 1 opens with &ldquo;Last quarter, 34% of financial services breaches exploited API vulnerabilities&rdquo; and positions the product as API-first security. Email 2 shifts to compliance, noting that SOC 2 Type II auditors now specifically check for real-time threat monitoring. Email 3 makes the vulnerability assessment offer concrete: &ldquo;We will scan your public-facing endpoints and deliver a prioritized risk report within 72 hours &mdash; no strings, no sales call required.&rdquo; Each email is under 150 words with a single, clear call to action.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Product Roadmap Prioritization</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">TAG Prompt</span>
+                                    <p><strong>Task:</strong> Prioritize our Q2 product backlog of 23 feature requests for a project management tool used primarily by marketing teams.<br><br>
+                                    <strong>Action:</strong> Score each feature against three criteria: revenue impact (will it reduce churn or drive upgrades?), development effort (T-shirt sizing: S/M/L/XL), and competitive differentiation (do our top 3 competitors already have this?). Rank the top 10 features by a weighted composite score favoring revenue impact.<br><br>
+                                    <strong>Goal:</strong> Produce a defensible prioritization that the CPO can present to the board as evidence of data-driven roadmap decisions, reducing the typical 2-hour prioritization debate to a 30-minute review.<br><br>
+                                    <em>Note: AI-generated prioritizations should be validated against actual usage data and customer feedback. Use this output as a starting framework, not a final decision.</em></p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AI Response</span>
+                                    <p>A scored prioritization table with all 23 features rated on the three criteria, weighted 50% revenue impact, 30% competitive differentiation, and 20% inverse development effort. The top 10 are: (1) Campaign calendar integration (high revenue: reduces churn trigger #1), (2) Real-time collaborative editing (competitive gap: all three competitors have it), (3) AI-powered task assignment (differentiation: none of the competitors offer it). Each feature includes a one-sentence rationale for its score and a recommended sprint allocation. The bottom 13 features are flagged as &ldquo;Q3 candidates&rdquo; with brief explanations of why they ranked lower.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Employee Performance Review</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">TAG Prompt</span>
+                                    <p><strong>Task:</strong> Write a mid-year performance review for a senior software engineer who has been strong on technical delivery but needs improvement in cross-team communication and mentoring junior developers.<br><br>
+                                    <strong>Action:</strong> Structure the review with three sections: Strengths (with specific examples of technical impact), Growth Areas (framed constructively with actionable next steps), and Goals for Next Half (two technical, one leadership). Use language that is direct but supportive.<br><br>
+                                    <strong>Goal:</strong> Motivate the engineer to invest in mentoring without diminishing their confidence in their technical contributions. The review should make them feel valued for what they do well while clearly showing that leadership growth is the path to promotion.<br><br>
+                                    <em>Note: AI-generated performance reviews should be reviewed and personalized by the manager to reflect specific, real examples. Never submit AI-generated reviews without adding genuine, personal observations about the employee&rsquo;s actual work.</em></p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AI Response</span>
+                                    <p>A three-section review that opens with genuine recognition: &ldquo;Your refactoring of the payment processing pipeline reduced latency by 40% and eliminated the class of timeout errors that accounted for 15% of our support tickets. This is senior-level technical impact.&rdquo; The growth section frames communication as a multiplier: &ldquo;Your technical instincts are strong enough to share. When you mentored Alex on the database migration, the project finished a week early &mdash; that is the leverage effect of transferring your expertise.&rdquo; Goals include leading one architecture review per month and pairing with a junior engineer on a feature build, alongside two technical goals that maintain their engineering trajectory.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use TAG</h2>
+                <p class="section-subtitle fade-in-up">Best for outcome-driven tasks where the &ldquo;why&rdquo; shapes the &ldquo;what&rdquo;</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Business Communications</strong>
+                                    <p>Reports, proposals, and presentations where the output needs to serve a strategic objective &mdash; not just inform, but persuade, justify, or secure approval.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Marketing and Sales</strong>
+                                    <p>Campaigns, emails, and content where success is measured by conversion rates, engagement metrics, or pipeline generation &mdash; not just word count.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Project Planning</strong>
+                                    <p>Roadmaps, prioritization exercises, and resource allocation where every decision should trace back to a stated business goal.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Decision Support</strong>
+                                    <p>Analysis and recommendations where the AI needs to understand what decision will be made based on its output, shaping the analysis accordingly.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative Exploration</strong>
+                                    <p>When you want the AI to surprise you with unexpected ideas, a fixed goal can over-constrain the response. Use SPARK or open-ended prompting instead.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Information Retrieval</strong>
+                                    <p>Factual questions (&ldquo;What is the capital of Japan?&rdquo;) do not benefit from goal-oriented framing. Direct prompting is faster and equally effective.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Audience-Sensitive Content</strong>
+                                    <p>When tone, audience, and style matter as much as the objective, TAG&rsquo;s three elements are not enough. Upgrade to CO-STAR for full communication control.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where TAG delivers strategically aligned output</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Executive Reporting</h3>
+                        <p class="use-case-showcase__desc">Transform raw data into executive summaries that drive specific decisions &mdash; budget approvals, headcount changes, or strategic pivots.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Sales Enablement</h3>
+                        <p class="use-case-showcase__desc">Craft outreach sequences, proposals, and follow-ups where every word is optimized for a specific conversion goal.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Proposal Writing</h3>
+                        <p class="use-case-showcase__desc">Structure proposals around the client&rsquo;s decision criteria rather than your own feature list, increasing win rates by aligning content to buyer goals.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">People Management</h3>
+                        <p class="use-case-showcase__desc">Performance reviews, development plans, and feedback documents where the goal shapes the tone &mdash; motivating, correcting, or advocating for promotion.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Process Improvement</h3>
+                        <p class="use-case-showcase__desc">Analyze workflows with a specific efficiency target in mind, ensuring recommendations are anchored to measurable KPIs rather than generic best practices.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Training Content</h3>
+                        <p class="use-case-showcase__desc">Design training materials where the learning objective is explicit &mdash; what learners should be able to do after completing the module, measured by specific competencies.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where TAG Fits</h2>
+                <p class="section-subtitle fade-in-up">TAG bridges minimal structure and outcome-focused prompting</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">RTF</span>
+                        <span class="era-marker__title">Minimal Structure</span>
+                        <span class="era-marker__desc">Role, Task, Format &mdash; persona-driven</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">TAG</span>
+                        <span class="era-marker__title">Goal-Oriented</span>
+                        <span class="era-marker__desc">Task, Action, Goal &mdash; outcome-focused</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">CRISP</span>
+                        <span class="era-marker__title">Efficient Structure</span>
+                        <span class="era-marker__desc">Adds context and persona depth</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">CO-STAR</span>
+                        <span class="era-marker__title">Full Communication</span>
+                        <span class="era-marker__desc">Six-dimension audience-aware framework</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The Goal Shapes Everything</div>
+                    <p>TAG&rsquo;s most powerful element is its simplest. When you tell the AI that the goal is &ldquo;to secure budget approval,&rdquo; it writes differently than when the goal is &ldquo;to inform the team.&rdquo; The same data, the same task, the same action &mdash; but the goal changes word choice, emphasis, structure, and what gets highlighted versus buried. If you take only one thing from TAG, let it be this: always tell the AI what the output needs to <em>achieve</em>, not just what it needs to <em>contain</em>.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques &amp; Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary approaches to structured and goal-driven prompting</p>
+
+                <a href="rtf.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Sibling Framework</span>
+                        <span class="evolution-callout__title">RTF Framework</span>
+                        <span class="evolution-callout__desc">Where TAG focuses on outcomes, RTF focuses on personas. RTF&rsquo;s Role element shapes the AI&rsquo;s expertise and voice &mdash; useful when who is speaking matters as much as what is being achieved.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="ape.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="16"/>
+                            <line x1="8" y1="12" x2="16" y2="12"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Similar Scope</span>
+                        <span class="evolution-callout__title">APE Framework</span>
+                        <span class="evolution-callout__desc">Another three-element framework (Action, Purpose, Expectation) with a similar outcome orientation. APE&rsquo;s Purpose maps closely to TAG&rsquo;s Goal, while Expectation adds output quality criteria.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="costar.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Fuller Framework</span>
+                        <span class="evolution-callout__title">CO-STAR Framework</span>
+                        <span class="evolution-callout__desc">When TAG&rsquo;s three elements are not enough, CO-STAR adds Context, Style, Tone, and Audience for complete communication control alongside the objective.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Prompt With Purpose</h2>
+                        <p class="cta-corporate__text">Try TAG on your next business task or find the right framework for your specific needs.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../tools/matcher.html" class="btn btn-secondary">Technique Finder</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="APE (Automatic Prompt Engineer): Automatically generate and select optimal prompt instructions via LLM-driven search and evaluation.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/ape.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="APE (Automatic Prompt Engineer) - Praxis">
+    <meta property="og:description" content="APE (Automatic Prompt Engineer): Automatically generate and select optimal prompt instructions via LLM-driven search and evaluation.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/ape.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="APE (Automatic Prompt Engineer) - Praxis">
+    <meta name="twitter:description" content="APE (Automatic Prompt Engineer): Automatically generate and select optimal prompt instructions via LLM-driven search and evaluation.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "APE (Automatic Prompt Engineer)",
+      "name": "APE (Automatic Prompt Engineer)",
+      "description": "APE (Automatic Prompt Engineer): Automatically generate and select optimal prompt instructions via LLM-driven search and evaluation.",
+      "url": "https://praxislibrary.com/learn/ape.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "APE (Automatic Prompt Engineer)"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>APE (Automatic Prompt Engineer) - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">APE</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Prompt Optimization Technique</span>
+                </div>
+                <h1 class="page-title fade-in">APE (Automatic Prompt Engineer)</h1>
+                <p class="page-subtitle fade-in">Why write prompts yourself when the model can write better ones? APE uses LLMs to propose candidate instructions, evaluates each on a target task, and selects the best-performing prompt through iterative search &mdash; discovering that machines often engineer more effective prompts than humans.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2022</span>
+                        <p><strong>Introduced:</strong> APE was published in 2022 by Zhou et al. The paper demonstrated a striking finding: LLMs could generate prompt instructions that outperformed carefully human-crafted ones. Most famously, APE discovered that &ldquo;Let&rsquo;s work this out in a step by step way to be sure we have the right answer&rdquo; significantly outperformed the original &ldquo;Let&rsquo;s think step by step&rdquo; zero-shot chain-of-thought prompt. The technique framed prompt engineering as a program synthesis problem &mdash; search through the space of possible instructions to find the one that maximizes task performance.</p>
+                        <p><strong>Modern LLM Status:</strong> APE was a landmark paper showing that LLMs could engineer better prompts than humans. The principle has been absorbed into production tools like <strong>DSPy and OPRO</strong> in 2026. The standalone technique is less common now, but the insight &mdash; automated prompt search &mdash; is <strong>foundational to modern prompt optimization pipelines</strong>. Understanding APE helps practitioners grasp why tools like DSPy work and when automated optimization outperforms manual prompt engineering.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Prompt Engineering as Search</h2>
+                        <p class="split-section__text">Manual prompt engineering is a form of trial and error. You write an instruction, test it, notice failures, revise it, and repeat. This process is slow, biased by your assumptions about what makes a good prompt, and limited by your creativity in imagining alternative phrasings. APE automates this entire loop by treating it as what it fundamentally is: a search problem.</p>
+                        <p class="split-section__text"><strong>APE uses LLMs to explore the instruction space systematically.</strong> Given a task description or examples, it generates many candidate instructions &mdash; not just one human-written attempt. Each candidate is evaluated on a held-out set of examples, scored by accuracy, and the top performers are selected. Optional iterative refinement generates variations of the best candidates for further evaluation, progressively narrowing toward the optimal instruction.</p>
+                        <p class="split-section__text">Think of it like A/B testing at scale for prompts. Instead of testing your one idea against a control, you generate dozens of candidates and let data decide which performs best &mdash; often discovering phrasings you would never have thought to try.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">The &ldquo;Step by Step&rdquo; Discovery</span>
+                                <p>APE&rsquo;s most celebrated finding was that the model-generated instruction &ldquo;Let&rsquo;s work this out in a step by step way to be sure we have the right answer&rdquo; outperformed the famous human-written &ldquo;Let&rsquo;s think step by step&rdquo; by a significant margin on reasoning benchmarks. The difference? The APE version adds a <strong>quality motivation</strong> (&ldquo;to be sure we have the right answer&rdquo;) that subtly encourages the model to be more careful. No human prompt engineer had thought to add that clause &mdash; the machine found it through search.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The APE Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from task definition to optimized instruction</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define the Target Task</h3>
+                            <p class="element-timeline__text">Start with the task you want to optimize a prompt for. Provide either a natural language task description, a set of input-output examples demonstrating the desired behavior, or both. You also need a held-out evaluation set &mdash; examples with known correct answers that will be used to score candidate instructions. The quality of your evaluation set determines the quality of the optimization.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Task: Sentiment classification. Training examples: 20 labeled reviews. Evaluation set: 50 labeled reviews held out for scoring. Metric: classification accuracy.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Generate Candidate Instructions</h3>
+                            <p class="element-timeline__text">Use an LLM to generate multiple candidate instructions for the task. The generation prompt asks the model to propose various ways to instruct another model to perform the task. APE typically generates 20-50 candidates in this phase, using different generation strategies: forward (describe the task), reverse (infer instruction from examples), and paraphrase (rephrase existing instructions). Diversity in candidates is critical for exploring the search space effectively.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Candidate 1: &ldquo;Classify the sentiment as positive or negative.&rdquo;<br>Candidate 2: &ldquo;Read the review and determine whether the author&rsquo;s overall feeling is positive or negative.&rdquo;<br>Candidate 3: &ldquo;Based on the tone and content, label this review as positive or negative sentiment.&rdquo;<br>...(20+ more candidates)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Evaluate and Score Each Candidate</h3>
+                            <p class="element-timeline__text">Run each candidate instruction through the target model on the evaluation set. Score each instruction by how accurately it produces correct outputs. This step is the heart of APE &mdash; it provides objective, data-driven ranking of instructions rather than relying on human intuition about what sounds like a good prompt. The evaluation is automated and can test hundreds of candidates efficiently.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Candidate 1: 78% accuracy on eval set<br>Candidate 2: 85% accuracy on eval set<br>Candidate 3: 82% accuracy on eval set<br>Candidate 17: 91% accuracy on eval set (unexpected winner)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Select and Optionally Refine</h3>
+                            <p class="element-timeline__text">Select the top-performing instruction(s). Optionally, generate variations of the best candidates by paraphrasing, extending, or combining them, then evaluate again. This iterative refinement can squeeze additional performance from the search process. The final output is a rigorously tested, data-validated instruction that you can deploy with confidence. Always verify the winning instruction on a final holdout set to guard against overfitting to the evaluation data.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Best instruction after 2 rounds: &ldquo;Read the customer review carefully. Determine whether the overall sentiment expressed is positive or negative. Consider the balance of positive and negative statements, but weight the concluding sentiment most heavily. Respond with only &lsquo;positive&rsquo; or &lsquo;negative.&rsquo;&rdquo; &mdash; 93% accuracy, up from 78% for the naive baseline.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why automated search discovers prompts humans miss</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Manual Prompt Engineering</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>Human writes: &ldquo;Let&rsquo;s think step by step.&rdquo; Tests it on a few examples. Notices some failures. Tweaks to: &ldquo;Think through this carefully, step by step.&rdquo; Tests again. After 5-10 iterations over several hours, settles on the best version they can think of.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>A prompt that works well for the cases the human thought to test, limited by one person&rsquo;s creativity and assumptions about effective phrasing.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Limited exploration, human bias, hours of iteration for modest gains</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">APE</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Approach</span>
+                                <p>APE generates 30 candidate instructions automatically. Each is evaluated against 50 held-out examples. Top 5 candidates are refined through paraphrase generation. Second-round evaluation selects the winner: a phrasing with a quality-motivation clause no human had considered.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>A prompt validated against objective metrics, discovered through systematic search rather than intuition. Often outperforms the best human-written alternative by 5-15 percentage points.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Broad exploration, data-driven selection, discovers non-obvious phrasings</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">APE in Action</h2>
+                <p class="section-subtitle fade-in-up">See how automated prompt search discovers better instructions</p>
+
+                <div class="accordion fade-in-up" id="ape-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Optimizing a Classification Prompt</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">APE Setup</span>
+                                    <p><strong>Task:</strong> Classify support tickets by priority (P1-Critical, P2-High, P3-Medium, P4-Low).<br><br>
+                                    <strong>Human baseline prompt:</strong> &ldquo;Classify this support ticket by priority level.&rdquo; &mdash; 71% accuracy.<br><br>
+                                    <strong>APE generates 25 candidates.</strong> Top 3 after evaluation:<br>
+                                    - &ldquo;Read the support ticket and assign a priority. P1 for outages or data loss, P2 for degraded service, P3 for feature issues, P4 for questions.&rdquo; &mdash; 86%<br>
+                                    - &ldquo;Determine urgency: is this an emergency (P1), serious problem (P2), minor issue (P3), or informational (P4)?&rdquo; &mdash; 83%<br>
+                                    - &ldquo;Classify priority by business impact: P1=revenue impact, P2=productivity impact, P3=inconvenience, P4=no immediate impact.&rdquo; &mdash; 89%</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>The winning instruction (89%) includes specific criteria for each priority level framed in terms of business impact &mdash; a framing no human had tried. APE discovered that explicit category definitions dramatically improve classification accuracy. Note: Always validate the APE-discovered prompt on a separate holdout set before deploying to production, as optimization against the evaluation set can overfit to its specific distribution.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Improving Chain-of-Thought Reasoning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">APE Setup</span>
+                                    <p><strong>Task:</strong> Mathematical word problems requiring multi-step reasoning.<br><br>
+                                    <strong>Human baseline:</strong> &ldquo;Let&rsquo;s think step by step.&rdquo; &mdash; 73% accuracy on GSM8K-style problems.<br><br>
+                                    <strong>APE generates 30 candidates</strong> by paraphrasing and extending the baseline. Selected findings:<br>
+                                    - &ldquo;Let&rsquo;s work this out in a step by step way to be sure we have the right answer.&rdquo; &mdash; 82%<br>
+                                    - &ldquo;Break this problem into smaller parts. Solve each part carefully, then combine the results.&rdquo; &mdash; 79%<br>
+                                    - &ldquo;First, identify what is being asked. Then list the known quantities. Work through the math one step at a time, checking each step.&rdquo; &mdash; 84%</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>APE discovered that adding explicit quality motivations (&ldquo;to be sure we have the right answer&rdquo;) and procedural structure (&ldquo;identify, list, work, check&rdquo;) significantly improves reasoning accuracy. The 84% candidate adds a self-checking mechanism that the human baseline lacked entirely. This demonstrates APE&rsquo;s power: it explores phrasings and structural variations that manual iteration rarely discovers. Always verify results with your own test cases &mdash; benchmark numbers may not transfer directly to your specific use case.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Optimizing Summarization Instructions</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">APE Setup</span>
+                                    <p><strong>Task:</strong> Summarize technical documents into executive-friendly briefs (evaluated by human preference and factual accuracy).<br><br>
+                                    <strong>Human baseline:</strong> &ldquo;Summarize this document for a non-technical executive audience in 3-4 sentences.&rdquo; &mdash; 65% preference rate vs. human-written summaries.<br><br>
+                                    <strong>APE generates 20 candidates.</strong> Top performers:<br>
+                                    - &ldquo;Write an executive summary: start with the business impact, then the key finding, then the recommended action. No jargon. 3 sentences maximum.&rdquo; &mdash; 78%<br>
+                                    - &ldquo;A busy CEO has 30 seconds to read this. What do they need to know? Focus on decisions they need to make, not technical details.&rdquo; &mdash; 81%<br>
+                                    - &ldquo;Translate this technical document into plain language for leadership. Lead with &lsquo;so what&rsquo; &mdash; why should they care? Then the essential facts. Then what happens next. Three sentences.&rdquo; &mdash; 83%</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>APE discovered that persona-anchoring (&ldquo;busy CEO&rdquo;) and structure-prescribing (&ldquo;lead with so what&rdquo;) dramatically outperform the generic &ldquo;summarize for non-technical audience&rdquo; instruction. The winning prompt frames the task around the reader&rsquo;s decision-making needs rather than the document&rsquo;s content structure &mdash; a subtle but impactful shift in framing. Important: Human evaluation of summary quality is inherently subjective; always have multiple reviewers validate AI-generated summaries against source documents for factual accuracy.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use APE</h2>
+                <p class="section-subtitle fade-in-up">Best for high-stakes tasks where prompt quality directly impacts outcomes</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Production Prompt Optimization</strong>
+                                    <p>When a prompt runs thousands of times in production and each percentage point of accuracy translates to measurable business impact.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Benchmark Optimization</strong>
+                                    <p>When competing on evaluation metrics and you need to squeeze maximum performance from a model without fine-tuning.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Breaking Through Plateaus</strong>
+                                    <p>When manual prompt iteration has stalled and you cannot improve performance further through human creativity alone.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Multi-Model Deployment</strong>
+                                    <p>When the same task runs on different models &mdash; APE can discover model-specific optimal instructions rather than using a one-size-fits-all prompt.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>One-Off Tasks</strong>
+                                    <p>When you are writing a prompt for a single use &mdash; the overhead of generating and evaluating dozens of candidates is not justified for a prompt you will use once.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>No Evaluation Data</strong>
+                                    <p>Without labeled examples to score candidates against, APE cannot objectively compare instructions &mdash; you need ground truth to drive the search.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Budget-Constrained Scenarios</strong>
+                                    <p>APE requires many LLM calls (generation + evaluation per candidate) &mdash; for cost-sensitive applications, manual prompt engineering may be more efficient.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where APE delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Moderation</h3>
+                        <p class="use-case-showcase__desc">Optimize classification prompts for detecting policy violations across millions of posts &mdash; even small accuracy improvements at scale prevent thousands of misclassifications daily.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Document Processing</h3>
+                        <p class="use-case-showcase__desc">Optimize extraction prompts for processing contracts, invoices, or medical records at scale &mdash; where precision on field extraction directly impacts downstream workflows.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Triage Prompts</h3>
+                        <p class="use-case-showcase__desc">Optimize symptom assessment prompts where classification accuracy has direct patient safety implications &mdash; APE&rsquo;s systematic evaluation prevents reliance on untested human intuition.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Chatbot Response Quality</h3>
+                        <p class="use-case-showcase__desc">Optimize system prompts for customer-facing chatbots by evaluating candidate instructions against user satisfaction metrics and resolution rates.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Security Alert Classification</h3>
+                        <p class="use-case-showcase__desc">Optimize prompts for classifying security alerts by severity &mdash; where false negatives on critical threats have severe consequences and prompt accuracy is paramount.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Model Migration</h3>
+                        <p class="use-case-showcase__desc">When switching between LLM providers, use APE to discover model-specific optimal prompts rather than assuming the same instruction works equally well across all models.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where APE Fits</h2>
+                <p class="section-subtitle fade-in-up">APE bridges manual prompt engineering and fully automated optimization pipelines</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Manual Prompting</span>
+                        <span class="era-marker__title">Human Intuition</span>
+                        <span class="era-marker__desc">Trial-and-error prompt writing</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Instruction Induction</span>
+                        <span class="era-marker__title">Example-Based Discovery</span>
+                        <span class="era-marker__desc">Model infers instructions from examples</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">APE</span>
+                        <span class="era-marker__title">Automated Search</span>
+                        <span class="era-marker__desc">Generate, evaluate, select best instructions</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">DSPy / MIPRO / OPRO</span>
+                        <span class="era-marker__title">Production Pipelines</span>
+                        <span class="era-marker__desc">Industrial-scale optimization with compilers</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">APE as a Stepping Stone to DSPy</div>
+                    <p>If you find APE valuable, consider graduating to DSPy &mdash; a framework that industrializes APE&rsquo;s principles. DSPy treats prompts as <strong>programs with optimizable parameters</strong>, automatically compiling natural language signatures into optimized prompts through the same generate-evaluate-select loop that APE pioneered, but with more sophisticated search strategies and multi-stage pipeline support.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary optimization and meta-learning techniques</p>
+
+                <a href="instruction-induction.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Instruction Induction</span>
+                        <span class="evolution-callout__desc">The precursor technique that infers a single instruction from examples &mdash; APE extends this by generating multiple candidates and selecting the best through evaluation.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="dspy.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">DSPy</span>
+                        <span class="evolution-callout__desc">The production-grade framework that industrializes APE&rsquo;s principles &mdash; treating prompts as compilable programs with automatically optimized parameters.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="prompt-mining.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Prompt Mining</span>
+                        <span class="evolution-callout__desc">Discovers effective prompt templates by mining patterns in training data &mdash; a complementary approach that searches corpus statistics rather than generating candidates.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Automate Your Prompt Engineering</h2>
+                        <p class="cta-corporate__text">Explore APE-inspired optimization or build structured prompts with our tools to maximize AI performance.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

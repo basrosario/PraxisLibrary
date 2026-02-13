@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LATS (Language Agent Tree Search): Synergize reasoning, acting, and planning via Monte Carlo Tree Search for powerful AI agent frameworks.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/lats.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="LATS (Language Agent Tree Search) - Praxis">
+    <meta property="og:description" content="LATS (Language Agent Tree Search): Synergize reasoning, acting, and planning via Monte Carlo Tree Search for powerful AI agent frameworks.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/lats.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LATS (Language Agent Tree Search) - Praxis">
+    <meta name="twitter:description" content="LATS (Language Agent Tree Search): Synergize reasoning, acting, and planning via Monte Carlo Tree Search for powerful AI agent frameworks.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "LATS (Language Agent Tree Search)",
+      "name": "LATS (Language Agent Tree Search)",
+      "description": "LATS (Language Agent Tree Search): Synergize reasoning, acting, and planning via Monte Carlo Tree Search for powerful AI agent frameworks.",
+      "url": "https://praxislibrary.com/learn/lats.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "LATS (Language Agent Tree Search)"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>LATS (Language Agent Tree Search) - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">LATS</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Agent Planning Technique</span>
+                </div>
+                <h1 class="page-title fade-in">LATS (Language Agent Tree Search)</h1>
+                <p class="page-subtitle fade-in">Most AI agents reason in a straight line &mdash; one thought, one action, one outcome. LATS breaks that limitation by giving agents a tree of possibilities, using Monte Carlo Tree Search to explore, evaluate, and backtrack through multiple reasoning paths before committing to the best one.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2023</span>
+                        <p><strong>Introduced:</strong> LATS (Language Agent Tree Search) was introduced in 2023 by Zhou et al. The technique addresses a fundamental limitation of sequential agent frameworks: once an agent takes a wrong action, it has no mechanism to recover. LATS solves this by unifying three capabilities &mdash; reasoning (Chain-of-Thought), acting (ReAct), and planning (Monte Carlo Tree Search) &mdash; into a single agent framework. By treating the environment&rsquo;s feedback as value signals for tree search, LATS achieved state-of-the-art 92.7% pass@1 on HumanEval with GPT-4, dramatically outperforming sequential approaches.</p>
+                        <p><strong>Modern LLM Status:</strong> LATS is one of the most impactful agent frameworks from 2023. In 2026, its combination of tree search with LLM agents is widely used in production coding assistants, automated testing pipelines, and complex problem-solving systems. The framework demonstrated that structured search dramatically outperforms simple sequential reasoning for agentic tasks. Many modern agent orchestration platforms (LangChain, AutoGen, CrewAI) have incorporated LATS-inspired search-and-backtrack patterns into their core architectures.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Search Before You Commit</h2>
+                        <p class="split-section__text">Traditional AI agents follow a single path: think, act, observe, repeat. If the agent takes a wrong turn three steps in, it has no way to undo that decision &mdash; it just keeps going, compounding the error. This is like navigating a maze by only ever moving forward, never allowed to retrace your steps.</p>
+                        <p class="split-section__text"><strong>LATS gives the agent a bird&rsquo;s-eye view of the maze.</strong> Instead of committing to one path, the agent explores multiple branches simultaneously. At each decision point, it generates several possible actions, evaluates which branches look most promising using environment feedback as value signals, and can backtrack to try alternative paths when one branch fails. The result is an agent that systematically searches the space of possible solutions rather than gambling on a single trajectory.</p>
+                        <p class="split-section__text">Think of it like a chess engine: instead of making the first reasonable move it sees, it explores thousands of possible game states before choosing the move with the highest expected value. LATS brings this same strategic depth to language agents.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Tree Search Beats Sequential Reasoning</span>
+                                <p>Sequential agents (like basic ReAct) are fragile: one bad action can derail the entire chain. LATS mitigates this by maintaining a search tree where each node represents a state, each edge represents an action, and the agent can freely explore and backtrack. Environment feedback (success, failure, partial progress) serves as the value function that guides which branches to explore next. This transforms agentic problem-solving from a <strong>single-shot gamble</strong> into a <strong>systematic search with recovery</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The LATS Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from problem to verified solution via tree search</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Selection &mdash; Choose the Most Promising Node</h3>
+                            <p class="element-timeline__text">Starting from the root (the initial problem state), LATS traverses the existing search tree to find the most promising node to expand. It uses Upper Confidence Bound (UCB) scoring &mdash; the same algorithm used in AlphaGo &mdash; to balance exploring new branches versus exploiting branches that have already shown promise. This ensures the agent does not get stuck repeatedly trying the same approach.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Given a coding task, the agent has already tried two approaches: a recursive solution (score: 0.6) and an iterative solution (score: 0.3). UCB scoring selects the recursive branch for further exploration because it has the higher value, but also reserves exploration budget for untried approaches.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Expansion &mdash; Generate Multiple Candidate Actions</h3>
+                            <p class="element-timeline__text">At the selected node, the LLM generates multiple candidate actions (typically 3&ndash;5) rather than just one. Each candidate represents a different reasoning path or action the agent could take. This is where LATS leverages the LLM&rsquo;s ability to produce diverse outputs &mdash; by sampling at higher temperatures or using different prompting strategies to ensure genuine variety in the proposed actions.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Expanding the recursive branch, the LLM generates three candidates: (a) implement with memoization, (b) implement with tail recursion, (c) convert to dynamic programming. Each becomes a new child node in the search tree.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Evaluation &mdash; Score Actions Using Environment Feedback</h3>
+                            <p class="element-timeline__text">Each candidate action is executed in the environment, and the resulting feedback (test results, error messages, partial outputs) is used to assign a value score. This is the key innovation of LATS: instead of relying on the LLM to self-evaluate (which is unreliable), it uses <strong>real environment signals</strong> as the ground truth. The LLM then reflects on this feedback to generate an improved value estimate for each node.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The memoization approach passes 8/10 test cases (value: 0.8), tail recursion hits a stack overflow on large inputs (value: 0.2), and the dynamic programming version passes all 10 tests (value: 1.0). These real execution results, not LLM guesses, drive the search.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Backpropagation &mdash; Update the Tree and Iterate</h3>
+                            <p class="element-timeline__text">The value scores from evaluation are propagated back up the tree, updating ancestor nodes so future selection decisions reflect what the agent has learned. If the best leaf node solves the problem, the search terminates successfully. If not, the cycle repeats: select, expand, evaluate, backpropagate &mdash; each iteration making the agent smarter about which branches to explore and which to abandon.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The dynamic programming path scored 1.0, so the search terminates with a verified solution. If no path had fully succeeded, the agent would backtrack to the highest-value unexplored branch and try new approaches &mdash; potentially combining insights from failed branches into a hybrid solution.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why tree search outperforms sequential agent reasoning</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Sequential Agent (ReAct)</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Agent Trace</span>
+                                <p><strong>Thought:</strong> I need to write a function to find the longest palindromic substring.<br><strong>Action:</strong> Write a brute-force O(n&sup3;) solution.<br><strong>Observation:</strong> Time Limit Exceeded on test case 47.<br><strong>Thought:</strong> I should optimize... but I already committed to brute-force structure.<br><strong>Action:</strong> Add minor optimizations to the same approach.<br><strong>Observation:</strong> Still TLE. No path to recovery.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>Agent stuck in a suboptimal approach with no mechanism to try fundamentally different strategies.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Single path, no recovery from wrong initial approach</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">LATS Agent</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Tree Search Trace</span>
+                                <p><strong>Expand:</strong> Generate 3 approaches &mdash; brute-force, expand-around-center, Manacher&rsquo;s algorithm.<br><strong>Evaluate:</strong> Brute-force TLE (0.2), expand-around-center passes 9/10 (0.9), Manacher&rsquo;s has a bug (0.4).<br><strong>Select:</strong> Expand the expand-around-center branch.<br><strong>Expand:</strong> Fix edge case handling for even-length palindromes.<br><strong>Evaluate:</strong> All 10 tests pass (1.0). Solution found.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Final Result</span>
+                                <p>Agent explored three fundamentally different approaches in parallel, identified the most promising one via real test feedback, and refined it to a verified solution &mdash; all within a structured search framework.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Multiple paths explored, environment-verified, backtracking enabled</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">LATS in Action</h2>
+                <p class="section-subtitle fade-in-up">See how tree search transforms agent problem-solving across domains</p>
+
+                <div class="accordion fade-in-up" id="lats-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Automated Code Generation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task</span>
+                                    <p>&ldquo;Write a Python function that determines whether a given Sudoku board is valid. The board is a 9x9 grid where empty cells are represented by &lsquo;.&rsquo; characters.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">LATS Search Trace</span>
+                                    <p><strong>Iteration 1 &mdash; Expand:</strong> Generate 3 candidate solutions:<br>
+                                    (a) Nested loops checking rows, columns, and boxes separately<br>
+                                    (b) Hash set approach checking all constraints in one pass<br>
+                                    (c) Bit manipulation approach using bitmasks<br><br>
+                                    <strong>Iteration 1 &mdash; Evaluate:</strong><br>
+                                    (a) Passes 18/20 tests &mdash; fails on boards with duplicate in 3x3 box (value: 0.7)<br>
+                                    (b) Passes 20/20 tests (value: 1.0)<br>
+                                    (c) Has syntax error in bit shift (value: 0.1)<br><br>
+                                    <strong>Result:</strong> Branch (b) solves the problem on first expansion. Search terminates with verified solution.<br><br>
+                                    <em>Note: Always review AI-generated code against your test suite and edge cases before deploying to production. Automated tests are necessary but may not cover all real-world scenarios.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Web Navigation Agent</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task</span>
+                                    <p>&ldquo;Find the return policy for electronics purchases on an e-commerce site and summarize the key conditions.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">LATS Search Trace</span>
+                                    <p><strong>Iteration 1 &mdash; Expand:</strong> Generate candidate navigation paths:<br>
+                                    (a) Click &ldquo;Help&rdquo; &rarr; search &ldquo;return policy&rdquo;<br>
+                                    (b) Click &ldquo;Customer Service&rdquo; &rarr; &ldquo;Returns &amp; Refunds&rdquo;<br>
+                                    (c) Scroll to footer &rarr; &ldquo;Policies&rdquo; link<br><br>
+                                    <strong>Iteration 1 &mdash; Evaluate:</strong><br>
+                                    (a) Search returns general FAQ, not electronics-specific (value: 0.4)<br>
+                                    (b) Reaches returns page but it covers all categories (value: 0.6)<br>
+                                    (c) Footer link leads to a 404 page (value: 0.0)<br><br>
+                                    <strong>Iteration 2 &mdash; Expand branch (b):</strong><br>
+                                    (b1) Filter by &ldquo;Electronics&rdquo; category on returns page<br>
+                                    (b2) Search within page for &ldquo;electronics&rdquo;<br><br>
+                                    <strong>Iteration 2 &mdash; Evaluate:</strong><br>
+                                    (b1) Successfully shows electronics-specific return policy (value: 1.0)<br><br>
+                                    <strong>Result:</strong> Agent navigated to the correct policy page through systematic exploration, backtracking from dead ends automatically.<br><br>
+                                    <em>Note: Always verify that information retrieved by AI agents matches the current published policy. Websites update their policies regularly, and cached or outdated information can lead to incorrect conclusions.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Mathematical Reasoning Challenge</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task</span>
+                                    <p>&ldquo;Solve: A farmer has chickens and cows. He counts 30 heads and 86 legs. How many chickens and how many cows does he have?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">LATS Search Trace</span>
+                                    <p><strong>Iteration 1 &mdash; Expand:</strong> Generate 3 reasoning approaches:<br>
+                                    (a) Set up system of equations: c + w = 30, 2c + 4w = 86<br>
+                                    (b) Assume all chickens: 30 heads = 60 legs, surplus = 26, each cow adds 2 legs &rarr; 13 cows<br>
+                                    (c) Trial and error starting from midpoint: 15 chickens + 15 cows = 90 legs (too many)<br><br>
+                                    <strong>Iteration 1 &mdash; Evaluate:</strong><br>
+                                    (a) Solves to w = 13, c = 17. Verify: 17(2) + 13(4) = 34 + 52 = 86. Correct (value: 1.0)<br>
+                                    (b) 13 cows, 17 chickens. Same answer. Correct (value: 1.0)<br>
+                                    (c) Needs more iterations to converge (value: 0.5)<br><br>
+                                    <strong>Result:</strong> Two independent approaches converged on the same answer (17 chickens, 13 cows), providing high confidence. Cross-verification through multiple solution paths is a key strength of LATS.<br><br>
+                                    <em>Note: Even when AI produces mathematically correct-looking work, verify the arithmetic independently. Cross-checking via multiple approaches, as LATS does naturally, is good practice for any quantitative reasoning task.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use LATS</h2>
+                <p class="section-subtitle fade-in-up">Best for complex agentic tasks where exploration and recovery matter</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Automated Code Generation</strong>
+                                    <p>Where test cases provide clear pass/fail signals &mdash; LATS can explore multiple algorithms and verify each against real execution results.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Decision-Making</strong>
+                                    <p>Tasks with multiple valid strategies where the best approach is not obvious upfront &mdash; LATS systematically evaluates alternatives before committing.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Web and API Navigation</strong>
+                                    <p>Agents that interact with external systems where wrong actions have real consequences &mdash; LATS can explore paths and backtrack from dead ends.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Stakes Problem Solving</strong>
+                                    <p>Scenarios where getting the answer right matters more than getting it fast &mdash; LATS trades compute for accuracy through systematic exploration.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Single-Step Tasks</strong>
+                                    <p>Tasks that have one obvious correct approach &mdash; tree search adds unnecessary overhead when the first action is almost certainly right.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Latency-Sensitive Applications</strong>
+                                    <p>Real-time chat or interactive scenarios where users expect instant responses &mdash; LATS requires multiple LLM calls per iteration, multiplied by tree depth.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>No Environment Feedback Available</strong>
+                                    <p>Tasks where there is no way to evaluate intermediate results &mdash; LATS depends on environment signals to guide its search. Without them, it cannot distinguish good branches from bad ones.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where LATS delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Code Generation &amp; Repair</h3>
+                        <p class="use-case-showcase__desc">Explore multiple algorithmic approaches, run tests against each, and converge on verified solutions. LATS achieved 92.7% on HumanEval by systematically searching through code strategies.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Automated Testing Pipelines</h3>
+                        <p class="use-case-showcase__desc">Generate test strategies, execute them against the system under test, and use pass/fail results to guide the search toward comprehensive test coverage.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Web Agent Navigation</h3>
+                        <p class="use-case-showcase__desc">Navigate complex websites by exploring multiple paths, backtracking from dead ends (404s, login walls), and systematically finding the target information.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Complex Reasoning Tasks</h3>
+                        <p class="use-case-showcase__desc">Math competitions, logic puzzles, and multi-step reasoning where exploring multiple solution strategies and verifying intermediate results prevents compounding errors.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Security Penetration Testing</h3>
+                        <p class="use-case-showcase__desc">Systematically explore attack vectors against a target system, using real feedback (success/failure of each probe) to guide the search toward vulnerabilities.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Data Pipeline Optimization</h3>
+                        <p class="use-case-showcase__desc">Explore different ETL configurations, query optimizations, and schema designs, using execution benchmarks as the value signal to converge on the highest-performing pipeline.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where LATS Fits</h2>
+                <p class="section-subtitle fade-in-up">LATS unifies reasoning, acting, and planning into a search framework</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">ReAct</span>
+                        <span class="era-marker__title">Sequential Agent</span>
+                        <span class="era-marker__desc">Think, act, observe &mdash; one path only</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Tree of Thought</span>
+                        <span class="era-marker__title">Branching Reasoning</span>
+                        <span class="era-marker__desc">Explore multiple thought paths</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">LATS</span>
+                        <span class="era-marker__title">Search-Guided Agent</span>
+                        <span class="era-marker__desc">MCTS + environment feedback for agents</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Everything of Thoughts</span>
+                        <span class="era-marker__title">Universal Reasoning</span>
+                        <span class="era-marker__desc">Unified thought topology framework</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The MCTS Connection</div>
+                    <p>LATS borrows Monte Carlo Tree Search (MCTS) from game AI &mdash; the same algorithm behind AlphaGo&rsquo;s superhuman Go play. In games, MCTS explores possible moves and uses simulated outcomes to evaluate them. LATS applies this same principle to language agents: instead of simulated games, it uses real environment feedback (test results, API responses, page content) as the value signal. This grounds the search in reality rather than the LLM&rsquo;s self-assessment, which is the key insight that makes LATS so effective.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques &amp; Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore the agent planning ecosystem</p>
+
+                <a href="react.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">ReAct</span>
+                        <span class="evolution-callout__desc">The sequential reasoning-and-acting framework that LATS extends with tree search and backtracking capabilities.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="tree-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Parallel</span>
+                        <span class="evolution-callout__title">Tree of Thought</span>
+                        <span class="evolution-callout__desc">Explores branching reasoning paths for pure reasoning tasks. LATS extends this concept to agentic tasks with real environment interaction.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="reasoning-via-planning.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Reasoning via Planning</span>
+                        <span class="evolution-callout__desc">Another MCTS-based approach to LLM reasoning that focuses on planning rather than agent interaction with environments.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Search Smarter, Not Harder</h2>
+                        <p class="cta-corporate__text">Explore LATS-inspired agent planning or build structured prompts with our interactive tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

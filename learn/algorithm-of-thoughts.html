@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Algorithm of Thoughts (AoT): Embed algorithmic thinking patterns like DFS and BFS directly into prompts for efficient, structured solution-space exploration in a single inference call.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/algorithm-of-thoughts.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Algorithm of Thoughts (AoT) - Praxis">
+    <meta property="og:description" content="Algorithm of Thoughts (AoT): Embed algorithmic thinking patterns like DFS and BFS directly into prompts for efficient, structured solution-space exploration in a single inference call.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/algorithm-of-thoughts.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Algorithm of Thoughts (AoT) - Praxis">
+    <meta name="twitter:description" content="Algorithm of Thoughts (AoT): Embed algorithmic thinking patterns like DFS and BFS directly into prompts for efficient, structured solution-space exploration in a single inference call.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Algorithm of Thoughts (AoT)",
+      "name": "Algorithm of Thoughts (AoT)",
+      "description": "Algorithm of Thoughts (AoT): Embed algorithmic thinking patterns like DFS and BFS directly into prompts for efficient, structured solution-space exploration in a single inference call.",
+      "url": "https://praxislibrary.com/learn/algorithm-of-thoughts.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Algorithm of Thoughts (AoT)"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Algorithm of Thoughts (AoT) - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Algorithm of Thoughts</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Reasoning &amp; CoT Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Algorithm of Thoughts (AoT)</h1>
+                <p class="page-subtitle fade-in">What if you could give an AI the same systematic search strategies that power computer algorithms? Algorithm of Thoughts embeds patterns like depth-first and breadth-first search directly into prompts &mdash; exploring solution spaces methodically in a single pass rather than requiring dozens of separate API calls.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2024</span>
+                        <p><strong>Introduced:</strong> Algorithm of Thoughts was introduced in 2024, building on the insight that tree-based reasoning methods like Tree of Thoughts (ToT) require many separate LLM calls to explore different solution paths. AoT instead embeds the algorithmic search pattern directly into the prompt, guiding the model to explore depth-first or breadth-first within a single generation. This achieves comparable accuracy (78% vs 74% for ToT on benchmarks) with roughly 100x fewer API calls.</p>
+                        <p><strong>Modern LLM Status:</strong> AoT represents an important efficiency breakthrough. While Tree of Thoughts and Graph of Thoughts achieve high accuracy through multi-call exploration, AoT demonstrates that much of this exploration can happen within a single, well-structured prompt. Modern frontier models (Claude, GPT-4, Gemini) respond well to algorithmic framing, making AoT particularly valuable for cost-sensitive production deployments where reasoning quality matters but API budgets are limited.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Embed the Search Algorithm in the Prompt</h2>
+                        <p class="split-section__text">Traditional tree-based reasoning methods (ToT, GoT) explore multiple paths by making many separate API calls &mdash; one per node in the reasoning tree. This is effective but expensive. AoT takes a different approach: it describes the algorithmic search strategy within the prompt itself, telling the model &ldquo;explore this like a depth-first search&rdquo; or &ldquo;evaluate breadth-first before going deeper.&rdquo;</p>
+                        <p class="split-section__text"><strong>The model then internalizes the search pattern and executes it within a single generation,</strong> producing a structured exploration of the solution space without external orchestration. Instead of an external controller spawning dozens of API calls to traverse a reasoning tree, AoT puts the traversal logic inside the prompt &mdash; and the model walks the tree itself.</p>
+                        <p class="split-section__text">Think of it like giving a navigator a map and saying &ldquo;explore every path depth-first, backtrack when you hit a dead end, and report the best route you found&rdquo; &mdash; rather than sending out separate scouts for every fork in the road.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Single-Call Search Matters</span>
+                                <p>Multi-call approaches like Tree of Thoughts can require 50-100+ API calls for a single problem. Each call adds latency and cost. AoT achieves similar reasoning depth in one call by embedding the search algorithm into the prompt structure itself. This makes sophisticated reasoning accessible in real-time applications where multi-call orchestration is impractical.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Algorithm of Thoughts Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from problem definition to single-pass solution</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define the Problem Space</h3>
+                            <p class="element-timeline__text">Frame the problem as a search space with multiple possible paths or solutions. Identify what a &ldquo;node&rdquo; represents &mdash; a partial solution, a decision point, or a reasoning step.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;We need to find the optimal seating arrangement for 8 people with constraints: couples cannot sit adjacent, department heads must be at opposite ends.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Choose an Algorithmic Strategy</h3>
+                            <p class="element-timeline__text">Select the search pattern that fits the problem. Depth-first search (DFS) for problems requiring deep exploration of individual paths. Breadth-first search (BFS) for problems where comparing options at each level matters.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Use depth-first search: fully explore one seating arrangement before backtracking to try alternatives. This way we evaluate complete solutions rather than partial comparisons.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Embed the Algorithm in the Prompt</h3>
+                            <p class="element-timeline__text">Describe the search strategy explicitly in the prompt. Tell the model to explore paths systematically, backtrack when a path looks unpromising, and track which paths have been explored.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Explore this problem using DFS. Start with Person A in seat 1. For each subsequent seat, try people in order. If a constraint is violated, backtrack immediately. Mark explored dead-ends to avoid revisiting them.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Execute Single-Pass Exploration</h3>
+                            <p class="element-timeline__text">The model generates a structured exploration of the solution space in one call, following the embedded algorithm. It explores, evaluates, backtracks, and converges on the best solution within its response.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The model outputs a structured trace: &ldquo;Path 1: A-C-E-G&hellip; constraint violated at seat 5 (couple adjacent). Backtracking. Path 2: A-C-F-B&hellip; valid arrangement found. Continuing to check for better options&hellip; Best arrangement: A-C-F-B-H-D-G-E (score: 92/100).&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why algorithmic search produces more reliable solutions</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Direct Answer</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>What is the optimal seating arrangement for 8 people at a dinner party where couples should not sit together?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Place Person A next to Person C and Person E. Put Person B across from Person D. Alternate couples around the table so no pair is adjacent.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>No exploration of alternatives, may miss better arrangements</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Algorithm of Thoughts</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Using a depth-first search approach, systematically explore seating arrangements for 8 people. Start with Person A, explore each adjacent seat option fully before backtracking. Track promising and unpromising paths.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Structured Exploration</span>
+                                <p><strong>Node 1:</strong> Place A in seat 1. Try B in seat 2 &mdash; couple adjacent, constraint violated. Backtrack.<br><strong>Node 2:</strong> Try C in seat 2. Valid. Continue &mdash; try D in seat 3. Not a couple with C. Valid.<br><strong>Node 3:</strong> Continue depth-first&hellip; E in seat 4 creates couple with D. Backtrack to seat 4, try F&hellip;<br><strong>Result:</strong> After systematic exploration, optimal arrangement found: A-C-F-B-H-D-G-E. All constraints satisfied, conversation compatibility maximized.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Systematic exploration finds optimal solution through structured search</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Algorithm of Thoughts in Action</h2>
+                <p class="section-subtitle fade-in-up">See how algorithmic search patterns improve complex problem-solving</p>
+
+                <div class="accordion fade-in-up" id="aot-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Scheduling Optimization</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem Setup</span>
+                                    <p>&ldquo;We have 6 meetings to schedule across 3 rooms over 4 time slots. Each meeting has participant constraints (some people are in multiple meetings), room requirements (projector, whiteboard), and priority levels. Find the optimal schedule.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AoT with DFS</span>
+                                    <p><strong>Search Strategy:</strong> Depth-first by priority. Schedule highest-priority meetings first, then backtrack if lower-priority meetings cannot fit.<br><br>
+                                    <strong>Node 1:</strong> Meeting A (priority 1) &rarr; Room 1, Slot 1. Constraint check: projector needed, Room 1 has projector. Valid.<br>
+                                    <strong>Node 2:</strong> Meeting B (priority 1) &rarr; Room 2, Slot 1. Constraint check: participant overlap with Meeting A? No. Valid.<br>
+                                    <strong>Node 3:</strong> Meeting C (priority 2) &rarr; Room 1, Slot 2. Participant from Meeting A available in Slot 2? Yes. Valid.<br>
+                                    <strong>Node 4:</strong> Meeting D (priority 2) &rarr; Room 3, Slot 1. Needs whiteboard, Room 3 has whiteboard. Valid.<br>
+                                    <strong>Node 5:</strong> Meeting E (priority 3) &rarr; Room 2, Slot 2. Participant conflict with Meeting C! Backtrack &rarr; try Slot 3. Valid.<br>
+                                    <strong>Node 6:</strong> Meeting F (priority 3) &rarr; Room 1, Slot 3. All constraints satisfied.<br><br>
+                                    <strong>Optimal schedule found in single pass.</strong> All priority-1 meetings in preferred slots, no participant conflicts, all room requirements met. <em>Always verify AI-generated schedules against your actual constraints before implementing.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Code Architecture Decision</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem Setup</span>
+                                    <p>&ldquo;We need to choose a data storage architecture for a new feature. Options include relational DB, document store, graph DB, or hybrid. Evaluate each against our requirements: complex relationships, high read throughput, schema flexibility, and team expertise.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AoT with BFS</span>
+                                    <p><strong>Search Strategy:</strong> Breadth-first. Evaluate all options at each requirement level before going deeper.<br><br>
+                                    <strong>Level 1 &mdash; Complex Relationships:</strong><br>
+                                    &bull; Relational DB: Good with JOINs but complex at scale (score: 7/10)<br>
+                                    &bull; Document Store: Poor for relationships (score: 3/10)<br>
+                                    &bull; Graph DB: Excellent, purpose-built (score: 9/10)<br>
+                                    &bull; Hybrid: Depends on combination (score: 7/10)<br><br>
+                                    <strong>Level 2 &mdash; Read Throughput:</strong><br>
+                                    &bull; Relational: Good with caching (8/10)<br>
+                                    &bull; Document: Excellent for denormalized reads (9/10)<br>
+                                    &bull; Graph: Moderate for bulk reads (6/10)<br>
+                                    &bull; Hybrid (Graph + Document cache): Strong (8/10)<br><br>
+                                    <strong>Pruning:</strong> Document Store eliminated (relationship score too low). Continuing with 3 candidates.<br><br>
+                                    <strong>Level 3 &mdash; Schema Flexibility:</strong> Graph DB and Hybrid both score 8/10. Relational scores 5/10.<br>
+                                    <strong>Level 4 &mdash; Team Expertise:</strong> Team knows relational (9/10), graph (4/10), hybrid (6/10).<br><br>
+                                    <strong>BFS Verdict:</strong> Hybrid (relational + graph for relationship queries) balances all requirements. <em>Validate this recommendation against your specific team and infrastructure constraints.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Strategic Planning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem Setup</span>
+                                    <p>&ldquo;Our company is evaluating market entry strategies for Southeast Asia. Options include direct entry (own offices), partnership with local firms, acquisition of existing player, or digital-first remote model. Each has sub-options for initial target country.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AoT with DFS + Backtracking</span>
+                                    <p><strong>Search Strategy:</strong> Depth-first with aggressive pruning on dealbreaker constraints.<br><br>
+                                    <strong>Path 1 &mdash; Direct Entry &rarr; Vietnam:</strong> Office setup costs $2M. Regulatory timeline: 8-12 months. Local hiring pool: strong in tech. Continue exploring&hellip; Revenue projection: break-even at 18 months. <strong>Viable path. Score: 72/100.</strong><br><br>
+                                    <strong>Path 2 &mdash; Direct Entry &rarr; Indonesia:</strong> Office setup $3M. Regulatory complexity: HIGH. Foreign ownership restrictions in our sector. <strong>Dealbreaker detected. Backtrack.</strong><br><br>
+                                    <strong>Path 3 &mdash; Partnership &rarr; Singapore hub:</strong> Lower cost ($500K), established legal framework. Partner due diligence needed. Revenue share reduces margins by 30%. <strong>Viable path. Score: 78/100.</strong><br><br>
+                                    <strong>Path 4 &mdash; Acquisition &rarr; Thailand:</strong> Target company valued at $8M. Exceeds budget ceiling of $5M. <strong>Backtrack.</strong><br><br>
+                                    <strong>Path 5 &mdash; Digital-first &rarr; Multi-country:</strong> Minimal fixed costs ($200K). Scalable. Regulatory risk: moderate (varies by country). <strong>Viable path. Score: 81/100.</strong><br><br>
+                                    <strong>Best path:</strong> Digital-first multi-country entry with Singapore legal entity as base. Highest score, lowest risk, most scalable. <em>This analysis should be verified against current market data and reviewed by regional experts.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Algorithm of Thoughts</h2>
+                <p class="section-subtitle fade-in-up">Best for structured search problems requiring efficient exploration</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Optimization Problems</strong>
+                                    <p>Scheduling, resource allocation, and constraint satisfaction problems where multiple valid solutions exist but differ in quality.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Resource-Constrained Deployments</strong>
+                                    <p>When API costs or latency budgets prevent multi-call approaches like Tree of Thoughts &mdash; AoT achieves similar depth in a single call.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Multi-Step Decision Trees</strong>
+                                    <p>Problems with branching decision points where each choice opens new sub-paths &mdash; strategic planning, diagnostic workflows, configuration optimization.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Problems with Many Valid but Differently-Ranked Solutions</strong>
+                                    <p>When you need not just any answer but the best answer &mdash; AoT&rsquo;s systematic exploration finds and compares multiple valid solutions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Single-Answer Questions</strong>
+                                    <p>Factual lookups or straightforward questions don&rsquo;t benefit from search-space exploration &mdash; they have one correct answer, not a solution space.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative or Open-Ended Tasks</strong>
+                                    <p>Writing, brainstorming, and artistic tasks benefit from free exploration rather than algorithmic constraint &mdash; DFS and BFS patterns would limit creative output.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Problems Without Clear Search Structure</strong>
+                                    <p>If the problem can&rsquo;t be framed as a tree or graph of decisions with evaluable nodes, algorithmic search patterns won&rsquo;t add value.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Algorithm of Thoughts delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Route Optimization</h3>
+                        <p class="use-case-showcase__desc">Use DFS to explore delivery routes, backtracking from paths that exceed time or distance constraints, finding the most efficient sequence in a single pass.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="9" y1="3" x2="9" y2="21"/>
+                                <line x1="15" y1="3" x2="15" y2="21"/>
+                                <line x1="3" y1="9" x2="21" y2="9"/>
+                                <line x1="3" y1="15" x2="21" y2="15"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Puzzle Solving</h3>
+                        <p class="use-case-showcase__desc">Apply algorithmic search to logic puzzles, Sudoku-style constraints, and combinatorial challenges where systematic exploration outperforms guessing.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Architecture Design</h3>
+                        <p class="use-case-showcase__desc">Use BFS to evaluate system architecture options at each decision level &mdash; database choice, API design, caching strategy &mdash; before committing to a full stack.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Resource Allocation</h3>
+                        <p class="use-case-showcase__desc">Systematically explore budget, personnel, and equipment allocation across projects, backtracking from over-allocated configurations to find balanced distributions.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Strategy Games</h3>
+                        <p class="use-case-showcase__desc">Embed game-tree search into prompts for move evaluation, exploring consequences of each option depth-first before recommending optimal plays.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Debugging Complex Systems</h3>
+                        <p class="use-case-showcase__desc">Apply DFS to trace bugs through code paths, systematically exploring each potential cause, eliminating dead ends, and narrowing to the root cause.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Algorithm of Thoughts Fits</h2>
+                <p class="section-subtitle fade-in-up">AoT bridges multi-call exploration and single-pass efficiency</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Tree of Thoughts</span>
+                        <span class="era-marker__title">Multi-Call Exploration</span>
+                        <span class="era-marker__desc">Separate API call per reasoning node</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Algorithm of Thoughts</span>
+                        <span class="era-marker__title">Single-Call Search</span>
+                        <span class="era-marker__desc">Algorithmic exploration in one generation</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Graph of Thought</span>
+                        <span class="era-marker__title">Networked Reasoning</span>
+                        <span class="era-marker__desc">Non-linear paths with cycles and merges</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Everything of Thoughts</span>
+                        <span class="era-marker__title">External Solvers</span>
+                        <span class="era-marker__desc">LLM + algorithmic solvers combined</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine with Self-Consistency</div>
+                    <p>AoT explores a single algorithmic path efficiently, but you can boost reliability by running it multiple times with different search strategies (DFS vs BFS) and comparing results. This gives you the efficiency of single-call reasoning with the robustness of ensemble methods.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary reasoning techniques</p>
+
+                <a href="tree-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Tree of Thoughts</span>
+                        <span class="evolution-callout__desc">The multi-call tree exploration method that AoT compresses into a single prompt pass.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="graph-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Graph of Thought</span>
+                        <span class="evolution-callout__desc">Extends tree-based reasoning to non-linear graph structures with cycles and merges.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">Run AoT multiple times and take the majority answer for higher reliability.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Think Algorithmically</h2>
+                        <p class="cta-corporate__text">Apply algorithmic search patterns to your prompts or explore other reasoning techniques.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="index.html" class="btn btn-secondary">All Techniques</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

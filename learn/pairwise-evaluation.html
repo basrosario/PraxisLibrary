@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pairwise Evaluation: Compare outputs in pairs rather than scoring individually, leveraging relative comparison for more consistent and reliable AI-assisted evaluation.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/pairwise-evaluation.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Pairwise Evaluation - Praxis">
+    <meta property="og:description" content="Pairwise Evaluation: Compare outputs in pairs rather than scoring individually, leveraging relative comparison for more consistent and reliable AI-assisted evaluation.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/pairwise-evaluation.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pairwise Evaluation - Praxis">
+    <meta name="twitter:description" content="Pairwise Evaluation: Compare outputs in pairs rather than scoring individually, leveraging relative comparison for more consistent and reliable AI-assisted evaluation.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Pairwise Evaluation",
+      "name": "Pairwise Evaluation",
+      "description": "Pairwise Evaluation: Compare outputs in pairs rather than scoring individually, leveraging relative comparison for more consistent and reliable AI-assisted evaluation.",
+      "url": "https://praxislibrary.com/learn/pairwise-evaluation.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Pairwise Evaluation"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Pairwise Evaluation - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Pairwise Evaluation</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Ensemble Methods Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Pairwise Evaluation</h1>
+                <p class="page-subtitle fade-in">Absolute scoring is hard &mdash; even for humans. Is this essay a 7 or an 8 out of 10? Pairwise Evaluation sidesteps this problem entirely: instead of scoring outputs individually, it compares them in pairs. &ldquo;Is A better than B?&rdquo; is a much easier and more reliable question than &ldquo;What score does A deserve?&rdquo;</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2024</span>
+                        <p><strong>Introduced:</strong> Pairwise Evaluation was formalized as a prompting technique in 2024, building on extensive research showing that relative comparisons are more reliable than absolute ratings. When asked to score an output from 1&ndash;10, models (and humans) show high variance and inconsistency. When asked &ldquo;which of these two is better?&rdquo;, agreement rates jump dramatically. Pairwise Evaluation applies this insight systematically: all candidates are compared in pairs, and rankings emerge from aggregated pairwise preferences.</p>
+                        <p><strong>Modern LLM Status:</strong> Pairwise Evaluation has become the <strong>standard approach for LLM-as-Judge benchmarks and automated evaluation systems</strong>. Major benchmarks (Chatbot Arena, MT-Bench) use pairwise comparison as their core methodology. The technique is essential for any production system that needs to evaluate, rank, or select among multiple AI-generated outputs. Its reliability advantage over absolute scoring has made it the default choice for evaluation pipelines across industry and research.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Compare, Don&rsquo;t Score</h2>
+                        <p class="split-section__text">Consider rating 5 essays on a 10-point scale &mdash; you&rsquo;ll agonize over whether each is a 6 or 7, and your scores will shift depending on the order you read them. Now consider simply comparing pairs: &ldquo;Is Essay A better than Essay B?&rdquo; This relative judgment is both easier and more consistent.</p>
+                        <p class="split-section__text"><strong>Pairwise Evaluation applies this principle systematically.</strong> Given N candidates, it generates all possible pairs (or a strategic subset), makes a comparison judgment for each pair, and derives a ranking from the aggregated comparisons using methods like Elo ratings or Bradley-Terry models. The result is a robust ranking that emerges from many small, reliable decisions rather than a few fragile absolute scores.</p>
+                        <p class="split-section__text">Think of it like a round-robin tournament: instead of asking judges to assign point totals to each athlete, you simply have them compete head-to-head. The overall standings emerge naturally from the accumulated match results &mdash; and they&rsquo;re far more trustworthy than any single judge&rsquo;s scorecard.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Relative Beats Absolute</span>
+                                <p>Absolute scoring requires calibrated standards (&ldquo;what does a 7 mean?&rdquo;) that are hard to maintain consistently. Relative comparison only requires answering &ldquo;which is better?&rdquo; &mdash; a judgment that humans and AI make much more reliably. By aggregating many reliable pairwise comparisons, highly accurate rankings emerge.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Pairwise Evaluation Process</h2>
+                <p class="section-subtitle fade-in-up">Five stages from candidate set to reliable ranking</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define Comparison Criteria</h3>
+                            <p class="element-timeline__text">Establish what &ldquo;better&rdquo; means for this evaluation context. This could be accuracy, clarity, helpfulness, creativity, or any combination of qualities. Clear criteria ensure consistent comparisons across all pairs and prevent evaluators from shifting standards mid-evaluation.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Compare these two article drafts on clarity of explanation, factual accuracy, and engagement. Which draft better serves a general audience?&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Generate Pairs</h3>
+                            <p class="element-timeline__text">Create all N*(N-1)/2 pairs from the candidate set, or sample strategically for large candidate pools. For 5 candidates, that&rsquo;s 10 pairs. For 20 candidates, that&rsquo;s 190 pairs &mdash; at which point strategic sampling (Swiss-system or random subsets) becomes practical to keep costs manageable.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Given candidates A, B, C, D &mdash; generate pairs: (A,B), (A,C), (A,D), (B,C), (B,D), (C,D) for a total of 6 comparisons.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Pairwise Comparison</h3>
+                            <p class="element-timeline__text">For each pair, determine which candidate is preferred and why. The evaluator (human or AI) sees only two options at a time and must choose one or declare a tie. Recording the reasoning behind each choice enables later auditing and helps detect inconsistencies in the evaluation process.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Comparing Draft A vs Draft B: Draft A is preferred. Reason: Draft A provides clearer structure with topic sentences, while Draft B buries key points in long paragraphs.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Aggregate Preferences</h3>
+                            <p class="element-timeline__text">Use Elo ratings, Bradley-Terry models, or majority voting to derive rankings from the pairwise results. Each method has trade-offs: Elo is simple and well-understood, Bradley-Terry provides probability estimates, and majority voting is most transparent. The aggregation method converts individual comparisons into a global ordering.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>After 6 comparisons: A won 3, B won 2, C won 1, D won 0 &mdash; Elo ratings: A (1,532), B (1,510), C (1,478), D (1,480).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">5</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Final Ranking</h3>
+                            <p class="element-timeline__text">Produce the final ordering with confidence scores based on agreement consistency. High confidence means the ranking is stable across comparisons; low confidence flags candidates whose relative positions are uncertain and may benefit from additional comparison rounds.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Final ranking:</strong> 1. Draft A (high confidence) &mdash; 2. Draft B (high confidence) &mdash; 3. Draft C (low confidence, close to D) &mdash; 4. Draft D (low confidence).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why relative comparison produces more reliable rankings</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Absolute Scoring</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Rate this response from 1-10 on helpfulness, accuracy, and clarity.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Helpfulness: 7. Accuracy: 8. Clarity: 7. Overall: 7.3/10.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Inconsistent across evaluators, scores drift over time, no anchoring</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Pairwise Evaluation</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Pairwise Comparison</span>
+                                <p><strong>Response A vs Response B:</strong> Which response better answers the user&rsquo;s question? Consider helpfulness, accuracy, and clarity.<br><br><strong>Verdict:</strong> Response A is preferred. It provides a more structured explanation with concrete examples, while Response B is accurate but overly abstract.<br><br><strong>Response A vs Response C:</strong> Response A preferred again &mdash; more actionable advice.<br><strong>Response B vs Response C:</strong> Response B preferred &mdash; better factual coverage.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Aggregated Ranking</span>
+                                <p>1. Response A (2 wins) &mdash; 2. Response B (1 win) &mdash; 3. Response C (0 wins). Ranking consistent across both orderings, high agreement confidence.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Consistent, reliable, each comparison grounded in direct side-by-side evidence</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Pairwise Evaluation in Action</h2>
+                <p class="section-subtitle fade-in-up">See how comparing outputs in pairs produces reliable rankings</p>
+
+                <div class="accordion fade-in-up" id="pairwise-evaluation-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Content Quality Assessment</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Evaluation Task</span>
+                                    <p>&ldquo;We have three draft introductions for an article about renewable energy. Rather than scoring each individually, compare them in pairs to find the strongest draft.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Pairwise Evaluation Process</span>
+                                    <p><strong>Draft A vs Draft B:</strong> Draft A is preferred. It opens with a compelling statistic and establishes stakes immediately, while Draft B uses a generic opening that could apply to any topic.<br><br>
+                                    <strong>Draft A vs Draft C:</strong> Draft A is preferred. Draft C has strong emotional appeal but lacks the factual grounding that Draft A provides. For an informational article, Draft A&rsquo;s evidence-first approach better serves the audience.<br><br>
+                                    <strong>Draft B vs Draft C:</strong> Draft C is preferred. While neither is as strong as Draft A, Draft C at least engages the reader emotionally, whereas Draft B reads as flat and formulaic.<br><br>
+                                    <strong>Aggregated ranking:</strong> 1. Draft A (2 wins, 0 losses) &mdash; 2. Draft C (1 win, 1 loss) &mdash; 3. Draft B (0 wins, 2 losses).<br><br>
+                                    <em>Note: Always verify that AI-generated evaluations align with your editorial standards. Use pairwise results as input to human decision-making, not as a replacement for it.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Model Evaluation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Evaluation Task</span>
+                                    <p>&ldquo;Compare outputs from three different models on the same coding task. Use pairwise comparison to determine which model produces the best solution.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Pairwise Evaluation Process</span>
+                                    <p><strong>Model X vs Model Y:</strong> Model X preferred. Both produce correct code, but Model X includes error handling and meaningful variable names. Model Y&rsquo;s solution works but uses single-letter variables and no comments.<br><br>
+                                    <strong>Model X vs Model Z:</strong> Model Z preferred. Model Z&rsquo;s solution is not only correct and well-documented, it also handles edge cases that Model X misses (empty input, negative numbers).<br><br>
+                                    <strong>Model Y vs Model Z:</strong> Model Z preferred. Model Z is superior on every criterion: correctness, readability, and robustness.<br><br>
+                                    <strong>Aggregated ranking:</strong> 1. Model Z (2 wins) &mdash; 2. Model X (1 win) &mdash; 3. Model Y (0 wins). High confidence &mdash; no ordering conflicts detected.<br><br>
+                                    <em>Note: Pairwise evaluation of code should be supplemented with actual test execution. AI-based comparison identifies stylistic and structural differences but cannot guarantee runtime correctness.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Resume Screening</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Evaluation Task</span>
+                                    <p>&ldquo;We have four candidate resumes for a data engineering role. Instead of scoring each resume on a rubric, compare them pairwise against the job requirements to produce a ranking.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Pairwise Evaluation Process</span>
+                                    <p><strong>Candidate 1 vs Candidate 2:</strong> Candidate 1 preferred. Stronger hands-on experience with the required tech stack (Spark, Airflow) vs. Candidate 2&rsquo;s primarily academic background.<br><br>
+                                    <strong>Candidate 1 vs Candidate 3:</strong> Candidate 3 preferred. Both have strong technical skills, but Candidate 3 demonstrates leadership experience managing data pipelines at scale.<br><br>
+                                    <strong>Candidate 1 vs Candidate 4:</strong> Candidate 1 preferred. Candidate 4 has relevant skills but less depth of experience.<br><br>
+                                    <strong>Candidate 2 vs Candidate 3:</strong> Candidate 3 preferred. Significant experience advantage.<br>
+                                    <strong>Candidate 2 vs Candidate 4:</strong> Candidate 4 preferred. More industry experience.<br>
+                                    <strong>Candidate 3 vs Candidate 4:</strong> Candidate 3 preferred. Broader scope and leadership.<br><br>
+                                    <strong>Aggregated ranking:</strong> 1. Candidate 3 (3 wins) &mdash; 2. Candidate 1 (2 wins) &mdash; 3. Candidate 4 (1 win) &mdash; 4. Candidate 2 (0 wins).<br><br>
+                                    <em>Note: AI-assisted resume screening must be reviewed by human recruiters. Pairwise comparison can surface relative strengths, but hiring decisions require human judgment on cultural fit, potential, and context that AI cannot fully assess.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Pairwise Evaluation</h2>
+                <p class="section-subtitle fade-in-up">Best for ranking tasks where absolute scoring is unreliable</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Evaluating AI-Generated Content</strong>
+                                    <p>Comparing multiple drafts, summaries, or responses to find the best output &mdash; relative comparison is far more reliable than assigning individual quality scores.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Benchmarking Model Performance</strong>
+                                    <p>Comparing different models or configurations on the same tasks &mdash; the foundation of systems like Chatbot Arena and MT-Bench.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Selecting Best Outputs from Multiple Candidates</strong>
+                                    <p>When you generate several candidate responses and need to pick the winner &mdash; pairwise comparison identifies the strongest option through aggregated preferences.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Any Ranking Task Where Absolute Scoring Is Unreliable</strong>
+                                    <p>Subjective quality assessments, creative evaluations, or any domain where calibrated scoring standards are hard to maintain consistently.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Only One Output to Evaluate</strong>
+                                    <p>Pairwise comparison requires at least two candidates &mdash; if you have a single output, use absolute scoring or rubric-based evaluation instead.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Absolute Scores Are Required</strong>
+                                    <p>When the application demands specific numeric scores (not rankings) &mdash; pairwise evaluation produces orderings, not calibrated point values.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Very Large Candidate Sets</strong>
+                                    <p>With O(N&sup2;) pairs, evaluation costs grow quadratically &mdash; 100 candidates means 4,950 comparisons. Use sampling strategies or tournament brackets for large pools.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Pass/Fail Judgments</strong>
+                                    <p>When all you need is a binary decision (correct/incorrect, safe/unsafe) &mdash; pairwise comparison adds unnecessary complexity to straightforward validation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Pairwise Evaluation delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">LLM Benchmarking</h3>
+                        <p class="use-case-showcase__desc">Compare model outputs head-to-head across tasks, aggregating pairwise preferences into Elo ratings that rank models by capability &mdash; the methodology behind Chatbot Arena.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Evaluation</h3>
+                        <p class="use-case-showcase__desc">Rank draft articles, marketing copy, or educational materials by comparing each pair on clarity, engagement, and accuracy rather than assigning fragile individual scores.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 2l4 4-4 4"/>
+                                <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                                <path d="M7 22l-4-4 4-4"/>
+                                <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">A/B Testing Analysis</h3>
+                        <p class="use-case-showcase__desc">Evaluate user experience variants by comparing them in pairs &mdash; pairwise preference data reveals which designs users genuinely prefer beyond noisy click-rate metrics.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="8.5" cy="7" r="4"/>
+                                <path d="M20 8v6M23 11h-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Resume Screening</h3>
+                        <p class="use-case-showcase__desc">Compare candidates pairwise against job requirements instead of rubric scoring, producing more consistent shortlists that human recruiters can then evaluate in depth.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Product Comparison</h3>
+                        <p class="use-case-showcase__desc">Evaluate competing products or features by comparing them in pairs on specific criteria, building reliable preference rankings from consistent relative judgments.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Quality Assurance</h3>
+                        <p class="use-case-showcase__desc">Compare output versions during QA review to identify regressions or improvements &mdash; pairwise comparison catches subtle quality changes that absolute metrics miss.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Pairwise Evaluation Fits</h2>
+                <p class="section-subtitle fade-in-up">Pairwise Evaluation bridges single scoring and tournament ranking</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Single Scoring</span>
+                        <span class="era-marker__title">Absolute Rating</span>
+                        <span class="era-marker__desc">Score each output independently</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Consistency</span>
+                        <span class="era-marker__title">Multiple Ratings</span>
+                        <span class="era-marker__desc">Average across repeated evaluations</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Pairwise Evaluation</span>
+                        <span class="era-marker__title">Relative Comparison</span>
+                        <span class="era-marker__desc">Head-to-head pair judgments</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Tournament Ranking</span>
+                        <span class="era-marker__title">Multi-Round Pairwise</span>
+                        <span class="era-marker__desc">Iterative bracket-style elimination</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Watch for Position Bias</div>
+                    <p>LLMs often prefer the first (or second) option regardless of quality. Mitigate this by presenting each pair in both orders (A vs B and B vs A) and only counting a preference if it&rsquo;s consistent across both orderings. This double-check roughly doubles the number of comparisons but dramatically improves reliability.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary evaluation and ensemble techniques</p>
+
+                <a href="ensemble-methods.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Ensemble Methods</span>
+                        <span class="evolution-callout__desc">The broader family of techniques that combine multiple outputs for better results &mdash; Pairwise Evaluation is a core method within this family.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">Generates multiple answers to the same question and selects the most common &mdash; a complementary approach that uses voting rather than pairwise comparison.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="diverse-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Diverse Prompting</span>
+                        <span class="evolution-callout__desc">Generates varied candidate outputs using different prompt strategies &mdash; a natural upstream step that feeds diverse candidates into Pairwise Evaluation.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Compare to Decide</h2>
+                        <p class="cta-corporate__text">Apply pairwise evaluation or explore other ensemble techniques.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

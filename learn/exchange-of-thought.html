@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Exchange-of-Thought: Enable multiple reasoning agents to share intermediate thoughts and build on each other's reasoning for collaborative problem-solving.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/exchange-of-thought.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Exchange-of-Thought (EoT) - Praxis">
+    <meta property="og:description" content="Exchange-of-Thought: Enable multiple reasoning agents to share intermediate thoughts and build on each other's reasoning for collaborative problem-solving.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/exchange-of-thought.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Exchange-of-Thought (EoT) - Praxis">
+    <meta name="twitter:description" content="Exchange-of-Thought: Enable multiple reasoning agents to share intermediate thoughts and build on each other's reasoning for collaborative problem-solving.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Exchange-of-Thought (EoT)",
+      "name": "Exchange-of-Thought (EoT)",
+      "description": "Exchange-of-Thought: Enable multiple reasoning agents to share intermediate thoughts and build on each other's reasoning for collaborative problem-solving.",
+      "url": "https://praxislibrary.com/learn/exchange-of-thought.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Exchange-of-Thought (EoT)"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Exchange-of-Thought (EoT) - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Exchange-of-Thought</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Ensemble Methods Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Exchange-of-Thought (EoT)</h1>
+                <p class="page-subtitle fade-in">Great ideas rarely emerge in isolation. Exchange-of-Thought enables multiple reasoning processes to share their intermediate thoughts &mdash; partial solutions, key insights, and promising directions &mdash; so each can build on the others&rsquo; progress rather than working in complete isolation.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2024</span>
+                        <p><strong>Introduced:</strong> Exchange-of-Thought was introduced in 2024, addressing a limitation of ensemble methods like Self-Consistency where multiple reasoning paths run completely independently. EoT introduces information exchange between reasoning processes at intermediate steps. Each &ldquo;agent&rdquo; shares its current thinking at checkpoints, allowing others to incorporate useful insights. This collaborative reasoning consistently outperforms independent parallel reasoning on complex tasks.</p>
+                        <p><strong>Modern LLM Status:</strong> EoT formalizes the collaborative reasoning pattern used in modern multi-agent AI systems. As production deployments increasingly use multiple AI agents working together, the question of <strong>how and when to share information between agents</strong> becomes critical. EoT provides a principled framework for intermediate information exchange, making it especially relevant for complex problem-solving where no single reasoning path can capture all necessary insights.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Share Thoughts, Don&rsquo;t Just Share Answers</h2>
+                        <p class="split-section__text">Self-Consistency runs multiple reasoning chains independently and votes on the final answer. But independent chains can&rsquo;t help each other &mdash; if Chain A discovers a crucial insight at step 3, Chains B and C can&rsquo;t benefit from it. Every chain is on its own, potentially duplicating effort or all missing the same key insight.</p>
+                        <p class="split-section__text"><strong>EoT adds exchange rounds</strong> where agents share intermediate thoughts. After each reasoning phase, agents broadcast their current reasoning state. Others can incorporate useful insights, correct their own errors based on what others found, or explore new directions inspired by shared progress.</p>
+                        <p class="split-section__text">Think of it like a research team that meets weekly to share progress: each researcher works independently, but regular check-ins ensure discoveries propagate across the group, dead ends are flagged early, and the collective output is far stronger than isolated work.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Sharing Beats Isolation</span>
+                                <p>In independent ensemble methods, different chains may duplicate effort or all miss the same insight. Exchange-of-Thought creates a shared knowledge pool that grows with each exchange round, ensuring discoveries propagate across all reasoning processes. A breakthrough by one agent becomes <strong>available to all agents</strong>, dramatically increasing the probability that the final synthesis captures every important insight.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Exchange-of-Thought Process</h2>
+                <p class="section-subtitle fade-in-up">Five stages from parallel initialization to enriched synthesis</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Initialize Multiple Agents</h3>
+                            <p class="element-timeline__text">Start 3&ndash;5 parallel reasoning processes, each given the same problem but potentially with different starting perspectives or approaches. The diversity of initial approaches is key &mdash; agents that start identically are less likely to discover complementary insights.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Three agents are tasked with designing a data pipeline architecture. Agent A focuses on throughput optimization. Agent B prioritizes fault tolerance. Agent C emphasizes cost efficiency.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Independent Reasoning Phase</h3>
+                            <p class="element-timeline__text">Each agent reasons independently for a defined number of steps, developing their own analysis and partial conclusions without seeing what others are thinking. This independent phase ensures genuine diversity of thought before any convergence occurs.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Agent A:</strong> &ldquo;For maximum throughput, we need partitioned streams with parallel consumers. I&rsquo;ve identified that our peak load of 50K events/sec requires at least 8 partitions.&rdquo;<br><strong>Agent B:</strong> &ldquo;Fault tolerance requires at-least-once delivery guarantees. I&rsquo;ve found that our current retry mechanism drops 2% of events during failover.&rdquo;<br><strong>Agent C:</strong> &ldquo;Cost analysis shows 60% of our pipeline cost is storage. Tiered storage with hot/warm/cold zones could cut costs by 40%.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Exchange Round</h3>
+                            <p class="element-timeline__text">Agents share intermediate thoughts, insights, and partial conclusions with each other. Each agent receives the current state of all other agents&rsquo; reasoning. This is the signature step of EoT &mdash; the point where isolated insights become shared knowledge.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Shared insight from Agent B:</strong> &ldquo;The 2% event loss during failover is relevant to all approaches &mdash; it affects throughput calculations and has cost implications for retry infrastructure.&rdquo;<br><strong>Shared insight from Agent C:</strong> &ldquo;Tiered storage affects partition strategy &mdash; hot tier needs fewer but faster partitions, changing Agent A&rsquo;s throughput calculations.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Informed Continuation</h3>
+                            <p class="element-timeline__text">Each agent continues reasoning, now informed by the insights shared by others. Agents incorporate relevant discoveries, adjust their analysis based on new information, and explore directions they wouldn&rsquo;t have considered alone. This phase produces richer, more interconnected reasoning than any single chain could achieve.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Agent A (updated):</strong> &ldquo;Incorporating Agent C&rsquo;s tiered storage insight: hot tier with 4 high-throughput partitions for real-time data, warm tier with batch processing for the remaining volume. This reduces partition count while maintaining throughput targets.&rdquo;<br><strong>Agent B (updated):</strong> &ldquo;Agent A&rsquo;s partition strategy interacts with failover &mdash; fewer partitions means faster rebalancing during failures, reducing the 2% loss to under 0.5%.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">5</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Final Synthesis</h3>
+                            <p class="element-timeline__text">Combine the enriched reasoning chains into a final answer. Because each agent has benefited from the others&rsquo; insights, the synthesis is far more comprehensive than what independent voting would produce. The final answer reflects cross-pollinated reasoning where each perspective has been refined by the others.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Synthesized architecture:</strong> &ldquo;Tiered pipeline with 4 hot partitions (real-time, high-throughput) and batch warm tier. At-least-once delivery with fast rebalancing (under 0.5% loss). Tiered storage cuts costs 40% while the reduced partition count simplifies both throughput management and failover handling.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why collaborative reasoning outperforms isolated parallel chains</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Independent Chains</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">3 Independent CoT Chains</span>
+                                <p><strong>Chain 1:</strong> Focuses on algorithm efficiency, misses memory constraints.<br><strong>Chain 2:</strong> Focuses on memory optimization, misses parallelization opportunity.<br><strong>Chain 3:</strong> Focuses on parallelization, misses the memory constraint that makes its approach infeasible.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Majority Vote Result</span>
+                                <p>Two chains suggest parallelization-based approaches (neither accounting for memory limits). The majority vote selects an infeasible solution.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Isolated chains miss each other&rsquo;s critical insights</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Exchange-of-Thought</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">3 Collaborating Chains</span>
+                                <p><strong>Phase 1 (independent):</strong> Same initial discoveries as above.<br><strong>Exchange round:</strong> Chain 2 shares memory constraint. Chain 3 shares parallelization opportunity.<br><strong>Phase 2 (informed):</strong> Chain 3 redesigns parallelization to work within memory limits. Chain 1 incorporates both constraints into its algorithm design. Chain 2 identifies memory-efficient parallel primitives.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Synthesized Result</span>
+                                <p>Memory-aware parallel algorithm that respects hardware constraints while maximizing throughput &mdash; a solution no single chain would have reached alone.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Shared insights produce a solution that integrates all constraints</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Exchange-of-Thought in Action</h2>
+                <p class="section-subtitle fade-in-up">See how shared intermediate reasoning produces stronger solutions</p>
+
+                <div class="accordion fade-in-up" id="eot-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Complex Problem Solving</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem Setup</span>
+                                    <p>&ldquo;Design a notification system for a healthcare app that must handle medication reminders, appointment alerts, and emergency broadcasts across 500K users with different time zones, language preferences, and notification fatigue thresholds.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Collaborative Reasoning</span>
+                                    <p><strong>Agent 1 (Phase 1):</strong> Focuses on delivery infrastructure &mdash; identifies need for priority queuing (emergency &gt; medication &gt; appointment) and timezone-aware scheduling.<br><br>
+                                    <strong>Agent 2 (Phase 1):</strong> Focuses on user experience &mdash; discovers that notification fatigue research shows users disable notifications after receiving more than 7 non-critical alerts per day.<br><br>
+                                    <strong>Agent 3 (Phase 1):</strong> Focuses on reliability &mdash; identifies that medication reminders have a safety-critical delivery SLA (must arrive within 5-minute window).<br><br>
+                                    <strong>Exchange round:</strong> Agent 2&rsquo;s fatigue threshold (7/day) impacts Agent 1&rsquo;s queuing strategy. Agent 3&rsquo;s 5-minute SLA requires Agent 1 to separate medication reminders from the general queue entirely.<br><br>
+                                    <strong>Agent 1 (Phase 2, informed):</strong> Redesigns with a dedicated high-priority channel for medication reminders (bypasses general queue) and a fatigue-aware batching system for appointments that respects the 7/day threshold.<br><br>
+                                    <strong>Synthesis:</strong> Three-tier notification architecture: (1) dedicated real-time channel for medication with 5-min SLA and delivery confirmation, (2) priority queue for emergencies with override capability, (3) smart-batched channel for appointments that aggregates low-priority notifications and respects per-user fatigue limits. All channels timezone-aware with language-specific templates. Always verify system behavior through testing before deploying to production.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Research Synthesis</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem Setup</span>
+                                    <p>&ldquo;Analyze the relationship between sleep quality, cognitive performance, and workplace productivity. Three agents each focus on one dimension, then share findings to build a comprehensive model.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Collaborative Reasoning</span>
+                                    <p><strong>Agent 1 (Sleep Science):</strong> Identifies that sleep quality depends more on consistency of schedule than total hours. Shift workers with regular 6-hour sleep patterns outperform irregular 8-hour sleepers on cognitive tests.<br><br>
+                                    <strong>Agent 2 (Cognitive Performance):</strong> Maps specific cognitive functions to sleep stages &mdash; REM sleep supports creative problem-solving while deep sleep consolidates procedural memory. Different job roles depend on different cognitive functions.<br><br>
+                                    <strong>Agent 3 (Workplace Productivity):</strong> Finds that productivity metrics vary dramatically by role type &mdash; creative roles show 40% decline with poor sleep, while routine task performance declines only 15%.<br><br>
+                                    <strong>Exchange round:</strong> Agent 2&rsquo;s finding about REM vs. deep sleep maps directly to Agent 3&rsquo;s observation about creative vs. routine roles. Agent 1&rsquo;s consistency finding suggests schedule regularity matters more than total sleep hours for productivity.<br><br>
+                                    <strong>Synthesis:</strong> Sleep-productivity relationship is role-dependent. Creative roles require strong REM sleep (prioritize consistent schedules, avoid late-night work that disrupts REM). Routine roles are more resilient to sleep disruption but still benefit from schedule consistency. Workplace interventions should focus on schedule regularity over sleep duration, and role-specific accommodations for sleep-sensitive positions. Note: these findings should be verified against peer-reviewed research before implementing organizational changes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Collaborative Design</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem Setup</span>
+                                    <p>&ldquo;Design an accessible e-commerce checkout flow for a grocery delivery app. Three agents focus on: accessibility, conversion optimization, and fraud prevention. Share insights after initial analysis.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Collaborative Reasoning</span>
+                                    <p><strong>Agent 1 (Accessibility):</strong> Identifies that multi-step checkouts with progress indicators are more accessible than single-page forms. Screen readers navigate steps more reliably, and cognitive load is reduced by showing only one decision at a time.<br><br>
+                                    <strong>Agent 2 (Conversion):</strong> Finds that reducing checkout steps from 5 to 3 increases conversion by 26%. Guest checkout (no account required) adds another 14%. Single-page checkout outperforms multi-step for most users.<br><br>
+                                    <strong>Agent 3 (Fraud Prevention):</strong> Discovers that address verification at the delivery step catches 85% of fraudulent orders. Adding a brief delivery confirmation screen reduces chargebacks by 60%.<br><br>
+                                    <strong>Exchange round:</strong> Agent 1 and Agent 2 have conflicting recommendations (multi-step vs. fewer steps). Agent 3&rsquo;s delivery confirmation screen can serve double duty as both a fraud check and an accessibility-friendly review step.<br><br>
+                                    <strong>Synthesis:</strong> Three-step adaptive checkout: (1) Cart review with accessible item management, (2) combined payment and delivery form with progressive disclosure, (3) confirmation screen that serves as both fraud verification and accessible review. Guest checkout available. The confirmation step satisfies accessibility needs (clear review before commitment), conversion needs (only 3 steps), and fraud prevention (address verification integrated). Consider A/B testing this design against alternatives before full rollout to validate the approach with real user data.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Exchange-of-Thought</h2>
+                <p class="section-subtitle fade-in-up">Best for complex problems where shared insights amplify reasoning</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Multi-Dimensional Problems</strong>
+                                    <p>Problems that benefit from collaborative reasoning across multiple domains &mdash; where insights from one perspective can transform another&rsquo;s analysis.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Multi-Agent Systems</strong>
+                                    <p>Designing or operating systems where multiple AI agents need to coordinate &mdash; EoT provides the information-sharing protocol for effective collaboration.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Problems Where Partial Insights Matter</strong>
+                                    <p>Tasks where discovering one piece of the puzzle unlocks progress on other pieces &mdash; sharing partial solutions accelerates the entire process.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Long Reasoning Chains</strong>
+                                    <p>When reasoning involves many steps and early discoveries affect later analysis &mdash; sharing intermediate findings prevents downstream errors across all chains.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Problems</strong>
+                                    <p>Problems that a single reasoning chain can solve effectively don&rsquo;t need the overhead of multiple agents and exchange rounds.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>When Independent Diversity Is More Valuable</strong>
+                                    <p>Some problems benefit from maximally diverse perspectives &mdash; sharing can cause premature convergence where all agents adopt the same approach too early.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Tight Latency Constraints</strong>
+                                    <p>Exchange rounds add significant token usage and processing time. When speed matters more than depth, use simpler ensemble methods or single-chain reasoning.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Single-Step Questions</strong>
+                                    <p>Questions answerable in one step have no intermediate thoughts to exchange &mdash; the technique&rsquo;s value comes from sharing mid-process discoveries.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Exchange-of-Thought delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Collaborative Research</h3>
+                        <p class="use-case-showcase__desc">Multiple agents analyze different aspects of a research question, sharing discovered connections and relevant findings so each agent builds on the others&rsquo; progress.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Multi-Agent Planning</h3>
+                        <p class="use-case-showcase__desc">Coordinate planning across multiple dimensions &mdash; logistics, budget, staffing, and risk &mdash; where discoveries in one domain directly affect constraints in others.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Complex Problem Solving</h3>
+                        <p class="use-case-showcase__desc">Tackle problems with multiple interacting components where a breakthrough in one area changes the approach for all others &mdash; architecture design, optimization, and system integration.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Distributed Reasoning</h3>
+                        <p class="use-case-showcase__desc">Split large reasoning tasks across specialized agents, each contributing domain expertise while exchanging findings that create a more complete picture than any single agent could build.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Code Architecture</h3>
+                        <p class="use-case-showcase__desc">Design software systems with agents focusing on different quality attributes &mdash; performance, security, maintainability &mdash; sharing constraint discoveries that shape the overall architecture.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Scientific Discovery</h3>
+                        <p class="use-case-showcase__desc">Explore hypotheses from multiple angles simultaneously, with agents sharing intermediate observations that spark new research directions and cross-disciplinary connections.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Exchange-of-Thought Fits</h2>
+                <p class="section-subtitle fade-in-up">EoT bridges independent ensemble methods and full multi-agent collaboration</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Consistency</span>
+                        <span class="era-marker__title">Independent Voting</span>
+                        <span class="era-marker__desc">Parallel chains, majority answer</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Exchange-of-Thought</span>
+                        <span class="era-marker__title">Shared Reasoning</span>
+                        <span class="era-marker__desc">Intermediate insight exchange</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Multi-Expert</span>
+                        <span class="era-marker__title">Structured Deliberation</span>
+                        <span class="era-marker__desc">Role-based discussion synthesis</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Multi-Agent Systems</span>
+                        <span class="era-marker__title">Full Collaboration</span>
+                        <span class="era-marker__desc">Autonomous coordinated agents</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Control Exchange Frequency</div>
+                    <p>Too many exchanges create groupthink &mdash; all agents converge too early and lose the diversity that makes ensemble methods valuable. Too few exchanges lose the collaboration benefit entirely. Start with 1&ndash;2 exchange rounds for most problems, increasing only for very complex multi-phase tasks. The goal is to share <strong>breakthroughs</strong>, not every incremental thought. Always evaluate whether the final synthesis makes sense by checking the reasoning against the original problem constraints.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary ensemble techniques</p>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">The independent parallel reasoning technique that EoT extends by adding intermediate information exchange between reasoning chains.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="ensemble-methods.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Ensemble Methods</span>
+                        <span class="evolution-callout__desc">The family of multi-perspective reasoning techniques &mdash; EoT adds the collaborative layer that turns independent perspectives into connected reasoning.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="diverse-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Diverse Prompting</span>
+                        <span class="evolution-callout__desc">Ensures agents start with genuinely different perspectives &mdash; pairing diverse initial approaches with EoT exchange rounds maximizes collaborative value.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Share Your Thoughts</h2>
+                        <p class="cta-corporate__text">Apply collaborative reasoning to your next complex problem or explore other ensemble techniques.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

@@ -15318,14 +15318,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
 
-                // Info — shown as verified items
+                // Info — informational items (verified only when explicitly marked)
                 if (cat.infos && cat.infos.length) {
                     if (!hasIssues) {
                         var noIssues = el('div', 'audit-no-issues');
                         noIssues.textContent = 'No issues found.';
                         findingsBlock.appendChild(noIssues);
                     }
-                    findingsBlock.appendChild(el('div', 'audit-findings-subhead audit-findings-subhead--verified', 'Human Verified (' + cat.infos.length + ')'));
+                    var verifiedCount = cat.infos.filter(function(i) { return i.verified; }).length;
+                    var infoLabel = 'Info (' + cat.infos.length + ')';
+                    var infoClass = 'audit-findings-subhead audit-findings-subhead--info';
+                    if (verifiedCount > 0 && verifiedCount === cat.infos.length) {
+                        infoLabel = 'Human Verified (' + cat.infos.length + ')';
+                        infoClass = 'audit-findings-subhead audit-findings-subhead--verified';
+                    } else if (verifiedCount > 0) {
+                        infoLabel = 'Info (' + cat.infos.length + ' — ' + verifiedCount + ' verified)';
+                    }
+                    findingsBlock.appendChild(el('div', infoClass, infoLabel));
                     cat.infos.forEach(function(issue) {
                         findingsBlock.appendChild(buildIssueRow(issue, 'info'));
                     });
@@ -15374,7 +15383,7 @@ document.addEventListener('DOMContentLoaded', function() {
         msg.textContent = issue.message || '';
         row.appendChild(msg);
 
-        if (severity === 'info') {
+        if (severity === 'info' && issue.verified) {
             row.appendChild(el('span', 'audit-issue__verified-badge', 'Human Verified'));
         }
 

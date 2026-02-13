@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ask Me Anything (AMA) Prompting: Transform task inputs into effective question-answer format and aggregate multiple prompt responses for improved accuracy.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/ask-me-anything.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Ask Me Anything (AMA) Prompting - Praxis">
+    <meta property="og:description" content="Ask Me Anything (AMA) Prompting: Transform task inputs into effective question-answer format and aggregate multiple prompt responses for improved accuracy.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/ask-me-anything.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ask Me Anything (AMA) Prompting - Praxis">
+    <meta name="twitter:description" content="Ask Me Anything (AMA) Prompting: Transform task inputs into effective question-answer format and aggregate multiple prompt responses for improved accuracy.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Ask Me Anything (AMA) Prompting",
+      "name": "Ask Me Anything (AMA) Prompting",
+      "description": "Ask Me Anything (AMA) Prompting: Transform task inputs into effective question-answer format and aggregate multiple prompt responses for improved accuracy.",
+      "url": "https://praxislibrary.com/learn/ask-me-anything.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Ask Me Anything (AMA) Prompting"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Ask Me Anything (AMA) Prompting - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Ask Me Anything</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Prompt Reformulation Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Ask Me Anything Prompting</h1>
+                <p class="page-subtitle fade-in">What if you could ask the same question multiple ways and let the answers vote on the truth? AMA Prompting transforms any NLP task into open-ended question-answer format, collects diverse reformulations, and aggregates responses &mdash; enabling smaller models to punch far above their weight class.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2023</span>
+                        <p><strong>Introduced:</strong> Ask Me Anything (AMA) was published in 2023 by Arora et al. The technique addresses a fundamental limitation of prompt engineering: the way you phrase a question dramatically affects the quality of the answer. Instead of hoping one prompt formulation works well, AMA systematically converts arbitrary NLP tasks into open-ended QA format through multiple reformulations, collects predictions from each, and aggregates answers using weak supervision. The original research demonstrated that this approach enabled 6B-parameter models to match or exceed the performance of 175B-parameter models on certain benchmarks.</p>
+                        <p><strong>Modern LLM Status:</strong> Ask Me Anything&rsquo;s core insight &mdash; reformulating tasks into question-answer format and aggregating diverse responses &mdash; influenced modern ensemble and self-consistency approaches. While the specific weak supervision pipeline is less common with large models in 2026, the principle of reformulating inputs for better outputs remains a practical prompt engineering technique. The idea that asking the same question in multiple ways yields more reliable answers has been absorbed into best practices for critical decision-making with AI.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Ask It Many Ways, Let the Answers Agree</h2>
+                        <p class="split-section__text">A single prompt is a single lens &mdash; it captures one angle of a problem and may miss critical perspectives. AMA Prompting solves this by converting your task into multiple open-ended questions, each phrased differently. Instead of asking &ldquo;Is this sentence positive or negative?&rdquo; once and hoping for the best, AMA generates several reformulations: &ldquo;How does the author feel?&rdquo;, &ldquo;What is the emotional tone?&rdquo;, &ldquo;Would someone reading this feel encouraged or discouraged?&rdquo;</p>
+                        <p class="split-section__text"><strong>The power is in the aggregation.</strong> Each reformulation produces its own prediction. Some will be strong, some weak, some noisy. AMA uses weak supervision techniques to weight and combine these predictions &mdash; effectively letting the answers &ldquo;vote&rdquo; on the correct response. This statistical approach compensates for the fragility of any single prompt formulation.</p>
+                        <p class="split-section__text">Think of it like polling multiple witnesses to an event rather than relying on one account. Each witness has a different vantage point, and by aggregating their testimonies, you get a far more reliable picture of what actually happened.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Reformulation Beats Repetition</span>
+                                <p>Simply asking the same question multiple times and taking the majority answer (as in self-consistency) can help, but it biases toward whichever framing you chose. AMA goes further: by fundamentally <strong>reformulating</strong> the question each time, it accesses different reasoning pathways in the model. A question framed as sentiment analysis may trigger different internal representations than the same task framed as emotional interpretation &mdash; and combining both yields answers that neither framing alone could reliably produce.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The AMA Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from single task to aggregated prediction</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define the Original Task</h3>
+                            <p class="element-timeline__text">Start with any NLP task &mdash; classification, extraction, reasoning, or generation. The task may originally be in a format that is not well-suited for open-ended language models, such as a multiple-choice format or a structured label assignment.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Task: Determine whether the following product review is positive, negative, or neutral. Review: &ldquo;The battery lasts forever, but the screen is dim and the software crashes constantly.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Generate Multiple QA Reformulations</h3>
+                            <p class="element-timeline__text">Convert the task into several different open-ended question-answer pairs. Each reformulation frames the same underlying task from a different angle, using different vocabulary and structure. The goal is diversity &mdash; each reformulation should access a different reasoning pathway in the model.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Reformulation 1:</strong> &ldquo;Based on this review, would the customer recommend this product to a friend?&rdquo;<br><strong>Reformulation 2:</strong> &ldquo;What overall feeling does this review express about the product?&rdquo;<br><strong>Reformulation 3:</strong> &ldquo;If you read this review, would you buy the product?&rdquo;<br><strong>Reformulation 4:</strong> &ldquo;Does the reviewer seem satisfied or dissatisfied overall?&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Collect Predictions from Each Reformulation</h3>
+                            <p class="element-timeline__text">Run each reformulated prompt through the language model independently and record the response. Some responses will be confident and clear, others may be ambiguous or noisy. This variance is expected and is precisely what the aggregation step leverages.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Response 1:</strong> &ldquo;Probably not &mdash; the software issues would be a deal-breaker.&rdquo; (Negative signal)<br><strong>Response 2:</strong> &ldquo;Mixed &mdash; good battery but poor screen and software.&rdquo; (Mixed/Negative signal)<br><strong>Response 3:</strong> &ldquo;I would hesitate due to the crashes.&rdquo; (Negative signal)<br><strong>Response 4:</strong> &ldquo;Dissatisfied overall, despite the battery praise.&rdquo; (Negative signal)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Aggregate Using Weak Supervision</h3>
+                            <p class="element-timeline__text">Combine all predictions using a weak supervision approach. Rather than simple majority voting, AMA weighs each reformulation&rsquo;s reliability and correlations to produce a final, more accurate prediction. The aggregation accounts for the fact that some reformulations are inherently better signal sources than others.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Aggregated result:</strong> Negative. Three of four reformulations produced clear negative signals, and the fourth (mixed) still leaned negative. The weak supervision model assigns high confidence to this prediction despite the battery praise in the original review.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why multiple reformulations outperform a single prompt</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Single Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Classify the following text as either &ldquo;entailment&rdquo;, &ldquo;contradiction&rdquo;, or &ldquo;neutral&rdquo;. Premise: &ldquo;The dog chased the cat up the tree.&rdquo; Hypothesis: &ldquo;An animal climbed a tree.&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Neutral. The premise mentions a cat going up a tree, but it does not explicitly say the cat climbed the tree.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Incorrect &mdash; rigid label format confuses the model</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">AMA Reformulations</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Multiple Angles</span>
+                                <p><strong>Q1:</strong> &ldquo;If the dog chased the cat up the tree, is it true that an animal climbed a tree?&rdquo; &rarr; &ldquo;Yes, the cat went up the tree.&rdquo;<br><strong>Q2:</strong> &ldquo;Does the statement about a cat being chased up a tree support the idea that an animal climbed?&rdquo; &rarr; &ldquo;Yes, going up a tree involves climbing.&rdquo;<br><strong>Q3:</strong> &ldquo;Can we conclude an animal climbed a tree from knowing a cat was chased up one?&rdquo; &rarr; &ldquo;Yes, the cat is an animal and it went up the tree.&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Aggregated Answer</span>
+                                <p>Entailment. All three reformulations agree: a cat (an animal) going up a tree constitutes climbing, making the hypothesis a valid inference from the premise.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Correct &mdash; natural QA framing unlocks better reasoning</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">AMA in Action</h2>
+                <p class="section-subtitle fade-in-up">See how reformulating prompts and aggregating answers improves reliability</p>
+
+                <div class="accordion fade-in-up" id="ama-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Topic Classification with Reformulation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Original Task</span>
+                                    <p>&ldquo;Classify this news headline into one of these categories: Politics, Sports, Technology, Health. Headline: &lsquo;Federal Reserve Raises Interest Rates Amid Inflation Concerns&rsquo;&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AMA Reformulations &amp; Aggregation</span>
+                                    <p><strong>Reformulation 1:</strong> &ldquo;What topic does a headline about the Federal Reserve and interest rates belong to?&rdquo;<br>
+                                    <strong>Answer:</strong> Economics/Politics &mdash; monetary policy is a government function.<br><br>
+                                    <strong>Reformulation 2:</strong> &ldquo;If someone interested in government policy read this headline, would it be relevant to them?&rdquo;<br>
+                                    <strong>Answer:</strong> Yes, the Federal Reserve&rsquo;s rate decisions are a core policy topic.<br><br>
+                                    <strong>Reformulation 3:</strong> &ldquo;Is this headline about athletic competition, medical science, digital innovation, or governance?&rdquo;<br>
+                                    <strong>Answer:</strong> Governance &mdash; it concerns a federal institution&rsquo;s economic decisions.<br><br>
+                                    <strong>Aggregated result:</strong> Politics. All three reformulations converge on the governance/policy category.</p>
+                                    <p><em>Always verify AI classifications against the original source material before using them in any decision-making process.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Fact Verification Through Multiple Framings</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Original Task</span>
+                                    <p>&ldquo;Is the following claim true or false? Claim: &lsquo;The Great Wall of China is visible from space with the naked eye.&rsquo;&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AMA Reformulations &amp; Aggregation</span>
+                                    <p><strong>Reformulation 1:</strong> &ldquo;Can astronauts in orbit see the Great Wall of China without telescopes?&rdquo;<br>
+                                    <strong>Answer:</strong> No &mdash; multiple astronauts have confirmed it is not visible to the naked eye from orbit. The wall is narrow compared to its length.<br><br>
+                                    <strong>Reformulation 2:</strong> &ldquo;What man-made structures are visible from space, and is the Great Wall among them?&rdquo;<br>
+                                    <strong>Answer:</strong> Cities and large infrastructure are visible, but the Great Wall is too narrow (about 15-30 feet wide) to be distinguished from orbit.<br><br>
+                                    <strong>Reformulation 3:</strong> &ldquo;Why do people believe the Great Wall is visible from space, and is this belief accurate?&rdquo;<br>
+                                    <strong>Answer:</strong> This is a popular myth, but it has been debunked by astronauts and space agencies.<br><br>
+                                    <strong>Aggregated result:</strong> False. All reformulations agree the claim is a common misconception.</p>
+                                    <p><em>AI responses about factual claims should always be verified against authoritative sources. Even with AMA aggregation, models can share widespread misconceptions or outdated information.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Ambiguous Instruction Interpretation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Original Task</span>
+                                    <p>&ldquo;Does the instruction &lsquo;employees must not share confidential information with unauthorized parties&rsquo; prohibit discussing project details with a contractor who signed an NDA?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AMA Reformulations &amp; Aggregation</span>
+                                    <p><strong>Reformulation 1:</strong> &ldquo;Is a contractor with a signed NDA considered an &lsquo;authorized party&rsquo; under this policy?&rdquo;<br>
+                                    <strong>Answer:</strong> Generally yes &mdash; an NDA is typically the mechanism that authorizes information sharing.<br><br>
+                                    <strong>Reformulation 2:</strong> &ldquo;What does &lsquo;unauthorized&rsquo; mean in a corporate confidentiality context?&rdquo;<br>
+                                    <strong>Answer:</strong> Unauthorized typically means individuals who have not been formally cleared through agreements like NDAs, security clearances, or role-based access.<br><br>
+                                    <strong>Reformulation 3:</strong> &ldquo;Would sharing project details with an NDA-bound contractor violate a standard confidentiality policy?&rdquo;<br>
+                                    <strong>Answer:</strong> No, assuming the NDA covers the relevant information and the contractor needs the information for their work.<br><br>
+                                    <strong>Aggregated result:</strong> No, the instruction does not prohibit sharing with an NDA-bound contractor, as the NDA establishes them as an authorized party. However, sharing should be limited to information relevant to the contractor&rsquo;s work scope.</p>
+                                    <p><em>Legal and policy interpretations from AI should always be reviewed by qualified professionals. AI cannot substitute for legal counsel on confidentiality matters.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use AMA</h2>
+                <p class="section-subtitle fade-in-up">Best for tasks where a single prompt formulation may not capture the full picture</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Classification Tasks</strong>
+                                    <p>Sentiment analysis, topic categorization, and intent detection &mdash; where rephrasing the classification question from different angles reveals the correct label more reliably.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Smaller Model Optimization</strong>
+                                    <p>When working with resource-constrained models where you cannot simply scale up &mdash; AMA&rsquo;s reformulation-aggregation pipeline extracts more performance from less capable models.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Stakes Decisions</strong>
+                                    <p>Medical triage, legal analysis, or financial assessments where getting the answer wrong has significant consequences &mdash; multiple reformulations reduce single-point-of-failure risk.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Ambiguous Inputs</strong>
+                                    <p>When the input text is ambiguous, poorly written, or context-dependent &mdash; different question framings probe different interpretations and the aggregation resolves ambiguity.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Direct Questions</strong>
+                                    <p>Questions with unambiguous, factual answers &mdash; &ldquo;What is 2 + 2?&rdquo; gains nothing from reformulation.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Latency-Sensitive Applications</strong>
+                                    <p>When speed is critical &mdash; AMA requires multiple model calls per task, multiplying both latency and token cost.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative Generation</strong>
+                                    <p>Writing, brainstorming, or artistic tasks where there is no &ldquo;correct answer&rdquo; to converge on &mdash; AMA is designed for tasks with deterministic outcomes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where AMA delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Moderation</h3>
+                        <p class="use-case-showcase__desc">Reformulate toxicity detection from multiple angles &mdash; intent-based, impact-based, and policy-based &mdash; to catch subtle violations that any single framing might miss.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Document Classification</h3>
+                        <p class="use-case-showcase__desc">Classify legal, medical, or technical documents by asking about their content from multiple perspectives &mdash; subject matter, audience, purpose, and regulatory domain.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Diagnostic Triage</h3>
+                        <p class="use-case-showcase__desc">Frame symptom assessment from multiple clinical angles &mdash; by system, severity, and differential diagnosis &mdash; aggregating to reduce the risk of overlooking critical indicators.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Customer Intent Detection</h3>
+                        <p class="use-case-showcase__desc">Determine what a customer actually wants by reformulating their request as questions about urgency, subject, desired outcome, and emotional state &mdash; then aggregating for routing accuracy.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Security Threat Assessment</h3>
+                        <p class="use-case-showcase__desc">Evaluate potential security threats by reformulating threat intelligence from attacker motivation, technical capability, target vulnerability, and historical pattern perspectives.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Survey Response Analysis</h3>
+                        <p class="use-case-showcase__desc">Analyze open-ended survey responses by reformulating coding questions from thematic, sentiment, and actionability angles to produce more robust categorizations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where AMA Fits</h2>
+                <p class="section-subtitle fade-in-up">AMA bridges single-prompt approaches and ensemble methods</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Zero-Shot</span>
+                        <span class="era-marker__title">Single Prompt</span>
+                        <span class="era-marker__desc">One question, one answer</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">AMA</span>
+                        <span class="era-marker__title">Multi-Reformulation</span>
+                        <span class="era-marker__desc">Many phrasings, aggregated answer</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Consistency</span>
+                        <span class="era-marker__title">Same Prompt, Many Samples</span>
+                        <span class="era-marker__desc">Majority vote across identical prompts</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Ensemble Methods</span>
+                        <span class="era-marker__title">Multi-Model Agreement</span>
+                        <span class="era-marker__desc">Cross-model consensus</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine with Self-Consistency</div>
+                    <p>AMA and self-consistency address different sources of variance. Self-consistency samples multiple reasoning paths from the <strong>same</strong> prompt; AMA generates predictions from <strong>different</strong> prompts. Combining both &mdash; multiple samples from multiple reformulations &mdash; provides a double layer of robustness. This hybrid approach is particularly powerful for tasks where both prompt sensitivity and reasoning variance contribute to errors.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary reformulation and ensemble approaches</p>
+
+                <a href="prompt-paraphrasing.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Prompt Paraphrasing</span>
+                        <span class="evolution-callout__desc">The underlying principle of rephrasing prompts for better responses &mdash; AMA systematizes this with structured aggregation.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="rar.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Rephrase and Respond</span>
+                        <span class="evolution-callout__desc">Has the model rephrase the question in its own words before answering &mdash; a single-step reformulation compared to AMA&rsquo;s multi-reformulation pipeline.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Ensemble Methods</span>
+                        <span class="evolution-callout__desc">While AMA reformulates the prompt, ensemble methods sample multiple reasoning paths or models &mdash; combining both provides maximum robustness.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Reformulate Your Prompts</h2>
+                        <p class="cta-corporate__text">Try AMA reformulation on your own tasks or build multi-angle prompts with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

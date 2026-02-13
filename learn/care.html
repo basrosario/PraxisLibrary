@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CARE Framework: Structure prompts with Context, Action, Role, and Expectation for context-aware AI communication with clear role assignment and expected outcomes.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/care.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="CARE Framework - Praxis">
+    <meta property="og:description" content="CARE Framework: Structure prompts with Context, Action, Role, and Expectation for context-aware AI communication with clear role assignment and expected outcomes.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/care.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CARE Framework - Praxis">
+    <meta name="twitter:description" content="CARE Framework: Structure prompts with Context, Action, Role, and Expectation for context-aware AI communication with clear role assignment and expected outcomes.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "CARE Framework",
+      "name": "CARE Framework",
+      "description": "CARE Framework: Structure prompts with Context, Action, Role, and Expectation for context-aware AI communication with clear role assignment and expected outcomes.",
+      "url": "https://praxislibrary.com/learn/care.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Frameworks",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "CARE Framework"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>CARE Framework - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-page-type="framework">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">CARE</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Community Framework</span>
+                </div>
+                <h1 class="page-title fade-in">CARE Framework</h1>
+                <p class="page-subtitle fade-in">Four components that ensure every prompt carries the right context, assigns a clear role, and defines what success looks like. CARE treats expected outcomes as a first-class element &mdash; so the AI knows not just what to do, but what &ldquo;done well&rdquo; means.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Introduced:</strong> CARE was popularized in 2023 through usability and AI communication communities, with notable contributions from Nielsen Norman Group&rsquo;s research on effective AI prompting. The acronym stands for Context, Action, Role, and Expectation &mdash; four dimensions that mirror how experienced communicators naturally structure requests to human collaborators. A common variation, Context-Ask-Rules-Examples, adapts the same philosophy for complex multi-constraint tasks by substituting explicit rules and demonstrations for the role and expectation components.</p>
+                        <p><strong>Modern LLM Status:</strong> CARE remains <strong>highly practical and widely recommended</strong> as an introductory framework for prompt engineering. Its four-component structure is deliberately lean &mdash; easy to memorize and quick to apply &mdash; while still covering the critical dimensions that most casual prompts neglect. Whether you use Claude, GPT-4, or Gemini, specifying context, action, role, and expectation consistently produces more focused and higher-quality outputs than leaving any of these dimensions implicit. The Expectation component is especially valuable: it gives the AI a success criterion to aim for rather than guessing at what &ldquo;good enough&rdquo; means.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--align-start fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Tell AI What Success Looks Like</h2>
+                        <p class="split-section__text">Most prompts describe a task but never define what a successful result looks like. The AI fills the gap with its best guess &mdash; producing output that is technically responsive but often misaligned with what you actually needed. CARE closes this gap by making the expected outcome an explicit, non-negotiable part of every prompt.</p>
+                        <p class="split-section__text"><strong>CARE structures prompts around four pillars.</strong> Context sets the stage &mdash; the situation, background, and constraints the AI needs to understand. Action defines the specific task or deliverable. Role assigns a persona or expertise level that shapes the AI&rsquo;s perspective and vocabulary. Expectation declares the success criteria &mdash; what the output should achieve, how it should be measured, or what qualities it must demonstrate.</p>
+                        <p class="split-section__text">Think of it like briefing a consultant. You would not just say &ldquo;write a report&rdquo; &mdash; you would explain the business situation, specify the deliverable, clarify who they are writing as, and define what a successful report would accomplish. CARE formalizes that same natural process for AI interactions.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Expectations Change Everything</span>
+                                <p>Without an explicit expectation, an AI optimizes for plausibility &mdash; producing text that sounds reasonable but may not meet your actual standard. When you define the expectation (&ldquo;persuade a skeptical executive,&rdquo; &ldquo;pass a technical review,&rdquo; &ldquo;be accessible to a non-technical audience&rdquo;), the AI has a concrete target to optimize toward. This single addition often produces more dramatic improvements than adding any other prompt component.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The CARE Process</h2>
+                <p class="section-subtitle fade-in-up">Four components that transform vague requests into targeted prompts</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Context &mdash; Set the Stage</h3>
+                            <p class="element-timeline__text">Provide the background information, situation, and constraints that the AI needs to understand before it can respond appropriately. Context includes the domain, the current state of affairs, relevant history, and any limitations. Without context, the AI defaults to the most generic interpretation of your request.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Our SaaS startup just closed Series A funding. We have 50 enterprise customers, a 12-person engineering team, and we are preparing to scale from 5,000 to 50,000 users over the next 6 months.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Action &mdash; Define the Task</h3>
+                            <p class="element-timeline__text">Clearly state what you need the AI to produce or accomplish. The action should be specific and unambiguous &mdash; a concrete deliverable rather than a vague direction. Focus on the what, not the how &mdash; give the AI room to apply its expertise within the boundaries you have set.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Create a technical infrastructure scaling plan that identifies the top 5 bottlenecks we will hit during this growth phase and proposes solutions for each.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Role &mdash; Assign a Persona</h3>
+                            <p class="element-timeline__text">Specify who the AI should be for this task. A well-chosen role shapes the vocabulary, depth, perspective, and problem-solving approach the AI brings to the response. Roles can be professional identities (&ldquo;senior DevOps engineer&rdquo;), communication styles (&ldquo;explain like a patient teacher&rdquo;), or domain experts (&ldquo;healthcare compliance specialist&rdquo;).</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Act as a senior platform engineer who has scaled three SaaS products from startup to enterprise scale. You favor pragmatic, battle-tested solutions over cutting-edge experimentation.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Expectation &mdash; Define Success Criteria</h3>
+                            <p class="element-timeline__text">Declare what a successful response looks like. Expectations can be qualitative (&ldquo;convincing enough for a board presentation&rdquo;), quantitative (&ldquo;under 500 words&rdquo;), structural (&ldquo;table format with cost estimates&rdquo;), or audience-focused (&ldquo;understandable by a non-technical CEO&rdquo;). This is the component that separates adequate output from precisely targeted output.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;The plan should be presentable to our CTO and VP of Engineering. Each bottleneck needs a severity rating, estimated timeline to hit, and a solution with rough cost range. Format as a structured document with an executive summary.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why four structured components produce better results than a single instruction</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Casual Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Help me write an email to my team about our new remote work policy.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Subject: New Remote Work Policy<br><br>Hi team, I wanted to let you know about our updated remote work policy. Starting next month, we will be implementing a hybrid work model. Please review the attached policy document for details. Let me know if you have any questions.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Generic, no tone, no context, no clear outcome defined</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">CARE Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Structured Prompt</span>
+                                <p><strong>C:</strong> Our 200-person company is shifting from fully remote to hybrid (3 days in-office). Employee sentiment surveys show 40% resistance. The policy takes effect March 1st.<br><strong>A:</strong> Write an internal email announcing the new hybrid policy to all employees.<br><strong>R:</strong> You are the VP of People &amp; Culture who is known for transparent, empathetic communication.<br><strong>E:</strong> The email should acknowledge employee concerns, explain the reasoning, outline the transition timeline, and end with an invitation to a live Q&amp;A. Tone should be warm but direct. Under 400 words. Always verify policy details with HR before sending.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p><strong>Subject: Our Path Forward &mdash; Hybrid Work Starting March 1st</strong><br><br>Team,<br><br>I will be straightforward: changing how we work is hard, and I know many of you have built routines around full remote that you value. I hear you, and this decision was not made lightly.<br><br>After reviewing collaboration data, team feedback, and project outcomes over the past year, we believe a hybrid model &mdash; three days together, two days remote &mdash; gives us the best of both worlds: the spontaneous collaboration that drives innovation plus the focused deep-work time that remote provides...<br><br>Join me for a live Q&amp;A on February 20th at 2 PM to share your questions and concerns directly.<br><br><em>Note: Please verify all policy details against the official HR document before making scheduling decisions.</em></p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Empathetic tone, context-aware, structured, clear next steps</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">CARE in Action</h2>
+                <p class="section-subtitle fade-in-up">See all four components working together across different scenarios</p>
+
+                <div class="accordion fade-in-up" id="care-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Customer Onboarding Email Sequence</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">CARE Prompt</span>
+                                    <p><strong>Context:</strong> We are a B2B project management tool. New users complete sign-up but 60% never create their first project within the first week. Our onboarding data shows the biggest drop-off happens between account creation and first project setup.<br><br>
+                                    <strong>Action:</strong> Write a 3-email onboarding sequence sent on Day 1, Day 3, and Day 5 after sign-up, designed to guide users to create their first project.<br><br>
+                                    <strong>Role:</strong> You are a customer success manager who specializes in product-led growth for SaaS companies. Your communication style is helpful without being pushy.<br><br>
+                                    <strong>Expectation:</strong> Each email should be under 150 words, include one clear CTA button, and progressively increase urgency. The sequence should feel like a helpful guide, not a sales funnel. Include a note reminding users they can contact support for help. Verify all product feature descriptions are accurate before sending.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AI Output</span>
+                                    <p><strong>Email 1 (Day 1): Welcome &mdash; Your First Project is 2 Minutes Away</strong><br><br>
+                                    Hi [Name],<br><br>
+                                    Welcome aboard. The fastest way to see what [Product] can do? Create your first project. It takes about 2 minutes, and we have a template ready to go so you do not have to start from scratch...<br><br>
+                                    [Create Your First Project]<br><br>
+                                    <strong>Email 3 (Day 5): Still Figuring Things Out?</strong><br><br>
+                                    No pressure &mdash; but teams who set up their first project in the first week are 3x more likely to make [Product] a daily habit. Need a hand? Reply to this email or book a 10-minute walkthrough with our team...<br><br>
+                                    <em>Note: Contact support@[product].com anytime for setup assistance. Verify all metrics and feature claims against current product documentation.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Incident Post-Mortem Report</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">CARE Prompt</span>
+                                    <p><strong>Context:</strong> Our e-commerce platform experienced a 45-minute outage during peak holiday shopping hours. Root cause was a database connection pool exhaustion triggered by an unoptimized query in a newly deployed feature. Revenue impact estimated at $180K.<br><br>
+                                    <strong>Action:</strong> Write a blameless post-mortem report covering timeline, root cause analysis, impact assessment, and remediation steps.<br><br>
+                                    <strong>Role:</strong> You are a senior site reliability engineer who writes post-mortems focused on systemic improvements rather than individual blame.<br><br>
+                                    <strong>Expectation:</strong> The report should follow the format: Executive Summary, Timeline, Root Cause, Impact, Remediation (immediate + long-term), and Lessons Learned. Technical enough for the engineering team but with an executive summary readable by non-technical leadership. Include specific action items with owners and deadlines. Always verify incident details and metrics against actual monitoring data before distributing.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AI Output</span>
+                                    <p><strong>Incident Post-Mortem: Database Connection Pool Exhaustion</strong><br>
+                                    <strong>Date:</strong> [Date] | <strong>Duration:</strong> 45 minutes | <strong>Severity:</strong> P1<br><br>
+                                    <strong>Executive Summary</strong><br>
+                                    A newly deployed product recommendation feature contained an unoptimized database query that consumed all available connection pool slots under peak traffic. This caused cascading failures across the checkout and product catalog services for 45 minutes during our highest-traffic shopping period...<br><br>
+                                    <strong>Remediation &mdash; Long Term</strong><br>
+                                    1. Implement mandatory load testing for all database-touching features before production deployment (Owner: Platform Lead, Due: [Date])<br>
+                                    2. Add connection pool monitoring alerts at 70% and 90% thresholds...<br><br>
+                                    <em>Note: Verify all timestamps, metrics, and revenue impact figures against monitoring dashboards and financial reports before circulating this document.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Grant Proposal Executive Summary</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">CARE Prompt</span>
+                                    <p><strong>Context:</strong> Our nonprofit runs after-school STEM programs in underserved communities. We serve 800 students across 12 schools in the metro area. We are applying for a $250K federal education grant to expand into 8 additional schools over two years.<br><br>
+                                    <strong>Action:</strong> Write the executive summary section of the grant proposal (the first thing the review committee reads).<br><br>
+                                    <strong>Role:</strong> You are a grant writer with 15 years of experience securing federal education funding. You know how to balance data-driven impact claims with compelling human stories.<br><br>
+                                    <strong>Expectation:</strong> Under 500 words. Open with a compelling hook, include 2&ndash;3 key impact metrics from our current program, clearly state the funding request and what it will accomplish, and close with a forward-looking vision. The tone should be confident but not boastful. All statistics must be clearly identified as requiring verification against actual program data before submission.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AI Output</span>
+                                    <p><strong>Executive Summary</strong><br><br>
+                                    When Maria, a seventh-grader from Jefferson Middle School, presented her water filtration prototype at our annual showcase last spring, she told the judges: &ldquo;I did not know engineers could look like me until this program.&rdquo; Maria is one of 800 students across 12 schools who have discovered that STEM is not a spectator sport...<br><br>
+                                    With $250,000 in federal support over 24 months, [Organization] will expand into 8 additional Title I schools, reaching an estimated 550 new students annually. Our model &mdash; which has demonstrated a [X]% increase in science proficiency scores and a [X]% improvement in STEM career interest among participants &mdash; is ready to scale...<br><br>
+                                    <em>Note: All statistics marked [X] must be verified against actual program evaluation data. Have the program director review all impact claims before submission.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use CARE</h2>
+                <p class="section-subtitle fade-in-up">Best for tasks where defining the expected outcome is as important as defining the task itself</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Professional Communication</strong>
+                                    <p>Emails, announcements, and stakeholder updates where the wrong tone or missing context can derail the message entirely.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Outcome-Driven Tasks</strong>
+                                    <p>When the deliverable has a measurable success criterion &mdash; persuade a specific audience, meet a word count, or follow a particular format.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Quick Structured Prompts</strong>
+                                    <p>When you need structure but do not have time for a six-component framework. CARE&rsquo;s four elements cover the essentials without overhead.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Beginner-Friendly Prompting</strong>
+                                    <p>Teaching prompt engineering to newcomers &mdash; CARE&rsquo;s four letters are easy to remember and immediately improve output quality.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Multi-Constraint Tasks</strong>
+                                    <p>When you need to specify examples, adjustments, tone, audience, and format separately. Frameworks like CO-STAR or CREATE offer more granular control.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Reasoning-Heavy Analysis</strong>
+                                    <p>Mathematical proofs, logic problems, or code debugging where structured thinking techniques like Chain-of-Thought are more appropriate.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Open-Ended Exploration</strong>
+                                    <p>Early brainstorming where you want the AI to surprise you. Defining a strict expectation too early can constrain creative exploration.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where CARE delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Business Communication</h3>
+                        <p class="use-case-showcase__desc">Draft emails, memos, and announcements where context and expected outcomes are critical for tone and effectiveness across different organizational levels.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Report Writing</h3>
+                        <p class="use-case-showcase__desc">Generate structured reports &mdash; post-mortems, quarterly reviews, competitive analyses &mdash; where the success criteria and audience shape every paragraph.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Educational Content</h3>
+                        <p class="use-case-showcase__desc">Create lesson plans, explainers, and study guides where the role defines the teaching approach and the expectation sets the comprehension target.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Stakeholder Presentations</h3>
+                        <p class="use-case-showcase__desc">Build slide decks, talking points, and briefing documents where the audience&rsquo;s technical level and decision-making authority shape the content strategy.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Policy and Compliance</h3>
+                        <p class="use-case-showcase__desc">Draft policy documents, compliance summaries, and regulatory responses where context accuracy and expected legal precision are non-negotiable.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Customer Success</h3>
+                        <p class="use-case-showcase__desc">Craft onboarding sequences, churn-prevention outreach, and account review summaries where expected engagement outcomes guide every word.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where CARE Fits</h2>
+                <p class="section-subtitle fade-in-up">CARE bridges minimal prompting and comprehensive structured frameworks</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Zero-Shot</span>
+                        <span class="era-marker__title">Raw Instructions</span>
+                        <span class="era-marker__desc">Single request, no structure</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">CARE</span>
+                        <span class="era-marker__title">Outcome Focused</span>
+                        <span class="era-marker__desc">Context, role, and success criteria</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">CO-STAR</span>
+                        <span class="era-marker__title">Audience Centered</span>
+                        <span class="era-marker__desc">Full communication brief with six dimensions</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">CREATE</span>
+                        <span class="era-marker__title">Example Driven</span>
+                        <span class="era-marker__desc">Persona, demonstrations, and iterative refinement</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">CARE as a Starting Point</div>
+                    <p>CARE is deliberately lean &mdash; four components that cover the essentials without overwhelming new prompt engineers. If you find yourself adding more detail to the Expectation component (audience, format, tone, examples), that is a signal to graduate to a more comprehensive framework like CO-STAR or CREATE. Use CARE when speed and simplicity matter, and upgrade when precision demands it. And always verify the AI&rsquo;s output against your actual requirements before using it.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques &amp; Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary approaches to structured prompting</p>
+
+                <a href="costar.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">More Dimensions</span>
+                        <span class="evolution-callout__title">CO-STAR Framework</span>
+                        <span class="evolution-callout__desc">Where CARE uses four components, CO-STAR adds explicit Style, Tone, and Audience dimensions. Use CO-STAR when communication precision requires finer-grained control.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="race.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="16"/>
+                            <line x1="8" y1="12" x2="16" y2="12"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Similar Structure</span>
+                        <span class="evolution-callout__title">RACE Framework</span>
+                        <span class="evolution-callout__desc">RACE shares CARE&rsquo;s four-component philosophy with Role, Action, Context, and Expectation &mdash; reordering the same dimensions to lead with the persona assignment.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="rtf.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Compact Alternative</span>
+                        <span class="evolution-callout__title">RTF Framework</span>
+                        <span class="evolution-callout__desc">RTF distills prompting to three elements &mdash; Role, Task, and Format. Use RTF when even CARE&rsquo;s four components feel like more structure than you need.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Build Your CARE Prompt</h2>
+                        <p class="cta-corporate__text">Structure your next prompt with all four CARE components or find the right framework for your specific task.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../tools/matcher.html" class="btn btn-secondary">Technique Finder</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

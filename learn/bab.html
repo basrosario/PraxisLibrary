@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BAB Framework: Structure prompts using Before, After, Bridge to describe current state, desired outcome, and the solution path for persuasive AI-generated content.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/bab.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="BAB Framework - Praxis">
+    <meta property="og:description" content="BAB Framework: Structure prompts using Before, After, Bridge to describe current state, desired outcome, and the solution path for persuasive AI-generated content.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/bab.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BAB Framework - Praxis">
+    <meta name="twitter:description" content="BAB Framework: Structure prompts using Before, After, Bridge to describe current state, desired outcome, and the solution path for persuasive AI-generated content.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "BAB Framework",
+      "name": "BAB Framework",
+      "description": "BAB Framework: Structure prompts using Before, After, Bridge to describe current state, desired outcome, and the solution path for persuasive AI-generated content.",
+      "url": "https://praxislibrary.com/learn/bab.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Frameworks",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "BAB Framework"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>BAB Framework - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-page-type="framework">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">BAB</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Community Framework</span>
+                </div>
+                <h1 class="page-title fade-in">BAB Framework</h1>
+                <p class="page-subtitle fade-in">Three acts that turn any AI prompt into a compelling narrative. BAB maps the journey from problem to solution &mdash; Before (where you are), After (where you want to be), and Bridge (how to get there).</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Origin:</strong> The BAB (Before, After, Bridge) framework was adapted for prompt engineering from a classic copywriting formula popularized in direct-response marketing. The original BAB structure has been used by copywriters for decades to craft persuasive narratives: describe the reader&rsquo;s current pain (Before), paint a picture of the improved future (After), then present the product or solution as the path between them (Bridge). In 2023, prompt engineers recognized that this same narrative arc produces highly effective AI outputs for persuasive writing, change management communications, and proposal drafting.</p>
+                        <p><strong>Modern LLM Status:</strong> BAB remains <strong>highly effective for narrative and persuasive prompts</strong>. While modern LLMs like Claude, GPT-4, and Gemini can generate persuasive text without explicit structure, they tend to default to feature-listing or informational styles. BAB&rsquo;s strength is that it forces a narrative arc &mdash; problem, vision, solution &mdash; that is inherently more engaging than a flat description. The framework is especially valuable when you need AI to generate content that <strong>motivates action</strong> rather than merely informs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Structure Prompts as Stories</h2>
+                        <p class="split-section__text">Most prompts tell AI what to produce. BAB tells AI what story to tell. The difference matters because human decision-making is narrative-driven &mdash; we are more persuaded by a story of transformation (from pain to relief) than by a list of features or facts. When you frame a prompt as a Before-After-Bridge journey, the AI naturally produces content with emotional momentum.</p>
+                        <p class="split-section__text"><strong>Before</strong> anchors the reader in a recognizable problem &mdash; a situation they are currently experiencing. <strong>After</strong> paints a vivid picture of the desired outcome &mdash; what life looks like once the problem is solved. <strong>Bridge</strong> connects the two states with a clear path, solution, or call to action. Together, these three components create a natural persuasive arc.</p>
+                        <p class="split-section__text">Think of BAB like a movie trailer: it shows you the world as it is (conflict), the world as it could be (resolution), and the one thing that makes the difference (the hero&rsquo;s journey).</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Narrative Beats Description</span>
+                                <p>A prompt that says &ldquo;write about our product&rsquo;s benefits&rdquo; produces a feature list. A BAB prompt that says &ldquo;describe the frustration of manual data entry, then the relief of automated workflows, then how our tool bridges that gap&rdquo; produces a <strong>story</strong>. Stories activate empathy, create urgency, and drive action &mdash; exactly what persuasive content needs to accomplish.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The BAB Process</h2>
+                <p class="section-subtitle fade-in-up">Three stages from current pain to solution path</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Before &mdash; Describe the Current State</h3>
+                            <p class="element-timeline__text">Paint a vivid picture of the current situation, problem, or pain point. The Before component grounds the reader in a reality they recognize. Be specific about the frustrations, inefficiencies, or gaps that exist right now. The more relatable the Before state, the more compelling the transformation will feel.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Your marketing team spends 15 hours per week manually formatting reports from three different analytics platforms. Data is always a day behind, formatting is inconsistent, and half the meeting time is spent explaining discrepancies rather than making decisions.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">After &mdash; Paint the Desired Future</h3>
+                            <p class="element-timeline__text">Describe what the world looks like once the problem is solved. The After component creates aspiration and emotional momentum. Focus on the tangible improvements &mdash; time saved, stress reduced, outcomes improved. Make the reader feel what success looks like, not just understand it intellectually.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Imagine opening a single, unified dashboard every Monday morning with real-time data from all three platforms, auto-formatted and ready to present. Your team reclaims those 15 hours for strategy, and meetings focus on action items instead of data reconciliation.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Bridge &mdash; Present the Solution Path</h3>
+                            <p class="element-timeline__text">Connect the Before and After with a clear solution, product, or action step. The Bridge is the &ldquo;how&rdquo; &mdash; the specific mechanism that transforms the current pain into the desired outcome. It should feel like the natural, logical connection between the two states rather than a hard sell.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;DataSync Hub integrates with Google Analytics, HubSpot, and Salesforce in under 10 minutes. It pulls data automatically, applies your custom report templates, and delivers a presentation-ready dashboard to your inbox before your first coffee. Start a free trial and see Monday mornings differently.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why narrative structure outperforms flat descriptions</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Flat Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Write marketing copy for our project management tool.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Our project management tool helps teams collaborate effectively. Features include task assignment, deadline tracking, file sharing, and real-time updates. Boost your productivity and keep your projects on track with our intuitive platform.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Feature list, no emotional hook, generic and forgettable</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">BAB Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Structured Prompt</span>
+                                <p><strong>Before:</strong> Remote teams juggle Slack threads, email chains, and spreadsheets to track who is doing what. Deadlines slip because no one has the full picture.<br><strong>After:</strong> Every team member sees all tasks, deadlines, and dependencies in one place. Status meetings take 10 minutes instead of 45.<br><strong>Bridge:</strong> Our tool unifies task management, communication, and timelines in a single workspace. Describe how it transforms the chaos into clarity.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>You know the feeling: three Slack threads about the same deliverable, a spreadsheet that was last updated on Tuesday, and a status meeting where everyone spends 30 minutes figuring out what everyone else already knew. Now picture this &mdash; you open one dashboard and see every task, every deadline, every dependency, updated in real time...</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Relatable pain, vivid transformation, natural solution arc</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">BAB in Action</h2>
+                <p class="section-subtitle fade-in-up">See how narrative structure creates more persuasive AI outputs</p>
+
+                <div class="accordion fade-in-up" id="bab-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">SaaS Product Landing Page</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">BAB Prompt</span>
+                                    <p><strong>Before:</strong> Small business owners spend 8+ hours per week on invoicing. They chase late payments manually, lose track of which clients have paid, and dread month-end reconciliation. Cash flow unpredictability forces them to delay hiring and investments.<br><br>
+                                    <strong>After:</strong> Invoices go out automatically on schedule. Payment reminders are sent without awkward follow-up emails. A real-time dashboard shows exactly who has paid, who is overdue, and what the projected cash flow looks like for the next 90 days.<br><br>
+                                    <strong>Bridge:</strong> Write a landing page hero section for InvoiceFlow, a tool that automates invoice creation, sends payment reminders, and provides cash flow forecasting. The audience is small business owners who are not accountants. Keep the language simple, benefits-focused, and under 120 words. Always verify any claims before publishing.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AI Output</span>
+                                    <p><strong>Stop Chasing Payments. Start Growing Your Business.</strong><br><br>
+                                    You did not start your business to spend Sunday nights reconciling spreadsheets. Yet here you are &mdash; tracking invoices by hand, sending awkward payment reminders, and guessing whether next month&rsquo;s cash flow will cover your team&rsquo;s salaries.<br><br>
+                                    InvoiceFlow changes that. Invoices go out on your schedule, automatically. Late-payment reminders send themselves. And a live dashboard shows you exactly where every dollar stands &mdash; today, next week, and 90 days from now.<br><br>
+                                    Get back the 8 hours a week you are spending on busywork. Your business needs a strategist, not a bookkeeper.<br><br>
+                                    [Start Free &mdash; No Credit Card Required]</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Change Management Internal Email</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">BAB Prompt</span>
+                                    <p><strong>Before:</strong> Our customer support team uses three separate systems to handle tickets: a legacy CRM for logging, a shared inbox for email, and Slack for internal escalation. Agents spend 20% of their time just switching between tools and copying information. Average resolution time is 4.2 hours, and customer satisfaction scores have dropped to 72%.<br><br>
+                                    <strong>After:</strong> All support interactions flow through a single platform. Agents see the full customer history, ticket status, and internal notes in one view. Resolution time drops below 2 hours, and CSAT targets of 85%+ become achievable.<br><br>
+                                    <strong>Bridge:</strong> Write an internal email from the VP of Customer Success announcing the migration to a unified support platform, addressing anticipated team concerns about learning a new system. Use an encouraging but honest tone. Note: verify all statistics mentioned before sending.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AI Output</span>
+                                    <p><strong>Subject:</strong> One Platform, Less Context-Switching, Better Support<br><br>
+                                    Team,<br><br>
+                                    I want to be direct about something we have all felt: our current support setup is holding us back. Toggling between three systems to resolve a single ticket is not just frustrating &mdash; it is costing us time we should be spending with customers. Our resolution times reflect that, and so do our satisfaction scores.<br><br>
+                                    Starting next month, we are consolidating everything into a single platform. One login, one view, one place to find everything you need about a customer&rsquo;s history and their open issues.<br><br>
+                                    I know what you are thinking: &ldquo;Great, another system to learn.&rdquo; Fair concern. Here is what we are doing about it...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Fundraising Pitch Deck Narrative</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">BAB Prompt</span>
+                                    <p><strong>Before:</strong> K-12 teachers spend an average of 12 hours per week grading assignments and providing feedback. Most feedback is limited to letter grades and brief comments because there is simply not enough time to write detailed, personalized guidance for each student. Students receive feedback days after submission, when the learning moment has passed.<br><br>
+                                    <strong>After:</strong> Every student receives detailed, personalized feedback within minutes of submission. Teachers review AI-generated feedback drafts rather than writing from scratch, spending 80% less time on grading while providing 3x more detailed comments. Learning happens in real time.<br><br>
+                                    <strong>Bridge:</strong> Write the opening narrative slide for a Series A pitch deck for EduFeedback, an AI-assisted grading tool. The audience is education-focused VCs. Keep it to 3 short paragraphs. All performance claims should be verified against actual product data before presenting.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AI Output</span>
+                                    <p>There are 3.7 million K-12 teachers in the United States. Each one spends roughly a quarter of their working hours on grading &mdash; not teaching, not mentoring, not inspiring. Just marking papers. And the feedback students receive after that effort? Often a letter and a sentence.<br><br>
+                                    Now imagine a classroom where every essay, every problem set, every lab report gets detailed, personalized feedback within minutes. Where teachers spend their grading time reviewing and refining AI-generated comments rather than starting from a blank page. Where students get guidance while the lesson is still fresh.<br><br>
+                                    EduFeedback makes that classroom real. Our AI reads student work, generates draft feedback aligned to rubrics, and puts teachers back in control of what matters most: the quality of their guidance, not the volume of their red ink.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use BAB</h2>
+                <p class="section-subtitle fade-in-up">Best for persuasive content that needs to motivate action</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Marketing and Sales Copy</strong>
+                                    <p>Landing pages, email campaigns, product descriptions, and ad copy where you need to move the reader from awareness to action through an emotional narrative arc.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Change Management Communications</strong>
+                                    <p>Internal announcements about new tools, processes, or organizational changes where you need to acknowledge current pain and sell the vision of improvement.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Proposal and Pitch Writing</strong>
+                                    <p>Business proposals, grant applications, and investor pitches where you need to frame a problem, present a vision, and position your solution as the bridge.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Case Studies and Testimonials</strong>
+                                    <p>Customer success stories that follow the natural transformation arc &mdash; where the client was, where they ended up, and what made the difference.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Technical Documentation</strong>
+                                    <p>API docs, user manuals, and reference guides where clarity and accuracy matter more than narrative persuasion. Use structured frameworks like CRISP instead.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Analytical or Research Tasks</strong>
+                                    <p>Data analysis, fact-checking, or reasoning tasks where the goal is accuracy, not persuasion. Use Chain-of-Thought or Self-Ask for these scenarios.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Neutral or Objective Content</strong>
+                                    <p>News articles, policy summaries, or educational content where maintaining objectivity is more important than driving action or emotional engagement.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where BAB delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Product Marketing</h3>
+                        <p class="use-case-showcase__desc">Transform feature-heavy product descriptions into compelling narratives that lead with the customer&rsquo;s problem, show the transformed outcome, and position the product as the natural bridge.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Employee Onboarding</h3>
+                        <p class="use-case-showcase__desc">Frame new tool adoption or process changes by acknowledging the old way (Before), describing the improved workflow (After), and introducing the training path (Bridge).</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Grant and Proposal Writing</h3>
+                        <p class="use-case-showcase__desc">Structure grant applications around the current gap in knowledge or resources, the envisioned impact of funding, and the specific project plan that connects the two.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Email Campaigns</h3>
+                        <p class="use-case-showcase__desc">Craft drip sequences and newsletters that open with a relatable challenge, present the subscriber&rsquo;s ideal outcome, and guide them toward the next step in their journey.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Stakeholder Presentations</h3>
+                        <p class="use-case-showcase__desc">Build executive presentations that frame the current business challenge, the strategic vision, and the recommended initiative as a coherent transformation story.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Consulting Deliverables</h3>
+                        <p class="use-case-showcase__desc">Structure client recommendations around the current-state assessment, the target-state vision, and the implementation roadmap that bridges the gap.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where BAB Fits</h2>
+                <p class="section-subtitle fade-in-up">BAB bridges simple prompts and full persuasion frameworks</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Zero-Shot</span>
+                        <span class="era-marker__title">Raw Instructions</span>
+                        <span class="era-marker__desc">Single request, no structure</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">BAB</span>
+                        <span class="era-marker__title">Narrative Arc</span>
+                        <span class="era-marker__desc">Problem, vision, solution path</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">SPARK</span>
+                        <span class="era-marker__title">Multi-Dimensional</span>
+                        <span class="era-marker__desc">Situation, purpose, action, result, knowledge</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">CO-STAR</span>
+                        <span class="era-marker__title">Audience Centered</span>
+                        <span class="era-marker__desc">Full communication brief with six dimensions</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">BAB Beyond Marketing</div>
+                    <p>While BAB originated in copywriting, the Before-After-Bridge structure works anywhere you need to persuade, motivate, or explain a transformation. Use it for performance reviews (current skill level, target growth, development plan), therapy session notes (presenting concern, treatment goal, therapeutic approach), or even personal goal-setting (where I am, where I want to be, what I will do to get there). The narrative arc is universal.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques &amp; Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary approaches to structured prompting</p>
+
+                <a href="spark.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">More Dimensions</span>
+                        <span class="evolution-callout__title">SPARK Framework</span>
+                        <span class="evolution-callout__desc">Extends narrative prompting with five components &mdash; Situation, Purpose, Action, Result, and Knowledge &mdash; for scenarios that need more context than BAB&rsquo;s three-part arc.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="costar.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Audience Focused</span>
+                        <span class="evolution-callout__title">CO-STAR Framework</span>
+                        <span class="evolution-callout__desc">When your content needs precise audience, tone, and format calibration beyond BAB&rsquo;s narrative structure &mdash; CO-STAR adds style, tone, audience, and response dimensions.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Build Your BAB Prompt</h2>
+                        <p class="cta-corporate__text">Structure your next persuasive prompt with Before, After, Bridge or find the right framework for your task.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../tools/matcher.html" class="btn btn-secondary">Technique Finder</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

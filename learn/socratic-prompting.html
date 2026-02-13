@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Socratic Prompting: Use reflective Socratic questioning to guide AI through iterative reasoning, challenging assumptions and exploring implications for deeper understanding.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/socratic-prompting.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Socratic Prompting - Praxis">
+    <meta property="og:description" content="Socratic Prompting: Use reflective Socratic questioning to guide AI through iterative reasoning, challenging assumptions and exploring implications for deeper understanding.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/socratic-prompting.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Socratic Prompting - Praxis">
+    <meta name="twitter:description" content="Socratic Prompting: Use reflective Socratic questioning to guide AI through iterative reasoning, challenging assumptions and exploring implications for deeper understanding.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Socratic Prompting",
+      "name": "Socratic Prompting",
+      "description": "Socratic Prompting: Use reflective Socratic questioning to guide AI through iterative reasoning, challenging assumptions and exploring implications for deeper understanding.",
+      "url": "https://praxislibrary.com/learn/socratic-prompting.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Socratic Prompting"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Socratic Prompting - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Socratic Prompting</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Conversational Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Socratic Prompting</h1>
+                <p class="page-subtitle fade-in">The best teachers don&rsquo;t give answers &mdash; they ask the right questions. Socratic Prompting applies this 2,400-year-old method to AI interactions, using probing questions to challenge assumptions, expose contradictions, and guide both the model and the user toward deeper understanding through iterative dialogue.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2023</span>
+                        <p><strong>Introduced:</strong> Socratic Prompting was formalized as an AI technique in 2023, drawing on the Socratic method of teaching through questioning attributed to the Greek philosopher Socrates (c. 470&ndash;399 BC). The technique applies the principles of elenchus &mdash; systematic questioning to examine beliefs, expose contradictions, and arrive at clearer understanding &mdash; to interactions with language models. Instead of asking the model for a direct answer, you instruct it to ask probing questions that guide reasoning through iterative question-answer cycles.</p>
+                        <p><strong>Modern LLM Status:</strong> Socratic Prompting aligns naturally with how modern LLMs reason in 2026. The technique&rsquo;s emphasis on questioning assumptions and exploring implications has been absorbed into Chain-of-Thought and self-reflection patterns. However, explicit Socratic questioning remains valuable for educational contexts, coaching applications, and situations where you want the AI to help the user <strong>think</strong> rather than just provide answers. The method is particularly powerful when combined with modern models&rsquo; ability to maintain extended, coherent dialogues.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Questions That Teach, Not Tell</h2>
+                        <p class="split-section__text">Most AI interactions follow a simple pattern: the user asks a question, the model provides an answer. This is efficient, but it skips a crucial step &mdash; understanding. Socratic Prompting reverses the dynamic. Instead of delivering conclusions, the model asks questions that guide the user (or itself) to discover the answer through reasoning.</p>
+                        <p class="split-section__text"><strong>The method works in two directions.</strong> You can instruct the AI to act as a Socratic tutor, asking you probing questions that help you think through a problem. Or you can apply Socratic questioning to the AI itself, challenging its initial response with follow-up questions that expose weaknesses, unexamined assumptions, or missing perspectives in its reasoning.</p>
+                        <p class="split-section__text">Think of it as the difference between a GPS that simply tells you &ldquo;turn left&rdquo; and a driving instructor who asks &ldquo;What do you notice about the traffic pattern ahead? What options do you see? What would happen if you took the next exit?&rdquo; Both get you to the destination, but only one builds understanding.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">The Six Types of Socratic Questions</span>
+                                <p>Classical Socratic questioning uses six categories, all applicable to AI interactions: <strong>Clarification</strong> (&ldquo;What do you mean by...?&rdquo;), <strong>Probing assumptions</strong> (&ldquo;What are you assuming here?&rdquo;), <strong>Probing reasons/evidence</strong> (&ldquo;What evidence supports this?&rdquo;), <strong>Questioning viewpoints</strong> (&ldquo;What would someone who disagrees say?&rdquo;), <strong>Probing implications</strong> (&ldquo;What would be the consequence of...?&rdquo;), and <strong>Questions about the question</strong> (&ldquo;Why is this question important?&rdquo;). Each type targets a different aspect of reasoning and can reveal different blind spots.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Socratic Prompting Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from surface-level question to deep understanding</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Present the Initial Problem or Claim</h3>
+                            <p class="element-timeline__text">Start with a statement, belief, or problem that warrants deeper examination. This could be a claim you want to test, a decision you are weighing, or a topic you want to understand more deeply. The initial framing sets the direction for the entire questioning process.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;I believe our company should switch entirely to remote work because employees are more productive at home.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Ask Clarifying and Assumption-Probing Questions</h3>
+                            <p class="element-timeline__text">The model (or you, questioning the model) asks questions that surface hidden assumptions, define ambiguous terms, and establish what evidence underlies the initial claim. These questions do not challenge the claim directly &mdash; they illuminate what the claim actually rests on.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Clarifying:</strong> &ldquo;How are you defining &lsquo;productivity&rsquo; in this context &mdash; output volume, quality, or both?&rdquo;<br><strong>Assumption-probing:</strong> &ldquo;What evidence do you have that productivity increases at home? Does this apply equally to all roles in your company?&rdquo;<br><strong>Viewpoint:</strong> &ldquo;What might a manager of a collaborative design team say about this claim?&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Explore Implications and Counter-Perspectives</h3>
+                            <p class="element-timeline__text">Follow the reasoning chain to its logical consequences. Ask what would happen if the claim were true, what would happen if it were false, and what evidence would change the conclusion. This stage often reveals that the original question was too simple and needs to be reframed.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Implications:</strong> &ldquo;If remote work increases individual output but decreases cross-team innovation, which matters more for your company&rsquo;s long-term success?&rdquo;<br><strong>Counter-perspective:</strong> &ldquo;What about employees who lack a good home workspace &mdash; does &lsquo;remote work&rsquo; mean the same thing for them?&rdquo;<br><strong>Reframing:</strong> &ldquo;Instead of &lsquo;should we go fully remote,&rsquo; might the better question be &lsquo;which work benefits from co-location and which does not?&rsquo;&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Synthesize a More Nuanced Understanding</h3>
+                            <p class="element-timeline__text">Through iterative questioning, the original claim has been examined from multiple angles. The result is not necessarily a different answer, but a <strong>better-informed</strong> answer &mdash; one that accounts for complexity, acknowledges limitations, and is grounded in explicit reasoning rather than unexamined assumptions.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Synthesis:</strong> &ldquo;Through our questioning, we&rsquo;ve identified that: (1) productivity gains from remote work are real but role-dependent, (2) collaboration-intensive work may suffer, (3) equity concerns exist for employees without adequate home setups, and (4) a hybrid model might capture the benefits while mitigating the risks. The original claim was partially correct but oversimplified.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why guided questioning produces deeper understanding than direct answers</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Direct Answer</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Should I use microservices or a monolith for my new application?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>For most new applications, start with a monolith. Microservices add complexity that is usually not justified until you have clear scaling needs or team boundaries. You can always extract services later.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Generic advice without understanding your specific situation</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Socratic Questioning</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Guided Discovery</span>
+                                <p><strong>Q:</strong> What specific problem are you trying to solve with this architecture choice?<br>
+                                <strong>A:</strong> We need to scale the payment processing independently from the rest of the app.<br>
+                                <strong>Q:</strong> How large is your engineering team, and how many teams will work on this system?<br>
+                                <strong>A:</strong> Three developers, one team.<br>
+                                <strong>Q:</strong> If three developers are managing multiple microservices, how would that affect their ability to ship features quickly?<br>
+                                <strong>A:</strong> They&rsquo;d spend a lot of time on infrastructure instead of features.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Discovery</span>
+                                <p>Through questioning, we found that while you have a valid scaling need (payment processing), your team size creates a strong constraint against full microservices. A monolith with the payment module designed as an extractable service gives you both simplicity now and a clear migration path later.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Tailored solution grounded in your specific context and constraints</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Socratic Prompting in Action</h2>
+                <p class="section-subtitle fade-in-up">See how iterative questioning deepens understanding and reveals better solutions</p>
+
+                <div class="accordion fade-in-up" id="socratic-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Educational Tutoring &mdash; Understanding Recursion</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Socratic Tutor Instruction</span>
+                                    <p>&ldquo;Act as a Socratic tutor. I want to understand recursion in programming. Don&rsquo;t explain it directly &mdash; ask me questions that help me discover the concept myself. Challenge my assumptions and guide me toward understanding through reasoning.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Socratic Dialogue</span>
+                                    <p><strong>AI:</strong> Let&rsquo;s start with something familiar. If I asked you to count from 1 to 10, how would you describe that process step by step?<br><br>
+                                    <strong>User:</strong> I&rsquo;d start at 1, say the number, then move to the next one until I reach 10.<br><br>
+                                    <strong>AI:</strong> Good. Now, could you rephrase that process as: &ldquo;counting from 1 to 10 is the same as saying 1, then counting from 2 to 10&rdquo;? Does that feel equivalent?<br><br>
+                                    <strong>User:</strong> Yes, that&rsquo;s the same thing just described differently.<br><br>
+                                    <strong>AI:</strong> Interesting. And what would &ldquo;counting from 10 to 10&rdquo; look like?<br><br>
+                                    <strong>User:</strong> Just say 10. That&rsquo;s it.<br><br>
+                                    <strong>AI:</strong> So you&rsquo;ve just described a process that calls a smaller version of itself and has a stopping condition. What do you think programmers call this pattern?<br><br>
+                                    <strong>User:</strong> Recursion?<br><br>
+                                    <strong>AI:</strong> Exactly. You just derived it. What two components did you identify that every recursive process needs?</p>
+                                    <p><em>AI-guided learning should complement, not replace, expert instruction. Always verify understanding with qualified educators or authoritative resources.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Business Decision &mdash; Challenging a Pricing Strategy</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Initial Claim</span>
+                                    <p>&ldquo;We should lower our prices to compete with the new market entrant. They are 30% cheaper and we are losing customers.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Socratic Examination</span>
+                                    <p><strong>Q (Clarifying):</strong> When you say &ldquo;losing customers,&rdquo; what percentage of your customer base has actually left? Are they your most profitable customers or your most price-sensitive ones?<br><br>
+                                    <strong>Q (Assumption-probing):</strong> You&rsquo;re assuming customers leave primarily because of price. What other reasons might they have? Have you asked departing customers why they switched?<br><br>
+                                    <strong>Q (Evidence):</strong> What data do you have on the competitor&rsquo;s service quality, reliability, and customer satisfaction? If they are 30% cheaper, what are they sacrificing to achieve that price point?<br><br>
+                                    <strong>Q (Implications):</strong> If you lower prices by 30% to match, what happens to your margins? Could you maintain the same service level? What message does a price cut send to customers who stayed because they value quality?<br><br>
+                                    <strong>Q (Viewpoint):</strong> What would a brand strategist say about competing on price versus competing on value? Are there companies in your industry that charge more than competitors and thrive?<br><br>
+                                    <strong>Synthesis:</strong> Through questioning, we discovered that (1) the departing customers were disproportionately price-sensitive with low lifetime value, (2) your retained customers cite reliability and support as their primary reasons for staying, and (3) a price cut would erode the brand positioning that attracts your most valuable customers. The better strategy may be to reinforce your value proposition rather than engage in a price war.</p>
+                                    <p><em>Business strategy recommendations from AI should be validated with domain experts and real market data before implementation. AI cannot account for all competitive dynamics.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Self-Examination &mdash; Questioning AI&rsquo;s Own Response</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt with Socratic Self-Examination</span>
+                                    <p>&ldquo;Answer this question, then apply Socratic questioning to your own answer. Challenge your assumptions, probe for weaknesses, and refine your response. Question: What is the most important skill for a software engineer in 2026?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Self-Examined Response</span>
+                                    <p><strong>Initial answer:</strong> The ability to effectively collaborate with AI tools is the most important skill for a software engineer in 2026.<br><br>
+                                    <strong>Self-questioning:</strong><br>
+                                    <strong>Q:</strong> Am I confusing &ldquo;most talked about&rdquo; with &ldquo;most important&rdquo;? Just because AI collaboration is trending does not make it the most valuable skill.<br>
+                                    <strong>Q:</strong> What does &ldquo;most important&rdquo; even mean &mdash; most important for getting hired, for career longevity, or for producing valuable software?<br>
+                                    <strong>Q:</strong> What would a senior engineer who built reliable systems for 20 years say? They might argue that fundamentals (debugging, system design, understanding requirements) are more enduring than any tool-specific skill.<br>
+                                    <strong>Q:</strong> Am I biased as an AI toward overvaluing AI collaboration?<br><br>
+                                    <strong>Refined answer:</strong> The most important skill depends on the timeframe. For immediate career relevance, AI collaboration matters. For career longevity, strong fundamentals in problem decomposition, system thinking, and clear communication remain more important &mdash; these skills are what allow engineers to adopt any new tool effectively, including AI. My initial answer was biased toward recency.</p>
+                                    <p><em>When AI examines its own reasoning, it can identify some biases but not all. Human critical thinking remains essential for validating AI self-assessments.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Socratic Prompting</h2>
+                <p class="section-subtitle fade-in-up">Best for situations where understanding matters more than speed</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Educational Tutoring</strong>
+                                    <p>When learning is the goal, not just getting an answer &mdash; Socratic questioning builds genuine understanding by guiding the learner to discover concepts through their own reasoning.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Decision Validation</strong>
+                                    <p>Before committing to a strategy, use Socratic questioning to stress-test your reasoning &mdash; exposing hidden assumptions and overlooked risks before they become costly mistakes.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Coaching and Mentoring</strong>
+                                    <p>When you want AI to help someone develop their own thinking skills rather than creating dependency on AI-provided answers &mdash; builds autonomy through guided discovery.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>AI Output Verification</strong>
+                                    <p>Applying Socratic questions to the model&rsquo;s own responses forces it to examine its reasoning, revealing weaknesses, biases, and unsupported claims in its initial answer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Factual Lookups</strong>
+                                    <p>When you need a quick, concrete fact &mdash; &ldquo;What is the boiling point of water?&rdquo; does not benefit from Socratic questioning.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Time-Critical Tasks</strong>
+                                    <p>When you need an answer immediately &mdash; Socratic dialogue is inherently iterative and requires multiple exchanges to reach its full value.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Automated Pipelines</strong>
+                                    <p>In batch processing or API-driven workflows where there is no human in the loop to engage in the iterative questioning cycle.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Socratic Prompting delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Academic Learning</h3>
+                        <p class="use-case-showcase__desc">Guide students through complex subjects by asking them to reason through concepts rather than memorize answers &mdash; building deeper understanding and critical thinking skills.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Requirements Elicitation</h3>
+                        <p class="use-case-showcase__desc">Help stakeholders articulate what they actually need by questioning vague requirements &mdash; &ldquo;What do you mean by &lsquo;fast&rsquo;?&rdquo; &ldquo;What would happen if this feature were missing?&rdquo;</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Therapeutic Coaching</h3>
+                        <p class="use-case-showcase__desc">Support cognitive reframing by helping individuals question unhelpful thought patterns &mdash; &ldquo;What evidence supports that belief? What would you tell a friend in this situation?&rdquo;</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Ethical Reasoning</h3>
+                        <p class="use-case-showcase__desc">Examine ethical dilemmas from multiple philosophical perspectives by questioning assumptions about right and wrong &mdash; exploring consequences, duties, and virtues systematically.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Risk Assessment</h3>
+                        <p class="use-case-showcase__desc">Stress-test risk analyses by questioning whether all scenarios have been considered &mdash; &ldquo;What if this assumption is wrong? What is the worst case we have not imagined?&rdquo;</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Research Design</h3>
+                        <p class="use-case-showcase__desc">Strengthen research methodologies by questioning study design assumptions &mdash; &ldquo;What confounding variables have you not controlled for? How would a skeptic critique this approach?&rdquo;</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Socratic Prompting Fits</h2>
+                <p class="section-subtitle fade-in-up">Socratic Prompting bridges direct questioning and structured reasoning</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Direct Prompting</span>
+                        <span class="era-marker__title">Ask and Receive</span>
+                        <span class="era-marker__desc">Single question, single answer</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Socratic</span>
+                        <span class="era-marker__title">Guided Discovery</span>
+                        <span class="era-marker__desc">Iterative questioning for deeper understanding</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Ask</span>
+                        <span class="era-marker__title">Self-Decomposition</span>
+                        <span class="era-marker__desc">Model questions itself to solve multi-hop problems</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Maieutic</span>
+                        <span class="era-marker__title">Tree of Explanations</span>
+                        <span class="era-marker__desc">Recursive belief elicitation through questioning</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine with Flipped Interaction</div>
+                    <p>Socratic Prompting and Flipped Interaction are natural partners. In Flipped Interaction, you ask the AI to interview you &mdash; which is already a form of Socratic dialogue. By explicitly instructing the AI to use Socratic questioning types (clarifying, assumption-probing, implication-exploring), you make the flipped interaction more structured and pedagogically effective. The AI becomes not just an interviewer, but a <strong>thinking partner</strong> that helps you reason through problems you could not solve alone.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary questioning and reasoning approaches</p>
+
+                <a href="self-ask.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Self-Ask</span>
+                        <span class="evolution-callout__desc">Where Socratic Prompting questions beliefs and assumptions, Self-Ask decomposes factual questions into explicit sub-questions &mdash; both use questioning as a reasoning tool.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="flipped-interaction.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Flipped Interaction</span>
+                        <span class="evolution-callout__desc">Reverses the traditional dynamic by having the AI ask questions &mdash; a natural vehicle for Socratic dialogue when combined with probing question types.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="maieutic-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Maieutic Prompting</span>
+                        <span class="evolution-callout__desc">Named after Socrates&rsquo; &ldquo;midwife&rdquo; method, Maieutic Prompting builds recursive explanation trees &mdash; a formalized, structured evolution of Socratic questioning for AI reasoning.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Question Everything</h2>
+                        <p class="cta-corporate__text">Try Socratic questioning on your own problems or build guided-discovery prompts with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

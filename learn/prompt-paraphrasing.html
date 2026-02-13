@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Prompt Paraphrasing: Generate multiple semantically similar prompt variants and ensemble their responses to reduce sensitivity to exact wording and improve reliability.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/prompt-paraphrasing.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Prompt Paraphrasing - Praxis">
+    <meta property="og:description" content="Prompt Paraphrasing: Generate multiple semantically similar prompt variants and ensemble their responses to reduce sensitivity to exact wording and improve reliability.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/prompt-paraphrasing.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Prompt Paraphrasing - Praxis">
+    <meta name="twitter:description" content="Prompt Paraphrasing: Generate multiple semantically similar prompt variants and ensemble their responses to reduce sensitivity to exact wording and improve reliability.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Prompt Paraphrasing",
+      "name": "Prompt Paraphrasing",
+      "description": "Prompt Paraphrasing: Generate multiple semantically similar prompt variants and ensemble their responses to reduce sensitivity to exact wording and improve reliability.",
+      "url": "https://praxislibrary.com/learn/prompt-paraphrasing.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Prompt Paraphrasing"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Prompt Paraphrasing - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Prompt Paraphrasing</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Ensembling Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Prompt Paraphrasing</h1>
+                <p class="page-subtitle fade-in">Should your results change just because you phrased the question slightly differently? Prompt Paraphrasing says no &mdash; it generates multiple semantically equivalent versions of your prompt, collects responses from each, and combines the results to produce answers that are robust to the arbitrary choices of wording you happened to make.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2023</span>
+                        <p><strong>Introduced:</strong> Prompt Paraphrasing emerged in 2023 as researchers documented a surprising vulnerability in LLMs: models could give dramatically different answers to semantically identical questions phrased in slightly different ways. The technique addresses this by creating paraphrased versions of the original prompt using back-translation or LLM rewriting, generating responses for each variant, and then selecting or combining the best results. This ensembling approach reduces sensitivity to prompt wording and produces more stable, reliable outputs.</p>
+                        <p><strong>Modern LLM Status:</strong> Prompt Paraphrasing addressed a real weakness in earlier models &mdash; sensitivity to exact wording. While modern LLMs in 2026 are more robust to phrasing variations, the technique remains valuable for <strong>high-stakes applications where you need to validate that your results aren&rsquo;t artifacts of specific wording choices</strong>. In production systems handling medical, legal, or financial queries, paraphrasing serves as a reliability check: if the answer changes when you ask the same question differently, the original answer may not be trustworthy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Same Question, Many Voices</h2>
+                        <p class="split-section__text">A single prompt is a single sample from the space of all possible ways to express an idea. Just as a single coin flip doesn&rsquo;t tell you the probability of heads, a single prompt phrasing doesn&rsquo;t tell you the model&rsquo;s true capability on a question. You might have written the one phrasing that confuses it &mdash; or the one that happens to trigger the right reasoning path.</p>
+                        <p class="split-section__text"><strong>Prompt Paraphrasing eliminates this lottery.</strong> Instead of betting on a single phrasing, you generate multiple semantically equivalent versions of the same question: rearranged syntax, swapped synonyms, altered sentence structure. Each variant probes the model from a different linguistic angle. When you ensemble the responses &mdash; taking the majority answer, averaging confidence scores, or selecting the most consistent output &mdash; you get a result that reflects the model&rsquo;s genuine understanding rather than its reaction to one particular arrangement of words.</p>
+                        <p class="split-section__text">Think of it like polling a group of translators. Each translates your question into a slightly different phrasing, the model answers each version, and you trust the answer that emerges most consistently across all phrasings.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Wording Sensitivity Matters</span>
+                                <p>Research showed that changing a single word in a prompt &mdash; &ldquo;analyze&rdquo; to &ldquo;examine,&rdquo; or &ldquo;describe&rdquo; to &ldquo;explain&rdquo; &mdash; could swing model accuracy by 10-20 percentage points on benchmark tasks. This fragility means that reported performance numbers often reflect prompt engineering skill as much as model capability. Prompt Paraphrasing marginalizes over this noise, giving you <strong>a more honest measure of what the model actually knows</strong> versus what it happens to produce for one lucky phrasing.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Prompt Paraphrasing Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from single prompt to robust ensemble</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Write Your Original Prompt</h3>
+                            <p class="element-timeline__text">Start with your best attempt at a prompt for the task. This serves as the seed from which paraphrased variants will be generated. The original doesn&rsquo;t need to be perfect &mdash; the whole point is to compensate for any weaknesses in this initial phrasing.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Classify the following customer review as positive, negative, or neutral. Review: &lsquo;The product arrived late but the quality exceeded my expectations.&rsquo;&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Generate Paraphrased Variants</h3>
+                            <p class="element-timeline__text">Create multiple semantically equivalent versions of the prompt. Methods include back-translation (translate to another language and back), LLM-based rewriting (ask the model to rephrase the prompt), or manual synonym substitution. Aim for 3-7 variants that preserve meaning while varying structure and vocabulary.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Variant 1:</strong> &ldquo;Determine the sentiment of this customer review: positive, negative, or neutral. &lsquo;The product arrived late but the quality exceeded my expectations.&rsquo;&rdquo;<br>
+                                <strong>Variant 2:</strong> &ldquo;What is the overall tone of this review &mdash; positive, negative, or neutral? &lsquo;The product arrived late but the quality exceeded my expectations.&rsquo;&rdquo;<br>
+                                <strong>Variant 3:</strong> &ldquo;Read this customer feedback and label it as positive, negative, or neutral: &lsquo;The product arrived late but the quality exceeded my expectations.&rsquo;&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Collect Responses from Each Variant</h3>
+                            <p class="element-timeline__text">Run each paraphrased prompt through the model independently. Record each response without letting any single variant&rsquo;s output influence the others. This gives you a distribution of answers that reflects the model&rsquo;s behavior across different phrasings of the same question.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Original response:</strong> Positive<br>
+                                <strong>Variant 1 response:</strong> Positive<br>
+                                <strong>Variant 2 response:</strong> Neutral<br>
+                                <strong>Variant 3 response:</strong> Positive</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Ensemble the Results</h3>
+                            <p class="element-timeline__text">Combine the responses using an aggregation strategy: majority vote for classification tasks, averaging for numerical outputs, or consistency filtering for open-ended generation. If responses diverge significantly, that disagreement itself is valuable information &mdash; it signals the question may be ambiguous or the model is uncertain.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Majority vote:</strong> 3 out of 4 responses say &ldquo;Positive&rdquo; &mdash; the ensemble answer is Positive. The one &ldquo;Neutral&rdquo; response flags that the mixed sentiment in the review creates some ambiguity, which is worth noting in the confidence assessment. <em>Always verify ensemble results against your domain expertise.</em></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why multiple phrasings produce more trustworthy answers</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Single Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">One Phrasing</span>
+                                <p>Is this email spam or not spam? &ldquo;Congratulations! You&rsquo;ve been selected for an exclusive offer. Click here to claim your reward before it expires.&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Not spam &mdash; it could be a legitimate promotional offer from a service the recipient signed up for.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Single phrasing, no way to assess confidence or stability</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Paraphrased Ensemble</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Multiple Phrasings</span>
+                                <p><strong>V1:</strong> &ldquo;Classify as spam or legitimate&rdquo; &rarr; Spam<br>
+                                <strong>V2:</strong> &ldquo;Is this a phishing attempt or real?&rdquo; &rarr; Spam<br>
+                                <strong>V3:</strong> &ldquo;Determine if this is junk mail&rdquo; &rarr; Spam<br>
+                                <strong>V4:</strong> &ldquo;Is this email spam or not spam?&rdquo; &rarr; Not spam</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Ensemble Result</span>
+                                <p>Spam (3/4 majority). The original &ldquo;not spam&rdquo; answer was an artifact of that specific phrasing &mdash; the ensemble reveals the model&rsquo;s true assessment when phrasing bias is removed.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Robust, phrasing-independent, with built-in confidence signal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Prompt Paraphrasing in Action</h2>
+                <p class="section-subtitle fade-in-up">See how ensembling across phrasings catches errors and builds confidence</p>
+
+                <div class="accordion fade-in-up" id="paraphrasing-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Medical Symptom Assessment</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Paraphrased Prompts</span>
+                                    <p><strong>Original:</strong> &ldquo;Based on the symptoms described, what conditions should a healthcare provider consider?&rdquo;<br><br>
+                                    <strong>V1:</strong> &ldquo;What medical conditions are consistent with these symptoms?&rdquo;<br>
+                                    <strong>V2:</strong> &ldquo;List possible diagnoses a clinician might explore given this symptom profile.&rdquo;<br>
+                                    <strong>V3:</strong> &ldquo;What differential diagnoses should be investigated based on these presenting symptoms?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Ensemble Analysis</span>
+                                    <p>All four phrasings returned overlapping but not identical condition lists. Conditions appearing in 4/4 responses: hypothyroidism, iron-deficiency anemia. Conditions appearing in 3/4: vitamin D deficiency. Conditions appearing in only 1/4: chronic fatigue syndrome (only the &ldquo;possible diagnoses&rdquo; phrasing).<br><br>
+                                    <strong>Ensemble insight:</strong> High-confidence conditions (present across all phrasings) are hypothyroidism and iron-deficiency anemia. The condition that appeared in only one variant should not be dismissed but warrants additional investigation before being included in a differential. <em>This is for informational purposes only &mdash; always consult qualified healthcare professionals for medical decisions.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Legal Contract Risk Analysis</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Paraphrased Prompts</span>
+                                    <p><strong>Original:</strong> &ldquo;Identify the key risks in this contract clause.&rdquo;<br><br>
+                                    <strong>V1:</strong> &ldquo;What potential liabilities does this clause create for the signing party?&rdquo;<br>
+                                    <strong>V2:</strong> &ldquo;Analyze this contract provision for unfavorable terms or hidden risks.&rdquo;<br>
+                                    <strong>V3:</strong> &ldquo;What should a lawyer flag as concerning in this clause?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Ensemble Analysis</span>
+                                    <p>The &ldquo;key risks&rdquo; phrasing identified 3 risks. The &ldquo;liabilities&rdquo; phrasing found 5 (including financial exposure the others missed). The &ldquo;unfavorable terms&rdquo; phrasing caught an asymmetric termination clause that only appeared in 1 of 4 responses. The &ldquo;lawyer flag&rdquo; phrasing surfaced an ambiguous indemnification scope.<br><br>
+                                    <strong>Ensemble insight:</strong> The union of risks across all phrasings produced a more comprehensive risk profile than any single prompt. Different phrasings activated different analytical lenses &mdash; financial, structural, and adversarial. <em>AI-generated legal analysis should always be reviewed by a qualified attorney before acting on it.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Fact-Checking a Historical Claim</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Paraphrased Prompts</span>
+                                    <p><strong>Original:</strong> &ldquo;Was the Great Wall of China visible from space?&rdquo;<br><br>
+                                    <strong>V1:</strong> &ldquo;Can astronauts see the Great Wall of China from orbit?&rdquo;<br>
+                                    <strong>V2:</strong> &ldquo;Is it true that the Great Wall of China is the only man-made structure visible from space?&rdquo;<br>
+                                    <strong>V3:</strong> &ldquo;Has any astronaut confirmed seeing the Great Wall from the International Space Station?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Ensemble Analysis</span>
+                                    <p>3 of 4 phrasings correctly stated that the Great Wall is generally not visible to the naked eye from low Earth orbit. However, the original phrasing (&ldquo;Was it visible?&rdquo;) returned a hedged response suggesting it &ldquo;might be visible under certain conditions,&rdquo; without clearly debunking the myth.<br><br>
+                                    <strong>Ensemble insight:</strong> The more specific phrasings (mentioning astronauts and orbit) produced more definitive, accurate answers. The vague original phrasing allowed the model to be noncommittal. Paraphrasing revealed that the model &ldquo;knows&rdquo; the correct answer but the original prompt didn&rsquo;t elicit it reliably. <em>Always cross-reference AI fact-checking with authoritative sources.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Prompt Paraphrasing</h2>
+                <p class="section-subtitle fade-in-up">Best for validating answer stability and catching phrasing-dependent errors</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Stakes Classification</strong>
+                                    <p>Medical triage, legal analysis, financial risk assessment &mdash; any domain where a wrong answer from a single prompt phrasing could have serious consequences.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Confidence Estimation</strong>
+                                    <p>When you need to know how certain the model is &mdash; high agreement across paraphrases signals confidence; divergence signals uncertainty.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Benchmark Evaluation</strong>
+                                    <p>Getting a fair measure of model capability by averaging over phrasings, rather than reporting results from the single best (or worst) prompt.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Comprehensive Coverage</strong>
+                                    <p>For open-ended analysis, different phrasings activate different perspectives &mdash; the union of responses across variants is richer than any single response.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple, Well-Defined Tasks</strong>
+                                    <p>If the task has a clear, unambiguous answer and the model consistently gets it right, paraphrasing adds latency and cost without benefit.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Real-Time Applications</strong>
+                                    <p>When response latency is critical &mdash; running 4-7 parallel prompt variants multiplies both time and cost, making it impractical for live user interactions.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative Generation Tasks</strong>
+                                    <p>When you want diverse, creative outputs &mdash; paraphrasing and ensembling tend to converge toward the &ldquo;average&rdquo; answer, smoothing out the creative outliers you may actually want.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Prompt Paraphrasing delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Clinical Decision Support</h3>
+                        <p class="use-case-showcase__desc">Paraphrase diagnostic queries to ensure symptom-to-condition mappings are stable across phrasings, flagging cases where wording sensitivity suggests genuine clinical ambiguity.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Moderation QA</h3>
+                        <p class="use-case-showcase__desc">Validate that moderation decisions are consistent regardless of how content is described, catching cases where the framing of the question biases the safety judgment.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Survey and Research Analysis</h3>
+                        <p class="use-case-showcase__desc">When analyzing open-ended survey responses, paraphrase the analysis prompt to ensure coding and categorization are robust to the specific instructions given.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Exam and Assessment Design</h3>
+                        <p class="use-case-showcase__desc">Test whether AI-assisted grading produces consistent scores when the same rubric is paraphrased, ensuring fairness in automated assessment pipelines.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Multilingual Applications</h3>
+                        <p class="use-case-showcase__desc">Use back-translation paraphrasing to validate that model responses are consistent across language-mediated prompt variations, critical for global deployments.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Model Evaluation Pipelines</h3>
+                        <p class="use-case-showcase__desc">Report model performance as an average across paraphrased prompts rather than a single phrasing, giving a fairer and more reproducible measure of capability.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Prompt Paraphrasing Fits</h2>
+                <p class="section-subtitle fade-in-up">Prompt Paraphrasing belongs to the family of ensembling techniques that aggregate multiple model outputs</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Consistency</span>
+                        <span class="era-marker__title">Same Prompt, Multiple Samples</span>
+                        <span class="era-marker__desc">Temperature-based response diversity</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Prompt Paraphrasing</span>
+                        <span class="era-marker__title">Multiple Prompts, One Answer</span>
+                        <span class="era-marker__desc">Phrasing-diverse ensembling</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Ask Me Anything</span>
+                        <span class="era-marker__title">Question Reformulation</span>
+                        <span class="era-marker__desc">Task-format diverse ensembling</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Demonstration Ensembling</span>
+                        <span class="era-marker__title">Example-Set Diversity</span>
+                        <span class="era-marker__desc">Few-shot example variation</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine with Self-Consistency</div>
+                    <p>Prompt Paraphrasing and Self-Consistency are complementary ensembling strategies. Self-Consistency varies the <em>sampling</em> (same prompt, different random seeds), while Paraphrasing varies the <em>input</em> (different prompts, same question). For maximum robustness, combine both: generate paraphrased variants AND sample multiple responses from each. The resulting ensemble is robust to both prompt wording sensitivity and model sampling variance.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary ensembling and robustness techniques</p>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">The complementary ensembling approach that varies sampling rather than prompt wording &mdash; combine with Paraphrasing for maximum robustness.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="ask-me-anything.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Ask Me Anything (AMA)</span>
+                        <span class="evolution-callout__desc">Goes beyond simple paraphrasing by reformulating tasks into entirely different question formats, creating deeper diversity in how the model approaches the problem.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="demo-ensembling.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Demonstration Ensembling</span>
+                        <span class="evolution-callout__desc">Instead of varying the prompt wording, varies the few-shot examples provided &mdash; another axis of diversity for building more robust LLM responses.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Test Your Prompt Robustness</h2>
+                        <p class="cta-corporate__text">Try paraphrasing your prompts to validate answer stability or explore complementary ensembling techniques with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../tools/matcher.html" class="btn btn-secondary">Technique Finder</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

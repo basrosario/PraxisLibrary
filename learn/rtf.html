@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RTF Framework: A minimalist three-part prompting framework using Role, Task, and Format to quickly structure AI prompts with persona, objective, and output specification.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/rtf.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="RTF Framework - Praxis">
+    <meta property="og:description" content="RTF Framework: A minimalist three-part prompting framework using Role, Task, and Format to quickly structure AI prompts with persona, objective, and output specification.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/rtf.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RTF Framework - Praxis">
+    <meta name="twitter:description" content="RTF Framework: A minimalist three-part prompting framework using Role, Task, and Format to quickly structure AI prompts with persona, objective, and output specification.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "RTF Framework",
+      "name": "RTF Framework",
+      "description": "RTF Framework: A minimalist three-part prompting framework using Role, Task, and Format to quickly structure AI prompts with persona, objective, and output specification.",
+      "url": "https://praxislibrary.com/learn/rtf.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Frameworks",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "RTF Framework"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>RTF Framework - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="framework">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">RTF</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Community Framework</span>
+                </div>
+                <h1 class="page-title fade-in">RTF Framework</h1>
+                <p class="page-subtitle fade-in">Three elements. Zero overhead. RTF distills prompting to its absolute essentials &mdash; Role, Task, Format &mdash; giving you a lightweight structure that works when speed matters more than depth.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Framework Context: 2023</span>
+                        <p><strong>Origin:</strong> RTF is a community framework from 2023 that emerged as one of the most minimal named prompting structures in widespread use. It addresses a common problem: users who know they should structure their prompts but find multi-element frameworks like CO-STAR or CRISPE intimidating. RTF strips the concept down to three essential questions &mdash; who should the AI be (Role), what should it do (Task), and how should the output look (Format). The framework gained traction through social media and blog communities as a beginner-friendly entry point into structured prompting.</p>
+                        <p><strong>Modern LLM Status:</strong> RTF remains <strong>highly practical as a quick-start framework</strong> for everyday prompting. Modern LLMs like Claude, GPT-4, and Gemini respond well to even minimal structure &mdash; specifying a role, a clear task, and an output format consistently outperforms unstructured prompts. RTF&rsquo;s limitation is that it lacks elements for context, constraints, and audience that more comprehensive frameworks provide. For simple to moderate tasks, RTF delivers excellent results with minimal effort. For complex, high-stakes prompts, consider upgrading to a fuller framework like CO-STAR or CRISP.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">The Minimum Viable Prompt</h2>
+                        <p class="split-section__text">Most people write prompts that are either completely unstructured (&ldquo;Write me a blog post&rdquo;) or so heavily templated that using the framework takes longer than the task itself. RTF occupies the sweet spot: just enough structure to dramatically improve output quality, without enough overhead to slow you down.</p>
+                        <p class="split-section__text"><strong>Three questions unlock better results.</strong> Role tells the AI what expertise to bring. Task tells it what to do. Format tells it how to present the result. These three elements address the most common failure modes of unstructured prompts: wrong perspective, vague objectives, and unusable output shapes.</p>
+                        <p class="split-section__text">Think of RTF like ordering food. Role is telling the chef what cuisine you want. Task is the dish. Format is how you want it served &mdash; plated, boxed, or family-style. Three decisions, and you get something far better than &ldquo;surprise me.&rdquo;</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <!-- === PROMPT INFOGRAPHIC === -->
+                        <div class="prompt-infographic">
+                            <div class="prompt-infographic__header">
+                                <div class="prompt-infographic__letters">
+                                    <span>R</span>
+                                    <span>T</span>
+                                    <span>F</span>
+                                </div>
+                                <span class="prompt-infographic__title">Minimalist Prompt Template</span>
+                            </div>
+                            <div class="prompt-infographic__rows">
+                                <div class="prompt-infographic__row">
+                                    <div class="prompt-infographic__letter">R</div>
+                                    <div class="prompt-infographic__field">
+                                        <span class="prompt-infographic__label">Role</span>
+                                        <p class="prompt-infographic__text">The persona or expertise the AI should adopt &mdash; who it should be for this task.</p>
+                                    </div>
+                                </div>
+                                <div class="prompt-infographic__row">
+                                    <div class="prompt-infographic__letter">T</div>
+                                    <div class="prompt-infographic__field">
+                                        <span class="prompt-infographic__label">Task</span>
+                                        <p class="prompt-infographic__text">The specific action or deliverable &mdash; what the AI should produce.</p>
+                                    </div>
+                                </div>
+                                <div class="prompt-infographic__row">
+                                    <div class="prompt-infographic__letter">F</div>
+                                    <div class="prompt-infographic__field">
+                                        <span class="prompt-infographic__label">Format</span>
+                                        <p class="prompt-infographic__text">The output structure or presentation &mdash; how the result should be delivered.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /PROMPT INFOGRAPHIC -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The RTF Process</h2>
+                <p class="section-subtitle fade-in-up">Three steps from vague request to structured prompt</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Role &mdash; Assign the Expertise</h3>
+                            <p class="element-timeline__text">Tell the AI who it should be. A role activates domain-specific knowledge and vocabulary, shaping the entire response through the lens of that expertise. The more specific the role, the more targeted the output &mdash; &ldquo;senior data analyst at a healthcare company&rdquo; beats &ldquo;data person&rdquo; every time.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;You are an experienced project manager who specializes in agile software delivery for remote teams.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Task &mdash; Define the Action</h3>
+                            <p class="element-timeline__text">Specify exactly what the AI should do. A well-defined task includes the action verb, the subject matter, and enough detail to eliminate ambiguity. Avoid compound tasks &mdash; if you need multiple deliverables, either chain separate RTF prompts or list the sub-tasks explicitly.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Create a sprint retrospective template that helps remote teams identify communication bottlenecks and action items for improvement.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Format &mdash; Specify the Output</h3>
+                            <p class="element-timeline__text">Tell the AI how to present the result. Format controls everything from structure (bullet list, table, paragraph) to length (250 words, one page) to medium (email, slide deck, code snippet). Without a format directive, the AI defaults to whatever it considers most natural &mdash; which may not match what you need.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Present this as a one-page document with three sections: What Went Well, What Needs Improvement, and Action Items. Use bullet points under each section with space for team members to add their own items.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">How three simple elements transform an unstructured prompt</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Unstructured Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Help me with onboarding new employees.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Here are some tips for onboarding: 1) Create a welcome packet. 2) Assign a buddy. 3) Schedule orientation meetings. 4) Set up their workspace. 5) Provide training materials.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Generic advice, no role expertise, no actionable format</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">RTF Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Structured Approach</span>
+                                <p><strong>Role:</strong> You are an HR operations manager at a 200-person SaaS company with a remote-first culture.<br><strong>Task:</strong> Create a 30-day onboarding plan for new software engineers that covers tooling setup, team introductions, codebase orientation, and first deliverable expectations.<br><strong>Format:</strong> A week-by-week table with columns for Day, Activity, Owner, and Success Criteria.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>A detailed 4-week table with specific daily activities: Week 1 covers environment setup, security training, and buddy pairing. Week 2 focuses on codebase walkthrough and first PR review. Week 3 assigns a starter ticket with mentor support. Week 4 establishes independent workflow with 1:1 check-in cadence. Each row includes the responsible owner and measurable success criteria.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Role-informed, specific, immediately actionable table format</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">RTF in Action</h2>
+                <p class="section-subtitle fade-in-up">See how Role, Task, and Format combine for fast, effective prompts</p>
+
+                <div class="accordion fade-in-up" id="rtf-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Marketing Email Draft</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">RTF Prompt</span>
+                                    <p><strong>Role:</strong> You are a B2B email marketing specialist who focuses on high open rates and clear calls to action.<br><br>
+                                    <strong>Task:</strong> Write a follow-up email to prospects who attended our webinar on data security but did not book a demo. The email should reference key takeaways from the webinar and create urgency around a limited-time offer for a free security audit.<br><br>
+                                    <strong>Format:</strong> A single email under 200 words with a compelling subject line, three short paragraphs, and one clear CTA button text.<br><br>
+                                    <em>Note: Review the generated email for accuracy against your actual webinar content and offer terms before sending. AI-generated marketing copy should always be verified against your brand guidelines.</em></p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AI Response</span>
+                                    <p><strong>Subject:</strong> The vulnerability you spotted in our webinar? Let&rsquo;s fix it (free).<br><br>
+                                    Hi [First Name],<br><br>
+                                    Last week you joined 200+ security leaders for our webinar on the three data vulnerabilities most companies miss. The stat that stopped the room: 73% of breaches exploit gaps that a standard audit would catch.<br><br>
+                                    We are opening 15 free security audit slots for webinar attendees this month. Our team will scan your environment for the exact vulnerability patterns we discussed &mdash; no commitment, full report yours to keep.<br><br>
+                                    Slots are first-come: 6 of 15 are already claimed.<br><br>
+                                    <strong>[Book Your Free Audit]</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Technical Documentation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">RTF Prompt</span>
+                                    <p><strong>Role:</strong> You are a senior technical writer at a cloud infrastructure company, experienced in writing documentation for developers with varying skill levels.<br><br>
+                                    <strong>Task:</strong> Write a quickstart guide for setting up a PostgreSQL database on our cloud platform. Cover account creation, database provisioning, connection string configuration, and running a first query.<br><br>
+                                    <strong>Format:</strong> A numbered step-by-step guide with code blocks for commands, a prerequisites section at the top, and a troubleshooting FAQ with three common issues at the bottom.<br><br>
+                                    <em>Note: Verify all commands and connection strings against your platform&rsquo;s current documentation before publishing. AI-generated technical instructions should be tested in a development environment first.</em></p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AI Response</span>
+                                    <p>A complete quickstart guide structured exactly as requested: Prerequisites (account, CLI tool, PostgreSQL client), then 6 numbered steps with inline code blocks for each command, clearly labeled expected outputs, and a 3-item troubleshooting FAQ covering connection timeouts, authentication errors, and firewall configuration. Each step includes both the command and a one-sentence explanation of what it does.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Lesson Plan Creation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">RTF Prompt</span>
+                                    <p><strong>Role:</strong> You are a middle school science teacher with 10 years of experience making complex concepts accessible to 12-14 year olds through hands-on activities.<br><br>
+                                    <strong>Task:</strong> Design a 45-minute lesson on the water cycle that includes a hands-on demonstration students can do with everyday materials, a class discussion component, and a formative assessment at the end.<br><br>
+                                    <strong>Format:</strong> A lesson plan with five sections: Learning Objectives (3 bullet points), Materials Needed, Activity Sequence (with time allocations), Discussion Questions (4 questions), and Assessment (a 5-question exit ticket).<br><br>
+                                    <em>Note: Review the lesson plan against your state curriculum standards and adapt the hands-on activity for your specific classroom setup. AI-generated educational content should be verified by qualified educators.</em></p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">AI Response</span>
+                                    <p>A structured 45-minute lesson plan: Learning Objectives aligned to NGSS standards, a materials list using only items found in a kitchen (pot, ice, plastic wrap, food coloring), a timed activity sequence (5-min intro, 15-min demo, 10-min discussion, 10-min group work, 5-min exit ticket), four Bloom&rsquo;s Taxonomy-aligned discussion questions progressing from recall to analysis, and a 5-question exit ticket mixing multiple choice with one short-answer explanation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use RTF</h2>
+                <p class="section-subtitle fade-in-up">Best for quick, everyday tasks where minimal structure yields maximum improvement</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Everyday Tasks</strong>
+                                    <p>Emails, summaries, outlines, and quick drafts where a lightweight structure is all you need to get a focused, well-formatted response.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Beginners Learning to Prompt</strong>
+                                    <p>RTF is the simplest named framework &mdash; perfect for people who are just starting to structure their prompts and want a memorable starting point.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Rapid Iteration</strong>
+                                    <p>When you need to generate multiple variations quickly, RTF&rsquo;s low overhead lets you swap roles, tasks, or formats without rewriting the entire prompt.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Template Libraries</strong>
+                                    <p>RTF&rsquo;s simplicity makes it ideal for building reusable prompt templates where team members fill in their own role, task, and format values.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Stakes Communication</strong>
+                                    <p>When audience, tone, and context matter deeply, RTF&rsquo;s three elements are not enough. Upgrade to CO-STAR or CRISPE for full communication control.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Reasoning</strong>
+                                    <p>Multi-hop questions, analytical tasks, or problems that require step-by-step reasoning need techniques like Chain-of-Thought or Self-Ask, not structural frameworks.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Heavily Constrained Tasks</strong>
+                                    <p>When you need to specify constraints, evaluation criteria, or examples alongside the core request, RTF&rsquo;s three slots cannot capture everything. Use CRISP or CRISPE instead.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where RTF delivers quick wins with minimal setup</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Email Drafting</h3>
+                        <p class="use-case-showcase__desc">Assign a professional role, specify the email purpose, and define the format (length, tone markers, CTA) for consistent, polished email output.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Content Creation</h3>
+                        <p class="use-case-showcase__desc">Blog posts, social media captions, and marketing copy where specifying the writer persona and output format immediately sharpens the voice and structure.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Study Aids</h3>
+                        <p class="use-case-showcase__desc">Cast the AI as a tutor in a specific subject, define the concept to explain, and request the output as flashcards, summaries, or practice questions.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Code Generation</h3>
+                        <p class="use-case-showcase__desc">Assign a developer role with a language specialty, specify the function or feature, and request the format (commented code, with tests, as a diff).</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Interview Prep</h3>
+                        <p class="use-case-showcase__desc">Set the AI as a hiring manager in your target industry, ask it to generate interview questions, and specify the format as Q&amp;A pairs with evaluation criteria.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Meeting Preparation</h3>
+                        <p class="use-case-showcase__desc">Ask the AI to act as a meeting facilitator, create agendas or talking points, and output them as timed agenda blocks or discussion frameworks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where RTF Fits</h2>
+                <p class="section-subtitle fade-in-up">RTF is the minimalist entry point in the structured prompting spectrum</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">RTF</span>
+                        <span class="era-marker__title">Minimal Structure</span>
+                        <span class="era-marker__desc">Role, Task, Format &mdash; three essentials</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">TAG</span>
+                        <span class="era-marker__title">Goal-Oriented</span>
+                        <span class="era-marker__desc">Task, Action, Goal &mdash; outcome-focused</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">CRISP</span>
+                        <span class="era-marker__title">Efficient Structure</span>
+                        <span class="era-marker__desc">Adds context and persona depth</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">CO-STAR</span>
+                        <span class="era-marker__title">Full Communication</span>
+                        <span class="era-marker__desc">Six-dimension audience-aware framework</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">RTF as a Stepping Stone</div>
+                    <p>RTF is intentionally minimal. Once you are comfortable with Role, Task, and Format, you will naturally start wanting to add more context &mdash; audience, constraints, tone, examples. That instinct is the signal to graduate to a fuller framework like CRISP, CO-STAR, or CRISPE. Think of RTF not as a ceiling but as a foundation: every comprehensive framework includes RTF&rsquo;s three elements plus additional dimensions.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques &amp; Frameworks</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary approaches to structured prompting</p>
+
+                <a href="tag.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+                            <line x1="7" y1="7" x2="7.01" y2="7"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Sibling Framework</span>
+                        <span class="evolution-callout__title">TAG Framework</span>
+                        <span class="evolution-callout__desc">Where RTF assigns a persona, TAG focuses on outcomes. TAG&rsquo;s Goal element ensures every prompt ties to a measurable objective &mdash; useful when the &ldquo;why&rdquo; matters as much as the &ldquo;what.&rdquo;</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="ape.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="16"/>
+                            <line x1="8" y1="12" x2="16" y2="12"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Similar Scope</span>
+                        <span class="evolution-callout__title">APE Framework</span>
+                        <span class="evolution-callout__desc">Another three-element framework (Action, Purpose, Expectation) that adds intent-driven structure. APE emphasizes the &ldquo;why&rdquo; through Purpose where RTF emphasizes the &ldquo;who&rdquo; through Role.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="role-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Role Prompting</span>
+                        <span class="evolution-callout__desc">RTF&rsquo;s &ldquo;R&rdquo; element is built on this foundational technique. Role Prompting explores persona assignment in depth &mdash; the theory behind why assigning expertise improves AI output.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Start Simple, Start Now</h2>
+                        <p class="cta-corporate__text">Try RTF on your next prompt or explore fuller frameworks when you need more control.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../tools/matcher.html" class="btn btn-secondary">Technique Finder</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

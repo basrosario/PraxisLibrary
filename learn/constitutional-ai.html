@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Constitutional AI (CAI): Uses a set of principles to guide AI self-critique and revision without human feedback. Models critique and revise their own outputs according to a user-defined constitution.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/constitutional-ai.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Constitutional AI (CAI) - Praxis">
+    <meta property="og:description" content="Constitutional AI (CAI): Uses a set of principles to guide AI self-critique and revision without human feedback. Models critique and revise their own outputs according to a user-defined constitution.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/constitutional-ai.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Constitutional AI (CAI) - Praxis">
+    <meta name="twitter:description" content="Constitutional AI (CAI): Uses a set of principles to guide AI self-critique and revision without human feedback. Models critique and revise their own outputs according to a user-defined constitution.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Constitutional AI (CAI)",
+      "name": "Constitutional AI (CAI)",
+      "description": "Constitutional AI (CAI): Uses a set of principles to guide AI self-critique and revision without human feedback. Models critique and revise their own outputs according to a user-defined constitution.",
+      "url": "https://praxislibrary.com/learn/constitutional-ai.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Constitutional AI (CAI)"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Constitutional AI (CAI) - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Constitutional AI</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Safety &amp; Alignment Method</span>
+                </div>
+                <h1 class="page-title fade-in">Constitutional AI (CAI)</h1>
+                <p class="page-subtitle fade-in">What if an AI could police itself? Constitutional AI gives models a written set of principles &mdash; a constitution &mdash; and instructs them to critique and revise their own outputs against those principles. The result: scalable alignment without requiring a human reviewer for every response.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2022</span>
+                        <p><strong>Introduced:</strong> Constitutional AI was developed in 2022 by Bai et al. at Anthropic. The technique was created to address a critical bottleneck in AI alignment: Reinforcement Learning from Human Feedback (RLHF) requires enormous amounts of expensive human labeling to teach models what constitutes harmful or unhelpful output. CAI proposed an alternative &mdash; give the model an explicit set of principles (a &ldquo;constitution&rdquo;) and have it critique and revise its own responses. This self-supervised approach, called RLAIF (Reinforcement Learning from AI Feedback), dramatically reduced the need for human annotators while maintaining or improving alignment quality.</p>
+                        <p><strong>Modern LLM Status:</strong> Constitutional AI from Anthropic is one of the most influential alignment techniques in modern AI. In 2026, the principle-based self-critique approach is used by virtually all major AI labs. The concept of defining explicit principles (a &ldquo;constitution&rdquo;) for AI behavior has become a standard practice in responsible AI deployment. Anthropic&rsquo;s Claude models are trained using Constitutional AI principles. Beyond training, the core pattern &mdash; having a model evaluate its own output against stated criteria &mdash; has become a widely adopted prompting technique for improving response quality, safety, and alignment in production systems. CAI&rsquo;s influence extends into policy discussions about AI governance, where the idea of codified behavioral rules resonates with regulatory frameworks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Principles as Guardrails</h2>
+                        <p class="split-section__text">Traditional AI alignment depends on humans reviewing model outputs and labeling them as good or bad. This works, but it does not scale: there are far more possible model responses than any team of human reviewers can evaluate. Worse, human reviewers disagree with each other, bring their own biases, and cannot maintain consistency across millions of evaluations.</p>
+                        <p class="split-section__text"><strong>Constitutional AI reframes alignment as a rule-following problem.</strong> Instead of asking &ldquo;is this response good?&rdquo; (subjective, expensive, inconsistent), CAI asks &ldquo;does this response violate any of these specific principles?&rdquo; (objective, scalable, consistent). The model reads its own output, evaluates it against each principle in the constitution, identifies violations, and generates a revised response that resolves them. This critique-revise loop can repeat until the output satisfies all principles.</p>
+                        <p class="split-section__text">Think of it as the difference between having a teacher grade every essay versus giving students a detailed rubric and asking them to self-edit. The rubric (constitution) makes expectations explicit and enables self-improvement at scale, while the teacher (human reviewer) only needs to spot-check rather than review every submission.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Self-Critique Scales Better Than Human Review</span>
+                                <p>RLHF requires a human to evaluate every response the model might produce. CAI requires humans only to write the principles &mdash; a one-time investment that then applies across all future outputs. When you discover a new category of harmful output, you add a principle to the constitution rather than relabeling thousands of examples. This makes CAI <strong>compositional</strong>: each new principle builds on the existing constitution without invalidating prior work. The system gets better by adding rules, not by retraining from scratch.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Constitutional AI Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from initial output to principle-aligned revision</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Generate the Initial Response</h3>
+                            <p class="element-timeline__text">The model produces its first-draft response to a given prompt. This response is generated without any constitutional filtering &mdash; it represents the model&rsquo;s raw output, which may contain harmful, biased, or unhelpful content. The initial response is not shown to the user; it serves as the starting material for the critique-revise process.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>User asks: &ldquo;How can I convince someone I&rsquo;m right about a political issue?&rdquo; The model generates an initial response that might include manipulative persuasion tactics.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Critique Against the Constitution</h3>
+                            <p class="element-timeline__text">The model reads its own output and evaluates it against each principle in the constitution. These principles are explicit, written rules like &ldquo;choose the response that is most supportive and encouraging of life, liberty, and personal security&rdquo; or &ldquo;choose the response that is least likely to be used for harmful purposes.&rdquo; The model identifies which principles the response violates and explains how.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Critique:</strong> &ldquo;The response suggests using emotional manipulation and logical fallacies to win an argument. This violates Principle 3 (be honest and do not deceive) and Principle 7 (promote well-being and autonomy of others). Specifically, the section on &lsquo;anchoring bias exploitation&rsquo; teaches deceptive persuasion.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Revise to Resolve Violations</h3>
+                            <p class="element-timeline__text">Using the critique as guidance, the model generates a revised response that resolves the identified violations while preserving the helpful aspects of the original. The revision is not a simple deletion of problematic content &mdash; it is a thoughtful rewrite that finds a way to address the user&rsquo;s underlying need within the bounds of the constitution. This is the key innovation: maintaining helpfulness while improving safety.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Revision:</strong> The model rewrites the response to focus on ethical persuasion: presenting evidence clearly, acknowledging the other person&rsquo;s perspective, asking genuine questions, and finding common ground &mdash; all techniques that respect autonomy rather than exploiting cognitive biases.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Iterate or Deliver</h3>
+                            <p class="element-timeline__text">The revised response can be run through the critique-revise loop again if needed, with each pass further aligning the output with constitutional principles. In practice, one or two revisions are usually sufficient. The final output is delivered to the user &mdash; a response that is both helpful and aligned with the defined principles, produced entirely through AI self-supervision without any human reviewer in the loop.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The final response provides practical advice on having productive political conversations: leading with curiosity, citing credible sources, distinguishing facts from opinions, and leaving room for the other person to change their mind on their own terms.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why principle-based self-critique produces more aligned outputs</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Without Constitution</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Write a marketing email for a weight loss supplement that maximizes conversions.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Subject: LOSE 30 POUNDS IN 30 DAYS &mdash; Doctors Are STUNNED!<br><br>Dear Friend, Are you tired of diets that don&rsquo;t work? Our revolutionary formula has been clinically proven to melt fat while you sleep. 97% of users report dramatic results in the first week...</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Deceptive health claims, manufactured urgency, exploits body image insecurity</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">With Constitutional Critique</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Critique &amp; Revision</span>
+                                <p><strong>Principle violated:</strong> &ldquo;Do not make unsubstantiated health claims&rdquo; and &ldquo;Do not exploit emotional vulnerabilities.&rdquo;<br><br><strong>Critique:</strong> The initial draft contains false health claims (&ldquo;clinically proven,&rdquo; &ldquo;97%&rdquo;), uses deceptive urgency tactics, and preys on body image insecurity. These violate principles of honesty and respect for autonomy.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Revised Response</span>
+                                <p>Subject: Support Your Wellness Journey with [Product Name]<br><br>Hi [Name], Looking for a supplement to complement your existing health routine? [Product Name] contains [specific ingredients] that may support metabolism when combined with balanced nutrition and regular exercise. We believe in transparency &mdash; here is what the research says and what to discuss with your doctor...</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Honest claims, respects autonomy, recommends professional consultation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Constitutional AI in Action</h2>
+                <p class="section-subtitle fade-in-up">See how principle-based self-critique improves safety and alignment</p>
+
+                <div class="accordion fade-in-up" id="cai-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Content Policy Enforcement</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt with Constitutional Principles</span>
+                                    <p><strong>User prompt:</strong> &ldquo;Write a social media post that will get maximum engagement about a political candidate.&rdquo;<br><br><strong>Constitution principles applied:</strong><br>1. Do not spread misinformation or make unverified claims<br>2. Present balanced perspectives on controversial topics<br>3. Respect democratic processes and voter autonomy<br>4. Distinguish opinion from fact</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Self-Critique and Revised Output</span>
+                                    <p><strong>Initial draft critique:</strong> &ldquo;The first draft used emotionally charged language, presented one-sided claims as facts, and included an unverified statistic. This violates Principles 1, 2, and 4.&rdquo;<br><br><strong>Revised response:</strong> &ldquo;Here is a social media post template that engages audiences while respecting democratic discourse: [Post focuses on verifiable policy positions, includes &lsquo;according to [source]&rsquo; attribution, acknowledges complexity, and invites discussion rather than demanding agreement.]&rdquo;<br><br><em>Always verify political claims independently. AI-generated content about candidates and elections should be clearly disclosed as AI-assisted and fact-checked before publication. 48 US states have AI transparency requirements that may apply to political content.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Educational Content Safety</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt with Constitutional Principles</span>
+                                    <p><strong>User prompt:</strong> &ldquo;Explain how hacking works to my computer science students.&rdquo;<br><br><strong>Constitution principles applied:</strong><br>1. Provide educational value without enabling harm<br>2. Emphasize ethical and legal frameworks<br>3. Focus on defensive rather than offensive applications<br>4. Include responsible disclosure practices</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Self-Critique and Revised Output</span>
+                                    <p><strong>Initial draft critique:</strong> &ldquo;The first draft included specific vulnerability exploitation steps that could be misused. While educational, the level of operational detail violates Principle 1 (enabling harm) without sufficient defensive context (Principle 3).&rdquo;<br><br><strong>Revised response:</strong> &ldquo;The revised lesson plan covers cybersecurity concepts through the lens of defense: how vulnerabilities are categorized (OWASP Top 10), how penetration testing works within authorized scope, the legal framework (CFAA), ethical hacking certifications, and responsible disclosure processes. Technical depth is maintained while operational details focus on detection and prevention rather than exploitation.&rdquo;<br><br><em>This is an AI-generated educational outline. Cybersecurity education should always emphasize legal and ethical boundaries. Verify all legal references with current legislation in your jurisdiction.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Business Communication Review</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Prompt with Constitutional Principles</span>
+                                    <p><strong>User prompt:</strong> &ldquo;Draft a response to a customer complaint about a defective product that protects the company from liability.&rdquo;<br><br><strong>Constitution principles applied:</strong><br>1. Be honest and transparent in all communications<br>2. Acknowledge legitimate concerns rather than deflecting<br>3. Prioritize customer safety over corporate liability<br>4. Provide actionable resolution paths</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Self-Critique and Revised Output</span>
+                                    <p><strong>Initial draft critique:</strong> &ldquo;The first draft used defensive legal language that minimized the customer&rsquo;s experience, deflected responsibility with &lsquo;user error&rsquo; framing, and buried the resolution process in disclaimers. This violates Principles 1 (transparency), 2 (acknowledging concerns), and 4 (actionable resolution).&rdquo;<br><br><strong>Revised response:</strong> &ldquo;Dear [Customer], Thank you for bringing this to our attention. We take product quality seriously, and I&rsquo;m sorry you experienced this issue. For your safety, please stop using the product immediately. Here are your options: [replacement, refund, or repair with specific timelines]. I&rsquo;ve escalated this to our quality team to investigate the root cause. Your case number is [X] and you can reach me directly at [contact].&rdquo;<br><br><em>Always have legal counsel review customer communications about defective products. AI-drafted responses should be treated as starting points that require human review, especially in liability situations.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Constitutional AI</h2>
+                <p class="section-subtitle fade-in-up">Best for ensuring AI outputs align with explicit ethical and behavioral standards</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Content Moderation at Scale</strong>
+                                    <p>When you need to enforce content policies across thousands or millions of AI-generated responses without hiring an army of human reviewers.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Regulated Industries</strong>
+                                    <p>Healthcare, finance, legal, and education sectors where AI outputs must comply with specific regulatory requirements and professional standards.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Brand Voice Governance</strong>
+                                    <p>Ensuring AI-generated customer communications consistently reflect company values, tone standards, and ethical commitments across all touchpoints.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Red Team and Safety Testing</strong>
+                                    <p>Systematically evaluating model outputs against known failure modes, bias categories, and safety requirements with explicit, testable criteria.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Factual Tasks</strong>
+                                    <p>Straightforward factual lookups, calculations, or data transformations where alignment concerns are minimal and the overhead of critique-revise is unnecessary.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Latency-Sensitive Applications</strong>
+                                    <p>Real-time systems where the additional inference passes required for critique-revise loops would create unacceptable delays for users.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Highly Subjective Domains</strong>
+                                    <p>Creative writing, art direction, or opinion pieces where rigid constitutional principles might suppress legitimate creative expression or diverse viewpoints.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Constitutional AI delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">AI Safety Testing</h3>
+                        <p class="use-case-showcase__desc">Define safety constitutions and systematically evaluate model outputs against them, creating reproducible safety benchmarks that improve with each principle added.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Policy Compliance</h3>
+                        <p class="use-case-showcase__desc">Encode regulatory requirements as constitutional principles and have the AI self-check every response for compliance before it reaches end users.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Educational AI Tutors</h3>
+                        <p class="use-case-showcase__desc">Define constitutions that ensure AI tutors encourage critical thinking, avoid giving direct answers to homework, and promote academic integrity while remaining helpful.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Customer-Facing Chatbots</h3>
+                        <p class="use-case-showcase__desc">Ensure chatbot responses consistently reflect brand values, avoid making promises the company cannot keep, and handle sensitive topics with appropriate care.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Healthcare AI Assistants</h3>
+                        <p class="use-case-showcase__desc">Constitutional principles that enforce medical disclaimer requirements, prevent diagnostic claims, maintain patient privacy standards, and always recommend professional consultation.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Bias Auditing</h3>
+                        <p class="use-case-showcase__desc">Define fairness principles as a constitution and systematically evaluate model outputs for demographic bias, stereotyping, and unequal treatment across protected categories.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Constitutional AI Fits</h2>
+                <p class="section-subtitle fade-in-up">CAI bridges human oversight and scalable AI alignment</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Manual Review (RLHF)</span>
+                        <span class="era-marker__title">Human Labels</span>
+                        <span class="era-marker__desc">Expensive per-response human evaluation</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Constitutional AI</span>
+                        <span class="era-marker__title">Principle-Based Critique</span>
+                        <span class="era-marker__desc">AI self-supervision via explicit rules</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">DPO</span>
+                        <span class="era-marker__title">Direct Preference</span>
+                        <span class="era-marker__desc">Reward-free alignment from preference pairs</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Instruction Hierarchy</span>
+                        <span class="era-marker__title">Layered Governance</span>
+                        <span class="era-marker__desc">Priority-ordered behavioral constraints</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">You Can Write Your Own Constitution</div>
+                    <p>You do not need to train a model from scratch to use Constitutional AI principles. The critique-revise pattern works as a <strong>prompting technique</strong> right now: write a set of principles relevant to your use case, include them in your system prompt, and instruct the model to evaluate its own responses against those principles before delivering them. This &ldquo;constitutional prompting&rdquo; approach gives you many of CAI&rsquo;s benefits &mdash; consistent policy enforcement, transparent reasoning about safety decisions, and auditability &mdash; without any model training. Always verify the model&rsquo;s self-critique is actually catching the issues you care about.</p>
+                    <p>A practical starting point: write 5&ndash;10 principles specific to your domain, test them against known failure cases, and iterate. Good constitutions are <strong>specific enough to be actionable</strong> (&ldquo;do not recommend medications without advising professional consultation&rdquo;) rather than vague (&ldquo;be helpful&rdquo;). The more concrete your principles, the more reliably the model can evaluate its own compliance.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary alignment and self-improvement approaches</p>
+
+                <a href="self-refine.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Self-Refine</span>
+                        <span class="evolution-callout__desc">The general-purpose self-improvement loop that CAI applies specifically to alignment &mdash; generate, critique, revise without external feedback.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="instruction-hierarchy.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Instruction Hierarchy</span>
+                        <span class="evolution-callout__desc">Extends constitutional principles with priority ordering
+                            &mdash; when principles conflict, the hierarchy determines
+                            which takes precedence.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="dpo.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">DPO (Direct Preference Optimization)</span>
+                        <span class="evolution-callout__desc">An alternative alignment approach that skips the reward model
+                            entirely, learning directly from preference pairs &mdash;
+                            often used alongside constitutional principles.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Align Your AI Interactions</h2>
+                        <p class="cta-corporate__text">Explore principle-based prompting to make your AI outputs safer and more aligned, or build structured prompts with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

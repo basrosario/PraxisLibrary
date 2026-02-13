@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Symbolic Chain-of-Thought: Integrate formal logic rules and symbolic expressions with natural language reasoning for verifiable, rigorous chain-of-thought inference.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/symbolic-cot.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Symbolic Chain-of-Thought (SymbCoT) - Praxis">
+    <meta property="og:description" content="Symbolic Chain-of-Thought: Integrate formal logic rules and symbolic expressions with natural language reasoning for verifiable, rigorous chain-of-thought inference.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/symbolic-cot.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Symbolic Chain-of-Thought (SymbCoT) - Praxis">
+    <meta name="twitter:description" content="Symbolic Chain-of-Thought: Integrate formal logic rules and symbolic expressions with natural language reasoning for verifiable, rigorous chain-of-thought inference.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Symbolic Chain-of-Thought (SymbCoT)",
+      "name": "Symbolic Chain-of-Thought (SymbCoT)",
+      "description": "Symbolic Chain-of-Thought: Integrate formal logic rules and symbolic expressions with natural language reasoning for verifiable, rigorous chain-of-thought inference.",
+      "url": "https://praxislibrary.com/learn/symbolic-cot.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Symbolic Chain-of-Thought (SymbCoT)"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Symbolic Chain-of-Thought (SymbCoT) - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Symbolic CoT</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Reasoning &amp; CoT Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Symbolic Chain-of-Thought (SymbCoT)</h1>
+                <p class="page-subtitle fade-in">What if reasoning chains could be both human-readable AND formally verifiable? Symbolic CoT combines natural language explanations with symbolic logic expressions &mdash; first-order logic, propositional calculus, and formal rules &mdash; creating reasoning chains that can be checked by both humans and automated verifiers.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2023</span>
+                        <p><strong>Introduced:</strong> Symbolic Chain-of-Thought (SymbCoT) was introduced in 2023, addressing a fundamental limitation of standard CoT: while step-by-step reasoning improves accuracy, there is no way to formally verify that each step is logically valid. SymbCoT solves this by augmenting natural language reasoning with parallel symbolic expressions using formal logic (propositional logic, first-order logic). Each reasoning step has both a natural language explanation and a formal symbolic representation, enabling automated verification of logical validity.</p>
+                        <p><strong>Modern LLM Status:</strong> SymbCoT represents the cutting edge of verifiable reasoning. As AI is deployed in high-stakes domains (legal, medical, financial), the ability to formally verify reasoning chains becomes critical. Modern frontier models can generate symbolic logic alongside natural language when prompted, making SymbCoT increasingly practical. The technique is particularly relevant for compliance, audit, and any context where reasoning must withstand formal scrutiny.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Reasoning You Can Prove</h2>
+                        <p class="split-section__text">Standard Chain-of-Thought produces reasoning in natural language that looks correct but may contain hidden logical fallacies. SymbCoT addresses this by requiring each reasoning step to be expressed in two forms simultaneously: natural language (for human understanding) and formal symbolic logic (for verification).</p>
+                        <p class="split-section__text"><strong>If you say &ldquo;All dogs are mammals, and Rex is a dog, therefore Rex is a mammal,&rdquo;</strong> SymbCoT also writes: &ldquo;&forall;x(Dog(x) &rarr; Mammal(x)), Dog(Rex) &vdash; Mammal(Rex).&rdquo; The symbolic form can be checked mechanically &mdash; if the logic is invalid, the formal expression will reveal it even when the natural language sounds convincing.</p>
+                        <p class="split-section__text">Think of it like double-entry bookkeeping: every transaction is recorded twice, in two different formats. If the books do not balance, you know there is an error &mdash; even if each individual entry looks reasonable on its own.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Dual Representation Catches Errors</span>
+                                <p>Natural language reasoning can contain subtle fallacies that are hard to spot: affirming the consequent, equivocation, undistributed middle. These errors often sound reasonable in prose. But when the same reasoning is expressed in formal logic, invalid inferences become mechanically detectable. SymbCoT&rsquo;s dual representation means every reasoning step must pass both a &ldquo;does this sound right?&rdquo; test AND a &ldquo;is this formally valid?&rdquo; test.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Symbolic CoT Process</h2>
+                <p class="section-subtitle fade-in-up">Five stages from premises to verified conclusion</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Formalize the Premises</h3>
+                            <p class="element-timeline__text">Convert the problem&rsquo;s given information into formal logical expressions (first-order logic, propositional logic, or set notation) alongside their natural language forms. Each premise gets a dual representation.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>NL: &ldquo;All employees who passed the certification are eligible for promotion.&rdquo;<br>Symbolic: &forall;x(Certified(x) &rarr; Eligible(x))</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Natural Language Reasoning Step</h3>
+                            <p class="element-timeline__text">Generate a reasoning step in natural language, explaining the inference in human-readable terms. This step should be clear enough for any reader to understand the logic being applied.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;John passed the certification. Since all certified employees are eligible for promotion, John must be eligible for promotion.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Parallel Symbolic Translation</h3>
+                            <p class="element-timeline__text">For each natural language step, produce the equivalent formal symbolic expression. The symbolic form must logically correspond to the natural language claim. Any mismatch between the two reveals a potential error.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Certified(John) &and; (&forall;x(Certified(x) &rarr; Eligible(x))) &vdash; Eligible(John) [Modus Ponens]</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Validity Check</h3>
+                            <p class="element-timeline__text">Verify that each symbolic expression follows validly from the previous expressions using formal rules of inference (modus ponens, universal instantiation, etc.). If any step is invalid, the chain is flagged.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Verification: Universal instantiation on &forall;x(Certified(x) &rarr; Eligible(x)) with x=John yields Certified(John) &rarr; Eligible(John). Combined with Certified(John), modus ponens gives Eligible(John). &check; Valid.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">5</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Synthesize Verified Conclusion</h3>
+                            <p class="element-timeline__text">Combine the verified symbolic chain with the natural language explanation. The final answer is supported by both human-readable reasoning and formally valid logic, creating a conclusion that is both understandable and provably correct.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Conclusion:</strong> John is eligible for promotion. This follows by modus ponens from the premises that John is certified and all certified employees are eligible. Verification: Valid.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why formal verification catches errors that natural language hides</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Standard CoT</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Think step by step: If all employees who passed the certification are eligible for promotion, and John passed the certification, is John eligible for promotion?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Step 1: All certified employees are eligible. Step 2: John is certified. Step 3: Therefore, John is eligible for promotion.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Correct but logic is implicit &mdash; what if the premises were trickier?</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Symbolic CoT</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Dual Representation</span>
+                                <p><strong>NL:</strong> &ldquo;All certified employees are eligible.&rdquo;<br>
+                                <strong>Symbolic:</strong> &forall;x(Certified(x) &rarr; Eligible(x))<br><br>
+                                <strong>NL:</strong> &ldquo;John passed certification.&rdquo;<br>
+                                <strong>Symbolic:</strong> Certified(John)<br><br>
+                                <strong>NL:</strong> &ldquo;Therefore John is eligible.&rdquo;<br>
+                                <strong>Symbolic:</strong> Certified(John) &and; (&forall;x(Certified(x) &rarr; Eligible(x))) &vdash; Eligible(John) [Modus Ponens]</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Verification</span>
+                                <p>Valid &mdash; modus ponens correctly applied. Universal instantiation with x=John yields the conditional, which combines with the ground fact to derive the conclusion.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Every step verified with formal logic rules &mdash; invalid reasoning would be caught</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Symbolic CoT in Action</h2>
+                <p class="section-subtitle fade-in-up">See how formal logic verification strengthens reasoning chains</p>
+
+                <div class="accordion fade-in-up" id="symbcot-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Legal Contract Analysis</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Scenario</span>
+                                    <p>&ldquo;A contract states: (1) If a vendor fails to deliver within 30 days, the buyer may cancel. (2) If the buyer cancels, the vendor must refund all payments. (3) Vendor X delivered on day 45. Has the buyer earned the right to a refund?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Symbolic CoT Solution</span>
+                                    <p><strong>Formalization:</strong><br>
+                                    P1: &forall;v(LateDelivery(v) &rarr; BuyerCanCancel(v))<br>
+                                    P2: &forall;v(BuyerCancels(v) &rarr; MustRefund(v))<br>
+                                    P3: Delivered(X, day45) &and; (day45 &gt; day30) &rarr; LateDelivery(X)<br><br>
+                                    <strong>Step 1 (NL):</strong> Vendor X delivered on day 45, which exceeds the 30-day window.<br>
+                                    <strong>Step 1 (Symbolic):</strong> Delivered(X, 45) &and; (45 &gt; 30) &vdash; LateDelivery(X) &check;<br><br>
+                                    <strong>Step 2 (NL):</strong> Since delivery is late, the buyer may cancel.<br>
+                                    <strong>Step 2 (Symbolic):</strong> LateDelivery(X) &and; P1 &vdash; BuyerCanCancel(X) [Modus Ponens] &check;<br><br>
+                                    <strong>Step 3 (NL):</strong> If the buyer exercises cancellation, refund is required.<br>
+                                    <strong>Step 3 (Symbolic):</strong> BuyerCancels(X) &and; P2 &vdash; MustRefund(X) [Modus Ponens] &check;<br><br>
+                                    <strong>Conclusion:</strong> The buyer has earned the right to cancel and, upon cancellation, receive a full refund. Note: the right to a refund is contingent on the buyer actually exercising cancellation &mdash; it is not automatic.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Medical Protocol Compliance</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Scenario</span>
+                                    <p>&ldquo;Protocol requires: (1) Patients with allergy to penicillin must not receive amoxicillin. (2) Amoxicillin is a penicillin-class antibiotic. (3) Patient has documented penicillin allergy. Is the proposed amoxicillin prescription safe?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Symbolic CoT Solution</span>
+                                    <p><strong>Formalization:</strong><br>
+                                    P1: &forall;p(PenicillinAllergy(p) &rarr; &not;Safe(p, PenicillinClass))<br>
+                                    P2: PenicillinClass(Amoxicillin)<br>
+                                    P3: PenicillinAllergy(Patient)<br><br>
+                                    <strong>Step 1 (NL):</strong> Amoxicillin belongs to the penicillin class of antibiotics.<br>
+                                    <strong>Step 1 (Symbolic):</strong> PenicillinClass(Amoxicillin) &check; [Given P2]<br><br>
+                                    <strong>Step 2 (NL):</strong> The patient has a documented penicillin allergy, so no penicillin-class drug is safe.<br>
+                                    <strong>Step 2 (Symbolic):</strong> PenicillinAllergy(Patient) &and; P1 &vdash; &not;Safe(Patient, PenicillinClass) [MP] &check;<br><br>
+                                    <strong>Step 3 (NL):</strong> Since amoxicillin is penicillin-class and penicillin-class is unsafe for this patient, amoxicillin is unsafe.<br>
+                                    <strong>Step 3 (Symbolic):</strong> &not;Safe(Patient, PenicillinClass) &and; PenicillinClass(Amoxicillin) &vdash; &not;Safe(Patient, Amoxicillin) &check;<br><br>
+                                    <strong>Conclusion:</strong> The amoxicillin prescription is NOT safe. Formal verification confirms the contraindication through valid logical inference from the allergy and drug classification premises.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Software Requirements Verification</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Scenario</span>
+                                    <p>&ldquo;Requirements: (1) All API endpoints must require authentication. (2) Authenticated requests must be rate-limited. (3) The /health endpoint does not require authentication. Does the /health endpoint need rate limiting?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Symbolic CoT Solution</span>
+                                    <p><strong>Formalization:</strong><br>
+                                    P1: &forall;e(APIEndpoint(e) &rarr; RequiresAuth(e)) [general requirement]<br>
+                                    P2: &forall;e(RequiresAuth(e) &rarr; RateLimited(e))<br>
+                                    P3: &not;RequiresAuth(/health) [exception]<br><br>
+                                    <strong>Step 1 (NL):</strong> P1 says all API endpoints require auth, but P3 explicitly exempts /health. P3 overrides P1 for /health.<br>
+                                    <strong>Step 1 (Symbolic):</strong> P1 yields RequiresAuth(/health), but P3 states &not;RequiresAuth(/health). Contradiction resolved: P3 is a specific exception to P1. &check;<br><br>
+                                    <strong>Step 2 (NL):</strong> Rate limiting (P2) applies only to authenticated requests. Since /health is not authenticated, P2 does not apply.<br>
+                                    <strong>Step 2 (Symbolic):</strong> &not;RequiresAuth(/health) &and; (RequiresAuth(/health) &rarr; RateLimited(/health)) &vdash; Cannot derive RateLimited(/health). [Modus ponens requires true antecedent] &check;<br><br>
+                                    <strong>Conclusion:</strong> Based on the stated requirements, /health does NOT require rate limiting because rate limiting is specified as a consequence of authentication, which /health is exempt from. However, this may be a requirements gap &mdash; consider whether rate limiting should be independently required.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Symbolic CoT</h2>
+                <p class="section-subtitle fade-in-up">Best for high-stakes reasoning that demands formal verification</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Stakes Reasoning Requiring Formal Verification</strong>
+                                    <p>When errors carry significant consequences &mdash; legal decisions, safety-critical systems, financial regulations &mdash; and reasoning must be provably correct.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Legal and Regulatory Compliance Analysis</strong>
+                                    <p>Formalizing regulations as logical propositions and verifying whether specific scenarios satisfy all compliance requirements.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Mathematical Proofs and Formal Arguments</strong>
+                                    <p>Constructing and verifying logical proofs where each inference step must be justified by a named rule of inference.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Audit Trails Where Reasoning Must Be Defensible</strong>
+                                    <p>Creating formal records of decision logic that can be reviewed, challenged, and verified by third parties.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Casual Reasoning Where Formal Rigor Isn&rsquo;t Needed</strong>
+                                    <p>Everyday questions, brainstorming, or exploratory reasoning where the overhead of formal logic outweighs the benefit.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative Tasks</strong>
+                                    <p>Writing, art direction, ideation, or any task where logical validity is not the primary concern &mdash; creativity does not follow formal inference rules.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Domains Without Clear Logical Structure</strong>
+                                    <p>Subjective evaluations, aesthetic judgments, or emotional reasoning where premises cannot be cleanly formalized into propositional or predicate logic.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Symbolic CoT delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Legal Reasoning Verification</h3>
+                        <p class="use-case-showcase__desc">Formalize legal statutes and case facts as logical propositions, then verify whether conclusions follow validly from the applicable law.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Compliance Auditing</h3>
+                        <p class="use-case-showcase__desc">Express regulatory requirements as formal rules and systematically verify that organizational practices satisfy every constraint.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                                <line x1="14" y1="4" x2="10" y2="20"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Mathematical Proof Checking</h3>
+                        <p class="use-case-showcase__desc">Construct step-by-step mathematical proofs with formal justification for each inference, making proofs mechanically verifiable.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Contract Analysis</h3>
+                        <p class="use-case-showcase__desc">Translate contract clauses into formal logical statements and verify whether specific actions constitute breach, compliance, or trigger conditional obligations.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Insurance Claim Adjudication</h3>
+                        <p class="use-case-showcase__desc">Formalize policy terms and claim circumstances as logical propositions, then derive whether coverage applies through verified inference chains.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Formal Specification Validation</h3>
+                        <p class="use-case-showcase__desc">Verify that software or system specifications are internally consistent and that implementation claims logically satisfy stated requirements.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Symbolic CoT Fits</h2>
+                <p class="section-subtitle fade-in-up">SymbCoT bridges informal reasoning and formal verification</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Informal Steps</span>
+                        <span class="era-marker__desc">Reasoning as continuous prose</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Faithful CoT</span>
+                        <span class="era-marker__title">Grounded Steps</span>
+                        <span class="era-marker__desc">Steps tied to verifiable sources</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Symbolic CoT</span>
+                        <span class="era-marker__title">Formally Verified Steps</span>
+                        <span class="era-marker__desc">Logic rules validate each inference</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Maieutic Prompting</span>
+                        <span class="era-marker__title">Explanation Trees</span>
+                        <span class="era-marker__desc">Satisfiability across belief networks</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Start with Propositional Logic</div>
+                    <p>If first-order logic feels too complex, start with propositional logic &mdash; simple P&rarr;Q statements with AND (&and;), OR (&or;), NOT (&not;), and IMPLIES (&rarr;). Even this basic formalization catches many common reasoning errors. Graduate to first-order logic (with quantifiers &forall; and &exist;) when you need to reason about categories and properties.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary verification techniques</p>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">The natural language reasoning that SymbCoT augments with formal symbolic verification.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="faithful-cot.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Faithful CoT</span>
+                        <span class="evolution-callout__desc">Grounds reasoning in verifiable steps; SymbCoT adds formal logic as the verification mechanism.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="structured-cot.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Structured CoT</span>
+                        <span class="evolution-callout__desc">Structures reasoning into organized sections; SymbCoT structures it into formal logic.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Verify Your Reasoning</h2>
+                        <p class="cta-corporate__text">Apply formal symbolic verification to your reasoning chains or explore other advanced techniques.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="index.html" class="btn btn-secondary">All Techniques</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

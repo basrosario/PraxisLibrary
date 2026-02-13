@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chain of Code (CoC): Interweave code execution with LM simulation for reasoning that spans both executable and semantic tasks.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/chain-of-code.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Chain of Code (CoC) - Praxis">
+    <meta property="og:description" content="Chain of Code (CoC): Interweave code execution with LM simulation for reasoning that spans both executable and semantic tasks.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/chain-of-code.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Chain of Code (CoC) - Praxis">
+    <meta name="twitter:description" content="Chain of Code (CoC): Interweave code execution with LM simulation for reasoning that spans both executable and semantic tasks.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Chain of Code (CoC)",
+      "name": "Chain of Code (CoC)",
+      "description": "Chain of Code (CoC): Interweave code execution with LM simulation for reasoning that spans both executable and semantic tasks.",
+      "url": "https://praxislibrary.com/learn/chain-of-code.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Chain of Code (CoC)"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Chain of Code (CoC) - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Chain of Code</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Code Reasoning Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Chain of Code (CoC)</h1>
+                <p class="page-subtitle fade-in">Some reasoning tasks need real computation. Others need language understanding. Chain of Code handles both &mdash; interweaving actual code execution with language model simulation to reason across executable and semantic boundaries in a single unified process.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2023</span>
+                        <p><strong>Introduced:</strong> Chain of Code was published in 2023, extending the Program of Thoughts approach by introducing the &ldquo;LMulator&rdquo; concept. The key innovation is a hybrid execution model: when code is directly executable (arithmetic, data processing, sorting), it runs in a real interpreter. When the task is semantic (sentiment analysis, commonsense reasoning), the language model simulates what the code would return. This interleaving achieved 84% on BIG-Bench Hard, a +12% improvement over standard Chain-of-Thought prompting.</p>
+                        <p><strong>Modern LLM Status:</strong> Chain of Code&rsquo;s hybrid approach &mdash; mixing real code execution with language model simulation &mdash; has become a foundational pattern in 2026. Modern coding assistants routinely interweave executable and non-executable reasoning. The LMulator concept anticipated how modern agents handle tasks that partially require computation and partially require language understanding. Today&rsquo;s AI systems like Claude, GPT-4, and Gemini naturally blend code execution with natural language reasoning in their tool-use capabilities.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Code That Thinks, Language That Computes</h2>
+                        <p class="split-section__text">Traditional code execution fails when reasoning requires common sense or world knowledge. Traditional language reasoning fails when problems require precise computation. Chain of Code bridges this gap by creating a seamless pipeline where the model writes code as its reasoning medium, then selectively executes or simulates each step depending on whether the operation is computable or semantic.</p>
+                        <p class="split-section__text"><strong>The LMulator is the breakthrough.</strong> When the model encounters a line of code that a Python interpreter cannot run &mdash; like <code>is_sarcastic(&quot;Oh great, another meeting&quot;)</code> &mdash; the language model steps in as a simulated interpreter, returning what the function <em>would</em> produce based on its understanding of language. The real interpreter handles arithmetic, sorting, and data manipulation. The LMulator handles meaning, context, and judgment.</p>
+                        <p class="split-section__text">Think of it as a relay race between a calculator and a poet. The calculator handles the numbers; the poet handles the nuance. Together, they solve problems neither could tackle alone.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Hybrid Execution Outperforms Pure Approaches</span>
+                                <p>Pure code execution (Program of Thoughts) breaks down when tasks require semantic understanding &mdash; you cannot write a Python function that genuinely determines if a statement is ironic. Pure language reasoning (Chain-of-Thought) introduces arithmetic errors and logical inconsistencies. Chain of Code&rsquo;s interleaving approach routes each sub-problem to the right engine: <strong>computation to the interpreter, meaning to the model</strong>. This selective routing is why CoC achieves +12% over CoT on BIG-Bench Hard.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Chain of Code Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from problem to hybrid-executed solution</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Generate Code as Reasoning</h3>
+                            <p class="element-timeline__text">The model writes code that encodes the full reasoning process &mdash; not just the computable parts, but also semantic operations expressed as function calls. The code serves as a structured reasoning scaffold, making every step explicit and ordered.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Given &ldquo;How many of these items are edible: a rock, an apple, a car tire, bread, a pencil?&rdquo; the model writes code like: <code>items = [&quot;rock&quot;, &quot;apple&quot;, &quot;car tire&quot;, &quot;bread&quot;, &quot;pencil&quot;]; edible = [x for x in items if is_edible(x)]; count = len(edible)</code></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Attempt Real Execution</h3>
+                            <p class="element-timeline__text">The generated code is sent to an actual Python interpreter. Lines that are purely computational &mdash; arithmetic, list operations, string manipulation &mdash; execute normally and return real results. This ensures mathematical precision that language models alone cannot guarantee.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The interpreter executes <code>len(edible)</code> and list comprehension syntax correctly, but hits an error on <code>is_edible(x)</code> because that function is not defined in Python &mdash; it requires world knowledge.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">LMulator Simulates Semantic Steps</h3>
+                            <p class="element-timeline__text">When the interpreter encounters a function it cannot execute &mdash; one that requires semantic understanding &mdash; the language model acts as an &ldquo;LMulator&rdquo; (LM + emulator). It simulates what the function would return based on its knowledge, providing the result as if the code had run successfully.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The LMulator processes <code>is_edible(&quot;rock&quot;)</code> &rarr; <code>False</code>, <code>is_edible(&quot;apple&quot;)</code> &rarr; <code>True</code>, <code>is_edible(&quot;car tire&quot;)</code> &rarr; <code>False</code>, <code>is_edible(&quot;bread&quot;)</code> &rarr; <code>True</code>, <code>is_edible(&quot;pencil&quot;)</code> &rarr; <code>False</code>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Combine Results into Final Answer</h3>
+                            <p class="element-timeline__text">The simulated semantic results are fed back into the code pipeline. The interpreter completes the remaining computation using the LMulator&rsquo;s outputs, producing a final answer that combines the precision of code execution with the understanding of language. Always verify AI-generated results independently.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>With the LMulator results injected, <code>edible = [&quot;apple&quot;, &quot;bread&quot;]</code> and <code>count = len(edible)</code> &rarr; <code>2</code>. Final answer: &ldquo;2 of the 5 items are edible: apple and bread.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why hybrid code-language reasoning outperforms either approach alone</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Chain-of-Thought Only</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>A store has 47 apples. A customer buys 13, another returns 5, and a third buys half of what remains. Also, which of these fruits are tropical: apple, mango, strawberry, papaya? How many tropical fruits multiplied by remaining apples gives what total?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>47 minus 13 is 34, plus 5 is 39, half is about 19. Tropical fruits are mango and papaya, so 2. 2 times 19 is 38. (Note: always verify AI calculations independently.)</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Arithmetic imprecise (&ldquo;about 19&rdquo;), semantic reasoning unstructured</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Chain of Code</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Hybrid Reasoning</span>
+                                <p><strong>Code:</strong> <code>apples = 47 - 13 + 5; remaining = apples // 2</code> &rarr; Interpreter: <code>remaining = 19</code> (exact integer division).<br><strong>Semantic:</strong> <code>is_tropical(&quot;mango&quot;)</code> &rarr; LMulator: <code>True</code>; <code>is_tropical(&quot;papaya&quot;)</code> &rarr; <code>True</code>; <code>is_tropical(&quot;apple&quot;)</code> &rarr; <code>False</code>; <code>is_tropical(&quot;strawberry&quot;)</code> &rarr; <code>False</code>.<br><strong>Code:</strong> <code>total = len(tropical) * remaining</code> &rarr; Interpreter: <code>2 * 19 = 38</code>.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Final Answer</span>
+                                <p>Remaining apples: 19 (exact). Tropical fruits: mango and papaya (2). Total: 2 &times; 19 = 38. Each step computed or simulated with full traceability. Verify these results against your own knowledge before relying on them.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Precise computation, structured semantic reasoning, fully traceable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Chain of Code in Action</h2>
+                <p class="section-subtitle fade-in-up">See how hybrid code-language execution tackles mixed reasoning tasks</p>
+
+                <div class="accordion fade-in-up" id="chain-of-code-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Sorting Items by Abstract Criteria</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task</span>
+                                    <p>&ldquo;Sort these activities by how physically demanding they are: reading a book, running a marathon, cooking dinner, climbing Mount Everest, walking to the mailbox. Then calculate the median index position.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Chain of Code Execution</span>
+                                    <p><strong>Semantic (LMulator):</strong> <code>physical_score(&quot;reading a book&quot;)</code> &rarr; 1, <code>physical_score(&quot;walking to the mailbox&quot;)</code> &rarr; 2, <code>physical_score(&quot;cooking dinner&quot;)</code> &rarr; 3, <code>physical_score(&quot;running a marathon&quot;)</code> &rarr; 4, <code>physical_score(&quot;climbing Mount Everest&quot;)</code> &rarr; 5.<br><br>
+                                    <strong>Code (Interpreter):</strong> <code>sorted_activities = sorted(activities, key=physical_score); median_idx = len(sorted_activities) // 2</code> &rarr; <code>median_idx = 2</code>.<br><br>
+                                    <strong>Final answer:</strong> Sorted order: reading, walking, cooking, marathon, Everest. Median position: index 2 (cooking dinner). <em>Remember to verify AI-generated rankings reflect your own judgment of physical difficulty.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Mixed Arithmetic and Sentiment Analysis</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task</span>
+                                    <p>&ldquo;Given these 5 product reviews, count how many are positive, how many are negative, and calculate the percentage of positive reviews. Reviews: (1) &lsquo;Absolutely love it!&rsquo; (2) &lsquo;Terrible quality, broke on day one.&rsquo; (3) &lsquo;Best purchase this year.&rsquo; (4) &lsquo;Would not recommend to anyone.&rsquo; (5) &lsquo;Solid product, works as advertised.&rsquo;&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Chain of Code Execution</span>
+                                    <p><strong>Semantic (LMulator):</strong> <code>sentiment(&quot;Absolutely love it!&quot;)</code> &rarr; <code>&quot;positive&quot;</code>; <code>sentiment(&quot;Terrible quality, broke on day one.&quot;)</code> &rarr; <code>&quot;negative&quot;</code>; <code>sentiment(&quot;Best purchase this year.&quot;)</code> &rarr; <code>&quot;positive&quot;</code>; <code>sentiment(&quot;Would not recommend to anyone.&quot;)</code> &rarr; <code>&quot;negative&quot;</code>; <code>sentiment(&quot;Solid product, works as advertised.&quot;)</code> &rarr; <code>&quot;positive&quot;</code>.<br><br>
+                                    <strong>Code (Interpreter):</strong> <code>positive = 3; negative = 2; pct = (positive / 5) * 100</code> &rarr; <code>60.0</code>.<br><br>
+                                    <strong>Final answer:</strong> 3 positive reviews, 2 negative reviews, 60% positive rate. <em>Sentiment classification is subjective &mdash; always verify AI sentiment analysis against your own reading of the text.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Data Processing with World Knowledge</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Task</span>
+                                    <p>&ldquo;From this list of cities &mdash; Tokyo, Paris, Sydney, Cairo, Toronto &mdash; identify which are in the Northern Hemisphere, sort them alphabetically, and report the count and sorted list.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Chain of Code Execution</span>
+                                    <p><strong>Semantic (LMulator):</strong> <code>is_northern(&quot;Tokyo&quot;)</code> &rarr; <code>True</code>; <code>is_northern(&quot;Paris&quot;)</code> &rarr; <code>True</code>; <code>is_northern(&quot;Sydney&quot;)</code> &rarr; <code>False</code>; <code>is_northern(&quot;Cairo&quot;)</code> &rarr; <code>True</code>; <code>is_northern(&quot;Toronto&quot;)</code> &rarr; <code>True</code>.<br><br>
+                                    <strong>Code (Interpreter):</strong> <code>northern = [c for c in cities if is_northern(c)]; northern.sort(); count = len(northern)</code> &rarr; <code>[&quot;Cairo&quot;, &quot;Paris&quot;, &quot;Tokyo&quot;, &quot;Toronto&quot;]</code>, <code>count = 4</code>.<br><br>
+                                    <strong>Final answer:</strong> 4 cities in the Northern Hemisphere: Cairo, Paris, Tokyo, Toronto (alphabetical). Sydney is in the Southern Hemisphere. <em>Geographic classifications should be verified against authoritative sources.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Chain of Code</h2>
+                <p class="section-subtitle fade-in-up">Best for tasks that mix computation with semantic understanding</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Mixed Reasoning Tasks</strong>
+                                    <p>Problems that require both precise computation (math, counting, sorting) and semantic judgment (classification, sentiment, common sense) in a single pipeline.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>BIG-Bench Hard Problems</strong>
+                                    <p>Complex benchmark tasks that stump pure CoT &mdash; CoC achieved 84% accuracy on BIG-Bench Hard by combining the strengths of both reasoning modes.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Structured Data with Semantic Filtering</strong>
+                                    <p>When you need to filter, sort, or aggregate data based on criteria that require world knowledge rather than simple value comparisons.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Agent Pipelines</strong>
+                                    <p>Building AI agents that need to decide dynamically whether to execute code or reason linguistically at each step of a multi-step task.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Purely Computational Tasks</strong>
+                                    <p>If the entire problem is executable code (math, data transforms), standard Program of Thoughts or PAL is simpler and sufficient.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Purely Creative Tasks</strong>
+                                    <p>Writing, brainstorming, and open-ended generation tasks that involve no computation &mdash; the code execution layer adds overhead without benefit.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>No Code Execution Environment</strong>
+                                    <p>When you lack access to a code interpreter, CoC loses its primary advantage &mdash; use Chain-of-Thought instead for language-only environments.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Chain of Code delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Document Classification with Stats</h3>
+                        <p class="use-case-showcase__desc">Classify documents by topic using semantic understanding, then compute distribution statistics, percentages, and trends using precise arithmetic &mdash; all in one pass.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Survey Response Analysis</h3>
+                        <p class="use-case-showcase__desc">Parse free-text survey responses for sentiment and themes (semantic), then aggregate counts, compute averages, and generate summary statistics (computational).</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Scientific Data Curation</h3>
+                        <p class="use-case-showcase__desc">Determine which experimental observations are &ldquo;anomalous&rdquo; using domain knowledge (semantic), then apply statistical outlier detection on the remaining valid data (computational).</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">E-Commerce Product Ranking</h3>
+                        <p class="use-case-showcase__desc">Evaluate product descriptions for relevance to a user query (semantic), then score and rank results using weighted algorithms (computational).</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Compliance Checking</h3>
+                        <p class="use-case-showcase__desc">Interpret regulatory requirements in natural language (semantic), then verify structured data records against those requirements using formal logic checks (computational).</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Financial Report Parsing</h3>
+                        <p class="use-case-showcase__desc">Extract qualitative insights from earnings call transcripts (semantic), then combine with numerical financial data for ratio calculations and trend analysis (computational).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Chain of Code Fits</h2>
+                <p class="section-subtitle fade-in-up">CoC unifies the code execution and language reasoning lineages</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Program of Thoughts</span>
+                        <span class="era-marker__title">Code Only</span>
+                        <span class="era-marker__desc">Pure code generation and execution</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">PAL</span>
+                        <span class="era-marker__title">Code + Interpreter</span>
+                        <span class="era-marker__desc">Offload execution to Python</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Chain of Code</span>
+                        <span class="era-marker__title">Hybrid Execution</span>
+                        <span class="era-marker__desc">Code + LMulator for semantic tasks</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Modern Agents</span>
+                        <span class="era-marker__title">Dynamic Tool Use</span>
+                        <span class="era-marker__desc">Seamless code and language blending</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The LMulator Pattern Today</div>
+                    <p>The LMulator concept &mdash; where a language model simulates code execution for operations that require world knowledge &mdash; has evolved into the broader &ldquo;tool use&rdquo; paradigm in modern AI. Today&rsquo;s agents dynamically decide whether to run code, call an API, search the web, or reason linguistically. Chain of Code was one of the first techniques to formalize this selective routing, making it a conceptual ancestor of modern agentic architectures.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore the code reasoning family of techniques</p>
+
+                <a href="program-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Program of Thoughts</span>
+                        <span class="evolution-callout__desc">The code-as-reasoning technique that Chain of Code extends by adding LMulator simulation for non-executable semantic operations.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="pal.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Sibling</span>
+                        <span class="evolution-callout__title">PAL (Program-Aided Language Models)</span>
+                        <span class="evolution-callout__desc">Generates Python programs and executes them via interpreter &mdash; Chain of Code extends this by adding semantic simulation for non-computable steps.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="faithful-cot.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Faithful Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">Ensures reasoning chains are faithful to the evidence by combining natural language with symbolic verification &mdash; a complementary approach to CoC&rsquo;s hybrid execution.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Blend Code and Language Reasoning</h2>
+                        <p class="cta-corporate__text">Try Chain of Code&rsquo;s hybrid approach on your own mixed reasoning tasks or explore more code reasoning techniques.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

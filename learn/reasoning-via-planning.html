@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reasoning via Planning (RAP): Treat LLM reasoning as a planning problem using Monte Carlo Tree Search, with the model serving as both world model and reasoning agent.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/reasoning-via-planning.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Reasoning via Planning (RAP) - Praxis">
+    <meta property="og:description" content="Reasoning via Planning (RAP): Treat LLM reasoning as a planning problem using Monte Carlo Tree Search, with the model serving as both world model and reasoning agent.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/reasoning-via-planning.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Reasoning via Planning (RAP) - Praxis">
+    <meta name="twitter:description" content="Reasoning via Planning (RAP): Treat LLM reasoning as a planning problem using Monte Carlo Tree Search, with the model serving as both world model and reasoning agent.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Reasoning via Planning (RAP)",
+      "name": "Reasoning via Planning (RAP)",
+      "description": "Reasoning via Planning (RAP): Treat LLM reasoning as a planning problem using Monte Carlo Tree Search, with the model serving as both world model and reasoning agent.",
+      "url": "https://praxislibrary.com/learn/reasoning-via-planning.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Reasoning via Planning (RAP)"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Reasoning via Planning (RAP) - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Reasoning via Planning</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Planning Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Reasoning via Planning (RAP)</h1>
+                <p class="page-subtitle fade-in">What if an LLM could think like a chess engine &mdash; exploring multiple reasoning paths, simulating outcomes, and strategically choosing the best route to an answer? RAP treats every reasoning problem as a planning problem, using Monte Carlo Tree Search to guide the model through a structured exploration of possibilities rather than committing to the first chain of thought that comes to mind.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2023</span>
+                        <p><strong>Introduced:</strong> Reasoning via Planning (RAP) was published in 2023 by Hao et al. The technique repurposes the LLM in a dual role: as a <strong>world model</strong> that predicts the consequences of reasoning steps (states), and as a <strong>reasoning agent</strong> that proposes next actions. Combined with Monte Carlo Tree Search (MCTS) &mdash; the same algorithm family behind AlphaGo &mdash; RAP enables strategic exploration of the reasoning space. The model doesn&rsquo;t just follow one chain of thought; it explores multiple paths, backtracks from dead ends, and selects the most promising reasoning trajectory. RAP outperformed standard Chain-of-Thought on math, logic, and commonsense reasoning tasks.</p>
+                        <p><strong>Modern LLM Status:</strong> Reasoning via Planning (RAP) was ahead of its time, combining planning algorithms with LLM reasoning. In 2026, the MCTS-based approach has been adopted by agent frameworks like LATS (Language Agent Tree Search). The core insight &mdash; that <strong>reasoning can be treated as a planning problem with search</strong> &mdash; is now foundational to agentic AI systems. While the computational overhead of full MCTS remains significant, the principle of deliberate, search-guided reasoning has influenced how modern models handle complex multi-step problems internally.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Reasoning as Strategic Search</h2>
+                        <p class="split-section__text">Standard Chain-of-Thought prompting produces a single reasoning path: the model starts at the beginning, thinks step by step, and arrives at an answer. But what if that first path leads to a dead end? What if the model makes an error in step two that corrupts everything downstream? Standard CoT has no mechanism to backtrack, explore alternatives, or compare different reasoning strategies.</p>
+                        <p class="split-section__text"><strong>RAP reframes reasoning as a search problem.</strong> Each reasoning step is a &ldquo;move&rdquo; in a game tree. The LLM acts as the world model (predicting what state results from each move) and as the agent (choosing which move to make). MCTS then orchestrates the search: it explores multiple branches, evaluates their promise through simulated rollouts, and concentrates computational effort on the most promising paths.</p>
+                        <p class="split-section__text">Think of it like a chess grandmaster who doesn&rsquo;t just play the first good-looking move. They mentally explore several candidate moves, simulate the opponent&rsquo;s responses, evaluate resulting positions, and then choose the move with the best expected outcome &mdash; except here, the &ldquo;opponent&rdquo; is the complexity of the problem itself.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">The LLM&rsquo;s Dual Role</span>
+                                <p>RAP&rsquo;s innovation is using the same LLM for two distinct functions simultaneously. As the <strong>world model</strong>, it predicts: &ldquo;If I take this reasoning step, what will the resulting state look like?&rdquo; As the <strong>agent</strong>, it decides: &ldquo;Given the current state, what reasoning step should I try next?&rdquo; This self-play dynamic, guided by MCTS, allows the model to <strong>deliberate</strong> rather than merely generate &mdash; trading speed for substantially better accuracy on hard problems.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The RAP Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from problem to search-optimized solution</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Define the Reasoning Problem as a State Space</h3>
+                            <p class="element-timeline__text">Frame the problem in terms of states (what the model knows at each point) and actions (reasoning steps it can take). The initial state is the problem statement; the goal state is a valid, well-supported answer. Each intermediate state represents the accumulated reasoning so far.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Problem:</strong> &ldquo;A farmer has a wolf, a goat, and a cabbage. He needs to cross a river in a boat that can carry only the farmer and one item. If left alone, the wolf eats the goat, and the goat eats the cabbage. How does the farmer get everything across?&rdquo;<br>
+                                <strong>Initial state:</strong> {wolf, goat, cabbage, farmer} on left bank. <strong>Goal:</strong> All on right bank, nothing eaten.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Generate Candidate Actions (Agent Role)</h3>
+                            <p class="element-timeline__text">At each state, the LLM proposes multiple possible next reasoning steps. Unlike Chain-of-Thought which commits to one path, RAP generates several candidate actions &mdash; different ways to advance the reasoning. The model considers what moves are available given the current state&rsquo;s constraints.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Candidate actions from initial state:</strong><br>
+                                Action A: Take the wolf across first<br>
+                                Action B: Take the goat across first<br>
+                                Action C: Take the cabbage across first<br>
+                                Each action leads to a different state that needs evaluation.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Simulate and Evaluate via MCTS (World Model Role)</h3>
+                            <p class="element-timeline__text">For each candidate action, the LLM predicts the resulting state (world model role). MCTS then simulates rollouts from each resulting state &mdash; continuing the reasoning to see where each path leads. States that lead toward the goal get higher value scores; dead ends get penalized. The search tree is built iteratively, with each simulation updating the value estimates.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Simulation results:</strong><br>
+                                Action A (wolf first) &rarr; goat eats cabbage on left bank &rarr; <strong>Dead end, score: 0</strong><br>
+                                Action B (goat first) &rarr; wolf and cabbage safe on left &rarr; <strong>Promising, score: 0.7</strong><br>
+                                Action C (cabbage first) &rarr; wolf eats goat on left bank &rarr; <strong>Dead end, score: 0</strong><br>
+                                MCTS concentrates further exploration on the Action B branch.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Select the Optimal Reasoning Path</h3>
+                            <p class="element-timeline__text">After sufficient exploration, MCTS selects the action with the highest value at each step, tracing a complete path from initial state to goal. The result is a reasoning chain that has been tested against alternatives &mdash; dead ends were explored and rejected, and the chosen path survived competitive evaluation against other candidates.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Optimal path found:</strong> Take goat across &rarr; Return alone &rarr; Take wolf across &rarr; Bring goat back &rarr; Take cabbage across &rarr; Return alone &rarr; Take goat across. All items arrive safely. This solution was found by eliminating dead-end branches through search, not by hoping the first reasoning attempt was correct. <em>Always verify AI-generated solutions against the problem constraints.</em></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why search-guided reasoning outperforms linear chain-of-thought</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Chain-of-Thought</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Linear Reasoning</span>
+                                <p>&ldquo;Let me think step by step. First, I&rsquo;ll take the wolf across... wait, that leaves the goat with the cabbage. Okay, let me try taking the cabbage first... no, that leaves the wolf with the goat. Let me try the goat... yes, then I&rsquo;ll come back and take the wolf...&rdquo;</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>The model stumbles through trial-and-error within a single generation pass. It may find the answer, or it may get confused mid-chain and produce an incorrect solution that it cannot backtrack from.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Linear, no backtracking, errors compound through the chain</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">RAP with MCTS</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Search-Guided Reasoning</span>
+                                <p>MCTS explores three branches simultaneously: wolf-first (dead end detected in 1 step), cabbage-first (dead end detected in 1 step), goat-first (promising &mdash; expand further). The search concentrates on the goat-first branch, exploring sub-branches for the second move, pruning failures, until a complete valid path emerges.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Result</span>
+                                <p>Systematic exploration finds the optimal 7-step solution. Dead ends are detected and abandoned early. The final reasoning path is selected from a tree of evaluated alternatives, not generated in a single pass.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Exploratory, self-correcting, provably optimal among explored paths</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">RAP in Action</h2>
+                <p class="section-subtitle fade-in-up">See how search-guided reasoning tackles problems that stump linear approaches</p>
+
+                <div class="accordion fade-in-up" id="rap-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Multi-Step Math Problem</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;A store sells notebooks for $4 each and pens for $2 each. Maria bought some notebooks and pens, spending exactly $26. She bought more pens than notebooks. How many of each did she buy?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">RAP Search Process</span>
+                                    <p><strong>Branch 1:</strong> Try 1 notebook ($4) + remaining $22 in pens (11 pens). Check: 11 &gt; 1? Yes. Valid solution: (1, 11).<br><br>
+                                    <strong>Branch 2:</strong> Try 2 notebooks ($8) + remaining $18 in pens (9 pens). Check: 9 &gt; 2? Yes. Valid solution: (2, 9).<br><br>
+                                    <strong>Branch 3:</strong> Try 3 notebooks ($12) + remaining $14 in pens (7 pens). Check: 7 &gt; 3? Yes. Valid solution: (3, 7).<br><br>
+                                    <strong>Branch 4:</strong> Try 4 notebooks ($16) + remaining $10 in pens (5 pens). Check: 5 &gt; 4? Yes. Valid solution: (4, 5).<br><br>
+                                    <strong>Branch 5:</strong> Try 5 notebooks ($20) + remaining $6 in pens (3 pens). Check: 3 &gt; 5? No. Invalid &mdash; prune.<br><br>
+                                    <strong>RAP result:</strong> Four valid solutions exist. Unlike CoT which might stop at the first one found, RAP&rsquo;s search reveals the complete solution space. If the problem requires a unique answer, the ambiguity itself is valuable information. <em>Always verify mathematical solutions by substituting back into the original constraints.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Commonsense Reasoning Challenge</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;You need to move a grand piano from a second-floor apartment to a ground-floor apartment across the street. You have two professional movers, a moving truck, furniture blankets, and a dolly. What is the safest and most efficient approach?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">RAP Search Process</span>
+                                    <p><strong>Branch A &mdash; Stairs approach:</strong> Wrap piano in blankets &rarr; Tilt onto dolly &rarr; Navigate down stairwell &rarr; <strong>State evaluation:</strong> High risk (tight turns, weight on stairs), possible damage. Score: 0.4<br><br>
+                                    <strong>Branch B &mdash; Window/crane approach:</strong> Remove window frame &rarr; Rig crane/hoist to lower piano &rarr; <strong>State evaluation:</strong> Requires equipment not listed (crane). Infeasible with given resources. Score: 0.1<br><br>
+                                    <strong>Branch C &mdash; Disassemble approach:</strong> Check if piano has removable legs/lid &rarr; <strong>State evaluation:</strong> Grand piano legs are removable, significantly reducing dimensions. Score: 0.8<br><br>
+                                    <strong>Expanding Branch C (highest score):</strong> Remove legs and wrap them separately &rarr; Wrap piano body in blankets &rarr; Two movers carry body down stairs (lighter, more compact) &rarr; Load onto dolly at ground level &rarr; Roll to truck &rarr; Drive across street &rarr; Reverse process at destination.<br><br>
+                                    <strong>RAP result:</strong> Branch C selected as optimal. The search identified that partial disassembly (removable legs) transforms the problem from extremely difficult to manageable with the given resources. <em>For actual piano moving, always consult professional movers who specialize in piano transport.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Logical Deduction Puzzle</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;Three friends &mdash; Alice, Bob, and Carol &mdash; each have a different pet (cat, dog, fish) and a different favorite color (red, blue, green). Alice doesn&rsquo;t like red. The person with the cat likes blue. Bob doesn&rsquo;t have a fish. Carol likes green. Who has which pet and which color?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">RAP Search Process</span>
+                                    <p><strong>Constraint propagation (state initialization):</strong><br>
+                                    Clue 4: Carol = green. Remaining colors: {red, blue} for {Alice, Bob}.<br>
+                                    Clue 1: Alice &ne; red. Therefore Alice = blue, Bob = red.<br><br>
+                                    <strong>Branch from color assignments:</strong><br>
+                                    Clue 2: Cat owner = blue = Alice. Therefore Alice has the cat.<br>
+                                    Clue 3: Bob &ne; fish. Remaining pets: {dog, fish} for {Bob, Carol}. Bob = dog, Carol = fish.<br><br>
+                                    <strong>Verification rollout:</strong> Alice (cat, blue), Bob (dog, red), Carol (fish, green). Check all constraints: Alice not red (pass), cat owner is blue/Alice (pass), Bob no fish (pass), Carol green (pass). All constraints satisfied.<br><br>
+                                    <strong>RAP result:</strong> The search confirmed a unique solution with no backtracking needed &mdash; constraint propagation from the color assignments resolved everything. In harder puzzles with ambiguous early choices, MCTS would explore multiple assignment branches before finding the valid one. <em>Always verify logical deductions by checking all original constraints against the final answer.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use RAP</h2>
+                <p class="section-subtitle fade-in-up">Best for complex problems where exploration and backtracking improve outcomes</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Constraint Satisfaction Problems</strong>
+                                    <p>Logic puzzles, scheduling, and planning problems where wrong early choices lead to dead ends that require backtracking to resolve.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Mathematical Reasoning</strong>
+                                    <p>Multi-step math problems where different solution strategies exist &mdash; RAP can explore algebraic, geometric, and numerical approaches in parallel.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Strategic Decision-Making</strong>
+                                    <p>Problems where the best immediate action depends on looking several steps ahead &mdash; like game playing, resource allocation, or negotiation strategy.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Agentic AI Workflows</strong>
+                                    <p>Building AI agents that need to plan sequences of actions in environments with uncertain outcomes &mdash; RAP provides the deliberation framework.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple, Linear Tasks</strong>
+                                    <p>Tasks that follow a straightforward sequence with no branching &mdash; summarization, translation, or single-step Q&amp;A don&rsquo;t benefit from search overhead.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Latency-Sensitive Applications</strong>
+                                    <p>MCTS requires many LLM calls per problem (one per simulation rollout) &mdash; this is too slow for real-time interactions and significantly multiplies compute costs.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Open-Ended Creative Tasks</strong>
+                                    <p>When there is no clear &ldquo;correct&rdquo; solution to search for &mdash; creative writing, brainstorming, and opinion tasks lack the evaluation function MCTS needs to guide the search.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where RAP delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Mathematical Problem Solving</h3>
+                        <p class="use-case-showcase__desc">Explore multiple solution strategies for complex math problems, systematically pruning approaches that hit dead ends and concentrating effort on promising paths.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Code Generation and Debugging</h3>
+                        <p class="use-case-showcase__desc">Treat program synthesis as planning &mdash; explore different algorithmic approaches, test intermediate states against expected outputs, and backtrack from bugs.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Scientific Hypothesis Testing</h3>
+                        <p class="use-case-showcase__desc">Explore multiple hypotheses in parallel, simulating the evidence each would predict, and concentrating investigation on the most promising explanations.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Multi-Turn Dialogue Planning</h3>
+                        <p class="use-case-showcase__desc">Plan conversation strategies by simulating how different opening moves lead to different dialogue trajectories, selecting the approach most likely to achieve the communication goal.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Red Team Analysis</h3>
+                        <p class="use-case-showcase__desc">Systematically explore attack vectors by treating adversarial reasoning as a search problem &mdash; what can go wrong, in what sequence, with what probability.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Resource Scheduling</h3>
+                        <p class="use-case-showcase__desc">Optimize scheduling and allocation problems where dependencies create complex constraint networks that benefit from look-ahead search to avoid bottlenecks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where RAP Fits</h2>
+                <p class="section-subtitle fade-in-up">RAP bridges simple reasoning chains and full agentic planning systems</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Linear Reasoning</span>
+                        <span class="era-marker__desc">Single-path step-by-step</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Tree of Thought</span>
+                        <span class="era-marker__title">Branching Search</span>
+                        <span class="era-marker__desc">Multiple reasoning paths with BFS/DFS</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">RAP</span>
+                        <span class="era-marker__title">MCTS-Guided Planning</span>
+                        <span class="era-marker__desc">Strategic search with world model</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">LATS</span>
+                        <span class="era-marker__title">Agent Tree Search</span>
+                        <span class="era-marker__desc">MCTS for tool-using agents</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">From Reasoning to Agency</div>
+                    <p>RAP demonstrated that the same search algorithms powering game-playing AI (like AlphaGo&rsquo;s MCTS) can be applied to language reasoning. This insight opened the door to a new generation of agentic systems. LATS (Language Agent Tree Search) extends RAP&rsquo;s approach to agents that interact with external tools and environments. Everything of Thoughts (XoT) pushes further by pre-training the search policy. If you&rsquo;re building AI agents that need to plan and reason, RAP&rsquo;s architecture is the conceptual foundation.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore the planning and search reasoning ecosystem</p>
+
+                <a href="tree-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Tree of Thought</span>
+                        <span class="evolution-callout__desc">The branching reasoning framework that introduced search over thought paths &mdash; RAP enhances this with MCTS for more strategic exploration and the world model concept.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="lats.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">LATS (Language Agent Tree Search)</span>
+                        <span class="evolution-callout__desc">Extends RAP&rsquo;s MCTS approach to agents that interact with external tools and environments, combining planning with real-world action execution.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="everything-of-thoughts.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Everything of Thoughts (XoT)</span>
+                        <span class="evolution-callout__desc">Goes beyond RAP by pre-training the search policy with reinforcement learning, reducing the computational cost of MCTS while maintaining its exploratory benefits.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Plan Your Reasoning Strategy</h2>
+                        <p class="cta-corporate__text">Explore search-guided reasoning techniques or build structured prompts with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../tools/matcher.html" class="btn btn-secondary">Technique Finder</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

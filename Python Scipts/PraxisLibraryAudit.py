@@ -780,7 +780,7 @@ class BrokenLinksChecker(AuditChecker):
                 for file_path, line_num in url_map[url]:
                     self.add(Severity.INFO, file_path, line_num,
                              f"Verified (bot-blocked domain): {url}",
-                             suggestion=f"Domain '{domain}' blocks bots — verified safe by human oversight")
+                             suggestion=f"Domain '{domain}' blocks bots — bot-blocked domain, requires human verification")
                 continue
             checkable[url] = url_map[url]
 
@@ -905,6 +905,15 @@ class RelevancyChecker(AuditChecker):
                 has_placeholder = RE_PLACEHOLDER.search(line)
                 has_placeholder_word = (RE_PLACEHOLDER_WORD.search(line) and
                                         'placeholder=' not in line.lower())
+                # Skip false positives in learn/ pages:
+                # - "placeholder" is a legitimate technique term (Chain of Abstraction, etc.)
+                # - "[TBD]" in square brackets is intentional in prompt examples
+                if has_placeholder and rel_path.startswith('learn'):
+                    # Only flag if NOT inside square brackets (template markers in examples)
+                    clean = re.sub(r'\[.*?\]', '', line)
+                    has_placeholder = RE_PLACEHOLDER.search(clean)
+                if has_placeholder_word and rel_path.startswith('learn'):
+                    has_placeholder_word = False  # "placeholder" is valid technique terminology
                 if has_placeholder or has_placeholder_word:
                     self.add(Severity.WARNING, rel_path, i,
                              "Placeholder content detected",
@@ -1553,7 +1562,7 @@ CITATION_FRESHNESS_CUTOFF = 2024  # Minimum acceptable year
 # Used by both Category 3 (Broken Links) and Category 8 (Citation Accuracy).
 # All URLs manually verified in browser before adding here.
 BOT_BLOCKED_ALLOWLIST = {
-    # All domains below have been individually verified by human oversight.
+    # All domains below are known to block automated bot requests.
     # A domain is ONLY added here after manual browser verification confirms
     # the link is live, safe, and functional. Bot-blocking prevents automated
     # HTTP checks, so these are maintained through human review.
@@ -1813,7 +1822,7 @@ class CitationChecker(AuditChecker):
                     anchor = self._clean_anchor(raw_anchor)
                     self.add(Severity.INFO, file_path, line_num,
                              f"Verified (bot-blocked domain): \"{anchor}\" -> {url}",
-                             suggestion=f"Domain '{domain}' blocks bots — verified safe by human oversight")
+                             suggestion=f"Domain '{domain}' blocks bots — bot-blocked domain, requires human verification")
                 continue
             checkable[url] = url_map[url]
 
@@ -2698,7 +2707,7 @@ CATEGORY_CHECKS = {
         "checks": [
             ("Internal link resolution", "ERROR", "Resolves each `href`/`src` relative to the file's directory depth and checks if the target file exists. Directory links resolved to index.html."),
             ("External URL reachability", "WARNING", "HTTP HEAD/GET check for each unique external URL in `<a>` tags only (multi-line safe regex). Skip with `--skip-urls`."),
-            ("Bot-blocked domain handling", "INFO", "Known bot-blocked domains (LinkedIn, arXiv, OpenAI, etc.) get INFO instead of HTTP check. All links in this state have been verified by human oversight and are confirmed safe. INFO status maintains visibility for ongoing monitoring."),
+            ("Bot-blocked domain handling", "INFO", "Known bot-blocked domains (LinkedIn, arXiv, OpenAI, etc.) get INFO instead of HTTP check. These links require manual human verification. INFO status maintains visibility for ongoing monitoring."),
             ("Special URI skipping", "INFO", "Skips `#`, `mailto:`, `tel:`, `javascript:`, and `data:` URIs — not checkable links."),
         ]
     },
@@ -3121,14 +3130,12 @@ The overall score (0.0 – 10.0) is computed from unique issue types, not raw oc
                 lines.append(f"- \u2705 **{r.category.value}** — PASS ({status_detail})")
             lines.append("")
 
-        # What the remaining info items mean (if any non-verified info exists)
+        # What the remaining info items mean
         if other_info > 0:
             lines.append(f"### \u2139\ufe0f About the {other_info} Info Item(s)\n")
             lines.append("Info items are **not problems** — they are inventory data the audit "
-                         "collects to keep the status of these items visible. All links and "
-                         "content flagged at INFO level have been individually reviewed and "
-                         "verified through human oversight and are considered safe. "
-                         "No action is required.\n")
+                         "collects to keep the status of these items visible. These items "
+                         "require human review before they can be marked as verified.\n")
 
         lines.append("---\n")
         return '\n'.join(lines)
@@ -3398,9 +3405,34 @@ All values in this report are **dynamically discovered** from the live filesyste
         lines.append(f"*Generated {now.strftime('%Y-%m-%d %H:%M:%S')} by PraxisLibraryAudit.py v3.0 \u2014 Praxis Library Quality Assurance*")
         return '\n'.join(lines)
 
+    def _load_verified_registry(self) -> list:
+        """Load human-verified item signatures from Audit/verified-items.json."""
+        registry_path = os.path.join(self.root_dir, 'Audit', 'verified-items.json')
+        if not os.path.isfile(registry_path):
+            return []
+        try:
+            with open(registry_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            return data.get('verified', [])
+        except (json.JSONDecodeError, KeyError):
+            return []
+
+    def _is_verified(self, verified_sigs: list, category: str, message: str) -> bool:
+        """Check if an info item matches a verified signature.
+
+        Signatures use format 'Category|message_prefix'.
+        A signature matches if the item's 'Category|message' starts with it.
+        """
+        item_sig = f"{category}|{message}"
+        for sig in verified_sigs:
+            if item_sig.startswith(sig):
+                return True
+        return False
+
     def to_json(self) -> dict:
         """Export complete audit data as JSON for the portal page."""
         now = datetime.now()
+        verified_sigs = self._load_verified_registry()
 
         # Totals
         total_e = total_w = total_i = 0
@@ -3446,6 +3478,8 @@ All values in this report are **dynamically discovered** from the live filesyste
                 elif issue.severity == Severity.WARNING:
                     warnings.append(d)
                 else:
+                    if self._is_verified(verified_sigs, result.category.value, issue.message):
+                        d['verified'] = True
                     infos.append(d)
 
             categories.append({

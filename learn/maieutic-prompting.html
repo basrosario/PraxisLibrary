@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Maieutic Prompting: Build a tree of recursive explanations and use logical consistency to extract reliable commonsense reasoning from language models.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/maieutic-prompting.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Maieutic Prompting - Praxis">
+    <meta property="og:description" content="Maieutic Prompting: Build a tree of recursive explanations and use logical consistency to extract reliable commonsense reasoning from language models.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/maieutic-prompting.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Maieutic Prompting - Praxis">
+    <meta name="twitter:description" content="Maieutic Prompting: Build a tree of recursive explanations and use logical consistency to extract reliable commonsense reasoning from language models.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Maieutic Prompting",
+      "name": "Maieutic Prompting",
+      "description": "Maieutic Prompting: Build a tree of recursive explanations and use logical consistency to extract reliable commonsense reasoning from language models.",
+      "url": "https://praxislibrary.com/learn/maieutic-prompting.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Maieutic Prompting"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Maieutic Prompting - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Maieutic Prompting</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Reasoning &amp; CoT Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Maieutic Prompting</h1>
+                <p class="page-subtitle fade-in">Named after Socrates&rsquo; method of bringing knowledge to light through questioning, Maieutic Prompting builds a tree of recursive explanations &mdash; then uses logical consistency checks to determine which explanation branches are trustworthy and which contain contradictions.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2022</span>
+                        <p><strong>Introduced:</strong> Maieutic Prompting was published at EMNLP 2022 by Jung et al. The technique addresses a fundamental challenge: language models can generate confident but incorrect explanations. Maieutic Prompting handles this by generating multiple explanations in a tree structure, then using satisfiability-based reasoning to identify which explanations are logically consistent. By treating commonsense inference as a constraint satisfaction problem, it achieves up to 20% improvement over standard prompting on commonsense reasoning benchmarks.</p>
+                        <p><strong>Modern LLM Status:</strong> The core insight of Maieutic Prompting &mdash; that models should generate multiple explanations and verify their consistency &mdash; has influenced modern self-verification approaches. While frontier models (Claude, GPT-4) have significantly improved their commonsense reasoning, the principle of building explanation trees and checking for contradictions remains valuable for high-stakes reasoning where a single explanation may be unreliable. The technique is particularly relevant for domains where logical consistency between claims is critical.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Build Explanation Trees, Then Verify Them</h2>
+                        <p class="split-section__text">Standard prompting asks a model for one explanation and trusts it. But models can hallucinate plausible-sounding but incorrect reasoning. Maieutic Prompting takes a fundamentally different approach inspired by the Socratic method: it generates a tree of explanations by recursively asking &ldquo;why?&rdquo; or &ldquo;explain further&rdquo; at each node.</p>
+                        <p class="split-section__text"><strong>Each explanation is then checked for logical consistency</strong> with its parent, siblings, and children in the tree. Contradictions reveal unreliable reasoning branches. The technique frames this as a satisfiability problem &mdash; finding the assignment of true/false to each explanation that maximizes overall logical consistency.</p>
+                        <p class="split-section__text">Think of it like a panel of experts who each explain a claim independently, then a moderator checks whether all the explanations are logically compatible. Where they contradict each other, something is wrong &mdash; and the contradictions point directly to the unreliable reasoning.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Trees of Explanations Beat Single Answers</span>
+                                <p>A single explanation can be confidently wrong. By generating multiple explanations and checking them against each other for logical consistency, Maieutic Prompting creates a self-checking system. If Explanation A implies X, but Explanation B (which is also plausible) implies not-X, the contradiction flags unreliable reasoning. This is analogous to how peer review works &mdash; multiple independent analyses that must be logically consistent.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Maieutic Process</h2>
+                <p class="section-subtitle fade-in-up">Five stages from claim to verified explanation</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Generate Initial Explanation</h3>
+                            <p class="element-timeline__text">Prompt the model to explain why a statement is true (or false). This creates the root of the explanation tree. The initial explanation serves as the anchor from which all deeper reasoning branches will grow.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Explain why the statement &lsquo;All birds can fly&rsquo; is true or false.&rdquo; &rarr; Root: &ldquo;Not all birds can fly because some species like penguins and ostriches are flightless.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Recursive Depth Expansion</h3>
+                            <p class="element-timeline__text">For each explanation, generate sub-explanations by asking &ldquo;Why is this the case?&rdquo; or &ldquo;Can you explain this further?&rdquo; This builds a tree of nested explanations, where each level provides deeper reasoning support for the level above it.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Why are penguins flightless?&rdquo; &rarr; &ldquo;Flight requires specific wing structure and low body weight. Penguins evolved flipper-like wings optimized for swimming rather than flying.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Abductive Verification</h3>
+                            <p class="element-timeline__text">For each explanation node, generate the opposite explanation (if the original says true, generate one arguing false). Compare the confidence and coherence of both sides. This adversarial step exposes weak reasoning by forcing the model to argue against itself.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Counter-explanation: &ldquo;All birds have wings, so all should fly.&rdquo; &rarr; This is easily refuted by known examples of flightless birds, revealing the counter-argument as weak and the original as strong.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Consistency Scoring</h3>
+                            <p class="element-timeline__text">Evaluate logical consistency between parent-child and sibling explanation pairs. Score each explanation based on how well it aligns with the rest of the tree. Contradictions between nodes lower consistency scores and flag unreliable branches.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Parent says &ldquo;not all birds fly&rdquo; and child says &ldquo;flight requires specific wing structure&rdquo; &mdash; these are consistent (score: high). A sibling claiming &ldquo;all winged creatures fly&rdquo; contradicts both (score: low).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">5</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Satisfiability Resolution</h3>
+                            <p class="element-timeline__text">Treat the tree as a logical constraint problem. Find the assignment of true/false labels to each node that maximizes overall consistency, and extract the final answer from the most consistent branch. The result is a verified conclusion backed by mutually supporting explanations.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The solver assigns &ldquo;true&rdquo; to the flightless-birds branch and &ldquo;false&rdquo; to the &ldquo;all birds fly&rdquo; counter &mdash; yielding a high-confidence answer: &ldquo;No, not all birds can fly.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why explanation trees with consistency checks outperform single-path reasoning</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Standard Prompting</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Is it true that all birds can fly? Explain your reasoning.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>While most birds can fly, not all birds can. Penguins, ostriches, and emus are examples of flightless birds. So no, not all birds can fly.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Correct, but based on a single reasoning path &mdash; no verification</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Maieutic Prompting</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Explanation Tree</span>
+                                <p><strong>Root:</strong> &ldquo;Not all birds fly because some species evolved without flight capability.&rdquo;<br><br>
+                                <strong>Sub-explanation 1:</strong> &ldquo;Flight requires specific wing structure and low body-to-wing ratio.&rdquo;<br>
+                                <strong>Sub-explanation 2:</strong> &ldquo;Evolutionary pressures led some species to lose flight in favor of other adaptations.&rdquo;<br><br>
+                                <strong>Counter-explanation:</strong> &ldquo;All birds have wings, so all should fly.&rdquo;<br>
+                                <strong>Consistency check:</strong> Counter contradicts known flightless species &mdash; marked as inconsistent.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Verified Answer</span>
+                                <p>High-confidence answer with verified reasoning chain: No, not all birds can fly. The explanation tree confirms this through multiple consistent branches, while the counter-argument was found logically inconsistent with established facts.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Multiple explanation branches checked for logical consistency</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Maieutic Prompting in Action</h2>
+                <p class="section-subtitle fade-in-up">See how explanation trees and consistency checks improve reasoning reliability</p>
+
+                <div class="accordion fade-in-up" id="maieutic-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Scientific Claim Verification</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Claim to Verify</span>
+                                    <p>&ldquo;Does cold weather cause colds?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Maieutic Explanation Tree</span>
+                                    <p><strong>Root Explanation (True):</strong> &ldquo;Cold weather causes colds because people get sick more in winter.&rdquo;<br><br>
+                                    <strong>Sub-explanation 1:</strong> &ldquo;Cold air may weaken nasal immune defenses, making infection easier.&rdquo;<br>
+                                    <strong>Sub-explanation 2:</strong> &ldquo;People spend more time indoors in winter, increasing virus transmission.&rdquo;<br><br>
+                                    <strong>Root Explanation (False):</strong> &ldquo;Colds are caused by viruses (rhinoviruses), not temperature itself.&rdquo;<br>
+                                    <strong>Sub-explanation 3:</strong> &ldquo;You cannot catch a cold from cold air alone without viral exposure.&rdquo;<br><br>
+                                    <strong>Consistency Check:</strong> Sub-explanation 2 (indoor crowding) is consistent with viral transmission, not cold temperature causation. Sub-explanation 1 (weakened defenses) suggests cold is a contributing factor, not a direct cause. The &ldquo;false&rdquo; branch is more internally consistent.<br><br>
+                                    <strong>Verified Answer:</strong> Cold weather does not directly cause colds. Colds are caused by viruses. However, cold weather indirectly increases transmission by driving people indoors and may slightly weaken nasal defenses. The explanation tree reveals the important distinction between correlation and causation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Ethical Dilemma Analysis</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Ethical Claim</span>
+                                    <p>&ldquo;Is it always wrong to lie?&rdquo; &mdash; Generating competing explanation trees for ethical positions and checking logical consistency.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Maieutic Explanation Tree</span>
+                                    <p><strong>Branch A (Always wrong):</strong> &ldquo;Lying violates the categorical imperative &mdash; if everyone lied, trust would collapse.&rdquo;<br>
+                                    <strong>Sub-A1:</strong> &ldquo;Society depends on truthfulness as a foundational norm.&rdquo;<br>
+                                    <strong>Sub-A2:</strong> &ldquo;Even well-intentioned lies erode trust over time.&rdquo;<br><br>
+                                    <strong>Branch B (Not always wrong):</strong> &ldquo;Lying to protect someone from harm can be morally justified.&rdquo;<br>
+                                    <strong>Sub-B1:</strong> &ldquo;Hiding refugees from persecutors is widely considered moral despite involving deception.&rdquo;<br>
+                                    <strong>Sub-B2:</strong> &ldquo;Consequentialist ethics evaluates lies by their outcomes, not the act itself.&rdquo;<br><br>
+                                    <strong>Consistency Check:</strong> Branch A&rsquo;s absolutism (Sub-A2: &ldquo;even well-intentioned lies&rdquo;) contradicts the widely accepted moral intuition in Sub-B1. Branch B maintains internal consistency &mdash; outcomes-based evaluation accommodates both truth-telling as default and justified exceptions.<br><br>
+                                    <strong>Verified Position:</strong> The explanation tree reveals that an absolute prohibition on lying creates logical inconsistencies with widely held moral intuitions. The more consistent position acknowledges lying as generally wrong while permitting justified exceptions based on outcomes and context.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Historical Causation</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Historical Claim</span>
+                                    <p>&ldquo;Did the printing press cause the Protestant Reformation?&rdquo; &mdash; Building explanation trees with cross-branch consistency analysis.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Maieutic Explanation Tree</span>
+                                    <p><strong>Branch A (Direct cause):</strong> &ldquo;The printing press enabled mass distribution of Luther&rsquo;s 95 Theses and reformist literature.&rdquo;<br>
+                                    <strong>Sub-A1:</strong> &ldquo;Before printing, dissent was limited to local, hand-copied manuscripts.&rdquo;<br>
+                                    <strong>Sub-A2:</strong> &ldquo;Print culture created a shared information space that unified reform movements.&rdquo;<br><br>
+                                    <strong>Branch B (Not a direct cause):</strong> &ldquo;Religious grievances and corruption within the Church were the primary causes.&rdquo;<br>
+                                    <strong>Sub-B1:</strong> &ldquo;Movements like the Hussites predated the printing press by decades.&rdquo;<br>
+                                    <strong>Sub-B2:</strong> &ldquo;The printing press was a tool that amplified existing discontent, not the source of it.&rdquo;<br><br>
+                                    <strong>Consistency Check:</strong> Sub-A1 and Sub-B1 create a tension &mdash; if dissent existed before printing (Hussites), printing cannot be the sole cause. However, Sub-A2 and Sub-B2 are actually consistent: the press amplified and unified existing grievances. The contradiction resolves to a &ldquo;necessary but not sufficient&rdquo; relationship.<br><br>
+                                    <strong>Verified Answer:</strong> The printing press did not single-handedly cause the Reformation, but it was a critical enabling factor. The explanation tree reveals that religious grievances predated printing, but the press transformed localized dissent into a continent-wide movement. Both branches contribute to a nuanced, consistent answer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Maieutic Prompting</h2>
+                <p class="section-subtitle fade-in-up">Best for claims requiring logical verification across multiple explanations</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Commonsense Reasoning with Uncertain Premises</strong>
+                                    <p>Claims where the &ldquo;obvious&rdquo; answer might be wrong &mdash; Maieutic&rsquo;s tree structure surfaces hidden contradictions in seemingly straightforward reasoning.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Claims That Need Logical Verification</strong>
+                                    <p>When you need more than a single explanation &mdash; generating competing explanations and checking consistency provides much stronger evidence than trusting one answer.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Stakes Decisions Requiring Multiple Perspectives</strong>
+                                    <p>Medical, legal, or policy decisions where a single line of reasoning is insufficient &mdash; the tree structure ensures all angles are explored and cross-checked.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Domains Where Internal Consistency Is Critical</strong>
+                                    <p>Legal arguments, scientific hypotheses, and financial analyses where every supporting claim must be logically compatible with every other claim.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Factual Lookups</strong>
+                                    <p>Questions with clear, unambiguous answers &mdash; &ldquo;What is the capital of France?&rdquo; doesn&rsquo;t benefit from explanation trees.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Creative Tasks Where Consistency Isn&rsquo;t the Goal</strong>
+                                    <p>Writing, brainstorming, or ideation &mdash; creative work thrives on exploration, not logical constraint satisfaction.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Time-Critical Applications</strong>
+                                    <p>Tree generation is slow &mdash; building multiple explanation branches, counter-arguments, and consistency checks requires significant token overhead and processing time.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Maieutic Prompting delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Fact Verification Systems</h3>
+                        <p class="use-case-showcase__desc">Build explanation trees for contested claims and use consistency checks to determine which explanations hold up under logical scrutiny, flagging misinformation at the reasoning level.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Legal Argument Analysis</h3>
+                        <p class="use-case-showcase__desc">Generate competing legal explanations for a case outcome and verify that each argument&rsquo;s supporting claims are internally consistent and compatible with established precedent.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Differential Diagnosis</h3>
+                        <p class="use-case-showcase__desc">Build explanation trees for multiple diagnoses and check whether each diagnosis&rsquo;s supporting symptoms and mechanisms are logically consistent with the full clinical picture.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Policy Impact Assessment</h3>
+                        <p class="use-case-showcase__desc">Generate explanation trees for predicted policy outcomes and verify that economic, social, and political impact claims don&rsquo;t contradict each other across analysis branches.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Academic Peer Review</h3>
+                        <p class="use-case-showcase__desc">Evaluate research claims by building explanation trees and checking whether the methodology, data interpretation, and conclusions form a logically consistent chain of reasoning.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Ethical Framework Evaluation</h3>
+                        <p class="use-case-showcase__desc">Generate competing ethical explanations for moral dilemmas and use consistency checks to identify which ethical positions maintain logical coherence across edge cases.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Maieutic Prompting Fits</h2>
+                <p class="section-subtitle fade-in-up">Maieutic bridges simple reasoning chains and formal tree-based exploration</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Chain-of-Thought</span>
+                        <span class="era-marker__title">Linear Reasoning</span>
+                        <span class="era-marker__desc">Single step-by-step path</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Self-Consistency</span>
+                        <span class="era-marker__title">Multiple Paths, Vote</span>
+                        <span class="era-marker__desc">Sample many paths, majority wins</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Maieutic Prompting</span>
+                        <span class="era-marker__title">Explanation Trees + Logic</span>
+                        <span class="era-marker__desc">Recursive explanations with consistency checks</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Tree of Thoughts</span>
+                        <span class="era-marker__title">Explicit Tree Search</span>
+                        <span class="era-marker__desc">Formal tree exploration with backtracking</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Simplified Maieutic for Daily Use</div>
+                    <p>You don&rsquo;t need formal satisfiability solvers to use Maieutic principles. Try this simplified version: ask the model to explain a claim, then ask it to argue the opposite. If the counter-argument is weak and inconsistent with known facts, your original explanation is likely reliable. If both sides are equally compelling, the claim needs more investigation.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary reasoning and verification techniques</p>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">The linear reasoning approach that Maieutic extends into branching explanation trees.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="tree-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Tree of Thoughts</span>
+                        <span class="evolution-callout__desc">Formalizes tree-based exploration that Maieutic pioneered for explanation verification.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">Samples multiple paths and votes; Maieutic instead checks logical consistency between explanations.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Question Your Reasoning</h2>
+                        <p class="cta-corporate__text">Apply Maieutic explanation trees to your own reasoning challenges or explore related verification techniques.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="index.html" class="btn btn-secondary">All Techniques</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

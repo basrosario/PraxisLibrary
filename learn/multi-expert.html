@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Multi-Expert Prompting: Generate answers from multiple simulated expert viewpoints, then aggregate through structured discussion and voting for higher accuracy.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/multi-expert.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Multi-Expert Prompting - Praxis">
+    <meta property="og:description" content="Multi-Expert Prompting: Generate answers from multiple simulated expert viewpoints, then aggregate through structured discussion and voting for higher accuracy.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/multi-expert.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Multi-Expert Prompting - Praxis">
+    <meta name="twitter:description" content="Multi-Expert Prompting: Generate answers from multiple simulated expert viewpoints, then aggregate through structured discussion and voting for higher accuracy.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Multi-Expert Prompting",
+      "name": "Multi-Expert Prompting",
+      "description": "Multi-Expert Prompting: Generate answers from multiple simulated expert viewpoints, then aggregate through structured discussion and voting for higher accuracy.",
+      "url": "https://praxislibrary.com/learn/multi-expert.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Multi-Expert Prompting"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Multi-Expert Prompting - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Multi-Expert</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Ensemble Methods Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Multi-Expert Prompting</h1>
+                <p class="page-subtitle fade-in">When experts disagree, the truth often lies in their structured dialogue. Multi-Expert Prompting simulates a panel of domain experts who each provide their answer, engage in structured discussion, and reach a consensus &mdash; combining the reliability of ensemble methods with the depth of expert reasoning.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2024</span>
+                        <p><strong>Introduced:</strong> Multi-Expert Prompting was introduced in 2024, formalizing the panel-of-experts pattern. Unlike Mixture of Experts which focuses on diverse perspectives, Multi-Expert emphasizes structured aggregation: experts state positions, challenge each other, and converge through voting or consensus. The technique achieves significant accuracy improvements over single-expert prompting by leveraging deliberation rather than simple aggregation.</p>
+                        <p><strong>Modern LLM Status:</strong> The structured deliberation pattern is increasingly used in production AI for high-stakes decisions. Courts, medical boards, and investment committees all use multi-expert deliberation. This technique brings the same rigor to AI reasoning &mdash; ensuring that answers are stress-tested through structured critique before being finalized.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Deliberation Produces Better Answers</h2>
+                        <p class="split-section__text">Single answers, even from expert personas, can be confidently wrong. Multi-Expert generates answers from 3&ndash;7 simulated experts, then uses structured deliberation &mdash; each expert critiques others&rsquo; reasoning, identifies flaws, and updates their position. The final answer emerges from consensus or majority vote, providing both the answer and a measure of expert agreement.</p>
+                        <p class="split-section__text"><strong>Think of it like a medical board review.</strong> When a patient&rsquo;s case is complex, a single doctor&rsquo;s opinion is not enough. A panel of specialists each reviews the case independently, then meets to discuss. During discussion, one specialist might point out a finding another missed, or challenge an interpretation. The final recommendation is stronger because it survived structured scrutiny.</p>
+                        <p class="split-section__text">The critical difference from simply &ldquo;getting multiple opinions&rdquo; is the deliberation step. Experts do not just state positions &mdash; they respond to each other, update their reasoning, and reach a considered consensus. This dynamic exchange produces answers informed by the full range of arguments.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Deliberation Beats Averaging</span>
+                                <p>Simple voting among experts (like Self-Consistency) misses something important: experts can change their minds when confronted with good arguments. Multi-Expert&rsquo;s deliberation step allows experts to update based on each other&rsquo;s reasoning, producing answers informed by the full range of arguments. The result is not just the most popular answer, but the most defensible one &mdash; the answer that survives structured criticism.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Multi-Expert Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from expert panel to structured consensus</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Instantiate Expert Panel</h3>
+                            <p class="element-timeline__text">Create 3&ndash;7 expert personas relevant to the problem. Each expert should have a defined specialty, methodology, and evaluation criteria. Unlike Mixture of Experts where diversity is paramount, Multi-Expert benefits from overlapping expertise &mdash; experts need enough shared knowledge to meaningfully critique each other&rsquo;s reasoning.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>For an ethical dilemma: a <strong>Moral Philosopher</strong> (ethical frameworks and principles), a <strong>Clinical Psychologist</strong> (behavioral impact and human factors), and a <strong>Legal Scholar</strong> (regulatory implications and precedent).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Independent Answers</h3>
+                            <p class="element-timeline__text">Each expert provides their answer and reasoning independently, without seeing others&rsquo; responses. This independence is critical &mdash; it prevents anchoring bias and ensures the full diversity of expert opinion is captured before deliberation begins.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The Philosopher argues from a utilitarian framework. The Psychologist focuses on stakeholder impact and long-term behavioral consequences. The Legal Scholar identifies regulatory risks and precedent. Each reaches their own conclusion with distinct reasoning.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Structured Deliberation</h3>
+                            <p class="element-timeline__text">Experts review each other&rsquo;s answers, critique reasoning, identify flaws, and update their positions. This is the step that distinguishes Multi-Expert from simple voting &mdash; experts engage with each other&rsquo;s arguments, creating a dynamic dialogue that surfaces hidden assumptions and resolves contradictions.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>The Legal Scholar challenges the Philosopher&rsquo;s utilitarian analysis by pointing out a regulatory constraint that makes the proposed approach illegal. The Philosopher revises their position. The Psychologist notes that both revised approaches overlook stakeholder anxiety, suggesting a phased implementation. All three update their recommendations.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Consensus or Vote</h3>
+                            <p class="element-timeline__text">The final answer emerges through agreement or majority vote. If consensus is reached, the answer carries high confidence. If experts remain split, the disagreement itself is informative &mdash; it signals genuine complexity and identifies the specific points of contention that require human judgment.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p><strong>Consensus (3/3):</strong> Proceed with phased implementation that satisfies regulatory requirements, minimizes stakeholder disruption, and achieves the utilitarian goal over a 12-month timeline. The deliberation produced a solution none of the experts initially proposed.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why structured deliberation produces more reliable answers</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Single Expert Answer</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Should we migrate our monolithic application to microservices?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Yes, microservices offer better scalability, independent deployment, and technology flexibility. Start by identifying bounded contexts and extracting services gradually.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Confident but one-sided, ignores costs and team readiness</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Multi-Expert Deliberation</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Expert Deliberation</span>
+                                <p><strong>Security Expert:</strong> Microservices increase attack surface. Each service needs its own auth, and inter-service communication adds network-level risks. Current monolith has a simpler security perimeter.<br><strong>Performance Expert:</strong> Agreed on scalability benefits, but network latency between services can degrade user experience. The team needs distributed tracing and circuit breakers &mdash; do they have that expertise?<br><strong>Engineering Manager:</strong> Our team of 8 developers lacks distributed systems experience. The 6-month migration estimate is optimistic &mdash; similar organizations report 12&ndash;18 months with significant productivity loss during transition.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Consensus (2/3 against full migration)</span>
+                                <p>Do not pursue full microservices migration now. Instead, extract only the two highest-traffic modules as services while keeping the core monolith. Invest in team training on distributed systems. Re-evaluate full migration in 12 months when the team has hands-on experience with the initial extractions.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Stress-tested recommendation with dissenting views addressed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Multi-Expert in Action</h2>
+                <p class="section-subtitle fade-in-up">See how structured deliberation produces more defensible answers</p>
+
+                <div class="accordion fade-in-up" id="multi-expert-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Ethical Dilemma</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;Should a company deploy facial recognition technology in its retail stores to reduce theft?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Expert Panel Deliberation</span>
+                                    <p><strong>Philosopher (Initial):</strong> From a utilitarian perspective, if theft reduction significantly outweighs privacy costs, deployment is justified. However, the distribution of harm matters &mdash; marginalized communities disproportionately face false positives.<br><br>
+                                    <strong>Psychologist (Initial):</strong> Constant surveillance creates a chilling effect on customer behavior. Research shows that perceived surveillance reduces browsing time and impulse purchases by 15&ndash;20%, potentially offsetting theft reduction gains.<br><br>
+                                    <strong>Legal Scholar (Initial):</strong> Multiple jurisdictions now restrict biometric data collection. BIPA in Illinois, GDPR in Europe, and emerging state laws create significant legal liability. The regulatory trend is toward restriction, not permissiveness.<br><br>
+                                    <strong>Deliberation Round:</strong><br>
+                                    <strong>Philosopher (Updated):</strong> The Psychologist&rsquo;s point about reduced browsing behavior changes my utilitarian calculus. If surveillance reduces legitimate revenue, the net utility may be negative even before considering privacy harms.<br>
+                                    <strong>Psychologist (Updated):</strong> Agreed with the Legal Scholar. Employee training in customer engagement reduces theft comparably without the surveillance costs &mdash; both financial and psychological.<br>
+                                    <strong>Legal Scholar (Updated):</strong> Even in permissive jurisdictions, the regulatory trajectory suggests investing in this technology creates a stranded asset within 3&ndash;5 years.<br><br>
+                                    <strong>Consensus (3/3):</strong> Do not deploy facial recognition. The combination of legal risk, negative customer experience impact, and available alternatives (employee training, inventory management systems) makes alternative theft reduction strategies more effective and sustainable. Always verify legal requirements in your specific jurisdiction before making security technology decisions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Technical Architecture</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;Should we use a SQL or NoSQL database for our new real-time analytics platform?&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Expert Panel Deliberation</span>
+                                    <p><strong>Security Expert (Initial):</strong> SQL databases offer mature RBAC, field-level encryption, and audit logging out of the box. NoSQL security is improving but still requires more manual configuration for compliance scenarios.<br><br>
+                                    <strong>Performance Expert (Initial):</strong> For real-time analytics at scale, NoSQL (specifically a columnar store like ClickHouse or time-series DB like TimescaleDB) handles high write throughput and aggregation queries significantly better than traditional SQL.<br><br>
+                                    <strong>Maintainability Expert (Initial):</strong> SQL has a 40-year ecosystem of tools, talent, and patterns. The team knows PostgreSQL. NoSQL introduces a learning curve and operational complexity that could slow development for 3&ndash;6 months.<br><br>
+                                    <strong>Deliberation Round:</strong><br>
+                                    <strong>Performance Expert (Updated):</strong> The Maintainability Expert raises a valid point. However, TimescaleDB is a PostgreSQL extension &mdash; it gives us time-series performance with the SQL interface and ecosystem the team already knows.<br>
+                                    <strong>Security Expert (Updated):</strong> TimescaleDB inherits PostgreSQL&rsquo;s security model. This addresses my compliance concerns completely.<br>
+                                    <strong>Maintainability Expert (Updated):</strong> If we can stay in the PostgreSQL ecosystem while getting time-series performance, that eliminates my primary objection. The team ramps up on hypertable concepts in weeks, not months.<br><br>
+                                    <strong>Consensus (3/3):</strong> Use TimescaleDB (PostgreSQL extension) for the analytics platform. It provides the write throughput and time-series query performance of specialized NoSQL stores while maintaining the SQL interface, security model, and ecosystem familiarity the team needs. This is a case where deliberation found a solution that none of the initial positions fully captured. Note: benchmark with your specific workload patterns before committing to any database choice.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Diagnosis</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Problem</span>
+                                    <p>&ldquo;A patient presents with recurring headaches, visual disturbances, and elevated blood pressure. Three specialists deliberate.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Expert Panel Deliberation</span>
+                                    <p><strong>Neurologist (Initial):</strong> The combination of headaches and visual disturbances suggests migraine with aura as the primary diagnosis. The elevated blood pressure could be secondary to pain. Recommend MRI to rule out structural causes.<br><br>
+                                    <strong>Cardiologist (Initial):</strong> Elevated blood pressure with visual disturbances raises concern for hypertensive emergency or malignant hypertension. The headaches could be a symptom, not the primary condition. Recommend immediate BP monitoring and fundoscopic exam.<br><br>
+                                    <strong>Ophthalmologist (Initial):</strong> Visual disturbances with elevated BP warrant urgent evaluation for papilledema (optic disc swelling). This could indicate raised intracranial pressure, which would reframe both the headaches and the hypertension as symptoms of a single underlying cause.<br><br>
+                                    <strong>Deliberation Round:</strong><br>
+                                    <strong>Neurologist (Updated):</strong> The Ophthalmologist&rsquo;s point about papilledema is critical. If present, it changes my differential entirely &mdash; from migraine to possible idiopathic intracranial hypertension or space-occupying lesion. I agree the fundoscopic exam should be the first step.<br>
+                                    <strong>Cardiologist (Updated):</strong> If papilledema is confirmed, the elevated BP may be a Cushing response rather than primary hypertension. This changes treatment &mdash; aggressive BP lowering could be harmful if ICP is elevated.<br>
+                                    <strong>Ophthalmologist (Updated):</strong> Agreed. The sequence matters: fundoscopic exam first, then MRI if papilledema is present, then targeted treatment based on findings.<br><br>
+                                    <strong>Consensus (3/3):</strong> Urgent fundoscopic examination as the first diagnostic step. If papilledema is present, proceed immediately to MRI brain. Do not aggressively treat the blood pressure until the underlying cause is established, as it may be a compensatory response. The deliberation revealed that what appeared to be three separate symptoms may be one unified condition requiring a specific diagnostic sequence. Important: AI-generated medical analysis is for educational purposes only and must be reviewed by qualified healthcare professionals.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Multi-Expert</h2>
+                <p class="section-subtitle fade-in-up">Best for high-stakes decisions where confidence matters</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>High-Stakes Decisions</strong>
+                                    <p>When the cost of being wrong is significant &mdash; medical decisions, legal strategy, infrastructure investments &mdash; and you need confidence that the answer has been stress-tested.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Disagreement as Signal</strong>
+                                    <p>Problems where expert disagreement reveals genuine complexity &mdash; if all experts agree easily, the problem may not need this technique.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Consensus as Confidence</strong>
+                                    <p>When you need not just an answer but a measure of how trustworthy that answer is &mdash; a 5/5 consensus carries different weight than a 3/2 split.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Reasoning Tasks</strong>
+                                    <p>Problems with multiple valid approaches where the best answer requires evaluating and comparing different methodologies through structured critique.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Factual Questions</strong>
+                                    <p>Questions with definitive, easily verifiable answers &mdash; no deliberation is needed for &ldquo;What year was Python released?&rdquo;</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Time-Critical Single-Shot Answers</strong>
+                                    <p>When speed matters more than consensus &mdash; Multi-Expert requires multiple rounds of generation, significantly increasing latency and token usage.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Single Correct Methodology</strong>
+                                    <p>Problems where there is one established correct approach &mdash; following a recipe, applying a formula, or executing a well-defined procedure.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Low-Stakes Decisions</strong>
+                                    <p>When the consequences of being slightly wrong are minimal &mdash; the overhead of panel deliberation is not justified for trivial choices.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Multi-Expert delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Diagnosis Panels</h3>
+                        <p class="use-case-showcase__desc">Simulate specialist deliberation over complex symptom patterns, where the diagnostic sequence matters as much as the diagnosis itself.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Investment Committees</h3>
+                        <p class="use-case-showcase__desc">Evaluate investment opportunities through structured deliberation between risk, return, and market-timing perspectives with explicit vote counts.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Architecture Review Boards</h3>
+                        <p class="use-case-showcase__desc">Assess technical architecture decisions through security, performance, and maintainability lenses with structured critique and consensus building.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Ethical Review</h3>
+                        <p class="use-case-showcase__desc">Navigate ethical dilemmas by deliberating across philosophical, psychological, and legal frameworks to find defensible positions.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Academic Peer Review</h3>
+                        <p class="use-case-showcase__desc">Simulate peer review by having multiple reviewer personas critique methodology, statistical approach, and contribution significance with structured feedback.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Legal Strategy</h3>
+                        <p class="use-case-showcase__desc">Deliberate between prosecution-style, defense-style, and judicial perspectives to stress-test legal arguments before filing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Multi-Expert Fits</h2>
+                <p class="section-subtitle fade-in-up">Multi-Expert adds structured deliberation to the ensemble spectrum</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Role Prompting</span>
+                        <span class="era-marker__title">Single Expert</span>
+                        <span class="era-marker__desc">One persona, one answer</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Mixture of Experts</span>
+                        <span class="era-marker__title">Parallel Perspectives</span>
+                        <span class="era-marker__desc">Multiple experts, synthesized</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Multi-Expert</span>
+                        <span class="era-marker__title">Structured Deliberation</span>
+                        <span class="era-marker__desc">Experts critique and converge</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Debate Prompting</span>
+                        <span class="era-marker__title">Adversarial Arguments</span>
+                        <span class="era-marker__desc">Opposing positions battle</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Assign Dissenting Voices</div>
+                    <p>Always include at least one &ldquo;devil&rsquo;s advocate&rdquo; expert who is skeptical of the dominant position. This prevents groupthink and ensures the consensus is robust. If all your experts easily agree, either the problem is too simple for this technique or your expert panel lacks sufficient diversity of perspective. The most valuable deliberations are the ones where experts genuinely challenge each other.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary ensemble and deliberation techniques</p>
+
+                <a href="role-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Role Prompting</span>
+                        <span class="evolution-callout__desc">The single-expert technique that Multi-Expert extends by adding panel deliberation and structured consensus building.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="self-consistency.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Self-Consistency</span>
+                        <span class="evolution-callout__desc">Uses multiple reasoning paths with majority voting. Multi-Expert adds structured deliberation where experts update their positions based on critique.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="ensemble-methods.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Ensemble Methods</span>
+                        <span class="evolution-callout__desc">The broader family of multi-output techniques. Multi-Expert is a deliberation-based ensemble that emphasizes structured critique over simple aggregation.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Deliberate for Better Answers</h2>
+                        <p class="cta-corporate__text">Apply expert panel reasoning to your own complex problems or explore other ensemble techniques.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

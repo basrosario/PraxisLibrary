@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generated Knowledge Prompting: Have the model generate relevant knowledge first, then use that knowledge to produce more accurate and informed answers.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/generated-knowledge.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Generated Knowledge Prompting - Praxis">
+    <meta property="og:description" content="Generated Knowledge Prompting: Have the model generate relevant knowledge first, then use that knowledge to produce more accurate and informed answers.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/generated-knowledge.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Generated Knowledge Prompting - Praxis">
+    <meta name="twitter:description" content="Generated Knowledge Prompting: Have the model generate relevant knowledge first, then use that knowledge to produce more accurate and informed answers.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Generated Knowledge Prompting",
+      "name": "Generated Knowledge Prompting",
+      "description": "Generated Knowledge Prompting: Have the model generate relevant knowledge first, then use that knowledge to produce more accurate and informed answers.",
+      "url": "https://praxislibrary.com/learn/generated-knowledge.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Generated Knowledge Prompting"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Generated Knowledge Prompting - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-page-type="technique">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Generated Knowledge</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Knowledge Enhancement Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Generated Knowledge Prompting</h1>
+                <p class="page-subtitle fade-in">Before asking the model to answer, ask it to teach itself first. Generated Knowledge Prompting uses a two-step process &mdash; generate relevant knowledge, then reason with it &mdash; turning the model&rsquo;s own latent understanding into explicit context that improves accuracy by 14&ndash;20%.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2022</span>
+                        <p><strong>Introduced:</strong> Generated Knowledge Prompting was published in 2022 by Liu et al. The technique takes a two-step approach: first, prompt the model to generate relevant factual knowledge about the topic; then, include that generated knowledge in a second prompt alongside the actual question. The original paper demonstrated improvements of 14&ndash;20% on commonsense reasoning benchmarks (NumerSense, CSQA2) by having the model &ldquo;prime itself&rdquo; with its own knowledge before answering. The key insight was that LLMs contain vast knowledge but don&rsquo;t always surface the right facts when answering directly.</p>
+                        <p><strong>Modern LLM Status:</strong> Generated Knowledge Prompting was a precursor to Retrieval-Augmented Generation (RAG). While RAG now retrieves real documents from external knowledge bases, the core insight &mdash; priming context before answering &mdash; remains powerful. In 2026, the technique is most useful when external retrieval isn&rsquo;t available but the model&rsquo;s own knowledge can be surfaced and organized before reasoning. Modern models with extended thinking capabilities (like Claude&rsquo;s) partially internalize this pattern, but explicit knowledge generation still helps for specialized or nuanced topics where the model benefits from &ldquo;warming up&rdquo; its relevant knowledge before committing to an answer.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Let the Model Study Before the Exam</h2>
+                        <p class="split-section__text">When you ask a question directly, the model attempts to retrieve the right facts and reason with them simultaneously. This combined cognitive load often leads to shallow or inaccurate answers &mdash; the model grabs whatever knowledge surfaces first rather than the most relevant knowledge.</p>
+                        <p class="split-section__text"><strong>Generated Knowledge separates retrieval from reasoning.</strong> Step one: ask the model to generate everything it knows about the topic. Step two: feed that generated knowledge back as context for the actual question. By splitting the process, you give the model a chance to surface relevant facts deliberately, then reason over them with full context in view.</p>
+                        <p class="split-section__text">Think of it like asking a student to write down everything they know about photosynthesis on a notepad before answering an exam question about it. The act of writing primes the right knowledge, and having it visible during the answer prevents gaps and errors.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Self-Priming Works</span>
+                                <p>LLMs contain far more knowledge than they surface in any single response. When answering directly, the model&rsquo;s attention mechanism selects a subset of relevant information &mdash; but this selection is noisy and can miss crucial facts. By explicitly asking the model to <strong>generate knowledge first</strong>, you force a broader retrieval pass. The generated knowledge then sits in the context window during the actual answer, ensuring the model has access to its own best information. This is especially powerful for commonsense reasoning, where the relevant facts feel &ldquo;obvious&rdquo; but are easy to overlook.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Generated Knowledge Process</h2>
+                <p class="section-subtitle fade-in-up">Two stages: generate knowledge, then reason with it</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Identify the Question Domain</h3>
+                            <p class="element-timeline__text">Start with the question you need answered. Identify the key topic, domain, or concept area that the model will need knowledge about. This helps you craft an effective knowledge generation prompt.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>Question: &ldquo;Is it possible for a penguin to fly higher than a typical commercial airplane?&rdquo; &mdash; Domain: penguin biology, avian flight capabilities, airplane altitude.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Generate Relevant Knowledge</h3>
+                            <p class="element-timeline__text">Prompt the model to generate factual knowledge about the topic without yet asking the question. The goal is to surface relevant facts, context, and background information that will be useful for answering. Generate multiple knowledge statements for broader coverage.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Generate 5 facts about penguins and their physical abilities, including their relationship to flight.&rdquo; &mdash; The model produces: Penguins are flightless birds. Their wings evolved into flippers for swimming. Emperor penguins can dive to 1,800 feet. No penguin species can fly. Commercial airplanes cruise at 35,000&ndash;42,000 feet.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Combine Knowledge with the Question</h3>
+                            <p class="element-timeline__text">Create a second prompt that includes the generated knowledge as context, followed by the actual question. The model now has explicit access to relevant facts while formulating its answer, leading to more informed and accurate reasoning.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Given the following knowledge: [generated facts about penguins and flight]. Now answer: Is it possible for a penguin to fly higher than a typical commercial airplane?&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Verify the Answer Against the Knowledge</h3>
+                            <p class="element-timeline__text">Review the model&rsquo;s answer to ensure it correctly uses the generated knowledge and doesn&rsquo;t contradict it. Check for logical consistency between the knowledge statements and the conclusion. Remember that the generated knowledge itself may contain errors &mdash; always verify important claims against trusted sources.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;No, penguins cannot fly at all. They are flightless birds whose wings evolved into flippers. Since they cannot achieve any altitude through flight, they cannot fly higher than a commercial airplane (or anything else). Note: The generated knowledge was consistent, but the user should verify these biological claims against a reliable reference.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why knowledge priming produces more accurate answers</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Direct Answer</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>Part of golf is trying to get a lower point total than others. True or False?</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>True.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Correct but unsupported, no reasoning visible, could easily be a guess</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Generated Knowledge</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Step 1: Knowledge Generation</span>
+                                <p><strong>Generated knowledge:</strong> Golf is scored by counting strokes. Each stroke adds one point. The player with the fewest total strokes (lowest score) wins. Par is the expected number of strokes for a hole. Scoring below par (birdie, eagle) is desirable. A higher score means worse performance.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Step 2: Knowledge-Informed Answer</span>
+                                <p>True. In golf, each stroke counts as a point, and the objective is to complete the course in as few strokes as possible. The player with the lowest total score wins, making golf one of the few major sports where a lower score is better. Terms like &ldquo;birdie&rdquo; (one under par) and &ldquo;eagle&rdquo; (two under par) reflect this &mdash; scoring below the expected number is the goal.</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Grounded in explicit knowledge, well-reasoned, verifiable explanation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Generated Knowledge in Action</h2>
+                <p class="section-subtitle fade-in-up">See how knowledge priming improves reasoning across domains</p>
+
+                <div class="accordion fade-in-up" id="gkp-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Commonsense Reasoning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Step 1: Knowledge Generation</span>
+                                    <p>&ldquo;Generate 5 relevant facts about glass, its properties, and how it interacts with sound and light.&rdquo;<br><br><strong>Generated:</strong> Glass is a solid but brittle material. Glass is transparent to visible light but can block UV rays. Glass can shatter when exposed to specific resonant frequencies of sound. Tempered glass is 4x stronger than regular glass. Sound travels through glass but is partially absorbed, making it useful for sound insulation.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Step 2: Knowledge-Informed Question</span>
+                                    <p><strong>Question:</strong> &ldquo;Can a singer break a glass with their voice? Use the knowledge above to reason through your answer. Flag anything you are uncertain about.&rdquo;<br><br><strong>Answer:</strong> Yes, it is physically possible. Glass has a natural resonant frequency, and when a singer produces a sustained note at that exact frequency with sufficient amplitude (volume), the vibrations can exceed the glass&rsquo;s structural tolerance and cause it to shatter. This has been demonstrated experimentally, though it requires exceptional vocal control and volume. Tempered glass would be much harder to break due to its 4x greater strength. <em>Note: While the physics are well-established, verify specific claims about vocal amplitude thresholds against acoustics references.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Historical Analysis</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Step 1: Knowledge Generation</span>
+                                    <p>&ldquo;Generate relevant historical knowledge about the Silk Road, including its time period, routes, and cultural significance.&rdquo;<br><br><strong>Generated:</strong> The Silk Road was a network of trade routes active from roughly the 2nd century BCE to the 15th century CE. It connected East Asia to the Mediterranean through Central Asia. The routes carried silk, spices, precious metals, and other goods. The Silk Road facilitated the spread of religions including Buddhism, Islam, and Christianity. It was also a vector for disease transmission, including the Black Death. The Mongol Empire&rsquo;s Pax Mongolica (13th&ndash;14th century) was a peak period of Silk Road activity.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Step 2: Knowledge-Informed Question</span>
+                                    <p><strong>Question:</strong> &ldquo;Was the Silk Road more important for trade or cultural exchange? Use the knowledge above to support your reasoning. Acknowledge areas of historical debate.&rdquo;<br><br><strong>Answer:</strong> The two functions were inseparable, but the cultural impact arguably outlasted the commercial one. While trade in silk, spices, and metals drove the economic incentive to maintain the routes, the cultural exchanges they enabled &mdash; the spread of Buddhism from India to China, Islam across Central Asia, and scientific knowledge in both directions &mdash; reshaped civilizations permanently. Even when trade routes shifted to maritime paths in the 15th century, the religious and intellectual transformations they had catalyzed continued for centuries. <em>Note: This is a matter of historical interpretation. Historians debate the relative weight of commercial vs. cultural significance. Verify specific claims against academic sources.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Technical Problem-Solving</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Step 1: Knowledge Generation</span>
+                                    <p>&ldquo;Generate relevant technical knowledge about database indexing, including how indexes work, types of indexes, and their performance tradeoffs.&rdquo;<br><br><strong>Generated:</strong> Database indexes are data structures that speed up row retrieval at the cost of additional storage and write overhead. B-tree indexes are the most common and support range queries efficiently. Hash indexes are faster for exact-match queries but don&rsquo;t support ranges. Composite indexes cover multiple columns but column order matters. Over-indexing slows write operations because every INSERT/UPDATE must maintain all indexes. Covering indexes include all queried columns, eliminating the need for table lookups.</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Step 2: Knowledge-Informed Question</span>
+                                    <p><strong>Question:</strong> &ldquo;My database query is slow. It filters on user_id and created_at but the table has 50 million rows. What indexing strategy should I consider? Use the knowledge above. Note any assumptions you are making.&rdquo;<br><br><strong>Answer:</strong> Create a composite B-tree index on (user_id, created_at) in that order. Since you&rsquo;re filtering on user_id (likely equality) and created_at (likely a range), the B-tree index will first narrow to matching user_ids, then efficiently scan the date range within that subset. If you also SELECT specific columns frequently, consider a covering index that includes those columns to avoid table lookups entirely. However, if this is a write-heavy table, monitor the write performance impact of adding indexes. <em>Assumptions: user_id is an equality filter, created_at is a range filter, and you&rsquo;re using a relational database that supports B-tree indexes. Verify this strategy against your specific database engine&rsquo;s documentation.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Generated Knowledge</h2>
+                <p class="section-subtitle fade-in-up">Best for tasks where surfacing the right context improves accuracy</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Commonsense Reasoning</strong>
+                                    <p>Questions that seem simple but require connecting multiple pieces of everyday knowledge &mdash; the original strength of this technique.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Offline Reasoning (No Retrieval Available)</strong>
+                                    <p>When you can&rsquo;t use RAG or external search, Generated Knowledge lets the model be its own knowledge base &mdash; surfacing facts from its training data explicitly.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Cross-Domain Questions</strong>
+                                    <p>Questions that span multiple knowledge domains &mdash; generating knowledge from each domain first ensures no relevant area is overlooked.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Nuanced True/False Questions</strong>
+                                    <p>Questions where the answer depends on understanding subtle distinctions &mdash; knowledge priming prevents the model from rushing to a surface-level answer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>When RAG is Available</strong>
+                                    <p>If you can retrieve actual documents, real-world data beats model-generated knowledge. Generated knowledge is a fallback, not a replacement for verified sources.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Rapidly Evolving Topics</strong>
+                                    <p>The model&rsquo;s generated knowledge reflects its training data cutoff. For current events or fast-moving fields, the generated facts may be outdated.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple Direct Lookups</strong>
+                                    <p>Questions with straightforward factual answers don&rsquo;t benefit from the two-step overhead &mdash; &ldquo;What year was the Eiffel Tower built?&rdquo; is better answered directly.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Generated Knowledge delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Educational Assessment</h3>
+                        <p class="use-case-showcase__desc">Generate domain knowledge before answering quiz or exam questions, demonstrating understanding rather than pattern-matching.
+                        Always verify generated answers against textbook sources before relying on them.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Technical Troubleshooting</h3>
+                        <p class="use-case-showcase__desc">Surface relevant system knowledge before diagnosing issues. Having the model recall architecture details, common failure modes, and configuration requirements improves diagnostic accuracy.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Medical Decision Support</h3>
+                        <p class="use-case-showcase__desc">Generate relevant clinical knowledge about symptoms, conditions, and treatment protocols before analyzing a case &mdash; ensuring no relevant differential diagnosis is overlooked. Always have clinicians verify AI-assisted medical reasoning.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Expert Q&amp;A Systems</h3>
+                        <p class="use-case-showcase__desc">In chatbot or Q&amp;A applications, generate domain knowledge before answering user questions to provide richer, more contextual responses than direct-answer approaches.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Fact Verification</h3>
+                        <p class="use-case-showcase__desc">Generate background knowledge about a claim before evaluating its truthfulness. The explicit knowledge surface helps identify what facts support or contradict the claim under review.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Strategic Planning</h3>
+                        <p class="use-case-showcase__desc">Before generating recommendations, have the model surface relevant market conditions, competitor landscapes, and historical precedents &mdash; ensuring strategic advice is grounded in comprehensive context.
+                        Cross-reference all generated market data with verified sources.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Generated Knowledge Fits</h2>
+                <p class="section-subtitle fade-in-up">Generated Knowledge bridges direct prompting and retrieval-augmented approaches</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Direct Prompting</span>
+                        <span class="era-marker__title">No Context</span>
+                        <span class="era-marker__desc">Model answers from implicit knowledge</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Generated Knowledge</span>
+                        <span class="era-marker__title">Self-Primed</span>
+                        <span class="era-marker__desc">Model surfaces its own knowledge first</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">RAG</span>
+                        <span class="era-marker__title">Retrieved Context</span>
+                        <span class="era-marker__desc">External documents provide ground truth</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Fine-Tuning</span>
+                        <span class="era-marker__title">Embedded Knowledge</span>
+                        <span class="era-marker__desc">Domain knowledge baked into model weights</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">The RAG Connection</div>
+                    <p>Generated Knowledge Prompting is often called a &ldquo;precursor to RAG.&rdquo; Both techniques share the same core insight: providing explicit context before answering improves accuracy. The difference is the source. Generated Knowledge uses the model&rsquo;s own training data; RAG retrieves real documents. When you have access to a knowledge base, RAG is almost always better. But when you don&rsquo;t &mdash; or when the model&rsquo;s training data is sufficient &mdash; Generated Knowledge is a powerful, zero-infrastructure alternative.</p>
+                    <p>A practical hybrid approach: use Generated Knowledge as a <strong>first pass</strong>, then verify or augment the generated facts with retrieval when possible. This two-layer strategy gives you the breadth of the model&rsquo;s training data plus the grounding of real documents.</p>
+                    <p><strong>Important:</strong> Generated knowledge is only as reliable as the model&rsquo;s training data. Always treat it as a starting point, not a definitive source. Cross-reference critical facts against trusted, verified sources before acting on them.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary knowledge enhancement techniques</p>
+
+                <a href="rag.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">RAG (Retrieval-Augmented Generation)</span>
+                        <span class="evolution-callout__desc">Replaces model-generated knowledge with retrieved real documents &mdash; the production-grade successor to Generated Knowledge&rsquo;s self-priming approach.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="chain-of-thought.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Chain-of-Thought</span>
+                        <span class="evolution-callout__desc">While Generated Knowledge primes what the model knows, CoT structures how it reasons. Combining both generates knowledge first, then reasons through it step-by-step.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="scratchpad-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Related</span>
+                        <span class="evolution-callout__title">Scratchpad Prompting</span>
+                        <span class="evolution-callout__desc">Uses a working memory space for intermediate computations &mdash; similar to Generated Knowledge&rsquo;s approach of making implicit knowledge explicit before answering.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Prime Your Prompts with Knowledge</h2>
+                        <p class="cta-corporate__text">Try Generated Knowledge on your own questions or build knowledge-enhanced prompts with our tools.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>

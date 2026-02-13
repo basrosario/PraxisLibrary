@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dialogue-Guided Prompting: Structure prompts as multi-turn dialogues with role-based guidance, enabling models to reason proactively through conversational exchanges.">
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Praxis Library">
+    <meta name="theme-color" content="#DC3545">
+    <link rel="canonical" href="https://praxislibrary.com/learn/dialogue-guided.html">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Dialogue-Guided Prompting - Praxis">
+    <meta property="og:description" content="Dialogue-Guided Prompting: Structure prompts as multi-turn dialogues with role-based guidance, enabling models to reason proactively through conversational exchanges.">
+    <meta property="og:url" content="https://praxislibrary.com/learn/dialogue-guided.html">
+    <meta property="og:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <meta property="og:site_name" content="Praxis Library">
+    <meta property="og:locale" content="en_US">
+    <!-- Social Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dialogue-Guided Prompting - Praxis">
+    <meta name="twitter:description" content="Dialogue-Guided Prompting: Structure prompts as multi-turn dialogues with role-based guidance, enabling models to reason proactively through conversational exchanges.">
+    <meta name="twitter:image" content="https://praxislibrary.com/assets/images/praxishome.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LearningResource",
+        "Article"
+      ],
+      "headline": "Dialogue-Guided Prompting",
+      "name": "Dialogue-Guided Prompting",
+      "description": "Dialogue-Guided Prompting: Structure prompts as multi-turn dialogues with role-based guidance, enabling models to reason proactively through conversational exchanges.",
+      "url": "https://praxislibrary.com/learn/dialogue-guided.html",
+      "inLanguage": "en-US",
+      "learningResourceType": "Tutorial",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalUse": "AI Prompt Engineering",
+      "isAccessibleForFree": true,
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "name": "Praxis Library",
+        "alternateName": "The Open Standard in AI Literacy",
+        "url": "https://praxislibrary.com",
+        "logo": "https://praxislibrary.com/favicon.svg",
+        "description": "A comprehensive, living library of 5,000+ AI terms, 177 techniques & frameworks, and interactive tools. The definitive open resource for AI literacy, prompt engineering, and human-AI communication.",
+        "sameAs": [
+          "https://www.tiktok.com/@thepraxislibrary",
+          "https://www.facebook.com/profile.php?id=61587612308104",
+          "https://github.com/PowerOfPraxis/PraxisLibrary"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "AI Literacy",
+          "Prompt Engineering",
+          "AI Prompting Techniques",
+          "AI Glossary",
+          "Large Language Models",
+          "Chain-of-Thought Prompting",
+          "AI Education",
+          "Human-AI Communication",
+          "Neurodivergence and AI",
+          "AI Safety",
+          "AI Ethics"
+        ]
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Praxis Library",
+        "url": "https://praxislibrary.com"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Prompt Engineering"
+        },
+        {
+          "@type": "Thing",
+          "name": "AI Communication"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://praxislibrary.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discover",
+          "item": "https://praxislibrary.com/learn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Dialogue-Guided Prompting"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <!-- /SEO -->
+
+<title>Dialogue-Guided Prompting - Praxis</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <header class="header" id="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">&lt;/Praxis <span>Library</span>&gt;</a>
+            <nav class="nav" id="nav" aria-label="Main navigation">
+                <a href="../foundations/index.html" class="nav-link">History</a>
+                <div class="nav-item has-dropdown">
+                    <a href="../learn/index.html" class="nav-link active" aria-expanded="false">Discover</a>
+                                        <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="index.html">Prompt Engineering</a>
+                            <a href="./prompt-basics.html">Prompt Basics</a>
+                            <a href="./facts-fictions.html">Facts &amp; Fictions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../tools/index.html" class="nav-link" aria-expanded="false">Readiness</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-section">
+                            <h4>Tools</h4>
+                            <a href="../quiz/index.html">Readiness Quiz</a>
+                            <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                            <a href="../tools/guidance.html">Prompt Builder</a>
+                            <a href="../tools/matcher.html">Technique Finder</a>
+                            <a href="../tools/checklist.html">Preflight Checklist</a>
+                            <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../patterns/index.html">Patterns Library</a>
+                            <a href="../pages/ai-safety.html">AI Safety</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="../pages/resources.html" class="nav-link" aria-expanded="false">Resources</a>
+                    <div class="mega-menu mega-menu--categories">
+                        <div class="mega-menu-quick-links">
+                            <a href="../pages/glossary.html">Glossary</a>
+                            <a href="../pages/faq.html">FAQ</a>
+                            <a href="../benchmarks/index.html">AI Benchmarks</a>
+                            <a href="../pages/responsible-ai.html">Responsible AI</a>
+                            <a href="../pages/security.html">Security</a>
+                            <a href="../neurodivergence/resources.html">ND Resources</a>
+                            <a href="../pages/about.html">About Praxis</a>
+                            <a href="../pages/audit-report.html">Audit Report</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+
+
+    <main id="main-content" data-page-type="technique">
+        <!-- === HERO SECTION === -->
+        <section class="page-hero">
+            <canvas id="page-hero-neural-bg" class="page-hero-neural-bg"></canvas>
+            <div class="container">
+                <nav class="breadcrumb fade-in" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Discover</a>
+                    <span class="separator">/</span>
+                    <span class="current">Dialogue-Guided</span>
+                </nav>
+                <div class="hero-badge">
+                    <span class="hero-badge__text">Conversational Technique</span>
+                </div>
+                <h1 class="page-title fade-in">Dialogue-Guided Prompting</h1>
+                <p class="page-subtitle fade-in">Single-turn prompts compress your intent into one monolithic block. Dialogue-Guided Prompting breaks that mold &mdash; structuring prompts as multi-turn conversational exchanges where each message builds context, assigns roles, and steers reasoning iteratively toward a well-developed response.</p>
+            </div>
+        </section>
+        <!-- /HERO SECTION -->
+
+        <!-- === HISTORICAL CONTEXT === -->
+        <section class="section">
+            <div class="container">
+                <div class="highlight-box highlight-box--warning fade-in-up">
+                    <div class="highlight-box__content">
+                        <span class="highlight-box__title">Technique Context: 2023</span>
+                        <p><strong>Introduced:</strong> Dialogue-Guided Prompting emerged in 2023 as researchers recognized that multi-turn dialogue structures could outperform monolithic single-turn prompts for complex tasks. The technique leverages the conversational nature of modern chat-based LLMs by assigning roles, establishing context progressively across turns, and using follow-up messages to refine and guide the model&rsquo;s reasoning. Rather than cramming all instructions into one prompt, each turn incrementally shapes the model&rsquo;s understanding and output.</p>
+                        <p><strong>Modern LLM Status:</strong> With modern LLMs optimized for multi-turn dialogue in 2026, Dialogue-Guided Prompting has become natural to how people interact with AI. The technique&rsquo;s insight &mdash; structuring reasoning through conversation &mdash; is now the default interaction paradigm. It remains valuable as a <strong>deliberate strategy</strong> for complex tasks requiring iterative refinement, where casual conversation would miss important constraints or context that a structured dialogue approach captures systematically.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HISTORICAL CONTEXT -->
+
+        <!-- === THE CONCEPT === -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="split-section split-section--center fade-in-up">
+                    <div class="split-section__content">
+                        <span class="split-section__badge">The Core Insight</span>
+                        <h2 class="split-section__title">Conversations Are Structured Reasoning</h2>
+                        <p class="split-section__text">A single prompt tries to do everything at once: set the role, provide context, define constraints, and request output. This monolithic approach works for simple tasks, but complex reasoning benefits from the natural scaffolding of conversation. Each turn in a dialogue can serve a distinct purpose &mdash; one establishes the persona, another provides domain context, a third refines the constraints, and the final turn requests the deliverable.</p>
+                        <p class="split-section__text"><strong>Dialogue-Guided Prompting formalizes this intuition.</strong> Instead of hoping one massive prompt covers everything, you design a deliberate sequence of exchanges. The model accumulates context across turns, and you can observe its intermediate understanding before steering it further. Each turn is a checkpoint where you verify alignment before proceeding.</p>
+                        <p class="split-section__text">Think of it like a meeting agenda versus a memo. A memo delivers everything at once and hopes the reader interprets it correctly. An agenda structures the discussion into stages, allows for clarification, and builds toward a conclusion collaboratively.</p>
+                    </div>
+                    <div class="split-section__visual">
+                        <div class="highlight-box highlight-box--info">
+                            <div class="highlight-box__content">
+                                <span class="highlight-box__title">Why Multi-Turn Outperforms Single-Turn for Complex Tasks</span>
+                                <p>When you pack an entire complex request into one prompt, the model must parse role, context, constraints, format, and task simultaneously. Ambiguities compound silently. With dialogue-guided structure, each turn isolates one dimension of the task. You see the model&rsquo;s interpretation at each stage and can correct course immediately &mdash; before errors cascade into the final output. This incremental approach mirrors how human experts break down problems through discussion.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE CONCEPT -->
+
+        <!-- === HOW IT WORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">The Dialogue-Guided Process</h2>
+                <p class="section-subtitle fade-in-up">Four stages from role assignment to refined output</p>
+
+                <div class="element-timeline fade-in-up">
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">1</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Establish the Role and Persona</h3>
+                            <p class="element-timeline__text">The first turn assigns a clear role to the model. Rather than embedding role instructions within a larger prompt, a dedicated opening message establishes who the model is, what expertise it brings, and how it should approach the conversation. This sets the behavioral foundation for all subsequent turns.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;You are a senior data engineer with 10 years of experience in ETL pipeline design. You specialize in Python-based data processing and have deep knowledge of Apache Spark and Airflow. Respond as this expert throughout our conversation.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">2</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Provide Domain Context Incrementally</h3>
+                            <p class="element-timeline__text">Subsequent turns layer in specific context: the problem domain, existing constraints, prior decisions, or relevant background information. Each message adds one dimension of context, allowing the model to process and integrate information progressively rather than parsing everything at once.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;We have a legacy ETL pipeline that processes 50 million records daily from three PostgreSQL databases into a Snowflake warehouse. The current pipeline uses Pandas and runs on a single EC2 instance. Processing time has grown to 14 hours and we need to get it under 4 hours.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">3</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Refine Through Guided Follow-Ups</h3>
+                            <p class="element-timeline__text">After the model responds, follow-up turns steer the reasoning deeper. You can ask the model to elaborate on specific aspects, challenge its assumptions, request alternatives, or introduce additional constraints. Each exchange narrows the solution space while the model retains the full conversational context.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Good analysis. Now consider that our team has no Spark experience and we need to minimize the learning curve. Also, our budget for infrastructure changes is limited to $500/month. How does this change your recommendation?&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="element-timeline__item">
+                        <div class="element-timeline__marker">
+                            <span class="element-timeline__number">4</span>
+                        </div>
+                        <div class="element-timeline__content">
+                            <h3 class="element-timeline__title">Synthesize the Final Deliverable</h3>
+                            <p class="element-timeline__text">The final turn requests the concrete output &mdash; now informed by all the context, constraints, and refinements from the preceding dialogue. The model produces a response that reflects the full depth of the multi-turn conversation, incorporating every constraint and refinement organically rather than mechanically.</p>
+                            <div class="element-timeline__example">
+                                <span class="element-timeline__example-label">Example</span>
+                                <p>&ldquo;Based on everything we have discussed, write a concrete migration plan with phases, timelines, and risk mitigations. Format it as a technical proposal I can present to our VP of Engineering. Remember to always verify technical claims in this proposal against current documentation before presenting it.&rdquo;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /HOW IT WORKS -->
+
+        <!-- === VISUAL: THE COMPARISON === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">See the Difference</h2>
+                <p class="section-subtitle fade-in-up">Why structured dialogue produces better results than single-turn prompts</p>
+
+                <div class="comparison-panel fade-in-up">
+                    <div class="comparison-panel__side comparison-panel__side--before">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 8v4M12 16h.01"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Single-Turn Prompt</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Prompt</span>
+                                <p>You are a marketing strategist. Write a go-to-market strategy for a B2B SaaS product targeting mid-market companies in the healthcare sector. Include positioning, channels, messaging, budget allocation, and a 90-day timeline. Make it detailed and actionable.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Response</span>
+                                <p>Here is a go-to-market strategy for your B2B SaaS healthcare product... [Generic strategy with surface-level recommendations, no awareness of specific product features, competitive landscape, or organizational constraints]</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--weak">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12h8"/>
+                            </svg>
+                            <span>Generic, context-thin, assumes details that were never provided</span>
+                        </div>
+                    </div>
+
+                    <div class="comparison-panel__divider">
+                        <span>VS</span>
+                    </div>
+
+                    <div class="comparison-panel__side comparison-panel__side--after">
+                        <div class="comparison-panel__header">
+                            <span class="comparison-panel__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </span>
+                            <h3 class="comparison-panel__title">Dialogue-Guided</h3>
+                        </div>
+                        <div class="comparison-panel__content">
+                            <div class="comparison-panel__prompt">
+                                <span class="comparison-panel__label">Multi-Turn Dialogue</span>
+                                <p><strong>Turn 1:</strong> You are a B2B SaaS marketing strategist who has launched 5+ healthcare products.<br>
+                                <strong>Turn 2:</strong> Our product is an EHR integration platform. Competitors are Redox and Health Gorilla. We have $200K for launch.<br>
+                                <strong>Turn 3:</strong> Our sales cycle is 6-9 months. We already have 3 pilot customers. What channels have the best ROI for this profile?<br>
+                                <strong>Turn 4:</strong> Good. Now factor in HIPAA compliance messaging requirements and write the full 90-day plan.</p>
+                            </div>
+                            <div class="comparison-panel__result">
+                                <span class="comparison-panel__label">Final Output</span>
+                                <p>Based on our discussion of your EHR integration platform, $200K budget, 6-9 month sales cycle, existing pilot base, and HIPAA messaging requirements... [Highly specific strategy grounded in actual constraints, competitive positioning against named competitors, actionable channel mix]</p>
+                            </div>
+                        </div>
+                        <div class="comparison-panel__verdict comparison-panel__verdict--strong">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 12l3 3 5-5"/>
+                            </svg>
+                            <span>Context-rich, constraint-aware, grounded in specific details from each turn</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /THE COMPARISON -->
+
+        <!-- === NLP TIP === -->
+        <section class="section-tip fade-in-up">
+            <div class="container">
+                <div class="section-tip__content">
+                    <div class="section-tip__icon">
+                        <svg viewBox="-3 -3 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+                            <path d="M12 -1.5v2.5M6.3 2.5L4.5 0.7M17.7 2.5l1.8-1.8M3.2 7.5L1 6.5M20.8 7.5L23 6.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-tip__text">
+                        <h3 class="section-tip__title">Natural Language Works Too</h3>
+                        <p>While structured frameworks and contextual labels are powerful tools, <strong>LLMs are exceptionally good at understanding natural language.</strong> As long as your prompt contains the actual contextual information needed to create, answer, or deliver the response you&rsquo;re looking for &mdash; the who, what, why, and constraints &mdash; the AI can produce complete and accurate results whether you use a formal framework or plain conversational language. But even in 2026, with the best prompts, <strong>verifying AI output is always a necessary step.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /NLP TIP -->
+
+
+        <!-- === EXAMPLES IN ACTION === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Dialogue-Guided in Action</h2>
+                <p class="section-subtitle fade-in-up">See how structured multi-turn exchanges improve complex task outcomes</p>
+
+                <div class="accordion fade-in-up" id="dialogue-guided-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Technical Architecture Review</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Multi-Turn Dialogue</span>
+                                    <p><strong>Turn 1 (Role):</strong> &ldquo;You are a cloud solutions architect with expertise in AWS and distributed systems. You prioritize cost optimization and operational simplicity.&rdquo;<br><br>
+                                    <strong>Turn 2 (Context):</strong> &ldquo;We run a microservices application with 12 services on ECS Fargate. Monthly AWS bill is $18K. Traffic is highly variable &mdash; peaks at 10x baseline during US business hours, near-zero overnight.&rdquo;<br><br>
+                                    <strong>Turn 3 (Refinement):</strong> &ldquo;Our team has 3 engineers. We cannot take on Kubernetes complexity. What are the top 3 cost reduction strategies that maintain our current simplicity?&rdquo;<br><br>
+                                    <strong>Turn 4 (Deliverable):</strong> &ldquo;Write an implementation plan for strategy #1 with specific AWS service configurations, estimated savings, and rollback procedures. Note: Please flag any estimates that I should verify against current AWS pricing before relying on them.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>Each turn isolates one dimension: expertise, system context, constraints, and deliverable format. By Turn 4, the model has accumulated deep context about the specific infrastructure, team capacity, and cost targets. The final output is grounded in the actual constraints rather than generic best practices. The ethics reminder ensures the user verifies pricing claims rather than blindly trusting AI-generated cost estimates.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Educational Curriculum Design</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Multi-Turn Dialogue</span>
+                                    <p><strong>Turn 1 (Role):</strong> &ldquo;You are an experienced K-12 curriculum designer who specializes in making complex STEM topics accessible to diverse learners, including neurodivergent students.&rdquo;<br><br>
+                                    <strong>Turn 2 (Context):</strong> &ldquo;I need a 6-week unit on climate science for 8th graders. The class has 28 students including 5 with IEPs and 3 English language learners. We have limited lab equipment but good computer access.&rdquo;<br><br>
+                                    <strong>Turn 3 (Refinement):</strong> &ldquo;The unit needs to align with NGSS MS-ESS3-5. I want to emphasize data literacy and critical thinking over memorization. What project-based approaches would work?&rdquo;<br><br>
+                                    <strong>Turn 4 (Deliverable):</strong> &ldquo;Create the detailed week-by-week plan for the data journalism approach you suggested. Include accommodations for the IEP students and scaffolding for ELL students. Important: I will need to review all content against current NGSS standards and my district requirements before using this curriculum.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>The dialogue progressively builds from expertise to student demographics to standards alignment to specific pedagogical approach. By the final turn, the model produces a curriculum that accounts for IEPs, ELL scaffolding, NGSS alignment, and the chosen project-based methodology &mdash; none of which a single-turn prompt could capture with the same precision. The verification reminder ensures the educator checks AI-generated curriculum against actual standards.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" aria-expanded="false">
+                            <span class="accordion-title">Incident Response Planning</span>
+                            <span class="accordion-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="technique-demo">
+                                <div class="technique-demo__prompt">
+                                    <span class="technique-demo__tag">Multi-Turn Dialogue</span>
+                                    <p><strong>Turn 1 (Role):</strong> &ldquo;You are a cybersecurity incident response lead with experience handling breaches at mid-size financial institutions.&rdquo;<br><br>
+                                    <strong>Turn 2 (Context):</strong> &ldquo;Our SOC detected unusual data exfiltration from a database server at 2 AM. The server holds PII for 150,000 customers. Initial analysis shows a compromised service account with elevated privileges.&rdquo;<br><br>
+                                    <strong>Turn 3 (Refinement):</strong> &ldquo;We are subject to state breach notification laws in California, New York, and Texas. Our cyber insurance requires notification within 72 hours. What is the priority sequence for the next 24 hours?&rdquo;<br><br>
+                                    <strong>Turn 4 (Deliverable):</strong> &ldquo;Write the first 24-hour incident response playbook as a numbered checklist with responsible parties, decision points, and escalation triggers. Critical reminder: All legal and regulatory steps in this playbook must be verified against current state statutes and our actual insurance policy before execution.&rdquo;</p>
+                                </div>
+                                <div class="technique-demo__response">
+                                    <span class="technique-demo__tag">Why This Works</span>
+                                    <p>Each turn layers critical context: the expertise domain, the specific incident details, the regulatory environment, and the output format. The dialogue structure ensures the model does not produce a generic incident response plan but one tailored to the specific breach characteristics, regulatory obligations, and organizational constraints. The verification reminder models responsible AI use by flagging that legal and regulatory content must be validated by humans.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /EXAMPLES IN ACTION -->
+
+
+        <!-- === WHEN TO USE === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">When to Use Dialogue-Guided Prompting</h2>
+                <p class="section-subtitle fade-in-up">Best for complex tasks that benefit from iterative context-building</p>
+
+                <div class="split-section fade-in-up">
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Perfect For</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Complex Multi-Constraint Tasks</strong>
+                                    <p>Tasks with many interacting requirements that are clearer when introduced one at a time rather than packed into a single prompt.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Iterative Refinement</strong>
+                                    <p>When you need to see intermediate thinking and course-correct before the model produces a final deliverable &mdash; each turn is a checkpoint.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Role-Dependent Expertise</strong>
+                                    <p>When the model needs to adopt a specific expert persona and maintain that perspective consistently across a complex analysis.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--positive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <div>
+                                    <strong>Exploratory Problem-Solving</strong>
+                                    <p>When you do not know all constraints upfront &mdash; dialogue lets you discover and incorporate new requirements as the conversation reveals them.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split-section__content">
+                        <h3 class="split-section__subtitle">Skip It When</h3>
+                        <div class="feature-list">
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Simple, Well-Defined Tasks</strong>
+                                    <p>Straightforward requests with clear parameters &mdash; &ldquo;Translate this paragraph to French&rdquo; does not benefit from multi-turn structure.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>API / Automated Pipelines</strong>
+                                    <p>Programmatic workflows where multi-turn overhead adds latency and complexity &mdash; single-turn structured prompts are more efficient for automation.</p>
+                                </div>
+                            </div>
+                            <div class="feature-list__item feature-list__item--neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="8" y1="12" x2="16" y2="12"/>
+                                </svg>
+                                <div>
+                                    <strong>Context Window Concerns</strong>
+                                    <p>When you are already near the model&rsquo;s context limit &mdash; multi-turn dialogue consumes more tokens than a single optimized prompt.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /WHEN TO USE -->
+
+        <!-- === USE CASES === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Use Cases</h2>
+                <p class="section-subtitle fade-in-up">Where Dialogue-Guided Prompting delivers the most value</p>
+
+                <div class="use-case-showcase fade-in-up">
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Strategic Planning</h3>
+                        <p class="use-case-showcase__desc">Build comprehensive business strategies by layering market context, competitive intelligence, organizational constraints, and financial parameters across deliberate turns.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Technical Writing</h3>
+                        <p class="use-case-showcase__desc">Guide documentation creation through progressive context &mdash; audience, technical depth, format standards, and review requirements introduced turn by turn.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Diagnostic Analysis</h3>
+                        <p class="use-case-showcase__desc">Methodically narrow complex diagnostic scenarios in healthcare, IT, or engineering by introducing symptoms, test results, and constraints across conversational turns.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Consulting Engagements</h3>
+                        <p class="use-case-showcase__desc">Simulate expert consulting sessions where each turn peels back a layer of the client&rsquo;s problem, building toward a tailored recommendation grounded in all disclosed details.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Policy Development</h3>
+                        <p class="use-case-showcase__desc">Craft organizational policies by progressively introducing regulatory requirements, stakeholder needs, existing frameworks, and implementation constraints through structured dialogue.</p>
+                    </div>
+
+                    <div class="use-case-showcase__item">
+                        <div class="use-case-showcase__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"/>
+                                <path d="M12 20V4"/>
+                                <path d="M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3 class="use-case-showcase__title">Data Analysis Workflows</h3>
+                        <p class="use-case-showcase__desc">Guide data analysis step-by-step: define the dataset, establish hypotheses, select methods, interpret results &mdash; each turn building on the model&rsquo;s prior output.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /USE CASES -->
+
+        <!-- === FRAMEWORK POSITIONING === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Where Dialogue-Guided Fits</h2>
+                <p class="section-subtitle fade-in-up">Dialogue-Guided bridges single-turn prompting and fully autonomous agent workflows</p>
+
+                <div class="evolution-timeline fade-in-up">
+                    <div class="era-marker">
+                        <span class="era-marker__year">Single-Turn</span>
+                        <span class="era-marker__title">Monolithic Prompts</span>
+                        <span class="era-marker__desc">All context packed into one message</span>
+                    </div>
+                    <div class="era-marker era-marker--active">
+                        <span class="era-marker__year">Dialogue-Guided</span>
+                        <span class="era-marker__title">Structured Conversation</span>
+                        <span class="era-marker__desc">Multi-turn with deliberate role and context staging</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Flipped Interaction</span>
+                        <span class="era-marker__title">AI-Led Questioning</span>
+                        <span class="era-marker__desc">Model drives the dialogue by asking the questions</span>
+                    </div>
+                    <div class="era-marker">
+                        <span class="era-marker__year">Agent Workflows</span>
+                        <span class="era-marker__title">Autonomous Iteration</span>
+                        <span class="era-marker__desc">Multi-step reasoning with tool use and self-correction</span>
+                    </div>
+                </div>
+
+                <div class="callout tip fade-in-up">
+                    <div class="callout-title">Combine with Role Prompting</div>
+                    <p>Dialogue-Guided Prompting is especially powerful when combined with Role Prompting. Use the first turn to establish a deep, specific persona &mdash; then use subsequent turns to leverage that persona&rsquo;s expertise on your specific problem. The role becomes more consistent and nuanced when established as a dedicated conversational act rather than a prefix to a longer prompt.</p>
+                </div>
+            </div>
+        </section>
+        <!-- /FRAMEWORK POSITIONING -->
+
+        <!-- === RELATED FRAMEWORKS === -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Related Techniques</h2>
+                <p class="section-subtitle fade-in-up">Explore complementary conversational and role-based techniques</p>
+
+                <a href="flipped-interaction.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Evolution</span>
+                        <span class="evolution-callout__title">Flipped Interaction</span>
+                        <span class="evolution-callout__desc">Takes dialogue further by letting the AI lead the conversation &mdash; asking you the questions instead of waiting for your guidance at each turn.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="socratic-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Complement</span>
+                        <span class="evolution-callout__title">Socratic Prompting</span>
+                        <span class="evolution-callout__desc">Uses targeted questioning to guide reasoning &mdash; where Dialogue-Guided structures context delivery, Socratic structures inquiry to deepen understanding.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+
+                <a href="role-prompting.html" class="evolution-callout fade-in-up">
+                    <span class="evolution-callout__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 2l4 4-4 4"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
+                            <path d="M7 22l-4-4 4-4"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                    </span>
+                    <div class="evolution-callout__content">
+                        <span class="evolution-callout__label">Foundation</span>
+                        <span class="evolution-callout__title">Role Prompting</span>
+                        <span class="evolution-callout__desc">The persona-assignment technique that Dialogue-Guided builds upon &mdash; the first turn of a dialogue-guided exchange is typically a role prompt.</span>
+                    </div>
+                    <span class="evolution-callout__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        <!-- /RELATED FRAMEWORKS -->
+
+        <!-- === CTA SECTION === -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-corporate cta-corporate--dark fade-in-up">
+                    <canvas id="cta-neural-bg" class="cta-corporate__canvas"></canvas>
+                    <div class="cta-corporate__content">
+                        <h2 class="cta-corporate__title">Structure Your Conversations</h2>
+                        <p class="cta-corporate__text">Try Dialogue-Guided Prompting on your next complex task or explore our tools for building structured conversational prompts.</p>
+                        <div class="cta-corporate__actions">
+                            <a href="../tools/guidance.html" class="btn btn-primary">Prompt Builder</a>
+                            <a href="../foundations/index.html" class="btn btn-secondary">All Foundations</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /CTA SECTION -->
+    </main>
+
+
+        <footer class="footer">
+    <canvas id="footer-neural-bg" class="footer-neural-bg"></canvas>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
+                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Techniques</h4>
+                <a href="../learn/prompt-basics.html">Prompt Basics</a>
+                <a href="../learn/crisp.html">CRISP Framework</a>
+                <a href="../learn/crispe.html">CRISPE Framework</a>
+                <a href="../learn/costar.html">CO-STAR Framework</a>
+                <a href="../learn/react.html">ReAct Framework</a>
+                <a href="../learn/flipped-interaction.html">Flipped Interaction</a>
+                <a href="../learn/chain-of-thought.html">Chain-of-Thought</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>AI Readiness Tools</h4>
+                <a href="../tools/analyzer.html">Prompt Analyzer</a>
+                <a href="../tools/matcher.html">Technique Finder</a>
+                <a href="../tools/checklist.html">Preflight Checklist</a>
+                <a href="../tools/guidance.html">Prompt Builder</a>
+                <a href="../tools/persona.html">Persona Architect</a>
+                <a href="../tools/hallucination.html">Hallucination Spotter</a>
+                <a href="../quiz/index.html">Readiness Quiz</a>
+            </div>
+
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
+                <a href="../pages/responsible-ai.html">Responsible AI</a>
+                <a href="../pages/faq.html">FAQ</a>
+                <a href="../pages/glossary.html">Glossary</a>
+                <a href="../pages/security.html">Security</a>
+                <a href="../pages/performance.html">Performance</a>
+                <a href="../pages/about.html">About</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>AI for Everybody</p>
+            <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
+        </div>
+
+        <div class="footer-policies">
+            <a href="../pages/responsible-ai.html">Responsible AI</a>
+            <a href="../pages/use-policy.html">Use Policy</a>
+            <a href="../pages/site-policy.html">Site Policy</a>
+            <a href="../pages/security-policy.html">Security Policy</a>
+            <a href="../pages/data-retention-policy.html">Data Retention</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Back to Top Bar -->
+    <button class="back-to-top-bar" aria-label="Back to top">
+        <span class="back-to-top-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </span>
+        <span class="back-to-top-text">Back to Top</span>
+    </button>
+
+    <!-- Accessibility Dashboard -->
+
+    <!-- =============================================
+         BADGE LIGHTBOX - Modal popup for badge info
+         ============================================= -->
+    <div class="badge-lightbox-overlay" aria-hidden="true"></div>
+    <div class="badge-lightbox" role="dialog" aria-modal="true" aria-labelledby="badge-lightbox-title">
+        <header class="badge-lightbox-header">
+            <h2 class="badge-lightbox-title" id="badge-lightbox-title"></h2>
+            <button class="badge-lightbox-close" aria-label="Close dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </header>
+        <div class="badge-lightbox-content"></div>
+    </div>
+    <!-- /BADGE LIGHTBOX -->
+
+    <div class="adl-dim-overlay" aria-hidden="true"></div>
+    <button class="adl-toggle" aria-label="Accessibility options" aria-expanded="false" aria-controls="adl-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 13v6M9 17l3 3 3-3"/>
+        </svg>
+    </button>
+    <div class="adl-panel" id="adl-panel" role="dialog" aria-label="Accessibility Settings">
+        <div class="adl-panel-header">
+            <span class="adl-panel-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="10" r="3"/>
+                    <path d="M12 13v6M9 17l3 3 3-3"/>
+                </svg>
+                Accessibility
+            </span>
+            <button class="adl-close" aria-label="Close accessibility panel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Text Size</span>
+            <div class="adl-btn-group">
+                <button class="adl-btn is-active" data-scale="1" aria-label="Normal text size">1x</button>
+                <button class="adl-btn" data-scale="2" aria-label="Large text size">2x</button>
+                <button class="adl-btn" data-scale="3" aria-label="Extra large text size">3x</button>
+            </div>
+        </div>
+        <div class="adl-control">
+            <div class="adl-switch-wrapper">
+                <span class="adl-switch-label">High Contrast</span>
+                <label class="adl-switch">
+                    <input type="checkbox" id="adl-contrast-toggle" aria-label="Toggle high contrast mode">
+                    <span class="adl-switch-track"></span>
+                </label>
+            </div>
+        </div>
+        <div class="adl-control adl-readaloud">
+            <span class="adl-label">Read Aloud</span>
+            <div class="adl-readaloud-controls">
+                <button class="adl-play-btn" aria-label="Play or pause reading">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                </button>
+                <div class="adl-speed-group">
+                    <button class="adl-speed-btn" data-speed="slow">Slow</button>
+                    <button class="adl-speed-btn is-active" data-speed="normal">Normal</button>
+                    <button class="adl-speed-btn" data-speed="fast">Fast</button>
+                </div>
+            </div>
+            <div class="adl-reading-indicator"></div>
+        </div>
+        <div class="adl-control">
+            <span class="adl-label">Screen Dimming</span>
+            <div class="adl-range-wrapper">
+                <input type="range" class="adl-range" id="adl-dim-slider" min="0" max="50" value="0" aria-label="Screen dimming level">
+                <span class="adl-range-value">0%</span>
+            </div>
+        </div>
+        <button class="adl-reset" aria-label="Reset accessibility settings to defaults">Reset to Defaults</button>
+    </div>
+
+    <script src="../app.js" defer></script>
+</body>
+</html>
