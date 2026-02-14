@@ -483,6 +483,52 @@ document.addEventListener('DOMContentLoaded', () => {
         ethicsTickerEyeballEl = eyeball;
     })();
 
+    // === MAINTENANCE BANNER ===
+    /** Site-wide maintenance banner — fixed below header, syncs with scroll state */
+    var maintenanceBannerEl = null;
+    (function() {
+        if (!header) return;
+
+        var banner = document.createElement('div');
+        banner.className = 'maintenance-banner';
+        banner.setAttribute('role', 'alert');
+
+        var inner = document.createElement('div');
+        inner.className = 'maintenance-banner__inner';
+
+        // Warning icon (triangle)
+        var svgNS = 'http://www.w3.org/2000/svg';
+        var icon = document.createElementNS(svgNS, 'svg');
+        icon.setAttribute('class', 'maintenance-banner__icon');
+        icon.setAttribute('viewBox', '0 0 24 24');
+        icon.setAttribute('fill', 'none');
+        icon.setAttribute('stroke', 'currentColor');
+        icon.setAttribute('stroke-width', '2');
+        var triPath = document.createElementNS(svgNS, 'path');
+        triPath.setAttribute('d', 'M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z');
+        icon.appendChild(triPath);
+        var line1 = document.createElementNS(svgNS, 'line');
+        line1.setAttribute('x1', '12'); line1.setAttribute('y1', '9');
+        line1.setAttribute('x2', '12'); line1.setAttribute('y2', '13');
+        icon.appendChild(line1);
+        var line2 = document.createElementNS(svgNS, 'line');
+        line2.setAttribute('x1', '12'); line2.setAttribute('y1', '17');
+        line2.setAttribute('x2', '12.01'); line2.setAttribute('y2', '17');
+        icon.appendChild(line2);
+
+        var text = document.createElement('span');
+        text.className = 'maintenance-banner__text';
+        text.textContent = 'Maintenance \u2014 Link verification in progress. External citations are pending review & verification.';
+
+        inner.appendChild(icon);
+        inner.appendChild(text);
+        banner.appendChild(inner);
+
+        header.parentNode.insertBefore(banner, header.nextSibling);
+        maintenanceBannerEl = banner;
+    })();
+    // /MAINTENANCE BANNER
+
     /**
      * Typewriter engine — types in → 8s normal → eyeball looks around →
      * 2s normal → tired blink → untype → next message. Eternal loop.
@@ -716,6 +762,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 header.classList.remove('header--ticker-offset');
                 document.documentElement.style.setProperty('--ticker-offset', '0px');
             }
+        }
+
+        // Sync maintenance banner — position below header + ticker + sticky sub-nav
+        if (maintenanceBannerEl) {
+            var bannerTop = header.offsetHeight;
+            if (isScrolled) {
+                maintenanceBannerEl.classList.add('maintenance-banner--scrolled');
+                bannerTop += ethicsTickerEl ? ethicsTickerEl.offsetHeight : 0;
+            } else {
+                maintenanceBannerEl.classList.remove('maintenance-banner--scrolled');
+            }
+            // Push below sticky sub-navs when they are stuck
+            // Each page may have one sticky sub-nav system; check in priority order
+            var glossarySearch = document.querySelector('.glossary-search-container');
+            var glossaryNav = document.querySelector('.glossary-nav');
+            var foundationsNav = document.querySelector('.foundations-nav');
+            var discoverFilters = document.querySelector('.discover-filters');
+            if (glossarySearch && glossaryNav && isScrolled) {
+                // Glossary: A-Z nav + search container are both sticky
+                var searchRect = glossarySearch.getBoundingClientRect();
+                if (searchRect.top <= bannerTop + glossaryNav.offsetHeight + 5) {
+                    bannerTop += glossaryNav.offsetHeight + glossarySearch.offsetHeight;
+                }
+            } else if (foundationsNav && isScrolled) {
+                var navRect = foundationsNav.getBoundingClientRect();
+                if (navRect.top <= bannerTop + 5) {
+                    bannerTop += foundationsNav.offsetHeight;
+                }
+            } else if (discoverFilters && isScrolled) {
+                var filterRect = discoverFilters.getBoundingClientRect();
+                if (filterRect.top <= bannerTop + 5) {
+                    bannerTop += discoverFilters.offsetHeight;
+                }
+            }
+            maintenanceBannerEl.style.top = bannerTop + 'px';
         }
 
         headerWasScrolled = isScrolled;
@@ -15475,20 +15556,20 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // Collect unverified WARNING items (UNVERIFIED messages), deduplicate by URL
+        // Collect unverified ERROR items (UNVERIFIED messages), deduplicate by URL
         categories.forEach(function(cat) {
-            if (!cat.warnings || !cat.warnings.length) return;
-            cat.warnings.forEach(function(w) {
-                if (!w.message || w.message.indexOf('UNVERIFIED') === -1) return;
-                var parsed = parseUnverifiedMessage(w.message);
+            var sources = (cat.errors || []).concat(cat.warnings || []);
+            sources.forEach(function(item) {
+                if (!item.message || item.message.indexOf('UNVERIFIED') === -1) return;
+                var parsed = parseUnverifiedMessage(item.message);
                 if (!parsed.url) return;
                 if (seen[parsed.url]) return;
                 seen[parsed.url] = true;
                 unverifiedItems.push({
                     url: parsed.url,
                     anchor: parsed.anchor,
-                    filePath: w.file_path || '',
-                    line: w.line_number || 0,
+                    filePath: item.file_path || '',
+                    line: item.line_number || 0,
                     category: cat.name,
                     status: 'unverified'
                 });

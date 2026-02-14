@@ -4,9 +4,55 @@
 
 ---
 
+## Session 110 (2026-02-13)
+**Audit Hardening & Category Rename — Integrity Cascade, 6 Category Renames, Maintenance Banner**
+
+### Integrity Cascade
+- [x] Source Verification FAIL automatically cascades to Data Integrity FAIL
+- [x] Cascade injects single ERROR issue with clear message and suggestion
+- [x] Implemented in `AuditRunner.run()` after all checkers complete
+
+### INFO Text Fix
+- [x] Changed misleading "all verified" to "all reachable (HTTP 200)" in per-page citation counts
+- [x] Changed "some failed verification" to "some unreachable"
+- [x] Changed "not verified" to "not checked (--skip-urls active)"
+- [x] Reason: "verified" now exclusively means human-verified with screenshot proof
+
+### Category Rename (6 of 11)
+- [x] Continuity -> **Template Compliance**
+- [x] Broken Links -> **Link Integrity**
+- [x] Relevancy -> **Content Readiness**
+- [x] Accuracy -> **Content Consistency**
+- [x] Citation Accuracy -> **Source Verification**
+- [x] Data Accuracy -> **Data Integrity**
+- [x] Structural -> **Site Architecture**
+- [x] Updated: Category enum, CATEGORY_MAP keys, CATEGORY_CHECKS descriptions, section comments, cascade messages
+- [x] Updated `Audit/verified-items.json` sig strings to use new category names
+
+### Maintenance Banner (Site-Wide)
+- [x] JS-injected IIFE after header element (like ethics ticker pattern)
+- [x] Fixed positioning with scroll-state sync (transparent->frosted yellow)
+- [x] White text on dark bg, black text when scrolled
+- [x] Centered: "Maintenance — Link verification in progress. External citations are pending review & verification."
+- [x] Positions below sticky sub-navs on foundations/glossary/discover pages (z-index: 89)
+- [x] CSS: `.maintenance-banner*` classes (~60 lines)
+- [x] JS: IIFE + `updateHeader()` positioning logic (~95 lines)
+
+### Unverified Severity Upgrade
+- [x] All unverified external links: WARNING -> **ERROR**
+- [x] 3 places in audit tool: bot-blocked broken links, bot-blocked citations, reachable citations
+- [x] Rationale: unverified = content integrity violation (Bas's "unwavering integrity" policy)
+
+### Audit Result After Session 110
+- 8/11 passed, **178E/0W/30I/5V**
+- 178 errors = 164 unverified citations + 13 unverified broken links + 1 cascade
+- 3 categories FAIL: Link Integrity (13E), Source Verification (164E), Data Integrity (1E cascade)
+
+---
+
 ## Session 109 (2026-02-13)
 **Audit Verification System Overhaul — Human Oversight for ALL External Links**
-**Commits:** Not yet committed (in progress)
+**Commits:** `64ffc02` (pushed)
 
 ### Audit Infrastructure Changes
 - [x] Removed Python Scripts from git tracking (`.gitignore` whitelist update + `git rm --cached`)
