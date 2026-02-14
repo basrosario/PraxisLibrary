@@ -497,6 +497,78 @@
         </section>
         <!-- /EXAMPLES IN ACTION -->
 
+        <!-- === IMPLEMENTATION === -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Python Implementation</h2>
+                <p class="section-subtitle fade-in-up">A complete DSPy program for automated website auditing &mdash; from signature to compiled module</p>
+
+                <div class="code-block fade-in-up">
+                    <div class="code-block__header">
+                        <span class="code-block__lang">Python</span>
+                        <span class="code-block__file">website_auditor.py</span>
+                    </div>
+                    <pre><code><span class="hl-kw">import</span> dspy
+
+<span class="hl-cmt"># Configure the language model</span>
+lm = dspy.LM(<span class="hl-str">"openai/gpt-4o-mini"</span>)
+dspy.configure(lm=lm)
+
+
+<span class="hl-cmt"># Step 1: Define the Signature &mdash; the contract between code and LLM</span>
+<span class="hl-kw">class</span> <span class="hl-fn">WebsiteAuditSignature</span>(dspy.Signature):
+    <span class="hl-str">"""Analyze HTML/CSS/JS code for accessibility (WCAG AA), security (CSP),
+    and performance issues. Return findings by severity with remediation."""</span>
+
+    code_snippet = dspy.InputField(desc=<span class="hl-str">"The HTML/CSS/JS code to audit"</span>)
+    context = dspy.InputField(desc=<span class="hl-str">"Production standards: CSP policy, WCAG level, target metrics"</span>)
+
+    detailed_report = dspy.OutputField(desc=<span class="hl-str">"Point-by-point findings with severity and location"</span>)
+    critical_vulnerabilities = dspy.OutputField(desc=<span class="hl-str">"Issues that would fail production deployment"</span>)
+    remediation_steps = dspy.OutputField(desc=<span class="hl-str">"Prioritized fixes with corrected code examples"</span>)
+
+
+<span class="hl-cmt"># Step 2: Build the Module &mdash; compose DSPy primitives into a program</span>
+<span class="hl-kw">class</span> <span class="hl-fn">ProfessionalAuditor</span>(dspy.Module):
+    <span class="hl-kw">def</span> <span class="hl-fn">__init__</span>(self):
+        <span class="hl-bi">super</span>().__init__()
+        self.generate_audit = dspy.ChainOfThought(WebsiteAuditSignature)
+
+    <span class="hl-kw">def</span> <span class="hl-fn">forward</span>(self, code_snippet, context):
+        <span class="hl-kw">return</span> self.generate_audit(code_snippet=code_snippet, context=context)
+
+
+<span class="hl-cmt"># Step 3: Define a quality metric for the optimizer</span>
+<span class="hl-kw">def</span> <span class="hl-fn">audit_metric</span>(example, prediction, trace=<span class="hl-kw">None</span>):
+    expected = <span class="hl-bi">set</span>(example.expected_issues)
+    found = <span class="hl-bi">set</span>(prediction.detailed_report.split(<span class="hl-str">"\n"</span>))
+    recall = <span class="hl-bi">len</span>(expected &amp; found) / <span class="hl-bi">max</span>(<span class="hl-bi">len</span>(expected), <span class="hl-num">1</span>)
+    has_fixes = <span class="hl-str">"remediation"</span> <span class="hl-kw">in</span> prediction.remediation_steps.lower()
+    <span class="hl-kw">return</span> recall * <span class="hl-num">0.7</span> + (<span class="hl-num">0.3</span> <span class="hl-kw">if</span> has_fixes <span class="hl-kw">else</span> <span class="hl-num">0</span>)
+
+
+<span class="hl-cmt"># Step 4: Compile &mdash; the optimizer finds the best prompt automatically</span>
+optimizer = dspy.BootstrapFewShot(metric=audit_metric, max_bootstrapped_demos=<span class="hl-num">4</span>)
+compiled_auditor = optimizer.compile(ProfessionalAuditor(), trainset=training_data)
+
+
+<span class="hl-cmt"># Step 5: Use the compiled module</span>
+<span class="hl-cmt"># Important: Always verify AI-generated audit findings against actual code</span>
+result = compiled_auditor(
+    code_snippet=<span class="hl-str">'&lt;img src="hero.jpg" &#111;nclick="load()"&gt;'</span>,
+    context=<span class="hl-str">"CSP A+ (no inline scripts), WCAG AA, zero external dependencies"</span>
+)
+<span class="hl-bi">print</span>(result.detailed_report)
+<span class="hl-bi">print</span>(result.critical_vulnerabilities)</code></pre>
+                    <div class="code-block__note">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
+                        AI-generated audit findings should always be verified against actual source code before acting on remediation steps.
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /IMPLEMENTATION -->
+
         <!-- === WHEN TO USE === -->
         <section class="section section-alt">
             <div class="container">

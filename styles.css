@@ -450,12 +450,12 @@ body.menu-open .ethics-ticker {
     position: relative;
     overflow: hidden;
     display: inline;
-    background: linear-gradient(120deg, #60a5fa 0%, #60a5fa 40%, #ffffff 50%, #60a5fa 60%, #60a5fa 100%);
+    background: linear-gradient(120deg, #60a5fa 0%, #60a5fa 45%, #fff 46.5%, #93c5fd 48.5%, #7ab8fc 51%, #60a5fa 55%, #60a5fa 100%);
     background-size: 200% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: maintenance-link-shine 3s ease-in-out infinite;
+    animation: maintenance-link-shine 5s ease-in-out infinite;
 }
 
 .maintenance-banner__link:hover {
@@ -466,12 +466,12 @@ body.menu-open .ethics-ticker {
 }
 
 .maintenance-banner--scrolled .maintenance-banner__link {
-    background: linear-gradient(120deg, #000 0%, #000 40%, #555 50%, #000 60%, #000 100%);
+    background: linear-gradient(120deg, #000 0%, #000 45%, #fff 46.5%, #888 48.5%, #444 51%, #000 55%, #000 100%);
     background-size: 200% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: maintenance-link-shine 3s ease-in-out infinite;
+    animation: maintenance-link-shine 5s ease-in-out infinite;
 }
 
 .maintenance-banner--scrolled .maintenance-banner__link:hover {
@@ -25691,6 +25691,134 @@ h3 + .nav-cards--compact {
     color: var(--text);
 }
 
+/* === CODE BLOCK ===
+   Syntax-highlighted code display for implementation examples */
+
+/* Container ---- */
+.code-block {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #30363d;
+    margin-top: var(--space-lg);
+}
+
+/* Header bar ---- */
+.code-block__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 1.25rem;
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+}
+
+.code-block__lang {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #DC3545;
+}
+
+.code-block__file {
+    font-size: 0.8125rem;
+    color: #8b949e;
+    font-family: monospace;
+}
+
+/* Pre/Code base ---- */
+.code-block pre {
+    margin: 0;
+    padding: 1.5rem;
+    background: #0d1117;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #30363d #0d1117;
+}
+
+.code-block pre::-webkit-scrollbar {
+    height: 6px;
+}
+
+.code-block pre::-webkit-scrollbar-track {
+    background: #0d1117;
+}
+
+.code-block pre::-webkit-scrollbar-thumb {
+    background: #30363d;
+    border-radius: 3px;
+}
+
+.code-block code {
+    display: block;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: #e6edf3;
+    white-space: pre;
+    tab-size: 4;
+}
+
+/* Syntax highlight classes ---- */
+.hl-kw {
+    color: #ff7b72;
+}
+
+.hl-str {
+    color: #a5d6ff;
+}
+
+.hl-cmt {
+    color: #8b949e;
+    font-style: italic;
+}
+
+.hl-fn {
+    color: #d2a8ff;
+}
+
+.hl-bi {
+    color: #79c0ff;
+}
+
+.hl-dec {
+    color: #ffa657;
+}
+
+.hl-num {
+    color: #79c0ff;
+}
+
+/* Code block footer note ---- */
+.code-block__note {
+    padding: 0.75rem 1.25rem;
+    background: #161b22;
+    border-top: 1px solid #30363d;
+    font-size: 0.8125rem;
+    color: #8b949e;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.code-block__note svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    color: #fbbf24;
+}
+
+/* Responsive ---- */
+@media (max-width: 768px) {
+    .code-block code {
+        font-size: 0.75rem;
+    }
+
+    .code-block pre {
+        padding: 1rem;
+    }
+}
+
 
 /* === PILLAR GRID ===
    Grid layouts for pillar cards */
@@ -30265,6 +30393,7 @@ h3 + .nav-cards--compact {
     border: 1px solid #374151;
     border-left: 4px solid #10b981;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
 }
 
 .audit-category-card:hover {
@@ -30353,6 +30482,7 @@ h3 + .nav-cards--compact {
     border-radius: 12px;
     border: 1px solid #374151;
     overflow: hidden;
+    scroll-margin-top: 140px;
 }
 
 .audit-issue-item__header {
@@ -30635,6 +30765,7 @@ h3 + .nav-cards--compact {
     margin-bottom: 0.5rem;
     padding-bottom: 0.25rem;
     border-bottom: 1px solid #374151;
+    scroll-margin-top: 140px;
 }
 
 .audit-findings-subhead--verified {
@@ -30653,6 +30784,30 @@ h3 + .nav-cards--compact {
     border: 1px solid #374151;
     border-radius: 12px;
     overflow: hidden;
+}
+
+.audit-verified-repo__body {
+    max-height: 600px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #374151 #111827;
+}
+
+.audit-verified-repo__body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.audit-verified-repo__body::-webkit-scrollbar-track {
+    background: #111827;
+}
+
+.audit-verified-repo__body::-webkit-scrollbar-thumb {
+    background: #374151;
+    border-radius: 4px;
+}
+
+.audit-verified-repo__body::-webkit-scrollbar-thumb:hover {
+    background: #4b5563;
 }
 
 .audit-verified-repo__header {

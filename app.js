@@ -523,7 +523,13 @@ document.addEventListener('DOMContentLoaded', () => {
         var link = document.createElement('a');
         link.className = 'maintenance-banner__link';
         link.href = resolveInternalUrl('pages/audit-report.html');
-        link.textContent = 'Audit Report';
+        var linkTexts = ['Live Audit Report', 'View Progress'];
+        var linkIdx = 0;
+        link.textContent = linkTexts[0];
+        setInterval(function() {
+            linkIdx = 1 - linkIdx;
+            link.textContent = linkTexts[linkIdx];
+        }, 3330);
         text.appendChild(link);
 
         inner.appendChild(icon);
@@ -15041,6 +15047,9 @@ document.addEventListener('DOMContentLoaded', function() {
         grid.innerHTML = '';
         categories.forEach(function(cat) {
             var card = el('div', 'audit-category-card' + (cat.passed ? '' : ' audit-category-card--failed'));
+            card.setAttribute('role', 'button');
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('data-category', cat.name);
 
             // Header
             var header = el('div', 'audit-category-card__header');
@@ -15072,6 +15081,33 @@ document.addEventListener('DOMContentLoaded', function() {
             var meta = el('div', 'audit-category-card__meta');
             meta.textContent = fmtNum(cat.files_scanned) + ' files scanned \u00B7 ' + fmtNum(cat.checks_run) + ' checks';
             card.appendChild(meta);
+
+            // Click handler — scroll to accordion, open it, jump to first finding
+            card.addEventListener('click', function() {
+                var target = document.querySelector('.audit-issue-item[data-category="' + cat.name + '"]');
+                if (!target) return;
+
+                // Open the accordion if not already expanded
+                if (!target.classList.contains('is-expanded')) {
+                    target.classList.add('is-expanded');
+                    var hdr = target.querySelector('.audit-issue-item__header');
+                    if (hdr) hdr.setAttribute('aria-expanded', 'true');
+                }
+
+                // Scroll to accordion item first
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                // Re-scroll after expand animation settles to lock header at top
+                setTimeout(function() {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 400);
+            });
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.click();
+                }
+            });
 
             grid.appendChild(card);
         });
@@ -15300,6 +15336,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var verifiedCount = cat.verified_count || 0;
             var totalIssues = cat.error_count + cat.warning_count + cat.info_count + verifiedCount;
             var item = el('div', 'audit-issue-item');
+            item.setAttribute('data-category', cat.name);
 
             // Header (clickable)
             var hdr = el('div', 'audit-issue-item__header');
@@ -15399,7 +15436,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (cat.errors && cat.errors.length) {
                     findingsBlock.appendChild(el('div', 'audit-detail-block__label', 'Findings'));
                     labelAdded = true;
-                    findingsBlock.appendChild(el('div', 'audit-findings-subhead', 'Errors (' + cat.errors.length + ')'));
+                    var errSubhead = el('div', 'audit-findings-subhead', 'Errors (' + cat.errors.length + ')');
+                    errSubhead.setAttribute('data-severity', 'error');
+                    findingsBlock.appendChild(errSubhead);
                     var errScroll = el('div', 'audit-findings-scroll');
                     cat.errors.forEach(function(issue) {
                         errScroll.appendChild(buildIssueRow(issue, 'error'));
@@ -15413,7 +15452,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         findingsBlock.appendChild(el('div', 'audit-detail-block__label', 'Findings'));
                         labelAdded = true;
                     }
-                    findingsBlock.appendChild(el('div', 'audit-findings-subhead', 'Warnings (' + cat.warnings.length + ')'));
+                    var warnSubhead = el('div', 'audit-findings-subhead', 'Warnings (' + cat.warnings.length + ')');
+                    warnSubhead.setAttribute('data-severity', 'warning');
+                    findingsBlock.appendChild(warnSubhead);
                     var warnScroll = el('div', 'audit-findings-scroll');
                     cat.warnings.forEach(function(issue) {
                         warnScroll.appendChild(buildIssueRow(issue, 'warning'));
@@ -15432,7 +15473,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         noIssues.textContent = 'No issues found.';
                         findingsBlock.appendChild(noIssues);
                     }
-                    findingsBlock.appendChild(el('div', 'audit-findings-subhead audit-findings-subhead--info', 'Info (' + cat.infos.length + ')'));
+                    var infoSubhead = el('div', 'audit-findings-subhead audit-findings-subhead--info', 'Info (' + cat.infos.length + ')');
+                    infoSubhead.setAttribute('data-severity', 'info');
+                    findingsBlock.appendChild(infoSubhead);
                     var infoScroll = el('div', 'audit-findings-scroll');
                     cat.infos.forEach(function(issue) {
                         infoScroll.appendChild(buildIssueRow(issue, 'info'));
@@ -15446,7 +15489,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         findingsBlock.appendChild(el('div', 'audit-detail-block__label', 'Findings'));
                         labelAdded = true;
                     }
-                    findingsBlock.appendChild(el('div', 'audit-findings-subhead audit-findings-subhead--verified', 'Verified Repository (' + cat.verified.length + ')'));
+                    var verSubhead = el('div', 'audit-findings-subhead audit-findings-subhead--verified', 'Verified Repository (' + cat.verified.length + ')');
+                    verSubhead.setAttribute('data-severity', 'verified');
+                    findingsBlock.appendChild(verSubhead);
                     var verScroll = el('div', 'audit-findings-scroll');
                     cat.verified.forEach(function(issue) {
                         verScroll.appendChild(buildIssueRow(issue, 'verified'));
@@ -15598,6 +15643,9 @@ document.addEventListener('DOMContentLoaded', function() {
         header.appendChild(el('span', '', 'Status'));
         container.appendChild(header);
 
+        // Scrollable body — caps at 10 rows then scrolls
+        var body = el('div', 'audit-verified-repo__body');
+
         // Render rows — verified first, then unverified
         allItems.forEach(function(item) {
             var rowCls = 'audit-verified-repo__row';
@@ -15663,8 +15711,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             row.appendChild(statusCell);
 
-            container.appendChild(row);
+            body.appendChild(row);
         });
+        container.appendChild(body);
 
         // Footer count
         var countRow = el('div', 'audit-verified-repo__count');
