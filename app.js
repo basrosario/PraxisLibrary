@@ -14925,7 +14925,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var state = JSON.parse(localStorage.getItem('praxis-cv4') || '{}');
             var count = 0;
             for (var key in state) {
-                if (state[key]) count++;
+                if (state[key] && /^[A-Z]{4}-CIT\d+$/.test(key)) count++;
             }
             return count;
         } catch (e) {
