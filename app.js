@@ -8969,11 +8969,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sortCardsByComplexity();
         initChips();
 
-        // Default selection: Math & Logic + Beginner
-        var defaultUC = usecaseContainer.querySelector('[data-usecase="math"]');
-        var defaultCL = complexityContainer.querySelector('[data-complexity="beginner"]');
-        if (defaultUC) handleUsecaseClick(defaultUC, 'math');
-        if (defaultCL) handleComplexityClick(defaultCL, 'beginner');
     }
 
     initDiscoverFilters();
