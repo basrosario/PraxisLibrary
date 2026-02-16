@@ -145,6 +145,7 @@
                             <a href="../tools/matcher.html">Technique Finder</a>
                             <a href="../tools/checklist.html">Preflight Checklist</a>
                             <a href="../tools/persona.html">Persona Architect</a>
+                            <a href="../tools/hallucination.html">Hallucination Spotter</a>
                             <a href="../patterns/index.html">Patterns Library</a>
                             <a href="../pages/ai-safety.html">AI Safety</a>
                         </div>
@@ -191,28 +192,32 @@
         <!-- === ACCENT BAR === -->
         <div class="accent-bar accent-bar--gradient"></div>
 
-        <!-- === QUICK FILTERS === -->
-        <nav class="discover-filters" id="discover-filters" aria-label="Category filters">
+        <!-- === DISCOVER FILTER BAR === -->
+        <nav class="discover-bar" id="discover-bar" aria-label="Filter and navigate techniques">
             <div class="container">
-                <div class="discover-filters__row">
-                    <a href="#cat-structured" class="discover-filters__btn">Structured (5)</a>
-                    <a href="#cat-reasoning" class="discover-filters__btn">Reasoning &amp; CoT (27)</a>
-                    <a href="#cat-decomposition" class="discover-filters__btn">Decomposition (11)</a>
-                    <a href="#cat-self-correction" class="discover-filters__btn">Self-Correction (11)</a>
-                    <a href="#cat-icl" class="discover-filters__btn">In-Context Learning (12)</a>
-                    <a href="#cat-ensemble" class="discover-filters__btn">Ensemble Methods (12)</a>
-                    <a href="#cat-strategies" class="discover-filters__btn">Prompting Strategies (33)</a>
-                    <a href="#cat-code" class="discover-filters__btn">Code (11)</a>
-                    <a href="#cat-safety" class="discover-filters__btn">Safety &amp; Alignment (3)</a>
-                    <a href="#cat-community" class="discover-filters__btn">Community Frameworks (21)</a>
-                    <a href="#cat-image" class="discover-filters__btn">Image (12)</a>
-                    <a href="#cat-audio" class="discover-filters__btn">Audio (6)</a>
-                    <a href="#cat-video" class="discover-filters__btn">Video (6)</a>
-                    <a href="#cat-3d" class="discover-filters__btn">3D (5)</a>
+                <div class="discover-bar__inner">
+                    <div class="discover-bar__controls">
+                        <label class="discover-bar__label" for="discover-mode">I am working with</label>
+                        <select class="discover-bar__select" id="discover-mode">
+                            <option value="usecase" selected>Use Case</option>
+                            <option value="complexity">Complexity</option>
+                            <option value="category">Category</option>
+                        </select>
+                        <label class="discover-bar__multi-toggle" id="discover-multi-toggle" title="Enable multi-select filtering">
+                            <input type="checkbox" id="discover-multi-check">
+                            <span class="discover-bar__toggle-track"></span>
+                            <span class="discover-bar__toggle-text">Multi</span>
+                        </label>
+                    </div>
+                    <div class="discover-bar__chips" id="discover-chips" role="group" aria-label="Filter options"></div>
+                    <div class="discover-bar__meta">
+                        <span class="discover-bar__status" id="discover-status" aria-live="polite" aria-atomic="true"></span>
+                        <button class="discover-bar__clear discover-bar__clear--hidden" id="discover-clear-all" aria-label="Clear all filters">Clear All</button>
+                    </div>
                 </div>
             </div>
         </nav>
-        <!-- /QUICK FILTERS -->
+        <!-- /DISCOVER FILTER BAR -->
 
         <!-- === STRUCTURED FRAMEWORKS === -->
         <section class="section" id="cat-structured">
@@ -1926,7 +1931,7 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <a href="../index.html" class="footer-logo">&lt;/Praxis <span>Library</span>&gt;</a>
-                <p>Master the Art of AI Communication theory through proven frameworks.</p>
+                <p>From Prompting to Production. Built on Proven Techniques &amp; Frameworks.</p>
             </div>
 
             <div class="footer-links">
@@ -1949,23 +1954,23 @@
                 <a href="../tools/persona.html">Persona Architect</a>
                 <a href="../tools/hallucination.html">Hallucination Spotter</a>
                 <a href="../quiz/index.html">Readiness Quiz</a>
+                <a href="../patterns/index.html">Patterns Library</a>
+                <a href="../pages/ai-safety.html">AI Safety</a>
             </div>
 
             <div class="footer-links">
                 <h4>Resources</h4>
-                <a href="../patterns/index.html">Patterns Library</a>
-                <a href="../pages/ai-safety.html">AI Safety</a>
                 <a href="../pages/responsible-ai.html">Responsible AI</a>
-                <a href="../pages/faq.html">FAQ</a>
-                <a href="../pages/glossary.html">Glossary</a>
-                <a href="../pages/security.html">Security</a>
-                <a href="../pages/performance.html">Performance</a>
-                <a href="../pages/about.html">About</a>
+                <a href="../neurodivergence/resources.html">ND Resources</a>
+                <a href="../benchmarks/index.html">AI Benchmarks</a>
+                <a href="../pages/audit-report.html">Audit Report</a>
+                <a href="../pages/about.html">About Praxis</a>
+                <a href="../pages/faq.html">FAQs</a>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>AI for Everybody</p>
+            <p>AI for Everyone</p>
             <p class="footer-quote">&ldquo;True innovation in AI isn&rsquo;t just about companies adopting AI as a new technology&mdash;it&rsquo;s about people learning about, adapting to, and adopting Artificial Intelligence into their daily lives to empower and unlock their own human potential.&rdquo; <span class="footer-quote-author">&mdash; Basiliso (Bas) Rosario</span></p>
         </div>
 

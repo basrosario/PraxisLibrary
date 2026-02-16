@@ -90,6 +90,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (window.matchMedia('(max-width: 767px)').matches) {
+        // Mobile: category menu parent links become accordion toggles
+        document.querySelectorAll('.nav-item.has-dropdown').forEach(function(item) {
+            var megaMenu = item.querySelector('.mega-menu--categories');
+            if (!megaMenu) return;
+            // Start expanded
+            item.classList.add('is-expanded');
+            var navLink = item.querySelector('.nav-link');
+            if (navLink) {
+                navLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    item.classList.toggle('is-expanded');
+                });
+            }
+        });
+
         // Split top-level nav links (AI Foundations, Discover, etc.)
         document.querySelectorAll('.nav > a.nav-link, .nav-item.has-dropdown > a.nav-link').forEach(function(link) {
             splitNavAccent(link);
@@ -330,7 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 parentAccordion.setAttribute('open', '');
                 // Scroll to element after a brief delay for accordion to open
                 setTimeout(() => {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    scrollToVisible(targetElement);
                 }, 100);
             }
         }
@@ -430,58 +445,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ethicsTickerEyeballEl = eyeball;
     })();
 
-    // === MAINTENANCE BANNER ===
-    /** Site-wide maintenance banner — fixed below header, syncs with scroll state */
-    var maintenanceBannerEl = null;
-    (function() {
-        if (!header) return;
-
-        var banner = document.createElement('div');
-        banner.className = 'maintenance-banner';
-        banner.setAttribute('role', 'alert');
-
-        var inner = document.createElement('div');
-        inner.className = 'maintenance-banner__inner';
-
-        // Checkmark circle icon (audit complete)
-        var svgNS = 'http://www.w3.org/2000/svg';
-        var icon = document.createElementNS(svgNS, 'svg');
-        icon.setAttribute('class', 'maintenance-banner__icon');
-        icon.setAttribute('viewBox', '0 0 24 24');
-        icon.setAttribute('fill', 'none');
-        icon.setAttribute('stroke', 'currentColor');
-        icon.setAttribute('stroke-width', '2');
-        var circlePath = document.createElementNS(svgNS, 'path');
-        circlePath.setAttribute('d', 'M22 11.08V12a10 10 0 1 1-5.93-9.14');
-        icon.appendChild(circlePath);
-        var checkPath = document.createElementNS(svgNS, 'path');
-        checkPath.setAttribute('d', 'M9 11l3 3L22 4');
-        icon.appendChild(checkPath);
-
-        var text = document.createElement('span');
-        text.className = 'maintenance-banner__text';
-        text.textContent = 'Audit Complete \u2014 All 11 categories passed. 254 citations verified. Score: 10.0/10 \u2014 ';
-
-        var link = document.createElement('a');
-        link.className = 'maintenance-banner__link';
-        link.href = resolveInternalUrl('pages/audit-report.html');
-        var linkTexts = ['Live Audit Report', 'View Results'];
-        var linkIdx = 0;
-        link.textContent = linkTexts[0];
-        setInterval(function() {
-            linkIdx = 1 - linkIdx;
-            link.textContent = linkTexts[linkIdx];
-        }, 3330);
-        text.appendChild(link);
-
-        inner.appendChild(icon);
-        inner.appendChild(text);
-        banner.appendChild(inner);
-
-        header.parentNode.insertBefore(banner, header.nextSibling);
-        maintenanceBannerEl = banner;
-    })();
-    // /MAINTENANCE BANNER
+    // --ticker-offset starts at 0 (no banner), updated when ticker appears on scroll
+    document.documentElement.style.setProperty('--ticker-offset', '0px');
 
     /**
      * Typewriter engine — types in → 8s normal → eyeball looks around →
@@ -704,53 +669,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Transition: transparent -> scrolled -- show ticker above header
                 ethicsTickerEl.classList.add('ethics-ticker--visible');
                 startTickerTimer();
-                // Push header + all sticky elements down by ticker height
-                var tickerH = ethicsTickerEl.offsetHeight + 'px';
-                header.style.setProperty('--ticker-height', tickerH);
+                var tickerH = ethicsTickerEl.offsetHeight;
+                header.style.setProperty('--ticker-height', tickerH + 'px');
                 header.classList.add('header--ticker-offset');
-                document.documentElement.style.setProperty('--ticker-offset', tickerH);
+                document.documentElement.style.setProperty('--ticker-offset', tickerH + 'px');
             } else if (!isScrolled && headerWasScrolled) {
-                // Transition: scrolled -> transparent -- hide ticker + reset offsets
+                // Transition: scrolled -> transparent -- hide ticker
                 stopTickerTimer();
                 ethicsTickerEl.classList.remove('ethics-ticker--visible');
                 header.classList.remove('header--ticker-offset');
                 document.documentElement.style.setProperty('--ticker-offset', '0px');
             }
-        }
-
-        // Sync maintenance banner — position below header + ticker + sticky sub-nav
-        if (maintenanceBannerEl) {
-            var bannerTop = header.offsetHeight;
-            if (isScrolled) {
-                maintenanceBannerEl.classList.add('maintenance-banner--scrolled');
-                bannerTop += ethicsTickerEl ? ethicsTickerEl.offsetHeight : 0;
-            } else {
-                maintenanceBannerEl.classList.remove('maintenance-banner--scrolled');
-            }
-            // Push below sticky sub-navs when they are stuck
-            // Each page may have one sticky sub-nav system; check in priority order
-            var glossarySearch = document.querySelector('.glossary-search-container');
-            var glossaryNav = document.querySelector('.glossary-nav');
-            var foundationsNav = document.querySelector('.foundations-nav');
-            var discoverFilters = document.querySelector('.discover-filters');
-            if (glossarySearch && glossaryNav && isScrolled) {
-                // Glossary: A-Z nav + search container are both sticky
-                var searchRect = glossarySearch.getBoundingClientRect();
-                if (searchRect.top <= bannerTop + glossaryNav.offsetHeight + 5) {
-                    bannerTop += glossaryNav.offsetHeight + glossarySearch.offsetHeight;
-                }
-            } else if (foundationsNav && isScrolled) {
-                var navRect = foundationsNav.getBoundingClientRect();
-                if (navRect.top <= bannerTop + 5) {
-                    bannerTop += foundationsNav.offsetHeight;
-                }
-            } else if (discoverFilters && isScrolled) {
-                var filterRect = discoverFilters.getBoundingClientRect();
-                if (filterRect.top <= bannerTop + 5) {
-                    bannerTop += discoverFilters.offsetHeight;
-                }
-            }
-            maintenanceBannerEl.style.top = bannerTop + 'px';
         }
 
         headerWasScrolled = isScrolled;
@@ -3859,6 +3788,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
+    // SCROLL UTILITY — centers target in visible area below sticky elements
+    // Accounts for banner + ticker + header heights at destination
+    // ==========================================
+    function scrollToVisible(el, behavior) {
+        if (!el) return;
+        if (!behavior) behavior = 'smooth';
+        var ticker = document.querySelector('.ethics-ticker');
+        var headerEl = document.getElementById('header');
+        var stickyH = 0;
+        if (ticker) stickyH += ticker.offsetHeight;
+        if (headerEl) stickyH += headerEl.offsetHeight;
+        var rect = el.getBoundingClientRect();
+        var absTop = rect.top + window.scrollY;
+        var visibleH = window.innerHeight - stickyH;
+        var padding = Math.max(0, (visibleH - rect.height) / 2);
+        window.scrollTo({ top: Math.max(0, absTop - stickyH - padding), behavior: behavior });
+    }
+
+    // ==========================================
     // SMOOTH SCROLL FOR ANCHOR LINKS
     // ==========================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -3869,10 +3817,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 e.preventDefault();
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                scrollToVisible(targetElement);
                 history.pushState(null, null, targetId);
             }
         });
@@ -3908,7 +3853,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetId = btn.getAttribute('href').slice(1);
                 const target = document.getElementById(targetId);
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    scrollToVisible(target);
                 }
             });
         });
@@ -6992,7 +6937,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const scenario = shuffledScenarios[currentIndex];
             aiResponseText.textContent = scenario.aiResponse;
             categoryBadge.textContent = scenario.categoryLabel;
-            progressDisplay.textContent = (currentIndex + 1) + '/' + shuffledScenarios.length;
+            progressDisplay.textContent = (currentIndex + 1) + ' / 1,000,000,000';
             scoreDisplay.textContent = 'Score: ' + score;
 
             // Update progress bar
@@ -7077,7 +7022,7 @@ document.addEventListener('DOMContentLoaded', () => {
             explanationPanel.classList.remove('visible');
             categoryBadge.textContent = 'Complete';
             progressBar.style.width = '100%';
-            progressDisplay.textContent = shuffledScenarios.length + '/' + shuffledScenarios.length;
+            progressDisplay.textContent = shuffledScenarios.length + ' / 1,000,000,000';
 
             // Build summary in the AI response area
             var summary = document.createElement('div');
@@ -8570,6 +8515,555 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
+    // DISCOVER USE-CASE FILTER SYSTEM
+    // ==========================================
+
+    /** Registry: [useCases[], complexity, type]
+     *  Use cases: math, coding, problem-solving, writing, structured-output, research, planning, creative
+     *  Complexity: beginner, intermediate, advanced
+     *  Type: technique, framework
+     */
+    const TECHNIQUE_REGISTRY = {
+        // --- Structured Frameworks (5) ---
+        'crisp': [['writing', 'structured-output'], 'beginner', 'framework'],
+        'crispe': [['writing', 'structured-output'], 'beginner', 'framework'],
+        'costar': [['writing', 'structured-output'], 'beginner', 'framework'],
+        'context-structure': [['writing', 'structured-output'], 'beginner', 'technique'],
+        'constrained-output': [['structured-output'], 'beginner', 'technique'],
+        // --- Reasoning & CoT (27) ---
+        'chain-of-thought': [['math', 'problem-solving'], 'beginner', 'technique'],
+        'zero-shot-cot': [['math', 'problem-solving'], 'beginner', 'technique'],
+        'auto-cot': [['math', 'problem-solving'], 'intermediate', 'technique'],
+        'contrastive-cot': [['math', 'problem-solving'], 'intermediate', 'technique'],
+        'structured-cot': [['structured-output', 'problem-solving'], 'intermediate', 'technique'],
+        'faithful-cot': [['math', 'problem-solving'], 'advanced', 'technique'],
+        'complexity-prompting': [['math', 'problem-solving'], 'intermediate', 'technique'],
+        'tab-cot': [['structured-output', 'problem-solving'], 'intermediate', 'technique'],
+        'analogical-reasoning': [['problem-solving', 'creative'], 'intermediate', 'technique'],
+        'step-back': [['problem-solving', 'research'], 'intermediate', 'technique'],
+        'thread-of-thought': [['problem-solving'], 'intermediate', 'technique'],
+        'active-prompting': [['math', 'problem-solving'], 'advanced', 'technique'],
+        'memory-of-thought': [['problem-solving'], 'advanced', 'technique'],
+        'reversing-cot': [['problem-solving', 'math'], 'intermediate', 'technique'],
+        'uncertainty-cot': [['problem-solving', 'research'], 'advanced', 'technique'],
+        'algorithm-of-thoughts': [['math', 'problem-solving'], 'advanced', 'technique'],
+        'buffer-of-thoughts': [['problem-solving', 'planning'], 'advanced', 'technique'],
+        'maieutic-prompting': [['problem-solving', 'research'], 'advanced', 'technique'],
+        'scratchpad-prompting': [['math', 'coding'], 'beginner', 'technique'],
+        'selection-inference': [['problem-solving', 'research'], 'advanced', 'technique'],
+        'thought-propagation': [['problem-solving', 'planning'], 'advanced', 'technique'],
+        'chain-of-symbol': [['math', 'problem-solving'], 'advanced', 'technique'],
+        'symbolic-cot': [['math', 'problem-solving'], 'advanced', 'technique'],
+        'dual-process-prompting': [['problem-solving'], 'advanced', 'technique'],
+        'chain-of-knowledge': [['research', 'problem-solving'], 'advanced', 'technique'],
+        'chain-of-abstraction': [['problem-solving', 'math'], 'advanced', 'technique'],
+        'everything-of-thoughts': [['problem-solving', 'math'], 'advanced', 'technique'],
+        // --- Decomposition (11) ---
+        'least-to-most': [['math', 'problem-solving', 'planning'], 'intermediate', 'technique'],
+        'decomp': [['problem-solving', 'planning'], 'intermediate', 'technique'],
+        'plan-and-solve': [['planning', 'math', 'problem-solving'], 'intermediate', 'technique'],
+        'tree-of-thought': [['problem-solving', 'planning', 'creative'], 'advanced', 'technique'],
+        'graph-of-thought': [['problem-solving', 'planning'], 'advanced', 'technique'],
+        'recursion-of-thought': [['math', 'problem-solving'], 'advanced', 'technique'],
+        'program-of-thought': [['math', 'coding'], 'intermediate', 'technique'],
+        'skeleton-of-thought': [['writing', 'planning'], 'intermediate', 'technique'],
+        'branch-solve-merge': [['problem-solving', 'planning'], 'advanced', 'technique'],
+        'successive-prompting': [['problem-solving', 'planning'], 'intermediate', 'technique'],
+        'chain-of-table': [['structured-output', 'research'], 'intermediate', 'technique'],
+        // --- Self-Correction (11) ---
+        'self-refine': [['writing', 'coding', 'problem-solving'], 'intermediate', 'technique'],
+        'self-verification': [['math', 'problem-solving'], 'intermediate', 'technique'],
+        'chain-of-verification': [['research', 'problem-solving'], 'intermediate', 'technique'],
+        'critic': [['writing', 'problem-solving'], 'intermediate', 'technique'],
+        'cumulative-reasoning': [['math', 'problem-solving'], 'advanced', 'technique'],
+        'self-calibration': [['problem-solving', 'research'], 'advanced', 'technique'],
+        'reflexion': [['coding', 'problem-solving'], 'advanced', 'technique'],
+        'star': [['math', 'problem-solving'], 'advanced', 'technique'],
+        'quiet-star': [['problem-solving'], 'advanced', 'technique'],
+        'verify-and-edit': [['research', 'problem-solving'], 'intermediate', 'technique'],
+        'progressive-hint': [['math', 'problem-solving'], 'intermediate', 'technique'],
+        // --- In-Context Learning (12) ---
+        'few-shot-learning': [['writing', 'coding', 'structured-output'], 'beginner', 'technique'],
+        'zero-shot': [['writing', 'problem-solving'], 'beginner', 'technique'],
+        'one-shot': [['writing', 'coding'], 'beginner', 'technique'],
+        'example-selection': [['coding', 'structured-output'], 'intermediate', 'technique'],
+        'knn-prompting': [['problem-solving', 'research'], 'advanced', 'technique'],
+        'vote-k': [['problem-solving'], 'advanced', 'technique'],
+        'demo-ensembling': [['problem-solving', 'coding'], 'advanced', 'technique'],
+        'prompt-mining': [['problem-solving'], 'advanced', 'technique'],
+        'many-shot': [['coding', 'structured-output'], 'intermediate', 'technique'],
+        'example-ordering': [['coding', 'structured-output'], 'intermediate', 'technique'],
+        'self-generated-icl': [['problem-solving', 'coding'], 'intermediate', 'technique'],
+        'active-example': [['coding', 'problem-solving'], 'advanced', 'technique'],
+        // --- Ensemble Methods (12) ---
+        'self-consistency': [['math', 'problem-solving'], 'intermediate', 'technique'],
+        'cosp': [['problem-solving'], 'advanced', 'technique'],
+        'dense-prompting': [['writing', 'research'], 'intermediate', 'technique'],
+        'max-mutual-info': [['problem-solving'], 'advanced', 'technique'],
+        'meta-reasoning': [['problem-solving', 'planning'], 'advanced', 'technique'],
+        'universal-self-consistency': [['math', 'problem-solving'], 'advanced', 'technique'],
+        'diverse-prompting': [['creative', 'problem-solving'], 'intermediate', 'technique'],
+        'mixture-of-experts': [['problem-solving', 'coding'], 'advanced', 'technique'],
+        'multi-expert': [['problem-solving', 'writing'], 'intermediate', 'technique'],
+        'debate-prompting': [['research', 'problem-solving'], 'intermediate', 'technique'],
+        'exchange-of-thought': [['problem-solving', 'research'], 'advanced', 'technique'],
+        'pairwise-evaluation': [['writing', 'research'], 'intermediate', 'technique'],
+        // --- Prompting Strategies (33) ---
+        'react': [['problem-solving', 'research', 'planning'], 'intermediate', 'technique'],
+        'self-ask': [['research', 'problem-solving'], 'intermediate', 'technique'],
+        'prompt-chaining': [['planning', 'writing', 'coding'], 'intermediate', 'technique'],
+        'role-prompting': [['writing', 'creative'], 'beginner', 'technique'],
+        'emotion-prompting': [['writing', 'creative'], 'beginner', 'technique'],
+        'style-prompting': [['writing', 'creative'], 'beginner', 'technique'],
+        'flipped-interaction': [['research', 'problem-solving'], 'intermediate', 'technique'],
+        's2a': [['problem-solving', 'research'], 'intermediate', 'technique'],
+        'simtom': [['writing', 'problem-solving'], 'intermediate', 'technique'],
+        'rar': [['problem-solving', 'math'], 'intermediate', 'technique'],
+        're2': [['problem-solving'], 'beginner', 'technique'],
+        'system-prompting': [['writing', 'structured-output'], 'beginner', 'technique'],
+        'rag': [['research'], 'intermediate', 'technique'],
+        'agentic-prompting': [['planning', 'coding'], 'advanced', 'technique'],
+        'dspy': [['coding', 'structured-output'], 'advanced', 'technique'],
+        'mipro': [['coding', 'structured-output'], 'advanced', 'technique'],
+        'agentflow': [['planning', 'coding'], 'advanced', 'technique'],
+        'meta-prompting': [['problem-solving', 'planning'], 'advanced', 'technique'],
+        'batch-prompting': [['structured-output', 'coding'], 'intermediate', 'technique'],
+        'prompt-repetition': [['problem-solving'], 'beginner', 'technique'],
+        'directional-stimulus': [['writing', 'creative'], 'intermediate', 'technique'],
+        'generated-knowledge': [['research', 'problem-solving'], 'intermediate', 'technique'],
+        'hyde': [['research'], 'advanced', 'technique'],
+        'ask-me-anything': [['problem-solving', 'research'], 'intermediate', 'technique'],
+        'socratic-prompting': [['problem-solving', 'research'], 'intermediate', 'technique'],
+        'dialogue-guided': [['research', 'writing'], 'intermediate', 'technique'],
+        'instruction-induction': [['coding', 'problem-solving'], 'advanced', 'technique'],
+        'ape': [['coding', 'structured-output'], 'advanced', 'technique'],
+        'opro': [['math', 'coding'], 'advanced', 'technique'],
+        'prompt-paraphrasing': [['writing', 'problem-solving'], 'intermediate', 'technique'],
+        'reasoning-via-planning': [['planning', 'problem-solving'], 'advanced', 'technique'],
+        'lats': [['planning', 'coding'], 'advanced', 'technique'],
+        'chain-of-density': [['writing', 'research'], 'intermediate', 'technique'],
+        // --- Code (11) ---
+        'modality/code/code-prompting': [['coding'], 'beginner', 'technique'],
+        'modality/code/self-debugging': [['coding'], 'intermediate', 'technique'],
+        'modality/code/structured-output': [['coding', 'structured-output'], 'intermediate', 'technique'],
+        'modality/code/program-synthesis': [['coding'], 'intermediate', 'technique'],
+        'modality/code/code-explanation': [['coding'], 'beginner', 'technique'],
+        'modality/code/code-review': [['coding'], 'intermediate', 'technique'],
+        'modality/code/test-generation': [['coding'], 'intermediate', 'technique'],
+        'modality/code/sql-generation': [['coding', 'structured-output'], 'intermediate', 'technique'],
+        'chain-of-code': [['coding', 'math'], 'intermediate', 'technique'],
+        'pal': [['coding', 'math'], 'intermediate', 'technique'],
+        'lmql': [['coding', 'structured-output'], 'advanced', 'technique'],
+        // --- Safety & Alignment (3) ---
+        'constitutional-ai': [['writing', 'research'], 'advanced', 'technique'],
+        'dpo': [['writing'], 'advanced', 'technique'],
+        'instruction-hierarchy': [['writing', 'structured-output'], 'intermediate', 'technique'],
+        // --- Community Frameworks (21) ---
+        'race': [['writing'], 'beginner', 'framework'],
+        'risen': [['writing'], 'beginner', 'framework'],
+        'icio': [['writing', 'structured-output'], 'beginner', 'framework'],
+        'create': [['writing', 'creative'], 'beginner', 'framework'],
+        'grade': [['writing'], 'beginner', 'framework'],
+        'spark': [['creative', 'writing'], 'beginner', 'framework'],
+        'trace': [['writing', 'planning'], 'beginner', 'framework'],
+        'care': [['writing'], 'beginner', 'framework'],
+        'rodes': [['writing', 'structured-output'], 'beginner', 'framework'],
+        'bore': [['writing'], 'beginner', 'framework'],
+        'ape-framework': [['writing'], 'beginner', 'framework'],
+        'era': [['writing'], 'beginner', 'framework'],
+        'rtf': [['writing'], 'beginner', 'framework'],
+        'tag': [['writing', 'structured-output'], 'beginner', 'framework'],
+        'bab': [['writing', 'creative'], 'beginner', 'framework'],
+        'broke': [['writing', 'problem-solving'], 'beginner', 'framework'],
+        'roses': [['writing'], 'beginner', 'framework'],
+        'cape': [['writing'], 'beginner', 'framework'],
+        'smart-prompting': [['writing', 'planning'], 'beginner', 'framework'],
+        'scope': [['writing', 'structured-output'], 'beginner', 'framework'],
+        'master-prompt': [['writing', 'structured-output'], 'intermediate', 'framework'],
+        // --- Image (12) ---
+        'modality/image/image-prompting': [['creative'], 'beginner', 'technique'],
+        'modality/image/multimodal-cot': [['math', 'problem-solving'], 'advanced', 'technique'],
+        'modality/image/visual-cot': [['problem-solving'], 'intermediate', 'technique'],
+        'modality/image/image-as-text': [['research'], 'intermediate', 'technique'],
+        'modality/image/vqa': [['research', 'problem-solving'], 'intermediate', 'technique'],
+        'modality/image/image-gen-prompting': [['creative'], 'beginner', 'technique'],
+        'modality/image/negative-prompting': [['creative'], 'intermediate', 'technique'],
+        'modality/image/controlnet-prompting': [['creative'], 'advanced', 'technique'],
+        'modality/image/inpainting-prompting': [['creative'], 'intermediate', 'technique'],
+        'modality/image/style-transfer': [['creative'], 'intermediate', 'technique'],
+        'modality/image/image-to-image': [['creative'], 'intermediate', 'technique'],
+        'modality/image/composition-prompting': [['creative'], 'intermediate', 'technique'],
+        // --- Audio (6) ---
+        'modality/audio/audio-prompting': [['creative'], 'beginner', 'technique'],
+        'modality/audio/stt-prompting': [['structured-output'], 'intermediate', 'technique'],
+        'modality/audio/tts-prompting': [['creative', 'writing'], 'intermediate', 'technique'],
+        'modality/audio/audio-classification': [['structured-output', 'research'], 'intermediate', 'technique'],
+        'modality/audio/music-gen': [['creative'], 'intermediate', 'technique'],
+        'modality/audio/voice-cloning': [['creative'], 'advanced', 'technique'],
+        // --- Video (6) ---
+        'modality/video/video-prompting': [['creative'], 'beginner', 'technique'],
+        'modality/video/video-gen': [['creative'], 'intermediate', 'technique'],
+        'modality/video/temporal-reasoning': [['problem-solving', 'research'], 'intermediate', 'technique'],
+        'modality/video/video-qa': [['research', 'problem-solving'], 'intermediate', 'technique'],
+        'modality/video/video-captioning': [['writing', 'structured-output'], 'intermediate', 'technique'],
+        'modality/video/video-editing': [['creative'], 'intermediate', 'technique'],
+        // --- 3D (5) ---
+        'modality/3d/3d-prompting': [['creative'], 'intermediate', 'technique'],
+        'modality/3d/3d-model-gen': [['creative'], 'advanced', 'technique'],
+        'modality/3d/scene-understanding': [['research', 'problem-solving'], 'advanced', 'technique'],
+        'modality/3d/pose-estimation': [['structured-output'], 'advanced', 'technique'],
+        'modality/3d/point-cloud': [['structured-output', 'research'], 'advanced', 'technique']
+    };
+
+    // --- Discover Filter Bar: Mode Definitions ---
+    const DISCOVER_MODES = {
+        usecase: {
+            chips: [
+                { id: 'math', label: 'Math & Logic' },
+                { id: 'coding', label: 'Coding' },
+                { id: 'problem-solving', label: 'Problem Solving' },
+                { id: 'writing', label: 'Writing' },
+                { id: 'structured-output', label: 'Structured Output' },
+                { id: 'research', label: 'Research' },
+                { id: 'planning', label: 'Planning' },
+                { id: 'creative', label: 'Creative' }
+            ],
+            dataAttr: 'data-usecase',
+            multiSelect: true,
+            chipClass: ''
+        },
+        complexity: {
+            chips: [
+                { id: 'beginner', label: 'Beginner' },
+                { id: 'intermediate', label: 'Intermediate' },
+                { id: 'advanced', label: 'Advanced' }
+            ],
+            dataAttr: 'data-complexity',
+            multiSelect: false,
+            chipClass: 'discover-bar__chip--complexity'
+        },
+        category: {
+            chips: [
+                { id: 'cat-structured', label: 'Structured' },
+                { id: 'cat-reasoning', label: 'Reasoning & CoT' },
+                { id: 'cat-decomposition', label: 'Decomposition' },
+                { id: 'cat-self-correction', label: 'Self-Correction' },
+                { id: 'cat-icl', label: 'In-Context Learning' },
+                { id: 'cat-ensemble', label: 'Ensemble' },
+                { id: 'cat-strategies', label: 'Strategies' },
+                { id: 'cat-code', label: 'Code' },
+                { id: 'cat-safety', label: 'Safety' },
+                { id: 'cat-community', label: 'Community' },
+                { id: 'cat-image', label: 'Image' },
+                { id: 'cat-audio', label: 'Audio' },
+                { id: 'cat-video', label: 'Video' },
+                { id: 'cat-3d', label: '3D / Spatial' }
+            ],
+            dataAttr: 'data-category',
+            multiSelect: false,
+            chipClass: ''
+        }
+    };
+
+    // --- Discover Filter State (persists across mode switches) ---
+    const discoverFilterState = {
+        useCases: new Set(),
+        complexity: null,
+        categories: new Set(),
+        activeMode: 'usecase',
+        totalCount: 0
+    };
+
+    // --- Discover Filter Engine (unified bar with mode switching) ---
+    function initDiscoverFilters() {
+        const bar = document.getElementById('discover-bar');
+        if (!bar) return;
+
+        const modeSelect = document.getElementById('discover-mode');
+        const chipsContainer = document.getElementById('discover-chips');
+        const statusEl = document.getElementById('discover-status');
+        const clearBtn = document.getElementById('discover-clear-all');
+        const multiCheck = document.getElementById('discover-multi-check');
+        const multiToggle = document.getElementById('discover-multi-toggle');
+        const allCards = document.querySelectorAll('.discover-card');
+        const categorySections = document.querySelectorAll('[id^="cat-"]');
+
+        discoverFilterState.totalCount = allCards.length;
+
+        /** Check if multi-select toggle is ON */
+        function isMultiSelect() {
+            return multiCheck && multiCheck.checked;
+        }
+
+        /** Render chips for the active mode */
+        function renderChips(mode) {
+            const modeDef = DISCOVER_MODES[mode];
+            chipsContainer.innerHTML = '';
+            chipsContainer.setAttribute('aria-label', mode === 'usecase' ? 'Use case filters'
+                : mode === 'complexity' ? 'Complexity filters' : 'Category navigation');
+
+            modeDef.chips.forEach(function(chip) {
+                var btn = document.createElement('button');
+                btn.className = 'discover-bar__chip' + (modeDef.chipClass ? ' ' + modeDef.chipClass : '');
+                btn.setAttribute(modeDef.dataAttr, chip.id);
+                btn.textContent = chip.label;
+
+                // Restore pressed state from persisted filter state
+                var isActive = false;
+                if (mode === 'usecase') isActive = discoverFilterState.useCases.has(chip.id);
+                else if (mode === 'complexity') isActive = discoverFilterState.complexity === chip.id;
+                else if (mode === 'category') isActive = discoverFilterState.categories.has(chip.id);
+                btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+
+                btn.addEventListener('click', function() { handleChipClick(mode, btn, chip.id); });
+                chipsContainer.appendChild(btn);
+            });
+        }
+
+        /** Scroll to show element below sticky headers */
+        function scrollToSection(el) {
+            if (!el) return;
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        /** Reset all aria-pressed in current chip container for a given data attribute */
+        function resetChips(dataAttr) {
+            chipsContainer.querySelectorAll('[' + dataAttr + ']').forEach(function(c) {
+                c.setAttribute('aria-pressed', 'false');
+            });
+        }
+
+        /** Handle chip click based on mode */
+        function handleChipClick(mode, btn, chipId) {
+            var multi = isMultiSelect();
+
+            if (mode === 'category') {
+                if (!multi) {
+                    // Single mode: scroll to section
+                    var section = document.getElementById(chipId);
+                    scrollToSection(section);
+                    return;
+                }
+                // Multi mode: toggle category filter
+                if (discoverFilterState.categories.has(chipId)) {
+                    discoverFilterState.categories.delete(chipId);
+                    btn.setAttribute('aria-pressed', 'false');
+                } else {
+                    discoverFilterState.categories.add(chipId);
+                    btn.setAttribute('aria-pressed', 'true');
+                }
+                applyDiscoverFilters();
+                return;
+            }
+
+            if (mode === 'usecase') {
+                if (multi) {
+                    // Multi-select: toggle in set
+                    if (discoverFilterState.useCases.has(chipId)) {
+                        discoverFilterState.useCases.delete(chipId);
+                        btn.setAttribute('aria-pressed', 'false');
+                    } else {
+                        discoverFilterState.useCases.add(chipId);
+                        btn.setAttribute('aria-pressed', 'true');
+                    }
+                } else {
+                    // Single-select: toggle off or switch
+                    if (discoverFilterState.useCases.has(chipId)) {
+                        discoverFilterState.useCases.clear();
+                        btn.setAttribute('aria-pressed', 'false');
+                    } else {
+                        discoverFilterState.useCases.clear();
+                        resetChips('data-usecase');
+                        discoverFilterState.useCases.add(chipId);
+                        btn.setAttribute('aria-pressed', 'true');
+                    }
+                }
+            } else if (mode === 'complexity') {
+                if (multi) {
+                    // Multi-select: use Set for complexity too
+                    if (!discoverFilterState.complexities) discoverFilterState.complexities = new Set();
+                    if (discoverFilterState.complexities.has(chipId)) {
+                        discoverFilterState.complexities.delete(chipId);
+                        btn.setAttribute('aria-pressed', 'false');
+                    } else {
+                        discoverFilterState.complexities.add(chipId);
+                        btn.setAttribute('aria-pressed', 'true');
+                    }
+                    // Sync single-select field for cardMatches
+                    discoverFilterState.complexity = discoverFilterState.complexities.size === 1
+                        ? Array.from(discoverFilterState.complexities)[0] : null;
+                } else {
+                    // Single-select: toggle off or switch
+                    resetChips('data-complexity');
+                    if (discoverFilterState.complexity === chipId) {
+                        discoverFilterState.complexity = null;
+                        btn.setAttribute('aria-pressed', 'false');
+                    } else {
+                        discoverFilterState.complexity = chipId;
+                        btn.setAttribute('aria-pressed', 'true');
+                    }
+                    if (discoverFilterState.complexities) discoverFilterState.complexities.clear();
+                }
+            }
+
+            applyDiscoverFilters();
+        }
+
+        /** Check if any filter dimension is active */
+        function hasActiveFilters() {
+            return discoverFilterState.useCases.size > 0
+                || discoverFilterState.complexity !== null
+                || (discoverFilterState.complexities && discoverFilterState.complexities.size > 0)
+                || discoverFilterState.categories.size > 0;
+        }
+
+        /** Check if a card matches current filters (AND across dimensions, OR within) */
+        function cardMatches(card) {
+            var href = card.getAttribute('href') || '';
+            var slug = href.replace(/\.html$/, '');
+            var entry = TECHNIQUE_REGISTRY[slug];
+            if (!entry) return !hasActiveFilters();
+            var useCases = entry[0];
+            var complexity = entry[1];
+            var st = discoverFilterState;
+
+            // Use case filter (OR within)
+            if (st.useCases.size > 0 && !useCases.some(function(u) { return st.useCases.has(u); })) return false;
+
+            // Complexity filter (multi or single)
+            if (st.complexities && st.complexities.size > 0) {
+                if (!st.complexities.has(complexity)) return false;
+            } else if (st.complexity && complexity !== st.complexity) {
+                return false;
+            }
+
+            // Category filter: card must be inside a selected section
+            if (st.categories.size > 0) {
+                var section = card.closest('[id^="cat-"]');
+                if (!section || !st.categories.has(section.id)) return false;
+            }
+
+            return true;
+        }
+
+        /** Apply filters: show/hide cards within sections, hide empty sections */
+        function applyDiscoverFilters() {
+            if (!hasActiveFilters()) {
+                allCards.forEach(function(c) { c.classList.remove('discover-card--hidden'); });
+                categorySections.forEach(function(s) { s.classList.remove('discover-section--hidden'); });
+                statusEl.textContent = '';
+                clearBtn.classList.add('discover-bar__clear--hidden');
+                return;
+            }
+
+            clearBtn.classList.remove('discover-bar__clear--hidden');
+            var matchCount = 0;
+
+            allCards.forEach(function(card) {
+                if (cardMatches(card)) {
+                    card.classList.remove('discover-card--hidden');
+                    matchCount++;
+                } else {
+                    card.classList.add('discover-card--hidden');
+                }
+            });
+
+            categorySections.forEach(function(section) {
+                var visible = section.querySelectorAll('.discover-card:not(.discover-card--hidden)');
+                section.classList.toggle('discover-section--hidden', visible.length === 0);
+            });
+
+            // Build summary of active filters across all modes
+            var parts = [];
+            if (discoverFilterState.useCases.size > 0) {
+                var ucLabels = [];
+                discoverFilterState.useCases.forEach(function(id) {
+                    var found = DISCOVER_MODES.usecase.chips.find(function(c) { return c.id === id; });
+                    if (found) ucLabels.push(found.label);
+                });
+                parts.push(ucLabels.join(', '));
+            }
+            if (discoverFilterState.complexities && discoverFilterState.complexities.size > 0) {
+                var cLabels = [];
+                discoverFilterState.complexities.forEach(function(id) {
+                    var found = DISCOVER_MODES.complexity.chips.find(function(c) { return c.id === id; });
+                    if (found) cLabels.push(found.label);
+                });
+                parts.push(cLabels.join(', '));
+            } else if (discoverFilterState.complexity) {
+                var cFound = DISCOVER_MODES.complexity.chips.find(function(c) { return c.id === discoverFilterState.complexity; });
+                if (cFound) parts.push(cFound.label);
+            }
+            if (discoverFilterState.categories.size > 0) {
+                var catLabels = [];
+                discoverFilterState.categories.forEach(function(id) {
+                    var found = DISCOVER_MODES.category.chips.find(function(c) { return c.id === id; });
+                    if (found) catLabels.push(found.label);
+                });
+                parts.push(catLabels.join(', '));
+            }
+            var summary = parts.length > 0 ? ' (' + parts.join(' + ') + ')' : '';
+            statusEl.textContent = 'Showing ' + matchCount + ' of ' + discoverFilterState.totalCount + summary;
+        }
+
+        /** Clear all filters across all modes */
+        function clearAll() {
+            discoverFilterState.useCases.clear();
+            discoverFilterState.complexity = null;
+            discoverFilterState.categories.clear();
+            if (discoverFilterState.complexities) discoverFilterState.complexities.clear();
+            // Re-render chips to reset aria-pressed
+            renderChips(discoverFilterState.activeMode);
+            applyDiscoverFilters();
+        }
+
+        // --- Event: Mode Selector Change ---
+        modeSelect.addEventListener('change', function() {
+            discoverFilterState.activeMode = modeSelect.value;
+            renderChips(modeSelect.value);
+        });
+
+        // --- Event: Clear All Button ---
+        if (clearBtn) clearBtn.addEventListener('click', clearAll);
+
+        // --- Event: Multi-Select Toggle ---
+        if (multiCheck) {
+            multiCheck.addEventListener('change', function() {
+                // When toggled OFF, clear all filters and reset
+                if (!multiCheck.checked) {
+                    clearAll();
+                }
+            });
+        }
+
+        /** Sort cards within each section by complexity: beginner → intermediate → advanced */
+        function sortCardsByComplexity() {
+            var COMPLEXITY_ORDER = { beginner: 0, intermediate: 1, advanced: 2 };
+            categorySections.forEach(function(section) {
+                var grid = section.querySelector('.discover-grid');
+                if (!grid) return;
+                var cards = Array.from(grid.querySelectorAll('.discover-card'));
+                cards.sort(function(a, b) {
+                    var slugA = (a.getAttribute('href') || '').replace(/\.html$/, '');
+                    var slugB = (b.getAttribute('href') || '').replace(/\.html$/, '');
+                    var entryA = TECHNIQUE_REGISTRY[slugA];
+                    var entryB = TECHNIQUE_REGISTRY[slugB];
+                    var rankA = entryA && entryA[1] in COMPLEXITY_ORDER ? COMPLEXITY_ORDER[entryA[1]] : 1;
+                    var rankB = entryB && entryB[1] in COMPLEXITY_ORDER ? COMPLEXITY_ORDER[entryB[1]] : 1;
+                    return rankA - rankB;
+                });
+                cards.forEach(function(card) { grid.appendChild(card); });
+            });
+        }
+
+        // --- Initialize ---
+        sortCardsByComplexity();
+        renderChips('usecase');
+    }
+
+    initDiscoverFilters();
+
+    // ==========================================
     // COPY TO CLIPBOARD
     // ==========================================
     document.querySelectorAll('.btn-copy').forEach(btn => {
@@ -9630,10 +10124,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Double-rAF for accurate position after layout reflow
         requestAnimationFrame(function() {
             requestAnimationFrame(function() {
-                // Use scrollIntoView with instant behavior to avoid
-                // smooth-scroll animation loop on mobile devices.
-                // CSS scroll-margin-top (220px) handles the sticky header offset.
-                target.scrollIntoView({ behavior: 'instant', block: 'start' });
+                // Use instant scroll to avoid animation loop on mobile.
+                // scrollToVisible accounts for banner + ticker + header heights.
+                scrollToVisible(target, 'instant');
 
                 // Restore content-visibility after browser has painted
                 setTimeout(function() {
@@ -11664,7 +12157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Same-page anchor — scroll to it directly
                     window.location.hash = '#' + targetId;
                     requestAnimationFrame(() => {
-                        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        scrollToVisible(targetEl);
                     });
                     return;
                 }
@@ -15079,12 +15572,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (hdr) hdr.setAttribute('aria-expanded', 'true');
                 }
 
-                // Scroll to accordion item first
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Scroll to accordion item centered in visible area
+                scrollToVisible(target);
 
-                // Re-scroll after expand animation settles to lock header at top
+                // Re-scroll after expand animation settles
                 setTimeout(function() {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    scrollToVisible(target);
                 }, 400);
             });
             card.addEventListener('keydown', function(e) {
@@ -16228,7 +16721,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var date = now.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
         var time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
 
-        var subject = 'Praxis Library RAI - Notification - Date: ' + date + '  Time: ' + time;
+        var subject = '[URGENT] Praxis Library RAI - Notification - Date: ' + date + '  Time: ' + time;
 
         var body = 'Please Include the page URL, a description of the issue, and any supporting details that will help us keep Praxis Library a safe and reliable resource for everyone. We read every message and aim to acknowledge reports within 48 hours. This is the fastest way to reach us for any content, accuracy, or governance concern.\n\n\nPage URL:\n\n\n\nDescription:\n\n';
 
