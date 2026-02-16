@@ -11817,8 +11817,62 @@ body.menu-open {
     gap: var(--space-sm);
 }
 
+.recommender-alt-score {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* Recommender method metadata row */
+.recommender-method-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+/* Recommender tags (category, complexity) */
+.recommender-tag {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.recommender-tag--category {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .recommender-tag--category {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.recommender-tag--beginner {
+    background: rgba(40, 167, 69, 0.12);
+    color: #28a745;
+}
+
+.recommender-tag--intermediate {
+    background: rgba(255, 193, 7, 0.12);
+    color: #d4a000;
+}
+
+.recommender-tag--advanced {
+    background: rgba(220, 53, 69, 0.12);
+    color: var(--primary);
+}
+
+.recommender-tag--sm {
+    font-size: 0.65rem;
+    padding: 0.1rem 0.4rem;
+}
+
+/* Alt item layout with meta row */
 .recommender-alt-item {
-    display: inline-flex;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
     padding: 0.4rem 0.8rem;
@@ -11829,9 +11883,17 @@ body.menu-open {
     color: var(--text-secondary);
 }
 
-.recommender-alt-score {
-    font-weight: 600;
-    color: var(--primary);
+.recommender-alt-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.recommender-alt-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-shrink: 0;
 }
 
 /* ============================================
@@ -20970,6 +21032,42 @@ h3 + .nav-cards--compact {
     font-size: 0.9rem;
     color: var(--text-secondary);
     margin: 0 0 var(--space-lg) 0;
+}
+
+/* CTA variant features row */
+.mini-finder__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.mini-finder__feature {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: rgba(220, 53, 69, 0.08);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+}
+
+.mini-finder--cta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mini-finder--full {
+    max-width: 100%;
+    text-align: center;
+}
+
+.mini-finder--full .mini-finder__header {
+    justify-content: center;
+}
+
+.mini-finder--full .mini-finder__features {
+    justify-content: center;
 }
 
 .mini-finder__question {
