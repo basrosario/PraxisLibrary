@@ -387,10 +387,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let ethicsTickerIndex = 0;
     let ethicsTickerEl = null;
     let ethicsTickerTextEl = null;
-    let ethicsTickerLabelEl = null;
-    let ethicsTickerLabelAI = null;
-    let ethicsTickerLabelEthics = null;
-    let ethicsTickerEyeballEl = null;
     let ethicsTickerRunning = false;
 
     /** Create the ticker DOM element (IIFE to avoid var leaks) */
@@ -412,12 +408,8 @@ document.addEventListener('DOMContentLoaded', () => {
         var labelEthics = document.createElement('span');
         labelEthics.className = 'ethics-ticker__label-ethics';
         labelEthics.textContent = ' Ethics';
-        var eyeball = document.createElement('span');
-        eyeball.className = 'ethics-ticker__eyeball';
-
         label.appendChild(labelAI);
         label.appendChild(labelEthics);
-        label.appendChild(eyeball);
 
         var msgWrap = document.createElement('span');
         msgWrap.className = 'ethics-ticker__msg';
@@ -425,12 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
         var msg = document.createElement('span');
         msg.textContent = '';
 
-        var cursor = document.createElement('span');
-        cursor.className = 'ethics-ticker__cursor';
-        cursor.textContent = '|';
-
         msgWrap.appendChild(msg);
-        msgWrap.appendChild(cursor);
 
         inner.appendChild(label);
         inner.appendChild(msgWrap);
@@ -439,219 +426,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ethicsTickerEl = ticker;
         ethicsTickerTextEl = msg;
-        ethicsTickerLabelEl = label;
-        ethicsTickerLabelAI = labelAI;
-        ethicsTickerLabelEthics = labelEthics;
-        ethicsTickerEyeballEl = eyeball;
     })();
 
     // --ticker-offset starts at 0 (no banner), updated when ticker appears on scroll
     document.documentElement.style.setProperty('--ticker-offset', '0px');
 
     /**
-     * Typewriter engine — types in → 8s normal → eyeball looks around →
-     * 2s normal → tired blink → untype → next message. Eternal loop.
+     * Scroll engine — slide in from right → hold 5.55s → fade out →
+     * 3.33s pause → next message. Eternal loop.
      */
-    function tickerTypewriterLoop() {
+    function tickerScrollLoop() {
         if (!ethicsTickerTextEl || !ethicsTickerRunning) return;
 
+        var msgWrap = ethicsTickerTextEl.parentNode;
         var fullText = ethicsTickerMessages[ethicsTickerIndex];
-        var charIndex = 0;
-        var typeSpeed = 45;   // ms per character typing in
-        var untypeSpeed = 25; // ms per character deleting
 
-        // Phase 1: Type in
-        function typeIn() {
+        // Reset state
+        msgWrap.classList.remove('ethics-ticker__msg--visible', 'ethics-ticker__msg--fading');
+        ethicsTickerTextEl.textContent = fullText;
+
+        // Force reflow then slide in
+        void msgWrap.offsetWidth;
+        msgWrap.classList.add('ethics-ticker__msg--visible');
+
+        // Hold 5.55s after slide-in completes (800ms transition)
+        setTimeout(function() {
             if (!ethicsTickerRunning) return;
-            if (charIndex <= fullText.length) {
-                ethicsTickerTextEl.textContent = fullText.slice(0, charIndex);
-                charIndex++;
-                setTimeout(typeIn, typeSpeed);
-            } else {
-                ethicsTickerTextEl.textContent = fullText;
-                // Eyeball on ~2 out of 3 messages (skip every 3rd)
-                if (ethicsTickerIndex % 3 !== 0) {
-                    setTimeout(eyeballLookAround, 8000);
-                } else {
-                    setTimeout(typeOut, 8000);
-                }
-            }
-        }
+            msgWrap.classList.add('ethics-ticker__msg--fading');
 
-        // Phase 2: Eyeball — text morphs into half-red/half-black eye that looks around
-        function eyeballLookAround() {
-            if (!ethicsTickerRunning || !ethicsTickerEyeballEl) { setTimeout(blinkLabel, 2000); return; }
-
-            var morphMs = 400; // crossfade duration
-
-            function easeInOut(t) {
-                return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-            }
-
-            /** Crossfade: text out + eyeball in (or reverse) */
-            function crossfade(toEyeball, cb) {
-                var start = null;
-                function step(ts) {
-                    if (!start) start = ts;
-                    var p = Math.min((ts - start) / morphMs, 1);
-                    var e = easeInOut(p);
-                    // Text: fade + shrink out; Eyeball: fade + grow in
-                    var textOpacity = toEyeball ? (1 - e) : e;
-                    var textScale = toEyeball ? (1 - e * 0.3) : (0.7 + e * 0.3);
-                    var eyeOpacity = toEyeball ? e : (1 - e);
-                    var eyeScale = toEyeball ? e : (1 - e);
-
-                    ethicsTickerLabelAI.style.opacity = textOpacity;
-                    ethicsTickerLabelEthics.style.opacity = textOpacity;
-                    ethicsTickerLabelAI.style.transform = 'scale(' + textScale + ')';
-                    ethicsTickerLabelEthics.style.transform = 'scale(' + textScale + ')';
-                    ethicsTickerEyeballEl.style.opacity = eyeOpacity;
-                    ethicsTickerEyeballEl.style.transform =
-                        'translate(-50%, -50%) scale(' + eyeScale + ')';
-
-                    if (p < 1) { requestAnimationFrame(step); } else { cb(); }
-                }
-                requestAnimationFrame(step);
-            }
-
-            // Morph text → eyeball
-            crossfade(true, function() {
-                // Ensure clean state after morph
-                ethicsTickerLabelAI.style.opacity = '0';
-                ethicsTickerLabelEthics.style.opacity = '0';
-                ethicsTickerEyeballEl.style.opacity = '1';
-                ethicsTickerEyeballEl.style.transform = 'translate(-50%, -50%) scale(1)';
-                startLooking();
-            });
-
-            // Saccade waypoints [x, y] px offsets — natural scanning pattern
-            var waypoints = [
-                [0, 0],       // center
-                [-18, 0],     // glance left
-                [-18, -2],    // drift up-left
-                [22, -1],     // saccade to right (fast jump)
-                [22, 2],      // settle down-right
-                [-10, 1],     // scan back center-left
-                [16, -1],     // quick look right again
-                [0, 0]        // settle center
-            ];
-            var moveMs = 200;  // saccade speed
-            var holdMs = 280;  // fixation at each point
-
-            function startLooking() {
-                var wpIndex = 0;
-                function moveToNext() {
-                    if (!ethicsTickerRunning) { afterLooking(); return; }
-                    if (wpIndex >= waypoints.length) { afterLooking(); return; }
-
-                    var target = waypoints[wpIndex];
-                    var prev = wpIndex > 0 ? waypoints[wpIndex - 1] : [0, 0];
-                    var start = null;
-
-                    function animate(ts) {
-                        if (!start) start = ts;
-                        var p = Math.min((ts - start) / moveMs, 1);
-                        var e = easeInOut(p);
-                        var x = prev[0] + (target[0] - prev[0]) * e;
-                        var y = prev[1] + (target[1] - prev[1]) * e;
-                        ethicsTickerEyeballEl.style.transform =
-                            'translate(calc(-50% + ' + x + 'px), calc(-50% + ' + y + 'px))';
-                        if (p < 1) { requestAnimationFrame(animate); }
-                        else { wpIndex++; setTimeout(moveToNext, holdMs); }
-                    }
-                    requestAnimationFrame(animate);
-                }
-                moveToNext();
-            }
-
-            // After looking around — hold eyeball 2.2s, then blink over it, then morph back
-            function afterLooking() {
-                setTimeout(blinkOverEyeball, 2200);
-            }
-
-            // Tired blink while eyeball is still showing (clip-path over whole label)
-            function blinkOverEyeball() {
-                if (!ethicsTickerRunning || !ethicsTickerLabelEl) { finishEyeball(); return; }
-                var blinks = 0;
-                var totalBlinks = 2;
-
-                function animateEyelid(closing, duration, cb) {
-                    var start = null;
-                    function step(ts) {
-                        if (!start) start = ts;
-                        var p = Math.min((ts - start) / duration, 1);
-                        var e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-                        var pct = closing ? (e * 100) : ((1 - e) * 100);
-                        ethicsTickerLabelEl.style.clipPath = 'inset(' + pct + '% 0 0 0)';
-                        if (p < 1) { requestAnimationFrame(step); } else { cb(); }
-                    }
-                    requestAnimationFrame(step);
-                }
-
-                function doBlink() {
-                    if (blinks >= totalBlinks) {
-                        ethicsTickerLabelEl.style.clipPath = '';
-                        finishEyeball();
-                        return;
-                    }
-                    var closeMs = blinks === 0 ? 350 : 500;
-                    var shutMs  = blinks === 0 ? 150 : 250;
-                    var openMs  = blinks === 0 ? 250 : 350;
-
-                    animateEyelid(true, closeMs, function() {
-                        setTimeout(function() {
-                            animateEyelid(false, openMs, function() {
-                                blinks++;
-                                setTimeout(doBlink, 300);
-                            });
-                        }, shutMs);
-                    });
-                }
-                doBlink();
-            }
-
-            function finishEyeball() {
-                // Morph eyeball → text (reverse crossfade)
-                crossfade(false, function() {
-                    ethicsTickerLabelAI.style.opacity = '';
-                    ethicsTickerLabelEthics.style.opacity = '';
-                    ethicsTickerLabelAI.style.transform = '';
-                    ethicsTickerLabelEthics.style.transform = '';
-                    ethicsTickerEyeballEl.style.opacity = '0';
-                    ethicsTickerEyeballEl.style.transform = 'translate(-50%, -50%) scale(0)';
-                    typeOut();
-                });
-            }
-        }
-
-        // Phase 4: Untype (delete)
-        function typeOut() {
-            if (!ethicsTickerRunning) return;
-            var currentLen = ethicsTickerTextEl.textContent.length;
-            if (currentLen > 0) {
-                ethicsTickerTextEl.textContent = fullText.slice(0, currentLen - 1);
-                setTimeout(typeOut, untypeSpeed);
-            } else {
+            // After fade-out completes (500ms) + 3.33s pause → next
+            setTimeout(function() {
+                msgWrap.classList.remove('ethics-ticker__msg--visible', 'ethics-ticker__msg--fading');
+                ethicsTickerTextEl.textContent = '';
                 ethicsTickerIndex = (ethicsTickerIndex + 1) % ethicsTickerMessages.length;
-                setTimeout(tickerTypewriterLoop, 400);
-            }
-        }
-
-        typeIn();
+                setTimeout(tickerScrollLoop, 3330);
+            }, 500);
+        }, 800 + 5550);
     }
 
-    /** Start the typewriter loop */
+    /** Start the scroll loop */
     function startTickerTimer() {
         if (ethicsTickerRunning) return;
         ethicsTickerRunning = true;
         ethicsTickerTextEl.textContent = '';
-        tickerTypewriterLoop();
+        tickerScrollLoop();
     }
 
-    /** Stop the typewriter loop */
+    /** Stop the scroll loop */
     function stopTickerTimer() {
         ethicsTickerRunning = false;
-        if (ethicsTickerTextEl) ethicsTickerTextEl.textContent = '';
+        if (ethicsTickerTextEl) {
+            var msgWrap = ethicsTickerTextEl.parentNode;
+            if (msgWrap) msgWrap.classList.remove('ethics-ticker__msg--visible', 'ethics-ticker__msg--fading');
+            ethicsTickerTextEl.textContent = '';
+        }
     }
 
     function updateHeader() {

@@ -325,8 +325,6 @@ p {
     line-height: 1.3;
     flex-shrink: 0;
     white-space: nowrap;
-    position: relative;
-    overflow: hidden;
 }
 
 .ethics-ticker__label-ai {
@@ -337,35 +335,27 @@ p {
     color: #DC3545;
 }
 
-.ethics-ticker__eyeball {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #DC3545;
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-    pointer-events: none;
-}
-
 .ethics-ticker__msg {
     flex: 1;
-    text-align: right;
+    text-align: center;
     padding: 0;
+    overflow: hidden;
 }
 
-.ethics-ticker__cursor {
-    font-weight: 400;
-    color: #fff;
-    animation: tickerBlink 0.7s step-end infinite;
+.ethics-ticker__msg span {
+    display: inline-block;
+    transform: translateX(100%);
+    opacity: 1;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.5s ease;
 }
 
-@keyframes tickerBlink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+.ethics-ticker__msg--visible span {
+    transform: translateX(0);
+}
+
+.ethics-ticker__msg--fading span {
+    opacity: 0;
 }
 
 [data-theme="dark"] .ethics-ticker {
